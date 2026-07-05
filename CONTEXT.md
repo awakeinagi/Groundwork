@@ -1,0 +1,94 @@
+# Groundwork Glossary
+
+The ubiquitous language of the Groundwork system. Terms are canonical: docs,
+code, UI copy, and agent prompts must use these words with exactly these
+meanings. Resolve new or drifting terms here first (see
+[SPEC-artifact-common](docs/specs/SPEC-artifact-common.md) for how the glossary
+is gated).
+
+## The system
+
+- **Groundwork** — this system: a standalone application that refines business
+  ideas into contract-complete Component Docs through gated, agent-facilitated
+  refinement, with full provenance from implementation detail back to business
+  intent.
+- **Canonical Store** — the git-backed markdown repository that is the single
+  source of truth for all artifacts. Every other representation (Jira, the
+  Graph Index, UI views) is derived from it.
+- **Projection** — a derived, non-authoritative representation of canonical
+  artifacts in an external system (e.g., the Jira issue mirroring an Epic).
+  Edits made to a projection are drift, to be detected and reconciled.
+- **Graph Index** — a queryable graph database built from the typed links in
+  artifact frontmatter. Derived and rebuildable at any time; never written to
+  directly; never a source of truth.
+- **Connector** — a pluggable adapter behind a defined API contract: Jira,
+  codebase hosts (Bitbucket/GitHub), auth providers, doc storage.
+- **Handoff Manifest** — the machine-readable package (component docs,
+  contracts, dependency order) that Groundwork emits for an implementation
+  swarm. Groundwork's southern boundary.
+- **Implementation Swarm** — the set of AI agents and/or developers that build
+  components from Component Docs. Out of Groundwork's scope; consumes the
+  Handoff Manifest.
+
+## Artifacts
+
+- **Artifact** — any identified, versioned document in the Canonical Store:
+  Business Goal, Epic, Story, Spike, Component Doc, Session, Decision,
+  Conflict, Consolidation.
+- **Business Goal (BG)** — the foundational statement of a refined business
+  intent: problem, intent, outcomes, scope, constraints. Root of the
+  traceability graph.
+- **Epic (EP)** — a coherent body of work derived from a Business Goal,
+  refined with product owners and engineering/data-science leads.
+- **Story (ST)** — an implementable unit of work derived from an Epic, with
+  acceptance criteria citing Decisions.
+- **Spike (SP)** — a research unit derived from an Epic. Its findings are
+  recorded as Decision records, which drive impact analysis on siblings.
+- **Component Doc (CMP)** — a contract-complete specification of a system
+  component (aligned with DDD-style bounded contexts) handed to the
+  Implementation Swarm.
+- **Session (SES)** — an append-only record of a 1:1 refinement conversation
+  between the agent and one participant. The raw material Decisions distill.
+- **Decision (DEC)** — a distilled, attributable decision: context, choice,
+  rationale, alternatives, source (Session or Spike). The unit of provenance.
+- **Conflict (CFL)** — a first-class record of contradictory or competing
+  requests, linking the artifacts in tension. Blocks downstream generation
+  until resolved.
+- **Consolidation (CON)** — curated, derived reference material summarizing a
+  frequently traveled path of the artifact graph, maintained for agent
+  retrieval efficiency and invalidated when its sources change.
+
+## Process
+
+- **Refinement Session** — a 1:1 Q&A conversation in which the agent sharpens
+  a participant's request through clarifying questions. Unsupervised: no
+  technical facilitator is present.
+- **Synthesis** — the agent's merging of perspectives from multiple 1:1
+  Sessions into a single artifact, surfacing cross-participant Conflicts.
+- **Gate** — a human approval checkpoint an artifact must pass before it may
+  feed the next pipeline stage.
+- **Gate Policy** — the configured rule for who approves a gate: a fixed
+  role-to-gate mapping or a committee requiring multiple roles.
+- **Approver** — the named person whose sign-off passes a gate.
+- **Contract-Complete** — the required property of a Component Doc: an
+  implementer holding the doc plus the interface contracts of its dependencies
+  (not their internals) can implement and test the component. Behavior, data,
+  and API contracts are itemized and cite the Decisions behind them.
+- **Impact Analysis** — walking the Graph Index from a changed artifact to
+  find affected descendants (including in-flight work) and mark them Stale.
+- **Stale** — status of an artifact whose upstream basis changed after
+  approval. Stale artifacts block new downstream generation until re-ratified.
+- **Drift** — divergence between a Projection and its canonical artifact
+  (e.g., a direct Jira edit), detected by sync and reconciled toward canon.
+- **Provenance Chain** — Transcript → Decision → citation: the traceable path
+  from any contract line back to who said what, when, and why.
+
+## Roles
+
+- **Stakeholder** — a business participant who initiates ideas and answers
+  refinement questions.
+- **Product Owner** — approves Business Goals and Epics.
+- **Engineering Lead / Data Science Lead** — refine and approve Stories,
+  Spikes, and Component Docs.
+- **Arbiter** — the person (often an Admin, product lead, or scrum master) to
+  whom unresolved Conflicts escalate; assigns and overrides Approvers.
