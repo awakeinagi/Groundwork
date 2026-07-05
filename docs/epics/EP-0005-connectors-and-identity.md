@@ -9,7 +9,9 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   depends-on: [EP-0001, EP-0003]
-cites: [DEC-0002, DEC-0013, DEC-0016, DEC-0024]
+  impacts: [EP-0001, EP-0006]
+  impacted-by: [EP-0001, EP-0003]
+cites: [DEC-0002, DEC-0013, DEC-0016, DEC-0024, DEC-0026]
 ---
 
 # EP-0005: Connectors & Identity

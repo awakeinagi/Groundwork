@@ -13,7 +13,9 @@ type: spike
 jira-key: PROJ-789
 timebox: 3d                 # agreed effort bound
 links:
-  derives-from: [EP-....]
+  derives-from: [EP-....]   # or [BG-....] for cross-cutting, process-level
+                            # spikes that exist before any epic is approved
+                            # (per DEC-0027)
   satisfies: [BG-....]
   relates-to: [ST-....]     # sibling work whose assumptions are at stake
 ```

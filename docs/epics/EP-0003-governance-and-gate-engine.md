@@ -9,7 +9,9 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   depends-on: [EP-0001]
-cites: [DEC-0006, DEC-0007, DEC-0020]
+  impacts: [EP-0001, EP-0004, EP-0005, EP-0006]
+  impacted-by: [EP-0001]
+cites: [DEC-0006, DEC-0007, DEC-0020, DEC-0026]
 ---
 
 # EP-0003: Governance & Gate Engine

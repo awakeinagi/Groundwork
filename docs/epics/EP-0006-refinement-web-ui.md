@@ -9,7 +9,9 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   depends-on: [EP-0001, EP-0002, EP-0003]
-cites: [DEC-0001, DEC-0003, DEC-0022]
+  impacts: [EP-0002]
+  impacted-by: [EP-0001, EP-0002, EP-0003, EP-0005]
+cites: [DEC-0001, DEC-0003, DEC-0022, DEC-0026]
 ---
 
 # EP-0006: Refinement Web UI

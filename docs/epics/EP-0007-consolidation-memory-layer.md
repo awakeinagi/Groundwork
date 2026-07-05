@@ -9,7 +9,8 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   depends-on: [EP-0001, EP-0004]
-cites: [DEC-0017]
+  impacted-by: [EP-0001, EP-0002, EP-0004]
+cites: [DEC-0017, DEC-0026]
 ---
 
 # EP-0007: Consolidation Memory Layer

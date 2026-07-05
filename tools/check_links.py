@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 
 LINK_TYPES = {"derives-from", "satisfies", "depends-on", "conflicts-with",
-              "supersedes", "relates-to"}
+              "supersedes", "relates-to", "impacts", "impacted-by"}
 ID_RE = re.compile(r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CON)-\d{4}$")
 PREFIX_FOR_TYPE = {
     "business-goal": "BG", "epic": "EP", "story": "ST", "spike": "SP",
@@ -126,6 +126,23 @@ def main():
         if not ok:
             errors.append(f"{fm['_path']}: {aid} must derive from a "
                           f"session or spike")
+
+    # Rule 6: impact links are reciprocal and same-type
+    INVERSE = {"impacts": "impacted-by", "impacted-by": "impacts"}
+    for aid, fm in artifacts.items():
+        links = fm.get("links") or {}
+        for ltype, inverse in INVERSE.items():
+            for target in as_list(links.get(ltype)):
+                other = artifacts.get(target)
+                if other is None:
+                    continue  # already reported by rule 2
+                if other.get("type") != fm.get("type"):
+                    errors.append(f"{fm['_path']}: {ltype} -> {target} "
+                                  f"crosses artifact types")
+                back = as_list((other.get("links") or {}).get(inverse))
+                if aid not in back:
+                    errors.append(f"{fm['_path']}: {aid} {ltype} {target}, "
+                                  f"but {target} lacks {inverse}: {aid}")
 
     # Rule 5: approved artifacts have no open conflicts
     for aid, fm in artifacts.items():

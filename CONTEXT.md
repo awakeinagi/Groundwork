@@ -82,6 +82,11 @@ is gated).
   (e.g., a direct Jira edit), detected by sync and reconciled toward canon.
 - **Provenance Chain** — Transcript → Decision → citation: the traceable path
   from any contract line back to who said what, when, and why.
+- **Impact Link** — a directional, reciprocal link between same-type
+  artifacts: "X impacts Y" means decisions recorded while refining X are
+  expected to constrain, shape, or invalidate decisions in Y. Recorded as
+  `impacts` on X and `impacted-by` on Y; the basis for ranking refinement
+  order among siblings.
 
 ## Roles
 

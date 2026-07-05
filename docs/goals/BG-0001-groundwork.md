@@ -106,3 +106,6 @@ docs vs. quality-first pragmatism — was resolved by
 - [EP-0005](../epics/EP-0005-connectors-and-identity.md) — Connectors & Identity
 - [EP-0006](../epics/EP-0006-refinement-web-ui.md) — Refinement Web UI
 - [EP-0007](../epics/EP-0007-consolidation-memory-layer.md) — Consolidation Memory Layer
+- [SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md) — Ranking algorithm
+  for impact-based refinement ordering (cross-cutting spike, per
+  [DEC-0027](../decisions/DEC-0027-impact-ranked-refinement-order.md))

@@ -34,6 +34,9 @@ links:
   conflicts-with: []          # open conflicts (paired with a CFL artifact)
   supersedes: []              # earlier artifact(s) this replaces
   relates-to: []              # weak association (context, not derivation)
+  impacts: [EP-0004]          # same-type siblings whose decisions this
+                              # artifact's refinement will shape
+  impacted-by: [EP-0001]      # inverse: siblings whose refinement shapes this
 cites: [DEC-0015, DEC-0021]   # decisions that shaped this artifact
 ---
 ```
@@ -42,7 +45,14 @@ Rules ([DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)):
 
 - All link values are bare artifact IDs. Link types are closed vocabulary:
   `derives-from`, `satisfies`, `depends-on`, `conflicts-with`, `supersedes`,
-  `relates-to`. Decision citations use the top-level `cites` field.
+  `relates-to`, `impacts`, `impacted-by`. Decision citations use the
+  top-level `cites` field.
+- **Impact links** ([DEC-0026](../decisions/DEC-0026-directional-impact-links.md)):
+  "X impacts Y" means decisions recorded while refining X are expected to
+  constrain, shape, or invalidate decisions in Y. Impact links connect
+  same-type artifacts only, and both endpoints record the relationship —
+  `impacts` on X, `impacted-by` on Y. Refinement order among siblings is
+  ranked over this graph ([DEC-0027](../decisions/DEC-0027-impact-ranked-refinement-order.md)).
 - Empty link lists may be omitted.
 - The Graph Index is built solely from frontmatter; prose wiki-links are
   navigational sugar and carry no semantics.
@@ -89,3 +99,5 @@ Decisions and Sessions use reduced lifecycles defined in their own specs.
    Business Goal through `derives-from`/`satisfies` chains.
 4. Every Decision has a `derives-from` pointing at a Session or Spike.
 5. No approved artifact links `conflicts-with` an open Conflict.
+6. Impact links are reciprocal and same-type: `X.impacts ∋ Y` iff
+   `Y.impacted-by ∋ X`, and X and Y share an artifact type.

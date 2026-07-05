@@ -9,7 +9,9 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   depends-on: [EP-0001]
-cites: [DEC-0003, DEC-0005, DEC-0012, DEC-0015, DEC-0021]
+  impacts: [EP-0004, EP-0006, EP-0007]
+  impacted-by: [EP-0001, EP-0006]
+cites: [DEC-0003, DEC-0005, DEC-0012, DEC-0015, DEC-0021, DEC-0026]
 ---
 
 # EP-0002: Refinement Session Agent

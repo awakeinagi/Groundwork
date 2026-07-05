@@ -8,7 +8,9 @@ created: 2026-07-05
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
-cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018]
+  impacts: [EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
+  impacted-by: [EP-0003, EP-0005]
+cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018, DEC-0026]
 ---
 
 # EP-0001: Artifact Store & Format Engine
