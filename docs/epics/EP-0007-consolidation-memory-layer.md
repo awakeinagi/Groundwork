@@ -12,7 +12,7 @@ links:
   impacts: [EP-0006]
   impacted-by: [EP-0001, EP-0002, EP-0004]
 cites: [DEC-0017, DEC-0026, DEC-0056, DEC-0063, DEC-0065, DEC-0066, DEC-0067,
-        DEC-0068, DEC-0069, DEC-0070, DEC-0071]
+        DEC-0068, DEC-0069, DEC-0070, DEC-0071, DEC-0072]
 ---
 
 # EP-0007: Consolidation Memory Layer
@@ -59,6 +59,12 @@ rides on ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)).
 - **Quality** ([DEC-0069](../decisions/DEC-0069-automated-faithfulness-checks.md)):
   no human gate; automated no-new-claims faithfulness checks block serving
   on failure; periodic judge sampling.
+- **Human review & flagging** ([DEC-0072](../decisions/DEC-0072-consolidation-review-flagging.md)):
+  consolidations browsable in the UI with source refs, freshness state,
+  and check history; any user's flag quarantines immediately (never
+  served; resolver falls back to sources) pending disposition —
+  regenerate, fix sources, or correct the checker; confirmed misses feed
+  the evaluation corpus as regression cases.
 - **Participant profiles** ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)):
   opt-in per user; readable and editable by the subject via the UI; stored
   per-person outside the canonical artifact store; served as bundle
@@ -84,6 +90,8 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
 - **Catalog schema**: the static consolidation catalog as repo
   configuration.
 - **Faithfulness-check contract**: generation → pass/blocked with report.
+- **Flag/quarantine contract**: flag → quarantine → disposition
+  (regenerate | fix-sources | correct-checker), with eval-corpus feedback.
 - **Profile store contract**: per-person CRUD with consent state, subject
   read/edit access, serving projection into bundles.
 

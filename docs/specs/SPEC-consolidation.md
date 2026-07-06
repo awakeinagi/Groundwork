@@ -37,6 +37,11 @@ audience: session-agent | implementation-swarm | human-reviewer
   mechanically, no judgment involved.
 - Stale Consolidations are never served to agents; they are regenerated (or
   retired) by the memory maintenance process.
+- Any user may **flag** a Consolidation from the UI; a flag quarantines it
+  immediately (treated as stale) pending disposition — regenerate, fix
+  sources, or correct the faithfulness checker. Confirmed misses become
+  evaluation-corpus regression cases
+  ([DEC-0072](../decisions/DEC-0072-consolidation-review-flagging.md)).
 - Consolidations are derived artifacts: they can always be deleted and
   rebuilt from sources. Nothing may cite a Consolidation as provenance —
   provenance citations go to Decisions and Sessions only.
