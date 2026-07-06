@@ -14,6 +14,8 @@ type: session
 participant: <named person>
 participant-role: stakeholder | product-owner | eng-lead | ds-lead | arbiter
 facilitator: <agent identity + model version>
+strategy-pack: <pack/version>   # which methodology conducted the session
+                                # (per DEC-0053); absent for pre-app sessions
 transcript-fidelity: verbatim | reconstructed
 links:
   relates-to: [BG-....]       # artifact(s) the session refined; may be empty
@@ -30,9 +32,13 @@ immutable. Follow-up conversation is a new Session linking
 
 1. **Purpose** — what the session set out to refine.
 2. **Transcript** — the conversation, turn-numbered (`T1`, `T2`, …) so
-   Decisions can cite spans (`SES-0042 @ T31–T38`). `verbatim` fidelity is
-   the standard once the application hosts sessions; `reconstructed` is
-   permitted only for pre-application bootstrap records and must say so.
+   Decisions can cite spans (`SES-0042 @ T31–T38`). The transcript **is the
+   raw message log** — verbatim and never summarized in place; condensed
+   views are derived layers elsewhere, and distillation must be re-runnable
+   from this record ([DEC-0052](../decisions/DEC-0052-raw-transcripts-regenerable-distillation.md)).
+   `verbatim` fidelity is the standard once the application hosts sessions;
+   `reconstructed` is permitted only for pre-application bootstrap records
+   and must say so.
 3. **Decisions Produced** — the `DEC` records distilled from this session
    (maintained by the distillation step).
 4. **Conflicts Raised** — `CFL` records opened during the session, if any.

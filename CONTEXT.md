@@ -69,6 +69,13 @@ is gated).
   technical facilitator is present.
 - **Synthesis** — the agent's merging of perspectives from multiple 1:1
   Sessions into a single artifact, surfacing cross-participant Conflicts.
+- **Strategy Pack** — a versioned, plugin-like bundle (prompts, skills,
+  tools, policies, context recipe) defining how the agent conducts one kind
+  of session; PR-gated, model-agnostic, recorded in each session's
+  provenance.
+- **Decision Rights** — the governance-configured scope of decisions a
+  role may accept in-session; statements outside a participant's rights are
+  captured as proposals requiring ratification by the right holder.
 - **Gate** — a human approval checkpoint an artifact must pass before it may
   feed the next pipeline stage.
 - **Gate Policy** — the configured rule for who approves a gate: a fixed
