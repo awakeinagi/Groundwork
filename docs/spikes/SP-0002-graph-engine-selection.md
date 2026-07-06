@@ -2,7 +2,9 @@
 id: SP-0002
 type: spike
 title: Graph engine selection for the Cross-Reference Graph Index
-status: draft
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-06
 owner: eng-lead
 created: 2026-07-06
 timebox: 5d
