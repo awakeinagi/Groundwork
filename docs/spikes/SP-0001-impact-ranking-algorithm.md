@@ -51,10 +51,20 @@ both have interfaces shaped by whatever the algorithm needs.
    - weighted out-degree minus in-degree heuristics;
    - minimum feedback arc set orderings (minimize edges pointing backward
      in the refinement sequence).
-3. Consider extensions the data model may need: edge weights (impact
+3. Investigate **provisional bounding decisions** (sponsor guidance,
+   SES-0003 @ T1): rather than strictly ordering refinement, impacted items
+   may first receive "subject to change" decisions or best guesses — made by
+   the agent, humans, or both — that provide guidance and boundaries for
+   refining the item that impacts them, with reconciliation once the
+   impactor's real decisions land. Assess: whether this needs a
+   `provisional` decision status, how reconciliation interacts with the
+   staleness machinery ([DEC-0007](../decisions/DEC-0007-impact-analysis-stale-marks.md)),
+   and whether provisional bounds change what the ranking algorithm should
+   optimize (e.g., cycles become tractable by bounding one direction).
+4. Consider extensions the data model may need: edge weights (impact
    strength), partial refinement (an artifact revisited after its impactors
    settle), and incremental re-ranking when edges change.
-4. Prototype the front-runner and run it on the current epic graph; sanity-
+5. Prototype the front-runner and run it on the current epic graph; sanity-
    check the output against human judgment.
 
 ## Findings

@@ -2,7 +2,7 @@
 id: EP-0001
 type: epic
 title: Artifact Store & Format Engine
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-05
 links:
@@ -10,62 +10,103 @@ links:
   satisfies: [BG-0001]
   impacts: [EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
   impacted-by: [EP-0003, EP-0005]
-cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018, DEC-0026]
+cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018, DEC-0026, DEC-0028, DEC-0029,
+        DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035]
 ---
 
 # EP-0001: Artifact Store & Format Engine
 
 ## Summary
 
-The canonical heart of Groundwork: a storage service that owns the git-backed
-markdown repository, allocates immutable artifact IDs, validates every write
-against the artifact format specs, and enforces link-graph integrity. All
-reads and writes — UI, agents, connectors — go through its API; nothing else
-touches the repository.
+The canonical heart of Groundwork: a storage service that owns the fork-pull
+git model over the upstream doc repository, allocates immutable artifact
+IDs, validates every write, orchestrates item branches, session worktrees,
+and gate PRs, and enforces link-graph integrity. All writes — UI, agents,
+connectors — go through its API; nothing else holds write credentials to the
+repository.
 
 ## Why (Goal Alignment)
 
 BG-0001's traceability outcome depends on artifacts being well-formed and
 their links resolvable at all times ([DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)).
 Canonical-store discipline ([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md))
-only holds if a single component mediates access to the git repo
-([DEC-0008](../decisions/DEC-0008-git-backed-markdown-store.md)).
+holds because this service is the single write authority
+([DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md)); human
+ratification is durable because gate sign-off is PR approval on the upstream
+repository ([DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
 
 ## Scope
 
-**In:** storage API (CRUD over artifacts, structured queries by type/status);
-ID allocation (sequential per prefix, never reused); frontmatter schema
-validation per type spec; status-lifecycle transition enforcement; link
-integrity checking (the productionized `tools/check_links.py` rules); git
-plumbing (commits, refs, history) hidden behind the interface.
+**In** (refined at [SES-0003](../sessions/SES-0003-ep-0001-refinement.md)):
 
-**Out:** graph queries (EP-0004); gate approval logic (EP-0003 — this epic
-only enforces that transitions come from the gate engine); rendering (EP-0006).
+- **Git model** ([DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)):
+  application-owned fork of upstream; one item branch per artifact under
+  refinement, carrying the item plus its sessions and decisions; PR to
+  upstream main opened with the branch; merge = approval; post-merge changes
+  reuse the branch with a new PR. The frontmatter `status` field is kept
+  synchronized with branch/PR state by the service.
+- **Concurrency** ([DEC-0030](../decisions/DEC-0030-session-worktrees-branch-merge.md)):
+  one git worktree per user session; sole-version worktrees merge into the
+  generic item branch; divergent versions get user-suffixed branches until
+  reconciled (synthesis or Conflict flow).
+- **Access** ([DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md)):
+  all writes via the storage API; read-only git access sanctioned for
+  external consumers pinned to refs.
+- **ID allocation** ([DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md)):
+  sequential per prefix, never reused, serialized by a thread/process-safe
+  service lock.
+- **Mechanical writes** ([DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)):
+  typed operations only (`append-turn`, `mark-stale`, `set-jira-key`, …);
+  agents hold no git credentials; direct-commit or program-user auto-PR
+  fallback with a deterministic mechanical-diff CI check, per deployment.
+- **Validation** ([DEC-0034](../decisions/DEC-0034-two-tier-validation.md)):
+  tier 1 (schema + branch-local link resolution) on every write to any
+  branch; tier 2 (completeness: required sections, decision citations,
+  reciprocal impact links, no open conflicts) as required PR checks.
+- **Type-aware write rules** ([DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)):
+  session artifacts are append-only at the API level.
+
+**Out:** graph queries (EP-0004); gate *policy* — who must approve what —
+(EP-0003, which compiles policies onto host branch-protection via EP-0005);
+the PR review UI (EP-0006, per [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md));
+rendering (EP-0006).
 
 ## Domain Context
 
 Bounded context: **Canonical Store**. Terms: Artifact, Canonical Store,
-status lifecycle (draft/in-refinement/gated/approved/stale/superseded/
-archived) — all per [CONTEXT.md](../../CONTEXT.md) and
+status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
+[CONTEXT.md](../../CONTEXT.md) and
 [SPEC-artifact-common](../specs/SPEC-artifact-common.md).
 
 ## Interfaces & Contracts to Define
 
-- **Storage API contract**: language-neutral (OpenAPI) so backends other
-  than git-markdown remain swappable ([DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
+- **Storage API contract** (OpenAPI, language-neutral per
+  [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)):
+  CRUD via item branches, versioned reads, typed mechanical operations,
+  session lifecycle (open worktree / append-turn / close), branch and PR
+  orchestration operations.
 - **Artifact schema definitions**: machine-readable (JSON Schema) versions
-  of each SPEC's frontmatter.
-- **Change-event stream**: artifact-changed events consumed by the Graph
-  Index (EP-0004), impact analysis (EP-0003), and consolidation freshness
-  (EP-0007).
+  of each SPEC's frontmatter — the tier-1 validators.
+- **Tier-2 check suite**: the productionized `tools/check_links.py` plus the
+  mechanical-diff validator, packaged as required PR checks.
+- **Change-event stream**: artifact-changed events (branch-aware) consumed
+  by the Graph Index (EP-0004), impact analysis (EP-0003), and consolidation
+  freshness (EP-0007).
+- **Consumed from EP-0005**: code-host connector operations for fork, PR
+  open/merge, review state, and required-check registration.
 
 ## Risks & Open Questions
 
-- Concurrent writes to one artifact (agent + human): optimistic locking vs.
-  git merge semantics — candidate spike.
-- Where transcript append-only enforcement lives: store layer or session
-  agent.
+- Counter durability across restarts and multi-node deployment (distributed
+  lock) — story-level design ([DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md) implication).
+- Branch-aware reads for the Graph Index: which branches does the index see,
+  and how are draft-only artifacts marked in query results? (EP-0004
+  refinement input, via the EP-0001→EP-0004 impact edge.)
+- Worktree lifecycle hygiene: abandoned sessions, worktree GC, and the
+  reconciliation queue for user-suffixed branches.
+- Upstream host permission model: service identity vs. program user vs.
+  delegated approver reviews — to be pinned during EP-0005 refinement.
 
 ## Derived Work
 
-None yet — stories/spikes follow refinement and approval of this epic.
+None yet — stories/spikes follow gate approval of this epic.

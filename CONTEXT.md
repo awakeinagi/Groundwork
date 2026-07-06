@@ -80,6 +80,16 @@ is gated).
   approval. Stale artifacts block new downstream generation until re-ratified.
 - **Drift** — divergence between a Projection and its canonical artifact
   (e.g., a direct Jira edit), detected by sync and reconciled toward canon.
+- **Item Branch** — the git branch dedicated to one artifact's refinement,
+  carrying the item plus its sessions and decisions; its PR to upstream main
+  is the artifact's Gate, and merging it is approval.
+- **Session Worktree** — the isolated git worktree in which one user
+  session's changes accumulate before merging into the Item Branch (or a
+  user-suffixed branch when versions diverge).
+- **Mechanical Write** — a metadata-only or append-only mutation (stale
+  mark, jira-key, transcript turn, counter) expressible solely as a typed
+  storage-service operation; records a system fact and bypasses the human
+  gate under machine verification, never carrying design content.
 - **Provenance Chain** — Transcript → Decision → citation: the traceable path
   from any contract line back to who said what, when, and why.
 - **Impact Link** — a directional, reciprocal link between same-type
