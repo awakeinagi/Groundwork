@@ -7,12 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: eng-lead
 created: 2026-07-06
-timebox: 5d
+timebox: 7d
 links:
   derives-from: [EP-0004]
   satisfies: [BG-0001]
-  relates-to: [SP-0001]
-cites: [DEC-0061, DEC-0062, DEC-0059, DEC-0060, DEC-0064]
+  relates-to: [SP-0001, EP-0007]
+cites: [DEC-0061, DEC-0062, DEC-0059, DEC-0060, DEC-0064, DEC-0070]
 ---
 
 # SP-0002: Graph Engine Selection
@@ -53,7 +53,15 @@ chosen; the contract tiers are engine-neutral and proceed in parallel.
    latency, rebuild time at scale, guard enforcement (depth/time/result),
    multi-node deployment story, operational burden (backup, upgrade,
    monitoring) in a self-hosted enterprise.
-4. Recommend an engine and record the choice, its runner-up, and any
+4. **Search/vector workload** (extension per
+   [DEC-0070](../decisions/DEC-0070-extend-sp-0002-search-infra.md)):
+   evaluate pgvector + Postgres full-text vs. an embedded vector index vs.
+   a dedicated vector store on the same corpus and ops criteria, serving
+   the retrieval layer's search contract
+   ([DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)); measure
+   re-embed cost at scale for embedding-model swaps. The spike returns one
+   coherent infrastructure recommendation covering graph and search.
+5. Recommend the engine(s) and record the choice, runner-up, and any
    contract adjustments as Decisions per
    [DEC-0023](../decisions/DEC-0023-spike-findings-become-decisions.md).
 

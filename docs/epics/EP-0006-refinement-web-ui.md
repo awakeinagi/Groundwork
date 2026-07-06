@@ -10,7 +10,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [EP-0001, EP-0002, EP-0003]
   impacts: [EP-0002]
-  impacted-by: [EP-0001, EP-0002, EP-0003, EP-0005]
+  impacted-by: [EP-0001, EP-0002, EP-0003, EP-0005, EP-0007]
 cites: [DEC-0001, DEC-0003, DEC-0022, DEC-0026]
 ---
 

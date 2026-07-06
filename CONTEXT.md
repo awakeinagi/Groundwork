@@ -61,6 +61,10 @@ is gated).
 - **Consolidation (CON)** — curated, derived reference material summarizing a
   frequently traveled path of the artifact graph, maintained for agent
   retrieval efficiency and invalidated when its sources change.
+- **Participant Profile** — opt-in, per-person interaction memory (pacing,
+  preferences, questions already covered) that improves repeat sessions;
+  owned by its subject, who can read, edit, and delete it via the UI; never
+  a home for org facts, which belong in artifacts.
 - **Change Proposal (CP)** — a captured change proposed from outside the
   refinement pipeline (Jira drift, UI suggestion, implementation feedback),
   preserved verbatim and triaged by the agent into a mechanical fix, a
