@@ -2,7 +2,7 @@
 id: ST-0005
 type: story
 title: ID allocation — service lock, durability, multi-node behavior
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-06
 links:
@@ -10,7 +10,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0002]
   impacted-by: [ST-0002]
-cites: [DEC-0009, DEC-0031]
+cites: [DEC-0009, DEC-0031, DEC-0077]
 ---
 
 # ST-0005: ID Allocation
@@ -32,12 +32,11 @@ deployment.
 3. Allocation accounts for artifacts existing only on unmerged item
    branches — a fresh scan of all refs yields no ID collisions
    (per DEC-0031).
-4. Counter state survives service restart without manual intervention;
-   the durability mechanism is settled in this story's refinement
-   (per DEC-0031 implications).
-5. Multi-node behavior is explicitly specified: either single-allocator
-   deployment is a documented constraint, or a distributed lock is
-   provided (per DEC-0031 implications).
+4. Counter state survives service restart via rescan-on-boot: startup
+   scans all refs for the max existing ID per prefix; no persistent
+   counter store exists anywhere (per DEC-0077).
+5. Single-allocator deployment is a documented constraint of the service
+   (per DEC-0077).
 
 ## Component Impact
 
@@ -50,5 +49,5 @@ ID formats and prefixes themselves (fixed by SPEC-artifact-common).
 
 ## Notes for Implementers
 
-Durability approach (rescan-on-boot vs. allocation log vs. service DB) is
-an open refinement point for this story's session.
+The boot scan must cover every ref, not just main — unmerged item branches
+hold allocated IDs (per DEC-0077).

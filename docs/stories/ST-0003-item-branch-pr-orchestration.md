@@ -2,7 +2,7 @@
 id: ST-0003
 type: story
 title: Item-branch and gate-PR lifecycle orchestration
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-06
 links:
@@ -11,7 +11,7 @@ links:
   depends-on: [ST-0002]
   impacts: [ST-0004]
   impacted-by: [ST-0002]
-cites: [DEC-0028, DEC-0032, DEC-0043, DEC-0045, DEC-0050]
+cites: [DEC-0028, DEC-0032, DEC-0043, DEC-0045, DEC-0050, DEC-0079]
 ---
 
 # ST-0003: Item-Branch and Gate-PR Lifecycle Orchestration
@@ -40,6 +40,10 @@ stays synchronized with branch/PR state throughout.
 5. All host interactions go through the code-host connector contract and
    respect its capability manifest; v1 target is Bitbucket Data Center
    (per DEC-0045, DEC-0050).
+6. The full orchestration test suite passes hermetically against the
+   local-git fake connector, which implements the complete contract
+   including its capability manifest and ships as part of this story
+   (per DEC-0079).
 
 ## Component Impact
 
@@ -53,5 +57,6 @@ review UI (EP-0006); the BBDC connector implementation itself (EP-0005).
 
 ## Notes for Implementers
 
-Development-time host strategy (fake vs. real connector ordering) is an
-open refinement point for this story's session.
+The fake connector is a permanent test double — its simulated review/check
+semantics track the contract spec, never any particular host's quirks
+(per DEC-0079).

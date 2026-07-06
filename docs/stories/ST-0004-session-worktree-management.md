@@ -2,7 +2,7 @@
 id: ST-0004
 type: story
 title: Session worktree management and divergence handling
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-06
 links:

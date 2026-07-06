@@ -2,7 +2,7 @@
 id: ST-0006
 type: story
 title: Typed mechanical write operations and credential separation
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-06
 links:

@@ -2,7 +2,7 @@
 id: ST-0002
 type: story
 title: Storage service core and OpenAPI contract
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-06
 links:

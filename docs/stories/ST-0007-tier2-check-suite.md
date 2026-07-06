@@ -2,7 +2,7 @@
 id: ST-0007
 type: story
 title: Tier-2 completeness check suite as required PR checks
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-06
 links:
