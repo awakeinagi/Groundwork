@@ -2,7 +2,9 @@
 id: EP-0006
 type: epic
 title: Refinement Web UI
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-06
 owner: eng-lead
 created: 2026-07-05
 links:
