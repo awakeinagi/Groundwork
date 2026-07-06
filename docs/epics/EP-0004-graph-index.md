@@ -2,7 +2,7 @@
 id: EP-0004
 type: epic
 title: Cross-Reference Graph Index
-status: draft
+status: gated
 owner: eng-lead
 created: 2026-07-05
 links:
@@ -11,60 +11,89 @@ links:
   depends-on: [EP-0001]
   impacts: [EP-0007]
   impacted-by: [EP-0001, EP-0002, EP-0003]
-cites: [DEC-0009, DEC-0010, DEC-0026]
+cites: [DEC-0009, DEC-0010, DEC-0026, DEC-0056, DEC-0059, DEC-0060, DEC-0061,
+        DEC-0062, DEC-0063, DEC-0064]
 ---
 
 # EP-0004: Cross-Reference Graph Index
 
 ## Summary
 
-A queryable graph database built from the typed links and citations in
-artifact frontmatter — strictly a derived, rebuildable projection of the
-canonical store. Serves traversal queries to agents (context retrieval),
-the gate engine (impact analysis), and the UI (traceability navigation).
+A queryable graph over the typed links and citations in artifact
+frontmatter — strictly a derived, rebuildable projection of the canonical
+store, maintained as a main base view plus a thin overlay per open item
+branch. Serves three query tiers (named traversals, a bounded generic
+primitive, and read-only guarded openCypher) to agents, the gate engine,
+the UI, and manifest generation.
 
 ## Why (Goal Alignment)
 
 The cross-reference system is BG-0001's alignment backbone; the Graph Index
-is what makes it efficiently navigable for agents at scale
+makes it efficiently navigable at scale
 ([DEC-0010](../decisions/DEC-0010-graph-index-derived.md)) without
-compromising the single-source-of-truth rule
-([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md)).
+compromising single-source-of-truth
+([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md)) — including for
+drafts mid-refinement under the fork-pull model
+([DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)).
 
 ## Scope
 
-**In:** graph construction from frontmatter (`derives-from`, `satisfies`,
-`depends-on`, `conflicts-with`, `supersedes`, `relates-to`, `cites`);
-incremental updates from the store's change-event stream; full rebuild from
-scratch (the invariant that proves derived-ness); query API — ancestors/
-descendants, trace-to-goal, cited-by, conflict neighborhoods, dependency
-topology for the Handoff Manifest; path-usage statistics feeding
-consolidation placement (EP-0007).
+**In** (refined at [SES-0007](../sessions/SES-0007-ep-0004-refinement.md)):
 
-**Out:** choosing what to do with query results (callers' concern); the
-canonical link data itself (EP-0001 validates and owns it).
+- **View model** ([DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)):
+  main base + per-item-branch overlays; view-parameterized queries;
+  ref/status tagging on every result; overlay lifecycle bound to item
+  branches.
+- **Freshness** ([DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)):
+  synchronous writes to the writer's overlay (read-your-writes for
+  sessions); async propagation elsewhere via the change-event stream;
+  rebuild output as the correctness definition.
+- **Query tiers** ([DEC-0062](../decisions/DEC-0062-tiered-query-api.md)):
+  named traversals (trace-to-goal, subtree, impact-neighborhood, cited-by,
+  conflict-neighborhood, build-order); bounded generic traversal primitive
+  for agent tools ([DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md));
+  read-only openCypher endpoint with depth/time/result guards.
+- **Content depth** ([DEC-0063](../decisions/DEC-0063-metadata-only-graph.md)):
+  frontmatter metadata only; bodies fetched from the store; text/semantic
+  search explicitly deferred to the retrieval layer (EP-0007).
+- **Verification** ([DEC-0064](../decisions/DEC-0064-scheduled-rebuild-diff.md)):
+  scheduled rebuild-and-diff with alarming and atomic replacement;
+  deterministic `rebuild(ref) → index`.
+- **Path-usage telemetry**: consumer-tagged traversal statistics (edge
+  heat, no participant content) feeding consolidation placement (EP-0007).
+
+**Out:** engine internals until [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
+concludes ([DEC-0061](../decisions/DEC-0061-engine-via-spike.md)); what
+callers do with results; canonical link data itself (EP-0001 owns and
+validates it); text search (EP-0007's neighborhood).
 
 ## Domain Context
 
-Bounded context: **Graph Index**. Terms: Graph Index, Provenance Chain,
-typed link vocabulary — per [CONTEXT.md](../../CONTEXT.md) and
-[SPEC-artifact-common](../specs/SPEC-artifact-common.md).
+Bounded context: **Graph Index**. Terms: Graph Index, Branch Overlay,
+Provenance Chain, typed link vocabulary — per [CONTEXT.md](../../CONTEXT.md)
+and [SPEC-artifact-common](../specs/SPEC-artifact-common.md).
 
 ## Interfaces & Contracts to Define
 
-- **Graph query API**: language-neutral contract; the specific graph engine
-  (Neo4j, embedded, etc.) is an implementation detail behind it — engine
-  choice deferred, per SES-0001 synthesis (T14).
-- **Rebuild contract**: `rebuild(canonical-ref) → index`, deterministic.
+- **Graph query API**: the three tiers, language-neutral (OpenAPI), view
+  parameter mandatory; engine hidden behind the executor boundary.
+- **Rebuild contract**: `rebuild(canonical-ref) → index`, deterministic;
+  diff format for verification runs.
+- **Overlay lifecycle contract**: create/update/drop tied to item-branch
+  events from EP-0001's change stream.
 - **Path-usage telemetry schema**: consumed by EP-0007.
 
 ## Risks & Open Questions
 
-- Graph engine selection — explicitly deferred; candidate spike when this
-  epic is refined.
-- Index freshness guarantees relative to the event stream (read-after-write
-  for agents mid-session).
+- Engine selection — [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
+  (openCypher support, overlay fit, multi-node story, on-prem ops burden).
+- Overlay memory/cost at high concurrent-session counts — measure in
+  SP-0002's synthetic-scale runs.
+- Guard calibration for the openCypher tier (limits tight enough to
+  protect, loose enough to be useful) — story-level tuning.
 
 ## Derived Work
 
-None yet — stories/spikes follow refinement and approval of this epic.
+- [SP-0002](../spikes/SP-0002-graph-engine-selection.md) — Graph engine
+  selection (drafted during this epic's refinement; ratified with the
+  epic's approval per the item-branch pattern).

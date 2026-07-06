@@ -21,6 +21,10 @@ is gated).
 - **Graph Index** — a queryable graph database built from the typed links in
   artifact frontmatter. Derived and rebuildable at any time; never written to
   directly; never a source of truth.
+- **Branch Overlay** — the Graph Index's thin per-item-branch view: that
+  branch's additions and changes layered over the main base graph, so
+  sessions query their drafts in the context of approved reality. Every
+  query names its view; results tag nodes with ref and status.
 - **Connector** — a pluggable adapter behind a defined API contract: Jira,
   codebase hosts (Bitbucket/GitHub), auth providers, doc storage.
 - **Handoff Manifest** — the machine-readable package (component docs,
