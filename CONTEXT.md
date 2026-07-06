@@ -57,6 +57,10 @@ is gated).
 - **Consolidation (CON)** — curated, derived reference material summarizing a
   frequently traveled path of the artifact graph, maintained for agent
   retrieval efficiency and invalidated when its sources change.
+- **Change Proposal (CP)** — a captured change proposed from outside the
+  refinement pipeline (Jira drift, UI suggestion, implementation feedback),
+  preserved verbatim and triaged by the agent into a mechanical fix, a
+  refinement session, or an audited rejection.
 
 ## Process
 

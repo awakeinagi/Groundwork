@@ -23,11 +23,11 @@ DOCS = ROOT / "docs"
 
 LINK_TYPES = {"derives-from", "satisfies", "depends-on", "conflicts-with",
               "supersedes", "relates-to", "impacts", "impacted-by"}
-ID_RE = re.compile(r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CON)-\d{4}$")
+ID_RE = re.compile(r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}$")
 PREFIX_FOR_TYPE = {
     "business-goal": "BG", "epic": "EP", "story": "ST", "spike": "SP",
     "component": "CMP", "session": "SES", "decision": "DEC",
-    "conflict": "CFL", "consolidation": "CON",
+    "conflict": "CFL", "consolidation": "CON", "change-proposal": "CP",
 }
 MUST_TRACE_TO_GOAL = {"epic", "story", "spike", "component"}
 

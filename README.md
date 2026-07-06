@@ -43,6 +43,7 @@ generation until resolved.
 | `docs/sessions/` | Refinement session records (`SES-*`) |
 | `docs/decisions/` | Decision records (`DEC-*`) |
 | `docs/conflicts/` | Conflict artifacts (`CFL-*`) |
+| `docs/change-proposals/` | Change proposals (`CP-*`) |
 | `docs/consolidations/` | Curated context consolidations (`CON-*`) |
 | `tools/` | Validation tooling (link/graph integrity checker) |
 

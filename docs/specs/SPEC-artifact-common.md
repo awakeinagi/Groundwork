@@ -10,7 +10,7 @@ produce and validate exactly this format ([DEC-0018](../decisions/DEC-0018-pytho
 - Every artifact has an immutable ID: `<PREFIX>-<4-digit zero-padded number>`.
 - Prefixes: `BG` (Business Goal), `EP` (Epic), `ST` (Story), `SP` (Spike),
   `CMP` (Component Doc), `SES` (Session), `DEC` (Decision), `CFL` (Conflict),
-  `CON` (Consolidation).
+  `CON` (Consolidation), `CP` (Change Proposal).
 - Numbers are allocated sequentially per prefix and never reused, even for
   deleted artifacts.
 - Filename: `<ID>-<kebab-case-slug>.md` in the type's directory. The slug may
