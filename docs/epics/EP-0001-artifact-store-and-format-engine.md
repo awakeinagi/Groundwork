@@ -111,4 +111,20 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
 
 ## Derived Work
 
-None yet — stories/spikes follow gate approval of this epic.
+- [CMP-0001](../components/CMP-0001-artifact-store-service.md) — Artifact
+  Store Service (draft; contract-completed by the stories below)
+- [ST-0001](../stories/ST-0001-tier1-schema-suite.md) — Tier-1 schema suite
+  and validation library
+- [ST-0002](../stories/ST-0002-storage-api-core.md) — Storage service core
+  and OpenAPI contract
+- [ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md) —
+  Item-branch and gate-PR lifecycle orchestration
+- [ST-0004](../stories/ST-0004-session-worktree-management.md) — Session
+  worktree management and divergence handling
+- [ST-0005](../stories/ST-0005-id-allocation.md) — ID allocation
+- [ST-0006](../stories/ST-0006-typed-mechanical-writes.md) — Typed
+  mechanical write operations
+- [ST-0007](../stories/ST-0007-tier2-check-suite.md) — Tier-2 completeness
+  check suite
+- [ST-0008](../stories/ST-0008-change-event-stream.md) — Branch-aware
+  change-event stream
