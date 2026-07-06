@@ -2,7 +2,9 @@
 id: EP-0005
 type: epic
 title: Connectors & Identity
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-06
 owner: eng-lead
 created: 2026-07-05
 links:
