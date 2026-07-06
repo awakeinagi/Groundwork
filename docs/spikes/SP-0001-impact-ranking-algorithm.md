@@ -25,6 +25,15 @@ impacted by have already been made? The answer must be well-defined in the
 presence of cycles, since real impact graphs contain them (the current epic
 set has EP-0001↔EP-0003 and EP-0002↔EP-0006).
 
+## Consumers
+
+Two, per [DEC-0027](../decisions/DEC-0027-impact-ranked-refinement-order.md)
+and [DEC-0041](../decisions/DEC-0041-impact-ranked-reaffirmation-queue.md):
+initial refinement ordering among siblings, and re-affirmation queue
+ordering after staleness sweeps. The objective function must serve both
+(they may weight differently: re-affirmation clears against a live blocked
+graph).
+
 ## Why It Blocks
 
 Refinement ordering is the first scheduling decision Groundwork makes at

@@ -78,6 +78,13 @@ is gated).
   find affected descendants (including in-flight work) and mark them Stale.
 - **Stale** — status of an artifact whose upstream basis changed after
   approval. Stale artifacts block new downstream generation until re-ratified.
+- **Re-affirmation** — the lightweight clearing of a Stale mark: the
+  approver reviews the upstream diff plus impact report and re-approves via
+  a small PR; full re-refinement happens only if re-affirmation is rejected.
+- **Governance-as-Code** — the rule that roles, domain→approver mappings,
+  and gate policies live as versioned, PR-gated files under `governance/`
+  in the Canonical Store; host teams and branch protections are projections
+  compiled from them.
 - **Drift** — divergence between a Projection and its canonical artifact
   (e.g., a direct Jira edit), detected by sync and reconciled toward canon.
 - **Item Branch** — the git branch dedicated to one artifact's refinement,
