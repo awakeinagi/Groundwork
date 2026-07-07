@@ -70,6 +70,41 @@ is gated).
   preserved verbatim and triaged by the agent into a mechanical fix, a
   refinement session, or an audited rejection.
 
+## Design elements
+
+The typed constituents of Component Docs (see
+[SPEC-design-elements](docs/specs/SPEC-design-elements.md)). The five type
+names below are reserved words when used as element types.
+
+- **Design Element** — a named, typed constituent of a Component Doc's
+  contract, declared as `### <Name> (<type>)` in the doc's Design Elements
+  section and carrying its own contract block.
+- **Element Type** — the closed classification of Design Elements: Entity,
+  Value, Service, Event, Protocol. Extended only by an accepted Decision
+  and spec change.
+- **Entity** — an element type: a domain concept with persistent identity,
+  lifecycle, and mutable state; identity survives state changes.
+- **Value** — an element type: an immutable, attribute-defined item;
+  equality by value; no identity or lifecycle.
+- **Service** — an element type: a stateless capability exposing
+  operations; owns no state beyond what its contracts declare.
+- **Event** — an element type: a schema'd payload crossing a boundary,
+  with defined emission, ordering, and delivery semantics.
+- **Protocol** — an element type: a capability seam — the contract an
+  implementation must satisfy, defined independently of any
+  implementation.
+- **Seam** — a Design Element consumed across component boundaries
+  (consumed by more than one CMP, or independently versioned); seams
+  graduate to standalone Component Docs carrying a `component-type`.
+- **Component Invariant** — a numbered guarantee spanning multiple
+  elements of one component (`C-<n>` items).
+- **Implementation Constraint** — a normative, Decision-cited commitment
+  binding the reference implementation (`IG-<n>` items in a CMP's
+  Implementation Guidance section).
+- **Implementation Note** — an advisory, possibly stack-specific hint in
+  a CMP's Implementation Guidance section; never load-bearing — contracts
+  must stand without it.
+
 ## Process
 
 - **Refinement Session** — a 1:1 Q&A conversation in which the agent sharpens

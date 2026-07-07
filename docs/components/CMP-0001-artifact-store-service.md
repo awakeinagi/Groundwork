@@ -9,7 +9,8 @@ context: canonical-store
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
-cites: [DEC-0028, DEC-0029, DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035]
+cites: [DEC-0028, DEC-0029, DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035,
+        DEC-0080, DEC-0081, DEC-0082, DEC-0083, DEC-0085, DEC-0087]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -19,6 +20,8 @@ cites: [DEC-0028, DEC-0029, DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035]
 > refine and settle their designs; this component is gate-eligible only
 > when contract-complete per
 > [DEC-0011](../decisions/DEC-0011-contract-complete-component-docs.md).
+> Structured element-first per
+> [DEC-0081](../decisions/DEC-0081-element-first-contract-layout.md).
 
 ## Purpose
 
@@ -30,41 +33,84 @@ writes, and emits the change-event stream every other component consumes.
 ## Ubiquitous Language
 
 Canonical Store, Artifact, Item Branch, Session Worktree, Mechanical
-Write, Gate — per [CONTEXT.md](../../CONTEXT.md). No new terms introduced.
+Write, Gate, Design Element — per [CONTEXT.md](../../CONTEXT.md). No new
+terms introduced.
 
-## Behavior Contract
+## Design Elements
 
-Pending — itemized from ST-0002/ST-0003/ST-0004/ST-0005/ST-0006 as they
-refine. Anchors already decided: single write authority
-(per [DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md)); branch/PR
-lifecycle (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md));
+Candidate elements (per
+[DEC-0082](../decisions/DEC-0082-closed-element-type-taxonomy.md)); each
+block is itemized as its stories settle. The list is provisional until
+gate time.
+
+### StorageService (service)
+
+Pending — API contract (`StorageService.A-*`) from ST-0002 (OpenAPI),
+mechanical operations from ST-0006, branch/PR operations from ST-0003;
+behavior contract (`StorageService.B-*`) anchors already decided: single
+write authority (per [DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md));
+branch/PR lifecycle (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md));
 worktree concurrency (per [DEC-0030](../decisions/DEC-0030-session-worktrees-branch-merge.md));
 mechanical-write inexpressibility of content diffs
 (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md));
-append-only sessions (per [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)).
+append-only sessions
+(per [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)).
 
-## API Contract
+### Artifact (entity)
 
-Pending — OpenAPI authored in ST-0002; mechanical operations in ST-0006;
-branch/PR operations in ST-0003 (per
-[DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md),
-language-neutral).
+Pending — identity/lifecycle invariants and data contract
+(`Artifact.B-*`, `Artifact.D-*`) from the tier-1 schema suite (ST-0001)
+and status lifecycle (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md),
+[SPEC-artifact-common](../specs/SPEC-artifact-common.md)).
 
-## Data Contract
+### ArtifactId (value)
 
-Pending — owned state: the fork (git), ID counters (ST-0005 design),
-event outbox (ST-0008 design). The repository remains rebuild-sufficient.
+Pending — schema, allocation and immutability invariants
+(`ArtifactId.D-*`) from ST-0005
+(per [DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md),
+[DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
+
+### ChangeEvent (event)
+
+Pending — payload schema and emission/ordering/delivery semantics
+(`ChangeEvent.D-*`, `ChangeEvent.B-*`) from ST-0008
+(per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)).
+
+## Component Invariants
+
+Pending — cross-element guarantees (`C-*`) itemized as stories settle;
+known anchor: the repository remains rebuild-sufficient — all derived
+state reconstructible from the fork.
+
+## Implementation Guidance
+
+### Constraints
+
+Pending — candidates from accepted decisions: Postgres transactional
+outbox for the event stream
+(per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md));
+ID rescan-on-boot, no durable counter store
+(per [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
+
+### Notes
+
+Pending — populated during story implementation refinement (advisory,
+per [DEC-0085](../decisions/DEC-0085-implementation-guidance-split.md)).
 
 ## Dependencies
 
-- Code-host connector contract (EP-0005 / future CMP) — fork, branch, PR,
-  review, protection operations; consumed per its capability manifest
+- Code-host connector contract (EP-0005 / future standalone
+  `protocol`-type CMP per
+  [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md)) —
+  fork, branch, PR, review, protection operations; consumed per its
+  capability manifest
   (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
 
 ## Acceptance & Test Expectations
 
 Pending — assembled from story acceptance criteria; must include the
-tier-2 check suite (ST-0007) passing against this repo's bootstrap corpus.
+tier-2 check suite (ST-0007) passing against this repo's bootstrap
+corpus.
 
 ## Out of Scope
 

@@ -9,7 +9,7 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
   impacts: [ST-0002, ST-0007]
-cites: [DEC-0009, DEC-0018, DEC-0034, DEC-0037, DEC-0047]
+cites: [DEC-0009, DEC-0018, DEC-0034, DEC-0037, DEC-0047, DEC-0080, DEC-0082]
 ---
 
 # ST-0001: Tier-1 Schema Suite and Validation Library
@@ -37,6 +37,11 @@ service runs on every write — the executable form of the SPEC documents.
    DEC-0026, DEC-0034).
 5. Schemas are published as language-neutral assets alongside the SPECs so
    any reimplementation validates identically (per DEC-0018).
+6. The element-type enum (entity, value, service, event, protocol) is
+   published as a language-neutral schema asset, and the CMP frontmatter
+   schema validates the optional `component-type` field (standalone
+   element CMPs) against it; unknown types are tier-1 rejections (per
+   DEC-0080, DEC-0082, DEC-0018).
 
 ## Component Impact
 

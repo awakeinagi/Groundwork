@@ -10,7 +10,8 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0001]
   impacted-by: [ST-0001]
-cites: [DEC-0009, DEC-0026, DEC-0033, DEC-0034, DEC-0035]
+cites: [DEC-0009, DEC-0026, DEC-0033, DEC-0034, DEC-0035, DEC-0081, DEC-0083,
+        DEC-0085, DEC-0087]
 ---
 
 # ST-0007: Tier-2 Completeness Check Suite
@@ -38,7 +39,14 @@ validator.
    fields/append regions (per DEC-0033).
 5. Every failure is reported with a human-readable explanation naming the
    artifact, the rule, and the fix (per DEC-0034).
-6. The suite passes against this repository's full bootstrap corpus as its
+6. For component docs, the suite parses `### <ElementName> (<type>)`
+   element headings in Design Elements sections: every type resolves
+   against the closed element-type enum, each element's typed contract
+   obligations are present, element-scoped item IDs are well-formed and
+   unique within the doc, and Implementation Guidance Constraints cite
+   decisions while Notes are exempt (per DEC-0081, DEC-0083, DEC-0085,
+   DEC-0087).
+7. The suite passes against this repository's full bootstrap corpus as its
    initial regression baseline.
 
 ## Component Impact
