@@ -1,0 +1,26 @@
+{
+  "skill_name": "groundwork-design-session",
+  "evals": [
+    {
+      "id": 1,
+      "name": "bootstrap-and-inception",
+      "prompt": "I want to start properly documenting the design of a new internal tool before anyone writes code. The idea: our support team gets ~800 tickets/day and triages them by hand; I want an LLM-assisted ticket router that classifies, prioritizes, and routes tickets to the right team queues. Set up a Groundwork design documentation project in this directory and run the design process as far as you can. I'm the sponsor — here are my answers to the obvious questions so you're not blocked: routing suggestions must be human-confirmable for the first quarter (no fully-automatic routing until we trust it); misroutes are the pain (23% of tickets today) and SLA breaches follow from them; success means misroute rate under 8% and triage touch-time halved; out of scope: replying to customers, deflection bots; constraints: tickets contain PII so no external LLM APIs — self-hosted models only — and the platform team must approve anything touching the ticket database. Zendesk is the ticket system. If you still need answers beyond these, record your open questions for a next session rather than inventing my answers. Get the docs to the point where I could approve the business goal.",
+      "expected_output": "A complete Groundwork bootstrap (docs/ tree, CONTEXT.md with domain terms, AGENTS.md with the Groundwork marker, tools/check_links.py) plus an inception session record (SES-0001, turn-numbered transcript), decision records with source-spans (human-confirmable routing, self-hosted models/PII, measurable outcomes, scope), and a gated BG-0001 citing those decisions with measurable success criteria and explicit out-of-scope. Checker passes; git initialized with commits; remaining unknowns recorded as open questions, not fabricated answers.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "continue-existing-design",
+      "prompt": "This repo contains the design docs for our invoice reconciliation tool (Recon). Please continue the design work following the project's methodology. For anything needing my input, here are my positions as sponsor: I approve EP-0002 (Reviewer Workflow) as written — consider this my sign-off today. For the matching engine: tolerances are configurable per vendor with a global default (percentage-based, default 2%, hard cap $500 per line); quantity mismatches are never tolerable — any quantity difference is an Exception; match runs are a nightly batch for v1, real-time later. Use these answers; where you'd need more from me, record open questions instead of guessing. Take the next steps the methodology calls for and leave the repo in a clean, validated state.",
+      "expected_output": "Correct state assessment (Mode 3). EP-0002 transitioned to approved with approved-by/approved-on recorded in its own commit. A new session record (SES-0002) capturing the sponsor's matching-engine answers, distilled into new decision records (tolerance semantics, quantity rule, nightly batch) with source-spans — WITHOUT editing the closed SES-0001 or the accepted DEC-0001..0004. Stories (and optionally spikes) derived from EP-0001 with acceptance criteria citing decisions; IDs continue from the existing max; check_links.py passes; work committed.",
+      "files": ["fixtures/continue-project"]
+    },
+    {
+      "id": 3,
+      "name": "assess-state-readonly",
+      "prompt": "I've just been handed this design-docs repo for a tool called Recon and I'm taking over as tech lead. Before we change anything: give me a precise state-of-the-project assessment — what exists, what's approved, what's blocked and why, what's waiting on whom, and what you would do next in priority order. Don't modify any files.",
+      "expected_output": "An accurate read-only assessment: BG-0001 approved; EP-0001 approved but its only story ST-0001 is stale (ERP reporting DB being replaced by REST API) and needs re-affirmation or re-refinement; EP-0002 is gated but BLOCKED by the open, escalated conflict CFL-0001 (controller wants sub-$25 auto-write-offs vs DEC-0002 finance policy), waiting on the sponsor to rule with finance; correct priority order (resolve CFL-0001 first since it blocks EP-0002's gate; handle ST-0001 staleness; then derive remaining EP-0001 stories / EP-0002 work). No files modified.",
+      "files": ["fixtures/assess-project"]
+    }
+  ]
+}

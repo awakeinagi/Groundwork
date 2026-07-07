@@ -1,0 +1,284 @@
+# The Groundwork Documentation System
+
+Self-contained reference: the artifact model, file conventions, link
+graph, status lifecycles, and integrity rules. This is the *what*; the
+companion [refinement-process.md](refinement-process.md) is the *how*.
+
+## Contents
+
+1. [The pipeline](#the-pipeline)
+2. [Repository layout](#repository-layout)
+3. [Identity and files](#identity-and-files)
+4. [Common frontmatter and typed links](#common-frontmatter-and-typed-links)
+5. [Status lifecycles](#status-lifecycles)
+6. [Artifact catalog](#artifact-catalog) (one section per type)
+7. [Integrity rules](#integrity-rules)
+8. [Operating modes](#operating-modes)
+
+## The pipeline
+
+```
+Idea ─▶ Refinement Sessions ─▶ Business Goal ─▶ Epics ─▶ Stories/Spikes ─▶ Component Docs ─▶ implementation
+             (SES)                 (BG)           (EP)       (ST/SP)           (CMP)
+               │                    ▲              ▲            ▲                ▲
+               └── Decisions (DEC) ─┴──────────────┴────────────┴────────────────┘
+                    every artifact cites the decisions that shaped it
+```
+
+Each stage transition passes a human **approval gate**. The end product is
+a set of **contract-complete Component Docs**: an implementer holding one
+(plus the interface contracts of its dependencies, not their internals)
+can implement and test the component without asking anyone anything. The
+whole system exists to produce those docs while keeping them provably
+aligned with the business intent at the root.
+
+Three properties make the system work; protect them above all:
+
+- **Provenance**: raw conversation → distilled Decision → cited by
+  requirements/contracts. "Why does this contract say X?" is always
+  answerable, down to who said what and when.
+- **Gates**: nothing derives from an unapproved parent, so every layer of
+  the tree is human-ratified.
+- **Traceability**: typed links make the tree machine-walkable — impact
+  analysis, staleness, and refinement ordering all ride the link graph.
+
+## Repository layout
+
+```
+CONTEXT.md               glossary — the project's ubiquitous language
+AGENTS.md                standing instructions for agents (Groundwork marker)
+tools/check_links.py     graph integrity checker — run before every commit
+docs/
+├── goals/               Business Goals        BG-*
+├── epics/               Epics                 EP-*
+├── stories/             Stories               ST-*
+├── spikes/              Spikes                SP-*
+├── components/          Component Docs        CMP-*
+├── sessions/            Session records       SES-*
+├── decisions/           Decision records      DEC-*
+├── conflicts/           Conflicts             CFL-*
+├── change-proposals/    Change Proposals      CP-*
+└── consolidations/      Consolidations        CON-*
+```
+
+## Identity and files
+
+- Every artifact has an immutable ID: `<PREFIX>-<4-digit zero-padded n>`
+  (e.g. `EP-0003`). Numbers are sequential per prefix and **never reused**,
+  even after deletion. To allocate, scan all of `docs/` for the current
+  max of that prefix.
+- Filename: `<ID>-<kebab-case-slug>.md`. The slug may change; the ID may not.
+- One artifact per file: markdown body + YAML frontmatter.
+- Dates are absolute (`2026-07-06`), never relative.
+
+## Common frontmatter and typed links
+
+```yaml
+---
+id: EP-0002
+type: epic          # business-goal | epic | story | spike | component |
+                    # session | decision | conflict | change-proposal |
+                    # consolidation
+title: Short descriptive title
+status: draft
+owner: <person or role accountable for the gate>
+created: 2026-07-06
+links:
+  derives-from: [BG-0001]   # immediate parent(s) in the pipeline
+  satisfies: [BG-0001]      # business goal(s) ultimately served
+  depends-on: []            # artifacts this one requires (e.g. CMP contracts)
+  conflicts-with: []        # open conflicts (paired with a CFL artifact)
+  supersedes: []            # earlier artifact(s) this replaces
+  relates-to: []            # weak association (context, not derivation)
+  impacts: []               # same-type siblings whose decisions this
+                            # artifact's refinement will shape
+  impacted-by: []           # inverse of impacts
+cites: [DEC-0004, DEC-0009] # decisions that shaped this artifact
+---
+```
+
+Rules:
+
+- Link values are bare artifact IDs; the vocabulary above is **closed** —
+  no invented link types. Empty lists may be omitted.
+- Frontmatter links are the authoritative relationships. Inline markdown
+  links in prose (`[EP-0003](../epics/EP-0003-....md)`) are navigational
+  sugar — use them generously, but the frontmatter is what tools read.
+- **Impact links**: "X impacts Y" means decisions recorded while refining
+  X are expected to constrain, shape, or invalidate decisions in Y. They
+  connect *same-type* artifacts only, and both endpoints record the
+  relationship (`impacts` on X, `impacted-by` on Y) — the checker enforces
+  reciprocity. Impact graphs may legitimately contain cycles; refinement
+  ordering among siblings is judged over this graph (refine items whose
+  impactors are settled and whose impact fan-out is largest, first).
+- `cites` is the provenance field: any artifact whose content rests on a
+  decision cites its `DEC-` ID.
+
+## Status lifecycles
+
+Standard lifecycle (goals, epics, stories, spikes, components):
+
+```
+draft ─▶ in-refinement ─▶ gated ─▶ approved ─▶ (stale ⇄ approved)
+                                       │
+                                       ├─▶ superseded
+                                       └─▶ archived
+```
+
+- `draft` — generated/authored, not yet in active refinement.
+- `in-refinement` — under active session work.
+- `gated` — refinement complete, awaiting the approver's sign-off.
+- `approved` — human-ratified; may feed the next stage. Record
+  `approved-by:` and `approved-on:` in frontmatter at this transition.
+- `stale` — an upstream basis changed after approval; blocks new
+  downstream derivation until re-affirmed back to `approved`.
+- `superseded`/`archived` — terminal; a superseding artifact links back
+  with `supersedes`.
+
+Reduced lifecycles:
+
+- **Session**: `open → closed`. Closed sessions are immutable — follow-up
+  conversation is a *new* session.
+- **Decision**: `proposed → accepted → superseded`. Accepted decisions are
+  immutable; changing course means a new decision with `supersedes` set.
+- **Conflict**: `open → mediating → escalated → resolved`.
+- **Change Proposal**: triage states `pending → mechanical | session | rejected`.
+- **Consolidation**: `fresh | stale` (derived artifacts, mechanically
+  invalidated when any source changes).
+
+## Artifact catalog
+
+### Business Goal (BG) — `docs/goals/`
+The foundational statement of a refined business intent; root of the
+traceability graph. Sections: **Problem** (in the sponsor's terms, no
+solution language), **Intent**, **Outcomes & Success Criteria** (each
+citing a decision), **Scope** (in/out), **Constraints**, **Stakeholders &
+Roles**, **Conflicts & Tensions**, **Derived Work**. A goal must be
+`approved` before epics derive from it. Solution design does not belong
+here. Frontmatter extras: `sponsor:`.
+
+### Epic (EP) — `docs/epics/`
+A coherent body of work derived from an approved goal. Sections:
+**Summary**, **Why (Goal Alignment)** — the argument a gate reviewer
+checks, **Scope** (in/out), **Domain Context** (bounded context + glossary
+terms it introduced), **Interfaces & Contracts to Define**, **Risks & Open
+Questions** (including candidate spikes), **Derived Work**. Must be
+`approved` before stories/spikes derive.
+
+### Story (ST) — `docs/stories/`
+An implementable unit derived from an approved epic. Sections: **Summary**,
+**Acceptance Criteria** — numbered, individually testable, **each ending
+with `(per DEC-nnnn)`** (a criterion no decision supports means: refine
+more, never invent provenance), **Component Impact** (which CMPs it
+implements/modifies), **Out of Scope**, **Notes for Implementers**
+(optional context, never a substitute for contracts).
+
+### Spike (SP) — `docs/spikes/`
+A research unit: a question that must be answered before sibling work can
+be trusted. Sections: **Question** (phrased so an answer is recognizable),
+**Why It Blocks**, **Method**, **Findings** (at completion), **Resulting
+Decisions**. Frontmatter extras: `timebox:`. A completed spike must
+produce ≥1 Decision (deriving from the spike) — even "assumption
+confirmed, no change." Cross-cutting process-level spikes may derive
+directly from a Business Goal.
+
+### Component Doc (CMP) — `docs/components/`
+The contract-complete spec of one system component, aligned with a
+DDD-style bounded context — **the deliverable**. Sections: **Purpose**,
+**Ubiquitous Language** (every model term glossary-resolved), **Behavior
+Contract** (numbered guarantees: invariants, state transitions, failure
+behavior), **API Contract** (operations, schemas in language-neutral form,
+error taxonomy, idempotency), **Data Contract** (owned entities, lifecycle),
+**Dependencies** (which contract sections of each `depends-on` component
+are consumed — internals are out of bounds), **Acceptance & Test
+Expectations**, **Out of Scope** (especially plausible adjacent behavior an
+implementer might assume). **Every contract item cites at least one
+decision** — uncited items block the gate. Frontmatter extras: `context:`
+(bounded context name). Drafts may carry `Pending — …` sections; the gate
+requires completeness.
+
+### Session (SES) — `docs/sessions/`
+The record of one 1:1 refinement conversation. Sections: **Purpose**,
+**Transcript** — turn-numbered (`T1`, `T2`, …) so decisions can cite spans;
+this is the raw record, faithful to what was actually said, never
+summarized in place (fidelity `verbatim` when captured live;
+`reconstructed` when written up from an agent conversation — say which),
+**Decisions Produced**, **Conflicts Raised**. Frontmatter extras:
+`participant:`, `participant-role:`, `facilitator:` (agent + model),
+`transcript-fidelity:`. Append-only; corrections happen in later turns or
+later sessions. Multi-stakeholder input = separate 1:1 sessions that the
+facilitator synthesizes, never shared sessions.
+
+### Decision (DEC) — `docs/decisions/`
+The unit of provenance: one distilled, attributable decision. Sections:
+**Context** (the question that had to be answered), **Decision** (one
+unambiguous statement — if it takes more than a short paragraph it is
+several decisions), **Rationale**, **Alternatives Considered**,
+**Implications**. Frontmatter extras: `decided-by:`, `decided-on:`,
+`source-span: "SES-0001 @ T4-T6"` (turns that actually support it; for
+spikes, `"SP-0002 findings"`). `derives-from` must point at a session or
+spike. Record decisions that are hard to reverse, surprising without
+context, or genuine trade-offs; routine clarifications live in artifact
+bodies instead.
+
+### Conflict (CFL) — `docs/conflicts/`
+A first-class record of contradictory or competing requests. Sections:
+**The Tension** (stated neutrally), **Party Intents** (the underlying
+intent behind each position — discovered before mediating), **Mediation
+Record** (compromises proposed, responses), **Resolution** (citing the
+decision(s) that resolved it). While unresolved, the artifacts in tension
+link `conflicts-with: [CFL-…]`, cannot pass a gate, and nothing new may
+derive from them. Frontmatter extras: `escalated-to:` once escalated.
+
+### Change Proposal (CP) — `docs/change-proposals/`
+A change proposed from outside the refinement pipeline (an edit made
+elsewhere, a reviewer suggestion, implementation feedback), captured
+verbatim so intent survives redirection. Sections: **Proposed Change**,
+**Context**, **Triage Outcome** (mechanical fix / refinement session /
+rejected-with-rationale). Frontmatter extras: `source:`, `proposed-by:`,
+`triage:`. CPs never modify their target directly; the fix or session does,
+citing the CP. Optional in small manual projects — use when out-of-band
+input needs an audit trail.
+
+### Consolidation (CON) — `docs/consolidations/`
+A derived summary of a frequently-needed neighborhood of the graph (e.g.
+"BG-0001 + its epics + key decisions"), used to load context efficiently.
+Sections: **Path Covered**, **Consolidated Content** (faithful, no new
+claims, load-bearing statements carry citations), **Omissions**.
+Frontmatter extras: `sources:` (each pinned to a git ref). Stale the
+moment any source changes; never citable as provenance; always
+regenerable. Optional — valuable once the graph outgrows comfortable
+re-reading.
+
+## Integrity rules
+
+Enforced by `tools/check_links.py` (bundled with this skill; installed
+into projects at bootstrap):
+
+1. IDs are unique; frontmatter `id` matches the filename prefix; type
+   matches prefix.
+2. Every linked or cited ID resolves to an existing artifact.
+3. Every epic/story/spike/component traces to ≥1 Business Goal through
+   `derives-from`/`satisfies` chains.
+4. Every decision `derives-from` a session or spike.
+5. No `approved` artifact links `conflicts-with` an unresolved conflict.
+6. Impact links are reciprocal and same-type.
+
+Beyond the checker, the human-enforced rules: closed sessions and accepted
+decisions are immutable; acceptance criteria and contract items cite
+decisions; glossary terms are used exactly.
+
+## Operating modes
+
+**Manual mode (default — what this skill runs):** a single branch;
+lifecycle state lives in the `status` frontmatter field; the user approves
+gates in conversation and the agent records `approved-by`/`approved-on`;
+every session and every approval is a commit; git history is the audit
+trail.
+
+**Branch/PR mode (optional, for teams on a git host):** each artifact
+under refinement gets an item branch carrying the item plus its sessions
+and decisions; opening the branch opens a PR to main; **PR approval is the
+gate** and merge = approved, so main holds only ratified artifacts;
+post-merge changes reuse the branch with a new PR. Adopt this only when
+the team actually reviews PRs; the artifact model is identical either way.
