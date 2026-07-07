@@ -423,26 +423,130 @@ def cmd_stats(g, root, args):
         "a.title AS title ORDER BY degree DESC, id LIMIT 10"), args.json)
 
 
+EPILOG = """\
+quick start:
+  uv run groundwork_graph.py --root /path/to/project build
+  uv run groundwork_graph.py --root /path/to/project gaps
+
+examples:
+  build                                  rebuild after many doc edits
+  sync docs/epics/EP-0002-foo.md         re-index one edited file
+  sync ST-0004 DEC-0091                  re-index by artifact ID
+  impact DEC-0011                        who goes stale if this changes?
+  trace CMP-0001                         why does this exist? which DECs?
+  order story                            what should be refined next?
+  elements protocol                      all protocol elements across CMPs
+  query "MATCH (a:Artifact {status:'gated'}) RETURN a.id, a.title"
+  --json query "..."                     machine-readable output
+
+The graph is a DERIVED view: markdown under docs/ is always the source
+of truth. Edit docs first, then `sync` (or `build` — it is cheap).
+Full schema + a Cypher recipe cookbook: references/graph-queries.md
+(next to this script's skill). Run `<command> --help` for details.
+"""
+
+COMMANDS = {
+    "build": ("rebuild the whole graph from docs/",
+              "Drop and recreate the database from every artifact's "
+              "frontmatter, plus Design Element headings in component "
+              "docs. Cheap (seconds); when in doubt, rebuild rather "
+              "than sync. Unresolved link/cite targets become "
+              "placeholder nodes (type='missing') so gaps stay "
+              "queryable."),
+    "sync": ("incrementally re-index changed or deleted artifacts",
+             "Re-parse the given files (or artifact IDs) and replace "
+             "their nodes, outgoing edges, and elements. If the file "
+             "is gone, the node is deleted. Docs stay canonical: sync "
+             "reflects doc edits into the graph, never the reverse. "
+             "Note: placeholders created by OTHER artifacts are only "
+             "cleaned up by a full `build`."),
+    "query": ("run raw openCypher against the graph",
+              "One positional argument: the Cypher string (quote it). "
+              "Node tables: Artifact(id, type, title, status, owner, "
+              "created, path, context, component_type, source_span), "
+              "Element(key, name, etype, component). Rel tables: "
+              "DERIVES{ltype} (child->parent: derives-from/satisfies), "
+              "IMPACTS (X impacts Y), DEPENDS_ON, CONFLICTS_WITH, "
+              "SUPERSEDES (new->old), RELATES_TO, CITES "
+              "(artifact->decision), HAS_ELEMENT (component->element). "
+              "Mutating queries are allowed but are for what-if "
+              "exploration only — rebuild to reset."),
+    "impact": ("downstream blast radius of changing an artifact",
+               "Four views of what a change to ID touches: derivation "
+               "descendants (the set that would be marked stale), "
+               "citers (artifacts resting on it — key for decisions "
+               "about to be superseded), impact-edge neighbors "
+               "(siblings its refinement shapes), and dependents "
+               "(components consuming its contracts). Run BEFORE "
+               "superseding a decision or amending an approved "
+               "artifact."),
+    "trace": ("upstream provenance of an artifact",
+              "Ancestor chain to the business goal(s) via "
+              "derives-from/satisfies, plus every decision the "
+              "artifact cites with its source-span and originating "
+              "session. Answers: why does this exist, and who decided "
+              "what, where?"),
+    "gaps": ("audit the cross-reference graph for holes",
+             "Five checks: unresolved references (missing targets), "
+             "artifacts still citing superseded decisions, accepted "
+             "decisions cited by nothing, approved goals/epics with "
+             "nothing derived yet (the refinement frontier), and "
+             "closed sessions that produced no decisions."),
+    "order": ("impact-ranked refinement order among siblings",
+              "For unapproved artifacts of TYPE: ready = every "
+              "artifact that impacts it is approved; ranked by how "
+              "many siblings their own refinement will shape "
+              "(impact fan-out). Refine ready items with the largest "
+              "fan-out first."),
+    "elements": ("design-element inventory across components",
+                 "Every `### <Name> (<type>)` element declared in "
+                 "component docs, optionally filtered to one type. "
+                 "Useful for spotting seam-graduation candidates and "
+                 "reviewing the element model as a whole."),
+    "stats": ("node/edge counts and most-connected artifacts",
+              "Artifact counts by type and status, edge counts per "
+              "relationship table, and the ten highest-degree "
+              "artifacts (the load-bearing neighborhoods)."),
+}
+
+
 def main():
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--root", default=".", help="project root (has docs/)")
-    ap.add_argument("--db", default=None, help="database file path")
-    ap.add_argument("--json", action="store_true", help="JSON output")
-    sub = ap.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("build")
-    p = sub.add_parser("sync")
-    p.add_argument("targets", nargs="+", metavar="PATH|ID")
-    p = sub.add_parser("query")
-    p.add_argument("cypher")
+    ap = argparse.ArgumentParser(
+        prog="groundwork_graph.py",
+        description="Local queryable graph index for a Groundwork "
+                    "artifact tree (LadybugDB / openCypher). Built from "
+                    "docs/ frontmatter links + Design Element headings; "
+                    "a derived, disposable view — docs are the source "
+                    "of truth.",
+        epilog=EPILOG,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--root", default=".",
+                    help="project root containing docs/ (default: cwd)")
+    ap.add_argument("--db", default=None,
+                    help="database file (default: <root>/.groundwork-graph;"
+                         " keep it gitignored)")
+    ap.add_argument("--json", action="store_true",
+                    help="emit result rows as JSON instead of aligned text")
+    sub = ap.add_subparsers(dest="cmd", required=True,
+                            metavar="COMMAND")
+    ps = {name: sub.add_parser(name, help=h, description=f"{h}. {d}")
+          for name, (h, d) in COMMANDS.items()}
+    ps["sync"].add_argument(
+        "targets", nargs="+", metavar="PATH|ID",
+        help="artifact file path (relative to --root) or bare ID "
+             "(e.g. EP-0002); a missing file deletes the node")
+    ps["query"].add_argument(
+        "cypher", help="openCypher statement (single quoted argument)")
     for name in ("impact", "trace"):
-        p = sub.add_parser(name)
-        p.add_argument("id")
-    sub.add_parser("gaps")
-    p = sub.add_parser("order")
-    p.add_argument("type", nargs="?", default="epic")
-    p = sub.add_parser("elements")
-    p.add_argument("etype", nargs="?", default=None)
-    sub.add_parser("stats")
+        ps[name].add_argument("id", help="artifact ID, e.g. DEC-0011")
+    ps["order"].add_argument(
+        "type", nargs="?", default="epic",
+        help="artifact type: business-goal | epic | story | spike | "
+             "component (default: epic)")
+    ps["elements"].add_argument(
+        "etype", nargs="?", default=None,
+        help="filter to one element type: entity | value | service | "
+             "event | protocol (default: all)")
     args = ap.parse_args()
 
     root = Path(args.root).resolve()

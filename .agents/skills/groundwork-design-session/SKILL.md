@@ -142,7 +142,7 @@ Use it whenever a question is really a graph traversal:
 | Periodic audit: dangling refs, citations of superseded DECs, uncited decisions, frontier | `gaps` |
 | Choosing what to refine next among siblings | `order [type]` |
 | Element inventory across components (seam-graduation candidates) | `elements [etype]` |
-| Anything else | `query "<openCypher>"` (schema in the script docstring) |
+| Anything else | `query "<openCypher>"` — schema + recipe cookbook in [references/graph-queries.md](references/graph-queries.md) |
 
 Discipline: the graph is a **derived view** — docs stay the source of
 truth. After editing artifacts, `sync <file-or-ID>...` (or rebuild:
@@ -170,4 +170,5 @@ only, never a substitute for editing docs.
 | Artifact types, frontmatter, links, statuses, integrity rules | [references/groundwork-system.md](references/groundwork-system.md) |
 | How to grill, record sessions, distill decisions, run gates, handle conflicts/staleness, per-stage playbooks | [references/refinement-process.md](references/refinement-process.md) |
 | Copy-paste templates for every artifact + CONTEXT.md/README seeds | [references/templates.md](references/templates.md) |
+| Graph-index schema, command reference, openCypher recipe cookbook | [references/graph-queries.md](references/graph-queries.md) |
 | The standing instructions installed into projects | [assets/AGENTS.md](assets/AGENTS.md) |
