@@ -127,6 +127,8 @@ draft ─▶ in-refinement ─▶ gated ─▶ approved ─▶ (stale ⇄ approv
                                        │
                                        ├─▶ superseded
                                        └─▶ archived
+
+any active status ─▶ deferred ─▶ draft      (stories & epics only)
 ```
 
 - `draft` — generated/authored, not yet in active refinement.
@@ -138,6 +140,28 @@ draft ─▶ in-refinement ─▶ gated ─▶ approved ─▶ (stale ⇄ approv
   downstream derivation until re-affirmed back to `approved`.
 - `superseded`/`archived` — terminal; a superseding artifact links back
   with `supersedes`.
+- `deferred` — stories and epics only: captured but intentionally out of
+  the current release. Entered from any active status; while deferred the
+  artifact cannot pass a gate and nothing derives from it. Revival always
+  lands at `draft` — content, citations, and links are retained, but the
+  gate is re-earned in current context. Deferral and revival each cite a
+  decision.
+
+**Release scoping.** Stories and epics may carry a `release:` frontmatter
+field: reserved `backlog` ("wanted, no target yet") or a prefix of a
+SemVer 2.0.0 version core — `MAJOR`, `MAJOR.MINOR`, or
+`MAJOR.MINOR.PATCH` (e.g. `1`, `1.2`, `1.2.3`; numeric identifiers, no
+leading zeroes, no `v` prefix, no pre-release/build metadata; quote the
+value so YAML keeps it a string). A partial value is a scope ("somewhere
+in the 1.x.x line"), narrowable mechanically; *moving* an item between
+releases cites a decision. Absence of the field = current release. An
+epic's label defaults its derived stories; a story may override. Labels
+must exactly match a release declared in the governing Business Goal's
+Scope section (`**Releases:**` list, current release marked `(current)`),
+or be `backlog`. Non-current effective release ⇔ `deferred`. Deferred
+stories leave the design-% denominators and coverage warnings; the
+status report lists them grouped by release, SemVer precedence order,
+`backlog` last.
 
 Reduced lifecycles:
 
@@ -156,7 +180,10 @@ Reduced lifecycles:
 The foundational statement of a refined business intent; root of the
 traceability graph. Sections: **Problem** (in the sponsor's terms, no
 solution language), **Intent**, **Outcomes & Success Criteria** (each
-citing a decision), **Scope** (in/out), **Constraints**, **Stakeholders &
+citing a decision), **Scope** (in/out; if the work is release-scoped,
+also a `**Releases:**` list — one item per release, value in a code
+span, current release marked `(current)` — which release labels validate
+against), **Constraints**, **Stakeholders &
 Roles**, **Conflicts & Tensions**, **Derived Work**. A goal must be
 `approved` before epics derive from it. Solution design does not belong
 here. Frontmatter extras: `sponsor:`.
@@ -178,7 +205,9 @@ builds or modifies — the story-side forward declaration that component
 design elements later back-reference via `Implements:` lines), **Out of
 Scope**, **Notes for Implementers** (optional context, never a
 substitute for contracts). Amending or superseding an approved story
-stales every CMP with an element that implements it.
+stales every CMP with an element that implements it. Out-of-release
+stories are `deferred` with a `release:` label (see Release scoping in
+the status section, above).
 
 ### Spike (SP) — `docs/spikes/`
 A research unit: a question that must be answered before sibling work can
@@ -329,6 +358,10 @@ into projects at bootstrap):
    naming ≥1 resolvable story whose Component Impact links the CMP back;
    approved stories no element implements are reported as design-coverage
    warnings.
+10. `deferred` status and `release:` fields appear only on stories/epics;
+    `release:` values are `backlog` or SemVer prefixes exactly matching a
+    declared release; deferred ⇔ non-current effective release. Elements
+    implementing only deferred stories are audit warnings.
 
 Beyond the checker, the human-enforced rules: closed sessions and accepted
 decisions are immutable; acceptance criteria and contract items cite

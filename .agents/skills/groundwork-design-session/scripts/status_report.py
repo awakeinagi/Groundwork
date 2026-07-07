@@ -93,6 +93,34 @@ def main():
                          ("untriaged change proposals", pending_cp)]:
         print(f"  {label:<32} {', '.join(items) if items else '-'}")
 
+    # Deferred items grouped by release (SemVer precedence, backlog last)
+    def release_key(label):
+        if label == "backlog":
+            return (1, ())
+        try:
+            return (0, tuple(int(p) for p in str(label).split(".")))
+        except ValueError:
+            return (0, ())
+
+    def effective_release(fm):
+        if fm.get("release") is not None:
+            return str(fm.get("release"))
+        for p in as_list((fm.get("links") or {}).get("derives-from")):
+            parent = arts.get(p, {})
+            if parent.get("type") == "epic" and \
+                    parent.get("release") is not None:
+                return str(parent.get("release"))
+        return "?"
+
+    deferred = defaultdict(list)
+    for aid, fm in arts.items():
+        if fm.get("status") == "deferred":
+            deferred[effective_release(fm)].append(aid)
+    if deferred:
+        print("\nDeferred (out of current release):")
+        for rel in sorted(deferred, key=release_key):
+            print(f"  {rel:<8} {', '.join(sorted(deferred[rel]))}")
+
     # Frontier: approved parents with no derived children
     children = defaultdict(list)
     for aid, fm in arts.items():

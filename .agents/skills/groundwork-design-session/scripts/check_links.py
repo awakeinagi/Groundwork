@@ -26,6 +26,17 @@ Rules enforced:
      doc back (reciprocity with its Component Impact).
  10. (audit, non-blocking) Approved stories with no referencing design
      element are reported as design-coverage warnings.
+ 11. `deferred` status and `release:` fields appear only on stories and
+     epics; a `release:` value is the reserved `backlog` or a SemVer
+     prefix (`1`, `1.2`, `1.2.3` — no leading zeroes, no v prefix) and
+     must exactly match a release declared in a business goal's
+     `**Releases:**` list.
+ 12. Deferred/release consistency: a deferred artifact has an effective
+     release (own field, or its parent epic's) that is not a current
+     release; an artifact whose effective release is non-current is
+     deferred.
+ 13. (audit, non-blocking) A design element whose Implements line
+     references only deferred stories is reported as a warning.
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -63,6 +74,10 @@ INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 BARE_ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}\b")
 EXTERNAL_TARGET = ("http://", "https://", "mailto:", "#")
+RELEASE_SCOPED_TYPES = {"story", "epic"}
+RELEASE_RE = re.compile(r"^(0|[1-9]\d*)(\.(0|[1-9]\d*)){0,2}$")
+RELEASES_HEADER_RE = re.compile(r"^\*\*Releases:\*\*\s*$", re.MULTILINE)
+RELEASE_ITEM_RE = re.compile(r"^-\s+`([^`]+)`(\s*\(current\))?")
 
 
 def parse_frontmatter(path):
@@ -219,7 +234,83 @@ def main():
                               f"{name}")
             seen.add(name)
 
+    # Rules 11-12: release scoping and deferred consistency
+    declared, current = set(), set()
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "business-goal":
+            continue
+        body = fm.get("_body") or ""
+        header = RELEASES_HEADER_RE.search(body)
+        if not header:
+            continue
+        for line in body[header.end():].lstrip("\n").splitlines():
+            item = RELEASE_ITEM_RE.match(line)
+            if item is None:
+                if line.strip() and not line.startswith(" "):
+                    break  # end of the Releases list
+                continue
+            value = item.group(1)
+            declared.add(value)
+            if item.group(2):
+                current.add(value)
+            if not RELEASE_RE.match(value):
+                errors.append(f"{fm['_path']}: declared release {value!r} "
+                              f"is not a SemVer prefix")
+
+    def own_release(fm):
+        return None if fm.get("release") is None else fm.get("release")
+
+    def effective_release(fm):
+        if fm.get("release") is not None:
+            return fm.get("release")
+        for p in as_list((fm.get("links") or {}).get("derives-from")):
+            parent = artifacts.get(p, {})
+            if parent.get("type") == "epic" and \
+                    parent.get("release") is not None:
+                return parent.get("release")
+        return None
+
+    for aid, fm in artifacts.items():
+        atype = fm.get("type")
+        rel = own_release(fm)
+        if fm.get("status") == "deferred" and \
+                atype not in RELEASE_SCOPED_TYPES:
+            errors.append(f"{fm['_path']}: status deferred is only valid "
+                          f"on stories and epics")
+        if rel is not None:
+            if atype not in RELEASE_SCOPED_TYPES:
+                errors.append(f"{fm['_path']}: release: is only valid on "
+                              f"stories and epics")
+                continue
+            if not isinstance(rel, str):
+                errors.append(f"{fm['_path']}: release: {rel!r} must be a "
+                              f"quoted string (YAML parsed it as "
+                              f"{type(rel).__name__})")
+                continue
+            if rel != "backlog" and not RELEASE_RE.match(rel):
+                errors.append(f"{fm['_path']}: release: {rel!r} is not "
+                              f"'backlog' or a SemVer prefix")
+                continue
+            if rel != "backlog" and rel not in declared:
+                errors.append(f"{fm['_path']}: release: {rel!r} matches no "
+                              f"release declared in a business goal "
+                              f"(declared: {sorted(declared) or 'none'})")
+        if atype in RELEASE_SCOPED_TYPES:
+            eff = effective_release(fm)
+            eff_current = eff is None or eff in current
+            if fm.get("status") == "deferred" and eff is None:
+                errors.append(f"{fm['_path']}: deferred {aid} has no "
+                              f"release: (own or parent epic's)")
+            elif fm.get("status") == "deferred" and eff_current:
+                errors.append(f"{fm['_path']}: deferred {aid} targets "
+                              f"current release {eff!r}")
+            elif fm.get("status") != "deferred" and not eff_current \
+                    and isinstance(eff, str):
+                errors.append(f"{fm['_path']}: {aid} targets non-current "
+                              f"release {eff!r} but is not deferred")
+
     # Rule 9: element Implements lines — presence, stories, reciprocity
+    warnings = []
     story_covered = set()
     for aid, fm in artifacts.items():
         if fm.get("type") != "component":
@@ -261,9 +352,14 @@ def main():
                                   f"implements {sid}, but {sid}'s Component "
                                   f"Impact does not link {aid}")
                 story_covered.add(sid)
+            # Rule 13 (audit): element motivated only by deferred stories
+            statuses = [artifacts.get(sid, {}).get("status")
+                        for sid in story_ids if sid in artifacts]
+            if statuses and all(s == "deferred" for s in statuses):
+                warnings.append(f"{fm['_path']}: element {name} implements "
+                                f"only deferred stories")
 
     # Rule 10 (audit): approved stories uncovered by any element
-    warnings = []
     for aid, fm in artifacts.items():
         if fm.get("type") == "story" and fm.get("status") == "approved" \
                 and aid not in story_covered:
@@ -293,7 +389,7 @@ def main():
                           f"prose — must be a markdown link")
 
     if warnings:
-        print(f"WARN: {len(warnings)} design-coverage gap(s)\n")
+        print(f"WARN: {len(warnings)} audit warning(s)\n")
         for w in warnings:
             print(f"  {w}")
         print()

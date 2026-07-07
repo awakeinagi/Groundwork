@@ -44,6 +44,11 @@ cites: [DEC-0001, DEC-0002]
 2. ...
 
 ## Scope
+**Releases:** [omit unless the work is release-scoped; labels are SemVer
+prefixes; mark the current release]
+- `1` (current) — [what this release delivers]
+- `2` — [follow-on scope]
+
 **In:** ...
 **Out:** ...
 
@@ -111,7 +116,8 @@ None yet — stories/spikes follow gate approval of this epic.
 id: ST-0001
 type: story
 title: [Implementable unit]
-status: draft
+status: draft            # deferred if out of the current release
+# release: "2"           # only when deferred: declared release or backlog
 owner: [approver role]
 created: [YYYY-MM-DD]
 links:
