@@ -93,6 +93,15 @@ names below are reserved words when used as element types.
 - **Protocol** — an element type: a capability seam — the contract an
   implementation must satisfy, defined independently of any
   implementation.
+- **Implements** — the directed relationship *Design Element ⇒ Story*: the
+  element handles (part of) the implementation the story calls for.
+  Declared on the mandated `Implements:` line under each element heading;
+  the word is reserved for this direction (a Story *builds or modifies* a
+  Component Doc, never "implements" it).
+- **Design-Complete** — the property of a Design Element whose typed
+  contract obligations are fully met with no pending content; the unit the
+  design percent-complete metric counts. A Story is design-complete when
+  every element implementing it is design-complete.
 - **Seam** — a Design Element consumed across component boundaries
   (consumed by more than one CMP, or independently versioned); seams
   graduate to standalone Component Docs carrying a `component-type`.

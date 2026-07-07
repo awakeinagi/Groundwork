@@ -45,6 +45,9 @@ trackable units ([DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)).
    [SPEC-design-elements](SPEC-design-elements.md)
    ([DEC-0081](../decisions/DEC-0081-element-first-contract-layout.md),
    [DEC-0087](../decisions/DEC-0087-parseable-element-headings.md)).
+   Each element declares the stories it implements on a mandated
+   `Implements:` line directly under its heading
+   ([DEC-0092](../decisions/DEC-0092-element-implements-line.md)).
    Each element's type mandates its contract kinds
    ([DEC-0088](../decisions/DEC-0088-revised-typed-obligations.md));
    schemas in language-neutral form (JSON Schema / OpenAPI fragments),
@@ -84,6 +87,16 @@ trackable units ([DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)).
   Implementation Guidance Constraints — must cite at least one Decision;
   uncited items are gate-blockers. Implementation Guidance Notes are
   exempt.
+- Every element carries an `Implements:` line naming ≥1 story, resolvable
+  and consistent with each named story's Component Impact
+  ([DEC-0092](../decisions/DEC-0092-element-implements-line.md),
+  [DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md));
+  a CMP cannot pass its gate while a story whose Component Impact names
+  it has no referencing element
+  ([DEC-0093](../decisions/DEC-0093-story-design-coverage-check.md)).
+  Amendment or supersession of a referenced story marks this CMP stale,
+  with the impact report scoped to the referencing elements
+  ([DEC-0096](../decisions/DEC-0096-implements-staleness-propagation.md)).
 - Element headings, types, typed obligations, and item-ID well-formedness
   are validated at the gate (tier-2 suite, ST-0007); the element-type
   enum and `component-type` field are tier-1 schema-validated (ST-0001).

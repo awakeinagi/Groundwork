@@ -11,7 +11,7 @@ links:
   depends-on: [ST-0001]
   impacted-by: [ST-0001]
 cites: [DEC-0009, DEC-0026, DEC-0033, DEC-0034, DEC-0035, DEC-0081, DEC-0085,
-        DEC-0087, DEC-0088, DEC-0089]
+        DEC-0087, DEC-0088, DEC-0089, DEC-0092, DEC-0093, DEC-0094]
 ---
 
 # ST-0007: Tier-2 Completeness Check Suite
@@ -48,7 +48,16 @@ validator.
    are well-formed and unique within the doc, and Implementation
    Guidance Constraints cite decisions while Notes are exempt (per
    [DEC-0081](../decisions/DEC-0081-element-first-contract-layout.md), [DEC-0088](../decisions/DEC-0088-revised-typed-obligations.md), [DEC-0089](../decisions/DEC-0089-api-schema-resolution-rule.md), [DEC-0085](../decisions/DEC-0085-implementation-guidance-split.md), [DEC-0087](../decisions/DEC-0087-parseable-element-headings.md)).
-7. The suite passes against this repository's full bootstrap corpus as its
+7. Each element heading is followed by an `Implements:` line whose story
+   links (≥1) resolve, and every referenced story's Component Impact
+   links the containing component doc; violations block the CMP's gate
+   (per [DEC-0092](../decisions/DEC-0092-element-implements-line.md),
+   [DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md)).
+8. A story design-coverage audit reports every approved story with no
+   referencing element; on a component doc's gate PR, an uncovered story
+   whose Component Impact names that component blocks the gate (per
+   [DEC-0093](../decisions/DEC-0093-story-design-coverage-check.md)).
+9. The suite passes against this repository's full bootstrap corpus as its
    initial regression baseline.
 
 ## Component Impact

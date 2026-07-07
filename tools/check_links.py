@@ -20,6 +20,12 @@ Rules enforced:
      artifact ID targets that artifact's file; bare artifact IDs in body
      prose (outside code spans/fenced blocks, excluding the artifact's
      own ID) are violations.
+  9. In component docs, every design-element heading is directly
+     followed by an `Implements:` line naming >=1 story via resolvable
+     markdown links; each referenced story's body links the component
+     doc back (reciprocity with its Component Impact).
+ 10. (audit, non-blocking) Approved stories with no referencing design
+     element are reported as design-coverage warnings.
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -213,6 +219,57 @@ def main():
                               f"{name}")
             seen.add(name)
 
+    # Rule 9: element Implements lines — presence, stories, reciprocity
+    story_covered = set()
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "component":
+            continue
+        section = DESIGN_ELEMENTS_RE.search(fm.get("_body") or "")
+        if not section:
+            continue
+        sec_text = section.group(1)
+        cmp_path = (root / fm["_path"]).resolve()
+        heads = list(ELEMENT_HEADING_RE.finditer(sec_text))
+        for i, h in enumerate(heads):
+            name = h.group(1)
+            end = heads[i + 1].start() if i + 1 < len(heads) else len(sec_text)
+            block = sec_text[h.end():end].lstrip("\n")
+            if not block.startswith("Implements:"):
+                errors.append(f"{fm['_path']}: element {name} lacks an "
+                              f"Implements: line directly under its heading")
+                continue
+            para = block.split("\n\n", 1)[0]
+            story_ids = [text for text, _ in MD_LINK_RE.findall(para)
+                         if ID_RE.match(text) and text.startswith("ST-")]
+            if not story_ids:
+                errors.append(f"{fm['_path']}: element {name} Implements "
+                              f"line names no stories")
+                continue
+            for sid in story_ids:
+                st = artifacts.get(sid)
+                if st is None or st.get("type") != "story":
+                    errors.append(f"{fm['_path']}: element {name} "
+                                  f"implements {sid}, which is not a story")
+                    continue
+                st_base = (root / st["_path"]).parent
+                back = any(
+                    (st_base / tgt.split("#")[0]).resolve() == cmp_path
+                    for _, tgt in MD_LINK_RE.findall(st["_body"] or "")
+                    if not tgt.startswith(EXTERNAL_TARGET))
+                if not back:
+                    errors.append(f"{fm['_path']}: element {name} "
+                                  f"implements {sid}, but {sid}'s Component "
+                                  f"Impact does not link {aid}")
+                story_covered.add(sid)
+
+    # Rule 10 (audit): approved stories uncovered by any element
+    warnings = []
+    for aid, fm in artifacts.items():
+        if fm.get("type") == "story" and fm.get("status") == "approved" \
+                and aid not in story_covered:
+            warnings.append(f"{fm['_path']}: approved story {aid} has no "
+                            f"referencing design element (coverage gap)")
+
     # Rule 8: body cross-references are clickable and resolve
     for aid, fm in artifacts.items():
         prose = INLINE_CODE_RE.sub("", FENCED_CODE_RE.sub("",
@@ -235,6 +292,11 @@ def main():
             errors.append(f"{fm['_path']}: bare cross-reference {b} in "
                           f"prose — must be a markdown link")
 
+    if warnings:
+        print(f"WARN: {len(warnings)} design-coverage gap(s)\n")
+        for w in warnings:
+            print(f"  {w}")
+        print()
     if errors:
         print(f"FAIL: {len(errors)} violation(s) across "
               f"{len(artifacts)} artifacts\n")

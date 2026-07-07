@@ -69,6 +69,23 @@ value/event elements those items reference.
   truth — there is **no** frontmatter mirror; machine consumers query
   element nodes via the Graph Index
   ([DEC-0010](../decisions/DEC-0010-graph-index-derived.md)).
+- Directly under its heading, every element carries a mandated
+  **`Implements:`** line listing, as resolvable markdown links, the
+  story or stories whose implementation the element handles
+  ([DEC-0092](../decisions/DEC-0092-element-implements-line.md)). At
+  least one story is required; a missing line, empty list, or
+  unresolvable target is a gate-blocker. An element may only reference
+  a story whose Component Impact section links this CMP
+  ([DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md)).
+  Private helper values/events list the same stories as the element
+  they support; a graduated seam CMP references the stories that
+  birthed the seam. The Graph Index derives element→story `IMPLEMENTS`
+  edges from these lines; story amendments propagate staleness to
+  referencing CMPs with element-scoped impact reports
+  ([DEC-0096](../decisions/DEC-0096-implements-staleness-propagation.md)),
+  and the design/implementation percent-complete metrics are computed
+  over these edges
+  ([DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md)).
 - Contract items are element-scoped:
   `<ElementName>.<K>-<n>` where `K` ∈ `B` (behavior), `A` (API),
   `D` (data), numbered sequentially per element and kind

@@ -10,7 +10,8 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
 cites: [DEC-0028, DEC-0029, DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035,
-        DEC-0080, DEC-0081, DEC-0082, DEC-0085, DEC-0087, DEC-0088, DEC-0089]
+        DEC-0080, DEC-0081, DEC-0082, DEC-0085, DEC-0087, DEC-0088, DEC-0089,
+        DEC-0092, DEC-0093]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -41,9 +42,19 @@ terms introduced.
 Candidate elements (per
 [DEC-0082](../decisions/DEC-0082-closed-element-type-taxonomy.md)); each
 block is itemized as its stories settle. The list is provisional until
-gate time.
+gate time. Known coverage gap (per
+[DEC-0093](../decisions/DEC-0093-story-design-coverage-check.md)):
+[ST-0007](../stories/ST-0007-tier2-check-suite.md) has no referencing
+element yet — a check-suite service element is expected to close it
+before this doc gates.
 
 ### StorageService (service)
+
+Implements: [ST-0002](../stories/ST-0002-storage-api-core.md),
+[ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md),
+[ST-0004](../stories/ST-0004-session-worktree-management.md),
+[ST-0005](../stories/ST-0005-id-allocation.md),
+[ST-0006](../stories/ST-0006-typed-mechanical-writes.md)
 
 Pending — API contract (`StorageService.A-*`) from [ST-0002](../stories/ST-0002-storage-api-core.md) (OpenAPI),
 mechanical operations from [ST-0006](../stories/ST-0006-typed-mechanical-writes.md), branch/PR operations from [ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md);
@@ -58,6 +69,8 @@ append-only sessions
 
 ### Artifact (entity)
 
+Implements: [ST-0001](../stories/ST-0001-tier1-schema-suite.md)
+
 Pending — identity/lifecycle invariants and data contract
 (`Artifact.B-*`, `Artifact.D-*`) from the tier-1 schema suite ([ST-0001](../stories/ST-0001-tier1-schema-suite.md))
 and status lifecycle (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md),
@@ -65,12 +78,16 @@ and status lifecycle (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.m
 
 ### ArtifactId (value)
 
+Implements: [ST-0005](../stories/ST-0005-id-allocation.md)
+
 Pending — schema, allocation and immutability invariants
 (`ArtifactId.D-*`) from [ST-0005](../stories/ST-0005-id-allocation.md)
 (per [DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md),
 [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
 
 ### ChangeEvent (event)
+
+Implements: [ST-0008](../stories/ST-0008-change-event-stream.md)
 
 Pending — payload schema and emission/ordering/delivery semantics
 (`ChangeEvent.D-*`, `ChangeEvent.B-*`) from [ST-0008](../stories/ST-0008-change-event-stream.md)
