@@ -2,7 +2,7 @@
 id: EP-0001
 type: epic
 title: Artifact Store & Format Engine
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: eng-lead

@@ -2,7 +2,7 @@
 id: EP-0007
 type: epic
 title: Consolidation Memory Layer
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: ds-lead
