@@ -41,12 +41,16 @@ Component Docs. Every stage transition passes a **human approval gate**.
    decisions (`status: accepted`) are never edited. New conversation = a
    new `SES-`. Changed mind = a new `DEC-` with `supersedes:` set — then
    mark every artifact citing the old decision `status: stale` and have
-   the approver re-affirm or re-refine each.
+   the approver re-affirm or re-refine each. Sole exception:
+   reference-formatting edits (wrapping a bare ID in a markdown link,
+   repairing a link path after a slug rename) change no meaning and are
+   permitted.
 4. **IDs.** `PREFIX-nnnn`, sequential per prefix, **never reused** (even
    after deletion). Scan all of `docs/` for the current max before
    allocating. Filename = `ID-kebab-slug.md`.
 5. **Provenance.** Every acceptance criterion and every contract item in
-   a Component Doc ends with `(per DEC-nnnn)`. A claim no decision
+   a Component Doc ends with a linked citation
+   `(per [DEC-nnnn](../decisions/DEC-nnnn-<slug>.md))`. A claim no decision
    supports means more refinement is needed — never invent a citation.
    Decisions carry `source-span: "SES-nnnn @ Tx-Ty"` pointing at
    transcript turns that actually support them.
@@ -54,7 +58,11 @@ Component Docs. Every stage transition passes a **human approval gate**.
    `satisfies`, `depends-on`, `conflicts-with`, `supersedes`,
    `relates-to`, `impacts`, `impacted-by` (the last two: same-type,
    reciprocal on both endpoints). Decision citations go in top-level
-   `cites:`.
+   `cites:`. In body prose the inverse holds: every cross-reference must
+   be a markdown link `[<ID>](relative/path.md)` — a bare artifact ID
+   outside code spans/blocks (other than the artifact's own ID) fails
+   the checker. Body links are navigation only; frontmatter stays bare
+   IDs and remains what tools read.
 7. **Glossary.** When a new or ambiguous term comes up, resolve it in
    `CONTEXT.md` immediately and use it exactly thereafter.
 8. **Conflicts block.** Artifacts linked to an unresolved `CFL-` cannot

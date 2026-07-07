@@ -82,9 +82,9 @@ synthesis shared-draft commenting feeding CPs
 ([DEC-0055](../decisions/DEC-0055-incremental-synthesis-shared-draft.md));
 CP triage views; full artifact/graph browsing across all types.
 
-**Out:** the agent behind the sessions (EP-0002); approval semantics
-(EP-0003); connectors and auth providers themselves (EP-0005); retrieval
-and profiles storage (EP-0007).
+**Out:** the agent behind the sessions ([EP-0002](EP-0002-refinement-session-agent.md)); approval semantics
+([EP-0003](EP-0003-governance-and-gate-engine.md)); connectors and auth providers themselves ([EP-0005](EP-0005-connectors-and-identity.md)); retrieval
+and profiles storage ([EP-0007](EP-0007-consolidation-memory-layer.md)).
 
 ## Domain Context
 
@@ -95,11 +95,11 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
 ## Interfaces & Contracts to Define
 
 - Consumes: session engine with **typed turn payloads** (question-card,
-  decision-playback, elaboration-request/response — the EP-0006→EP-0002
+  decision-playback, elaboration-request/response — the EP-0006→[EP-0002](EP-0002-refinement-session-agent.md)
   impact realized by [DEC-0074](../decisions/DEC-0074-structured-hybrid-session-ux.md)),
-  storage API (EP-0001), approval + metrics APIs (EP-0003), graph queries
-  (EP-0004), identity (EP-0005), recipe resolver outputs and profile store
-  (EP-0007).
+  storage API ([EP-0001](EP-0001-artifact-store-and-format-engine.md)), approval + metrics APIs ([EP-0003](EP-0003-governance-and-gate-engine.md)), graph queries
+  ([EP-0004](EP-0004-graph-index.md)), identity ([EP-0005](EP-0005-connectors-and-identity.md)), recipe resolver outputs and profile store
+  ([EP-0007](EP-0007-consolidation-memory-layer.md)).
 - **UI-pluggability boundary**: the typed session-engine contract is the
   seam — an alternative front end (Slack bot, CLI) must be buildable
   against it without backend changes.
@@ -108,8 +108,8 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
 
 ## Risks & Open Questions
 
-- Typed-payload contract elaboration must land in EP-0002's session-engine
-  stories (would be an EP-0002 re-affirmation in live operation).
+- Typed-payload contract elaboration must land in [EP-0002](EP-0002-refinement-session-agent.md)'s session-engine
+  stories (would be an [EP-0002](EP-0002-refinement-session-agent.md) re-affirmation in live operation).
 - Async session ergonomics: re-orientation quality after long pauses is a
   UX-research-worthy story.
 - Frontend framework selection — story-level, within the TS constraint

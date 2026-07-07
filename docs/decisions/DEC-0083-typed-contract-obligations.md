@@ -47,5 +47,5 @@ completeness per element becomes mechanically checkable
 ## Implications
 
 Obligation table lives in
-[SPEC-design-elements](../specs/SPEC-design-elements.md); ST-0007
+[SPEC-design-elements](../specs/SPEC-design-elements.md); [ST-0007](../stories/ST-0007-tier2-check-suite.md)
 enforces presence of each element's mandated contract kinds at the gate.

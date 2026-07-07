@@ -13,7 +13,7 @@ links:
   relates-to: [EP-0003, EP-0001]
 ---
 
-# SES-0004: EP-0003 Refinement Session
+# SES-0004: [EP-0003](../epics/EP-0003-governance-and-gate-engine.md) Refinement Session
 
 ## Purpose
 
@@ -26,13 +26,13 @@ conflict operations, delegation, queue ordering, and reporting.
 
 ## Transcript
 
-**T1 — Sponsor.** Approved EP-0001. Proceed to the next epic, agent's
+**T1 — Sponsor.** Approved [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md). Proceed to the next epic, agent's
 choice.
 
-**T2 — Agent.** Recorded EP-0001 approval. Chose EP-0003 by the interim
+**T2 — Agent.** Recorded [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) approval. Chose [EP-0003](../epics/EP-0003-governance-and-gate-engine.md) by the interim
 impact-ranking logic ([DEC-0027](../decisions/DEC-0027-impact-ranked-refinement-order.md)):
-its only impactor (EP-0001) is settled and it impacts four siblings,
-including EP-0005 whose refinement needs EP-0003's decisions. Round 1:
+its only impactor ([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)) is settled and it impacts four siblings,
+including [EP-0005](../epics/EP-0005-connectors-and-identity.md) whose refinement needs [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)'s decisions. Round 1:
 (a) policy enforcement given hosts can't express domain-conditional
 approvers (recommended host base + service-computed `gate-policy` status
 check); (b) governance config home (recommended governance-as-code in the
@@ -48,16 +48,16 @@ check, no auto-timeout) as the default, but allow election of option 2
 **T4 — Agent.** Round 2: (a) approver unavailability (recommended
 role-pool default + explicit time-bounded delegation in governance
 config); (b) re-affirmation queue ordering after staleness sweeps
-(recommended impact-ranked queue in the UI — the SP-0001 algorithm ordering
+(recommended impact-ranked queue in the UI — the [SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md) algorithm ordering
 refinement also orders re-affirmation); (c) reporting responsibility
-(recommended EP-0003 emits a governance event log + metrics API, EP-0006
+(recommended [EP-0003](../epics/EP-0003-governance-and-gate-engine.md) emits a governance event log + metrics API, [EP-0006](../epics/EP-0006-refinement-web-ui.md)
 renders dashboards).
 
 **T5 — Sponsor.** All three as recommended.
 
-**T6 — Agent (synthesis).** Distilled DEC-0036–DEC-0042, rewrote EP-0003
+**T6 — Agent (synthesis).** Distilled [DEC-0036](../decisions/DEC-0036-host-base-plus-service-gate-check.md)–[DEC-0042](../decisions/DEC-0042-governance-reporting-split.md), rewrote [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)
 accordingly, and moved it to `gated` awaiting sponsor sign-off. Noted for
-EP-0005's refinement: host review-semantics variance (Bitbucket vs GitHub)
+[EP-0005](../epics/EP-0005-connectors-and-identity.md)'s refinement: host review-semantics variance (Bitbucket vs GitHub)
 now matters to gate compilation, and the connector must support team/
 required-check administration.
 

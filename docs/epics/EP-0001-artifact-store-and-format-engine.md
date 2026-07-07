@@ -29,7 +29,7 @@ repository.
 
 ## Why (Goal Alignment)
 
-BG-0001's traceability outcome depends on artifacts being well-formed and
+[BG-0001](../goals/BG-0001-groundwork.md)'s traceability outcome depends on artifacts being well-formed and
 their links resolvable at all times ([DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)).
 Canonical-store discipline ([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md))
 holds because this service is the single write authority
@@ -68,10 +68,10 @@ repository ([DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
 - **Type-aware write rules** ([DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)):
   session artifacts are append-only at the API level.
 
-**Out:** graph queries (EP-0004); gate *policy* — who must approve what —
-(EP-0003, which compiles policies onto host branch-protection via EP-0005);
-the PR review UI (EP-0006, per [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md));
-rendering (EP-0006).
+**Out:** graph queries ([EP-0004](EP-0004-graph-index.md)); gate *policy* — who must approve what —
+([EP-0003](EP-0003-governance-and-gate-engine.md), which compiles policies onto host branch-protection via [EP-0005](EP-0005-connectors-and-identity.md));
+the PR review UI ([EP-0006](EP-0006-refinement-web-ui.md), per [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md));
+rendering ([EP-0006](EP-0006-refinement-web-ui.md)).
 
 ## Domain Context
 
@@ -92,9 +92,9 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
 - **Tier-2 check suite**: the productionized `tools/check_links.py` plus the
   mechanical-diff validator, packaged as required PR checks.
 - **Change-event stream**: artifact-changed events (branch-aware) consumed
-  by the Graph Index (EP-0004), impact analysis (EP-0003), and consolidation
-  freshness (EP-0007).
-- **Consumed from EP-0005**: code-host connector operations for fork, PR
+  by the Graph Index ([EP-0004](EP-0004-graph-index.md)), impact analysis ([EP-0003](EP-0003-governance-and-gate-engine.md)), and consolidation
+  freshness ([EP-0007](EP-0007-consolidation-memory-layer.md)).
+- **Consumed from [EP-0005](EP-0005-connectors-and-identity.md)**: code-host connector operations for fork, PR
   open/merge, review state, and required-check registration.
 
 ## Risks & Open Questions
@@ -102,12 +102,12 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
 - Counter durability across restarts and multi-node deployment (distributed
   lock) — story-level design ([DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md) implication).
 - Branch-aware reads for the Graph Index: which branches does the index see,
-  and how are draft-only artifacts marked in query results? (EP-0004
-  refinement input, via the EP-0001→EP-0004 impact edge.)
+  and how are draft-only artifacts marked in query results? ([EP-0004](EP-0004-graph-index.md)
+  refinement input, via the EP-0001→[EP-0004](EP-0004-graph-index.md) impact edge.)
 - Worktree lifecycle hygiene: abandoned sessions, worktree GC, and the
   reconciliation queue for user-suffixed branches.
 - Upstream host permission model: service identity vs. program user vs.
-  delegated approver reviews — to be pinned during EP-0005 refinement.
+  delegated approver reviews — to be pinned during [EP-0005](EP-0005-connectors-and-identity.md) refinement.
 
 ## Derived Work
 

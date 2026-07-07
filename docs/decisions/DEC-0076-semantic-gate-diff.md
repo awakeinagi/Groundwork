@@ -34,7 +34,7 @@ it too.
 
 Approval quality is bounded by comprehension; the semantic rendering makes
 the human gate a real check rather than a rubber stamp, for exactly the
-audience DEC-0032 exists to serve.
+audience [DEC-0032](DEC-0032-ui-wraps-pr-gate.md) exists to serve.
 
 ## Alternatives Considered
 

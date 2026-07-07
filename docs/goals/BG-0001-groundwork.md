@@ -20,7 +20,7 @@ Business requests reach the tech side poorly defined, vague, or mutually
 contradictory. Requirements arrive without the refinement needed to implement
 them; competing requests work against each other undetected. The cost appears
 downstream as rework, misaligned implementations, and systems that drift from
-the intent that motivated them. (SES-0001 @ T1.)
+the intent that motivated them. ([SES-0001](../sessions/SES-0001-groundwork-inception.md) @ T1.)
 
 ## Intent
 

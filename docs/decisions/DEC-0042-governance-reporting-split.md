@@ -12,7 +12,7 @@ links:
   derives-from: [SES-0004]
 ---
 
-# DEC-0042: Governance reporting — EP-0003 emits, EP-0006 renders
+# DEC-0042: Governance reporting — [EP-0003](../epics/EP-0003-governance-and-gate-engine.md) emits, [EP-0006](../epics/EP-0006-refinement-web-ui.md) renders
 
 ## Context
 
@@ -34,12 +34,12 @@ front end can consume the metrics contract without backend changes.
 
 ## Alternatives Considered
 
-- **Dashboards inside EP-0003**: a backend epic owning UI surface muddies
-  the EP-0006 boundary.
+- **Dashboards inside [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)**: a backend epic owning UI surface muddies
+  the [EP-0006](../epics/EP-0006-refinement-web-ui.md) boundary.
 - **Defer reporting**: invisible sweeps and blocking exactly when the
   system is new.
 
 ## Implications
 
-The metrics/query API joins EP-0003's contract list; EP-0006's scope gains
+The metrics/query API joins [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)'s contract list; [EP-0006](../epics/EP-0006-refinement-web-ui.md)'s scope gains
 governance dashboards.

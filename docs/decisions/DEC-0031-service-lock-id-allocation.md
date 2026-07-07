@@ -45,4 +45,4 @@ committed counter file on main would lag branches.
 Counter durability across service restarts must be specified at story level
 (e.g., rescan all refs on boot, or a persisted allocation log); multi-node
 API deployment upgrades "process-safe lock" to a distributed lock — noted
-as an EP-0001 story concern.
+as an [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) story concern.

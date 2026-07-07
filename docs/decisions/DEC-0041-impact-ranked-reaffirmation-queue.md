@@ -24,7 +24,7 @@ they clear in determines how fast the critical path unblocks.
 
 Each approver gets a work queue in the Groundwork UI ordered by impact
 rank: the same algorithm that orders refinement
-([DEC-0027](DEC-0027-impact-ranked-refinement-order.md) / SP-0001) also
+([DEC-0027](DEC-0027-impact-ranked-refinement-order.md) / [SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md)) also
 orders re-affirmation — items whose decisions constrain the most siblings
 and descendants clear first. Human judgment over raw impact edges serves
 until the spike lands. Notifications are batched via configured channels.
@@ -41,6 +41,6 @@ first unblocks the most downstream work per approval.
 
 ## Implications
 
-SP-0001's algorithm gains a second consumer — its objective function should
+[SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md)'s algorithm gains a second consumer — its objective function should
 account for re-affirmation clearing as well as initial refinement ordering
 (noted as spike input).

@@ -42,6 +42,6 @@ documentation scale.
 
 ## Implications
 
-ST-0005's durability and multi-node criteria resolve to this design;
+[ST-0005](../stories/ST-0005-id-allocation.md)'s durability and multi-node criteria resolve to this design;
 horizontal scaling of the allocator, if ever needed, is a future decision
 that supersedes this one.

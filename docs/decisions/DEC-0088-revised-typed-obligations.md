@@ -25,7 +25,7 @@ owes an API contract.
 
 ## Decision
 
-The typed obligations table is revised (superseding DEC-0083):
+The typed obligations table is revised (superseding [DEC-0083](DEC-0083-typed-contract-obligations.md)):
 
 - **entity** ⇒ **behavior contract** (identity semantics, lifecycle
   states, allowed transitions, domain-operation semantics) + **data
@@ -57,13 +57,13 @@ boundary.
 
 - **B+A+D all mandatory for entities**: uniform, but most entity
   A-sections would restate their B-items in implementation-shaped form.
-- **Keep DEC-0083 as-is**: leaves entity operation semantics without a
+- **Keep [DEC-0083](DEC-0083-typed-contract-obligations.md) as-is**: leaves entity operation semantics without a
   clearly mandated home.
 
 ## Implications
 
 Obligations table updated in
-[SPEC-design-elements](../specs/SPEC-design-elements.md); ST-0007 and
-CMP-0001 cites move from DEC-0083 to this decision. Service I/O coverage
+[SPEC-design-elements](../specs/SPEC-design-elements.md); [ST-0007](../stories/ST-0007-tier2-check-suite.md) and
+[CMP-0001](../components/CMP-0001-artifact-store-service.md) cites move from [DEC-0083](DEC-0083-typed-contract-obligations.md) to this decision. Service I/O coverage
 is handled separately by
 [DEC-0089](DEC-0089-api-schema-resolution-rule.md).

@@ -55,5 +55,5 @@ sprawling.
 
 Enum defined in [SPEC-design-elements](../specs/SPEC-design-elements.md);
 type names become glossary terms in [CONTEXT.md](../../CONTEXT.md);
-ST-0001 publishes the enum as a language-neutral schema asset; ST-0007
+[ST-0001](../stories/ST-0001-tier1-schema-suite.md) publishes the enum as a language-neutral schema asset; [ST-0007](../stories/ST-0007-tier2-check-suite.md)
 validates element headings against it.

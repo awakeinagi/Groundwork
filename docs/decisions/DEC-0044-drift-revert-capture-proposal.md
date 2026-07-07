@@ -45,4 +45,4 @@ and makes the redirect respectful of the editor's work.
 
 Drift detection needs the edit's before/after (webhook payload or
 event-stream diff on Bitbucket/Jira Data Center); CP triage becomes session
--agent scope (EP-0002, via the EP-0005→EP-0002 impact edge).
+-agent scope ([EP-0002](../epics/EP-0002-refinement-session-agent.md), via the [EP-0005](../epics/EP-0005-connectors-and-identity.md)→[EP-0002](../epics/EP-0002-refinement-session-agent.md) impact edge).

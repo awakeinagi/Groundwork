@@ -30,7 +30,7 @@ the UI, and manifest generation.
 
 ## Why (Goal Alignment)
 
-The cross-reference system is BG-0001's alignment backbone; the Graph Index
+The cross-reference system is [BG-0001](../goals/BG-0001-groundwork.md)'s alignment backbone; the Graph Index
 makes it efficiently navigable at scale
 ([DEC-0010](../decisions/DEC-0010-graph-index-derived.md)) without
 compromising single-source-of-truth
@@ -57,17 +57,17 @@ drafts mid-refinement under the fork-pull model
   read-only openCypher endpoint with depth/time/result guards.
 - **Content depth** ([DEC-0063](../decisions/DEC-0063-metadata-only-graph.md)):
   frontmatter metadata only; bodies fetched from the store; text/semantic
-  search explicitly deferred to the retrieval layer (EP-0007).
+  search explicitly deferred to the retrieval layer ([EP-0007](EP-0007-consolidation-memory-layer.md)).
 - **Verification** ([DEC-0064](../decisions/DEC-0064-scheduled-rebuild-diff.md)):
   scheduled rebuild-and-diff with alarming and atomic replacement;
   deterministic `rebuild(ref) → index`.
 - **Path-usage telemetry**: consumer-tagged traversal statistics (edge
-  heat, no participant content) feeding consolidation placement (EP-0007).
+  heat, no participant content) feeding consolidation placement ([EP-0007](EP-0007-consolidation-memory-layer.md)).
 
 **Out:** engine internals until [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
 concludes ([DEC-0061](../decisions/DEC-0061-engine-via-spike.md)); what
-callers do with results; canonical link data itself (EP-0001 owns and
-validates it); text search (EP-0007's neighborhood).
+callers do with results; canonical link data itself ([EP-0001](EP-0001-artifact-store-and-format-engine.md) owns and
+validates it); text search ([EP-0007](EP-0007-consolidation-memory-layer.md)'s neighborhood).
 
 ## Domain Context
 
@@ -82,15 +82,15 @@ and [SPEC-artifact-common](../specs/SPEC-artifact-common.md).
 - **Rebuild contract**: `rebuild(canonical-ref) → index`, deterministic;
   diff format for verification runs.
 - **Overlay lifecycle contract**: create/update/drop tied to item-branch
-  events from EP-0001's change stream.
-- **Path-usage telemetry schema**: consumed by EP-0007.
+  events from [EP-0001](EP-0001-artifact-store-and-format-engine.md)'s change stream.
+- **Path-usage telemetry schema**: consumed by [EP-0007](EP-0007-consolidation-memory-layer.md).
 
 ## Risks & Open Questions
 
 - Engine selection — [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
   (openCypher support, overlay fit, multi-node story, on-prem ops burden).
 - Overlay memory/cost at high concurrent-session counts — measure in
-  SP-0002's synthetic-scale runs.
+  [SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s synthetic-scale runs.
 - Guard calibration for the openCypher tier (limits tight enough to
   protect, loose enough to be useful) — story-level tuning.
 

@@ -49,6 +49,6 @@ resource-exhaustion surface.
 
 ## Implications
 
-openCypher support is a hard SP-0002 criterion; guard limits are
+openCypher support is a hard [SP-0002](../spikes/SP-0002-graph-engine-selection.md) criterion; guard limits are
 deployment configuration; GraphQL remains a possible future convenience
-layer for EP-0006, not a commitment.
+layer for [EP-0006](../epics/EP-0006-refinement-web-ui.md), not a commitment.

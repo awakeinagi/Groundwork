@@ -50,8 +50,8 @@ versioning, and conformance tests, so they earn their own gate.
 
 ## Implications
 
-CMP-0001's anticipated connector contract becomes a standalone
-`protocol`-type CMP under EP-0005. [SPEC-component](../specs/SPEC-component.md)
+[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s anticipated connector contract becomes a standalone
+`protocol`-type CMP under [EP-0005](../epics/EP-0005-connectors-and-identity.md). [SPEC-component](../specs/SPEC-component.md)
 gains the `component-type:` frontmatter field;
 [SPEC-design-elements](../specs/SPEC-design-elements.md) records the
-graduation rule. ST-0001 validates the new field tier-1.
+graduation rule. [ST-0001](../stories/ST-0001-tier1-schema-suite.md) validates the new field tier-1.

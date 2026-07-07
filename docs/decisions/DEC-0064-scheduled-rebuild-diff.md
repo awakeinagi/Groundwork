@@ -41,5 +41,5 @@ into an alerting metric.
 
 ## Implications
 
-Rebuild time budget becomes a monitored metric (and an SP-0002 criterion);
+Rebuild time budget becomes a monitored metric (and an [SP-0002](../spikes/SP-0002-graph-engine-selection.md) criterion);
 divergence alarms flow into the governance/ops observability surface.

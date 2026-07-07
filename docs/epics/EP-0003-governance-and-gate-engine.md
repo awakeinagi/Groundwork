@@ -30,7 +30,7 @@ log.
 
 ## Why (Goal Alignment)
 
-BG-0001 outcome 3 (human-ratified layers) is this epic
+[BG-0001](../goals/BG-0001-groundwork.md) outcome 3 (human-ratified layers) is this epic
 ([DEC-0006](../decisions/DEC-0006-gate-every-stage.md),
 [DEC-0020](../decisions/DEC-0020-configurable-gate-policies.md)) — realized
 under the fork-pull model as PR gating
@@ -67,16 +67,16 @@ time, not just at creation.
   role-pool approval by default (domain mapping = routing preference);
   explicit time-bounded delegation entries for exclusivity.
 - **Queueing** ([DEC-0041](../decisions/DEC-0041-impact-ranked-reaffirmation-queue.md)):
-  per-approver work queues ordered by impact rank (SP-0001's algorithm;
+  per-approver work queues ordered by impact rank ([SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md)'s algorithm;
   human judgment until it lands), batched notifications.
 - **Observability** ([DEC-0042](../decisions/DEC-0042-governance-reporting-split.md)):
   governance event log + language-neutral metrics/query API.
 
-**Out:** identity/auth itself (EP-0005); the approval and dashboard UI
-(EP-0006, per [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md) and
+**Out:** identity/auth itself ([EP-0005](EP-0005-connectors-and-identity.md)); the approval and dashboard UI
+([EP-0006](EP-0006-refinement-web-ui.md), per [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md) and
 [DEC-0042](../decisions/DEC-0042-governance-reporting-split.md)); conflict
-mediation content (EP-0002 — this epic enforces blocking; the agent
-mediates); commit construction (EP-0001 executes mechanical writes this
+mediation content ([EP-0002](EP-0002-refinement-session-agent.md) — this epic enforces blocking; the agent
+mediates); commit construction ([EP-0001](EP-0001-artifact-store-and-format-engine.md) executes mechanical writes this
 epic requests).
 
 ## Domain Context
@@ -91,16 +91,16 @@ Arbiter, Impact Analysis, Stale, Re-affirmation — per
   gate policies (including committee composition and timeout elections) —
   tier-1 validated ([DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).
 - **Policy compilation contract**: governance config → host
-  branch-protection settings, via EP-0005's team/required-check
+  branch-protection settings, via [EP-0005](EP-0005-connectors-and-identity.md)'s team/required-check
   administration operations.
 - **`gate-policy` / `conflicts-open` check contracts**: inputs (PR, graph
   state, governance config) → pass/fail with human-readable explanation.
 - **Impact-analysis contract**: changed artifact → affected set + impact
-  report (consumes EP-0004 graph queries; requests EP-0001 mechanical
+  report (consumes [EP-0004](EP-0004-graph-index.md) graph queries; requests [EP-0001](EP-0001-artifact-store-and-format-engine.md) mechanical
   writes).
 - **Re-affirmation flow contract**: stale artifact → re-affirm PR →
   cleared/rejected.
-- **Metrics/query API**: governance event log access for EP-0006
+- **Metrics/query API**: governance event log access for [EP-0006](EP-0006-refinement-web-ui.md)
   dashboards.
 
 ## Risks & Open Questions
@@ -109,7 +109,7 @@ Arbiter, Impact Analysis, Stale, Re-affirmation — per
   `roles.yaml`/`gate-policies.yaml` change — recomputation semantics at
   story level.
 - Host review-semantics variance (Bitbucket vs GitHub approval/dismissal
-  behavior) — pinned during EP-0005 refinement (impact edge EP-0003→EP-0005).
+  behavior) — pinned during [EP-0005](EP-0005-connectors-and-identity.md) refinement (impact edge EP-0003→[EP-0005](EP-0005-connectors-and-identity.md)).
 - Bootstrap: initial Arbiter and roles at deployment, before governance
   files exist to gate their own creation.
 

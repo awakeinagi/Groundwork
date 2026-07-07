@@ -13,7 +13,7 @@ links:
   relates-to: [EP-0002, EP-0005, EP-0003]
 ---
 
-# SES-0006: EP-0002 Refinement Session
+# SES-0006: [EP-0002](../epics/EP-0002-refinement-session-agent.md) Refinement Session
 
 ## Purpose
 
@@ -24,7 +24,7 @@ mechanics, context assembly, session lifecycle, and evaluation.
 
 ## Transcript
 
-**T1 — Sponsor.** Approved EP-0005. Move on to EP-0002.
+**T1 — Sponsor.** Approved [EP-0005](../epics/EP-0005-connectors-and-identity.md). Move on to [EP-0002](../epics/EP-0002-refinement-session-agent.md).
 
 **T2 — Agent.** Round 1: (a) when a distilled Decision becomes accepted
 (recommended in-session confirmation playback); (b) where the grilling
@@ -53,12 +53,12 @@ periodic drift audits re-running distillation from raw transcripts).
 
 **T5 — Sponsor.** All three as recommended.
 
-**T6 — Agent (synthesis).** Distilled DEC-0051–DEC-0058; rewrote EP-0002
+**T6 — Agent (synthesis).** Distilled [DEC-0051](../decisions/DEC-0051-in-session-decision-confirmation.md)–[DEC-0058](../decisions/DEC-0058-evaluation-harness.md); rewrote [EP-0002](../epics/EP-0002-refinement-session-agent.md)
 and moved it to `gated`. Updated SPEC-session (raw-log fidelity,
 `strategy-pack` field) and the glossary (Strategy Pack, Decision Rights).
-Noted a new impact edge EP-0002→EP-0003: decision-rights configuration
-extends `governance/roles.yaml`, a requirement EP-0003's config schema must
-absorb — in a live deployment this edge change would queue an EP-0003
+Noted a new impact edge [EP-0002](../epics/EP-0002-refinement-session-agent.md)→[EP-0003](../epics/EP-0003-governance-and-gate-engine.md): decision-rights configuration
+extends `governance/roles.yaml`, a requirement [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)'s config schema must
+absorb — in a live deployment this edge change would queue an [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)
 re-affirmation.
 
 ## Decisions Produced

@@ -13,7 +13,7 @@ links:
   relates-to: [EP-0006, EP-0002]
 ---
 
-# SES-0010: EP-0006 Refinement Session
+# SES-0010: [EP-0006](../epics/EP-0006-refinement-web-ui.md) Refinement Session
 
 ## Purpose
 
@@ -25,15 +25,15 @@ left to story level.
 
 ## Transcript
 
-**T1 — Sponsor.** Approved EP-0007. Move on (to EP-0006, the last epic).
+**T1 — Sponsor.** Approved [EP-0007](../epics/EP-0007-consolidation-memory-layer.md). Move on (to [EP-0006](../epics/EP-0006-refinement-web-ui.md), the last epic).
 
-**T2 — Agent.** Round: (a) v1 surface subset per DEC-0022 (recommended
+**T2 — Agent.** Round: (a) v1 surface subset per [DEC-0022](../decisions/DEC-0022-v1-goal-refinement-slice.md) (recommended
 session UI + goal view with provenance drill-down + goal gate + minimal
 conflict view; everything else deferred); (b) session experience — pure
 chat vs. the structured-hybrid pattern this bootstrap itself used
 (recommended hybrid: question cards with recommended-first options,
 decision-playback cards, progress panel — noting it requires typed turn
-payloads in the session-engine contract, a concrete EP-0006→EP-0002
+payloads in the session-engine contract, a concrete [EP-0006](../epics/EP-0006-refinement-web-ui.md)→[EP-0002](../epics/EP-0002-refinement-session-agent.md)
 impact); (c) notification architecture (recommended in-app center as
 source of truth + pluggable notifier connectors, email first);
 (d) gate review rendering (recommended semantic artifact-aware diff with
@@ -47,12 +47,12 @@ of the different options and more detailed comparisons and contrasts.
 (c) In-app center + notifier connectors. (d) Semantic diff + agent
 summary.
 
-**T4 — Agent (synthesis).** Distilled DEC-0073–DEC-0076. The session-UX
-decision realizes the long-standing EP-0006→EP-0002 impact edge concretely:
+**T4 — Agent (synthesis).** Distilled [DEC-0073](../decisions/DEC-0073-v1-ui-surfaces.md)–[DEC-0076](../decisions/DEC-0076-semantic-gate-diff.md). The session-UX
+decision realizes the long-standing [EP-0006](../epics/EP-0006-refinement-web-ui.md)→[EP-0002](../epics/EP-0002-refinement-session-agent.md) impact edge concretely:
 the session-engine contract needs typed turn payloads (question-card,
 decision-playback, elaboration-request) — in a live deployment this would
-queue an EP-0002 re-affirmation; recorded here as a story-level contract
-elaboration within EP-0002's approved scope. EP-0006 rewritten and moved
+queue an [EP-0002](../epics/EP-0002-refinement-session-agent.md) re-affirmation; recorded here as a story-level contract
+elaboration within [EP-0002](../epics/EP-0002-refinement-session-agent.md)'s approved scope. [EP-0006](../epics/EP-0006-refinement-web-ui.md) rewritten and moved
 to `gated` — the last of the seven epics.
 
 ## Decisions Produced

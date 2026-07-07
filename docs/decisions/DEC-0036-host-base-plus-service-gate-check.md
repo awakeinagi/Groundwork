@@ -47,5 +47,5 @@ lacks. Neither alone suffices.
 The gate engine compiles `gate-policies.yaml`
 ([DEC-0037](DEC-0037-governance-as-code.md)) into branch-protection
 settings via the code-host connector — requiring team and required-check
-administration operations in the EP-0005 contract. Host review-semantics
-variance (Bitbucket vs GitHub) becomes an EP-0005 refinement concern.
+administration operations in the [EP-0005](../epics/EP-0005-connectors-and-identity.md) contract. Host review-semantics
+variance (Bitbucket vs GitHub) becomes an [EP-0005](../epics/EP-0005-connectors-and-identity.md) refinement concern.

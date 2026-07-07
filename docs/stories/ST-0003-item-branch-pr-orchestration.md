@@ -27,23 +27,23 @@ stays synchronized with branch/PR state throughout.
 
 1. Creating an artifact opens a dedicated item branch on the fork and a PR
    against upstream main, carrying the artifact and its associated
-   sessions/decisions as they accrue (per DEC-0028).
+   sessions/decisions as they accrue (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
 2. PR merge transitions the artifact to `approved`, recording approver
-   identities resolved from the PR's reviews (per DEC-0028, DEC-0032,
-   DEC-0043).
+   identities resolved from the PR's reviews (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md), [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md),
+   [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
 3. Post-merge edits to the same item reuse its branch and open a new PR;
    the artifact returns to `in-refinement`/`gated` accordingly
-   (per DEC-0028).
+   (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
 4. Frontmatter `status` and branch/PR state can never disagree at rest:
    every lifecycle transition updates both atomically or reconciles on
-   next event (per DEC-0028).
+   next event (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
 5. All host interactions go through the code-host connector contract and
    respect its capability manifest; v1 target is Bitbucket Data Center
-   (per DEC-0045, DEC-0050).
+   (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md), [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
 6. The full orchestration test suite passes hermetically against the
    local-git fake connector, which implements the complete contract
    including its capability manifest and ships as part of this story
-   (per DEC-0079).
+   (per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).
 
 ## Component Impact
 
@@ -53,10 +53,10 @@ the branch/PR sections of its Behavior and API Contracts.
 ## Out of Scope
 
 Gate *policy* evaluation (Governance engine's `gate-policy` check); the
-review UI (EP-0006); the BBDC connector implementation itself (EP-0005).
+review UI ([EP-0006](../epics/EP-0006-refinement-web-ui.md)); the BBDC connector implementation itself ([EP-0005](../epics/EP-0005-connectors-and-identity.md)).
 
 ## Notes for Implementers
 
 The fake connector is a permanent test double — its simulated review/check
 semantics track the contract spec, never any particular host's quirks
-(per DEC-0079).
+(per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).

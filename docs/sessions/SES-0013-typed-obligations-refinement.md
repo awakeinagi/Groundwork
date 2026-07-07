@@ -21,7 +21,7 @@ Follow-up to [SES-0012](SES-0012-component-spec-design-elements.md): the
 sponsor challenged the typed-obligations table of
 [DEC-0083](../decisions/DEC-0083-typed-contract-obligations.md) on two
 points — entity behavior/API coverage and service input/output coverage.
-SES-0012 is closed, so this is a new session.
+[SES-0012](SES-0012-component-spec-design-elements.md) is closed, so this is a new session.
 
 ## Transcript
 
@@ -59,11 +59,11 @@ conditional A; schema-resolution rule for service I/O.
 
 **T4 — Agent (synthesis).** Distilled
 [DEC-0088](../decisions/DEC-0088-revised-typed-obligations.md)
-(superseding DEC-0083 with the revised table) and
+(superseding [DEC-0083](../decisions/DEC-0083-typed-contract-obligations.md) with the revised table) and
 [DEC-0089](../decisions/DEC-0089-api-schema-resolution-rule.md); updated
 [SPEC-design-elements](../specs/SPEC-design-elements.md),
-[SPEC-component](../specs/SPEC-component.md), ST-0007's element-validation
-criterion, and CMP-0001's cites.
+[SPEC-component](../specs/SPEC-component.md), [ST-0007](../stories/ST-0007-tier2-check-suite.md)'s element-validation
+criterion, and [CMP-0001](../components/CMP-0001-artifact-store-service.md)'s cites.
 
 ## Decisions Produced
 

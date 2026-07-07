@@ -101,9 +101,13 @@ Rules:
 
 - Link values are bare artifact IDs; the vocabulary above is **closed** —
   no invented link types. Empty lists may be omitted.
-- Frontmatter links are the authoritative relationships. Inline markdown
-  links in prose (`[EP-0003](../epics/EP-0003-....md)`) are navigational
-  sugar — use them generously, but the frontmatter is what tools read.
+- Frontmatter links are the authoritative relationships; the frontmatter
+  is what tools read. In body prose, cross-references must be inline
+  markdown links (`[EP-0003](../epics/EP-0003-....md)`) — navigational
+  only, no graph semantics, but mandatory: a bare artifact ID outside
+  code spans/fenced blocks (other than the artifact's own ID) is an
+  integrity violation the checker reports, and link targets must resolve
+  to the named artifact's file.
 - **Impact links**: "X impacts Y" means decisions recorded while refining
   X are expected to constrain, shape, or invalidate decisions in Y. They
   connect *same-type* artifacts only, and both endpoints record the

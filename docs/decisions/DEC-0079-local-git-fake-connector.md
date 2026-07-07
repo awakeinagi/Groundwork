@@ -16,8 +16,8 @@ links:
 
 ## Context
 
-ST-0003's branch/PR orchestration consumes the code-host connector
-contract, but the real Bitbucket Data Center connector ships with EP-0005
+[ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md)'s branch/PR orchestration consumes the code-host connector
+contract, but the real Bitbucket Data Center connector ships with [EP-0005](../epics/EP-0005-connectors-and-identity.md)
 — and requiring a BBDC instance in every dev/CI loop would couple store
 development to external infrastructure.
 
@@ -46,6 +46,6 @@ later swap-in becomes the first real validation of connector pluggability
 
 ## Implications
 
-The fake connector is a deliverable within ST-0003's scope; its simulated
+The fake connector is a deliverable within [ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md)'s scope; its simulated
 review/check semantics must track the contract spec, not any particular
 host.

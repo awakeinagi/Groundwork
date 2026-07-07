@@ -23,7 +23,7 @@ algorithm produces a refinement order that minimizes decision rework — i.e.,
 maximizes the chance that when we refine an artifact, the decisions it is
 impacted by have already been made? The answer must be well-defined in the
 presence of cycles, since real impact graphs contain them (the current epic
-set has EP-0001↔EP-0003 and EP-0002↔EP-0006).
+set has [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0003](../epics/EP-0003-governance-and-gate-engine.md) and [EP-0002](../epics/EP-0002-refinement-session-agent.md)↔[EP-0006](../epics/EP-0006-refinement-web-ui.md)).
 
 ## Consumers
 
@@ -50,8 +50,8 @@ both have interfaces shaped by whatever the algorithm needs.
 
 1. Formalize the objective: define "decision rework" cost over an ordering
    of a directed graph with cycles, and what ties mean.
-2. Evaluate candidate approaches against that objective on the real EP-0001–
-   EP-0007 graph plus synthetic graphs (larger, denser, cyclic):
+2. Evaluate candidate approaches against that objective on the real [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)–
+   [EP-0007](../epics/EP-0007-consolidation-memory-layer.md) graph plus synthetic graphs (larger, denser, cyclic):
    - condensation of strongly connected components + topological sort of the
      DAG of SCCs, with an intra-SCC tie-break rule (cycle members refined
      iteratively or jointly);
@@ -61,7 +61,7 @@ both have interfaces shaped by whatever the algorithm needs.
    - minimum feedback arc set orderings (minimize edges pointing backward
      in the refinement sequence).
 3. Investigate **provisional bounding decisions** (sponsor guidance,
-   SES-0003 @ T1): rather than strictly ordering refinement, impacted items
+   [SES-0003](../sessions/SES-0003-ep-0001-refinement.md) @ T1): rather than strictly ordering refinement, impacted items
    may first receive "subject to change" decisions or best guesses — made by
    the agent, humans, or both — that provide guidance and boundaries for
    refining the item that impacts them, with reconciliation once the

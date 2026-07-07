@@ -16,7 +16,7 @@ cites: [DEC-0028, DEC-0029, DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035,
 # CMP-0001: Artifact Store Service
 
 > Draft stub, birthed by [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md).
-> Contract sections are filled in as the epic's stories (ST-0001–ST-0008)
+> Contract sections are filled in as the epic's stories ([ST-0001](../stories/ST-0001-tier1-schema-suite.md)–[ST-0008](../stories/ST-0008-change-event-stream.md))
 > refine and settle their designs; this component is gate-eligible only
 > when contract-complete per
 > [DEC-0011](../decisions/DEC-0011-contract-complete-component-docs.md).
@@ -45,8 +45,8 @@ gate time.
 
 ### StorageService (service)
 
-Pending — API contract (`StorageService.A-*`) from ST-0002 (OpenAPI),
-mechanical operations from ST-0006, branch/PR operations from ST-0003;
+Pending — API contract (`StorageService.A-*`) from [ST-0002](../stories/ST-0002-storage-api-core.md) (OpenAPI),
+mechanical operations from [ST-0006](../stories/ST-0006-typed-mechanical-writes.md), branch/PR operations from [ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md);
 behavior contract (`StorageService.B-*`) anchors already decided: single
 write authority (per [DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md));
 branch/PR lifecycle (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md));
@@ -59,21 +59,21 @@ append-only sessions
 ### Artifact (entity)
 
 Pending — identity/lifecycle invariants and data contract
-(`Artifact.B-*`, `Artifact.D-*`) from the tier-1 schema suite (ST-0001)
+(`Artifact.B-*`, `Artifact.D-*`) from the tier-1 schema suite ([ST-0001](../stories/ST-0001-tier1-schema-suite.md))
 and status lifecycle (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md),
 [SPEC-artifact-common](../specs/SPEC-artifact-common.md)).
 
 ### ArtifactId (value)
 
 Pending — schema, allocation and immutability invariants
-(`ArtifactId.D-*`) from ST-0005
+(`ArtifactId.D-*`) from [ST-0005](../stories/ST-0005-id-allocation.md)
 (per [DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md),
 [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
 
 ### ChangeEvent (event)
 
 Pending — payload schema and emission/ordering/delivery semantics
-(`ChangeEvent.D-*`, `ChangeEvent.B-*`) from ST-0008
+(`ChangeEvent.D-*`, `ChangeEvent.B-*`) from [ST-0008](../stories/ST-0008-change-event-stream.md)
 (per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)).
 
 ## Component Invariants
@@ -99,7 +99,7 @@ per [DEC-0085](../decisions/DEC-0085-implementation-guidance-split.md)).
 
 ## Dependencies
 
-- Code-host connector contract (EP-0005 / future standalone
+- Code-host connector contract ([EP-0005](../epics/EP-0005-connectors-and-identity.md) / future standalone
   `protocol`-type CMP per
   [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md)) —
   fork, branch, PR, review, protection operations; consumed per its
@@ -109,7 +109,7 @@ per [DEC-0085](../decisions/DEC-0085-implementation-guidance-split.md)).
 ## Acceptance & Test Expectations
 
 Pending — assembled from story acceptance criteria; must include the
-tier-2 check suite (ST-0007) passing against this repo's bootstrap
+tier-2 check suite ([ST-0007](../stories/ST-0007-tier2-check-suite.md)) passing against this repo's bootstrap
 corpus.
 
 ## Out of Scope

@@ -12,11 +12,11 @@ links:
   derives-from: [SES-0007]
 ---
 
-# DEC-0061: Engine selection via SP-0002
+# DEC-0061: Engine selection via [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
 
 ## Context
 
-The engine choice was deferred at SES-0001 and again at EP-0004's drafting.
+The engine choice was deferred at [SES-0001](../sessions/SES-0001-groundwork-inception.md) and again at [EP-0004](../epics/EP-0004-graph-index.md)'s drafting.
 The deployment reality — self-hosted enterprise
 ([DEC-0050](DEC-0050-bitbucket-datacenter-v1.md)) — makes operational
 burden a first-class criterion, and the advanced query decision
@@ -44,6 +44,6 @@ load-bearing spot — exactly what spikes exist to prevent.
 
 ## Implications
 
-EP-0004 stories that depend on engine specifics block on SP-0002; the
+[EP-0004](../epics/EP-0004-graph-index.md) stories that depend on engine specifics block on [SP-0002](../spikes/SP-0002-graph-engine-selection.md); the
 query-tier contract ([DEC-0062](DEC-0062-tiered-query-api.md)) is designed
 engine-neutral so contract work proceeds in parallel.

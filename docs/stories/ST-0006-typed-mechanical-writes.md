@@ -28,18 +28,18 @@ changes inexpressible through this path.
    `append-turn`, `close-session`, `mark-stale`, `clear-stale`,
    `set-jira-key`, `set-jira-status`, `create-change-proposal`,
    `set-cp-triage` — each constructing its commit entirely from typed
-   parameters (per DEC-0033, DEC-0035, DEC-0038, DEC-0047, DEC-0048).
+   parameters (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md), [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md), [DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md), [DEC-0047](../decisions/DEC-0047-change-proposal-artifact.md), [DEC-0048](../decisions/DEC-0048-project-on-approval-field-ownership.md)).
 2. No mechanical operation can modify artifact body content or non-
    allowlisted frontmatter fields; attempts are rejected structurally, not
-   by policy check (per DEC-0033).
+   by policy check (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
 3. Agent processes hold no git credentials; only the storage service's
    identity can construct commits (verified by deployment test)
-   (per DEC-0033).
+   (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
 4. Where upstream branch protection forbids direct pushes, mechanical
    writes flow through auto-PRs approved by the program user, gated by the
-   mechanical-diff validator as a required check (per DEC-0033).
+   mechanical-diff validator as a required check (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
 5. Direct-commit vs. auto-PR mode is per-deployment configuration with no
-   code change (per DEC-0033).
+   code change (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
 
 ## Component Impact
 
@@ -48,8 +48,8 @@ the mechanical-write allowlist in its API and Behavior Contracts.
 
 ## Out of Scope
 
-The mechanical-diff validator implementation (ST-0007); who *invokes*
-mark-stale (Governance engine, EP-0003).
+The mechanical-diff validator implementation ([ST-0007](ST-0007-tier2-check-suite.md)); who *invokes*
+mark-stale (Governance engine, [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)).
 
 ## Notes for Implementers
 

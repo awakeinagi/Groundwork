@@ -34,7 +34,7 @@ Refinement and implementation agents need existing context
 overwhelming their windows — the sponsor's explicit concern behind
 [DEC-0017](../decisions/DEC-0017-consolidation-memory-layer.md). Semantic
 search additionally powers cross-goal conflict detection
-([DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)) — BG-0001
+([DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)) — [BG-0001](../goals/BG-0001-groundwork.md)
 outcome 2 — and profiles improve the session experience the whole system
 rides on ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)).
 
@@ -45,7 +45,7 @@ rides on ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)).
 - **Placement** ([DEC-0065](../decisions/DEC-0065-catalog-plus-telemetry-placement.md)):
   static always-on catalog (per-goal neighborhood, per-epic bundle,
   glossary-per-context) as repo configuration; telemetry-driven additions
-  and retirements from EP-0004's path-usage statistics; explicit human
+  and retirements from [EP-0004](EP-0004-graph-index.md)'s path-usage statistics; explicit human
   requests.
 - **Freshness & churn** ([DEC-0066](../decisions/DEC-0066-debounced-on-demand-regeneration.md)):
   instant staleness (never served stale); debounced regeneration
@@ -72,9 +72,9 @@ rides on ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)).
   per-person outside the canonical artifact store; served as bundle
   elements. Org facts never live in profiles — they belong in artifacts.
 
-**Out:** graph structure queries (EP-0004 — this layer composes them); the
-profile/consent UI itself (EP-0006, via the new EP-0007→EP-0006 impact
-edge); search/vector engine choice until the extended SP-0002 concludes
+**Out:** graph structure queries ([EP-0004](EP-0004-graph-index.md) — this layer composes them); the
+profile/consent UI itself ([EP-0006](EP-0006-refinement-web-ui.md), via the new EP-0007→[EP-0006](EP-0006-refinement-web-ui.md) impact
+edge); search/vector engine choice until the extended [SP-0002](../spikes/SP-0002-graph-engine-selection.md) concludes
 ([DEC-0070](../decisions/DEC-0070-extend-sp-0002-search-infra.md));
 provenance citation of consolidations (forbidden — [SPEC-consolidation](../specs/SPEC-consolidation.md)).
 
@@ -101,13 +101,13 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
 
 - Search/vector infrastructure — extended [SP-0002](../spikes/SP-0002-graph-engine-selection.md).
 - Consolidation effectiveness measurement (do bundles beat raw crawls?) —
-  evaluation design shared with the DEC-0058 harness.
+  evaluation design shared with the [DEC-0058](../decisions/DEC-0058-evaluation-harness.md) harness.
 - Profile schema and retention policy (what may a profile contain; how
   long) — story-level, with privacy review.
 - Embedding re-index cost at corpus scale on model swap — measure in
-  SP-0002.
+  [SP-0002](../spikes/SP-0002-graph-engine-selection.md).
 
 ## Derived Work
 
-None yet — stories/spikes follow gate approval of this epic (SP-0002 is
-shared with EP-0004).
+None yet — stories/spikes follow gate approval of this epic ([SP-0002](../spikes/SP-0002-graph-engine-selection.md) is
+shared with [EP-0004](EP-0004-graph-index.md)).

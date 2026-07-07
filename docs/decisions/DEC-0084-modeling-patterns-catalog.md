@@ -34,7 +34,7 @@ as new constructs recur.
 
 ## Rationale
 
-Sponsor amendment (SES-0012 @ T7): a closed taxonomy only works if
+Sponsor amendment ([SES-0012](../sessions/SES-0012-component-spec-design-elements.md) @ T7): a closed taxonomy only works if
 authors are shown how to express the constructs the rejected types would
 have named — otherwise pressure to reopen the enum returns with the
 first repository.

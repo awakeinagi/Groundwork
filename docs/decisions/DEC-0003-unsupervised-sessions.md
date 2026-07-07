@@ -27,7 +27,7 @@ facilitator in the loop, from the first release.
 
 ## Rationale
 
-Sponsor's call at SES-0001 T3, accepting the higher bar over the facilitated
+Sponsor's call at [SES-0001](../sessions/SES-0001-groundwork-inception.md) T3, accepting the higher bar over the facilitated
 on-ramp the agent recommended.
 
 ## Alternatives Considered

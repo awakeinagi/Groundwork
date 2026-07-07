@@ -47,4 +47,4 @@ keeps participants invested without the anchoring risk of live co-editing
 ## Implications
 
 Session-close triggers a synthesis step in the session engine; draft
-visibility and commenting are EP-0006 UI surface.
+visibility and commenting are [EP-0006](../epics/EP-0006-refinement-web-ui.md) UI surface.

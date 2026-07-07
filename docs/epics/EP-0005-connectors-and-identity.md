@@ -31,7 +31,7 @@ contract so implementations are swappable; v1 targets Bitbucket Data Center.
 
 ## Why (Goal Alignment)
 
-BG-0001 outcome 5 (sync without drift) is the Jira connector
+[BG-0001](../goals/BG-0001-groundwork.md) outcome 5 (sync without drift) is the Jira connector
 ([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md),
 [DEC-0044](../decisions/DEC-0044-drift-revert-capture-proposal.md)); the
 PR gate itself now runs through the code-host connector
@@ -50,7 +50,7 @@ existing-context awareness rides its read operations
   review posting (per-user OAuth and program-user paths, per
   [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)),
   branch-protection and team/required-check administration (consumed by
-  EP-0003's policy compiler), read-only browse/search filtered by the
+  [EP-0003](EP-0003-governance-and-gate-engine.md)'s policy compiler), read-only browse/search filtered by the
   `governance/repos.yaml` allowlist ([DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md)),
   and a capability manifest with a documented minimum set. v1
   implementation: **Bitbucket Data Center**
@@ -69,9 +69,9 @@ existing-context awareness rides its read operations
   host-identity linkage (tokens in the service secret store, never the
   repo); role-claims resolution for the gate engine.
 
-**Out:** gate policy logic (EP-0003 — this epic executes its compilation
-requests); CP triage (EP-0002 — the agent triages what this epic captures);
-what the agent does with read context (EP-0002); writing to codebases
+**Out:** gate policy logic ([EP-0003](EP-0003-governance-and-gate-engine.md) — this epic executes its compilation
+requests); CP triage ([EP-0002](EP-0002-refinement-session-agent.md) — the agent triages what this epic captures);
+what the agent does with read context ([EP-0002](EP-0002-refinement-session-agent.md)); writing to codebases
 (out entirely, per [DEC-0014](../decisions/DEC-0014-docs-are-the-product.md)).
 
 ## Domain Context
@@ -86,7 +86,7 @@ Change Proposal — per [CONTEXT.md](../../CONTEXT.md).
 - **Jira connector contract**: projection operations, field-ownership map,
   drift events with diffs, telemetry sync.
 - **Auth provider contract**: authenticate → auth subject; person-id
-  resolution against the registry; role claims for EP-0003.
+  resolution against the registry; role claims for [EP-0003](EP-0003-governance-and-gate-engine.md).
 - **Person registry schema**: `governance/people.yaml` (tier-1 validated).
 - **CP creation operation**: the typed write connectors use to file
   proposals ([DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).

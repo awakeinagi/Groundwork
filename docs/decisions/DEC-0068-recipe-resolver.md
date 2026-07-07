@@ -23,7 +23,7 @@ recipe plus a task into an actual context window.
 ## Decision
 
 The retrieval layer exposes `resolve(recipe, task) → bundle`: required
-graph paths fetched (via EP-0004), fresh consolidations substituted where
+graph paths fetched (via [EP-0004](../epics/EP-0004-graph-index.md)), fresh consolidations substituted where
 they cover a path, search filling content gaps, everything ranked and
 truncated to the token budget by the recipe's priority order. Every bundle
 element carries source refs and freshness metadata. Resolution is
@@ -34,7 +34,7 @@ use on-demand graph/search tools mid-session for follow-ups.
 
 One well-tested assembly brain beats every pack reimplementing ranking and
 truncation; determinism makes context assembly debuggable and evaluable
-(the DEC-0058 harness can regression-test bundles).
+(the [DEC-0058](DEC-0058-evaluation-harness.md) harness can regression-test bundles).
 
 ## Alternatives Considered
 
@@ -44,7 +44,7 @@ truncation; determinism makes context assembly debuggable and evaluable
 
 ## Implications
 
-The resolver contract (recipe schema in, bundle schema out) is EP-0007's
+The resolver contract (recipe schema in, bundle schema out) is [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)'s
 primary language-neutral interface; on-demand regeneration
 ([DEC-0066](DEC-0066-debounced-on-demand-regeneration.md)) is invoked
 inside resolution when a covering consolidation is stale.

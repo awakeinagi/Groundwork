@@ -24,7 +24,7 @@ exactly that period.
 ## Decision
 
 A small always-on catalog ships with the system: per-goal neighborhood,
-per-epic bundle, glossary-per-context. On top, EP-0004's path-usage
+per-epic bundle, glossary-per-context. On top, [EP-0004](../epics/EP-0004-graph-index.md)'s path-usage
 telemetry proposes new consolidations when uncatalogued paths cross heat
 thresholds, and retirement when heat decays. Humans can also request a
 consolidation explicitly.

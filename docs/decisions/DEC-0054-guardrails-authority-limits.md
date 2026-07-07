@@ -47,6 +47,6 @@ contracts would cite before any gate sees them.
 
 ## Implications
 
-`governance/roles.yaml` gains decision-rights configuration — an EP-0003
-config-schema extension (new impact edge EP-0002→EP-0003). Guardrail
+`governance/roles.yaml` gains decision-rights configuration — an [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)
+config-schema extension (new impact edge [EP-0002](../epics/EP-0002-refinement-session-agent.md)→[EP-0003](../epics/EP-0003-governance-and-gate-engine.md)). Guardrail
 behavior is eval-tested ([DEC-0058](DEC-0058-evaluation-harness.md)).

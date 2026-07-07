@@ -33,7 +33,7 @@ centerpiece.
 
 ## Why (Goal Alignment)
 
-This is the direct attack on BG-0001's problem statement: vague,
+This is the direct attack on [BG-0001](../goals/BG-0001-groundwork.md)'s problem statement: vague,
 contradictory requests become refined, ratified artifacts through the
 session experience. Conflict surfacing (outcome 2) is this agent's
 mediation flow ([DEC-0005](../decisions/DEC-0005-intent-first-mediation-then-escalation.md));
@@ -71,7 +71,7 @@ and confirmed distillation
   shared draft visible to participants, comments entering as CPs.
 - **Context assembly** ([DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md)):
   declarative per-pack recipes (required paths, preferred consolidations,
-  token budget, on-demand graph tools) resolved by EP-0004/EP-0007.
+  token budget, on-demand graph tools) resolved by [EP-0004](EP-0004-graph-index.md)/[EP-0007](EP-0007-consolidation-memory-layer.md).
 - **Session lifecycle** ([DEC-0057](../decisions/DEC-0057-session-lifecycle.md)):
   open across pauses; inactivity auto-close with partial distillation;
   resume via a new session loading the prior as context.
@@ -84,9 +84,9 @@ and confirmed distillation
   tests — gating pack changes and LLM swaps; periodic drift audits
   regenerating decisions from raw transcripts.
 
-**Out:** the chat UI (EP-0006); gate mechanics (EP-0003); retrieval
-infrastructure (EP-0004, EP-0007 — this epic consumes their contracts);
-commit construction (EP-0001 executes the typed writes).
+**Out:** the chat UI ([EP-0006](EP-0006-refinement-web-ui.md)); gate mechanics ([EP-0003](EP-0003-governance-and-gate-engine.md)); retrieval
+infrastructure ([EP-0004](EP-0004-graph-index.md), [EP-0007](EP-0007-consolidation-memory-layer.md) — this epic consumes their contracts);
+commit construction ([EP-0001](EP-0001-artifact-store-and-format-engine.md) executes the typed writes).
 
 ## Domain Context
 
@@ -104,7 +104,7 @@ Conflict, Synthesis, Strategy Pack, Decision Rights, Change Proposal — per
 - **Distillation contract**: transcript span → proposed DEC → confirmation
   → accepted DEC; regeneration entry point.
 - **Decision-rights schema**: the `governance/roles.yaml` extension
-  (EP-0003 absorbs — impact edge EP-0002→EP-0003).
+  ([EP-0003](EP-0003-governance-and-gate-engine.md) absorbs — impact edge EP-0002→[EP-0003](EP-0003-governance-and-gate-engine.md)).
 - **Evaluation suite contract**: benchmark corpus format, judge
   configuration, pass thresholds, drift-audit reports.
 

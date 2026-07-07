@@ -49,6 +49,6 @@ the value.
 
 Profile storage is per-person, outside the canonical artifact store (it is
 personal data, not design truth) — storage design at story level. New
-impact edge EP-0007→EP-0006: profile viewer/editor and consent surface are
+impact edge [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)→[EP-0006](../epics/EP-0006-refinement-web-ui.md): profile viewer/editor and consent surface are
 UI requirements. Org facts the agent learns still belong in artifacts
 (glossary, decisions), never in profiles.

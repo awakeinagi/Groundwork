@@ -50,7 +50,7 @@ automated guard converge on the human standard.
 
 ## Implications
 
-Review/flag surface joins the EP-0007→EP-0006 impact edge (alongside
-profiles); flag/quarantine/disposition semantics are EP-0007 contract
+Review/flag surface joins the [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)→[EP-0006](../epics/EP-0006-refinement-web-ui.md) impact edge (alongside
+profiles); flag/quarantine/disposition semantics are [EP-0007](../epics/EP-0007-consolidation-memory-layer.md) contract
 items; quarantine events flow to the ops surface
 ([DEC-0042](DEC-0042-governance-reporting-split.md)).

@@ -34,7 +34,7 @@ them.
 
 ## Rationale
 
-The split preserves DEC-0018: a rebuild in another language ignores the
+The split preserves [DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md): a rebuild in another language ignores the
 notes and renegotiates the constraints, while spike-driven stack
 decisions still surface in the doc an implementer actually holds instead
 of living only in DEC records.
@@ -45,10 +45,10 @@ of living only in DEC records.
   have no home in the CMP and the Handoff Manifest could not surface
   them as requirements.
 - **Fully normative section**: strongest binding, but bakes stack
-  choices into the contract itself, against DEC-0018.
+  choices into the contract itself, against [DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md).
 
 ## Implications
 
-Section rules in [SPEC-component](../specs/SPEC-component.md); ST-0007
-checks that Constraints items cite decisions and exempts Notes. SP-0002's
+Section rules in [SPEC-component](../specs/SPEC-component.md); [ST-0007](../stories/ST-0007-tier2-check-suite.md)
+checks that Constraints items cite decisions and exempts Notes. [SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s
 graph-store outcome lands as an `IG-` constraint in the Graph Index CMP.

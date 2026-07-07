@@ -12,13 +12,13 @@ links:
   derives-from: [SES-0008]
 ---
 
-# DEC-0070: Extend SP-0002 with the search workload
+# DEC-0070: Extend [SP-0002](../spikes/SP-0002-graph-engine-selection.md) with the search workload
 
 ## Context
 
 Search needs an engine (embeddings + full-text,
 [DEC-0067](DEC-0067-retrieval-owns-search.md)); the candidates overlap
-SP-0002's almost entirely — pgvector + FTS rides the same Postgres being
+[SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s almost entirely — pgvector + FTS rides the same Postgres being
 evaluated with Apache AGE, embedded vector indexes pair with the embedded
 graph option, and dedicated stores share the same on-prem ops criteria.
 
@@ -38,10 +38,10 @@ should be judged together.
 
 ## Alternatives Considered
 
-- **Separate SP-0003**: near-total overlap in candidates and criteria.
+- **Separate `SP-0003`**: near-total overlap in candidates and criteria.
 - **Pick pgvector now**: "probably right" is what spikes exist to test.
 
 ## Implications
 
-SP-0002's timebox extends (5d → 7d); embedding-model versioning and
+[SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s timebox extends (5d → 7d); embedding-model versioning and
 re-embed mechanics are contract-level regardless of the engine outcome.

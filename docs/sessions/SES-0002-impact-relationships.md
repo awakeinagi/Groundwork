@@ -42,9 +42,9 @@ same pattern as Jira's blocks/is-blocked-by. Impact links are restricted to
 same-type artifacts, per the sponsor's "at that level" framing. Defined
 semantics: "X impacts Y" means decisions recorded while refining X are
 expected to constrain, shape, or invalidate decisions in Y. Seeded an
-initial agent-proposed edge set across EP-0001–EP-0007 (to be ratified or
+initial agent-proposed edge set across [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)–[EP-0007](../epics/EP-0007-consolidation-memory-layer.md) (to be ratified or
 corrected at each epic's refinement gate); the set contains cycles
-(EP-0001↔EP-0003, EP-0002↔EP-0006), confirming that naive topological
+([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0003](../epics/EP-0003-governance-and-gate-engine.md), [EP-0002](../epics/EP-0002-refinement-session-agent.md)↔[EP-0006](../epics/EP-0006-refinement-web-ui.md)), confirming that naive topological
 ordering is insufficient and motivating the ranking spike. SPEC-spike was
 relaxed to allow cross-cutting spikes to derive directly from a Business
 Goal, since refinement ordering is a goal-level concern that exists before

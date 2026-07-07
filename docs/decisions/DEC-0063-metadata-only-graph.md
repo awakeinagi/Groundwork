@@ -26,7 +26,7 @@ Nodes carry frontmatter-derived attributes (id, type, status, title,
 owner, refs); edges carry link type and provenance. Bodies stay in the
 store: queries return IDs plus metadata, and callers fetch documents
 through the storage API. Full-text/semantic search over bodies is a
-separate retrieval concern in EP-0007's neighborhood — not this index.
+separate retrieval concern in [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)'s neighborhood — not this index.
 
 ## Rationale
 
@@ -42,6 +42,6 @@ storage that the consolidation/retrieval layer will need to own anyway.
 
 ## Implications
 
-Text/semantic search lands as an EP-0007 refinement question (impact edge
-EP-0004→EP-0007 already present); UI and agents compose graph queries with
+Text/semantic search lands as an [EP-0007](../epics/EP-0007-consolidation-memory-layer.md) refinement question (impact edge
+[EP-0004](../epics/EP-0004-graph-index.md)→[EP-0007](../epics/EP-0007-consolidation-memory-layer.md) already present); UI and agents compose graph queries with
 store fetches.

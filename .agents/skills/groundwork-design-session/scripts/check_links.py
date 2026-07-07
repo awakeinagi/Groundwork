@@ -15,6 +15,11 @@ Rules enforced:
      service, event, protocol) — both `component-type:` frontmatter and
      `### <Name> (<type>)` headings in Design Elements sections — and
      element names are unique within a doc.
+  8. Body cross-references are clickable and resolve: relative links in
+     bodies point at existing files; a link whose text begins with an
+     artifact ID targets that artifact's file; bare artifact IDs in body
+     prose (outside code spans/fenced blocks, excluding the artifact's
+     own ID) are violations.
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -47,6 +52,11 @@ ELEMENT_HEADING_RE = re.compile(r"^###\s+(\S+)\s+\(([^)]*)\)\s*$",
                                 re.MULTILINE)
 DESIGN_ELEMENTS_RE = re.compile(r"^## Design Elements\s*$(.*?)(?=^## |\Z)",
                                 re.MULTILINE | re.DOTALL)
+FENCED_CODE_RE = re.compile(r"```.*?(?:```|\Z)", re.DOTALL)
+INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
+MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+BARE_ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}\b")
+EXTERNAL_TARGET = ("http://", "https://", "mailto:", "#")
 
 
 def parse_frontmatter(path):
@@ -202,6 +212,28 @@ def main():
                 errors.append(f"{fm['_path']}: duplicate element name "
                               f"{name}")
             seen.add(name)
+
+    # Rule 8: body cross-references are clickable and resolve
+    for aid, fm in artifacts.items():
+        prose = INLINE_CODE_RE.sub("", FENCED_CODE_RE.sub("",
+                                                          fm["_body"] or ""))
+        base = (root / fm["_path"]).parent
+        for text, target in MD_LINK_RE.findall(prose):
+            if target.startswith(EXTERNAL_TARGET):
+                continue
+            dest = (base / target.split("#")[0]).resolve()
+            tid = BARE_ID_RE.match(text)
+            if not dest.exists():
+                errors.append(f"{fm['_path']}: link [{text}]({target}) "
+                              f"does not resolve")
+            elif tid and not dest.name.startswith(tid.group(0) + "-"):
+                errors.append(f"{fm['_path']}: link [{text}]({target}) "
+                              f"targets a different artifact")
+        bare = {b for b in BARE_ID_RE.findall(MD_LINK_RE.sub("", prose))
+                if b != aid}
+        for b in sorted(bare):
+            errors.append(f"{fm['_path']}: bare cross-reference {b} in "
+                          f"prose — must be a markdown link")
 
     if errors:
         print(f"FAIL: {len(errors)} violation(s) across "

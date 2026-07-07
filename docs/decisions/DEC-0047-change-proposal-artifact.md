@@ -48,4 +48,4 @@ declined) and a uniform triage flow, at the cost of one small spec.
 
 New [SPEC-change-proposal](../specs/SPEC-change-proposal.md); checker and
 common spec updated with the `CP` prefix; CP triage added to the session
-agent's scope (EP-0002).
+agent's scope ([EP-0002](../epics/EP-0002-refinement-session-agent.md)).

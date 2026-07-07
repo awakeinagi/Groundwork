@@ -13,7 +13,7 @@ links:
   relates-to: [EP-0001, SP-0001]
 ---
 
-# SES-0003: EP-0001 Refinement Session
+# SES-0003: [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) Refinement Session
 
 ## Purpose
 
@@ -25,15 +25,15 @@ guidance extending [SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md).
 
 ## Transcript
 
-**T1 — Sponsor.** Additional context for SP-0001: investigate whether
+**T1 — Sponsor.** Additional context for [SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md): investigate whether
 "subject to change" decisions or best guesses are made on the *impacted*
 items first (by the agent, with humans involved as needed) to provide
 guidance and boundaries for the item that will impact them. Then: proceed
-with EP-0001's refinement.
+with [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)'s refinement.
 
-**T2 — Agent.** Folded provisional-bounding-decisions into SP-0001's method
+**T2 — Agent.** Folded provisional-bounding-decisions into [SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md)'s method
 (including interaction with staleness machinery and whether a `provisional`
-decision status is needed). Opened EP-0001 round 1: (a) git model
+decision status is needed). Opened [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) round 1: (a) git model
 (recommended trunk-only + status field); (b) access paths (recommended API
 writes, sanctioned git reads); (c) concurrency (recommended optimistic
 versioning); (d) ID allocation (recommended committed counter file).
@@ -54,7 +54,7 @@ branches are used. (d) ID allocation serialized by a thread/process-safe
 lock on the API server.
 
 **T4 — Agent.** Round 2, probing the frictions the PR-gate model creates:
-(a) gate surface — where approvers click approve, given DEC-0002 says users
+(a) gate surface — where approvers click approve, given [DEC-0002](../decisions/DEC-0002-doc-store-canonical.md) says users
 interface via the Groundwork UI (recommended: UI wraps the PR via the
 code-host connector); (b) whether mechanical writes (stale marks, jira-keys,
 transcript appends, counters) bypass PR gates (recommended: direct commit
@@ -79,7 +79,7 @@ inexpressible through the mechanical path. Where branch protection forbids
 direct pushes, the service falls back to auto-PRs approved by a program
 user, with a deterministic mechanical-diff CI check (diff touches only
 allowlisted fields/append regions) as a required check — machine
-verification replaces human spam. EP-0001 updated accordingly and moved to
+verification replaces human spam. [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) updated accordingly and moved to
 `gated`, awaiting sponsor sign-off.
 
 ## Decisions Produced

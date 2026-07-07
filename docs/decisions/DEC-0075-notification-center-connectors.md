@@ -27,7 +27,7 @@ An in-app notification center is the source of truth: every event lands
 there with read state and links into the relevant surface. External
 delivery goes through pluggable notifier connectors — email in v1;
 Slack/Teams and others as future adapters under the same connector pattern
-(EP-0005 owns the adapter contract). Per-user channel preferences live
+([EP-0005](../epics/EP-0005-connectors-and-identity.md) owns the adapter contract). Per-user channel preferences live
 with the account.
 
 ## Rationale
@@ -44,7 +44,7 @@ channels.
 
 ## Implications
 
-The notifier connector contract joins EP-0005's adapter family; event →
+The notifier connector contract joins [EP-0005](../epics/EP-0005-connectors-and-identity.md)'s adapter family; event →
 notification routing rules are configuration; digest/batching behavior
 ([DEC-0041](DEC-0041-impact-ranked-reaffirmation-queue.md)) is per-user
 preference.

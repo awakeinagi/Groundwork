@@ -33,7 +33,7 @@ self-hosted enterprise operations
 
 ## Why It Blocks
 
-EP-0004 stories that touch engine specifics (overlay implementation,
+[EP-0004](../epics/EP-0004-graph-index.md) stories that touch engine specifics (overlay implementation,
 executor guards, rebuild pipeline) cannot be written until the engine is
 chosen; the contract tiers are engine-neutral and proceed in parallel.
 

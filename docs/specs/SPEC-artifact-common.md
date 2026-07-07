@@ -84,8 +84,13 @@ Decisions and Sessions use reduced lifecycles defined in their own specs.
 
 - Body sections are defined per type-spec. Required sections must be present
   even if brief; "N/A — <reason>" is acceptable and auditable.
-- Reference other artifacts inline as `[<ID>](relative/path.md)`; the
-  authoritative relationship still lives in frontmatter.
+- Cross-references in body prose **must** be markdown links:
+  `[<ID>](relative/path.md)`. A bare artifact ID outside fenced code
+  blocks and inline code spans (other than the artifact's own ID) is an
+  integrity violation
+  ([DEC-0090](../decisions/DEC-0090-clickable-body-cross-references.md)).
+  The authoritative relationship still lives in frontmatter; body links
+  carry no graph semantics.
 - Convert relative dates to absolute dates.
 - Use glossary terms from [CONTEXT.md](../../CONTEXT.md) exactly. If a needed
   term is missing or contested, resolve it in the glossary first
@@ -101,3 +106,8 @@ Decisions and Sessions use reduced lifecycles defined in their own specs.
 5. No approved artifact links `conflicts-with` an open Conflict.
 6. Impact links are reciprocal and same-type: `X.impacts ∋ Y` iff
    `Y.impacted-by ∋ X`, and X and Y share an artifact type.
+7. Body cross-references are clickable and resolve
+   ([DEC-0090](../decisions/DEC-0090-clickable-body-cross-references.md)):
+   every relative link in a body points at an existing file; a link whose
+   text begins with an artifact ID targets that artifact's file; no bare
+   artifact IDs appear in body prose outside code spans/blocks.

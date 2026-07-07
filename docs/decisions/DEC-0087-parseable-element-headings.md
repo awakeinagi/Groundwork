@@ -49,6 +49,6 @@ element change and adding mirror-drift as a new failure mode.
 ## Implications
 
 Heading grammar in [SPEC-design-elements](../specs/SPEC-design-elements.md);
-ST-0007 parses and validates headings; EP-0004 story derivation must
+[ST-0007](../stories/ST-0007-tier2-check-suite.md) parses and validates headings; [EP-0004](../epics/EP-0004-graph-index.md) story derivation must
 include exposing element nodes (name, type, owning CMP, contract items)
 in the Graph Index.

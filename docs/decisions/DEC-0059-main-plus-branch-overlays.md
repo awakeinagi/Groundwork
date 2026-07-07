@@ -46,4 +46,4 @@ traversal silently filter-dependent.
 ## Implications
 
 Overlay lifecycle tracks item-branch lifecycle (created on branch open,
-dropped on merge/abandon); overlay support is an SP-0002 engine criterion.
+dropped on merge/abandon); overlay support is an [SP-0002](../spikes/SP-0002-graph-engine-selection.md) engine criterion.

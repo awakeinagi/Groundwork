@@ -26,20 +26,20 @@ consolidation freshness.
 
 1. Every write that lands in the repository — content, mechanical, merge —
    emits an event carrying artifact ID, type, branch/ref, change kind, and
-   changed fields (per DEC-0059, DEC-0060).
+   changed fields (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md), [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
 2. Delivery is at-least-once with per-artifact ordering; consumers are
-   idempotent by contract (per DEC-0060).
+   idempotent by contract (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
 3. Merge events carry enough information for the Graph Index to promote
-   overlay state to the main view and drop the overlay (per DEC-0059).
+   overlay state to the main view and drop the overlay (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)).
 4. Named consumers are wired and tested: Graph Index incremental updates
-   (per DEC-0060), staleness sweeps (per DEC-0038), consolidation
-   invalidation (per DEC-0066).
+   (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)), staleness sweeps (per [DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md)), consolidation
+   invalidation (per [DEC-0066](../decisions/DEC-0066-debounced-on-demand-regeneration.md)).
 5. The stream is replayable from git history for any ref range — a
    consumer rebuilt from scratch converges to the same state as one that
-   consumed live (per DEC-0060).
+   consumed live (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
 6. Events are recorded in a transactional outbox in the service's
    Postgres, atomically with the write's bookkeeping, and delivered by a
-   dispatcher with retries (per DEC-0078).
+   dispatcher with retries (per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)).
 
 ## Component Impact
 
@@ -48,11 +48,11 @@ the event schema and delivery guarantees in its API Contract.
 
 ## Out of Scope
 
-Consumers' internal processing (EP-0003/0004/0007); notification-center
-events (EP-0006 — user-facing notifications derive from governance events,
+Consumers' internal processing ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)/0004/0007); notification-center
+events ([EP-0006](../epics/EP-0006-refinement-web-ui.md) — user-facing notifications derive from governance events,
 not raw store events).
 
 ## Notes for Implementers
 
 Replayability-from-git is the invariant the outbox must never be allowed
-to erode — the outbox is delivery plumbing, not truth (per DEC-0078).
+to erode — the outbox is delivery plumbing, not truth (per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)).

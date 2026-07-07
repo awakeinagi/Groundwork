@@ -47,5 +47,5 @@ substrate instead of a parallel app-internal approval store.
 ## Implications
 
 Approvers need host identities the connector can act for (or on behalf of,
-via delegated review) — an EP-0005 contract requirement. Gate-policy
-configuration (EP-0003) compiles down to host branch-protection settings.
+via delegated review) — an [EP-0005](../epics/EP-0005-connectors-and-identity.md) contract requirement. Gate-policy
+configuration ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)) compiles down to host branch-protection settings.

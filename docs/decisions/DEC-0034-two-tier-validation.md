@@ -47,4 +47,4 @@ projections, index) need everything.
 `tools/check_links.py` evolves into the tier-2 check suite run as a required
 PR check ([DEC-0033](DEC-0033-typed-mechanical-writes.md) adds the
 mechanical-diff validator alongside it); tier-1 schemas are the
-machine-readable JSON Schema versions of the SPECs (EP-0001 contract).
+machine-readable JSON Schema versions of the SPECs ([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) contract).

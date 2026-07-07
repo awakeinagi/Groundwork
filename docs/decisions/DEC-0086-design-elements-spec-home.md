@@ -46,5 +46,5 @@ rules; glossary entries keep the type names enforceable everywhere.
 
 ## Implications
 
-ST-0001's "schema per SPEC document" criterion now covers the new spec's
+[ST-0001](../stories/ST-0001-tier1-schema-suite.md)'s "schema per SPEC document" criterion now covers the new spec's
 enum asset; SPEC-component slims to structure + references.
