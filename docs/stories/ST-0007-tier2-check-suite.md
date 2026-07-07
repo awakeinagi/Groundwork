@@ -10,8 +10,8 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0001]
   impacted-by: [ST-0001]
-cites: [DEC-0009, DEC-0026, DEC-0033, DEC-0034, DEC-0035, DEC-0081, DEC-0083,
-        DEC-0085, DEC-0087]
+cites: [DEC-0009, DEC-0026, DEC-0033, DEC-0034, DEC-0035, DEC-0081, DEC-0085,
+        DEC-0087, DEC-0088, DEC-0089]
 ---
 
 # ST-0007: Tier-2 Completeness Check Suite
@@ -42,10 +42,12 @@ validator.
 6. For component docs, the suite parses `### <ElementName> (<type>)`
    element headings in Design Elements sections: every type resolves
    against the closed element-type enum, each element's typed contract
-   obligations are present, element-scoped item IDs are well-formed and
-   unique within the doc, and Implementation Guidance Constraints cite
-   decisions while Notes are exempt (per DEC-0081, DEC-0083, DEC-0085,
-   DEC-0087).
+   obligations are present (including entity's conditional API contract
+   when boundary-exposed), API-item request/response schemas resolve
+   inline or to declared value/event elements, element-scoped item IDs
+   are well-formed and unique within the doc, and Implementation
+   Guidance Constraints cite decisions while Notes are exempt (per
+   DEC-0081, DEC-0088, DEC-0089, DEC-0085, DEC-0087).
 7. The suite passes against this repository's full bootstrap corpus as its
    initial regression baseline.
 

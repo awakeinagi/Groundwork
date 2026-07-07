@@ -2,7 +2,7 @@
 id: DEC-0083
 type: decision
 title: Element types carry gate-checkable contract obligations
-status: accepted
+status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-07
 decided-by: awakeinagi@gmail.com

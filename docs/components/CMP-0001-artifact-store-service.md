@@ -10,7 +10,7 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
 cites: [DEC-0028, DEC-0029, DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035,
-        DEC-0080, DEC-0081, DEC-0082, DEC-0083, DEC-0085, DEC-0087]
+        DEC-0080, DEC-0081, DEC-0082, DEC-0085, DEC-0087, DEC-0088, DEC-0089]
 ---
 
 # CMP-0001: Artifact Store Service

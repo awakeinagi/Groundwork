@@ -46,8 +46,10 @@ trackable units ([DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)).
    ([DEC-0081](../decisions/DEC-0081-element-first-contract-layout.md),
    [DEC-0087](../decisions/DEC-0087-parseable-element-headings.md)).
    Each element's type mandates its contract kinds
-   ([DEC-0083](../decisions/DEC-0083-typed-contract-obligations.md));
-   schemas in language-neutral form (JSON Schema / OpenAPI fragments).
+   ([DEC-0088](../decisions/DEC-0088-revised-typed-obligations.md));
+   schemas in language-neutral form (JSON Schema / OpenAPI fragments),
+   with API-item schemas resolving inline or to declared value/event
+   elements ([DEC-0089](../decisions/DEC-0089-api-schema-resolution-rule.md)).
 4. **Component Invariants** — cross-element guarantees, numbered `C-<n>`
    (e.g. transactional couplings between elements, whole-component
    failure behavior).

@@ -36,17 +36,26 @@ model; service → function or class with methods; event → pydantic model
 ## Typed contract obligations
 
 An element's type determines which contract kinds its block must define
-([DEC-0083](../decisions/DEC-0083-typed-contract-obligations.md)).
-Missing mandated kinds are gate-blockers, checked per element by the
-tier-2 suite (ST-0007).
+([DEC-0088](../decisions/DEC-0088-revised-typed-obligations.md),
+superseding DEC-0083). Missing mandated kinds are gate-blockers, checked
+per element by the tier-2 suite (ST-0007).
 
-| Type | Mandatory contract kinds |
-|---|---|
-| entity | identity & lifecycle invariants (B), data contract (D) |
-| value | data contract: schema, equality/immutability invariants (D) |
-| service | API contract (A), behavior contract (B) |
-| event | schema (D), emission/ordering/delivery semantics (B) |
-| protocol | API contract implementations must satisfy (A), conformance expectations (B) |
+| Type | Mandatory contract kinds | Conditional |
+|---|---|---|
+| entity | behavior contract: identity semantics, lifecycle states, allowed transitions, domain-operation semantics (B); data contract (D) | API contract (A) — required exactly when the entity's operations are exposed at the component boundary (e.g., a graduated standalone entity CMP) |
+| value | data contract: schema, equality/immutability invariants (D) | — |
+| service | API contract (A), behavior contract (B) | — |
+| event | schema (D), emission/ordering/delivery semantics (B) | — |
+| protocol | API contract implementations must satisfy (A), conformance expectations (B) | — |
+
+**Schema-resolution rule**
+([DEC-0089](../decisions/DEC-0089-api-schema-resolution-rule.md)): in
+every API contract item, each request/response schema is either defined
+inline (language-neutral form) or resolves to a declared **value** or
+**event** element — in the same doc or in a `depends-on` component's
+contract. Dangling type references are gate-blockers. Services stay
+stateless (no D-kind); their payloads live in the A-items or in the
+value/event elements those items reference.
 
 ## Declaration syntax and item IDs
 
