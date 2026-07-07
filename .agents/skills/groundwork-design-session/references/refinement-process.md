@@ -159,6 +159,8 @@ superseded):
 
 1. Walk the graph downward (`derives-from`/`satisfies` children,
    transitively) and set every approved descendant to `status: stale`.
+   The bundled graph tool computes this set: `uv run
+   scripts/groundwork_graph.py impact <ID>` (see SKILL.md).
 2. Produce a short impact report: what changed, which artifacts are
    affected, which are mid-implementation.
 3. **Re-affirmation** clears staleness cheaply: show the approver the
@@ -179,7 +181,8 @@ with the artifacts.
 
 To pick what to refine next among siblings: prefer the item whose
 `impacted-by` list is fully settled (approved) and whose `impacts` list is
-largest. Cycles are normal (A and B constrain each other): break them by
+largest — computable via `uv run scripts/groundwork_graph.py order
+<type>` (see SKILL.md). Cycles are normal (A and B constrain each other): break them by
 refining one with the other's known constraints explicitly on the table,
 or by making *provisional* bounding decisions on the impacted item first —
 subject-to-change guesses that give the impactor something to design

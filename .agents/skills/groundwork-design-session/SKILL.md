@@ -120,6 +120,36 @@ least once per session and once per approval.
    anything. Drive toward that; it is the deliverable the whole process
    exists to produce.
 
+## The local graph index (LadybugDB)
+
+The skill bundles a queryable graph view of the artifact tree —
+`scripts/groundwork_graph.py`, an embedded LadybugDB (openCypher) built
+from frontmatter links plus Design Element headings. Run it via `uv`,
+which installs `ladybug<1.0` into a temporary managed venv from the
+script's inline metadata (requires `uv` on PATH):
+
+```bash
+uv run <skill-dir>/scripts/groundwork_graph.py --root <project> build
+uv run <skill-dir>/scripts/groundwork_graph.py --root <project> <command>
+```
+
+Use it whenever a question is really a graph traversal:
+
+| Moment in the process | Command |
+|---|---|
+| Before superseding a decision or amending an approved artifact — who goes stale? | `impact <ID>` |
+| Session prep: why does this artifact exist, on which decisions? | `trace <ID>` |
+| Periodic audit: dangling refs, citations of superseded DECs, uncited decisions, frontier | `gaps` |
+| Choosing what to refine next among siblings | `order [type]` |
+| Element inventory across components (seam-graduation candidates) | `elements [etype]` |
+| Anything else | `query "<openCypher>"` (schema in the script docstring) |
+
+Discipline: the graph is a **derived view** — docs stay the source of
+truth. After editing artifacts, `sync <file-or-ID>...` (or rebuild:
+`build` is cheap). The DB file `.groundwork-graph` is disposable; keep
+it gitignored. Graph mutations via `query` are for what-if exploration
+only, never a substitute for editing docs.
+
 ## Invariants (never break these, in any mode)
 
 - **Checker before commit.** `python3 tools/check_links.py` must pass.
