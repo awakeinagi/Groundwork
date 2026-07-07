@@ -23,7 +23,23 @@ links:
 3. **Outcomes & Success Criteria** — observable, ideally measurable results
    that would demonstrate the goal is met. Each criterion cites the Decision
    that established it.
-4. **Scope** — explicitly in and explicitly out.
+4. **Scope** — explicitly in and explicitly out. If the goal's work is
+   release-scoped, this section also declares the named releases as a
+   machine-parseable list
+   ([DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md)):
+   one item per release, the value in a code span (a SemVer prefix per
+   [DEC-0098](../decisions/DEC-0098-semver-release-labels.md)), the
+   current release marked `(current)`:
+
+   ```markdown
+   **Releases:**
+   - `1` (current) — goal refinement end-to-end
+   - `2` — connectors-led expansion
+   ```
+
+   `release:` labels in descendant stories/epics must exactly match a
+   declared value (or be `backlog`); adding, renaming, or re-scoping a
+   release is a gated amendment to this goal.
 5. **Constraints** — non-negotiables: regulatory, technical, budget, timeline,
    organizational.
 6. **Stakeholders & Roles** — who cares, who answers questions, who approves.

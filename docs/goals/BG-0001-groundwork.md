@@ -9,7 +9,8 @@ created: 2026-07-05
 links:
   derives-from: [SES-0001]
 cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006, DEC-0011,
-        DEC-0014, DEC-0015, DEC-0018, DEC-0019, DEC-0022, DEC-0025]
+        DEC-0014, DEC-0015, DEC-0018, DEC-0019, DEC-0022, DEC-0025,
+        DEC-0098, DEC-0099]
 ---
 
 # BG-0001: Groundwork — ground implementation in refined business intent
@@ -59,6 +60,17 @@ the decisions and conversations that shaped it
    [DEC-0002](../decisions/DEC-0002-doc-store-canonical.md)).
 
 ## Scope
+
+**Releases:**
+- `1` (current) — the v1 vertical slice: goal refinement end-to-end (per
+  [DEC-0022](../decisions/DEC-0022-v1-goal-refinement-slice.md)), plus the
+  epics that carry it.
+- `2` — the follow-on expansion named by
+  [DEC-0022](../decisions/DEC-0022-v1-goal-refinement-slice.md)'s
+  sequencing: connectors, full Graph Index, consolidations.
+
+Declared per [DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md);
+labels follow [DEC-0098](../decisions/DEC-0098-semver-release-labels.md).
 
 **In:** the refinement pipeline (sessions, synthesis, conflict handling);
 the artifact model and canonical store; gates and governance; the

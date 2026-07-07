@@ -11,6 +11,7 @@ Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 ```yaml
 type: story
 jira-key: PROJ-456
+release: "1.2"        # optional target release; absent = current release
 links:
   derives-from: [EP-....]
   satisfies: [BG-....]
@@ -48,3 +49,14 @@ links:
   A story's design and implementation percent-complete are computed over
   the elements referencing it
   ([DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md)).
+- **Release scoping** (see
+  [SPEC-artifact-common](SPEC-artifact-common.md) § Release scoping): a
+  story targeted at anything other than a current release is `deferred`
+  ([DEC-0097](../decisions/DEC-0097-deferred-status.md)) and carries a
+  `release:` label
+  ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md)); its
+  parent epic's label is the default. Deferral and revival each cite a
+  Decision ([DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md));
+  revival lands at `draft`. Deferred stories are excluded from design-%
+  rollups and coverage warnings and surface in the deferred report
+  ([DEC-0101](../decisions/DEC-0101-deferred-out-of-metrics.md)).

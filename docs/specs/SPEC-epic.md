@@ -10,6 +10,7 @@ Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 ```yaml
 type: epic
 jira-key: PROJ-123        # set once projected; absent before first sync
+release: "2"              # optional target release; absent = current release
 links:
   derives-from: [BG-....]
   satisfies: [BG-....]
@@ -39,3 +40,13 @@ links:
   ([DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)). Drift
   detected in Jira is reconciled toward this doc
   ([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md)).
+- **Release scoping** (see
+  [SPEC-artifact-common](SPEC-artifact-common.md) § Release scoping): an
+  epic targeted at anything other than a current release is `deferred`
+  ([DEC-0097](../decisions/DEC-0097-deferred-status.md)) and carries a
+  `release:` label ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md))
+  that becomes the default for its derived stories. A deferred epic
+  blocks story/spike derivation (it is not `approved`). Deferral and
+  revival each cite a Decision
+  ([DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md));
+  revival lands at `draft`.
