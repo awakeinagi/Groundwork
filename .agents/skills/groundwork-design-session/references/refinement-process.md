@@ -217,12 +217,24 @@ when its findings are recorded as decisions.
 ### Component docs (the deliverable)
 Create a `CMP-` per bounded-context component, drafted early (stub with
 Purpose + Pending sections is fine), made contract-complete as stories
-settle. The gate test: could a competent implementer with no access to
-you build and test this from the doc + its dependencies' contracts alone?
-Every behavior/API/data contract item numbered and citing decisions.
-"Out of Scope" must name the plausible adjacent behaviors an implementer
-might wrongly assume. When all components for a goal are approved, the
-design is implementation-ready — tell the user so, explicitly.
+settle. Structure the doc element-first: enumerate the component's typed
+design elements (`### <Name> (<type>)`, closed set entity | value |
+service | event | protocol) and give each its own contract block with
+element-scoped item IDs — the element's type dictates which contract
+kinds it owes (see the CMP section of groundwork-system.md). Model
+repositories/workflows/policies as compositions of the five types, never
+ad-hoc types. When an element is consumed by more than one component (or
+needs independently versioned conformance), graduate it to its own
+`component-type:`-tagged CMP. Put refinement-made stack commitments in
+Implementation Guidance → Constraints (decision-cited); anything merely
+helpful goes in Notes and must never be load-bearing. The gate test:
+could a competent implementer with no access to you build and test this
+from the doc + its dependencies' contracts alone? Every element item,
+invariant, and Constraint numbered and citing decisions; every API-item
+schema resolving inline or to a declared value/event element. "Out of
+Scope" must name the plausible adjacent behaviors an implementer might
+wrongly assume. When all components for a goal are approved, the design
+is implementation-ready — tell the user so, explicitly.
 
 ## Commit discipline
 

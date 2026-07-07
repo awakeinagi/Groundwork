@@ -11,6 +11,10 @@ Rules enforced:
   4. Every decision derives from a session or spike.
   5. No approved artifact links conflicts-with an unresolved conflict.
   6. Impact links (impacts/impacted-by) are reciprocal and same-type.
+  7. Component design elements use the closed type enum (entity, value,
+     service, event, protocol) — both `component-type:` frontmatter and
+     `### <Name> (<type>)` headings in Design Elements sections — and
+     element names are unique within a doc.
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -38,17 +42,22 @@ PREFIX_FOR_TYPE = {
 }
 MUST_TRACE_TO_GOAL = {"epic", "story", "spike", "component"}
 SKIP_DIRS = {"specs"}  # non-artifact doc directories
+ELEMENT_TYPES = {"entity", "value", "service", "event", "protocol"}
+ELEMENT_HEADING_RE = re.compile(r"^###\s+(\S+)\s+\(([^)]*)\)\s*$",
+                                re.MULTILINE)
+DESIGN_ELEMENTS_RE = re.compile(r"^## Design Elements\s*$(.*?)(?=^## |\Z)",
+                                re.MULTILINE | re.DOTALL)
 
 
 def parse_frontmatter(path):
     text = path.read_text(encoding="utf-8")
     m = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
     if not m:
-        return None, "missing YAML frontmatter"
+        return None, None, "missing YAML frontmatter"
     try:
-        return yaml.safe_load(m.group(1)), None
+        return yaml.safe_load(m.group(1)), text[m.end():], None
     except yaml.YAMLError as e:
-        return None, f"unparseable frontmatter: {e}"
+        return None, None, f"unparseable frontmatter: {e}"
 
 
 def as_list(value):
@@ -71,7 +80,7 @@ def main():
     for path in sorted(docs.rglob("*.md")):
         if path.parent.name in SKIP_DIRS:
             continue
-        fm, err = parse_frontmatter(path)
+        fm, body, err = parse_frontmatter(path)
         rel = path.relative_to(root)
         if err:
             errors.append(f"{rel}: {err}")
@@ -95,6 +104,7 @@ def main():
             errors.append(f"{rel}: id {aid} does not match type "
                           f"{fm['type']} (expected {expected_prefix}-)")
         fm["_path"] = rel
+        fm["_body"] = body
         artifacts[aid] = fm
 
     def refs(fm):
@@ -170,6 +180,28 @@ def main():
             if artifacts.get(cfl, {}).get("status") != "resolved":
                 errors.append(f"{fm['_path']}: approved {aid} links "
                               f"unresolved conflict {cfl}")
+
+    # Rule 7: component design elements use the closed type enum
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "component":
+            continue
+        ctype = fm.get("component-type")
+        if ctype is not None and ctype not in ELEMENT_TYPES:
+            errors.append(f"{fm['_path']}: component-type {ctype!r} not one "
+                          f"of {sorted(ELEMENT_TYPES)}")
+        section = DESIGN_ELEMENTS_RE.search(fm.get("_body") or "")
+        if not section:
+            continue  # drafts may not have the section yet
+        seen = set()
+        for name, etype in ELEMENT_HEADING_RE.findall(section.group(1)):
+            if etype not in ELEMENT_TYPES:
+                errors.append(f"{fm['_path']}: element {name} has unknown "
+                              f"type {etype!r} (closed enum: "
+                              f"{sorted(ELEMENT_TYPES)})")
+            if name in seen:
+                errors.append(f"{fm['_path']}: duplicate element name "
+                              f"{name}")
+            seen.add(name)
 
     if errors:
         print(f"FAIL: {len(errors)} violation(s) across "

@@ -184,18 +184,56 @@ directly from a Business Goal.
 
 ### Component Doc (CMP) — `docs/components/`
 The contract-complete spec of one system component, aligned with a
-DDD-style bounded context — **the deliverable**. Sections: **Purpose**,
-**Ubiquitous Language** (every model term glossary-resolved), **Behavior
-Contract** (numbered guarantees: invariants, state transitions, failure
-behavior), **API Contract** (operations, schemas in language-neutral form,
-error taxonomy, idempotency), **Data Contract** (owned entities, lifecycle),
-**Dependencies** (which contract sections of each `depends-on` component
-are consumed — internals are out of bounds), **Acceptance & Test
-Expectations**, **Out of Scope** (especially plausible adjacent behavior an
-implementer might assume). **Every contract item cites at least one
-decision** — uncited items block the gate. Frontmatter extras: `context:`
-(bounded context name). Drafts may carry `Pending — …` sections; the gate
+DDD-style bounded context — **the deliverable**. A component comprises
+typed **design elements** (see below). Sections: **Purpose**,
+**Ubiquitous Language** (every model term glossary-resolved), **Design
+Elements** (each element declared `### <ElementName> (<type>)` and
+carrying its own contract block with element-scoped item IDs like
+`StorageService.B-3`; kinds `B` behavior / `A` API / `D` data; schemas in
+language-neutral form), **Component Invariants** (cross-element
+guarantees, `C-<n>`), **Implementation Guidance** (two subsections:
+**Constraints** `IG-<n>` — normative for the reference implementation,
+decision-cited; **Notes** — advisory, may be stack-specific, never
+load-bearing: contracts must stand without them), **Dependencies** (which
+contract sections/items of each `depends-on` component are consumed —
+internals are out of bounds), **Acceptance & Test Expectations**, **Out
+of Scope** (especially plausible adjacent behavior an implementer might
+assume). **Every contract item — element items, invariants, and
+Constraints — cites at least one decision**; uncited items block the
+gate (Notes are exempt). Frontmatter extras: `context:` (bounded context
+name); `component-type:` only on standalone element CMPs (see
+graduation, below). Drafts may carry `Pending — …` sections; the gate
 requires completeness.
+
+**Design elements.** The element-type taxonomy is a **closed set of
+five** — extended only by an accepted decision and spec change:
+
+- **entity** — identity that persists across state changes; lifecycle;
+  mutable state.
+- **value** — immutable, attribute-defined; equality by value.
+- **service** — stateless capability exposing operations.
+- **event** — schema'd payload crossing a boundary, with
+  emission/ordering/delivery semantics.
+- **protocol** — a capability seam: the contract an implementation must
+  satisfy.
+
+Each type mandates contract kinds, checkable at the gate: entity ⇒ full
+behavior contract (identity semantics, lifecycle states, transitions,
+domain-operation semantics) + data contract, with an API contract
+required only when its operations are exposed at the component boundary;
+value ⇒ data contract; service ⇒ API + behavior; event ⇒ schema +
+delivery semantics; protocol ⇒ API + conformance expectations.
+**Schema-resolution rule**: every request/response schema in an API item
+is defined inline or resolves to a declared value/event element —
+dangling type references block the gate. The `### Name (type)` headings
+are the single machine-readable source of truth (no frontmatter element
+list). Common constructs are modeled as *compositions*, not new types:
+a repository = protocol + stored entity/value schemas; a workflow/saga =
+service with a state-machine behavior contract + events (+ a process
+entity); a policy = value (the rule schema) + the service that evaluates
+it. **Seam graduation**: an element consumed by more than one CMP, or
+needing independently versioned conformance, graduates to its own
+standalone CMP with `component-type: <type>` in frontmatter.
 
 ### Session (SES) — `docs/sessions/`
 The record of one 1:1 refinement conversation. Sections: **Purpose**,

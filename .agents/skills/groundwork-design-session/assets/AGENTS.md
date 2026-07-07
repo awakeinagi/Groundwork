@@ -60,6 +60,19 @@ Component Docs. Every stage transition passes a **human approval gate**.
 8. **Conflicts block.** Artifacts linked to an unresolved `CFL-` cannot
    pass gates and nothing derives from them until the conflict resolves
    via an accepted decision.
+9. **Component Docs are element-first.** A CMP's contracts live under
+   `## Design Elements`: each element is declared `### <Name> (<type>)`
+   with `<type>` from the closed set `entity | value | service | event |
+   protocol`, and carries element-scoped contract items (`<Name>.B-1`
+   behavior, `.A-1` API, `.D-1` data). Types mandate contract kinds
+   (entity ⇒ behavior+data, API only if boundary-exposed; value ⇒ data;
+   service ⇒ API+behavior; event ⇒ schema+delivery semantics; protocol ⇒
+   API+conformance). API request/response schemas resolve inline or to a
+   declared value/event element. Cross-element guarantees go in
+   `## Component Invariants` (`C-n`); stack commitments in
+   `## Implementation Guidance` as decision-cited Constraints (`IG-n`),
+   with advisory Notes never load-bearing. An element consumed by more
+   than one CMP graduates to its own CMP with `component-type:` set.
 
 ## How design changes are made
 

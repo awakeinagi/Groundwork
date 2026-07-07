@@ -1,25 +1,36 @@
 #!/usr/bin/env python3
-"""Validate Groundwork artifact graph integrity.
+"""Validate a Groundwork artifact graph.
 
-Enforces the integrity rules of docs/specs/SPEC-artifact-common.md:
-  1. IDs are unique; frontmatter `id` matches the filename prefix.
+Usage: python3 check_links.py [project_root]   (default: cwd)
+
+Rules enforced:
+  1. IDs unique; frontmatter `id` matches filename prefix and type.
   2. Every linked or cited ID resolves to an existing artifact.
-  3. Every epic|story|spike|component traces to a Business Goal via
+  3. Every epic|story|spike|component traces to a business goal via
      derives-from/satisfies chains.
-  4. Every decision has a derives-from pointing at a session or spike.
-  5. No approved artifact links conflicts-with an open conflict.
+  4. Every decision derives from a session or spike.
+  5. No approved artifact links conflicts-with an unresolved conflict.
+  6. Impact links (impacts/impacted-by) are reciprocal and same-type.
+  7. Component design elements use the closed type enum (entity, value,
+     service, event, protocol) — both `component-type:` frontmatter and
+     `### <Name> (<type>)` headings in Design Elements sections — and
+     element names are unique within a doc.
 
-Exit code 0 = graph is sound; 1 = violations found.
+Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
+
+This file is installed into Groundwork projects as tools/check_links.py.
+It requires PyYAML (`pip install pyyaml`).
 """
 
 import re
 import sys
 from pathlib import Path
 
-import yaml
-
-ROOT = Path(__file__).resolve().parent.parent
-DOCS = ROOT / "docs"
+try:
+    import yaml
+except ImportError:  # pragma: no cover
+    print("check_links.py requires PyYAML: pip install pyyaml")
+    sys.exit(2)
 
 LINK_TYPES = {"derives-from", "satisfies", "depends-on", "conflicts-with",
               "supersedes", "relates-to", "impacts", "impacted-by"}
@@ -30,17 +41,23 @@ PREFIX_FOR_TYPE = {
     "conflict": "CFL", "consolidation": "CON", "change-proposal": "CP",
 }
 MUST_TRACE_TO_GOAL = {"epic", "story", "spike", "component"}
+SKIP_DIRS = {"specs"}  # non-artifact doc directories
+ELEMENT_TYPES = {"entity", "value", "service", "event", "protocol"}
+ELEMENT_HEADING_RE = re.compile(r"^###\s+(\S+)\s+\(([^)]*)\)\s*$",
+                                re.MULTILINE)
+DESIGN_ELEMENTS_RE = re.compile(r"^## Design Elements\s*$(.*?)(?=^## |\Z)",
+                                re.MULTILINE | re.DOTALL)
 
 
 def parse_frontmatter(path):
     text = path.read_text(encoding="utf-8")
     m = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
     if not m:
-        return None, "missing YAML frontmatter"
+        return None, None, "missing YAML frontmatter"
     try:
-        return yaml.safe_load(m.group(1)), None
+        return yaml.safe_load(m.group(1)), text[m.end():], None
     except yaml.YAMLError as e:
-        return None, f"unparseable frontmatter: {e}"
+        return None, None, f"unparseable frontmatter: {e}"
 
 
 def as_list(value):
@@ -50,19 +67,29 @@ def as_list(value):
 
 
 def main():
-    errors = []
-    artifacts = {}  # id -> frontmatter
+    root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
+    docs = root / "docs"
+    if not docs.is_dir():
+        print(f"No docs/ directory under {root} — not a Groundwork project "
+              f"(or wrong root).")
+        return 2
 
-    for path in sorted(DOCS.rglob("*.md")):
-        if path.parent.name == "specs":
+    errors = []
+    artifacts = {}
+
+    for path in sorted(docs.rglob("*.md")):
+        if path.parent.name in SKIP_DIRS:
             continue
-        fm, err = parse_frontmatter(path)
-        rel = path.relative_to(ROOT)
+        fm, body, err = parse_frontmatter(path)
+        rel = path.relative_to(root)
         if err:
             errors.append(f"{rel}: {err}")
             continue
-        aid = fm.get("id", "")
-        if not ID_RE.match(str(aid)):
+        if not isinstance(fm, dict):
+            errors.append(f"{rel}: empty or non-mapping frontmatter")
+            continue
+        aid = str(fm.get("id", ""))
+        if not ID_RE.match(aid):
             errors.append(f"{rel}: bad or missing id {aid!r}")
             continue
         if not path.name.startswith(f"{aid}-"):
@@ -70,13 +97,14 @@ def main():
         if aid in artifacts:
             errors.append(f"{rel}: duplicate id {aid}")
             continue
-        expected_prefix = PREFIX_FOR_TYPE.get(fm.get("type"))
+        expected_prefix = PREFIX_FOR_TYPE.get(str(fm.get("type")))
         if expected_prefix is None:
             errors.append(f"{rel}: unknown type {fm.get('type')!r}")
         elif not aid.startswith(expected_prefix + "-"):
             errors.append(f"{rel}: id {aid} does not match type "
                           f"{fm['type']} (expected {expected_prefix}-)")
         fm["_path"] = rel
+        fm["_body"] = body
         artifacts[aid] = fm
 
     def refs(fm):
@@ -127,7 +155,7 @@ def main():
             errors.append(f"{fm['_path']}: {aid} must derive from a "
                           f"session or spike")
 
-    # Rule 6: impact links are reciprocal and same-type
+    # Rule 6: impact links reciprocal and same-type
     INVERSE = {"impacts": "impacted-by", "impacted-by": "impacts"}
     for aid, fm in artifacts.items():
         links = fm.get("links") or {}
@@ -152,6 +180,28 @@ def main():
             if artifacts.get(cfl, {}).get("status") != "resolved":
                 errors.append(f"{fm['_path']}: approved {aid} links "
                               f"unresolved conflict {cfl}")
+
+    # Rule 7: component design elements use the closed type enum
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "component":
+            continue
+        ctype = fm.get("component-type")
+        if ctype is not None and ctype not in ELEMENT_TYPES:
+            errors.append(f"{fm['_path']}: component-type {ctype!r} not one "
+                          f"of {sorted(ELEMENT_TYPES)}")
+        section = DESIGN_ELEMENTS_RE.search(fm.get("_body") or "")
+        if not section:
+            continue  # drafts may not have the section yet
+        seen = set()
+        for name, etype in ELEMENT_HEADING_RE.findall(section.group(1)):
+            if etype not in ELEMENT_TYPES:
+                errors.append(f"{fm['_path']}: element {name} has unknown "
+                              f"type {etype!r} (closed enum: "
+                              f"{sorted(ELEMENT_TYPES)})")
+            if name in seen:
+                errors.append(f"{fm['_path']}: duplicate element name "
+                              f"{name}")
+            seen.add(name)
 
     if errors:
         print(f"FAIL: {len(errors)} violation(s) across "

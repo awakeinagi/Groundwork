@@ -187,6 +187,8 @@ status: draft
 owner: [approver role]
 created: [YYYY-MM-DD]
 context: [bounded context]
+# component-type: protocol  # ONLY on standalone element CMPs (graduated
+#                           # seams): entity|value|service|event|protocol
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
@@ -202,22 +204,39 @@ cites: [DEC-....]
 ## Ubiquitous Language
 [Glossary terms this component's model uses.]
 
-## Behavior Contract
-1. [Guarantee: invariant / state transition / failure behavior] (per DEC-....)
-2. ...
+## Design Elements
 
-## API Contract
-[Every operation: signature, schemas (language-neutral), errors,
-idempotency/ordering.] (items cite DECs)
+### [ElementName] (service)
+[One-line responsibility. Contract kinds per type: entity ⇒ B+D (A only
+if boundary-exposed); value ⇒ D; service ⇒ A+B; event ⇒ D+B (delivery
+semantics); protocol ⇒ A+B (conformance).]
+- [ElementName].B-1: [behavioral guarantee] (per DEC-....)
+- [ElementName].A-1: [operation: signature, request/response schemas —
+  inline or referencing a declared value/event element — errors,
+  idempotency/ordering] (per DEC-....)
 
-## Data Contract
-[Owned entities, schemas, lifecycle, persisted vs derived.] (items cite DECs)
+### [ElementName] (value)
+- [ElementName].D-1: [schema, equality/immutability invariants] (per DEC-....)
+
+## Component Invariants
+- C-1: [cross-element guarantee] (per DEC-....)
+
+## Implementation Guidance
+
+### Constraints
+- IG-1: [normative for the reference implementation, e.g. a spike-chosen
+  store] (per DEC-....)
+
+### Notes
+- [Advisory, may be stack-specific; never load-bearing — contracts must
+  stand without these.]
 
 ## Dependencies
-- [CMP-....]: consumes [contract sections], internals out of bounds.
+- [CMP-....]: consumes [contract sections/items], internals out of bounds.
 
 ## Acceptance & Test Expectations
-[What a passing implementation must demonstrate.]
+[What a passing implementation must demonstrate. For protocol-type
+standalone CMPs: the conformance suite any implementation must pass.]
 
 ## Out of Scope
 [Especially plausible adjacent behavior an implementer might assume.]
