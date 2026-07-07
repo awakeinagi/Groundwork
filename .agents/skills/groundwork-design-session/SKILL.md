@@ -142,6 +142,7 @@ Use it whenever a question is really a graph traversal:
 | Periodic audit: dangling refs, citations of superseded DECs, uncited decisions, frontier | `gaps` |
 | Choosing what to refine next among siblings | `order [type]` |
 | Element inventory across components (seam-graduation candidates) | `elements [etype]` |
+| Percent-complete estimate — design % per story/epic/goal | `progress` |
 | Anything else | `query "<openCypher>"` — schema + recipe cookbook in [references/graph-queries.md](references/graph-queries.md) |
 
 Discipline: the graph is a **derived view** — docs stay the source of

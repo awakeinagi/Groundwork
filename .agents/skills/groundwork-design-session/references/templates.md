@@ -133,7 +133,10 @@ cites: [DEC-....]
 2. ... (per [DEC-....](../decisions/DEC-....md))
 
 ## Component Impact
-[CMP docs this implements/modifies; contract sections affected.]
+[CMP docs this story builds or modifies (markdown-linked); contract
+sections affected. Elements in those CMPs back-reference this story via
+`Implements:` lines and may only reference stories whose Component
+Impact links their CMP.]
 
 ## Out of Scope
 [Adjacent work explicitly excluded.]
@@ -209,6 +212,11 @@ cites: [DEC-....]
 ## Design Elements
 
 ### [ElementName] (service)
+
+Implements: [ST-....](../stories/ST-....md)   ← mandatory, ≥1 story whose
+implementation this element handles; the story's Component Impact must
+link this CMP back
+
 [One-line responsibility. Contract kinds per type: entity ⇒ B+D (A only
 if boundary-exposed); value ⇒ D; service ⇒ A+B; event ⇒ D+B (delivery
 semantics); protocol ⇒ A+B (conformance).]
@@ -218,6 +226,9 @@ semantics); protocol ⇒ A+B (conformance).]
   idempotency/ordering] (per [DEC-....](../decisions/DEC-....md))
 
 ### [ElementName] (value)
+
+Implements: [ST-....](../stories/ST-....md)
+
 - [ElementName].D-1: [schema, equality/immutability invariants] (per [DEC-....](../decisions/DEC-....md))
 
 ## Component Invariants

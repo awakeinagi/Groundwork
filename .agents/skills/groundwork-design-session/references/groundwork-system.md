@@ -174,8 +174,11 @@ An implementable unit derived from an approved epic. Sections: **Summary**,
 **Acceptance Criteria** — numbered, individually testable, **each ending
 with `(per DEC-nnnn)`** (a criterion no decision supports means: refine
 more, never invent provenance), **Component Impact** (which CMPs it
-implements/modifies), **Out of Scope**, **Notes for Implementers**
-(optional context, never a substitute for contracts).
+builds or modifies — the story-side forward declaration that component
+design elements later back-reference via `Implements:` lines), **Out of
+Scope**, **Notes for Implementers** (optional context, never a
+substitute for contracts). Amending or superseding an approved story
+stales every CMP with an element that implements it.
 
 ### Spike (SP) — `docs/spikes/`
 A research unit: a question that must be answered before sibling work can
@@ -191,10 +194,11 @@ The contract-complete spec of one system component, aligned with a
 DDD-style bounded context — **the deliverable**. A component comprises
 typed **design elements** (see below). Sections: **Purpose**,
 **Ubiquitous Language** (every model term glossary-resolved), **Design
-Elements** (each element declared `### <ElementName> (<type>)` and
-carrying its own contract block with element-scoped item IDs like
-`StorageService.B-3`; kinds `B` behavior / `A` API / `D` data; schemas in
-language-neutral form), **Component Invariants** (cross-element
+Elements** (each element declared `### <ElementName> (<type>)`, followed
+directly by a mandated `Implements:` line naming ≥1 story as markdown
+links, and carrying its own contract block with element-scoped item IDs
+like `StorageService.B-3`; kinds `B` behavior / `A` API / `D` data;
+schemas in language-neutral form), **Component Invariants** (cross-element
 guarantees, `C-<n>`), **Implementation Guidance** (two subsections:
 **Constraints** `IG-<n>` — normative for the reference implementation,
 decision-cited; **Notes** — advisory, may be stack-specific, never
@@ -231,7 +235,19 @@ delivery semantics; protocol ⇒ API + conformance expectations.
 is defined inline or resolves to a declared value/event element —
 dangling type references block the gate. The `### Name (type)` headings
 are the single machine-readable source of truth (no frontmatter element
-list). Common constructs are modeled as *compositions*, not new types:
+list). **Implements lines**: every element declares, directly under its
+heading, the story or stories whose implementation it handles
+(`Implements: [ST-nnnn](…)`, ≥1, resolvable — missing or empty is a
+gate-blocker; an element no story motivates means refine or cut). An
+element may only reference a story whose Component Impact links this
+CMP; a CMP cannot gate while a story naming it has no referencing
+element; approved stories with zero referencing elements anywhere are
+audit-reported design gaps. These edges power the design and
+implementation percent-complete rollups (story → epic → goal,
+equal-weighted; implementation status stays projection-side — e.g. the
+issue tracker — never in the docs). Private helper elements list the
+stories of the element they support; graduated seam CMPs reference the
+stories that birthed the seam. Common constructs are modeled as *compositions*, not new types:
 a repository = protocol + stored entity/value schemas; a workflow/saga =
 service with a state-machine behavior contract + events (+ a process
 entity); a policy = value (the rule schema) + the service that evaluates
@@ -305,10 +321,19 @@ into projects at bootstrap):
 4. Every decision `derives-from` a session or spike.
 5. No `approved` artifact links `conflicts-with` an unresolved conflict.
 6. Impact links are reciprocal and same-type.
+7. Component design elements use the closed type enum; element names are
+   unique within a doc.
+8. Body cross-references are resolvable markdown links; bare artifact IDs
+   in prose are violations.
+9. Every element heading is directly followed by an `Implements:` line
+   naming ≥1 resolvable story whose Component Impact links the CMP back;
+   approved stories no element implements are reported as design-coverage
+   warnings.
 
 Beyond the checker, the human-enforced rules: closed sessions and accepted
 decisions are immutable; acceptance criteria and contract items cite
-decisions; glossary terms are used exactly.
+decisions; glossary terms are used exactly; staleness propagates
+story→CMP over Implements references.
 
 ## Operating modes
 

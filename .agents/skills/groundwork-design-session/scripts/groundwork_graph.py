@@ -27,10 +27,14 @@ Commands:
   gaps                 Cross-reference audit: unresolved refs, citations
                        of superseded decisions, uncited accepted
                        decisions, approved artifacts with nothing
-                       derived, sessions producing no decisions.
+                       derived, sessions producing no decisions,
+                       approved stories no element implements.
   order [TYPE]         Impact-ranked refinement order among unapproved
                        artifacts of TYPE (default: epic).
-  elements [ETYPE]     Design-element inventory across components.
+  elements [ETYPE]     Design-element inventory across components, with
+                       implemented stories and completeness.
+  progress             Design percent-complete rollup: story -> epic ->
+                       business goal, over Implements edges (DEC-0095).
   stats                Node/edge counts and most-connected artifacts.
 
 Options:
@@ -41,7 +45,7 @@ Options:
 Schema:
   (:Artifact {id, type, title, status, owner, created, path, context,
               component_type, source_span})
-  (:Element {key, name, etype, component})
+  (:Element {key, name, etype, component, complete})
   Artifact-[:DERIVES {ltype}]->Artifact     derives-from | satisfies
   Artifact-[:IMPACTS]->Artifact             impacts (impacted-by = inverse)
   Artifact-[:DEPENDS_ON]->Artifact
@@ -50,6 +54,12 @@ Schema:
   Artifact-[:RELATES_TO]->Artifact
   Artifact-[:CITES]->Artifact
   Artifact-[:HAS_ELEMENT]->Element
+  Element-[:IMPLEMENTS]->Artifact           element's Implements: stories
+
+Element.complete is a heuristic for "design-complete" (DEC-0095): the
+element's block contains at least one of its own contract items
+(<Name>.<B|A|D>-<n>) and no "Pending" marker. The tier-2 suite is the
+real judge; this powers the progress estimate.
 
 Unresolved link/cite targets become placeholder nodes with
 type = status = 'missing' so gaps stay queryable.
@@ -81,13 +91,15 @@ LINK_TO_REL = {
 }
 REL_TABLES = ["DERIVES", "IMPACTS", "DEPENDS_ON", "CONFLICTS_WITH",
               "SUPERSEDES", "RELATES_TO", "CITES"]
+IMPLEMENTS_RE = re.compile(r"^Implements:", re.MULTILINE)
+MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 
 DDL = [
     "CREATE NODE TABLE Artifact(id STRING PRIMARY KEY, type STRING, "
     "title STRING, status STRING, owner STRING, created STRING, "
     "path STRING, context STRING, component_type STRING, source_span STRING)",
     "CREATE NODE TABLE Element(key STRING PRIMARY KEY, name STRING, "
-    "etype STRING, component STRING)",
+    "etype STRING, component STRING, complete BOOLEAN)",
     "CREATE REL TABLE DERIVES(FROM Artifact TO Artifact, ltype STRING)",
     "CREATE REL TABLE IMPACTS(FROM Artifact TO Artifact)",
     "CREATE REL TABLE DEPENDS_ON(FROM Artifact TO Artifact)",
@@ -96,6 +108,7 @@ DDL = [
     "CREATE REL TABLE RELATES_TO(FROM Artifact TO Artifact)",
     "CREATE REL TABLE CITES(FROM Artifact TO Artifact)",
     "CREATE REL TABLE HAS_ELEMENT(FROM Artifact TO Element)",
+    "CREATE REL TABLE IMPLEMENTS(FROM Element TO Artifact)",
 ]
 
 
@@ -115,7 +128,23 @@ def parse_artifact(path, root):
     if fm.get("type") == "component":
         section = DESIGN_ELEMENTS_RE.search(body)
         if section:
-            elements = ELEMENT_HEADING_RE.findall(section.group(1))
+            sec = section.group(1)
+            heads = list(ELEMENT_HEADING_RE.finditer(sec))
+            for i, h in enumerate(heads):
+                name, etype = h.group(1), h.group(2)
+                end = heads[i + 1].start() if i + 1 < len(heads) else len(sec)
+                block = sec[h.end():end]
+                stories = []
+                stripped = block.lstrip("\n")
+                if stripped.startswith("Implements:"):
+                    para = stripped.split("\n\n", 1)[0]
+                    stories = [t for t, _ in MD_LINK_RE.findall(para)
+                               if t.startswith("ST-") and ID_RE.match(t)]
+                complete = ("Pending" not in block and
+                            re.search(rf"{re.escape(name)}\.[BAD]-\d+",
+                                      block) is not None)
+                elements.append({"name": name, "etype": etype,
+                                 "stories": stories, "complete": complete})
     return {
         "id": str(fm["id"]),
         "props": {
@@ -216,14 +245,21 @@ class Graph:
                 f"MATCH (a:Artifact {{id: $a}}), (b:Artifact {{id: $b}}) "
                 f"MERGE (a)-[r:{rel}{prop}]->(b)",
                 {"a": aid, "b": target, **({"lt": ltype} if ltype else {})})
-        for name, etype in art["elements"]:
+        for el in art["elements"]:
+            key = f"{aid}/{el['name']}"
             self.conn.execute(
                 "MERGE (e:Element {key: $k}) SET e.name=$n, e.etype=$t, "
-                "e.component=$c",
-                {"k": f"{aid}/{name}", "n": name, "t": etype, "c": aid})
+                "e.component=$c, e.complete=$done",
+                {"k": key, "n": el["name"], "t": el["etype"], "c": aid,
+                 "done": el["complete"]})
             self.conn.execute(
                 "MATCH (a:Artifact {id: $a}), (e:Element {key: $k}) "
-                "MERGE (a)-[:HAS_ELEMENT]->(e)", {"a": aid, "k": f"{aid}/{name}"})
+                "MERGE (a)-[:HAS_ELEMENT]->(e)", {"a": aid, "k": key})
+            for sid in el["stories"]:
+                self.ensure_placeholder(sid)
+                self.conn.execute(
+                    "MATCH (e:Element {key: $k}), (s:Artifact {id: $s}) "
+                    "MERGE (e)-[:IMPLEMENTS]->(s)", {"k": key, "s": sid})
 
     def delete_artifact(self, aid):
         self.drop_edges_and_elements(aid)
@@ -255,7 +291,7 @@ def cmd_build(g, root, args):
         g.add_edges(art)
     n = g.rows("MATCH (a:Artifact) RETURN count(a) AS n")[0]["n"]
     e = sum(g.rows(f"MATCH ()-[r:{t}]->() RETURN count(r) AS n")[0]["n"]
-            for t in REL_TABLES)
+            for t in REL_TABLES + ["IMPLEMENTS"])
     el = g.rows("MATCH (e:Element) RETURN count(e) AS n")[0]["n"]
     print(f"Built: {n} artifacts, {e} edges, {el} elements "
           f"({len(arts)} docs scanned)")
@@ -369,6 +405,12 @@ def cmd_gaps(g, root, args):
         "OPTIONAL MATCH (d:Artifact {type: 'decision'})-[:DERIVES]->(s) "
         "WITH s, count(d) AS c WHERE c = 0 "
         "RETURN s.id AS id, s.title AS title ORDER BY id"), args.json)
+    print("\nApproved stories no design element implements (DEC-0093):")
+    emit(g.rows(
+        "MATCH (s:Artifact {type: 'story', status: 'approved'}) "
+        "OPTIONAL MATCH (e:Element)-[:IMPLEMENTS]->(s) "
+        "WITH s, count(e) AS c WHERE c = 0 "
+        "RETURN s.id AS id, s.title AS title ORDER BY id"), args.json)
 
 
 def cmd_order(g, root, args):
@@ -400,9 +442,51 @@ def cmd_order(g, root, args):
 def cmd_elements(g, root, args):
     q = ("MATCH (c:Artifact)-[:HAS_ELEMENT]->(e:Element) "
          + ("WHERE e.etype = $t " if args.etype else "")
-         + "RETURN e.component AS component, e.name AS element, "
-           "e.etype AS type ORDER BY component, element")
+         + "OPTIONAL MATCH (e)-[:IMPLEMENTS]->(s:Artifact) "
+           "RETURN e.component AS component, e.name AS element, "
+           "e.etype AS type, e.complete AS complete, "
+           "collect(s.id) AS implements ORDER BY component, element")
     emit(g.rows(q, {"t": args.etype} if args.etype else {}), args.json)
+
+
+def cmd_progress(g, root, args):
+    live = "NOT %s.status IN ['superseded', 'archived', 'missing']"
+    stories = g.rows(
+        f"MATCH (s:Artifact {{type: 'story'}}) WHERE {live % 's'} "
+        "OPTIONAL MATCH (e:Element)-[:IMPLEMENTS]->(s) "
+        "RETURN s.id AS id, s.status AS status, s.title AS title, "
+        "count(e) AS elements, "
+        "sum(CASE WHEN e.complete THEN 1 ELSE 0 END) AS complete "
+        "ORDER BY id")
+    for r in stories:
+        r["design_pct"] = round(100 * r["complete"] / r["elements"]) \
+            if r["elements"] else 0
+        if not r["elements"]:
+            r["title"] += "  [uncovered]"
+    print("Story design % (complete elements / referencing elements; "
+          "uncovered = 0%):")
+    emit([{k: r[k] for k in ("id", "status", "elements", "complete",
+                             "design_pct", "title")} for r in stories],
+         args.json)
+    pct = {r["id"]: r["design_pct"] for r in stories}
+    for child, parent, label in (("story", "epic", "Epic"),
+                                 ("epic", "business-goal", "Business goal")):
+        groups = g.rows(
+            f"MATCH (c:Artifact {{type: '{child}'}})-[:DERIVES]->"
+            f"(p:Artifact {{type: '{parent}'}}) "
+            f"WHERE {live % 'c'} AND {live % 'p'} "
+            "RETURN DISTINCT p.id AS parent, c.id AS child ORDER BY parent")
+        agg = {}
+        for row in groups:
+            agg.setdefault(row["parent"], []).append(
+                pct.get(row["child"], 0))
+        rows = [{"id": p, "children": len(v),
+                 "design_pct": round(sum(v) / len(v))}
+                for p, v in sorted(agg.items())]
+        for r in rows:
+            pct[r["id"]] = r["design_pct"]
+        print(f"\n{label} design % (equal-weighted over direct children):")
+        emit(rows, args.json)
 
 
 def cmd_stats(g, root, args):
@@ -413,7 +497,7 @@ def cmd_stats(g, root, args):
         "ORDER BY type, status"), args.json)
     edges = [{"rel": t,
               "n": g.rows(f"MATCH ()-[r:{t}]->() RETURN count(r) AS n")[0]["n"]}
-             for t in REL_TABLES]
+             for t in REL_TABLES + ["IMPLEMENTS"]]
     print("\nEdges:")
     emit(edges, args.json)
     print("\nMost-connected artifacts (in+out degree, top 10):")
@@ -436,6 +520,7 @@ examples:
   trace CMP-0001                         why does this exist? which DECs?
   order story                            what should be refined next?
   elements protocol                      all protocol elements across CMPs
+  progress                               design % per story/epic/goal
   query "MATCH (a:Artifact {status:'gated'}) RETURN a.id, a.title"
   --json query "..."                     machine-readable output
 
@@ -487,11 +572,13 @@ COMMANDS = {
               "session. Answers: why does this exist, and who decided "
               "what, where?"),
     "gaps": ("audit the cross-reference graph for holes",
-             "Five checks: unresolved references (missing targets), "
+             "Six checks: unresolved references (missing targets), "
              "artifacts still citing superseded decisions, accepted "
              "decisions cited by nothing, approved goals/epics with "
-             "nothing derived yet (the refinement frontier), and "
-             "closed sessions that produced no decisions."),
+             "nothing derived yet (the refinement frontier), closed "
+             "sessions that produced no decisions, and approved "
+             "stories no design element implements (DEC-0093 "
+             "design-coverage gaps)."),
     "order": ("impact-ranked refinement order among siblings",
               "For unapproved artifacts of TYPE: ready = every "
               "artifact that impacts it is approved; ranked by how "
@@ -500,9 +587,19 @@ COMMANDS = {
               "fan-out first."),
     "elements": ("design-element inventory across components",
                  "Every `### <Name> (<type>)` element declared in "
-                 "component docs, optionally filtered to one type. "
-                 "Useful for spotting seam-graduation candidates and "
-                 "reviewing the element model as a whole."),
+                 "component docs, optionally filtered to one type, "
+                 "with the stories each element implements (DEC-0092) "
+                 "and its design-complete heuristic. Useful for "
+                 "spotting seam-graduation candidates and reviewing "
+                 "the element model as a whole."),
+    "progress": ("design percent-complete rollup over Implements edges",
+                 "The DEC-0095 design metric: per story, the fraction "
+                 "of referencing elements that are design-complete "
+                 "(no Pending content, own contract items present); "
+                 "uncovered stories read 0%. Epics and business goals "
+                 "average their direct children equally. An estimate, "
+                 "not project management; implementation % lives "
+                 "projection-side (Jira join), outside this tool."),
     "stats": ("node/edge counts and most-connected artifacts",
               "Artifact counts by type and status, edge counts per "
               "relationship table, and the ten highest-degree "
@@ -557,7 +654,7 @@ def main():
     {"build": cmd_build, "sync": cmd_sync, "query": cmd_query,
      "impact": cmd_impact, "trace": cmd_trace, "gaps": cmd_gaps,
      "order": cmd_order, "elements": cmd_elements,
-     "stats": cmd_stats}[args.cmd](g, root, args)
+     "progress": cmd_progress, "stats": cmd_stats}[args.cmd](g, root, args)
 
 
 if __name__ == "__main__":

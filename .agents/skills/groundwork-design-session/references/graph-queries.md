@@ -31,7 +31,7 @@ Node tables:
 | Table | Properties | Notes |
 |---|---|---|
 | `Artifact` | `id` (PK), `type`, `title`, `status`, `owner`, `created`, `path`, `context`, `component_type`, `source_span` | One per doc under `docs/` (specs excluded). Unresolved link targets appear as placeholders with `type = status = 'missing'`. `source_span` is only set on decisions; `context`/`component_type` only on components. |
-| `Element` | `key` (PK, `"CMP-nnnn/Name"`), `name`, `etype`, `component` | One per `### <Name> (<type>)` heading in a component's Design Elements section. |
+| `Element` | `key` (PK, `"CMP-nnnn/Name"`), `name`, `etype`, `component`, `complete` | One per `### <Name> (<type>)` heading in a component's Design Elements section. `complete` is the design-complete heuristic: own contract items present, no "Pending" in the block. |
 
 Relationship tables — **direction matters**:
 
@@ -45,6 +45,7 @@ Relationship tables — **direction matters**:
 | `CONFLICTS_WITH` | artifact → conflict | open-conflict linkage. |
 | `RELATES_TO` | as written | weak association (sessions ↔ artifacts, etc.). |
 | `HAS_ELEMENT` | component → element | design-element ownership. |
+| `IMPLEMENTS` | element → story | the element's `Implements:` line — which stories' implementation it handles. |
 
 ## Command reference
 
@@ -54,9 +55,10 @@ Relationship tables — **direction matters**:
 | `sync PATH\|ID ...` | after editing/deleting a few artifacts |
 | `impact ID` | **before** superseding a decision or amending an approved artifact — shows derivation descendants (the would-be-stale set), citers, impact-edge neighbors, dependents |
 | `trace ID` | session prep — ancestors to the goal + cited decisions with source-spans |
-| `gaps` | periodic audit — unresolved refs, citations of superseded DECs, uncited accepted DECs, approved goals/epics with nothing derived, sessions with no decisions |
+| `gaps` | periodic audit — unresolved refs, citations of superseded DECs, uncited accepted DECs, approved goals/epics with nothing derived, sessions with no decisions, approved stories no element implements |
 | `order [type]` | choosing the next sibling to refine (ready + largest impact fan-out first) |
-| `elements [etype]` | reviewing the element model; spotting seam-graduation candidates |
+| `elements [etype]` | reviewing the element model; spotting seam-graduation candidates; per-element implemented stories + completeness |
+| `progress` | the design percent-complete rollup — story → epic → goal over `IMPLEMENTS` edges; uncovered stories read 0% |
 | `stats` | orientation in an unfamiliar project |
 | `query CYPHER` | everything below |
 
@@ -126,6 +128,30 @@ Components and their element counts by type (model shape at a glance):
 ```cypher
 MATCH (c:Artifact {type: 'component'})-[:HAS_ELEMENT]->(e:Element)
 RETURN c.id, e.etype, count(e) AS n ORDER BY c.id, e.etype
+```
+
+Which elements implement a story — the story's design surface (what must
+be contract-complete before the story counts as designed):
+
+```cypher
+MATCH (e:Element)-[:IMPLEMENTS]->(s:Artifact {id: 'ST-0002'})
+RETURN e.component, e.name, e.etype, e.complete
+```
+
+Stories a component's elements implement, with coverage counts (compare
+against the stories whose Component Impact names the CMP):
+
+```cypher
+MATCH (c:Artifact {id: 'CMP-0001'})-[:HAS_ELEMENT]->(e:Element)-[:IMPLEMENTS]->(s:Artifact)
+RETURN s.id, s.status, collect(e.name) AS by_elements ORDER BY s.id
+```
+
+CMPs that would go stale if a story changed (the DEC-0096 walk):
+
+```cypher
+MATCH (e:Element)-[:IMPLEMENTS]->(s:Artifact {id: 'ST-0008'})
+MATCH (c:Artifact)-[:HAS_ELEMENT]->(e)
+RETURN DISTINCT c.id, c.status, collect(e.name) AS via_elements
 ```
 
 Sessions that touched a given artifact (its conversational history):

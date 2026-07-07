@@ -224,7 +224,12 @@ settle. Structure the doc element-first: enumerate the component's typed
 design elements (`### <Name> (<type>)`, closed set entity | value |
 service | event | protocol) and give each its own contract block with
 element-scoped item IDs — the element's type dictates which contract
-kinds it owes (see the CMP section of groundwork-system.md). Model
+kinds it owes (see the CMP section of groundwork-system.md). Directly
+under each heading, an `Implements:` line names the story or stories
+the element handles (≥1, markdown-linked, consistent with each story's
+Component Impact); before gating, verify every story naming this CMP
+has a referencing element — an uncovered story is a design gap, an
+unmotivated element means refine or cut. Model
 repositories/workflows/policies as compositions of the five types, never
 ad-hoc types. When an element is consumed by more than one component (or
 needs independently versioned conformance), graduate it to its own

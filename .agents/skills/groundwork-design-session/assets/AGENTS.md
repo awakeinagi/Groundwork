@@ -71,8 +71,13 @@ Component Docs. Every stage transition passes a **human approval gate**.
 9. **Component Docs are element-first.** A CMP's contracts live under
    `## Design Elements`: each element is declared `### <Name> (<type>)`
    with `<type>` from the closed set `entity | value | service | event |
-   protocol`, and carries element-scoped contract items (`<Name>.B-1`
-   behavior, `.A-1` API, `.D-1` data). Types mandate contract kinds
+   protocol`, directly followed by a mandated `Implements:` line naming
+   ≥1 story (markdown-linked) whose implementation the element handles,
+   and carries element-scoped contract items (`<Name>.B-1` behavior,
+   `.A-1` API, `.D-1` data). Implements references must agree with each
+   story's Component Impact; a CMP cannot gate while a story naming it
+   has no referencing element; amending or superseding an approved story
+   stales every CMP whose elements implement it (element-scoped impact). Types mandate contract kinds
    (entity ⇒ behavior+data, API only if boundary-exposed; value ⇒ data;
    service ⇒ API+behavior; event ⇒ schema+delivery semantics; protocol ⇒
    API+conformance). API request/response schemas resolve inline or to a
