@@ -75,8 +75,10 @@ check's side of the seam
 the UI review surface itself
 ([EP-0006](../epics/EP-0006-refinement-web-ui.md)); the host review
 API plumbing ([ST-0019](ST-0019-code-host-connector-protocol.md)
-defines it, [ST-0020](ST-0020-bitbucket-data-center-connector.md)
-implements it).
+defines it, [ST-0031](ST-0031-github-connector.md) implements it for
+v1, per [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md);
+[ST-0020](ST-0020-bitbucket-data-center-connector.md), deferred,
+would implement it for Bitbucket Data Center).
 
 ## Notes for Implementers
 

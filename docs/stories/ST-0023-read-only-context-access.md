@@ -51,8 +51,11 @@ decision citing repo + ref.
 
 [CMP-0005](../components/CMP-0005-code-host-connector-protocol.md) —
 supplies the read-operation and allowlist-filter contract sections;
+[CMP-0009](../components/CMP-0009-github-connector.md) — the GitHub
+(v1) implementation of both, per
+[DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md);
 [CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md) —
-the BBDC implementation of both.
+the deferred Bitbucket Data Center implementation.
 
 ## Out of Scope
 

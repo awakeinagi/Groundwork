@@ -50,6 +50,16 @@ is gated).
   (person-id, PR reference, decision timestamp) carried in the body of
   a program-user review, cryptographically attributing the review to
   the human approver; verified by the `gate-policy` check.
+- **Orchestrator App** — the GitHub App registration backing every
+  write operation of [CMP-0009](docs/components/CMP-0009-github-connector.md)
+  (fork/branch/PR orchestration, review posting, check and
+  branch-protection administration, team sync); posts program-user
+  reviews under its own bot identity. Structurally distinct from the
+  Reader App.
+- **Reader App** — the read-only GitHub App registration backing
+  [CMP-0009](docs/components/CMP-0009-github-connector.md)'s
+  allowlisted context reads, installed only on allowlisted
+  repositories. Never shares a credential with the Orchestrator App.
 - **Port** — a Protocol-typed seam for a swappable infrastructure
   capability that hosts Groundwork's own state or computation. The four
   Ports: app database, vector store, embedding, graph store. Consumers

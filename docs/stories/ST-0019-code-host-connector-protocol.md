@@ -75,7 +75,10 @@ schema, and conformance expectations.
 
 ## Out of Scope
 
-The Bitbucket Data Center implementation
+Adapter implementations — the GitHub connector, v1
+([ST-0031](ST-0031-github-connector.md), per
+[DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)) and the
+Bitbucket Data Center connector, deferred
 ([ST-0020](ST-0020-bitbucket-data-center-connector.md)); allowlist
 *enforcement* and citation format for reads
 ([ST-0023](ST-0023-read-only-context-access.md)); token handling and
