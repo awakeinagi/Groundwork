@@ -11,7 +11,7 @@ links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]
   depends-on: [ST-0045]
-  impacts: []
+  impacts: [ST-0058]
   impacted-by: [ST-0042, ST-0045]
 cites: [DEC-0032, DEC-0043, DEC-0076, DEC-0146, DEC-0184, DEC-0186, DEC-0188]
 ---

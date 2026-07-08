@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0042]
   impacts: [ST-0044]
-  impacted-by: []
+  impacted-by: [ST-0059]
 cites: [DEC-0057, DEC-0074, DEC-0182, DEC-0184, DEC-0186, DEC-0187, DEC-0188]
 ---
 

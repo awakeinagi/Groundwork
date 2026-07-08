@@ -156,4 +156,20 @@ approvals draft-ahead rule):
 - [SP-0011](../spikes/SP-0011-kv-store-use-case-discovery.md) —
   KV-store additional use-case discovery, deferred/backlog.
 
-Stories derive in a subsequent session once this epic is approved.
+Stories, derived via [SES-0039](../sessions/SES-0039-ep-0008-story-derivation.md):
+- [ST-0057](../stories/ST-0057-composition-root.md) — Composition Root,
+  config-driven Port/Adapter binding.
+- [ST-0058](../stories/ST-0058-inbound-api-rest-and-gate-surface.md) —
+  Inbound API, artifact/session/gate REST surface.
+- [ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md) —
+  Inbound API, session SSE streaming with reconnect/resume.
+- [ST-0060](../stories/ST-0060-queue-port.md) — Queue Port, contract +
+  conformance suite + durable adapter.
+- [ST-0061](../stories/ST-0061-background-job-execution-runtime.md) —
+  in-process asyncio background job execution runtime.
+- [ST-0062](../stories/ST-0062-kv-store-port.md) — KV-store Port,
+  contract + conformance suite + app-database-reuse adapter.
+- [ST-0063](../stories/ST-0063-ephemeral-in-memory-queue-adapter.md) —
+  ephemeral in-memory Queue adapter, deferred/backlog.
+- [ST-0064](../stories/ST-0064-dedicated-embedded-kv-library-adapter.md) —
+  dedicated embedded KV-store library adapter, deferred/backlog.
