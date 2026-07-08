@@ -2,9 +2,9 @@
 id: EP-0004
 type: epic
 title: Cross-Reference Graph Index
-status: stale
+status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-06
+approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-05
 links:
