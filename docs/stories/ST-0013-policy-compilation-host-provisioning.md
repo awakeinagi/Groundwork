@@ -2,7 +2,9 @@
 id: ST-0013
 type: story
 title: Policy compilation and host provisioning
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 links:

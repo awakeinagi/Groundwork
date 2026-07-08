@@ -2,7 +2,9 @@
 id: ST-0012
 type: story
 title: Governance configuration schemas and lifecycle
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 links:

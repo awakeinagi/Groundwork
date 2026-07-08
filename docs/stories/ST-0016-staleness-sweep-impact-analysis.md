@@ -2,7 +2,9 @@
 id: ST-0016
 type: story
 title: Staleness sweeps and impact analysis
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 links:
