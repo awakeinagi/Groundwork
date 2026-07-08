@@ -151,6 +151,20 @@ relevance judges over-flag). Address findings in-session;
 mechanisms are complements. Recipes in
 [references/semantic-search.md](references/semantic-search.md).
 
+**Consistency checks at distillation (required — DEC-0157/DEC-0158).**
+Immediately after recording new decisions, run
+`python3 <skill-dir>/scripts/groundwork_consistency.py --root <project>
+sweep <new-DEC-IDs>` and `… terms <new-DEC-IDs>` (pure stdlib). `sweep`
+catches partial supersessions: an accepted decision named in
+`relates-to`/`supersedes` gets its ratified citers listed for
+consistency review (narrowing decisions never fire the staleness walk).
+`terms` catches contract-identifier overlap: ratified artifacts sharing
+rare code-span identifiers (containment-matched), flagging unlinked
+co-occurrences. Review hits in-session; record dispositions like audit
+findings. Protocol details in
+[references/refinement-process.md](references/refinement-process.md)
+§Distilling decisions.
+
 ## The local graph index (LadybugDB)
 
 The skill bundles a queryable graph view of the artifact tree —

@@ -107,6 +107,28 @@ epic being refined, a conflict being mediated).
   mark it stale.
 - After distilling, add the new DEC IDs to the `cites` of every artifact
   they shaped, and list them in the session's **Decisions Produced**.
+- **Consistency checks on every new decision (required — DEC-0157,
+  DEC-0158).** A new decision can narrow or contradict an accepted one
+  *without* superseding it (a "partial supersession") — the staleness
+  walk keys on `supersedes` and never fires. So, immediately after
+  recording new DECs, run both commands of
+  `scripts/groundwork_consistency.py` (pure stdlib, no index):
+
+  ```bash
+  python3 <skill-dir>/scripts/groundwork_consistency.py --root <project> sweep DEC-nnnn ...
+  python3 <skill-dir>/scripts/groundwork_consistency.py --root <project> terms DEC-nnnn ...
+  ```
+
+  `sweep` lists the ratified citers of every accepted decision in the
+  new DEC's `relates-to`/`supersedes` — review each citer for
+  consistency with the new decision. `terms` reports ratified artifacts
+  sharing *rare* code-span identifiers with the new DEC
+  (containment-matched, so `jira-status` joins `set-jira-status`;
+  sessions excluded), flagging unlinked co-occurrences. Both are
+  advisory review lists: walk the hits in-session and record the
+  disposition like audit findings. Origin: the SES-0026 incident where
+  DEC-0151 cancelled an operation two approved contracts still
+  enumerated.
 
 ## Glossary discipline
 
