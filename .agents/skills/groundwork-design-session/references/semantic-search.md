@@ -32,12 +32,13 @@ at gate prep.
    inline references, superseded-redirected), and emits a JSON judge
    packet including instructions.
 2. Spawn a judge subagent with the packet (plus the artifact text if
-   the judge lacks session context):
-   - list ≤ 15 → **one** Opus-class judge; fork (inherits session
-     context) when the facilitator runs on an Opus-class model,
-     otherwise a fresh Opus agent fed the packet + artifact.
-   - list > 15 → shard into batches of ~8 across Sonnet-class agents,
-     each batch judged comparatively; a batch of one is forbidden —
+   the judge lacks session context), always on a **Sonnet 5** model —
+   never Opus-class:
+   - list ≤ 15 → **one** Sonnet 5 judge; fork (inherits session
+     context) when the facilitator itself runs Sonnet 5, otherwise a
+     fresh Sonnet 5 agent fed the packet + artifact.
+   - list > 15 → shard into batches of ~8 across Sonnet 5 agents, each
+     batch judged comparatively; a batch of one is forbidden —
      isolated relevance judges over-flag (acquiescence bias).
 3. The judge reports at most 4 findings (ID, why relevant, where to
    consider it) or exactly "Nothing to add." plus the closest

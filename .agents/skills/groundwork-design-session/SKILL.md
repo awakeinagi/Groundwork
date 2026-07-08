@@ -140,11 +140,11 @@ uv run <skill-dir>/scripts/groundwork_search.py --root <project> audit <ID-or-fi
 materially amending an artifact — and again at gate prep — run `audit`:
 it ranks accepted decisions relevant to the artifact but absent from its
 considered set (cites + inline references) and emits a judge context
-packet. Spawn a judge subagent with that packet: an Opus-class judge
-with session context (fork when the facilitator is Opus-class, else a
-fresh Opus agent) for lists ≤15; shard into ~8-candidate batches on
-Sonnet-class agents beyond that; **never one candidate per agent**
-(isolated relevance judges over-flag). Address findings in-session;
+packet. Spawn a judge subagent with that packet, always on a **Sonnet
+5** model (fork when the facilitator itself runs Sonnet 5, else a fresh
+Sonnet 5 agent) — one judge for lists ≤15; shard into ~8-candidate
+batches beyond that; **never one candidate per agent** (isolated
+relevance judges over-flag). Address findings in-session;
 "Nothing to add" is a valid outcome worth recording. The audit catches
 *content-relevant* decisions missing from context; *rule-type* decisions
 (e.g. seam graduation) still need their explicit checklists — the two

@@ -2,7 +2,7 @@
 id: DEC-0137
 type: decision
 title: A decision-recall audit is a required refinement-stage step — retrieval plus a strict judge subagent
-status: accepted
+status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-08
 decided-by: awakeinagi@gmail.com
