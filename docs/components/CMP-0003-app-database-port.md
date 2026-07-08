@@ -11,7 +11,7 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
 cites: [DEC-0077, DEC-0080, DEC-0102, DEC-0103, DEC-0121, DEC-0122, DEC-0124,
-        DEC-0125, DEC-0129, DEC-0135]
+        DEC-0125, DEC-0129, DEC-0135, DEC-0139]
 ---
 
 # CMP-0003: App Database Port
@@ -44,17 +44,22 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
 [ST-0008](../stories/ST-0008-change-event-stream.md)
 
 - `AppDatabasePort.A-1` — `begin() → UnitOfWork` with atomic
-  commit/rollback across all operations enlisted in it (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
+  commit/rollback across all operations enlisted in it; typed error
+  conditions: `unavailable`, `uow-closed` (operations on a committed or
+  rolled-back unit) (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md), [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
 - `AppDatabasePort.A-2` — outbox family: `outbox.append(events[],
   uow)`; `outbox.claim(batch-size) → leased events`;
   `outbox.ack(lease)` / `outbox.nack(lease)` for the dispatcher's retry
   loop. Event payloads conform to
-  [CMP-0002](CMP-0002-change-event.md) (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
+  [CMP-0002](CMP-0002-change-event.md); typed error conditions:
+  `stale-lease` (expired or unknown lease on ack/nack), `uow-closed`
+  on append (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md), [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
 - `AppDatabasePort.A-3` — bookkeeping family:
   `bookkeeping.put/get/delete(namespace, key, document)` for
   operational records (worktree state, branch metadata, retry
-  counters); no ID-counter surface exists on the port (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md),
-  [DEC-0125](../decisions/DEC-0125-port-counters-exclude-id-allocation.md)).
+  counters); no ID-counter surface exists on the port; typed error
+  conditions: `not-found` on get/delete of an absent key (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md),
+  [DEC-0125](../decisions/DEC-0125-port-counters-exclude-id-allocation.md), [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
 - `AppDatabasePort.B-1` — atomicity: outbox append and the write's
   bookkeeping commit or roll back together within one UnitOfWork
   (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
@@ -65,6 +70,21 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
   operation family, including UnitOfWork atomicity under failure
   injection; passing it is the definition of a valid Adapter
   (per [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)).
+- `AppDatabasePort.B-4` — stale-lease safety: `ack`/`nack` with an
+  expired or unknown lease fails with `stale-lease` and the event
+  remains (or becomes again) claimable — safe under at-least-once
+  delivery because consumers are idempotent per
+  [CMP-0002](CMP-0002-change-event.md)'s delivery contract
+  (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
+- `AppDatabasePort.B-5` — dead-lettering: after a configurable maximum
+  of failed deliveries an event parks in a dead-letter state, visible
+  through the bookkeeping surface and never silently dropped;
+  replay-from-git remains the ultimate recovery path
+  (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
+- `AppDatabasePort.B-6` — crash atomicity: a crash at any point inside
+  a UnitOfWork leaves no partially visible state after restart;
+  exercised by the conformance suite's failure injection
+  (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
 
 ## Component Invariants
 
@@ -100,6 +120,10 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
 2. Atomicity under failure injection: a crash between bookkeeping write
    and outbox append leaves no half-committed unit of work
    (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
+3. Failure-path conformance: stale-lease rejection with the event
+   re-claimable, dead-letter parking after retry exhaustion, and every
+   enumerated typed error condition are exercised by the suite
+   (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
 
 ## Out of Scope
 

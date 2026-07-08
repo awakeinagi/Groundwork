@@ -120,6 +120,37 @@ least once per session and once per approval.
    anything. Drive toward that; it is the deliverable the whole process
    exists to produce.
 
+## Semantic search & the decision-recall audit
+
+`scripts/groundwork_search.py` — hybrid semantic search over the corpus
+(DuckDB index in `.groundwork-search`, gitignored, disposable; model2vec
+embeddings, fully local; index auto-reconciles with the docs on every
+invocation). Route **meaning-shaped** questions here (have we discussed
+X? which decision covers Y? is this new artifact a duplicate?) and
+**structure-shaped** questions to the graph tool (what depends on X? why
+does Y exist?).
+
+```bash
+uv run <skill-dir>/scripts/groundwork_search.py --root <project> search "query"     [--k N] [--type decision] [--status accepted] [--current] [--turns]     [--within EP-0001] [--no-boost]
+uv run <skill-dir>/scripts/groundwork_search.py --root <project> similar <ID>
+uv run <skill-dir>/scripts/groundwork_search.py --root <project> audit <ID-or-file> [--k 15]
+```
+
+**Decision-recall audit (required stage step).** After drafting or
+materially amending an artifact — and again at gate prep — run `audit`:
+it ranks accepted decisions relevant to the artifact but absent from its
+considered set (cites + inline references) and emits a judge context
+packet. Spawn a judge subagent with that packet: an Opus-class judge
+with session context (fork when the facilitator is Opus-class, else a
+fresh Opus agent) for lists ≤15; shard into ~8-candidate batches on
+Sonnet-class agents beyond that; **never one candidate per agent**
+(isolated relevance judges over-flag). Address findings in-session;
+"Nothing to add" is a valid outcome worth recording. The audit catches
+*content-relevant* decisions missing from context; *rule-type* decisions
+(e.g. seam graduation) still need their explicit checklists — the two
+mechanisms are complements. Recipes in
+[references/semantic-search.md](references/semantic-search.md).
+
 ## The local graph index (LadybugDB)
 
 The skill bundles a queryable graph view of the artifact tree —

@@ -80,6 +80,14 @@ epic being refined, a conflict being mediated).
    the actual exchange, including what YOU asked and recommended, and the
    user's answers with their amendments. Never compress the user's words
    into what you wished they'd said.
+4½. **Decision-recall audit.** After drafting or materially amending
+   the artifact (and again before any gate), run the search tool's
+   `audit` command and spawn a judge subagent with the emitted packet —
+   protocol, judge topology, and limits in
+   [semantic-search.md](semantic-search.md). Address findings before
+   gating; "Nothing to add" is a valid outcome. The audit catches
+   content-relevant decisions missing from context; rule-type decisions
+   still need their explicit checklists (e.g. the graduation review).
 5. Sessions are **append-only and immutable once closed**. More
    conversation later = a new session linking `relates-to` the same
    artifact.
