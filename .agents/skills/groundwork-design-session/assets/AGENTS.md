@@ -122,8 +122,12 @@ in the Business Goal's `**Releases:**` list, or `backlog`). Deferred
 items pass no gates and derive nothing; revival re-enters at `draft`.
 Deferral and revival each cite a decision. Revival conditions are armed
 as triggers in `docs/TRIGGERS.md` (`## TRG-nnnn (armed|fired|retired)`
-entries); firing one cites a decision too. Review armed triggers when
-scope or releases are re-planned.
+entries; decision-cited subscriber lines, one condition serving many
+items). Firing cites a decision and revives ALL subscribers; a revived
+item is unsubscribed from every other armed trigger in the same change
+(armed triggers may only subscribe deferred items — checker-enforced),
+and emptied triggers retire. Review armed triggers when scope or
+releases are re-planned.
 
 ## Orientation for a fresh agent
 

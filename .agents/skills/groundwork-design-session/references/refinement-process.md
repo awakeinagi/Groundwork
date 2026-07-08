@@ -221,12 +221,15 @@ Nice-to-haves that surface mid-session but don't belong in the current
 release: capture them as real stories (or spikes), set `status: deferred`
 plus a `release:` label (a declared release or `backlog`), and cite the
 deferral decision — thirty seconds, no gate needed. If revival depends on
-an observable condition ("when we need multi-node"), arm a trigger in
-`docs/TRIGGERS.md` naming the condition and the consequence. Revival
-later flips the label, cites the reviving decision (which also fires the
-trigger — one decision serves both), and re-enters at `draft`. Deferred
-items never block; the status report lists them by release alongside the
-armed triggers that would revive them.
+an observable condition ("when we need multi-node"), subscribe the item
+to a trigger in `docs/TRIGGERS.md` — reuse an existing armed trigger
+with the same condition rather than duplicating it; each subscriber
+line carries its own decision citation. Revival later flips the label,
+cites the reviving decision (which also fires the trigger and revives
+every subscriber — one decision serves all), unsubscribes the item from
+every other armed trigger (emptied triggers retire), and re-enters at
+`draft`. Deferred items never block; the status report lists them by
+release alongside the armed triggers that would revive them.
 
 ### Component docs (the deliverable)
 Create a `CMP-` per bounded-context component, drafted early (stub with

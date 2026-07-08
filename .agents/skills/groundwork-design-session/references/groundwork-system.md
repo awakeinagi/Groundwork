@@ -165,18 +165,25 @@ status report lists them grouped by release, SemVer precedence order,
 `backlog` last.
 
 **Trigger registry.** `docs/TRIGGERS.md` (not an artifact — no
-frontmatter, no artifact ID) tracks watched conditions that revive
-deferred work: entries under strict headings
+frontmatter, no artifact ID) tracks watched conditions with subscribed
+deferred items: entries under strict headings
 `## TRG-nnnn (armed|fired|retired)` with `**Condition:**` (observable,
-human-testable), `**Consequence:**` (action + markdown-linked targets),
-`**Cites:**` (the arming decision), and — once fired/retired —
-`**Fired:**`/`**Retired:**` with date, decision link, and outcome.
-TRG IDs are sequential, never reused; entries are never deleted. Firing
-or retiring requires a decision recording the observation (one decision
-serves both firing and the revival it causes). Tooling loads **armed
-entries only** into agent context; the status report lists them; a
-release-declaration amendment to a Business Goal must review the
-registry.
+human-testable), `**Subscribers:**` (one line per subscription:
+action verb + markdown-linked target + that subscription's own
+`(per DEC)` citation — one condition, many watchers, each individually
+attributable), `**Cites:**` (the arming decision), and — once
+fired/retired — `**Fired:**`/`**Retired:**` with date, decision link,
+and outcome. TRG IDs are sequential, never reused; entries are never
+deleted. Firing requires a decision recording the observation and
+**revives all subscribers** (the one decision serves the firing and
+every revival). Lifecycle invariants: armed triggers subscribe only
+`deferred` artifacts (≥1, checker-enforced — so a revived item cannot
+be revived again); when an item leaves `deferred`, its subscriber lines
+are removed from all other armed triggers in the same change, citing
+the same reviving decision; an armed trigger emptied this way
+auto-retires. Tooling loads **armed entries only** into agent context;
+the status report lists them; a release-declaration amendment to a
+Business Goal must review the registry.
 
 Reduced lifecycles:
 
@@ -380,7 +387,9 @@ into projects at bootstrap):
     audit warnings.
 11. The trigger registry (`docs/TRIGGERS.md`) is well-formed: valid
     headings, unique TRG IDs, required fields per status, resolvable
-    links, decision link on every fired/retired entry.
+    links, decision link on every fired/retired entry, decision-cited
+    subscriber lines, and armed triggers subscribing only deferred
+    artifacts (≥1).
 
 Beyond the checker, the human-enforced rules: closed sessions and accepted
 decisions are immutable; acceptance criteria and contract items cite

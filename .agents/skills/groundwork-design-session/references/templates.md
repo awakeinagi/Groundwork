@@ -475,12 +475,15 @@ Validate the artifact graph:
 ```markdown
 # Trigger Registry
 
-Watched conditions that revive deferred work or start new work when the
-world changes. Entries: `## TRG-nnnn (armed|fired|retired)`; firing or
-retiring cites a decision. Tooling loads **armed** entries only.
+Watched conditions with subscribed deferred items. Entries:
+`## TRG-nnnn (armed|fired|retired)`; one decision-cited subscriber line
+per item; a firing cites a decision and revives ALL subscribers; revival
+unsubscribes the item from other armed triggers (emptied triggers
+retire). Tooling loads **armed** entries only.
 
 ## TRG-0001 (armed)
 **Condition:** [observable, human-testable statement]
-**Consequence:** revive [SP-....](spikes/SP-....md)
-**Cites:** [DEC-....](decisions/DEC-....md)
+**Subscribers:**
+- revive [SP-....](spikes/SP-....md) (per [DEC-....](decisions/DEC-....md))
+**Cites:** [DEC-....](decisions/DEC-....md)   ← the arming decision
 ```

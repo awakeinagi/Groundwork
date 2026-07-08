@@ -126,27 +126,40 @@ def main():
     if reg.exists():
         head_re = re.compile(r"^## (TRG-\d{4}) \((armed|fired|retired)\)\s*$")
         cond_re = re.compile(r"^\*\*Condition:\*\*\s*(.*)$")
-        armed, current_id, collecting = [], None, False
+        sub_re = re.compile(r"^-\s+\S+.*?\[([^\]]+)\]")
+        armed, current_id, mode = [], None, None
         for line in reg.read_text(encoding="utf-8").splitlines():
             m = head_re.match(line)
             if m:
                 current_id = m.group(1) if m.group(2) == "armed" else None
-                collecting = False
+                mode = None
+                continue
+            if current_id is None:
                 continue
             c = cond_re.match(line)
-            if c and current_id:
-                armed.append([current_id, c.group(1).strip()])
-                collecting = True
+            if c:
+                armed.append([current_id, c.group(1).strip(), []])
+                mode = "cond"
                 continue
-            if collecting:
+            if line.startswith("**Subscribers:**"):
+                mode = "subs"
+                continue
+            if mode == "cond":
                 if line.startswith(("**", "## ")) or not line.strip():
-                    collecting = False
+                    mode = None
                 else:
                     armed[-1][1] += " " + line.strip()
+            elif mode == "subs":
+                s = sub_re.match(line)
+                if s:
+                    armed[-1][2].append(s.group(1))
+                elif line.startswith("**") or not line.strip():
+                    mode = None
         if armed:
             print("\nArmed triggers (docs/TRIGGERS.md):")
-            for tid, cond in armed:
-                print(f"  {tid}  {cond}")
+            for tid, cond, subs in armed:
+                subs_s = ",".join(subs) or "-"
+                print(f"  {tid} [{subs_s}]  {cond}")
 
     # Frontier: approved parents with no derived children
     children = defaultdict(list)

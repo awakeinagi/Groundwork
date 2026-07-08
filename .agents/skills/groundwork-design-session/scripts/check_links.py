@@ -39,8 +39,11 @@ Rules enforced:
      references only deferred stories is reported as a warning.
  14. The trigger registry (docs/TRIGGERS.md), when present, is
      well-formed: headings `## TRG-nnnn (armed|fired|retired)`, unique
-     IDs, required fields per status (Condition/Consequence/Cites; plus
-     Fired/Retired with a decision link), and resolvable relative links.
+     IDs, required fields per status (Condition/Subscribers/Cites; plus
+     Fired/Retired with a decision link), resolvable relative links, and
+     subscriber lines each carrying a linked target plus a `(per DEC)`
+     citation. On armed entries every subscribed artifact is `deferred`
+     and there is at least one subscriber (DEC-0109, DEC-0110).
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -422,15 +425,53 @@ def main():
                 continue
             if current is not None:
                 blocks[current].append(line)
+        path_to_aid = {(root / fm["_path"]).resolve(): a
+                       for a, fm in artifacts.items()}
         for tid, lines in blocks.items():
             block = "\n".join(lines)
-            fields = {f for f in ("Condition", "Consequence", "Cites")
+            fields = {f for f in ("Condition", "Subscribers", "Cites")
                       if f"**{f}:**" in block}
-            for f in ("Condition", "Consequence", "Cites"):
+            for f in ("Condition", "Subscribers", "Cites"):
                 if f not in fields:
                     errors.append(f"docs/TRIGGERS.md: {tid} lacks "
                                   f"**{f}:** field")
             tstatus = status_of[tid]
+            # Subscriber lines: target link + per-DEC citation; on armed
+            # entries the target must be a deferred artifact (rule 14)
+            sub_lines = []
+            if "**Subscribers:**" in block:
+                seg = block.split("**Subscribers:**", 1)[1]
+                for ln in seg.splitlines():
+                    if ln.startswith("- "):
+                        sub_lines.append(ln)
+                    elif ln.startswith("**"):
+                        break
+            if "Subscribers" in fields and not sub_lines:
+                errors.append(f"docs/TRIGGERS.md: {tid} has an empty "
+                              f"**Subscribers:** list")
+            for ln in sub_lines:
+                links_in = MD_LINK_RE.findall(ln)
+                if not links_in:
+                    errors.append(f"docs/TRIGGERS.md: {tid} subscriber "
+                                  f"line has no linked target: {ln!r}")
+                    continue
+                if "(per [" not in ln:
+                    errors.append(f"docs/TRIGGERS.md: {tid} subscriber "
+                                  f"line lacks a (per DEC) citation: "
+                                  f"{ln!r}")
+                if tstatus == "armed":
+                    tgt = links_in[0][1]
+                    dest = (docs / tgt.split("#")[0]).resolve()
+                    aid = path_to_aid.get(dest)
+                    if aid is None:
+                        continue  # unresolved link reported separately
+                    if artifacts[aid].get("status") != "deferred":
+                        errors.append(
+                            f"docs/TRIGGERS.md: {tid} (armed) subscribes "
+                            f"{aid}, whose status is "
+                            f"{artifacts[aid].get('status')!r} — armed "
+                            f"triggers may only subscribe deferred "
+                            f"artifacts")
             if tstatus in ("fired", "retired"):
                 marker = tstatus.capitalize()
                 seg = block.split(f"**{marker}:**", 1)

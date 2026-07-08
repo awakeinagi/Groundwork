@@ -2,7 +2,7 @@
 id: DEC-0106
 type: decision
 title: Trigger registry — docs/TRIGGERS.md with parseable entries, armed-only context loading
-status: accepted
+status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-07
 decided-by: awakeinagi@gmail.com
