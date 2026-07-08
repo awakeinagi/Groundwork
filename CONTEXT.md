@@ -29,6 +29,16 @@ is gated).
   *external-system integration*: Jira, codebase hosts (Bitbucket/GitHub),
   auth providers, doc storage. Distinct from a Port, which hosts
   Groundwork's own infrastructure.
+- **Work-Management Connector** — the pluggable connector family for
+  agile work-management systems, owning projection lifecycle, drift
+  capture, and the backlog read feed behind a host-agnostic,
+  capability-declaring contract. Jira Data Center is the reference
+  adapter; monday.com, OpenProject, and Jira Cloud are future adapters
+  against the same contract.
+- **Attribution Block** — the structured, service-signed block
+  (person-id, PR reference, decision timestamp) carried in the body of
+  a program-user review, cryptographically attributing the review to
+  the human approver; verified by the `gate-policy` check.
 - **Port** — a Protocol-typed seam for a swappable infrastructure
   capability that hosts Groundwork's own state or computation. The four
   Ports: app database, vector store, embedding, graph store. Consumers

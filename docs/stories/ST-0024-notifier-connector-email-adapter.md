@@ -1,0 +1,58 @@
+---
+id: ST-0024
+type: story
+title: Notifier connector contract and email adapter
+status: gated
+owner: eng-lead
+created: 2026-07-08
+links:
+  derives-from: [EP-0005]
+  satisfies: [BG-0001]
+  impacted-by: [ST-0019]
+cites: [DEC-0045, DEC-0075, DEC-0149, DEC-0152]
+---
+
+# ST-0024: Notifier Connector Contract and Email Adapter
+
+## Summary
+
+The delivery seam for everything that must reach a person outside the
+app: the notifier connector contract — delivery operations, capability
+manifest, per-user channel preferences — and the v1 email adapter,
+with the in-app notification center remaining the source of truth.
+
+## Acceptance Criteria
+
+1. The notifier contract defines delivery of a notification to a
+   recipient (person-id) over a channel, with each adapter declaring a
+   capability manifest in the standard connector pattern
+   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md),
+   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
+   [DEC-0149](../decisions/DEC-0149-notifier-story-under-ep-0005.md)).
+2. The v1 email adapter implements the contract and passes its
+   conformance expectations
+   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+3. Delivery respects per-user channel preferences, including
+   digest/batching settings, resolved per recipient
+   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+4. Delivery success/failure is reported back to the notification
+   center; a failed or unconfigured external delivery never loses the
+   notification, which remains authoritative in-app
+   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+5. Adapter credentials (SMTP/provider) live in the encrypted secret
+   store — never in config files, the repo, logs, or error output
+   (per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+
+## Component Impact
+
+[CMP-0008](../components/CMP-0008-notification-delivery.md) — supplies
+the notifier protocol and email-adapter contract sections.
+
+## Out of Scope
+
+The notification center itself — event routing rules, read state, the
+in-app surface ([EP-0006](../epics/EP-0006-refinement-web-ui.md), per
+[DEC-0075](../decisions/DEC-0075-notification-center-connectors.md));
+Slack/Teams and other channels
+([ST-0029](ST-0029-additional-notifier-adapters.md), deferred);
+preference storage — account-side, with the center.

@@ -49,3 +49,32 @@ reference implementation ships.
 **Subscribers:**
 - revive [ST-0011](stories/ST-0011-schema-evolution-machinery.md) (per [DEC-0133](decisions/DEC-0133-out-of-scope-differentiated-rule.md))
 **Cites:** [DEC-0133](decisions/DEC-0133-out-of-scope-differentiated-rule.md)
+
+## TRG-0006 (armed)
+**Condition:** An enterprise deployment mandates an external secret
+store (policy or compliance), ruling out embedded encrypted secrets in
+the app database.
+**Subscribers:**
+- revive [SP-0005](spikes/SP-0005-external-secret-store-adapter.md) (per [DEC-0152](decisions/DEC-0152-secrets-encrypted-in-app-database.md))
+**Cites:** [DEC-0152](decisions/DEC-0152-secrets-encrypted-in-app-database.md)
+
+## TRG-0007 (armed)
+**Condition:** A deployment requires a code host other than Bitbucket
+Data Center (GitHub, Bitbucket Cloud, GitLab, …).
+**Subscribers:**
+- revive [ST-0028](stories/ST-0028-additional-code-host-connectors.md) (per [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md))
+**Cites:** [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md)
+
+## TRG-0008 (armed)
+**Condition:** A deployment requires a notification channel beyond
+email (Slack, Teams, …).
+**Subscribers:**
+- revive [ST-0029](stories/ST-0029-additional-notifier-adapters.md) (per [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md))
+**Cites:** [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md)
+
+## TRG-0009 (armed)
+**Condition:** A deployment requires a work-management system other
+than Jira Data Center (monday.com, OpenProject, Jira Cloud, …).
+**Subscribers:**
+- revive [ST-0030](stories/ST-0030-additional-work-management-connectors.md) (per [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md))
+**Cites:** [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md)

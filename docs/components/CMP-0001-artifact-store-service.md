@@ -2,7 +2,7 @@
 id: CMP-0001
 type: component
 title: Artifact Store Service
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
@@ -19,7 +19,7 @@ cites: [DEC-0009, DEC-0018, DEC-0026, DEC-0028, DEC-0029, DEC-0030, DEC-0031,
         DEC-0092, DEC-0093, DEC-0097, DEC-0098, DEC-0099, DEC-0101, DEC-0102,
         DEC-0103, DEC-0104, DEC-0108, DEC-0109, DEC-0110, DEC-0121, DEC-0122,
         DEC-0124, DEC-0125, DEC-0126, DEC-0127, DEC-0130, DEC-0131, DEC-0132,
-        DEC-0134, DEC-0135, DEC-0142]
+        DEC-0134, DEC-0135, DEC-0142, DEC-0046, DEC-0151]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -186,12 +186,22 @@ Implements: [ST-0006](../stories/ST-0006-typed-mechanical-writes.md)
   closed set: `append-turn(session-id, turn-content)`,
   `close-session(session-id)`, `mark-stale(artifact-id, cause-ref)`,
   `clear-stale(artifact-id, reaffirm-ref)`,
-  `set-jira-key(artifact-id, key)`, `set-jira-status(artifact-id,
-  status)`, `create-change-proposal(cp-document)`,
+  `set-jira-key(artifact-id, key)`,
+  `migrate-person-ids(registry-ref)`,
+  `create-change-proposal(cp-document)`,
   `set-cp-triage(cp-id, outcome)`. Each constructs its commit entirely
   from typed parameters and returns `{commit-sha} |
   problem(mechanical-op-rejected)` (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md), [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md),
   [DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md), [DEC-0047](../decisions/DEC-0047-change-proposal-artifact.md), [DEC-0048](../decisions/DEC-0048-project-on-approval-field-ownership.md), [DEC-0130](../decisions/DEC-0130-mechanical-ops-shared-allowlist.md)).
+  `set-jira-status` was removed at the
+  [SES-0026](../sessions/SES-0026-ep-0005-story-derivation.md) audit —
+  workflow telemetry never reaches canon (per
+  [DEC-0151](../decisions/DEC-0151-workflow-telemetry-projection-side.md));
+  `migrate-person-ids` rewrites bootstrap-era email values in
+  `owner`/`decided-by`/`approved-by` frontmatter to person-ids from the
+  registry ref's `governance/people.yaml` — metadata-only, one-time
+  (per [DEC-0046](../decisions/DEC-0046-person-registry.md),
+  [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
 - `MechanicalWriteService.B-1` — no mechanical operation can modify
   artifact body content or non-allowlisted frontmatter fields; the
   restriction is structural (the diff is constructed, not filtered),
