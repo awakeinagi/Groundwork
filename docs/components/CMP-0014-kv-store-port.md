@@ -119,15 +119,13 @@ Implements: [ST-0062](../stories/ST-0062-kv-store-port.md)
   load-bearing contract items — the contract only requires "expired
   means unreadable via `get()`, and eventually reclaimed" (per
   [DEC-0211](../decisions/DEC-0211-kv-store-lazy-expiry-plus-sweep.md)).
-- The periodic expiry sweep is expected to run as a named job on the
-  background job execution runtime
-  ([CMP-0013](CMP-0013-background-job-execution-runtime.md), per
-  [ST-0061](../stories/ST-0061-background-job-execution-runtime.md)
-  AC3) — forward-declared here since that runtime's job-handler
-  registration surface is refined separately (per
-  [DEC-0132](../decisions/DEC-0132-connector-consumption-forward-declared.md)'s
-  forward-declaration convention); this port's own contract does not
-  depend on it.
+- The periodic expiry sweep runs as a named job on the background job
+  execution runtime
+  ([CMP-0013](CMP-0013-background-job-execution-runtime.md)): the
+  v1 default Adapter registers its sweep handler via
+  `JobRuntime.A-1` at its own startup (per
+  [DEC-0222](../decisions/DEC-0222-runtime-owns-handler-registration.md));
+  this port's own contract does not depend on that runtime.
 
 ## Dependencies
 

@@ -1,0 +1,86 @@
+---
+id: SES-0042
+type: session
+title: Background Job Execution Runtime contract refinement
+status: closed
+owner: awakeinagi@gmail.com
+created: 2026-07-08
+participant: awakeinagi@gmail.com
+participant-role: stakeholder
+facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
+transcript-fidelity: reconstructed
+links:
+  relates-to: [EP-0008, ST-0061, CMP-0013]
+---
+
+# SES-0042: Background Job Execution Runtime Contract Refinement
+
+## Purpose
+
+Refine the stubbed
+[CMP-0013](../components/CMP-0013-background-job-execution-runtime.md)
+(Background Job Execution Runtime) toward contract-completeness,
+consuming the now-approved
+[CMP-0012](../components/CMP-0012-queue-port.md) (Queue Port). This
+session resolves the design points [ST-0061](../stories/ST-0061-background-job-execution-runtime.md)
+left open at story grain: the job-handler registration surface, how
+uncaught handler exceptions are treated, whether the runtime enforces a
+per-job execution timeout, and the shape of the bounded-concurrency
+limit.
+
+## Transcript
+
+**T1 — Facilitator.** Asked a Round 1 question set, each with a
+recommended answer:
+1. Handler registration — a `register(job-type, handler)` API this CMP
+   owns, called by each producer at its own startup, vs. the
+   Composition Root centrally registering every handler. Recommended:
+   this CMP owns `register()`; each producer (e.g. the KV-store
+   Adapter registering its sweep) calls it directly, keeping
+   registration co-located with the job's owner rather than
+   centralized in the Composition Root — closing the "forward-declared"
+   open point flagged in
+   [CMP-0014](../components/CMP-0014-kv-store-port.md)'s Notes.
+2. Uncaught handler exceptions — auto-nack (retry per the Queue Port's
+   bound, eventually dead-letter) vs. propagate/crash. Recommended:
+   auto-nack, so one broken job never takes down the runtime.
+3. Per-job execution timeout — a configurable per-job-type timeout with
+   auto-nack on expiry, vs. no runtime-enforced timeout. Recommended:
+   enforce one, as the minimal safeguard against a hung handler
+   starving the bounded concurrency pool
+   ([ST-0061](../stories/ST-0061-background-job-execution-runtime.md)
+   AC6).
+4. Concurrency scope — a single global cap vs. per-job-type caps.
+   Recommended: single global cap, simplest for v1 with only one
+   concrete job type.
+
+**T2 — Stakeholder.** Confirmed all four recommendations as given.
+
+**T3 — Facilitator.** Decision-recall audit on the drafted
+[CMP-0013](../components/CMP-0013-background-job-execution-runtime.md):
+nothing missing. Closest near-misses were `DEC-0217` (Queue Port's Job
+envelope schema) and `DEC-0152` (secrets encrypted in the app
+database) — both already properly carried transitively through the
+`depends-on` relationship to
+[CMP-0012](../components/CMP-0012-queue-port.md) rather than needing
+independent citation here, the same pattern
+[CMP-0001](../components/CMP-0001-artifact-store-service.md) already
+uses for its own dependencies. Everything else in the candidate set
+(vector-store graduation spikes, BBDC connector decisions, workflow
+telemetry, an unrelated "Approver/Arbiter queue" UI concept sharing
+only the word "queue") was noise from generic term overlap.
+
+**T4 — Facilitator.** Graduation review: checked `JobRuntime` via the
+graph tool's `elements` command. Consumed only within `CMP-0013`
+today; no graduation indicated.
+
+## Decisions Produced
+
+[DEC-0222](../decisions/DEC-0222-runtime-owns-handler-registration.md),
+[DEC-0223](../decisions/DEC-0223-runtime-auto-nack-on-exception.md),
+[DEC-0224](../decisions/DEC-0224-runtime-per-job-type-timeout.md),
+[DEC-0225](../decisions/DEC-0225-runtime-global-concurrency-cap.md)
+
+## Conflicts Raised
+
+None.
