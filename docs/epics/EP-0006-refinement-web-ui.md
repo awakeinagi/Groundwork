@@ -4,7 +4,7 @@ type: epic
 title: Refinement Web UI
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-06
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-05
 links:
@@ -14,7 +14,8 @@ links:
   impacts: [EP-0002]
   impacted-by: [EP-0001, EP-0002, EP-0003, EP-0005, EP-0007]
 cites: [DEC-0001, DEC-0003, DEC-0022, DEC-0026, DEC-0032, DEC-0041, DEC-0042,
-        DEC-0055, DEC-0071, DEC-0072, DEC-0073, DEC-0074, DEC-0075, DEC-0076]
+        DEC-0055, DEC-0071, DEC-0072, DEC-0073, DEC-0074, DEC-0075, DEC-0076,
+        DEC-0184, DEC-0185, DEC-0186, DEC-0187, DEC-0188]
 ---
 
 # EP-0006: Refinement Web UI
@@ -109,14 +110,40 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
 ## Risks & Open Questions
 
 - Typed-payload contract elaboration must land in [EP-0002](EP-0002-refinement-session-agent.md)'s session-engine
-  stories (would be an [EP-0002](EP-0002-refinement-session-agent.md) re-affirmation in live operation).
-- Async session ergonomics: re-orientation quality after long pauses is a
-  UX-research-worthy story.
-- Frontend framework selection — story-level, within the TS constraint
-  ([DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
-- Accessibility and responsive baseline — story-level definition before
-  v1 build.
+  stories — recorded as a story-level contract elaboration within
+  [ST-0044](../stories/ST-0044-session-conversation-ux.md), consuming
+  [ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)'s
+  contract (would be an [EP-0002](EP-0002-refinement-session-agent.md)
+  re-affirmation in live operation).
+- Async session ergonomics: re-orientation quality after long pauses —
+  resolved into [ST-0043](../stories/ST-0043-session-progress-and-lifecycle-shell.md)
+  AC2 (per [DEC-0057](../decisions/DEC-0057-session-lifecycle.md)).
+- Frontend framework and packaging selection — resolved at
+  [SES-0034](../sessions/SES-0034-ep-0006-story-derivation.md): an
+  embeddable npm React component library for the stated Next.js 15 App
+  Router / Tailwind CSS 4 / Radix UI host, plus a thin standalone app in
+  this repo wrapping the same package
+  ([DEC-0184](../decisions/DEC-0184-ui-ships-as-embeddable-npm-component-library.md)–[DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md)).
+- Accessibility and responsive baseline — resolved at
+  [SES-0034](../sessions/SES-0034-ep-0006-story-derivation.md): WCAG 2.1
+  AA plus Tailwind's default breakpoints, folded into every v1 story's
+  acceptance criteria rather than a standalone story
+  ([DEC-0188](../decisions/DEC-0188-shared-accessibility-responsive-baseline.md)).
 
 ## Derived Work
 
-None yet — stories/spikes follow gate approval of this epic.
+v1 stories ([SES-0034](../sessions/SES-0034-ep-0006-story-derivation.md)):
+[ST-0042](../stories/ST-0042-identity-login-and-oauth-linking.md)
+(identity), [ST-0043](../stories/ST-0043-session-progress-and-lifecycle-shell.md)
+(session progress/lifecycle shell),
+[ST-0044](../stories/ST-0044-session-conversation-ux.md) (session
+conversation UX), [ST-0045](../stories/ST-0045-goal-artifact-view.md)
+(goal artifact view), [ST-0046](../stories/ST-0046-goal-gate-surface.md)
+(goal gate surface), [ST-0047](../stories/ST-0047-minimal-conflict-view.md)
+(minimal conflict view), [ST-0048](../stories/ST-0048-notification-center.md)
+(notification center), [ST-0049](../stories/ST-0049-standalone-application-shell.md)
+(standalone application shell).
+
+Deferred to release 2: [ST-0050](../stories/ST-0050-governance-dashboards.md)–[ST-0056](../stories/ST-0056-full-artifact-graph-browsing.md)
+(dashboards, re-affirmation queues, profile viewer, consolidation review,
+synthesis commenting, CP triage views, full artifact/graph browsing).
