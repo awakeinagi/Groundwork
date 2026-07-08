@@ -11,7 +11,7 @@ links:
   satisfies: [BG-0001]
 cites: [DEC-0028, DEC-0029, DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035,
         DEC-0080, DEC-0081, DEC-0082, DEC-0085, DEC-0087, DEC-0088, DEC-0089,
-        DEC-0092, DEC-0093]
+        DEC-0092, DEC-0093, DEC-0121, DEC-0122, DEC-0124]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -93,6 +93,22 @@ Pending — payload schema and emission/ordering/delivery semantics
 (`ChangeEvent.D-*`, `ChangeEvent.B-*`) from [ST-0008](../stories/ST-0008-change-event-stream.md)
 (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
 
+### AppDatabasePort (protocol)
+
+Implements: [ST-0008](../stories/ST-0008-change-event-stream.md)
+
+Pending — the Port for this component's relational/transactional
+workload: outbox tables
+(per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)) and
+service bookkeeping. Contract obligations
+(`AppDatabasePort.A-*`, `AppDatabasePort.B-*`) itemized as [ST-0008](../stories/ST-0008-change-event-stream.md)
+settles: operations the consumers require, transactional guarantees,
+and the conformance suite any Adapter must pass
+(per [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md),
+[DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)); v1
+Adapter is DuckDB only
+(per [DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
+
 ## Component Invariants
 
 Pending — cross-element guarantees (`C-*`) itemized as stories settle;
@@ -108,6 +124,11 @@ the app database, DuckDB in v1
 (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md));
 embedded v1 storage stack
 (per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md));
+app-database access only through the AppDatabasePort, Adapter selected
+by deployment configuration
+(per [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md),
+[DEC-0122](../decisions/DEC-0122-config-selected-adapters.md),
+[DEC-0124](../decisions/DEC-0124-v1-adapter-set.md));
 ID rescan-on-boot, no durable counter store
 (per [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
 

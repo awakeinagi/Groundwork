@@ -25,8 +25,18 @@ is gated).
   branch's additions and changes layered over the main base graph, so
   sessions query their drafts in the context of approved reality. Every
   query names its view; results tag nodes with ref and status.
-- **Connector** — a pluggable adapter behind a defined API contract: Jira,
-  codebase hosts (Bitbucket/GitHub), auth providers, doc storage.
+- **Connector** — a pluggable adapter behind a defined API contract for
+  *external-system integration*: Jira, codebase hosts (Bitbucket/GitHub),
+  auth providers, doc storage. Distinct from a Port, which hosts
+  Groundwork's own infrastructure.
+- **Port** — a Protocol-typed seam for a swappable infrastructure
+  capability that hosts Groundwork's own state or computation. The four
+  Ports: app database, vector store, embedding, graph store. Consumers
+  program against the Port contract, never an engine API.
+- **Adapter** — a concrete implementation of one Port (e.g. DuckDB,
+  LadybugDB, a local embedding model, a REST embedding client), selected
+  by deployment configuration and valid only if it passes the Port's
+  conformance test suite.
 - **Handoff Manifest** — the machine-readable package (component docs,
   contracts, dependency order) that Groundwork emits for an implementation
   swarm. Groundwork's southern boundary.

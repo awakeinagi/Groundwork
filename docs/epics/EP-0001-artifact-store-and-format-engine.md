@@ -2,7 +2,7 @@
 id: EP-0001
 type: epic
 title: Artifact Store & Format Engine
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: eng-lead
@@ -13,7 +13,8 @@ links:
   impacts: [EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
   impacted-by: [EP-0003, EP-0005]
 cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018, DEC-0026, DEC-0028, DEC-0029,
-        DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035]
+        DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035, DEC-0121, DEC-0122,
+        DEC-0124]
 ---
 
 # EP-0001: Artifact Store & Format Engine
@@ -94,6 +95,13 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
 - **Change-event stream**: artifact-changed events (branch-aware) consumed
   by the Graph Index ([EP-0004](EP-0004-graph-index.md)), impact analysis ([EP-0003](EP-0003-governance-and-gate-engine.md)), and consolidation
   freshness ([EP-0007](EP-0007-consolidation-memory-layer.md)).
+- **App database port** ([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)):
+  the Protocol seam for the relational/transactional workload (outbox per
+  [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md),
+  bookkeeping, counters); adapters config-selected with a conformance
+  suite ([DEC-0122](../decisions/DEC-0122-config-selected-adapters.md));
+  v1 ships the DuckDB adapter only
+  ([DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
 - **Consumed from [EP-0005](EP-0005-connectors-and-identity.md)**: code-host connector operations for fork, PR
   open/merge, review state, and required-check registration.
 

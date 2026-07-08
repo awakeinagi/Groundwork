@@ -2,7 +2,7 @@
 id: EP-0004
 type: epic
 title: Cross-Reference Graph Index
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: eng-lead
@@ -14,7 +14,7 @@ links:
   impacts: [EP-0007]
   impacted-by: [EP-0001, EP-0002, EP-0003]
 cites: [DEC-0009, DEC-0010, DEC-0026, DEC-0056, DEC-0059, DEC-0060, DEC-0102,
-        DEC-0062, DEC-0063, DEC-0064]
+        DEC-0062, DEC-0063, DEC-0064, DEC-0121, DEC-0122, DEC-0124]
 ---
 
 # EP-0004: Cross-Reference Graph Index
@@ -82,6 +82,14 @@ and [SPEC-artifact-common](../specs/SPEC-artifact-common.md).
 
 - **Graph query API**: the three tiers, language-neutral (OpenAPI), view
   parameter mandatory; engine hidden behind the executor boundary.
+- **Graph store port** ([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)):
+  the executor boundary formalized as a Protocol seam — an
+  openCypher-capable engine contract
+  ([DEC-0062](../decisions/DEC-0062-tiered-query-api.md)); adapters
+  config-selected with a conformance suite
+  ([DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)); v1
+  ships the LadybugDB adapter only
+  ([DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
 - **Rebuild contract**: `rebuild(canonical-ref) → index`, deterministic;
   diff format for verification runs.
 - **Overlay lifecycle contract**: create/update/drop tied to item-branch

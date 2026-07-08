@@ -2,7 +2,7 @@
 id: EP-0007
 type: epic
 title: Consolidation Memory Layer
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: ds-lead
@@ -14,7 +14,8 @@ links:
   impacts: [EP-0006]
   impacted-by: [EP-0001, EP-0002, EP-0004]
 cites: [DEC-0017, DEC-0026, DEC-0056, DEC-0063, DEC-0065, DEC-0066, DEC-0067,
-        DEC-0068, DEC-0069, DEC-0102, DEC-0071, DEC-0072]
+        DEC-0068, DEC-0069, DEC-0102, DEC-0071, DEC-0072, DEC-0121, DEC-0122,
+        DEC-0123, DEC-0124]
 ---
 
 # EP-0007: Consolidation Memory Layer
@@ -91,6 +92,19 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
   bundle schema out — EP-0007's primary language-neutral interface.
 - **Search API**: full-text + semantic query operations with ref-pinned
   results; embedding-version metadata.
+- **Vector store port and embedding port**
+  ([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)): two
+  separate Protocol seams — vector index/query, and text → vector
+  (local model or REST client); adapters config-selected with
+  conformance suites
+  ([DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)). The
+  embedding port exposes model identity + dimensionality, stamped on
+  the vector index; mismatch refuses service and forces a full re-embed
+  ([DEC-0123](../decisions/DEC-0123-embedding-identity-stamping.md)),
+  hardening [DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)'s
+  "swap = re-embed batch". v1 ships the DuckDB + vss vector adapter and
+  both embedding adapters
+  ([DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
 - **Catalog schema**: the static consolidation catalog as repo
   configuration.
 - **Faithfulness-check contract**: generation → pass/blocked with report.
