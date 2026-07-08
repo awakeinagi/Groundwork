@@ -18,7 +18,7 @@ cites: [DEC-0005, DEC-0007, DEC-0018, DEC-0020, DEC-0028, DEC-0033, DEC-0034,
         DEC-0075, DEC-0079, DEC-0096, DEC-0097, DEC-0102, DEC-0121, DEC-0124,
         DEC-0127, DEC-0130, DEC-0131, DEC-0132, DEC-0136, DEC-0140, DEC-0141,
         DEC-0142, DEC-0143, DEC-0144, DEC-0145, DEC-0146, DEC-0147, DEC-0150,
-        DEC-0162, DEC-0163, DEC-0164, DEC-0165]
+        DEC-0162, DEC-0163, DEC-0164, DEC-0165, DEC-0172, DEC-0173]
 ---
 
 # CMP-0004: Governance & Gate Engine
@@ -131,9 +131,9 @@ Implements: [ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md
   configuration (per [DEC-0140](../decisions/DEC-0140-seeded-governance-bootstrap.md)).
 - `PolicyCompiler.B-5` — all host interactions go through the
   code-host connector contract and respect its capability manifest; v1
-  target is Bitbucket Data Center
+  target is GitHub (cloud)
   (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
-  [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
+  [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)).
 
 ### GatePolicyCheck (service)
 
@@ -408,19 +408,22 @@ Implements: [ST-0018](../stories/ST-0018-governance-event-log-metrics.md)
 
 ### Constraints
 
-- `IG-1` — v1 code-host target is Bitbucket Data Center via the
-  connector contract; nothing in this component may depend on a
-  BBDC-specific behavior (per [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md),
+- `IG-1` — v1 code-host target is GitHub (cloud) via the connector
+  contract; nothing in this component may depend on GitHub-specific
+  behavior (per [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md),
   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
-  `PolicyCompiler.B-2`/`B-5` assume BBDC's merge-checks/Code Insights
-  surface can host every required check this component registers
-  (`gate-policy`, `conflicts-open`, the tier-2 suite, the
-  mechanical-diff validator, the template-conformance check) — that
-  assumption is exactly what
-  [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) validates
-  before [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md)
-  gates; treat its findings as binding on this element if they narrow
-  what the surface can express
+  `PolicyCompiler.B-2`/`B-5` rely on GitHub's Checks API /
+  required-status-checks to host every required check this component
+  registers (`gate-policy`, `conflicts-open`, the tier-2 suite, the
+  mechanical-diff validator, the template-conformance check); GitHub's
+  documented support for per-PR blocking, re-reporting, and un-passing
+  an already-green check is what makes this a settled assumption rather
+  than an open spike question here
+  (per [DEC-0173](../decisions/DEC-0173-check-admin-no-longer-provisional.md)).
+  The equivalent question for the now-deferred Bitbucket Data Center
+  adapter remains
+  [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)'s to
+  answer, on revival
   (per [DEC-0150](../decisions/DEC-0150-sp-0004-bbdc-check-surface-spike.md)).
 - `IG-2` — `GovernanceEventLog` persists behind the App Database Port
   ([CMP-0003](CMP-0003-app-database-port.md)); v1 adapter is DuckDB
@@ -539,9 +542,11 @@ Boundary statements (per [DEC-0133](../decisions/DEC-0133-out-of-scope-different
 each linking its owning artifact where one exists):
 
 - **No connector implementation** — the code-host connector protocol
-  and its Bitbucket Data Center adapter are
+  and its GitHub adapter (v1) are
   [EP-0005](../epics/EP-0005-connectors-and-identity.md)'s
-  ([CMP-0005](CMP-0005-code-host-connector-protocol.md)/[CMP-0006](CMP-0006-bitbucket-data-center-connector.md)).
+  ([CMP-0005](CMP-0005-code-host-connector-protocol.md)/[CMP-0009](CMP-0009-github-connector.md);
+  the deferred Bitbucket Data Center adapter is
+  [CMP-0006](CMP-0006-bitbucket-data-center-connector.md)).
   This component only consumes the contract.
 - **No notification adapter implementation** — delivery mechanics
   (email, future channels) belong to

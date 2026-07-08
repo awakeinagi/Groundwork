@@ -35,6 +35,17 @@ is gated).
   capability-declaring contract. Jira Data Center is the reference
   adapter; monday.com, OpenProject, and Jira Cloud are future adapters
   against the same contract.
+- **Code-Host Connector** — the pluggable connector family for git-hosting
+  platforms: fork/branch/PR orchestration, review posting, branch-protection
+  and team administration, and allowlisted read-only context access, behind
+  a host-agnostic, capability-declaring contract. GitHub (cloud) is the
+  reference adapter; Bitbucket Data Center, Bitbucket Cloud, and GitLab are
+  future adapters against the same contract.
+- **Capability Manifest** — the structured declaration a connector adapter
+  publishes stating which above-minimum operations it supports; a
+  documented minimum set is required to run Groundwork at all, and the
+  consuming policy compiler adapts to or emulates whatever a manifest
+  doesn't declare.
 - **Attribution Block** — the structured, service-signed block
   (person-id, PR reference, decision timestamp) carried in the body of
   a program-user review, cryptographically attributing the review to

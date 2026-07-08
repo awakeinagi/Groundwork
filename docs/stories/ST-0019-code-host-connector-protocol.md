@@ -10,7 +10,7 @@ created: 2026-07-08
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
-  impacts: [ST-0020, ST-0021, ST-0023, ST-0024, ST-0025]
+  impacts: [ST-0020, ST-0021, ST-0023, ST-0024, ST-0025, ST-0031]
 cites: [DEC-0028, DEC-0032, DEC-0036, DEC-0043, DEC-0045, DEC-0049, DEC-0079,
         DEC-0132, DEC-0142, DEC-0145, DEC-0150]
 ---

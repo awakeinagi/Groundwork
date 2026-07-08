@@ -16,7 +16,8 @@ links:
 cites: [DEC-0002, DEC-0013, DEC-0016, DEC-0024, DEC-0026, DEC-0028, DEC-0032,
         DEC-0036, DEC-0043, DEC-0044, DEC-0045, DEC-0046, DEC-0047, DEC-0048,
         DEC-0049, DEC-0050, DEC-0075, DEC-0132, DEC-0142, DEC-0148, DEC-0149,
-        DEC-0150, DEC-0151, DEC-0152, DEC-0153, DEC-0154, DEC-0155, DEC-0156]
+        DEC-0150, DEC-0151, DEC-0152, DEC-0153, DEC-0154, DEC-0155, DEC-0156,
+        DEC-0172, DEC-0173]
 ---
 
 # EP-0005: Connectors & Identity
@@ -28,7 +29,11 @@ orchestration, delegated reviews, branch-protection and team
 administration, read-only context access), the Jira connector (projection
 sync, drift capture, workflow telemetry), and identity (auth providers,
 the person registry, OAuth linkage). Each sits behind a capability-declaring
-contract so implementations are swappable; v1 targets Bitbucket Data Center.
+contract so implementations are swappable; v1 targets GitHub (cloud),
+with Bitbucket Data Center deferred to backlog behind trigger
+`TRG-0010`
+(per [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md),
+supersedes [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
 
 ## Why (Goal Alignment)
 
@@ -54,8 +59,10 @@ existing-context awareness rides its read operations
   [EP-0003](EP-0003-governance-and-gate-engine.md)'s policy compiler), read-only browse/search filtered by the
   `governance/repos.yaml` allowlist ([DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md)),
   and a capability manifest with a documented minimum set. v1
-  implementation: **Bitbucket Data Center**
-  ([DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
+  implementation: **GitHub (cloud)**; Bitbucket Data Center deferred to
+  backlog
+  ([DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md),
+  supersedes [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
 - **Work-management connector** (generalized from "Jira connector" per
   [DEC-0155](../decisions/DEC-0155-pluggable-work-management-connector.md);
   release-2 scoped per
@@ -125,9 +132,15 @@ All four recorded risks were resolved at story derivation
 
 - BBDC required-check surface → spike
   [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)
-  ([DEC-0150](../decisions/DEC-0150-sp-0004-bbdc-check-surface-spike.md));
-  [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md)
-  cannot gate before its findings land.
+  ([DEC-0150](../decisions/DEC-0150-sp-0004-bbdc-check-surface-spike.md)).
+  Moot for v1 since [SES-0031](../sessions/SES-0031-github-v1-pivot.md):
+  GitHub, not BBDC, is v1
+  ([DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)), and
+  GitHub's documented Checks API/required-status-checks already support
+  the semantics the spike would have validated
+  ([DEC-0173](../decisions/DEC-0173-check-admin-no-longer-provisional.md)).
+  [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md) and
+  the spike are deferred together, reviving on trigger `TRG-0010`.
 - Jira flavor → confirmed Data Center, generalized to a pluggable
   work-management contract
   ([DEC-0155](../decisions/DEC-0155-pluggable-work-management-connector.md));
@@ -144,8 +157,10 @@ Derived at [SES-0026](../sessions/SES-0026-ep-0005-story-derivation.md):
 - Current release:
   [ST-0019](../stories/ST-0019-code-host-connector-protocol.md) (connector
   protocol & capability manifest),
-  [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md) (BBDC
-  connector),
+  [ST-0031](../stories/ST-0031-github-connector.md) (GitHub connector,
+  per [SES-0031](../sessions/SES-0031-github-v1-pivot.md), took
+  [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md)'s
+  former slot),
   [ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)
   (delegated reviews & attribution),
   [ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
@@ -153,8 +168,7 @@ Derived at [SES-0026](../sessions/SES-0026-ep-0005-story-derivation.md):
   [ST-0023](../stories/ST-0023-read-only-context-access.md) (read-only
   context access),
   [ST-0024](../stories/ST-0024-notifier-connector-email-adapter.md)
-  (notifier contract & email adapter);
-  spike [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md).
+  (notifier contract & email adapter).
 - Release 2 (deferred per
   [DEC-0148](../decisions/DEC-0148-work-management-stories-release-2.md)):
   [ST-0025](../stories/ST-0025-work-management-projection-lifecycle.md),
@@ -162,13 +176,21 @@ Derived at [SES-0026](../sessions/SES-0026-ep-0005-story-derivation.md):
   [ST-0027](../stories/ST-0027-work-management-backlog-read-feed.md).
 - Backlog, trigger-subscribed (per
   [DEC-0156](../decisions/DEC-0156-future-connector-families-deferred.md),
-  [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)):
+  [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md),
+  [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)):
+  [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md) (BBDC
+  connector, deferred from current release; trigger `TRG-0010`),
   [ST-0028](../stories/ST-0028-additional-code-host-connectors.md),
   [ST-0029](../stories/ST-0029-additional-notifier-adapters.md),
   [ST-0030](../stories/ST-0030-additional-work-management-connectors.md);
-  spike [SP-0005](../spikes/SP-0005-external-secret-store-adapter.md).
+  spikes
+  [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) (trigger
+  `TRG-0010`),
+  [SP-0005](../spikes/SP-0005-external-secret-store-adapter.md).
 - Component stubs:
   [CMP-0005](../components/CMP-0005-code-host-connector-protocol.md),
-  [CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md),
+  [CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md)
+  (BBDC, dormant alongside its deferred story),
+  [CMP-0009](../components/CMP-0009-github-connector.md) (GitHub, v1),
   [CMP-0007](../components/CMP-0007-identity-and-access.md),
   [CMP-0008](../components/CMP-0008-notification-delivery.md).

@@ -2,9 +2,8 @@
 id: SP-0004
 type: spike
 title: Validate BBDC merge checks / Code Insights as the required-check surface
-status: approved
-approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+status: deferred
+release: backlog
 owner: eng-lead
 created: 2026-07-08
 timebox: 3d
@@ -12,7 +11,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   relates-to: [ST-0020, ST-0013, ST-0014]
-cites: [DEC-0036, DEC-0050, DEC-0141, DEC-0142, DEC-0145, DEC-0150]
+cites: [DEC-0036, DEC-0050, DEC-0141, DEC-0142, DEC-0145, DEC-0150, DEC-0172]
 ---
 
 # SP-0004: BBDC Required-Check Surface Validation
@@ -21,6 +20,15 @@ cites: [DEC-0036, DEC-0050, DEC-0141, DEC-0142, DEC-0145, DEC-0150]
 > story derivation ([SES-0026](../sessions/SES-0026-ep-0005-story-derivation.md))
 > and ratified with that gate bundle (per
 > [DEC-0150](../decisions/DEC-0150-sp-0004-bbdc-check-surface-spike.md)).
+>
+> Deferred to `backlog` (per
+> [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)): GitHub
+> is v1, not BBDC, so this validation no longer blocks any
+> current-release story
+> ([DEC-0173](../decisions/DEC-0173-check-admin-no-longer-provisional.md)).
+> Subscribed to trigger `TRG-0010` — a deployment requiring Bitbucket
+> Data Center revives it, together with
+> [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md).
 
 ## Question
 

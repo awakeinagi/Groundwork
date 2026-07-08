@@ -13,8 +13,8 @@ links:
   depends-on: [ST-0012]
   impacts: [ST-0014]
   impacted-by: [ST-0012]
-cites: [DEC-0033, DEC-0036, DEC-0037, DEC-0045, DEC-0046, DEC-0050, DEC-0079,
-        DEC-0140, DEC-0142, DEC-0143]
+cites: [DEC-0033, DEC-0036, DEC-0037, DEC-0045, DEC-0046, DEC-0079,
+        DEC-0140, DEC-0142, DEC-0143, DEC-0172]
 ---
 
 # ST-0013: Policy Compilation and Host Provisioning
@@ -55,9 +55,9 @@ writer of what blocks merge.
    special case in any evaluator
    (per [DEC-0140](../decisions/DEC-0140-seeded-governance-bootstrap.md)).
 6. All host interactions go through the code-host connector contract
-   and respect its capability manifest; v1 target is Bitbucket Data
-   Center (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
-   [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
+   and respect its capability manifest; v1 target is GitHub (cloud)
+   (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
+   [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)).
 7. The full compilation and provisioning suite passes hermetically
    against the local-git fake connector
    (per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).

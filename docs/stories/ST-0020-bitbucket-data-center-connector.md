@@ -2,9 +2,8 @@
 id: ST-0020
 type: story
 title: Bitbucket Data Center connector
-status: approved
-approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+status: deferred
+release: backlog
 owner: eng-lead
 created: 2026-07-08
 links:
@@ -12,10 +11,21 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0019, SP-0004]
   impacted-by: [ST-0019]
-cites: [DEC-0045, DEC-0050, DEC-0079, DEC-0150]
+cites: [DEC-0045, DEC-0050, DEC-0079, DEC-0150, DEC-0172]
 ---
 
 # ST-0020: Bitbucket Data Center Connector
+
+> Deferred to `backlog` (per
+> [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md), the
+> deferral citation per
+> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)):
+> GitHub took v1's slot
+> ([ST-0031](ST-0031-github-connector.md)). Subscribed to trigger
+> `TRG-0010` — a deployment requiring Bitbucket Data Center revives it
+> (together with [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)).
+> Content and citations below are retained unchanged from approval;
+> revival re-refines and re-gates.
 
 ## Summary
 

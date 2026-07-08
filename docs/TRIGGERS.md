@@ -59,11 +59,12 @@ the app database.
 **Cites:** [DEC-0152](decisions/DEC-0152-secrets-encrypted-in-app-database.md)
 
 ## TRG-0007 (armed)
-**Condition:** A deployment requires a code host other than Bitbucket
-Data Center (GitHub, Bitbucket Cloud, GitLab, …).
+**Condition:** A deployment requires a code host other than GitHub
+(Bitbucket Cloud, GitLab, …). Bitbucket Data Center has its own
+dedicated trigger, `TRG-0010`.
 **Subscribers:**
 - revive [ST-0028](stories/ST-0028-additional-code-host-connectors.md) (per [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md))
-**Cites:** [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md)
+**Cites:** [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md), [DEC-0172](decisions/DEC-0172-github-v1-bbdc-deferred.md)
 
 ## TRG-0008 (armed)
 **Condition:** A deployment requires a notification channel beyond
@@ -78,3 +79,10 @@ than Jira Data Center (monday.com, OpenProject, Jira Cloud, …).
 **Subscribers:**
 - revive [ST-0030](stories/ST-0030-additional-work-management-connectors.md) (per [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md))
 **Cites:** [DEC-0156](decisions/DEC-0156-future-connector-families-deferred.md)
+
+## TRG-0010 (armed)
+**Condition:** A deployment requires Bitbucket Data Center.
+**Subscribers:**
+- revive [ST-0020](stories/ST-0020-bitbucket-data-center-connector.md) (per [DEC-0172](decisions/DEC-0172-github-v1-bbdc-deferred.md))
+- revive [SP-0004](spikes/SP-0004-bbdc-required-check-surface.md) (per [DEC-0172](decisions/DEC-0172-github-v1-bbdc-deferred.md))
+**Cites:** [DEC-0172](decisions/DEC-0172-github-v1-bbdc-deferred.md)

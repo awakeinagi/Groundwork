@@ -19,7 +19,7 @@ cites: [DEC-0009, DEC-0018, DEC-0026, DEC-0028, DEC-0029, DEC-0030, DEC-0031,
         DEC-0092, DEC-0093, DEC-0097, DEC-0098, DEC-0099, DEC-0101, DEC-0102,
         DEC-0103, DEC-0104, DEC-0108, DEC-0109, DEC-0110, DEC-0121, DEC-0122,
         DEC-0124, DEC-0125, DEC-0126, DEC-0127, DEC-0130, DEC-0131, DEC-0132,
-        DEC-0134, DEC-0135, DEC-0142, DEC-0046, DEC-0151]
+        DEC-0134, DEC-0135, DEC-0142, DEC-0046, DEC-0151, DEC-0172]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -348,9 +348,9 @@ Implements: [ST-0005](../stories/ST-0005-id-allocation.md)
 - `IG-4` — the reference implementation is Python; the OpenAPI contract
   and schema assets are the deliverables of record and must stand
   language-neutral (per [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
-- `IG-5` — v1 code-host target is Bitbucket Data Center via the
-  connector contract; nothing in this component may depend on a
-  BBDC-specific behavior (per [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md), [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
+- `IG-5` — v1 code-host target is GitHub (cloud) via the connector
+  contract; nothing in this component may depend on GitHub-specific
+  behavior (per [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md), [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
 
 ### Notes
 
