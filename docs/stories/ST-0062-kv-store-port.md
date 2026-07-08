@@ -65,11 +65,10 @@ reuses the App Database Port rather than adding new deployment surface
 
 ## Component Impact
 
-[CMP-0014](../components/CMP-0014-kv-store-port.md) — stubbed as its
+[CMP-0014](../components/CMP-0014-kv-store-port.md) — approved, its
 own standalone `protocol`-type Component Doc, mirroring
 [CMP-0003](../components/CMP-0003-app-database-port.md)'s pattern
-(per [DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md)),
-contract pending.
+(per [DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md)).
 
 ## Out of Scope
 

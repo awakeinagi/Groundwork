@@ -61,6 +61,9 @@ broker or worker process in v1
 
 [CMP-0013](../components/CMP-0013-background-job-execution-runtime.md)
 — stubbed, contract pending.
+[CMP-0012](../components/CMP-0012-queue-port.md) — approved; the
+job-status observability item (`QueuePort.A-3`, `JobStatus`) this
+story's Acceptance Criteria require also implements this story.
 
 ## Out of Scope
 
