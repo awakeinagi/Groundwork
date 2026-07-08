@@ -2,7 +2,9 @@
 id: ST-0003
 type: story
 title: Item-branch and gate-PR lifecycle orchestration
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
 links:

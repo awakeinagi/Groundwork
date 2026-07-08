@@ -2,7 +2,9 @@
 id: ST-0001
 type: story
 title: Tier-1 schema suite and validation library
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
 links:

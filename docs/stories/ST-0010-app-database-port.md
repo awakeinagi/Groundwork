@@ -2,7 +2,9 @@
 id: ST-0010
 type: story
 title: App database port — protocol contract, conformance suite, DuckDB adapter
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-07
 links:

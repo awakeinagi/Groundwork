@@ -2,7 +2,9 @@
 id: ST-0005
 type: story
 title: ID allocation — service lock, durability, multi-node behavior
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
 links:

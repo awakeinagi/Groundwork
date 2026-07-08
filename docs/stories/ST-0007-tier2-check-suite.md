@@ -2,7 +2,9 @@
 id: ST-0007
 type: story
 title: Tier-2 completeness check suite as required PR checks
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
 links:
