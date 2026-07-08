@@ -2,7 +2,9 @@
 id: CMP-0001
 type: component
 title: Artifact Store Service
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-06
 context: canonical-store
