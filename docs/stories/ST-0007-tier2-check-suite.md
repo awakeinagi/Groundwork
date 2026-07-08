@@ -11,7 +11,8 @@ links:
   depends-on: [ST-0001]
   impacted-by: [ST-0001]
 cites: [DEC-0009, DEC-0026, DEC-0033, DEC-0034, DEC-0035, DEC-0081, DEC-0085,
-        DEC-0087, DEC-0088, DEC-0089, DEC-0092, DEC-0093, DEC-0094]
+        DEC-0087, DEC-0088, DEC-0089, DEC-0092, DEC-0093, DEC-0094, DEC-0097,
+        DEC-0098, DEC-0099, DEC-0101, DEC-0104, DEC-0108, DEC-0109, DEC-0110]
 ---
 
 # ST-0007: Tier-2 Completeness Check Suite
@@ -57,8 +58,26 @@ validator.
    referencing element; on a component doc's gate PR, an uncovered story
    whose Component Impact names that component blocks the gate (per
    [DEC-0093](../decisions/DEC-0093-story-design-coverage-check.md)).
-9. The suite passes against this repository's full bootstrap corpus as its
-   initial regression baseline.
+9. Release-scoping checks: the `deferred` status and `release:` field
+   appear only on stories, epics, and spikes; every `release:` label is
+   `backlog` or matches a release declared in the governing Business
+   Goal's Scope section; deferred status and non-current effective
+   release imply each other (an epic's label defaulting its derived
+   stories and spikes, either able to override); and a component design
+   element whose `Implements:` line references only deferred stories is
+   reported as an audit warning (per [DEC-0097](../decisions/DEC-0097-deferred-status.md),
+   [DEC-0098](../decisions/DEC-0098-semver-release-labels.md), [DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md), [DEC-0104](../decisions/DEC-0104-deferred-extends-to-spikes.md), [DEC-0101](../decisions/DEC-0101-deferred-out-of-metrics.md)).
+10. Trigger-registry validation: `docs/TRIGGERS.md` is well-formed —
+    entry headings match the strict format with unique, never-reused
+    TRG IDs; required fields are present per status (including the
+    dated, decision-linked `**Fired:**`/`**Retired:**` lines on
+    non-armed entries); all links resolve; every subscriber line
+    carries an action verb, a resolvable target link, and its own
+    decision citation; and armed triggers subscribe only `deferred`
+    artifacts, at least one each (per [DEC-0109](../decisions/DEC-0109-trigger-subscriptions.md),
+    [DEC-0110](../decisions/DEC-0110-subscription-lifecycle.md), [DEC-0108](../decisions/DEC-0108-trigger-surfacing.md)).
+11. The suite passes against this repository's full bootstrap corpus as
+    its initial regression baseline.
 
 ## Component Impact
 
@@ -75,4 +94,5 @@ that platform falls out naturally; otherwise they ship with [EP-0003](../epics/E
 ## Notes for Implementers
 
 `tools/check_links.py` is the seed — its rules 1–6 map directly onto
-criterion 2.
+criterion 2, and its release-scoping and trigger-registry rules onto
+criteria 9 and 10.

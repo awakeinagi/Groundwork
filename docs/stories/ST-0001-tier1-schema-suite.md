@@ -9,7 +9,8 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
   impacts: [ST-0002, ST-0007]
-cites: [DEC-0009, DEC-0018, DEC-0034, DEC-0037, DEC-0047, DEC-0080, DEC-0082]
+cites: [DEC-0009, DEC-0018, DEC-0034, DEC-0037, DEC-0047, DEC-0080, DEC-0082,
+        DEC-0097, DEC-0098, DEC-0104]
 ---
 
 # ST-0001: Tier-1 Schema Suite and Validation Library
@@ -42,6 +43,15 @@ service runs on every write — the executable form of the SPEC documents.
    schema validates the optional `component-type` field (standalone
    element CMPs) against it; unknown types are tier-1 rejections (per
    [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md), [DEC-0082](../decisions/DEC-0082-closed-element-type-taxonomy.md), [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
+7. Story, epic, and spike frontmatter schemas accept the `deferred`
+   status and validate the `release:` field grammar — `backlog` or a
+   SemVer version-core prefix (`MAJOR`, `MAJOR.MINOR`, or
+   `MAJOR.MINOR.PATCH`; numeric identifiers, no leading zeroes, no `v`
+   prefix, no pre-release/build metadata); malformed values, and the
+   field or status on any other artifact type, are tier-1 rejections.
+   Cross-file validity — the label matching a release declared in the
+   governing Business Goal — is explicitly NOT tier-1 (tier-2/PR check)
+   (per [DEC-0097](../decisions/DEC-0097-deferred-status.md), [DEC-0098](../decisions/DEC-0098-semver-release-labels.md), [DEC-0104](../decisions/DEC-0104-deferred-extends-to-spikes.md), [DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).
 
 ## Component Impact
 

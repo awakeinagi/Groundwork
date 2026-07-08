@@ -136,3 +136,5 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
   check suite
 - [ST-0008](../stories/ST-0008-change-event-stream.md) — Branch-aware
   change-event stream
+- [ST-0010](../stories/ST-0010-app-database-port.md) — App database
+  port: protocol contract, conformance suite, DuckDB adapter

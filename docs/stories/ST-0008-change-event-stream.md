@@ -8,9 +8,10 @@ created: 2026-07-06
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
-  depends-on: [ST-0002]
-  impacted-by: [ST-0002]
-cites: [DEC-0038, DEC-0059, DEC-0060, DEC-0066, DEC-0103]
+  depends-on: [ST-0002, ST-0010]
+  impacted-by: [ST-0002, ST-0010]
+cites: [DEC-0038, DEC-0059, DEC-0060, DEC-0066, DEC-0103, DEC-0121, DEC-0122,
+        DEC-0124]
 ---
 
 # ST-0008: Branch-Aware Change-Event Stream
@@ -37,9 +38,12 @@ consolidation freshness.
 5. The stream is replayable from git history for any ref range — a
    consumer rebuilt from scratch converges to the same state as one that
    consumed live (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
-6. Events are recorded in a transactional outbox in the app database
-   (DuckDB in v1), atomically with the write's bookkeeping, and delivered
-   by a dispatcher with retries (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
+6. Events are recorded in a transactional outbox behind the app
+   database port ([ST-0010](ST-0010-app-database-port.md)), atomically
+   with the write's bookkeeping, and delivered by a dispatcher with
+   retries; the outbox uses the port contract only — never an engine
+   API directly — with the adapter config-selected (DuckDB adapter in
+   v1) (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md), [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md), [DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
 
 ## Component Impact
 
