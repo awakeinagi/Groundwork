@@ -255,7 +255,9 @@ from the doc + its dependencies' contracts alone? Every element item,
 invariant, and Constraint numbered and citing decisions; every API-item
 schema resolving inline or to a declared value/event element. "Out of
 Scope" must name the plausible adjacent behaviors an implementer might
-wrongly assume. When all components for a goal are approved, the design
+wrongly assume. Future-work Out of Scope entries (in CMPs and
+stories alike) must be captured as linked deferred stories/spikes;
+boundary statements just link the owning artifact. When all components for a goal are approved, the design
 is implementation-ready — tell the user so, explicitly.
 
 ## Commit discipline

@@ -225,7 +225,9 @@ with `(per DEC-nnnn)`** (a criterion no decision supports means: refine
 more, never invent provenance), **Component Impact** (which CMPs it
 builds or modifies — the story-side forward declaration that component
 design elements later back-reference via `Implements:` lines), **Out of
-Scope**, **Notes for Implementers** (optional context, never a
+Scope** (future-work entries must exist as, and link, deferred
+stories/spikes; boundary statements link the owning artifact —
+permanent denials are never backlogged), **Notes for Implementers** (optional context, never a
 substitute for contracts). Amending or superseding an approved story
 stales every CMP with an element that implements it. Out-of-release
 stories are `deferred` with a `release:` label (see Release scoping in
@@ -257,7 +259,7 @@ load-bearing: contracts must stand without them), **Dependencies** (which
 contract sections/items of each `depends-on` component are consumed —
 internals are out of bounds), **Acceptance & Test Expectations**, **Out
 of Scope** (especially plausible adjacent behavior an implementer might
-assume). **Every contract item — element items, invariants, and
+assume). Out of Scope entries follow a differentiated rule: an entry that is really *future work* must exist as a deferred story/spike and be linked from the entry (prose-only future work is a review-time smell); a *boundary statement* links the owning artifact if one exists and never mints a deferred artifact. **Every contract item — element items, invariants, and
 Constraints — cites at least one decision**; uncited items block the
 gate (Notes are exempt). Frontmatter extras: `context:` (bounded context
 name); `component-type:` only on standalone element CMPs (see

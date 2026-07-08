@@ -138,3 +138,6 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
   change-event stream
 - [ST-0010](../stories/ST-0010-app-database-port.md) — App database
   port: protocol contract, conformance suite, DuckDB adapter
+- [ST-0011](../stories/ST-0011-schema-evolution-machinery.md) — Schema
+  evolution and migration machinery (deferred, `backlog`, trigger
+  `TRG-0005`)

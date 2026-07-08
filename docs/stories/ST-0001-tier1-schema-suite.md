@@ -63,7 +63,9 @@ its tier-1 validation behavior and the schema assets in its Data Contract.
 ## Out of Scope
 
 Tier-2 completeness rules ([ST-0007](ST-0007-tier2-check-suite.md)); schema *evolution*/migration
-machinery (future story once a spec change first occurs post-launch).
+machinery — tracked as [ST-0011](ST-0011-schema-evolution-machinery.md)
+(deferred `backlog`, revived by trigger `TRG-0005`, per
+[DEC-0133](../decisions/DEC-0133-out-of-scope-differentiated-rule.md)).
 
 ## Notes for Implementers
 

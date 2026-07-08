@@ -41,3 +41,11 @@ databases (policy or compliance), ruling out embedded storage.
 **Subscribers:**
 - revive [SP-0002](spikes/SP-0002-postgres-pgvector-graduation.md) (per [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md))
 **Cites:** [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md)
+
+## TRG-0005 (armed)
+**Condition:** The first post-launch change to an artifact SPEC
+document occurs — any gated edit to `docs/specs/SPEC-*.md` after the
+reference implementation ships.
+**Subscribers:**
+- revive [ST-0011](stories/ST-0011-schema-evolution-machinery.md) (per [DEC-0133](decisions/DEC-0133-out-of-scope-differentiated-rule.md))
+**Cites:** [DEC-0133](decisions/DEC-0133-out-of-scope-differentiated-rule.md)

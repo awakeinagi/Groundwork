@@ -74,7 +74,12 @@ trackable units ([DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)).
    standalone CMPs this includes the conformance suite any implementation
    must pass.
 8. **Out of Scope** — explicitly excluded behavior, especially plausible
-   adjacent behavior an implementer might assume.
+   adjacent behavior an implementer might assume. The differentiated
+   entry rule of
+   [DEC-0133](../decisions/DEC-0133-out-of-scope-differentiated-rule.md)
+   applies: future-work entries must exist as (and link) deferred
+   stories/spikes; boundary statements link the owning artifact where
+   one exists and never mint deferred artifacts.
 
 ## Rules
 

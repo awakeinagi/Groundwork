@@ -32,7 +32,15 @@ links:
    a story whose Component Impact links its CMP
    ([DEC-0092](../decisions/DEC-0092-element-implements-line.md),
    [DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md)).
-4. **Out of Scope** — adjacent work explicitly excluded.
+4. **Out of Scope** — adjacent work explicitly excluded. Entries are two
+   species with different obligations
+   ([DEC-0133](../decisions/DEC-0133-out-of-scope-differentiated-rule.md)):
+   an entry that is *future work* ("wanted later") must exist as a
+   deferred story or spike and be linked from the entry — prose-only
+   future work is a review-time smell; a *boundary statement* (behavior
+   that belongs elsewhere or nowhere) links the owning artifact if one
+   exists and never mints a deferred artifact. Classification is human
+   judgment at gate review.
 5. **Notes for Implementers** — constraints, gotchas, links to relevant
    Consolidations. Optional context, never a substitute for contracts.
 
