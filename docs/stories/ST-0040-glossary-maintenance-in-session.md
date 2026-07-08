@@ -2,8 +2,10 @@
 id: ST-0040
 type: story
 title: Glossary maintenance in-session
-status: gated
+status: approved
 owner: ds-lead
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 created: 2026-07-08
 links:
   derives-from: [EP-0002]

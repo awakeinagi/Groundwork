@@ -2,8 +2,10 @@
 id: SP-0008
 type: spike
 title: Pack format expressiveness vs. simplicity
-status: gated
+status: approved
 owner: ds-lead
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 created: 2026-07-08
 timebox: 3d
 links:

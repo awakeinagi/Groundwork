@@ -2,9 +2,9 @@
 id: EP-0002
 type: epic
 title: Refinement Session Agent
-status: stale
+status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-06
+approved-on: 2026-07-08
 owner: ds-lead
 created: 2026-07-05
 links:

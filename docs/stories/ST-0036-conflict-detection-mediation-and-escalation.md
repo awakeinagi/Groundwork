@@ -2,8 +2,10 @@
 id: ST-0036
 type: story
 title: Conflict detection, mediation, and escalation
-status: gated
+status: approved
 owner: ds-lead
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 created: 2026-07-08
 links:
   derives-from: [EP-0002]
