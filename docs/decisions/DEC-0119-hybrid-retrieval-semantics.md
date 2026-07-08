@@ -1,0 +1,88 @@
+---
+id: DEC-0119
+type: decision
+title: Hybrid retrieval — always-on superseded redirect, graph boost, subtree scoping, metadata pre-filters
+status: accepted
+owner: awakeinagi@gmail.com
+created: 2026-07-07
+decided-by: awakeinagi@gmail.com
+decided-on: 2026-07-07
+source-span: "SES-0019 @ T8-T15"
+links:
+  derives-from: [SES-0019]
+  relates-to: [DEC-0111, DEC-0113, DEC-0114, DEC-0118]
+---
+
+# DEC-0119: Hybrid Retrieval Semantics
+
+## Context
+
+POC 1 proved pure semantic search actively misleads on this corpus:
+superseded decisions are immutable and stay forever, and for "which
+database engine stores the graph and handles vector search" the top
+hit was superseded [DEC-0070](DEC-0070-extend-sp-0002-search-infra.md)
+while current [DEC-0102](DEC-0102-v1-embedded-stack.md) sat at rank 10.
+The graph knows what the vectors cannot: current truth, structure, and
+scope.
+
+## Decision
+
+The search tool integrates the graph (read-only) with these semantics:
+
+1. **Current-truth redirect, always on** — every hit on a `superseded`
+   decision is annotated with its accepted successor via `SUPERSEDES`
+   edges.
+2. **Graph-boosted artifact ranking** — each artifact's best chunk
+   score propagates one hop over `CITES`/`DERIVES`/`RELATES_TO`/
+   `IMPACTS` edges with 0.25 decay; the boosted artifact tier heads the
+   output (disable with `--no-boost`).
+3. **Subtree scoping** — `--within <ID>` restricts hits to the graph's
+   `DERIVES*` descendants of an artifact.
+4. **Metadata pre-filters** — `--type` and `--status` flags, plus
+   `--current` excluding `superseded`/`stale` rows; applied in DuckDB
+   as `WHERE` clauses *before* similarity ranking (exact, and measured
+   faster than unfiltered). A `--turns` filter searches transcript
+   turns only (prior-art recall).
+5. **`similar <ID>`** — semantic neighbors of an artifact, as an
+   advisory supplement to graph impact analysis.
+6. **Boilerplate dedupe at index time** — identical section bodies
+   recurring across artifacts are indexed once.
+7. **Provenance delegation** — hits stay lean; deep why-does-this-exist
+   traversal belongs to the graph tool's `trace`.
+
+Default retrieval is **include-everything + annotate + redirect**;
+pre-filters are opt-in.
+
+## Rationale
+
+All POC-measured on the real corpus: the redirect fixed the misleading
+query; boosting promoted the correct artifact set
+([EP-0004](../epics/EP-0004-graph-index.md),
+[SES-0017](../sessions/SES-0017-v1-storage-stack-and-triggers.md),
+[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md),
+[DEC-0102](DEC-0102-v1-embedded-stack.md)) and demoted the four
+identical "Derived Work — None yet" boilerplate hits that fooled cosine
+similarity; `--current` brought
+[DEC-0102](DEC-0102-v1-embedded-stack.md) from rank 10 into the top-8;
+pre-filtering is exact
+and free precisely because [DEC-0114](DEC-0114-no-persisted-hnsw.md)
+chose brute force (vss's HNSW index is silently bypassed by `WHERE`
+clauses). Include-all remains the default because superseded text is
+often the best-matching text and history questions ("why did we
+abandon Postgres?") are legitimate — the redirect makes stale hits
+safe instead of hiding them.
+
+## Alternatives Considered
+
+- **Pure semantic search, no graph**: demonstrated misleading (rank-1
+  superseded hit).
+- **Filter superseded/stale out by default**: hides the best-matching
+  trail and breaks history queries; kept opt-in as `--current`.
+- **Inline provenance expansion per hit**: duplicated `trace`, noisily.
+
+## Implications
+
+The script depends on `ladybug<1.0` read-only
+([DEC-0116](DEC-0116-separate-search-script-and-index.md)) and warns
+when the graph is stale ([DEC-0117](DEC-0117-index-freshness.md)).
+Boost weight (0.25, one hop) is a starting point, tunable with use.

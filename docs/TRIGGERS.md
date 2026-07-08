@@ -32,6 +32,7 @@ query scale (graph rebuilds, overlay queries, or vector search
 exceeding acceptable latency).
 **Subscribers:**
 - revive [SP-0002](spikes/SP-0002-postgres-pgvector-graduation.md) (per [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md))
+- revive [SP-0003](spikes/SP-0003-hnsw-index-adoption.md) (per [DEC-0115](decisions/DEC-0115-sp-0003-hnsw-deferred.md))
 **Cites:** [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md)
 
 ## TRG-0004 (armed)

@@ -111,5 +111,10 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
 
 ## Derived Work
 
-None yet — stories/spikes follow gate approval of this epic ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) is
-shared with [EP-0004](EP-0004-graph-index.md)).
+Stories/spikes follow gate approval of this epic ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) is
+shared with [EP-0004](EP-0004-graph-index.md)). Deferred captures (backlog, no gate):
+
+- [SP-0003](../spikes/SP-0003-hnsw-index-adoption.md) — HNSW index
+  adoption at scale (deferred per [DEC-0115](../decisions/DEC-0115-sp-0003-hnsw-deferred.md))
+- [ST-0009](../stories/ST-0009-hybrid-search-capabilities.md) — hybrid
+  search capabilities beyond v1 (deferred per [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md))
