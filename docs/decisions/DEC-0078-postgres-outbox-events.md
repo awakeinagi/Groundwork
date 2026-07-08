@@ -2,7 +2,7 @@
 id: DEC-0078
 type: decision
 title: The change-event stream is a transactional outbox in the service's Postgres
-status: accepted
+status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-06
 decided-by: awakeinagi@gmail.com
@@ -43,5 +43,5 @@ a handful of internal consumers.
 ## Implications
 
 Postgres is now definitively in the reference stack (also a data point for
-[SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s Postgres+AGE candidate); dispatcher lag is the bounded-lag knob
+[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s Postgres+AGE candidate); dispatcher lag is the bounded-lag knob
 of [DEC-0060](DEC-0060-session-sync-global-async.md).

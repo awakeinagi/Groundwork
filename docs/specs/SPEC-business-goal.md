@@ -37,9 +37,12 @@ links:
    - `2` — connectors-led expansion
    ```
 
-   `release:` labels in descendant stories/epics must exactly match a
-   declared value (or be `backlog`); adding, renaming, or re-scoping a
-   release is a gated amendment to this goal.
+   `release:` labels in descendant stories/epics/spikes must exactly
+   match a declared value (or be `backlog`); adding, renaming, or
+   re-scoping a release is a gated amendment to this goal. Any such
+   amendment must review the [trigger registry](../TRIGGERS.md) — has an
+   armed condition been met?
+   ([DEC-0108](../decisions/DEC-0108-trigger-surfacing.md)).
 5. **Constraints** — non-negotiables: regulatory, technical, budget, timeline,
    organizational.
 6. **Stakeholders & Roles** — who cares, who answers questions, who approves.

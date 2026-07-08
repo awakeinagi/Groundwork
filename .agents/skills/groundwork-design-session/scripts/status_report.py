@@ -121,6 +121,33 @@ def main():
         for rel in sorted(deferred, key=release_key):
             print(f"  {rel:<8} {', '.join(sorted(deferred[rel]))}")
 
+    # Armed triggers (docs/TRIGGERS.md) — armed entries only, per DEC-0106
+    reg = root / "docs" / "TRIGGERS.md"
+    if reg.exists():
+        head_re = re.compile(r"^## (TRG-\d{4}) \((armed|fired|retired)\)\s*$")
+        cond_re = re.compile(r"^\*\*Condition:\*\*\s*(.*)$")
+        armed, current_id, collecting = [], None, False
+        for line in reg.read_text(encoding="utf-8").splitlines():
+            m = head_re.match(line)
+            if m:
+                current_id = m.group(1) if m.group(2) == "armed" else None
+                collecting = False
+                continue
+            c = cond_re.match(line)
+            if c and current_id:
+                armed.append([current_id, c.group(1).strip()])
+                collecting = True
+                continue
+            if collecting:
+                if line.startswith(("**", "## ")) or not line.strip():
+                    collecting = False
+                else:
+                    armed[-1][1] += " " + line.strip()
+        if armed:
+            print("\nArmed triggers (docs/TRIGGERS.md):")
+            for tid, cond in armed:
+                print(f"  {tid}  {cond}")
+
     # Frontier: approved parents with no derived children
     children = defaultdict(list)
     for aid, fm in arts.items():

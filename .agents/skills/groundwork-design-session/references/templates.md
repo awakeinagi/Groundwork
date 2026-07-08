@@ -158,6 +158,8 @@ Impact links their CMP.]
 id: SP-0001
 type: spike
 title: [Research question]
+# status: deferred + release: backlog — for questions that matter later;
+# arm a trigger in docs/TRIGGERS.md with the revival condition
 status: draft
 owner: [role]
 created: [YYYY-MM-DD]
@@ -466,4 +468,19 @@ the project glossary.
 Validate the artifact graph:
 
     python3 tools/check_links.py
+```
+
+## Trigger registry (docs/TRIGGERS.md)
+
+```markdown
+# Trigger Registry
+
+Watched conditions that revive deferred work or start new work when the
+world changes. Entries: `## TRG-nnnn (armed|fired|retired)`; firing or
+retiring cites a decision. Tooling loads **armed** entries only.
+
+## TRG-0001 (armed)
+**Condition:** [observable, human-testable statement]
+**Consequence:** revive [SP-....](spikes/SP-....md)
+**Cites:** [DEC-....](decisions/DEC-....md)
 ```

@@ -128,7 +128,7 @@ draft ─▶ in-refinement ─▶ gated ─▶ approved ─▶ (stale ⇄ approv
                                        ├─▶ superseded
                                        └─▶ archived
 
-any active status ─▶ deferred ─▶ draft      (stories & epics only)
+any active status ─▶ deferred ─▶ draft   (stories, epics & spikes)
 ```
 
 - `draft` — generated/authored, not yet in active refinement.
@@ -140,28 +140,43 @@ any active status ─▶ deferred ─▶ draft      (stories & epics only)
   downstream derivation until re-affirmed back to `approved`.
 - `superseded`/`archived` — terminal; a superseding artifact links back
   with `supersedes`.
-- `deferred` — stories and epics only: captured but intentionally out of
-  the current release. Entered from any active status; while deferred the
+- `deferred` — stories, epics, and spikes only: captured but
+  intentionally out of the current release. Entered from any active status; while deferred the
   artifact cannot pass a gate and nothing derives from it. Revival always
   lands at `draft` — content, citations, and links are retained, but the
   gate is re-earned in current context. Deferral and revival each cite a
   decision.
 
-**Release scoping.** Stories and epics may carry a `release:` frontmatter
-field: reserved `backlog` ("wanted, no target yet") or a prefix of a
+**Release scoping.** Stories, epics, and spikes may carry a `release:`
+frontmatter field: reserved `backlog` ("wanted, no target yet") or a prefix of a
 SemVer 2.0.0 version core — `MAJOR`, `MAJOR.MINOR`, or
 `MAJOR.MINOR.PATCH` (e.g. `1`, `1.2`, `1.2.3`; numeric identifiers, no
 leading zeroes, no `v` prefix, no pre-release/build metadata; quote the
 value so YAML keeps it a string). A partial value is a scope ("somewhere
 in the 1.x.x line"), narrowable mechanically; *moving* an item between
 releases cites a decision. Absence of the field = current release. An
-epic's label defaults its derived stories; a story may override. Labels
+epic's label defaults its derived stories and spikes; either may
+override. Labels
 must exactly match a release declared in the governing Business Goal's
 Scope section (`**Releases:**` list, current release marked `(current)`),
 or be `backlog`. Non-current effective release ⇔ `deferred`. Deferred
 stories leave the design-% denominators and coverage warnings; the
 status report lists them grouped by release, SemVer precedence order,
 `backlog` last.
+
+**Trigger registry.** `docs/TRIGGERS.md` (not an artifact — no
+frontmatter, no artifact ID) tracks watched conditions that revive
+deferred work: entries under strict headings
+`## TRG-nnnn (armed|fired|retired)` with `**Condition:**` (observable,
+human-testable), `**Consequence:**` (action + markdown-linked targets),
+`**Cites:**` (the arming decision), and — once fired/retired —
+`**Fired:**`/`**Retired:**` with date, decision link, and outcome.
+TRG IDs are sequential, never reused; entries are never deleted. Firing
+or retiring requires a decision recording the observation (one decision
+serves both firing and the revival it causes). Tooling loads **armed
+entries only** into agent context; the status report lists them; a
+release-declaration amendment to a Business Goal must review the
+registry.
 
 Reduced lifecycles:
 
@@ -358,10 +373,14 @@ into projects at bootstrap):
    naming ≥1 resolvable story whose Component Impact links the CMP back;
    approved stories no element implements are reported as design-coverage
    warnings.
-10. `deferred` status and `release:` fields appear only on stories/epics;
-    `release:` values are `backlog` or SemVer prefixes exactly matching a
-    declared release; deferred ⇔ non-current effective release. Elements
-    implementing only deferred stories are audit warnings.
+10. `deferred` status and `release:` fields appear only on
+    stories/epics/spikes; `release:` values are `backlog` or SemVer
+    prefixes exactly matching a declared release; deferred ⇔ non-current
+    effective release. Elements implementing only deferred stories are
+    audit warnings.
+11. The trigger registry (`docs/TRIGGERS.md`) is well-formed: valid
+    headings, unique TRG IDs, required fields per status, resolvable
+    links, decision link on every fired/retired entry.
 
 Beyond the checker, the human-enforced rules: closed sessions and accepted
 decisions are immutable; acceptance criteria and contract items cite

@@ -26,7 +26,7 @@ agent-generated summaries, search infrastructure, and the boundary of
 
 ## Transcript
 
-**T1 — Sponsor.** Approved [EP-0004](../epics/EP-0004-graph-index.md) (ratifying [SP-0002](../spikes/SP-0002-graph-engine-selection.md)). Handle [EP-0007](../epics/EP-0007-consolidation-memory-layer.md).
+**T1 — Sponsor.** Approved [EP-0004](../epics/EP-0004-graph-index.md) (ratifying [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)). Handle [EP-0007](../epics/EP-0007-consolidation-memory-layer.md).
 
 **T2 — Agent.** Round 1: (a) consolidation placement given zero traffic at
 launch (recommended static always-on catalog plus telemetry-driven
@@ -43,20 +43,20 @@ freshness proofs).
 
 **T4 — Agent.** Round 2: (a) human gate on consolidations (recommended
 none — automated faithfulness checks blocking serving instead);
-(b) search/vector infrastructure (recommended extending [SP-0002](../spikes/SP-0002-graph-engine-selection.md) with the
+(b) search/vector infrastructure (recommended extending [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) with the
 retrieval workload rather than a separate spike); (c) scope of "memory" —
 consolidations only vs. participant interaction profiles vs. full memory
 system (recommended consolidations + retrieval only, profiles deferred
 over privacy weight).
 
-**T5 — Sponsor.** (a) No human gate, automated checks. (b) Extend [SP-0002](../spikes/SP-0002-graph-engine-selection.md).
+**T5 — Sponsor.** (a) No human gate, automated checks. (b) Extend [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md).
 (c) **Design to support both** consolidations/retrieval *and* participant
 profiles — but profiles are **opt-in by users**, and profile data must be
 **easily readable and editable by users via the UI**.
 
 **T6 — Agent (synthesis).** Distilled [DEC-0065](../decisions/DEC-0065-catalog-plus-telemetry-placement.md)–[DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md). The profile
 decision adds an impact edge [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)→[EP-0006](../epics/EP-0006-refinement-web-ui.md) (profile viewer/editor and
-consent surface are new UI requirements). Extended [SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s scope with
+consent surface are new UI requirements). Extended [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s scope with
 the search/vector workload. Rewrote [EP-0007](../epics/EP-0007-consolidation-memory-layer.md) and moved it to `gated`.
 
 ## Decisions Produced

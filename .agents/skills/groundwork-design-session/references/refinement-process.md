@@ -218,11 +218,15 @@ resolve them in a story-refinement session before gating. A spike is done
 when its findings are recorded as decisions.
 
 Nice-to-haves that surface mid-session but don't belong in the current
-release: capture them as real stories, set `status: deferred` plus a
-`release:` label (a declared release or `backlog`), and cite the deferral
-decision — thirty seconds, no gate needed. Revival later flips the label,
-cites the reviving decision, and re-enters at `draft`. Deferred items
-never block; the status report lists them by release for rediscovery.
+release: capture them as real stories (or spikes), set `status: deferred`
+plus a `release:` label (a declared release or `backlog`), and cite the
+deferral decision — thirty seconds, no gate needed. If revival depends on
+an observable condition ("when we need multi-node"), arm a trigger in
+`docs/TRIGGERS.md` naming the condition and the consequence. Revival
+later flips the label, cites the reviving decision (which also fires the
+trigger — one decision serves both), and re-enters at `draft`. Deferred
+items never block; the status report lists them by release alongside the
+armed triggers that would revive them.
 
 ### Component docs (the deliverable)
 Create a `CMP-` per bounded-context component, drafted early (stub with

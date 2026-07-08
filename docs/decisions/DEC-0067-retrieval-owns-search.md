@@ -44,6 +44,6 @@ write-authority contract.
 
 ## Implications
 
-Search infrastructure is evaluated in the extended [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
+Search infrastructure is evaluated in the extended [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)
 ([DEC-0070](DEC-0070-extend-sp-0002-search-infra.md)); search results in
 bundles carry the same source-ref citations as everything else.

@@ -65,7 +65,7 @@ draft ──▶ in-refinement ──▶ gated ──▶ approved ──▶ (stal
                                           ├──▶ superseded
                                           └──▶ archived
 
-any active status ──▶ deferred ──▶ draft      (stories & epics only)
+any active status ──▶ deferred ──▶ draft   (stories, epics & spikes)
 ```
 
 - `draft` — generated or authored, not yet in active refinement.
@@ -79,8 +79,10 @@ any active status ──▶ deferred ──▶ draft      (stories & epics only)
   new downstream generation until re-ratified back to `approved`.
 - `superseded` / `archived` — terminal. A superseding artifact must link
   `supersedes: [<old id>]`.
-- `deferred` — stories and epics only
-  ([DEC-0097](../decisions/DEC-0097-deferred-status.md)): captured but
+- `deferred` — stories, epics, and spikes only
+  ([DEC-0097](../decisions/DEC-0097-deferred-status.md), extended to
+  spikes by [DEC-0104](../decisions/DEC-0104-deferred-extends-to-spikes.md)):
+  captured but
   intentionally out of the current release. Entered from any active
   status (`draft`, `in-refinement`, `gated`, `approved`); while deferred
   the artifact cannot pass a gate and nothing derives from it. Revival
@@ -95,8 +97,10 @@ Decisions and Sessions use reduced lifecycles defined in their own specs.
 
 ## Release scoping
 
-Stories and epics may carry a `release:` frontmatter field targeting a
-declared release ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md)):
+Stories, epics, and spikes may carry a `release:` frontmatter field
+targeting a declared release
+([DEC-0098](../decisions/DEC-0098-semver-release-labels.md),
+[DEC-0104](../decisions/DEC-0104-deferred-extends-to-spikes.md)):
 
 - Value: reserved `backlog`, or a prefix of a SemVer 2.0.0 version core —
   `MAJOR`, `MAJOR.MINOR`, or `MAJOR.MINOR.PATCH` (e.g. `1`, `1.2`,
@@ -108,13 +112,13 @@ declared release ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md)):
   releases cites a Decision
   ([DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
 - Absence of the field means the current release.
-- An epic's `release:` is the default for its derived stories; a story
-  may override.
+- An epic's `release:` is the default for its derived stories and
+  spikes; either may override.
 - Labels must exactly match a release declared in the governing Business
   Goal's Scope section, or be `backlog`
   ([DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md)).
-- A story/epic whose `release:` names anything other than a current
-  release must be `deferred`; a `deferred` artifact must carry a
+- A story/epic/spike whose `release:` names anything other than a
+  current release must be `deferred`; a `deferred` artifact must carry a
   `release:`.
 - Deferred stories leave the design-% denominators and coverage
   warnings; discovery runs through the status report's Deferred section
@@ -152,8 +156,9 @@ declared release ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md)):
    every relative link in a body points at an existing file; a link whose
    text begins with an artifact ID targets that artifact's file; no bare
    artifact IDs appear in body prose outside code spans/blocks.
-8. `deferred` status and `release:` fields appear only on stories and
-   epics; `release:` values are well-formed SemVer prefixes or `backlog`
+8. `deferred` status and `release:` fields appear only on stories,
+   epics, and spikes; `release:` values are well-formed SemVer prefixes
+   or `backlog`
    and exactly match a declared release
    ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md),
    [DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md)).
@@ -162,3 +167,9 @@ declared release ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md)):
    parent epic's) is not a current release is `deferred`
    ([DEC-0097](../decisions/DEC-0097-deferred-status.md),
    [DEC-0098](../decisions/DEC-0098-semver-release-labels.md)).
+10. The trigger registry (`docs/TRIGGERS.md`) is well-formed per
+    [SPEC-triggers](SPEC-triggers.md): valid entry headings, unique
+    sequential `TRG-` IDs, required fields per status, resolvable links,
+    and a decision link on every fired/retired entry
+    ([DEC-0106](../decisions/DEC-0106-trigger-registry.md),
+    [DEC-0108](../decisions/DEC-0108-trigger-surfacing.md)).

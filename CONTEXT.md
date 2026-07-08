@@ -172,13 +172,18 @@ names below are reserved words when used as element types.
   `1.2.3`). A partial label is a scope, not a version: `1` means
   "somewhere in the 1.x.x line". Stories and Epics target a Release via
   the `release:` frontmatter field; absence means the current Release.
-- **Deferred** — status of a Story or Epic captured but intentionally out
-  of the current Release. Deferred artifacts cannot pass a Gate and
+- **Deferred** — status of a Story, Epic, or Spike captured but
+  intentionally out of the current Release. Deferred artifacts cannot pass a Gate and
   nothing derives from them; revival always lands at `draft`, re-earning
   the gate in current context. Deferral and revival each cite a Decision.
 - **Backlog** — the reserved Release label for work that is wanted but has
   no target Release yet. Always valid without declaration; sorts after
   all named Releases.
+- **Trigger** — a watched, human-testable condition in the tracked
+  registry (`docs/TRIGGERS.md`) whose firing revives deferred work or
+  starts new work. Statuses: armed (watched; the only entries loaded
+  into agent context), fired, retired. Firing or retiring cites a
+  Decision.
 
 ## Roles
 

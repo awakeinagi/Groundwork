@@ -50,5 +50,5 @@ of living only in DEC records.
 ## Implications
 
 Section rules in [SPEC-component](../specs/SPEC-component.md); [ST-0007](../stories/ST-0007-tier2-check-suite.md)
-checks that Constraints items cite decisions and exempts Notes. [SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s
+checks that Constraints items cite decisions and exempts Notes. [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s
 graph-store outcome lands as an `IG-` constraint in the Graph Index CMP.

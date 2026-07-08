@@ -37,14 +37,14 @@ ops burden per [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)); (d
 plus one bounded generic primitive, no engine QL leakage).
 
 **T3 — Sponsor.** (a) Main + branch overlays. (b) Session-sync,
-global-async. (c) Spike ([SP-0002](../spikes/SP-0002-graph-engine-selection.md)). (d) Named traversals + bounded
+global-async. (c) Spike ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)). (d) Named traversals + bounded
 primitive, **plus an advanced query API supporting something like GraphQL,
 Cypher, etc.**
 
 **T4 — Agent.** Proposed anchoring the advanced endpoint on a *standard*
 language rather than raw engine passthrough, to preserve engine
 swappability — openCypher (implemented by Neo4j, KuzuDB, Memgraph, Apache
-AGE on Postgres) or GraphQL — making standard-QL support a hard [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
+AGE on Postgres) or GraphQL — making standard-QL support a hard [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)
 criterion. Round 2: (a) which standard + guards (recommended openCypher,
 read-only, depth/time/result guards); (b) index content depth (recommended
 metadata-only graph, bodies stay in the store, text search deferred to the
@@ -54,7 +54,7 @@ retrieval layer); (c) operational verification of rebuild-correctness
 **T5 — Sponsor.** (a) openCypher, read-only + guarded. (b) Metadata graph
 only. (c) Scheduled rebuild-and-diff.
 
-**T6 — Agent (synthesis).** Distilled [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)–[DEC-0064](../decisions/DEC-0064-scheduled-rebuild-diff.md); created [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
+**T6 — Agent (synthesis).** Distilled [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)–[DEC-0064](../decisions/DEC-0064-scheduled-rebuild-diff.md); created [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)
 (engine selection spike — riding this epic's refinement per the item-branch
 pattern, ratified with the epic's approval); rewrote [EP-0004](../epics/EP-0004-graph-index.md) and moved it
 to `gated`.

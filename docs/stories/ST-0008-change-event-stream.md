@@ -10,7 +10,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0002]
   impacted-by: [ST-0002]
-cites: [DEC-0038, DEC-0059, DEC-0060, DEC-0066, DEC-0078]
+cites: [DEC-0038, DEC-0059, DEC-0060, DEC-0066, DEC-0103]
 ---
 
 # ST-0008: Branch-Aware Change-Event Stream
@@ -37,9 +37,9 @@ consolidation freshness.
 5. The stream is replayable from git history for any ref range — a
    consumer rebuilt from scratch converges to the same state as one that
    consumed live (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
-6. Events are recorded in a transactional outbox in the service's
-   Postgres, atomically with the write's bookkeeping, and delivered by a
-   dispatcher with retries (per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)).
+6. Events are recorded in a transactional outbox in the app database
+   (DuckDB in v1), atomically with the write's bookkeeping, and delivered
+   by a dispatcher with retries (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
 
 ## Component Impact
 
@@ -55,4 +55,4 @@ not raw store events).
 ## Notes for Implementers
 
 Replayability-from-git is the invariant the outbox must never be allowed
-to erode — the outbox is delivery plumbing, not truth (per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)).
+to erode — the outbox is delivery plumbing, not truth (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).

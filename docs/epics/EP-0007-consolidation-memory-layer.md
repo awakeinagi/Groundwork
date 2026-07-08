@@ -2,7 +2,7 @@
 id: EP-0007
 type: epic
 title: Consolidation Memory Layer
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: ds-lead
@@ -14,7 +14,7 @@ links:
   impacts: [EP-0006]
   impacted-by: [EP-0001, EP-0002, EP-0004]
 cites: [DEC-0017, DEC-0026, DEC-0056, DEC-0063, DEC-0065, DEC-0066, DEC-0067,
-        DEC-0068, DEC-0069, DEC-0070, DEC-0071, DEC-0072]
+        DEC-0068, DEC-0069, DEC-0102, DEC-0071, DEC-0072]
 ---
 
 # EP-0007: Consolidation Memory Layer
@@ -74,8 +74,10 @@ rides on ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)).
 
 **Out:** graph structure queries ([EP-0004](EP-0004-graph-index.md) — this layer composes them); the
 profile/consent UI itself ([EP-0006](EP-0006-refinement-web-ui.md), via the new EP-0007→[EP-0006](EP-0006-refinement-web-ui.md) impact
-edge); search/vector engine choice until the extended [SP-0002](../spikes/SP-0002-graph-engine-selection.md) concludes
-([DEC-0070](../decisions/DEC-0070-extend-sp-0002-search-infra.md));
+edge); search/vector engine internals beyond the committed embedded engine —
+DuckDB per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md), with
+graduation deferred to
+[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md);
 provenance citation of consolidations (forbidden — [SPEC-consolidation](../specs/SPEC-consolidation.md)).
 
 ## Domain Context
@@ -99,15 +101,15 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
 
 ## Risks & Open Questions
 
-- Search/vector infrastructure — extended [SP-0002](../spikes/SP-0002-graph-engine-selection.md).
+- Search/vector infrastructure — extended [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md).
 - Consolidation effectiveness measurement (do bundles beat raw crawls?) —
   evaluation design shared with the [DEC-0058](../decisions/DEC-0058-evaluation-harness.md) harness.
 - Profile schema and retention policy (what may a profile contain; how
   long) — story-level, with privacy review.
 - Embedding re-index cost at corpus scale on model swap — measure in
-  [SP-0002](../spikes/SP-0002-graph-engine-selection.md).
+  [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md).
 
 ## Derived Work
 
-None yet — stories/spikes follow gate approval of this epic ([SP-0002](../spikes/SP-0002-graph-engine-selection.md) is
+None yet — stories/spikes follow gate approval of this epic ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) is
 shared with [EP-0004](EP-0004-graph-index.md)).

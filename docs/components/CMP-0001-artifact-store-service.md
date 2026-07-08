@@ -91,7 +91,7 @@ Implements: [ST-0008](../stories/ST-0008-change-event-stream.md)
 
 Pending — payload schema and emission/ordering/delivery semantics
 (`ChangeEvent.D-*`, `ChangeEvent.B-*`) from [ST-0008](../stories/ST-0008-change-event-stream.md)
-(per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)).
+(per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
 
 ## Component Invariants
 
@@ -103,9 +103,11 @@ state reconstructible from the fork.
 
 ### Constraints
 
-Pending — candidates from accepted decisions: Postgres transactional
-outbox for the event stream
-(per [DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md));
+Pending — candidates from accepted decisions: transactional outbox in
+the app database, DuckDB in v1
+(per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md));
+embedded v1 storage stack
+(per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md));
 ID rescan-on-boot, no durable counter store
 (per [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
 

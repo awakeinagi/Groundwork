@@ -2,7 +2,7 @@
 id: EP-0004
 type: epic
 title: Cross-Reference Graph Index
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: eng-lead
@@ -13,7 +13,7 @@ links:
   depends-on: [EP-0001]
   impacts: [EP-0007]
   impacted-by: [EP-0001, EP-0002, EP-0003]
-cites: [DEC-0009, DEC-0010, DEC-0026, DEC-0056, DEC-0059, DEC-0060, DEC-0061,
+cites: [DEC-0009, DEC-0010, DEC-0026, DEC-0056, DEC-0059, DEC-0060, DEC-0102,
         DEC-0062, DEC-0063, DEC-0064]
 ---
 
@@ -64,8 +64,11 @@ drafts mid-refinement under the fork-pull model
 - **Path-usage telemetry**: consumer-tagged traversal statistics (edge
   heat, no participant content) feeding consolidation placement ([EP-0007](EP-0007-consolidation-memory-layer.md)).
 
-**Out:** engine internals until [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
-concludes ([DEC-0061](../decisions/DEC-0061-engine-via-spike.md)); what
+**Out:** engine internals beyond the committed embedded engine —
+LadybugDB per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md);
+graduation to server-grade infrastructure (deferred
+[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md), revived by
+the [trigger registry](../TRIGGERS.md)); what
 callers do with results; canonical link data itself ([EP-0001](EP-0001-artifact-store-and-format-engine.md) owns and
 validates it); text search ([EP-0007](EP-0007-consolidation-memory-layer.md)'s neighborhood).
 
@@ -87,15 +90,18 @@ and [SPEC-artifact-common](../specs/SPEC-artifact-common.md).
 
 ## Risks & Open Questions
 
-- Engine selection — [SP-0002](../spikes/SP-0002-graph-engine-selection.md)
-  (openCypher support, overlay fit, multi-node story, on-prem ops burden).
-- Overlay memory/cost at high concurrent-session counts — measure in
-  [SP-0002](../spikes/SP-0002-graph-engine-selection.md)'s synthetic-scale runs.
+- Embedded-engine scale limits (overlay memory/cost at high concurrent
+  session counts, rebuild time at corpus growth) — watched by the armed
+  graduation triggers in the [trigger registry](../TRIGGERS.md); crossing
+  them revives [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)
+  (per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md),
+  [DEC-0105](../decisions/DEC-0105-sp-0002-rescoped-deferred.md)).
 - Guard calibration for the openCypher tier (limits tight enough to
   protect, loose enough to be useful) — story-level tuning.
 
 ## Derived Work
 
-- [SP-0002](../spikes/SP-0002-graph-engine-selection.md) — Graph engine
-  selection (drafted during this epic's refinement; ratified with the
-  epic's approval per the item-branch pattern).
+- [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) — Postgres +
+  pgvector graduation evaluation (originally the engine-selection spike,
+  drafted during this epic's refinement; re-scoped and deferred per
+  [DEC-0105](../decisions/DEC-0105-sp-0002-rescoped-deferred.md)).

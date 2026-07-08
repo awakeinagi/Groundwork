@@ -116,11 +116,14 @@ design meaning.
 `proposed → accepted → superseded`. Conflicts: `open → mediating →
 escalated → resolved`.
 
-Stories and epics may additionally be `deferred` — out of the current
-release, carrying a `release:` label (a SemVer prefix declared in the
-Business Goal's `**Releases:**` list, or `backlog`). Deferred items pass
-no gates and derive nothing; revival re-enters at `draft`. Deferral and
-revival each cite a decision.
+Stories, epics, and spikes may additionally be `deferred` — out of the
+current release, carrying a `release:` label (a SemVer prefix declared
+in the Business Goal's `**Releases:**` list, or `backlog`). Deferred
+items pass no gates and derive nothing; revival re-enters at `draft`.
+Deferral and revival each cite a decision. Revival conditions are armed
+as triggers in `docs/TRIGGERS.md` (`## TRG-nnnn (armed|fired|retired)`
+entries); firing one cites a decision too. Review armed triggers when
+scope or releases are re-planned.
 
 ## Orientation for a fresh agent
 

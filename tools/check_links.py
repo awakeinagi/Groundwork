@@ -26,10 +26,10 @@ Rules enforced:
      doc back (reciprocity with its Component Impact).
  10. (audit, non-blocking) Approved stories with no referencing design
      element are reported as design-coverage warnings.
- 11. `deferred` status and `release:` fields appear only on stories and
-     epics; a `release:` value is the reserved `backlog` or a SemVer
-     prefix (`1`, `1.2`, `1.2.3` — no leading zeroes, no v prefix) and
-     must exactly match a release declared in a business goal's
+ 11. `deferred` status and `release:` fields appear only on stories,
+     epics, and spikes; a `release:` value is the reserved `backlog` or a
+     SemVer prefix (`1`, `1.2`, `1.2.3` — no leading zeroes, no v prefix)
+     and must exactly match a release declared in a business goal's
      `**Releases:**` list.
  12. Deferred/release consistency: a deferred artifact has an effective
      release (own field, or its parent epic's) that is not a current
@@ -37,6 +37,10 @@ Rules enforced:
      deferred.
  13. (audit, non-blocking) A design element whose Implements line
      references only deferred stories is reported as a warning.
+ 14. The trigger registry (docs/TRIGGERS.md), when present, is
+     well-formed: headings `## TRG-nnnn (armed|fired|retired)`, unique
+     IDs, required fields per status (Condition/Consequence/Cites; plus
+     Fired/Retired with a decision link), and resolvable relative links.
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -74,10 +78,12 @@ INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 BARE_ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}\b")
 EXTERNAL_TARGET = ("http://", "https://", "mailto:", "#")
-RELEASE_SCOPED_TYPES = {"story", "epic"}
+RELEASE_SCOPED_TYPES = {"story", "epic", "spike"}
 RELEASE_RE = re.compile(r"^(0|[1-9]\d*)(\.(0|[1-9]\d*)){0,2}$")
 RELEASES_HEADER_RE = re.compile(r"^\*\*Releases:\*\*\s*$", re.MULTILINE)
 RELEASE_ITEM_RE = re.compile(r"^-\s+`([^`]+)`(\s*\(current\))?")
+TRIGGER_HEAD_RE = re.compile(r"^## (TRG-\d{4}) \((armed|fired|retired)\)\s*$")
+TRIGGER_ANY_HEAD_RE = re.compile(r"^## .*TRG", re.IGNORECASE)
 
 
 def parse_frontmatter(path):
@@ -109,7 +115,7 @@ def main():
     artifacts = {}
 
     for path in sorted(docs.rglob("*.md")):
-        if path.parent.name in SKIP_DIRS:
+        if path.parent.name in SKIP_DIRS or path.name == "TRIGGERS.md":
             continue
         fm, body, err = parse_frontmatter(path)
         rel = path.relative_to(root)
@@ -387,6 +393,59 @@ def main():
         for b in sorted(bare):
             errors.append(f"{fm['_path']}: bare cross-reference {b} in "
                           f"prose — must be a markdown link")
+
+    # Rule 14: trigger registry well-formedness
+    reg = docs / "TRIGGERS.md"
+    if reg.exists():
+        text = reg.read_text(encoding="utf-8")
+        seen_trg, status_of = set(), {}
+        blocks = {}
+        current = None
+        for line in text.splitlines():
+            m = TRIGGER_HEAD_RE.match(line)
+            if m:
+                tid, tstatus = m.group(1), m.group(2)
+                if tid in seen_trg:
+                    errors.append(f"docs/TRIGGERS.md: duplicate id {tid}")
+                seen_trg.add(tid)
+                status_of[tid] = tstatus
+                blocks[tid] = []
+                current = tid
+                continue
+            if TRIGGER_ANY_HEAD_RE.match(line):
+                errors.append(f"docs/TRIGGERS.md: malformed trigger "
+                              f"heading {line.strip()!r}")
+                current = None
+                continue
+            if line.startswith("## "):
+                current = None
+                continue
+            if current is not None:
+                blocks[current].append(line)
+        for tid, lines in blocks.items():
+            block = "\n".join(lines)
+            fields = {f for f in ("Condition", "Consequence", "Cites")
+                      if f"**{f}:**" in block}
+            for f in ("Condition", "Consequence", "Cites"):
+                if f not in fields:
+                    errors.append(f"docs/TRIGGERS.md: {tid} lacks "
+                                  f"**{f}:** field")
+            tstatus = status_of[tid]
+            if tstatus in ("fired", "retired"):
+                marker = tstatus.capitalize()
+                seg = block.split(f"**{marker}:**", 1)
+                if len(seg) < 2:
+                    errors.append(f"docs/TRIGGERS.md: {tid} is {tstatus} "
+                                  f"but lacks **{marker}:** field")
+                elif not MD_LINK_RE.search(seg[1].split("**", 1)[0]):
+                    errors.append(f"docs/TRIGGERS.md: {tid} **{marker}:** "
+                                  f"lacks a decision link")
+        for text_, target in MD_LINK_RE.findall(text):
+            if target.startswith(EXTERNAL_TARGET):
+                continue
+            if not (docs / target.split("#")[0]).resolve().exists():
+                errors.append(f"docs/TRIGGERS.md: link [{text_}]({target}) "
+                              f"does not resolve")
 
     if warnings:
         print(f"WARN: {len(warnings)} audit warning(s)\n")
