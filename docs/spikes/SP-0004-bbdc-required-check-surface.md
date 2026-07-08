@@ -2,7 +2,9 @@
 id: SP-0004
 type: spike
 title: Validate BBDC merge checks / Code Insights as the required-check surface
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 timebox: 3d

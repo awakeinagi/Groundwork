@@ -2,7 +2,9 @@
 id: ST-0024
 type: story
 title: Notifier connector contract and email adapter
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 links:

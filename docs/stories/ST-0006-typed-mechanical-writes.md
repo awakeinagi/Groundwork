@@ -2,9 +2,9 @@
 id: ST-0006
 type: story
 title: Typed mechanical write operations and credential separation
-status: stale
+status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-07
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-06
 links:

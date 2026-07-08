@@ -2,7 +2,9 @@
 id: ST-0021
 type: story
 title: Delegated reviews and program-user attribution
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 links:

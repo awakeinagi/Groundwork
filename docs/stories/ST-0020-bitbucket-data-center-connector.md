@@ -2,7 +2,9 @@
 id: ST-0020
 type: story
 title: Bitbucket Data Center connector
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 links:
