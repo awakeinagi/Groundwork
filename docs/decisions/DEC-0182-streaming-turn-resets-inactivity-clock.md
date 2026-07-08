@@ -1,0 +1,52 @@
+---
+id: DEC-0182
+type: decision
+title: A streaming turn resets the session inactivity clock; auto-close never truncates mid-turn
+status: accepted
+owner: ds-lead
+created: 2026-07-08
+decided-by: awakeinagi@gmail.com
+decided-on: 2026-07-08
+source-span: "SES-0033 @ T9-T10"
+links:
+  derives-from: [SES-0033]
+  relates-to: [DEC-0057]
+  supersedes: []
+---
+
+# DEC-0182: A Streaming Turn Resets the Session Inactivity Clock; Auto-Close Never Truncates Mid-Turn
+
+## Context
+
+The decision-recall audit on
+[ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)
+flagged a race [DEC-0057](DEC-0057-session-lifecycle.md) left open:
+streaming turn append (AC5) can overlap with the inactivity-window
+auto-close (AC3) — what happens if the window elapses while a turn is
+still streaming?
+
+## Decision
+
+A turn actively streaming counts as activity: the inactivity window only
+starts counting once the current turn fully completes. Auto-close never
+force-closes or truncates a session mid-stream.
+
+## Rationale
+
+Truncating a partial turn risks losing a participant's in-flight answer
+and produces an incomplete, hard-to-interpret transcript entry — worse
+than simply deferring the timeout check until the turn resolves, which
+costs nothing since a genuinely inactive participant isn't streaming
+anything.
+
+## Alternatives Considered
+
+- **Auto-close can truncate a partial turn**: simpler timer
+  implementation, but risks data loss on exactly the participant input
+  the system exists to capture faithfully
+  (per [DEC-0052](DEC-0052-raw-transcripts-regenerable-distillation.md)).
+
+## Implications
+
+[ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)
+AC6 states this as a testable behavior.

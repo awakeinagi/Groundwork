@@ -2,7 +2,7 @@
 id: EP-0002
 type: epic
 title: Refinement Session Agent
-status: approved
+status: stale
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: ds-lead
@@ -15,7 +15,8 @@ links:
   impacted-by: [EP-0001, EP-0005, EP-0006]
 cites: [DEC-0003, DEC-0005, DEC-0012, DEC-0015, DEC-0021, DEC-0026, DEC-0044,
         DEC-0047, DEC-0051, DEC-0052, DEC-0053, DEC-0054, DEC-0055, DEC-0056,
-        DEC-0057, DEC-0058]
+        DEC-0057, DEC-0058, DEC-0178, DEC-0179, DEC-0180, DEC-0181,
+        DEC-0182, DEC-0183]
 ---
 
 # EP-0002: Refinement Session Agent
@@ -110,15 +111,43 @@ Conflict, Synthesis, Strategy Pack, Decision Rights, Change Proposal — per
 
 ## Risks & Open Questions
 
-- Judge-model independence for faithfulness evals (must differ from the
-  session model) — story-level requirement.
-- Benchmark corpus bootstrap: initial scenarios must be authored before
-  any production sessions exist to sample from.
-- Anchoring in synthesis: the shared draft must not leak into later 1:1
-  sessions' framing (pack design concern).
-- Pack format expressiveness vs. simplicity — candidate spike when stories
-  are derived.
+- Judge-model independence for faithfulness evals — resolved: config-declared
+  model-family check, enforced by the harness
+  ([DEC-0178](../decisions/DEC-0178-eval-harness-judge-model-family-independence.md)),
+  carried as [ST-0041](../stories/ST-0041-evaluation-harness.md) AC 1.
+- Benchmark corpus bootstrap — resolved: a hand-authored seed corpus is a
+  v1 acceptance criterion, not a stretch goal
+  ([DEC-0179](../decisions/DEC-0179-eval-harness-seed-benchmark-corpus.md)),
+  carried as [ST-0041](../stories/ST-0041-evaluation-harness.md) AC 2.
+- Anchoring in synthesis — resolved: the context-recipe story owns a
+  default exclusion of the shared draft's prose from fresh 1:1 context
+  ([DEC-0180](../decisions/DEC-0180-context-recipe-owns-anchoring-mitigation.md)),
+  carried as [ST-0038](../stories/ST-0038-context-assembly-via-pack-recipes.md) AC 3.
+- Pack format expressiveness vs. simplicity — spiked as
+  [SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md),
+  3-day timebox, draft-ahead ratified with this story bundle
+  ([DEC-0181](../decisions/DEC-0181-sp-0008-pack-format-expressiveness-spike.md)).
 
 ## Derived Work
 
-None yet — stories/spikes follow gate approval of this epic.
+- [ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md) — session
+  engine lifecycle and contract (foundational).
+- [ST-0033](../stories/ST-0033-strategy-pack-format-and-plugin-loading.md) — strategy
+  pack format and plugin loading (foundational).
+- [ST-0034](../stories/ST-0034-transcript-capture-and-confirmed-distillation.md) —
+  transcript capture and confirmed distillation.
+- [ST-0035](../stories/ST-0035-guardrails-and-authority-limits.md) — guardrails and
+  authority limits.
+- [ST-0036](../stories/ST-0036-conflict-detection-mediation-and-escalation.md) —
+  conflict detection, mediation, and escalation.
+- [ST-0037](../stories/ST-0037-incremental-synthesis-and-shared-draft.md) —
+  incremental synthesis and shared draft.
+- [ST-0038](../stories/ST-0038-context-assembly-via-pack-recipes.md) — context
+  assembly via pack recipes.
+- [ST-0039](../stories/ST-0039-change-proposal-triage.md) — Change Proposal triage.
+- [ST-0040](../stories/ST-0040-glossary-maintenance-in-session.md) — glossary
+  maintenance in-session.
+- [ST-0041](../stories/ST-0041-evaluation-harness.md) — evaluation harness.
+- [SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md)
+  — pack format expressiveness vs. simplicity (draft-ahead, ratified with
+  this bundle).
