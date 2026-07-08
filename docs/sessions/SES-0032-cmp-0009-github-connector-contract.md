@@ -172,6 +172,20 @@ new decision needed, since the resolution follows directly from
 already-accepted [DEC-0145](../decisions/DEC-0145-event-driven-check-recomputation.md)
 and [DEC-0167](../decisions/DEC-0167-connector-typed-error-idempotency-convention.md).
 
+**T13 — Product Owner.** Reviewed the gate summary — the
+[CMP-0009](../components/CMP-0009-github-connector.md) contract plus
+the bundled [ST-0019](../stories/ST-0019-code-host-connector-protocol.md)/[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)/[ST-0023](../stories/ST-0023-read-only-context-access.md)
+re-affirmation diffs — and approved.
+
+**T14 — Facilitator.** Set [CMP-0009](../components/CMP-0009-github-connector.md)
+to `approved` (`approved-by: awakeinagi@gmail.com`, `approved-on:
+2026-07-08`).
+[ST-0019](../stories/ST-0019-code-host-connector-protocol.md),
+[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md), and
+[ST-0023](../stories/ST-0023-read-only-context-access.md) remain
+`approved` with their diffs re-affirmed — no re-gate needed, since
+none of their contract shapes changed, only which adapter they name.
+
 ## Decisions Produced
 
 - [DEC-0174](../decisions/DEC-0174-github-connector-identity-architecture.md) —
