@@ -36,7 +36,13 @@ at gate prep.
    never Opus-class:
    - list ≤ 15 → **one** Sonnet 5 judge; fork (inherits session
      context) when the facilitator itself runs Sonnet 5, otherwise a
-     fresh Sonnet 5 agent fed the packet + artifact.
+     fresh Sonnet 5 agent fed the packet + artifact. **Pin the model
+     explicitly**: on the Agent call pass `model: sonnet` — a fresh
+     subagent given only a `subagent_type` (e.g. `general-purpose`) and
+     no `model` override *inherits the facilitator's model*, so on an
+     Opus-class facilitator the judge silently runs Opus unless you set
+     it. Verify if unsure (the subagent transcript's turns should read
+     `claude-sonnet-5`).
    - list > 15 → shard into batches of ~8 across Sonnet 5 agents, each
      batch judged comparatively; a batch of one is forbidden —
      isolated relevance judges over-flag (acquiescence bias).

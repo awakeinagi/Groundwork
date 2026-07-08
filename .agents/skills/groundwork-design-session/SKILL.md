@@ -86,9 +86,12 @@ decision distillation, and gates. The short version of the flow:
    problem, who hurts, why now. Don't refine yet; capture it.
 2. **Run the inception grilling session.** Dependency-ordered clarifying
    questions, 3–4 per round, each with a recommended answer listed first.
-   Challenge vague terms and record them in `CONTEXT.md` as they resolve.
-   Keep going as many rounds as it takes to reach shared understanding —
-   there is no round cap.
+   Use [references/goal-grilling-questions.md](references/goal-grilling-questions.md)
+   as the question bank — organized by BG section and tagged by confidence
+   tier (High/Medium/Low); don't skip Low-tier questions, just expect
+   their answers to be provisional. Challenge vague terms and record them
+   in `CONTEXT.md` as they resolve. Keep going as many rounds as it takes
+   to reach shared understanding — there is no round cap.
 3. **Record `SES-0001`** (turn-numbered transcript) and distill the
    decisions into `DEC-` records, confirming each with the user in plain
    language before marking it accepted.
@@ -151,7 +154,10 @@ it ranks accepted decisions relevant to the artifact but absent from its
 considered set (cites + inline references) and emits a judge context
 packet. Spawn a judge subagent with that packet, always on a **Sonnet
 5** model (fork when the facilitator itself runs Sonnet 5, else a fresh
-Sonnet 5 agent) — one judge for lists ≤15; shard into ~8-candidate
+Sonnet 5 agent — spawn it with the Agent tool's **`model: sonnet`
+override set explicitly**; a subagent with no `model` inherits the
+facilitator's model, which when the facilitator is Opus-class is exactly
+the forbidden case) — one judge for lists ≤15; shard into ~8-candidate
 batches beyond that; **never one candidate per agent** (isolated
 relevance judges over-flag). Address findings in-session;
 "Nothing to add" is a valid outcome worth recording. The audit catches
@@ -173,6 +179,20 @@ co-occurrences. Review hits in-session; record dispositions like audit
 findings. Protocol details in
 [references/refinement-process.md](references/refinement-process.md)
 §Distilling decisions.
+
+**Cross-sibling coupling check at epic and story derivation (required —
+DEC-0196, DEC-0199).** Right after a draft sibling set's impact edges are
+drawn, and before refining any of them in depth, run `python3
+<skill-dir>/scripts/groundwork_epic_coupling.py --root <project> check
+<IDs>` — add `--type story` for a story/spike set under an epic (default
+is epic, siblings grouped by goal). Pure stdlib. It flags *mutual*
+(bidirectional) `impacts` coupling between siblings — a signal the split
+may have followed a technical-layer seam instead of a real one — while
+treating one-directional fan-out as informational only (expected from
+foundational/substrate epics; not a finding). Seam catalogs and
+split-vs-merge guidance in
+[references/epic-slicing-seams.md](references/epic-slicing-seams.md) and
+[references/story-slicing-seams.md](references/story-slicing-seams.md).
 
 ## The local graph index (LadybugDB)
 
@@ -225,6 +245,9 @@ only, never a substitute for editing docs.
 | Artifact types, frontmatter, links, statuses, integrity rules | [references/groundwork-system.md](references/groundwork-system.md) |
 | The grilling technique itself, and its origin | [references/grilling.md](references/grilling.md) |
 | How to grill, record sessions, distill decisions, run gates, handle conflicts/staleness, per-stage playbooks | [references/refinement-process.md](references/refinement-process.md) |
+| The curated goal-level (BG) question bank, tiered by confidence/volatility | [references/goal-grilling-questions.md](references/goal-grilling-questions.md) |
+| Epic-slicing seams, vertical-vs-horizontal slicing, split-vs-merge guidance, the coupling check | [references/epic-slicing-seams.md](references/epic-slicing-seams.md) |
+| Story-slicing seams, INVEST-grounded split-vs-merge guidance, the coupling check | [references/story-slicing-seams.md](references/story-slicing-seams.md) |
 | Copy-paste templates for every artifact + CONTEXT.md/README seeds | [references/templates.md](references/templates.md) |
 | Graph-index schema, command reference, openCypher recipe cookbook | [references/graph-queries.md](references/graph-queries.md) |
 | The standing instructions installed into projects | [assets/AGENTS.md](assets/AGENTS.md) |

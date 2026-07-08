@@ -201,14 +201,28 @@ Reduced lifecycles:
 ### Business Goal (BG) — `docs/goals/`
 The foundational statement of a refined business intent; root of the
 traceability graph. Sections: **Problem** (in the sponsor's terms, no
-solution language), **Intent**, **Outcomes & Success Criteria** (each
-citing a decision), **Scope** (in/out; if the work is release-scoped,
-also a `**Releases:**` list — one item per release, value in a code
-span, current release marked `(current)` — which release labels validate
-against), **Constraints**, **Stakeholders &
-Roles**, **Conflicts & Tensions**, **Derived Work**. A goal must be
-`approved` before epics derive from it. Solution design does not belong
-here. Frontmatter extras: `sponsor:`.
+solution language), **Current State & Gap** (what exists today and the
+specific capability gap that lets the problem persist — distinct from
+Problem's human/business pain and from System Context's build-vs-reuse
+question), **Intent**, **System Context** (boundary-only, C4-Level-1/2
+inspired: what's being built, who uses it and how, where it lives, the
+trigger/output contract, existing-vs-new for the system's own parts,
+existing systems needing change, external dependencies — plus a
+mandatory Context Diagram and an optional Process Flow diagram, both
+Mermaid; see [goal-grilling-questions.md](goal-grilling-questions.md)),
+**Illustrative Scenario** (non-binding: a happy-path walkthrough, plus
+any bad paths that surfaced naturally — full edge-case enumeration is
+deferred to Epic/Story refinement), **Outcomes & Success Criteria**
+(each citing a decision, ideally metric-shaped), **Scope** (in/out; if
+the work is release-scoped, also a `**Releases:**` list — one item per
+release, value in a code span, current release marked `(current)` —
+which release labels validate against), **Constraints** (including an
+explicit compliance/data-residency check, answered even when "none
+identified"), **Stakeholders & Roles**, **Conflicts & Tensions**,
+**Derived Work**. A goal must be `approved` before epics derive from it.
+Solution design does not belong here — System Context stays
+boundary-only (what, not how); internal mechanics are Epic/Component
+territory. Frontmatter extras: `sponsor:`.
 
 ### Epic (EP) — `docs/epics/`
 A coherent body of work derived from an approved goal. Sections:

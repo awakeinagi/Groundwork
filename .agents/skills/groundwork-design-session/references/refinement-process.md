@@ -149,7 +149,12 @@ refinement, not as a separate exercise:
 - When an artifact's refinement is complete, set `status: gated` and
   present it to the approver (in manual mode: the user, in conversation).
   Summarize what they're ratifying — the key content and the decisions it
-  cites — don't make them re-read everything cold.
+  cites — don't make them re-read everything cold. For Business Goals,
+  walk the Context Diagram (and Process Flow, if present) alongside the
+  text summary, and call out which content is High/Medium/Low confidence
+  per [goal-grilling-questions.md](goal-grilling-questions.md) — boxes and
+  arrows catch boundary misunderstandings faster than prose, and the
+  approver should know what's settled vs. provisional.
 - On approval: `status: approved`, add `approved-by:` and `approved-on:`,
   commit with message `Approve <ID> (<approver>, <date>)`.
 - Never derive downstream work from an unapproved parent. Draft-ahead is
@@ -221,31 +226,103 @@ against, reconciled afterward.
 ## Per-stage playbooks
 
 ### Goal refinement (idea → BG)
-Grill for: the problem in the sponsor's terms (no solution language yet);
-who hurts and why now; observable outcomes that would demonstrate success;
-explicit scope in/out; hard constraints (regulatory, budget, stack, org);
-stakeholders and who approves what; tensions with existing goals/work.
-Keep solution design out of the goal — capture solution-shaped statements
-as decisions attached to future epics. Output: `SES` + `DEC`s + `BG`
-(gated). A goal with unmeasurable outcomes or an empty "out of scope" is
-not done.
+Grill using the question bank in
+[goal-grilling-questions.md](goal-grilling-questions.md), organized by BG
+section: the problem in the sponsor's terms (no solution language yet);
+the current-state gap; observable, ideally metric-shaped outcomes; System
+Context (boundary-only — what's being built, who/how, where it lives, the
+trigger/output contract, existing-vs-new, external dependencies); an
+illustrative happy-path scenario; explicit scope in/out; hard constraints
+including an explicit compliance/data-residency check; stakeholders and
+who approves what; tensions with existing goals/work. Keep solution design
+out of the goal — System Context stays boundary-only (what, not how);
+internal mechanics and full edge-case handling are Epic/Story territory,
+flagged during goal refinement but resolved there, never here.
+
+Content gathered is tiered by confidence (High/Medium/Low — see the
+question bank's legend): High-tier answers (Problem, Current State & Gap,
+what's being built, who) are treated as settled once confirmed;
+Medium-tier (placement, channels, timeline/scale) are expected to sharpen
+downstream without reversing; Low-tier (edge cases, specific integration
+points, compliance nuance) are provisional best-guesses and must be
+presented to the approver as such, not as binding fact.
+
+At gate time, render two diagrams from the System Context answers into
+the BG doc's own Context Diagram / Process Flow subsections (Mermaid): a
+**Context Diagram** (C4 Level 1 — the system as one box, its actors, and
+external systems) is mandatory; a **Process Flow** diagram (trigger
+through output) is included only if the session surfaced enough
+sequential detail to render one meaningfully — never fabricate steps to
+fill it in, omit the subsection instead. Walk both with the approver
+alongside the text summary — the visual counterpart to the shared
+understanding the method builds textually everywhere else.
+
+Output: `SES` + `DEC`s + `BG` (gated). A goal with unmeasurable outcomes,
+an empty "out of scope", or a System Context too abstract to draw a
+Context Diagram from is not done.
 
 ### Epic derivation and refinement (BG → EPs)
 Derive draft epics covering the goal — each a coherent body of work with a
-clear "Why" tied to the goal's outcomes. Add impact edges between them.
-Then refine each epic in its own session, in impact order. Epic-level
-questions: boundaries between epics; the bounded context and its terms;
-which interfaces/contracts the epic must define; risks worth a spike;
-what's deliberately deferred to stories. Move refined epics to `gated`
-one at a time.
+clear "Why" tied to the goal's outcomes, sliced along a real business or
+domain seam (never by architectural layer) per
+[epic-slicing-seams.md](epic-slicing-seams.md). Add impact edges between
+them. Then refine each epic in its own session, in impact order.
+Epic-level questions: boundaries between epics (per the seam catalog);
+the bounded context and its terms; which interfaces/contracts the epic
+must define; risks worth a spike; what's deliberately deferred to
+stories. There is no fixed number of epics — apply only the seams that
+carve a real boundary in this goal; see the seam catalog's split-vs-merge
+guidance before over-fragmenting a narrow goal. Pick up any Bad-Day/
+edge-case notes flagged (not resolved) in the goal's Illustrative Scenario
+and resolve them here as Risks & Open Questions, or push genuinely open
+ones to a spike.
+
+**Cross-epic coupling check (required, right after impact edges are
+drawn, before refining any epic in depth).** Run
+`groundwork_epic_coupling.py check` (see
+[epic-slicing-seams.md](epic-slicing-seams.md)) over the draft set.
+Address any mutual-coupling findings — reconsider the seam, or confirm
+the cycle is real and resolve it via a provisional bounding decision —
+before spending a session refining epics that may need to be re-seamed.
+
+**Deliverable-coverage pass (required, before finalizing the draft epic
+set).** Extract every deliverable named in the goal's Decision/Scope text
+and System Context section and confirm each maps to at least one derived
+epic. Watch for two miss categories: (a) an obvious domain deliverable
+with no epic; (b) a *structural/cross-cutting* deliverable (a backend/API
+layer, a deployment/runtime shell, an application composition root) that
+reads as generic connective tissue and gets waved off as implicitly
+covered by the domain epics' union — it isn't; domain-first decomposition
+answers "what does it do," never "what makes it a running program," and
+that second question needs its own epic. Record the pass's outcome
+explicitly, even "checked, no gap found" — same discipline as the CMP
+graduation review. Move refined epics to `gated` one at a time.
 
 ### Story and spike derivation (EP → STs/SPs)
 Slice the approved epic into implementable stories with DEC-cited
-acceptance criteria, plus spikes for genuine unknowns (research questions,
-not tasks). Give stories `depends-on` (build order) *and* impact edges
-(decision influence) — they differ. Flag open design points per story and
-resolve them in a story-refinement session before gating. A spike is done
-when its findings are recorded as decisions.
+acceptance criteria, sliced along a real vertical seam (never by
+architectural layer) per
+[story-slicing-seams.md](story-slicing-seams.md), plus spikes for genuine
+unknowns (research questions, not tasks — see the seam catalog's Spike
+cross-reference before writing a story whose real content is an
+investigation). Give stories `depends-on` (build order) *and* impact
+edges (decision influence) — they differ. There is no fixed number of
+stories — apply only the seams that carve a real boundary; see the seam
+catalog's split-vs-merge guidance before over-fragmenting. Flag open
+design points per story and resolve them in a story-refinement session
+before gating. Edge-case behavior surfaced but not resolved upstream
+(goal-level Illustrative Scenario, epic-level Risks & Open Questions)
+becomes concrete, testable Acceptance Criteria here. A spike is done when
+its findings are recorded as decisions.
+
+**Cross-story coupling check (required, right after impact edges are
+drawn, before refining any story in depth).** Run
+`groundwork_epic_coupling.py check --type story` (see
+[story-slicing-seams.md](story-slicing-seams.md)) over the draft
+set. Address any mutual-coupling findings — reconsider the seam, or
+confirm the cycle is real and resolve it via a provisional bounding
+decision — before spending a session refining stories that may need to
+be re-seamed.
 
 Nice-to-haves that surface mid-session but don't belong in the current
 release: capture them as real stories (or spikes), set `status: deferred`

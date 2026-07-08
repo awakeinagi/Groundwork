@@ -36,16 +36,57 @@ cites: [DEC-0001, DEC-0002]
 ## Problem
 [The pain/opportunity in the sponsor's terms — no solution language.]
 
+## Current State & Gap
+[What exists today to address this — systems, workaround, prior tooling,
+or nothing. What specifically is missing: the technology/capability gap
+that lets the problem persist.]
+
 ## Intent
 [What the business wants to be true afterward, and why now.]
 
+## System Context
+[Boundary-level only — no internal mechanics or architecture. See
+goal-grilling-questions.md for the full question set.]
+1. **What are we building?** [1-2 sentences, plain language]
+2. **Who will use this, and how?** [actors/personas + channels]
+3. **Where will this live?** [hosting/deployment placement, coarse]
+4. **Trigger & output:** [what starts it; what tangible output/status
+   exists when it's done]
+5. **Existing vs. new (this system's own parts):** [greenfield/brownfield
+   boundary for what's being built]
+6. **Existing systems that must change:** [...]
+7. **External systems it depends on:** [name the entities, not protocols]
+
+### Context Diagram
+[Mandatory — C4 Level 1, Mermaid: the system as one box, its actors, and
+external systems, built from 1-2 and 5-7 above.]
+```mermaid
+C4Context
+```
+
+### Process Flow
+[Optional — Mermaid flowchart, trigger through output, only if 4 and the
+Illustrative Scenario below surfaced enough sequence to render one
+meaningfully. Omit this subsection entirely rather than fabricate steps.]
+```mermaid
+flowchart TD
+```
+
+## Illustrative Scenario
+[Non-binding — grounds shared understanding, never a spec.]
+**Happy path:** [chronological bullets of one flawless, standard
+transaction, trigger to output]
+**Bad paths:** [optional — only what surfaced naturally; full edge-case
+enumeration is Epic/Story work, not goal work]
+
 ## Outcomes & Success Criteria
-1. [Observable, ideally measurable result] (per [DEC-0001](../decisions/DEC-0001-....md))
+1. [Observable, ideally metric-shaped result] (per [DEC-0001](../decisions/DEC-0001-....md))
 2. ...
 
 ## Scope
 **Releases:** [omit unless the work is release-scoped; labels are SemVer
-prefixes; mark the current release]
+prefixes; mark the current release. The first-thing-cut-if-timeline-halves
+answer shapes this split.]
 - `1` (current) — [what this release delivers]
 - `2` — [follow-on scope]
 
@@ -54,6 +95,8 @@ prefixes; mark the current release]
 
 ## Constraints
 - [Regulatory / technical / budget / timeline / organizational]
+- **Compliance & data residency:** [GDPR/HIPAA/PCI-DSS/etc., or "none
+  identified" — always answered explicitly, never left silent]
 
 ## Stakeholders & Roles
 - **Sponsor:** ...
