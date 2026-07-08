@@ -11,14 +11,15 @@ context: governance
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]
-  depends-on: [CMP-0001, CMP-0002, CMP-0003]
+  depends-on: [CMP-0001, CMP-0002, CMP-0003, CMP-0005, CMP-0007, CMP-0016]
 cites: [DEC-0005, DEC-0007, DEC-0018, DEC-0020, DEC-0028, DEC-0033, DEC-0034,
         DEC-0036, DEC-0037, DEC-0038, DEC-0039, DEC-0040, DEC-0041, DEC-0042,
         DEC-0043, DEC-0045, DEC-0046, DEC-0049, DEC-0050, DEC-0054, DEC-0063,
         DEC-0075, DEC-0079, DEC-0096, DEC-0097, DEC-0102, DEC-0121, DEC-0124,
         DEC-0127, DEC-0130, DEC-0131, DEC-0132, DEC-0136, DEC-0140, DEC-0141,
         DEC-0142, DEC-0143, DEC-0144, DEC-0145, DEC-0146, DEC-0147, DEC-0150,
-        DEC-0162, DEC-0163, DEC-0164, DEC-0165, DEC-0172, DEC-0173]
+        DEC-0162, DEC-0163, DEC-0164, DEC-0165, DEC-0172, DEC-0173,
+        DEC-0176, DEC-0233, DEC-0234, DEC-0238]
 ---
 
 # CMP-0004: Governance & Gate Engine
@@ -42,40 +43,21 @@ Session Worktree, Mechanical Write, Decision Rights — per
 
 ## Design Elements
 
-Decomposition per [DEC-0162](../decisions/DEC-0162-cmp-0004-element-decomposition.md):
-ten elements, none graduated — the mandatory pre-gate graduation review
-([DEC-0136](../decisions/DEC-0136-graduation-review-required.md)) found
-no element consumed by more than one CMP or needing independently
-versioned conformance. The governance file schemas are owned and
-published by [CMP-0001](CMP-0001-artifact-store-service.md)
-(`SchemaValidator.D-2`), so no other component needs a standalone
-seam onto this one today. All API items resolve against this document's
+Decomposition per [DEC-0162](../decisions/DEC-0162-cmp-0004-element-decomposition.md),
+amended by [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md):
+nine elements here — the `GovernanceConfig` value graduated to
+[CMP-0016](CMP-0016-governance-config-and-role-resolution.md) together
+with the shared `RoleResolution` service, so role-membership and
+delegation-window evaluation is implemented exactly once for this
+component and [CMP-0007](CMP-0007-identity-and-access.md) both.
+References to `GovernanceConfig` below resolve against
+[CMP-0016](CMP-0016-governance-config-and-role-resolution.md)'s
+contract via `## Dependencies`. The governance file schemas are owned
+and published by [CMP-0001](CMP-0001-artifact-store-service.md)
+(`SchemaValidator.D-2`). All API items resolve against this document's
 own value/event elements or against dependency contracts named in
 `## Dependencies`, per the schema-resolution rule
 ([DEC-0089](../decisions/DEC-0089-api-schema-resolution-rule.md)).
-
-### GovernanceConfig (value)
-
-Implements: [ST-0012](../stories/ST-0012-governance-config-schemas.md)
-
-- `GovernanceConfig.D-1` — the parsed, typed representation of the five
-  `governance/` files (`roles.yaml`, `domains.yaml`,
-  `gate-policies.yaml`, `repos.yaml`, `people.yaml`) at a resolving git
-  ref; schema shape is exactly
-  [CMP-0001](CMP-0001-artifact-store-service.md)'s published
-  `SchemaValidator.D-2` assets — this element defines no schema of its
-  own, only the in-memory value every other element in this component
-  reads. Equality by value at a given ref; never persisted
-  independently of git (per [DEC-0037](../decisions/DEC-0037-governance-as-code.md),
-  [DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).
-- `GovernanceConfig.D-2` — role membership entries carry stable
-  person-ids from `people.yaml` and optional time-bounded delegation
-  windows; domain entries carry an approver-routing target and an
-  optional exclusivity flag; gate-policy entries carry per-artifact-type
-  committee composition and a timeout-to-default default rule
-  (per [DEC-0040](../decisions/DEC-0040-role-pool-delegation.md),
-  [DEC-0020](../decisions/DEC-0020-configurable-gate-policies.md),
-  [DEC-0046](../decisions/DEC-0046-person-registry.md)).
 
 ### GovernanceInit (service)
 
@@ -112,7 +94,13 @@ Implements: [ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md
 - `PolicyCompiler.B-1` — host teams are projections of
   `GovernanceConfig` role membership, created and synced through the
   connector's team-administration operations only — never edited
-  host-side as truth (per [DEC-0037](../decisions/DEC-0037-governance-as-code.md)).
+  host-side as truth; when the connector's capability manifest
+  declares `team_sync: false` (e.g. a repo-only GitHub App install),
+  the compiler emulates role routing in its compiled plan instead of
+  requiring native teams
+  (per [DEC-0037](../decisions/DEC-0037-governance-as-code.md),
+  [DEC-0176](../decisions/DEC-0176-github-capability-and-admin-surface.md),
+  [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
 - `PolicyCompiler.B-2` — registers every required check —
   `gate-policy`, `conflicts-open`, the tier-2 suite, the
   mechanical-diff validator, and the System-Decision template-
@@ -161,8 +149,14 @@ Implements: [ST-0014](../stories/ST-0014-gate-policy-check.md)
   named approver or their active time-bounded delegate passes
   (per [DEC-0040](../decisions/DEC-0040-role-pool-delegation.md)).
 - `GatePolicyCheck.B-4` — reviews posted by a program user pass only
-  with verified human attribution
-  (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+  with verified human attribution: the attribution block's signature
+  verifies under the active public key matching its `key_id` and its
+  person-id holds the required role — schema and verification contract
+  per [CMP-0007](CMP-0007-identity-and-access.md)'s
+  `AttributionBlock.B-2`
+  (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
+  [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
+  [DEC-0238](../decisions/DEC-0238-attribution-key-rotation.md)).
 - `GatePolicyCheck.B-5` — every verdict carries a human-readable
   explanation naming the governing policy and the satisfying facts, and
   on failure, exactly what is missing
@@ -481,17 +475,35 @@ Implements: [ST-0018](../stories/ST-0018-governance-event-log-metrics.md)
   `GovernanceEventLog` persists behind; consumed sections: all
   operation families and the atomicity guarantee
   (`AppDatabasePort.A-1..A-3`, `AppDatabasePort.B-1`).
-- **Code-host connector contract** ([EP-0005](../epics/EP-0005-connectors-and-identity.md);
-  future standalone `protocol`-type CMP per
-  [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md)) —
-  consumption forward-declared per
-  [DEC-0132](../decisions/DEC-0132-connector-consumption-forward-declared.md),
-  binding on [EP-0005](../epics/EP-0005-connectors-and-identity.md)'s
-  refinement. Operations consumed: branch-protection administration;
-  team creation/sync; required-check registration; check-run result
-  posting; PR review-state reads; permission probe. All consumed per
-  the capability manifest; hermetic testing via the local-git fake
-  connector (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
+- [CMP-0016](CMP-0016-governance-config-and-role-resolution.md) —
+  the graduated governance-config value and role evaluation; consumed
+  sections: `GovernanceConfig.D-1`/`D-2` (the parsed value every
+  policy evaluation reads), `RoleResolution.A-1`/`A-2` and
+  `RoleClaims.D-1` (role membership and delegation-window judgements
+  for `GatePolicyCheck.B-1`/`B-3` and committee quorum composition)
+  (per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
+- [CMP-0007](CMP-0007-identity-and-access.md) — consumed sections:
+  `AttributionBlock.D-1`/`D-2`/`B-2` (the block schema, canonical
+  serialization, and verification contract behind
+  `GatePolicyCheck.B-4`); this component holds only public keys —
+  verification capability never implies signing capability
+  (per [DEC-0233](../decisions/DEC-0233-attribution-block-stays-in-cmp-0007.md),
+  [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
+  [DEC-0238](../decisions/DEC-0238-attribution-key-rotation.md)).
+- [CMP-0005](CMP-0005-code-host-connector-protocol.md) — the code-host
+  connector contract, formerly forward-declared per
+  [DEC-0132](../decisions/DEC-0132-connector-consumption-forward-declared.md)
+  and now the approved standalone `protocol`-type CMP promised by
+  [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md).
+  Consumed sections: `CodeHostConnector.A-6` (required-check
+  registration), `A-7` (branch-protection administration), `A-8` (team
+  administration), `A-5` (check-run result posting), `A-3` (PR
+  review-state reads), `A-10` (permission probe) — matching the
+  consumer list recorded in
+  [CMP-0005](CMP-0005-code-host-connector-protocol.md)'s Dependencies
+  section. All consumed per the `CapabilityManifest`;
+  hermetic testing via the local-git fake connector
+  (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
   [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).
 - **Graph Index queries** ([EP-0004](../epics/EP-0004-graph-index.md),
   not yet a standalone CMP) — consumption forward-declared, binding on

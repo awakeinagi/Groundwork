@@ -12,7 +12,8 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0019, ST-0022]
   impacted-by: [ST-0019, ST-0022]
-cites: [DEC-0033, DEC-0043, DEC-0046, DEC-0143, DEC-0152, DEC-0153, DEC-0154]
+cites: [DEC-0033, DEC-0043, DEC-0046, DEC-0143, DEC-0152, DEC-0153, DEC-0154,
+        DEC-0232]
 ---
 
 # ST-0021: Delegated Reviews and Program-User Attribution
@@ -59,6 +60,10 @@ attribution block where it doesn't.
 [CMP-0007](../components/CMP-0007-identity-and-access.md) — supplies
 the review-delegation, token-handling, and attribution-signing
 contract sections.
+
+[CMP-0015](../components/CMP-0015-secret-store.md) — supplies the
+graduated secret-store contract the tokens and signing key live behind
+(per [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md)).
 
 ## Out of Scope
 

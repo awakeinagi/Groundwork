@@ -14,7 +14,7 @@ links:
   depends-on: [CMP-0003, CMP-0012, CMP-0013, CMP-0014]
 cites: [DEC-0001, DEC-0102, DEC-0121, DEC-0122, DEC-0124, DEC-0132, DEC-0133,
         DEC-0152, DEC-0201, DEC-0203, DEC-0204, DEC-0205, DEC-0206, DEC-0208,
-        DEC-0222, DEC-0226, DEC-0227, DEC-0228]
+        DEC-0222, DEC-0226, DEC-0227, DEC-0228, DEC-0232]
 ---
 
 # CMP-0010: Composition Root
@@ -272,7 +272,9 @@ Boundary statements (per
   (per
   [DEC-0205](../decisions/DEC-0205-graduation-trigger-reuse-and-spikes.md)).
 - Secret storage and envelope-encryption mechanics — the Root loads the
-  master key from the environment and hands it to the app-database-backed
-  secrets facility ([ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)/[CMP-0007](CMP-0007-identity-and-access.md));
+  master key from the environment and hands it to the Secret Store
+  ([CMP-0015](CMP-0015-secret-store.md), graduated per
+  [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md); flow per
+  [ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md));
   the encryption itself lives there, not here (per
   [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).

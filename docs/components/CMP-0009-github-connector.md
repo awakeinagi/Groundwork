@@ -11,11 +11,11 @@ context: integration
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
-  depends-on: [CMP-0005]
+  depends-on: [CMP-0005, CMP-0015]
 cites: [DEC-0014, DEC-0028, DEC-0043, DEC-0045, DEC-0049, DEC-0079,
         DEC-0141, DEC-0142, DEC-0145, DEC-0152, DEC-0153, DEC-0167,
         DEC-0168, DEC-0169, DEC-0170, DEC-0172, DEC-0173, DEC-0174,
-        DEC-0175, DEC-0176, DEC-0177]
+        DEC-0175, DEC-0176, DEC-0177, DEC-0232]
 ---
 
 # CMP-0009: GitHub Connector
@@ -240,8 +240,10 @@ before writing, returning it instead of creating a duplicate
   deployment configuration alone
   (per [DEC-0176](../decisions/DEC-0176-github-capability-and-admin-surface.md)).
 - `IG-5` — each App installation's webhook signing secret is generated
-  per-installation and stored in the encrypted app-database secret
-  store, never shared across installations
+  per-installation and stored in the Secret Store
+  ([CMP-0015](CMP-0015-secret-store.md), graduated per
+  [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md)), never
+  shared across installations
   (per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md),
   [DEC-0176](../decisions/DEC-0176-github-capability-and-admin-surface.md)).
 - `IG-6` — `A-6`/`A-7` branch-protection administration targets
@@ -293,8 +295,13 @@ before writing, returning it instead of creating a duplicate
   they program against
   [CMP-0005](CMP-0005-code-host-connector-protocol.md)'s contract, not
   this adapter directly.
-- Identity component ([CMP-0007](CMP-0007-identity-and-access.md),
-  not yet contract-complete) — supplies the delegated-user OAuth token
+- [CMP-0015](CMP-0015-secret-store.md) — consumed sections:
+  `SecretStore.A-1`/`A-2` for the per-installation webhook signing
+  secrets of `IG-5`
+  (per [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md),
+  [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+- Identity component ([CMP-0007](CMP-0007-identity-and-access.md)) —
+  supplies the delegated-user OAuth token
   `A-4`'s `post_as_user` accepts, and the pre-signed
   `attribution_block` `post_as_program_user` accepts, both opaque and
   passed through unmodified

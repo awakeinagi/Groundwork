@@ -14,7 +14,7 @@ links:
   impacts: [ST-0018]
   impacted-by: [ST-0012, ST-0013, ST-0016]
 cites: [DEC-0020, DEC-0033, DEC-0036, DEC-0038, DEC-0040, DEC-0043, DEC-0141,
-        DEC-0143, DEC-0145]
+        DEC-0143, DEC-0145, DEC-0234]
 ---
 
 # ST-0014: The `gate-policy` Required Check
@@ -67,6 +67,11 @@ keeps its verdicts fresh while PRs sit open.
 
 [CMP-0004](../components/CMP-0004-governance-gate-engine.md) — supplies
 its `gate-policy` evaluation contract sections.
+
+[CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md) —
+supplies the shared role-membership/delegation evaluation the check's
+role verification rides on
+(per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
 
 ## Out of Scope
 

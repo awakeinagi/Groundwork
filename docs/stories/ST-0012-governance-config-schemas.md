@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   impacts: [ST-0013, ST-0014, ST-0015, ST-0017]
 cites: [DEC-0034, DEC-0037, DEC-0039, DEC-0040, DEC-0046, DEC-0049, DEC-0054,
-        DEC-0140]
+        DEC-0140, DEC-0234]
 ---
 
 # ST-0012: Governance Configuration Schemas and Lifecycle
@@ -59,6 +59,10 @@ seeding that bootstraps them.
 
 [CMP-0004](../components/CMP-0004-governance-gate-engine.md) — supplies
 its governance-config schema and validation contract sections.
+
+[CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md) —
+supplies the graduated `GovernanceConfig` value contract
+(per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
 
 ## Out of Scope
 

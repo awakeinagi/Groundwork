@@ -75,6 +75,18 @@ is gated).
   deployment configuration. Every other engine programs against Port
   contracts only; only the Composition Root knows which Adapters are
   actually wired in.
+- **Secret Store** — the single component holding secret material at
+  rest: envelope-encrypted storage for connector and service secrets
+  (OAuth tokens, signing keys, webhook secrets) in the app database,
+  with the master key from deployment configuration, never persisted
+  with the data.
+- **Session Token** — the opaque, revocable handle Identity & Access
+  issues after authentication; carries no claims — session state lives
+  server-side, and role claims are resolved fresh per request.
+- **Role Claims** — the resolved answer to "which roles does this
+  person hold at this moment": direct role memberships plus roles held
+  through an active time-bounded delegation window, evaluated at an
+  explicit governance ref and point in time.
 - **Handoff Manifest** — the machine-readable package (component docs,
   contracts, dependency order) that Groundwork emits for an implementation
   swarm. Groundwork's southern boundary.

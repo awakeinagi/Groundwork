@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0012]
   impacts: [ST-0021]
-cites: [DEC-0024, DEC-0033, DEC-0040, DEC-0046, DEC-0152]
+cites: [DEC-0024, DEC-0033, DEC-0040, DEC-0046, DEC-0152, DEC-0232, DEC-0234]
 ---
 
 # ST-0022: Identity — Auth Providers and Person Resolution
@@ -60,8 +60,17 @@ bootstrap-era email identities.
 ## Component Impact
 
 [CMP-0007](../components/CMP-0007-identity-and-access.md) — supplies
-the auth-provider protocol, person-resolution, and role-claims
+the auth-provider protocol, person-resolution, session, and role-claims
 contract sections.
+
+[CMP-0015](../components/CMP-0015-secret-store.md) — supplies the
+graduated secret-store contract OAuth tokens live behind
+(per [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md)).
+
+[CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md) —
+supplies the `RoleClaims` schema and shared delegation-window
+evaluation behind the role-claims criterion
+(per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
 
 ## Out of Scope
 

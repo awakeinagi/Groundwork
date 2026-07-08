@@ -2,14 +2,18 @@
 id: CMP-0007
 type: component
 title: Identity & Access
-status: draft
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 context: integration
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
-  depends-on: [CMP-0003, CMP-0005]
+  depends-on: [CMP-0003, CMP-0005, CMP-0015, CMP-0016]
+cites: [DEC-0024, DEC-0040, DEC-0043, DEC-0046, DEC-0152, DEC-0153, DEC-0154,
+        DEC-0233, DEC-0234, DEC-0235, DEC-0236, DEC-0237, DEC-0238]
 ---
 
 # CMP-0007: Identity & Access
@@ -18,37 +22,337 @@ links:
 
 Who anyone is, and how the system acts for them: the pluggable
 auth-provider protocol with the v1 email/OIDC provider
-([DEC-0024](../decisions/DEC-0024-pluggable-auth.md)), person-id
-resolution and role claims from the person registry
-([DEC-0046](../decisions/DEC-0046-person-registry.md)), OAuth
-host-identity linkage over the encrypted secret store
-([DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)),
+([DEC-0024](../decisions/DEC-0024-pluggable-auth.md)), session
+issuance and validation
+([DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)),
+person-id resolution and role claims backed by the shared
+role-resolution seam
+([DEC-0046](../decisions/DEC-0046-person-registry.md),
+[DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)),
+OAuth host-identity linkage over the secret store
+([DEC-0237](../decisions/DEC-0237-identity-owned-oauth-linking.md),
+[DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)),
 and delegated-review posting with the signed attribution block
 ([DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
 [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md)).
 
-## Pending — Ubiquitous Language
+Element decomposition per
+[SES-0045](../sessions/SES-0045-cmp-0007-identity-refinement.md):
+seven elements. Graduation review outcome: the secret store graduated
+to [CMP-0015](CMP-0015-secret-store.md)
+(per [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md));
+`AttributionBlock` stays here with
+[CMP-0004](CMP-0004-governance-gate-engine.md) consuming it as a
+dependency
+(per [DEC-0233](../decisions/DEC-0233-attribution-block-stays-in-cmp-0007.md));
+role-claims evaluation lives in
+[CMP-0016](CMP-0016-governance-config-and-role-resolution.md)
+(per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
+All API schemas resolve against this document's value elements or
+dependency contracts named in `## Dependencies`.
 
-## Pending — Design Elements
+## Ubiquitous Language
 
-Element decomposition follows story approval
-([ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md),
-[ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)).
-The attribution-block schema is a known graduation candidate — consumed
-by [CMP-0004](CMP-0004-governance-gate-engine.md) for verification
-(per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md)).
+Attribution Block, Approver, Role Claims, Secret Store, Session Token,
+Person Registry, Connector — per [CONTEXT.md](../../CONTEXT.md).
 
-## Pending — Component Invariants
+## Design Elements
 
-## Pending — Implementation Guidance
+### AuthProvider (protocol)
 
-## Pending — Dependencies
+Implements: [ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
 
-Consumes [CMP-0003](CMP-0003-app-database-port.md) (encrypted secret
-storage, per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md))
-and [CMP-0005](CMP-0005-code-host-connector-protocol.md) (review
-posting operations); exact consumed sections declared at contract time.
+- `AuthProvider.A-1` — `authenticate(credential) → AuthSubject`; the
+  credential shape is provider-specific (email challenge, OIDC
+  callback assertion); typed error: `auth-failed` (never
+  distinguishes unknown-user from bad-credential)
+  (per [DEC-0024](../decisions/DEC-0024-pluggable-auth.md)).
+- `AuthProvider.B-1` — conformance: swapping providers is deployment
+  configuration plus a new adapter passing the shared provider suite —
+  no core change; providers are stateless — sessions belong to
+  `IdentityService`, never a provider
+  (per [DEC-0024](../decisions/DEC-0024-pluggable-auth.md),
+  [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
 
-## Pending — Acceptance & Test Expectations
+### AuthSubject (value)
 
-## Pending — Out of Scope
+Implements: [ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+
+- `AuthSubject.D-1` — schema: `provider_id` (string), `subject`
+  (string, stable within the provider), optional `email`, optional
+  `display_name`. Never a person-id — resolution is
+  `IdentityService.A-1`'s job
+  (per [DEC-0024](../decisions/DEC-0024-pluggable-auth.md),
+  [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+
+### SessionToken (value)
+
+Implements: [ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+
+- `SessionToken.D-1` — schema: `token` (opaque handle, ≥128 bits of
+  entropy), `expires_at` (timestamp). Carries no claims and no
+  identity payload; everything else is server-side state
+  (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+
+### IdentityService (service)
+
+Implements: [ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+
+- `IdentityService.A-1` — `resolve(auth_subject) → person_id` via the
+  `people.yaml` value (`GovernanceConfig.D-1`); typed error:
+  `unmapped-subject`
+  (per [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+- `IdentityService.A-2` — `host_identity(person_id, identity_column) →
+  identifier` — the registry entry's provider-specific column (host
+  username, Jira accountId) each connector resolves from; typed
+  errors: `not-found` (no such person), `not-linked` (column empty)
+  (per [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+- `IdentityService.A-3` — `claims(person_id) → RoleClaims`, delegated
+  to `RoleResolution.A-1`
+  ([CMP-0016](CMP-0016-governance-config-and-role-resolution.md)) at
+  the current governance ref and time; typed error: `unknown-person`
+  (per [DEC-0040](../decisions/DEC-0040-role-pool-delegation.md),
+  [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
+- `IdentityService.A-4` — `issue_session(auth_subject) → SessionToken`:
+  resolves the person-id, records the session server-side, returns the
+  opaque handle; typed error: `unmapped-subject`
+  (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+- `IdentityService.A-5` — `validate_session(token) → {person_id}`;
+  typed error: `session-invalid` (expired, revoked, or unknown — never
+  distinguished)
+  (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+- `IdentityService.A-6` — `revoke_session(token) → ok`, idempotent
+  (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+- `IdentityService.A-7` — `map_emails(emails[]) → {email →
+  person_id | unmapped}` — the batch resolver backing
+  [CMP-0001](CMP-0001-artifact-store-service.md)'s
+  `migrate-person-ids` mechanical write; pure read over the registry
+  (per [DEC-0235](../decisions/DEC-0235-person-id-migration-split.md),
+  [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+- `IdentityService.B-1` — session state (person-id, expiry) lives in
+  the app database via `AppDatabasePort.A-3`; the handle is
+  meaningless without it; revocation takes effect on the next
+  `validate_session` call — there is no cached validity
+  (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+- `IdentityService.B-2` — session TTL comes from deployment
+  configuration; expiry is enforced at validation, not by background
+  cleanup (cleanup is hygiene, never semantics)
+  (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+- `IdentityService.B-3` — role claims are resolved fresh per request
+  via `A-3`, never embedded in the session — a delegation window
+  opening or closing changes the next request's claims
+  (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md),
+  [DEC-0040](../decisions/DEC-0040-role-pool-delegation.md)).
+
+### HostIdentityLink (entity)
+
+Implements: [ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md),
+[ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+
+- `HostIdentityLink.D-1` — identity `(person_id, host)`; attributes:
+  `host_username`, `token_ref` (a
+  [CMP-0015](CMP-0015-secret-store.md) key — never the token itself),
+  `scopes`, `linked_at`; states: `pending | linked | needs-reauth`
+  (per [DEC-0046](../decisions/DEC-0046-person-registry.md),
+  [DEC-0237](../decisions/DEC-0237-identity-owned-oauth-linking.md),
+  [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+- `HostIdentityLink.A-1` — `begin_link(person_id, host) →
+  {authorize_url, state}`: starts the OAuth grant, records `pending`
+  keyed by the `state` nonce
+  (per [DEC-0237](../decisions/DEC-0237-identity-owned-oauth-linking.md)).
+- `HostIdentityLink.A-2` — `complete_link(state, callback_params) →
+  linked`: finishes the code exchange, stores the token via
+  `SecretStore.A-1`, transitions to `linked`; typed errors:
+  `link-failed` (exchange rejected), `not-found` (unknown/expired
+  `state`)
+  (per [DEC-0237](../decisions/DEC-0237-identity-owned-oauth-linking.md),
+  [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+- `HostIdentityLink.A-3` — `status(person_id, host) → unlinked |
+  pending | linked | needs-reauth` — the UI's "shown as connected"
+  read (per [DEC-0237](../decisions/DEC-0237-identity-owned-oauth-linking.md),
+  [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+- `HostIdentityLink.A-4` — `unlink(person_id, host) → ok`: deletes the
+  stored token (`SecretStore.A-3`) and the link record; idempotent
+  (per [DEC-0237](../decisions/DEC-0237-identity-owned-oauth-linking.md)).
+- `HostIdentityLink.B-1` — lifecycle: `begin_link` supersedes any
+  prior `pending` for the same `(person_id, host)`; a host-reported
+  expired/revoked token transitions `linked → needs-reauth` — the
+  state that drives
+  [ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)'s
+  re-authorization prompt; re-linking from `needs-reauth` runs the
+  same `A-1`/`A-2` flow
+  (per [DEC-0237](../decisions/DEC-0237-identity-owned-oauth-linking.md),
+  [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+
+### AttributionBlock (value)
+
+Implements: [ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)
+
+- `AttributionBlock.D-1` — schema: `schema_version` (int),
+  `person_id`, `pr_ref`, `decision_timestamp`, `key_id`, `signature`
+  (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
+  [DEC-0238](../decisions/DEC-0238-attribution-key-rotation.md)).
+- `AttributionBlock.D-2` — canonical serialization: UTF-8 JSON with
+  lexicographically sorted keys and no insignificant whitespace; the
+  signature covers the canonical bytes of all fields except
+  `signature`
+  (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md)).
+- `AttributionBlock.B-1` — signing: Ed25519-class service key; the
+  private key lives in [CMP-0015](CMP-0015-secret-store.md); the
+  ordered active public-key list, keyed by `key_id`, is deployment
+  configuration
+  (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
+  [DEC-0238](../decisions/DEC-0238-attribution-key-rotation.md),
+  [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+- `AttributionBlock.B-2` — verification contract (consumed by
+  [CMP-0004](CMP-0004-governance-gate-engine.md)): valid iff the
+  signature verifies under the configured public key matching
+  `key_id` AND the `person_id` resolves in `people.yaml` to a holder
+  of the required role at verification time; verification capability
+  never implies signing capability
+  (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
+  [DEC-0238](../decisions/DEC-0238-attribution-key-rotation.md),
+  [DEC-0233](../decisions/DEC-0233-attribution-block-stays-in-cmp-0007.md)).
+
+### ReviewDelegationService (service)
+
+Implements: [ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)
+
+- `ReviewDelegationService.A-1` — `post_review(pr_ref, person_id,
+  verdict, body) → {path: as-user | program-user}`; typed errors:
+  `reauth-required` (OAuth path with expired/revoked token),
+  `unmapped-person`, `no-path-configured` (the person's roles map to
+  no review path); `CodeHostConnector.A-4`'s own typed errors
+  (`not-found`, `permission-denied`, `rate-limited`) pass through
+  unmapped — they describe the host interaction, not the delegation
+  (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
+  [DEC-0154](../decisions/DEC-0154-review-path-mapping-deployment-config.md)).
+- `ReviewDelegationService.B-1` — path selection reads the
+  role→review-path mapping from deployment configuration at review
+  time; no governance file is consulted or modified
+  (per [DEC-0154](../decisions/DEC-0154-review-path-mapping-deployment-config.md)).
+- `ReviewDelegationService.B-2` — as-user path: fetches the token via
+  the person's `HostIdentityLink`, posts through
+  `CodeHostConnector.A-4` `review.post_as_user` — host-side audit
+  shows the real approver
+  (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+- `ReviewDelegationService.B-3` — program-user path: constructs the
+  `AttributionBlock`, signs it, posts through `CodeHostConnector.A-4`
+  `review.post_as_program_user`
+  (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
+  [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md)).
+- `ReviewDelegationService.B-4` — an expired or revoked token on the
+  as-user path fails with `reauth-required` and flips the link to
+  `needs-reauth`; it **never** silently falls back to the program
+  user — that would misattribute the review path
+  (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
+  [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md)).
+
+## Component Invariants
+
+- `C-1` — no secret material (OAuth tokens, the signing key) is
+  stored, returned, or logged by this component outside
+  [CMP-0015](CMP-0015-secret-store.md); contracts traffic only in
+  `token_ref` keys
+  (per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+- `C-2` — every identity that crosses this component's boundary
+  outward is a person-id; raw provider subjects appear only in
+  `AuthSubject` inputs
+  (per [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+- `C-3` — no role-membership or delegation-window judgement is
+  computed here; all claims come from
+  [CMP-0016](CMP-0016-governance-config-and-role-resolution.md)'s
+  `RoleResolution`
+  (per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
+
+## Implementation Guidance
+
+### Constraints
+
+- `IG-1` — the v1 auth provider is email/OIDC; organizational SSO
+  arrives as a new `AuthProvider` adapter, never a core change
+  (per [DEC-0024](../decisions/DEC-0024-pluggable-auth.md)).
+- `IG-2` — the v1 signing algorithm is Ed25519; the `key_id` scheme
+  must allow a future algorithm change to ride the same rotation
+  mechanism (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
+  [DEC-0238](../decisions/DEC-0238-attribution-key-rotation.md)).
+
+### Notes
+
+- OIDC provider adapters should use a mature library for the code
+  exchange and assertion validation rather than hand-rolling; the
+  provider suite exercises semantics, not library choice.
+- The re-authorization prompt surfaced on `reauth-required` is
+  rendered by the UI ([ST-0042](../stories/ST-0042-identity-login-and-oauth-linking.md));
+  this component only guarantees the typed error and the
+  `needs-reauth` state.
+
+## Dependencies
+
+- [CMP-0003](CMP-0003-app-database-port.md) — consumed sections:
+  `AppDatabasePort.A-1` (UnitOfWork), `AppDatabasePort.A-3`
+  (bookkeeping) for session and link state.
+- [CMP-0005](CMP-0005-code-host-connector-protocol.md) — consumed
+  sections: `CodeHostConnector.A-4` (both review-posting operations);
+  the attribution block crosses it as an opaque pre-signed value.
+- [CMP-0015](CMP-0015-secret-store.md) — consumed sections:
+  `SecretStore.A-1`/`A-2`/`A-3` for OAuth tokens and the attribution
+  signing key.
+- [CMP-0016](CMP-0016-governance-config-and-role-resolution.md) —
+  consumed sections: `GovernanceConfig.D-1`/`D-2` (the `people.yaml`
+  value for `A-1`/`A-2`/`A-7`), `RoleResolution.A-1` and
+  `RoleClaims.D-1` (claims for `A-3`).
+
+## Acceptance & Test Expectations
+
+1. Provider conformance: the shared suite passes with the v1
+   email/OIDC adapter; switching providers is configuration only
+   (per [DEC-0024](../decisions/DEC-0024-pluggable-auth.md)).
+2. Session lifecycle: issue → validate → revoke → `session-invalid`;
+   expiry honored at validation across restart; revocation effective
+   on the next call
+   (per [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+3. Review paths: both paths exercised against the local-git fake
+   connector; the negative path — expired/revoked token — yields
+   `reauth-required`, flips the link to `needs-reauth`, and posts
+   nothing as the program user
+   (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+4. Attribution round-trip: sign → canonical-serialize → verify with
+   the configured public key; a rotation fixture (two active keys,
+   blocks signed under each) verifies both; a tampered field fails
+   (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
+   [DEC-0238](../decisions/DEC-0238-attribution-key-rotation.md)).
+5. Secret hygiene: captured logs and error output across the suite
+   contain no token or key material
+   (per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+6. Migration mapping: `map_emails` resolves a bootstrap-era fixture
+   (mapped, unmapped, and duplicate-email cases) correctly
+   (per [DEC-0235](../decisions/DEC-0235-person-id-migration-split.md)).
+7. Delegation freshness: a delegation window opening between two
+   requests changes the second request's claims with no re-login
+   (per [DEC-0040](../decisions/DEC-0040-role-pool-delegation.md),
+   [DEC-0236](../decisions/DEC-0236-identity-owned-sessions.md)).
+
+## Out of Scope
+
+- Login and linking UI — [ST-0042](../stories/ST-0042-identity-login-and-oauth-linking.md)
+  / [EP-0006](../epics/EP-0006-refinement-web-ui.md); this component
+  supplies the contracts those components call.
+- Attribution verification at gate time — the `gate-policy` check's
+  side of the seam ([CMP-0004](CMP-0004-governance-gate-engine.md),
+  [ST-0014](../stories/ST-0014-gate-policy-check.md)); this component
+  publishes the block and its verification contract.
+- Host review API plumbing — [CMP-0005](CMP-0005-code-host-connector-protocol.md)
+  defines it, [CMP-0009](CMP-0009-github-connector.md) implements it.
+- Executing `migrate-person-ids` — [CMP-0001](CMP-0001-artifact-store-service.md)'s
+  mechanical-write operation; this component only maps
+  (per [DEC-0235](../decisions/DEC-0235-person-id-migration-split.md)).
+- Secret storage mechanics — [CMP-0015](CMP-0015-secret-store.md).
+- Role-membership evaluation — [CMP-0016](CMP-0016-governance-config-and-role-resolution.md).
+- Machine-verified program-user approvals of mechanical/System-Decision
+  auto-PRs — they carry no attribution block; the requirement applies
+  only to reviews standing in for a human approver
+  (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md),
+  [DEC-0143](../decisions/DEC-0143-system-decisions-via-auto-pr.md)).
+- Participant Profiles — interaction memory, not identity
+  ([EP-0002](../epics/EP-0002-refinement-session-agent.md)).
