@@ -83,6 +83,13 @@ trackable units ([DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)).
 
 ## Rules
 
+- **Graduation review (required before gating)**: every design element
+  is checked against the graduation rule of
+  [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md) —
+  consumed by more than one CMP (actual or contract-certain), or
+  needing independently versioned conformance — and the outcome is
+  recorded in the gating session
+  ([DEC-0136](../decisions/DEC-0136-graduation-review-required.md)).
 - Contract-completeness is the standard; crawlable cross-references (to
   Decisions, Sessions, ancestor docs) are the sanctioned fallback when an
   implementer needs more context — ideally never necessary, iteratively

@@ -247,7 +247,12 @@ unmotivated element means refine or cut. Model
 repositories/workflows/policies as compositions of the five types, never
 ad-hoc types. When an element is consumed by more than one component (or
 needs independently versioned conformance), graduate it to its own
-`component-type:`-tagged CMP. Put refinement-made stack commitments in
+`component-type:`-tagged CMP. **Graduation review is a required
+step before gating**: check every element against the graduation rule
+(consumed by more than one CMP — actual or contract-certain — or
+needing independently versioned conformance; the graph tool's
+`elements` command lists candidates) and record the outcome in the
+gating session — citing a rule is not applying it. Put refinement-made stack commitments in
 Implementation Guidance → Constraints (decision-cited); anything merely
 helpful goes in Notes and must never be load-bearing. The gate test:
 could a competent implementer with no access to you build and test this

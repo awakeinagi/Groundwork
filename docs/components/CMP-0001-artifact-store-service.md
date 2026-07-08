@@ -9,14 +9,15 @@ context: canonical-store
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
+  depends-on: [CMP-0002, CMP-0003]
 cites: [DEC-0009, DEC-0018, DEC-0026, DEC-0028, DEC-0029, DEC-0030, DEC-0031,
         DEC-0033, DEC-0034, DEC-0035, DEC-0038, DEC-0043, DEC-0045, DEC-0047,
         DEC-0048, DEC-0055, DEC-0057, DEC-0059, DEC-0060, DEC-0077, DEC-0079,
         DEC-0080, DEC-0081, DEC-0082, DEC-0085, DEC-0087, DEC-0088, DEC-0089,
         DEC-0092, DEC-0093, DEC-0097, DEC-0098, DEC-0099, DEC-0101, DEC-0102,
         DEC-0103, DEC-0104, DEC-0108, DEC-0109, DEC-0110, DEC-0121, DEC-0122,
-        DEC-0124, DEC-0125, DEC-0126, DEC-0127, DEC-0128, DEC-0129, DEC-0130,
-        DEC-0131, DEC-0132]
+        DEC-0124, DEC-0125, DEC-0126, DEC-0127, DEC-0130, DEC-0131, DEC-0132,
+        DEC-0134, DEC-0135]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -37,7 +38,11 @@ Write, Gate, Design Element, Port, Adapter — per
 
 ## Design Elements
 
-Decomposition per [DEC-0126](../decisions/DEC-0126-cmp-0001-element-decomposition.md).
+Decomposition per [DEC-0126](../decisions/DEC-0126-cmp-0001-element-decomposition.md);
+two seam elements graduated to standalone components per
+[DEC-0134](../decisions/DEC-0134-graduate-change-event.md)/[DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md):
+the event contract lives in [CMP-0002](CMP-0002-change-event.md), the
+app database port in [CMP-0003](CMP-0003-app-database-port.md).
 One OpenAPI document spans the API items of all services
 (per [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md));
 all non-2xx responses use the problem+json model
@@ -103,9 +108,11 @@ Implements: [ST-0002](../stories/ST-0002-storage-api-core.md)
 - `StorageService.B-2` — external read-only git access is sanctioned
   for consumers pinned to refs; such consumers never observe
   half-written state because writes are single commits (per [DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md)).
-- `StorageService.B-3` — every landed write causes exactly one
-  `ChangeEvent` emission via the outbox (see `ChangeEvent.B-1`,
-  `AppDatabasePort.B-1`) (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
+- `StorageService.B-3` — every landed write causes exactly one event
+  emission via the outbox, conforming to
+  [CMP-0002](CMP-0002-change-event.md)'s emission item and
+  [CMP-0003](CMP-0003-app-database-port.md)'s atomicity item
+  (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0134](../decisions/DEC-0134-graduate-change-event.md), [DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md)).
 
 ### BranchOrchestrator (service)
 
@@ -270,8 +277,9 @@ Implements: [ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md)
   disagreement is repaired by the next reconciliation event (per
   [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
 - `ItemBranch.D-1` — branch metadata (artifact-id, pr-ref,
-  lifecycle-state, last-reconciled-sha) is bookkeeping behind the
-  AppDatabasePort, rebuildable from refs and host PR state
+  lifecycle-state, last-reconciled-sha) is bookkeeping behind the app
+  database port ([CMP-0003](CMP-0003-app-database-port.md)),
+  rebuildable from refs and host PR state
   (per [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md), [DEC-0131](../decisions/DEC-0131-rebuild-sufficiency-invariant.md)).
 
 ### SessionWorktree (entity)
@@ -287,8 +295,9 @@ Implements: [ST-0004](../stories/ST-0004-session-worktree-management.md)
   bookkeeping; inactivity-closed worktrees are GC'd only after their
   partial distillation commits are on a ref (per [DEC-0057](../decisions/DEC-0057-session-lifecycle.md), [DEC-0131](../decisions/DEC-0131-rebuild-sufficiency-invariant.md)).
 - `SessionWorktree.D-1` — worktree record (artifact-id, session-id,
-  branch-ref, state, last-activity) is bookkeeping behind the
-  AppDatabasePort (per [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)).
+  branch-ref, state, last-activity) is bookkeeping behind the app
+  database port ([CMP-0003](CMP-0003-app-database-port.md))
+  (per [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)).
 
 ### ArtifactId (value)
 
@@ -298,57 +307,6 @@ Implements: [ST-0005](../stories/ST-0005-id-allocation.md)
   from the closed artifact-type set; equality by value; immutable;
   sequential per prefix; never reused even after deletion or
   abandonment on unmerged branches (per [DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md), [DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md)).
-
-### ChangeEvent (event)
-
-Implements: [ST-0008](../stories/ST-0008-change-event-stream.md)
-
-- `ChangeEvent.D-1` — payload schema: `event_id` (uuid),
-  `schema_version` (int), `artifact_id` (ArtifactId), `artifact_type`,
-  `branch`, `commit` (sha), `kind` (closed enum: `created |
-  content-amended | status-changed | merged | deleted`),
-  `changed_fields[]`, `occurred_at` (timestamp). Enum or payload
-  changes are gated contract changes (per [DEC-0128](../decisions/DEC-0128-change-event-closed-schema.md), [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)).
-- `ChangeEvent.B-1` — emission: every write landing in the repository —
-  content, mechanical, merge — emits exactly one event via the
-  transactional outbox (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
-- `ChangeEvent.B-2` — delivery: at-least-once with per-artifact
-  ordering; consumers are idempotent by contract; no cross-artifact
-  ordering or exactly-once guarantee exists (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
-- `ChangeEvent.B-3` — merge events carry what the Graph Index needs to
-  promote overlay state to the main view and drop the overlay
-  (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)).
-- `ChangeEvent.B-4` — replayability: the stream is derivable from git
-  history for any ref range; a consumer rebuilt from scratch converges
-  to the state of one that consumed live. The outbox is delivery
-  plumbing, never truth (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0131](../decisions/DEC-0131-rebuild-sufficiency-invariant.md)).
-
-### AppDatabasePort (protocol)
-
-Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
-[ST-0008](../stories/ST-0008-change-event-stream.md)
-
-- `AppDatabasePort.A-1` — `begin() → UnitOfWork` with atomic
-  commit/rollback across all operations enlisted in it (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
-- `AppDatabasePort.A-2` — outbox family: `outbox.append(events[],
-  uow)`; `outbox.claim(batch-size) → leased events`;
-  `outbox.ack(lease)` / `outbox.nack(lease)` for the dispatcher's
-  retry loop (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
-- `AppDatabasePort.A-3` — bookkeeping family:
-  `bookkeeping.put/get/delete(namespace, key, document)` for
-  operational records (worktree state, branch metadata, retry
-  counters); no ID-counter surface exists on the port (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md),
-  [DEC-0125](../decisions/DEC-0125-port-counters-exclude-id-allocation.md)).
-- `AppDatabasePort.B-1` — atomicity guarantee: outbox append and the
-  write's bookkeeping commit or roll back together within one
-  UnitOfWork (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
-- `AppDatabasePort.B-2` — no SQL crosses the seam; adapters implement
-  semantics, not a dialect. The Adapter is selected by deployment
-  configuration only (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md), [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)).
-- `AppDatabasePort.B-3` — conformance expectations: a shared suite
-  exercises every operation family including UnitOfWork atomicity under
-  failure injection; passing it is the definition of a valid Adapter;
-  the v1 DuckDB Adapter passes it (per [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md), [DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
 
 ## Component Invariants
 
@@ -370,8 +328,9 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
 
 - `IG-1` — v1 storage stack is embedded-only; the app database engine
   is DuckDB behind the port (per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md), [DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
-- `IG-2` — all app-database access goes through the AppDatabasePort;
-  Adapter selection is deployment configuration (per [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md), [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)).
+- `IG-2` — all app-database access goes through the app database port
+  ([CMP-0003](CMP-0003-app-database-port.md)); Adapter selection is
+  deployment configuration (per [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md), [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)).
 - `IG-3` — ID counters are rebuilt by rescan-on-boot over all refs; no
   durable counter store may be introduced (per [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md), [DEC-0125](../decisions/DEC-0125-port-counters-exclude-id-allocation.md)).
 - `IG-4` — the reference implementation is Python; the OpenAPI contract
@@ -393,6 +352,15 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
 
 ## Dependencies
 
+- [CMP-0002](CMP-0002-change-event.md) — the event contract this
+  service emits against; consumed sections: payload schema and emission
+  semantics (`ChangeEvent.D-1`, `ChangeEvent.B-1`)
+  (per [DEC-0134](../decisions/DEC-0134-graduate-change-event.md)).
+- [CMP-0003](CMP-0003-app-database-port.md) — the app database port
+  this service consumes for outbox and bookkeeping; consumed sections:
+  all operation families and the atomicity guarantee
+  (`AppDatabasePort.A-1..A-3`, `AppDatabasePort.B-1`)
+  (per [DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md)).
 - **Code-host connector contract** ([EP-0005](../epics/EP-0005-connectors-and-identity.md);
   future standalone `protocol`-type CMP per
   [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md)) —
@@ -412,7 +380,8 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
    the implementation (per [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
 2. The full orchestration suite passes hermetically against the
    local-git fake connector (per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).
-3. The AppDatabasePort conformance suite passes with the DuckDB
+3. The app database port conformance suite
+   ([CMP-0003](CMP-0003-app-database-port.md)) passes with the DuckDB
    Adapter (per [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md), [DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
 4. The tier-2 CheckSuite passes against this repository's bootstrap
    corpus as its regression baseline (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).

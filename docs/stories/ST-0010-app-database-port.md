@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   impacts: [ST-0008]
 cites: [DEC-0018, DEC-0077, DEC-0102, DEC-0103, DEC-0121, DEC-0122, DEC-0124,
-        DEC-0125]
+        DEC-0125, DEC-0135]
 ---
 
 # ST-0010: App Database Port
@@ -49,9 +49,12 @@ a config-swappable contract instead of an engine API.
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
-the app-database-port Protocol element, its conformance expectations,
-and the DuckDB-adapter Constraint in Implementation Guidance.
+[CMP-0003](../components/CMP-0003-app-database-port.md) — supplies the
+port's Protocol element, conformance expectations, and DuckDB-adapter
+Constraint (standalone protocol CMP per
+[DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md));
+[CMP-0001](../components/CMP-0001-artifact-store-service.md) consumes
+it via its Dependencies section.
 
 ## Out of Scope
 

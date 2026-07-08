@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0002, ST-0010]
   impacted-by: [ST-0002, ST-0010]
 cites: [DEC-0038, DEC-0059, DEC-0060, DEC-0066, DEC-0103, DEC-0121, DEC-0122,
-        DEC-0124]
+        DEC-0124, DEC-0134, DEC-0135]
 ---
 
 # ST-0008: Branch-Aware Change-Event Stream
@@ -49,8 +49,13 @@ consolidation freshness.
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
-the event schema and delivery guarantees in its API Contract.
+[CMP-0002](../components/CMP-0002-change-event.md) — supplies the event
+schema and delivery guarantees (graduated seam per
+[DEC-0134](../decisions/DEC-0134-graduate-change-event.md));
+[CMP-0003](../components/CMP-0003-app-database-port.md) — supplies the
+outbox operation family and atomicity guarantee. Emission wiring lives
+in [CMP-0001](../components/CMP-0001-artifact-store-service.md)'s
+behavior contract.
 
 ## Out of Scope
 

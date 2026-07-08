@@ -120,7 +120,13 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
 ## Derived Work
 
 - [CMP-0001](../components/CMP-0001-artifact-store-service.md) — Artifact
-  Store Service (draft; contract-completed by the stories below)
+  Store Service (contract-completed by the stories below)
+- [CMP-0002](../components/CMP-0002-change-event.md) — ChangeEvent
+  Contract (graduated event seam per
+  [DEC-0134](../decisions/DEC-0134-graduate-change-event.md))
+- [CMP-0003](../components/CMP-0003-app-database-port.md) — App Database
+  Port (graduated protocol seam per
+  [DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md))
 - [ST-0001](../stories/ST-0001-tier1-schema-suite.md) — Tier-1 schema suite
   and validation library
 - [ST-0002](../stories/ST-0002-storage-api-core.md) — Storage service core
