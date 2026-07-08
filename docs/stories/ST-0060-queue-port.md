@@ -68,11 +68,12 @@ a config-swappable contract instead of an engine API
 
 ## Component Impact
 
-None yet — graduates to its own standalone `protocol`-type Component
-Doc at component-derivation time, mirroring
+[CMP-0012](../components/CMP-0012-queue-port.md) — stubbed as its own
+standalone `protocol`-type Component Doc, mirroring
 [CMP-0003](../components/CMP-0003-app-database-port.md)'s pattern
 (per [DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md),
-[DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md)).
+[DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md)),
+contract pending.
 
 ## Out of Scope
 

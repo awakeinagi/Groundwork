@@ -59,8 +59,8 @@ broker or worker process in v1
 
 ## Component Impact
 
-None yet — a Component Doc for this epic's bounded context is stubbed
-once the first story here refines toward it.
+[CMP-0013](../components/CMP-0013-background-job-execution-runtime.md)
+— stubbed, contract pending.
 
 ## Out of Scope
 

@@ -73,8 +73,8 @@ Data-Seam channel split
 
 ## Component Impact
 
-None yet — a Component Doc for this epic's bounded context is stubbed
-once the first story here refines toward it.
+[CMP-0011](../components/CMP-0011-inbound-api.md) — stubbed, contract
+pending.
 
 ## Out of Scope
 

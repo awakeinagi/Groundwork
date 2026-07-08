@@ -67,8 +67,8 @@ engine references
 
 ## Component Impact
 
-None yet — a Component Doc for this epic's bounded context is stubbed
-once the first story here refines toward it.
+[CMP-0010](../components/CMP-0010-composition-root.md) — stubbed,
+contract pending.
 
 ## Out of Scope
 
