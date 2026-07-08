@@ -71,3 +71,12 @@ python3 tools/check_links.py
 Groundwork is specified using its own artifact formats. The grilling session
 that produced this design is [SES-0001](docs/sessions/SES-0001-groundwork-inception.md);
 the system's own business goal is [BG-0001](docs/goals/BG-0001-groundwork.md).
+
+## Acknowledgements
+
+Groundwork's interview technique — grilling — is an elaboration of
+[Matt Pocock](https://github.com/mattpocock)'s
+[`grilling` skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md).
+Thanks, Matt, for the original description of the technique; see
+[.agents/skills/groundwork-design-session/references/grilling.md](.agents/skills/groundwork-design-session/references/grilling.md)
+for how it's cited and applied here.

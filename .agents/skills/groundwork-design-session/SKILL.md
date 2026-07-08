@@ -16,6 +16,13 @@ contract line cites the decision (and conversation) behind it.
 You are the facilitator. The user is the stakeholder/sponsor and, usually,
 the approver at every gate.
 
+The interview technique underneath every session is **grilling** — see
+[references/grilling.md](references/grilling.md) for the core technique
+and its origin. Grilling sessions run as many rounds as it takes for the
+artifact under refinement to be clearly, unambiguously specified; there is
+no round limit. It is always better to ask one more question than to stop
+short and leave a gap — err on the side of more questions, not fewer.
+
 ## Step 0 — Assess the project state (always do this first)
 
 Run the bundled status tool from the project root:
@@ -80,6 +87,8 @@ decision distillation, and gates. The short version of the flow:
 2. **Run the inception grilling session.** Dependency-ordered clarifying
    questions, 3–4 per round, each with a recommended answer listed first.
    Challenge vague terms and record them in `CONTEXT.md` as they resolve.
+   Keep going as many rounds as it takes to reach shared understanding —
+   there is no round cap.
 3. **Record `SES-0001`** (turn-numbered transcript) and distill the
    decisions into `DEC-` records, confirming each with the user in plain
    language before marking it accepted.
@@ -214,6 +223,7 @@ only, never a substitute for editing docs.
 | Need | Read |
 |---|---|
 | Artifact types, frontmatter, links, statuses, integrity rules | [references/groundwork-system.md](references/groundwork-system.md) |
+| The grilling technique itself, and its origin | [references/grilling.md](references/grilling.md) |
 | How to grill, record sessions, distill decisions, run gates, handle conflicts/staleness, per-stage playbooks | [references/refinement-process.md](references/refinement-process.md) |
 | Copy-paste templates for every artifact + CONTEXT.md/README seeds | [references/templates.md](references/templates.md) |
 | Graph-index schema, command reference, openCypher recipe cookbook | [references/graph-queries.md](references/graph-queries.md) |
