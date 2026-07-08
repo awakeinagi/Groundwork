@@ -17,6 +17,8 @@ loads **armed** entries only into agent context.
 than one app instance serving users.
 **Subscribers:**
 - revive [SP-0002](spikes/SP-0002-postgres-pgvector-graduation.md) (per [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md))
+- revive [SP-0009](spikes/SP-0009-aws-sqs-queue-adapter-evaluation.md) (per [DEC-0205](decisions/DEC-0205-graduation-trigger-reuse-and-spikes.md))
+- revive [SP-0010](spikes/SP-0010-external-kv-store-adapter-evaluation.md) (per [DEC-0205](decisions/DEC-0205-graduation-trigger-reuse-and-spikes.md))
 **Cites:** [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md)
 
 ## TRG-0002 (armed)
@@ -24,6 +26,8 @@ than one app instance serving users.
 the single-writer embedded model (DuckDB/LadybugDB) is the bottleneck.
 **Subscribers:**
 - revive [SP-0002](spikes/SP-0002-postgres-pgvector-graduation.md) (per [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md))
+- revive [SP-0009](spikes/SP-0009-aws-sqs-queue-adapter-evaluation.md) (per [DEC-0205](decisions/DEC-0205-graduation-trigger-reuse-and-spikes.md))
+- revive [SP-0010](spikes/SP-0010-external-kv-store-adapter-evaluation.md) (per [DEC-0205](decisions/DEC-0205-graduation-trigger-reuse-and-spikes.md))
 **Cites:** [DEC-0105](decisions/DEC-0105-sp-0002-rescoped-deferred.md)
 
 ## TRG-0003 (armed)

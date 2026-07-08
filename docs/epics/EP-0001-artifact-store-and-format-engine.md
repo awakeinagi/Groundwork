@@ -10,7 +10,7 @@ created: 2026-07-05
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
-  impacts: [EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
+  impacts: [EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007, EP-0008]
   impacted-by: [EP-0003, EP-0005]
 cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018, DEC-0026, DEC-0028, DEC-0029,
         DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035, DEC-0121, DEC-0122,

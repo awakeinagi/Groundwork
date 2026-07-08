@@ -61,13 +61,20 @@ is gated).
   allowlisted context reads, installed only on allowlisted
   repositories. Never shares a credential with the Orchestrator App.
 - **Port** — a Protocol-typed seam for a swappable infrastructure
-  capability that hosts Groundwork's own state or computation. The four
-  Ports: app database, vector store, embedding, graph store. Consumers
-  program against the Port contract, never an engine API.
+  capability that hosts Groundwork's own state or computation. The six
+  Ports: app database, vector store, embedding, graph store, Queue,
+  KV-store. Consumers program against the Port contract, never an
+  engine API.
 - **Adapter** — a concrete implementation of one Port (e.g. DuckDB,
   LadybugDB, a local embedding model, a REST embedding client), selected
   by deployment configuration and valid only if it passes the Port's
   conformance test suite.
+- **Composition Root** — the single place, owned by
+  [EP-0008](docs/epics/EP-0008-backend-application-platform.md), where
+  Port contracts are bound to concrete Adapters at process startup, from
+  deployment configuration. Every other engine programs against Port
+  contracts only; only the Composition Root knows which Adapters are
+  actually wired in.
 - **Handoff Manifest** — the machine-readable package (component docs,
   contracts, dependency order) that Groundwork emits for an implementation
   swarm. Groundwork's southern boundary.

@@ -11,7 +11,7 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   depends-on: [EP-0001]
-  impacts: [EP-0001, EP-0004, EP-0005, EP-0006]
+  impacts: [EP-0001, EP-0004, EP-0005, EP-0006, EP-0008]
   impacted-by: [EP-0001, EP-0002]
 cites: [DEC-0006, DEC-0007, DEC-0020, DEC-0026, DEC-0028, DEC-0032, DEC-0036,
         DEC-0037, DEC-0038, DEC-0039, DEC-0040, DEC-0041, DEC-0042]
