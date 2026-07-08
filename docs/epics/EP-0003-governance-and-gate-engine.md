@@ -115,4 +115,22 @@ Arbiter, Impact Analysis, Stale, Re-affirmation — per
 
 ## Derived Work
 
-None yet — stories/spikes follow gate approval of this epic.
+Derived at [SES-0025](../sessions/SES-0025-ep-0003-story-derivation.md):
+
+- [CMP-0004](../components/CMP-0004-governance-gate-engine.md) —
+  Governance & Gate Engine (stub; contract-completed by the stories
+  below)
+- [ST-0012](../stories/ST-0012-governance-config-schemas.md) —
+  Governance configuration schemas and lifecycle
+- [ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md) —
+  Policy compilation and host provisioning
+- [ST-0014](../stories/ST-0014-gate-policy-check.md) — The `gate-policy`
+  required check
+- [ST-0015](../stories/ST-0015-conflicts-open-check-and-operations.md) —
+  The `conflicts-open` check and conflict operations
+- [ST-0016](../stories/ST-0016-staleness-sweep-impact-analysis.md) —
+  Staleness sweeps and impact analysis
+- [ST-0017](../stories/ST-0017-reaffirmation-flow-queues.md) —
+  Re-affirmation flow and approver queues
+- [ST-0018](../stories/ST-0018-governance-event-log-metrics.md) —
+  Governance event log and metrics API

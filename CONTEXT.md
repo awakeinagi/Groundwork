@@ -65,6 +65,11 @@ is gated).
   between the agent and one participant. The raw material Decisions distill.
 - **Decision (DEC)** — a distilled, attributable decision: context, choice,
   rationale, alternatives, source (Session or Spike). The unit of provenance.
+- **System Decision** — a Decision the gate engine authors from a fixed
+  template to record an automated outcome (e.g., a timeout-to-default
+  conflict resolution), citing the election and default rule that
+  authorized it; lands through the auto-PR path under a
+  template-conformance check, never through a mechanical write.
 - **Conflict (CFL)** — a first-class record of contradictory or competing
   requests, linking the artifacts in tension. Blocks downstream generation
   until resolved.
@@ -158,6 +163,12 @@ names below are reserved words when used as element types.
   and gate policies live as versioned, PR-gated files under `governance/`
   in the Canonical Store; host teams and branch protections are projections
   compiled from them.
+- **Governance Event Log** — the gate engine's record of governance
+  events (gate transitions, sweeps, conflict lifecycle, check activity)
+  in two truth grades: provenance-grade entries mirror facts already
+  landed in git or host history and reconverge on rebuild;
+  telemetry-grade entries are dashboard-authoritative, lossy on rebuild,
+  and never citable as provenance.
 - **Drift** — divergence between a Projection and its canonical artifact
   (e.g., a direct Jira edit), detected by sync and reconciled toward canon.
 - **Item Branch** — the git branch dedicated to one artifact's refinement,

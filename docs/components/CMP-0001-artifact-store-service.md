@@ -19,7 +19,7 @@ cites: [DEC-0009, DEC-0018, DEC-0026, DEC-0028, DEC-0029, DEC-0030, DEC-0031,
         DEC-0092, DEC-0093, DEC-0097, DEC-0098, DEC-0099, DEC-0101, DEC-0102,
         DEC-0103, DEC-0104, DEC-0108, DEC-0109, DEC-0110, DEC-0121, DEC-0122,
         DEC-0124, DEC-0125, DEC-0126, DEC-0127, DEC-0130, DEC-0131, DEC-0132,
-        DEC-0134, DEC-0135]
+        DEC-0134, DEC-0135, DEC-0142]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -370,8 +370,11 @@ Implements: [ST-0005](../stories/ST-0005-id-allocation.md)
   [DEC-0132](../decisions/DEC-0132-connector-consumption-forward-declared.md),
   binding on [EP-0005](../epics/EP-0005-connectors-and-identity.md)'s
   refinement. Operations consumed: fork provisioning; branch
-  create/delete; PR open, merge, review-state; required-check
-  registration; permission probe. All consumed per the capability
+  create/delete; PR open, merge, review-state; check-run result posting
+  (required-check *registration* is the gate engine's
+  policy-compilation duty, per
+  [DEC-0142](../decisions/DEC-0142-gate-engine-owns-check-registration.md));
+  permission probe. All consumed per the capability
   manifest (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md));
   hermetic testing via the local-git fake connector
   (per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).
