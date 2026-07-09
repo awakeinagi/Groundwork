@@ -73,3 +73,8 @@ triage/queue list view (candidate post-v1 work, not scoped here).
 Keep this view genuinely minimal per the epic's naming — it is a status
 read surface, not a mediation tool; resist scope creep toward in-view
 actions until a session-derived need justifies a new story.
+
+The `CFL-` content this view renders defines
+ST-0058's conflict-read
+routes — the Inbound API serves exactly the read surface this story
+needs, and nothing more while the view stays read-only.

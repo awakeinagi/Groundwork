@@ -23,9 +23,10 @@ cites: [DEC-0021, DEC-0035, DEC-0057, DEC-0182]
 The pluggable-UI seam every refinement session runs through: open,
 resume, append-turn, and close operations, plus streaming, for one
 participant conducting one 1:1 conversation with the agent. Every other
-in-session capability in this epic (transcript capture, guardrails,
-conflict mediation, synthesis, glossary maintenance) executes inside a
-session this engine opened.
+in-session capability in this epic (transcript capture ST-0034,
+guardrails ST-0035, conflict mediation ST-0036, synthesis ST-0037,
+glossary maintenance ST-0040) executes inside a session this engine
+opened, under this story's lifecycle and inactivity semantics.
 
 ## Acceptance Criteria
 
@@ -73,3 +74,8 @@ The engine's contract must be UI-agnostic enough that both a chat web UI
 (EP-0006) and a CLI/agent-driven
 facilitator (as used in this project's own bootstrap) can drive it
 without engine changes.
+
+ST-0059's SSE endpoint is the transport consumer of AC5's streaming
+turn append: it resumes from the stable, monotonically ordered
+per-session event ids this engine assigns, and its reconnect behavior
+leans on AC6's rule that a streaming turn counts as activity.

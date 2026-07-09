@@ -71,3 +71,11 @@ Distillation re-runs must be deterministic enough to diff, not
 byte-identical — the eval harness's drift audits
 (ST-0041) depend on a meaningful diff
 signal, not exact reproduction.
+
+Two downstream flows ride the confirmed output rather than the raw
+log: ST-0037's synthesis merges, and runs conflict detection against,
+the accepted decisions distillation commits at session close; and a
+change proposal ST-0039 routes to a refinement session resolves
+through this same capture-and-confirmation loop, so its outcome
+inherits the verbatim record and `source-span` provenance defined
+here.

@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0034, ST-0035]
   impacts: []
   impacted-by: [ST-0033, ST-0034, ST-0035]
-cites: [DEC-0052, DEC-0058, DEC-0178, DEC-0179]
+cites: [DEC-0052, DEC-0054, DEC-0058, DEC-0178, DEC-0179]
 ---
 
 # ST-0041: Evaluation Harness

@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0019, ST-0012]
   impacted-by: [ST-0019]
-cites: [DEC-0014, DEC-0016, DEC-0049, DEC-0079]
+cites: [DEC-0014, DEC-0016, DEC-0049, DEC-0079, DEC-0172]
 ---
 
 # ST-0023: Read-Only Codebase Context Access

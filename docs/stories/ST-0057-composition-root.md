@@ -26,7 +26,12 @@ to concrete Adapters at process startup, from a structured deployment
 config file — so every other story in this epic, and every engine
 epic's Port, rides one config-swappable seam instead of hard-wired
 engine references
-(DEC-0201).
+(DEC-0201). The single
+process being composed is the standalone Groundwork application itself
+(per DEC-0001). The
+depends-on edges on ST-0060 and ST-0062 are deliberate build-order:
+the Root cannot wire an Adapter for a Port whose contract does not
+exist yet (per DEC-0209).
 
 ## Acceptance Criteria
 
@@ -91,3 +96,9 @@ The config schema's per-Port shape (adapter name + adapter-specific
 settings block) should stay uniform across all six Ports even though
 today only the embedding Port has a genuine v1 choice — that
 uniformity is what keeps a future Adapter swap a config-only change.
+
+The two Inbound API stories ride this Root directly: ST-0058's route
+handlers and ST-0059's SSE streaming run in the process this story
+assembles and reach every engine and Port through the bindings it
+creates at startup — never through directly constructed Adapters
+(per DEC-0122).

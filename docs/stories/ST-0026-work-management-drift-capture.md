@@ -11,7 +11,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0025]
   impacted-by: [ST-0025]
-cites: [DEC-0033, DEC-0044, DEC-0047, DEC-0048, DEC-0148]
+cites: [DEC-0033, DEC-0044, DEC-0047, DEC-0048, DEC-0100, DEC-0148]
 ---
 
 # ST-0026: Work-Management Drift Capture and Change Proposals

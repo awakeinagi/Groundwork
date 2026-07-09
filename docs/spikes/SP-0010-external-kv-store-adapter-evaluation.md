@@ -11,7 +11,7 @@ links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]
   relates-to: [SP-0009]
-cites: [DEC-0205]
+cites: [DEC-0023, DEC-0100, DEC-0204, DEC-0205]
 ---
 
 # SP-0010: External KV-Store Adapter Evaluation

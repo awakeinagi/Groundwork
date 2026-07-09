@@ -82,3 +82,8 @@ depends on, once this contract is proven).
 This story's diff/summary/impact-report rendering pattern is meant to
 generalize to epic, story, and component-doc gates later — keep the
 artifact-type-specific parts isolated from the shared rendering shell.
+
+The approve/request-changes actions this surface performs define
+ST-0058's gate-action
+routes — the Inbound API fronts this story's connector-driving actions
+over HTTP.

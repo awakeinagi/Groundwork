@@ -13,8 +13,8 @@ links:
   depends-on: [EP-0001]
   impacts: [EP-0001, EP-0004, EP-0005, EP-0006, EP-0008]
   impacted-by: [EP-0001, EP-0002]
-cites: [DEC-0006, DEC-0007, DEC-0020, DEC-0026, DEC-0028, DEC-0032, DEC-0036,
-        DEC-0037, DEC-0038, DEC-0039, DEC-0040, DEC-0041, DEC-0042]
+cites: [DEC-0006, DEC-0007, DEC-0020, DEC-0026, DEC-0028, DEC-0032, DEC-0034,
+        DEC-0036, DEC-0037, DEC-0038, DEC-0039, DEC-0040, DEC-0041, DEC-0042]
 ---
 
 # EP-0003: Governance & Gate Engine
@@ -95,9 +95,13 @@ Arbiter, Impact Analysis, Stale, Re-affirmation — per
   administration operations.
 - **`gate-policy` / `conflicts-open` check contracts**: inputs (PR, graph
   state, governance config) → pass/fail with human-readable explanation.
+  EP-0008's inbound API enforces gates by calling into these checks, so
+  their contract shape constrains the platform's gate-action endpoints
+  (the EP-0003→EP-0008 impact edge).
 - **Impact-analysis contract**: changed artifact → affected set + impact
   report (consumes EP-0004 graph queries; requests EP-0001 mechanical
-  writes).
+  writes). The affected set is computed over the directional impact
+  links (DEC-0026).
 - **Re-affirmation flow contract**: stale artifact → re-affirm PR →
   cleared/rejected.
 - **Metrics/query API**: governance event log access for EP-0006
@@ -134,3 +138,10 @@ Derived at SES-0025:
   Re-affirmation flow and approver queues
 - ST-0018 —
   Governance event log and metrics API
+
+Post-derivation additions:
+
+- SES-0029 — component refinement of CMP-0004 (element decomposition
+  and contract shape)
+- CMP-0016 — Governance Config & Role Resolution (component, graduated
+  out of CMP-0004)

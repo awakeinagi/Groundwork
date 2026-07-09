@@ -13,8 +13,8 @@ links:
   depends-on: [ST-0060]
   impacts: []
   impacted-by: [ST-0060]
-cites: [DEC-0102, DEC-0121, DEC-0131, DEC-0203, DEC-0204, DEC-0208, DEC-0210,
-        DEC-0211]
+cites: [DEC-0102, DEC-0121, DEC-0131, DEC-0203, DEC-0204, DEC-0205, DEC-0208,
+        DEC-0210, DEC-0211]
 ---
 
 # ST-0061: Background Job Execution Runtime (In-Process Asyncio)
@@ -33,7 +33,8 @@ broker or worker process in v1
    (claim → execute → ack/nack), with no external broker or separate
    worker process required in v1
    (per DEC-0203,
-   DEC-0208).
+   DEC-0208,
+   DEC-0121).
 2. The runtime honors
    ST-0060's retry/dead-letter contract:
    failed jobs retry up to the configured bound, then dead-letter

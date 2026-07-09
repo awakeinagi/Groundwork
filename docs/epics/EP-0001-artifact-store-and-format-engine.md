@@ -13,8 +13,8 @@ links:
   impacts: [EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007, EP-0008]
   impacted-by: [EP-0003, EP-0005]
 cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018, DEC-0026, DEC-0028, DEC-0029,
-        DEC-0030, DEC-0031, DEC-0033, DEC-0034, DEC-0035, DEC-0121, DEC-0122,
-        DEC-0124]
+        DEC-0030, DEC-0031, DEC-0032, DEC-0033, DEC-0034, DEC-0035, DEC-0103,
+        DEC-0121, DEC-0122, DEC-0124, DEC-0134, DEC-0135]
 ---
 
 # EP-0001: Artifact Store & Format Engine
@@ -26,7 +26,8 @@ git model over the upstream doc repository, allocates immutable artifact
 IDs, validates every write, orchestrates item branches, session worktrees,
 and gate PRs, and enforces link-graph integrity. All writes — UI, agents,
 connectors — go through its API; nothing else holds write credentials to the
-repository.
+repository. The store's reference implementation is git-backed markdown with
+YAML frontmatter (per DEC-0008).
 
 ## Why (Goal Alignment)
 
@@ -65,7 +66,8 @@ repository (DEC-0028).
 - **Validation** (DEC-0034):
   tier 1 (schema + branch-local link resolution) on every write to any
   branch; tier 2 (completeness: required sections, decision citations,
-  reciprocal impact links, no open conflicts) as required PR checks.
+  reciprocal impact links (DEC-0026), no open conflicts) as required PR
+  checks.
 - **Type-aware write rules** (DEC-0035):
   session artifacts are append-only at the API level.
 
@@ -87,7 +89,10 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
   DEC-0018):
   CRUD via item branches, versioned reads, typed mechanical operations,
   session lifecycle (open worktree / append-turn / close), branch and PR
-  orchestration operations.
+  orchestration operations. This is the surface the session agent
+  (EP-0002) writes through — the typed-mechanical-write and append-only
+  rules (DEC-0033, DEC-0035) constrain how EP-0002 persists turns and
+  decisions (the EP-0001→EP-0002 impact edge).
 - **Artifact schema definitions**: machine-readable (JSON Schema) versions
   of each SPEC's frontmatter — the tier-1 validators.
 - **Tier-2 check suite**: the productionized `tools/check_links.py` plus the
@@ -101,7 +106,10 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
   bookkeeping, counters); adapters config-selected with a conformance
   suite (DEC-0122);
   v1 ships the DuckDB adapter only
-  (DEC-0124).
+  (DEC-0124). EP-0008's Composition Root binds this port to its
+  configured adapter at startup, and its inbound API fronts this
+  service for the UI — contract decisions here constrain that platform
+  assembly (the EP-0001→EP-0008 impact edge).
 - **Consumed from EP-0005**: code-host connector operations for fork, PR
   open/merge, review state, and required-check registration.
 

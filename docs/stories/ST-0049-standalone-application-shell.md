@@ -69,3 +69,9 @@ Treat drift between the shell and any host integration as a defect in
 the shared package's contract, not something to special-case in the
 shell — the whole point of this story is that the shell is just another
 consumer of the same public API a host uses.
+
+Every component the package exports is a client-component boundary
+with no server-prefetch helpers (per DEC-0186) — the shell's App
+Router pages mount them as leaf client components inside the shell's
+own server-rendered tree and must not attempt to render or prefetch
+package components server-side.

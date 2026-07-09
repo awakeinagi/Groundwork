@@ -13,9 +13,9 @@ links:
   satisfies: [BG-0001]
   depends-on: [CMP-0005, CMP-0015]
 cites: [DEC-0014, DEC-0028, DEC-0043, DEC-0045, DEC-0049, DEC-0079,
-        DEC-0141, DEC-0142, DEC-0145, DEC-0152, DEC-0153, DEC-0167,
-        DEC-0168, DEC-0169, DEC-0170, DEC-0172, DEC-0173, DEC-0174,
-        DEC-0175, DEC-0176, DEC-0177, DEC-0232]
+        DEC-0141, DEC-0142, DEC-0145, DEC-0152, DEC-0153, DEC-0156,
+        DEC-0167, DEC-0168, DEC-0169, DEC-0170, DEC-0172, DEC-0173,
+        DEC-0174, DEC-0175, DEC-0176, DEC-0177, DEC-0232]
 ---
 
 # CMP-0009: GitHub Connector
@@ -37,6 +37,9 @@ Connector, Code-Host Connector, Capability Manifest, Adapter,
 Orchestrator App, Reader App — per [CONTEXT.md](../../CONTEXT.md).
 
 ## Design Elements
+
+Decomposition per DEC-0177: a single service element carrying every
+operation family; the graduation review found no split warranted.
 
 ### GitHubConnector (service)
 
@@ -73,7 +76,8 @@ before writing, returning it instead of creating a duplicate
   fork already exists, its `{fork_url, default_branch}` is returned
   unchanged. Implements
   CMP-0005's
-  `CodeHostConnector.A-1`.
+  `CodeHostConnector.A-1`, the fork-provisioning leg of the fork-pull
+  gating model (per DEC-0028).
 - `GitHubConnector.A-2` — branch operations: `create` via `POST
   /repos/{owner}/{repo}/git/refs` (check-before-create against `GET
   .../git/ref/{ref}`), `push` via `PATCH .../git/refs/{ref}`, `delete`
@@ -96,7 +100,8 @@ before writing, returning it instead of creating a duplicate
   verbatim into the review body
   (per DEC-0153,
   DEC-0174).
-  Implements `CodeHostConnector.A-4`.
+  Implements `CodeHostConnector.A-4`, both review-posting paths of
+  DEC-0043.
 - `GitHubConnector.A-5` — check-run result posting: GitHub's Checks
   API, `POST /repos/{owner}/{repo}/check-runs` for a first post, `PATCH
   .../check-runs/{id}` for re-posts — never commit statuses. Re-posting
@@ -121,7 +126,7 @@ before writing, returning it instead of creating a duplicate
   (per DEC-0176).
   Rule shapes above
   CMP-0005's documented
-  minimum (per `DEC-0168`) that classic branch protection cannot
+  minimum (per DEC-0168) that classic branch protection cannot
   express fail `capability-unsupported`. CODEOWNERS is read-only
   introspected to populate `CapabilityManifest.native_path_scoped_reviewers`;
   this element never writes a `CODEOWNERS` file

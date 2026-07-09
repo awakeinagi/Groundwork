@@ -38,6 +38,8 @@ review: one future direct consumer (the notification center, no CMP
 yet) does not trigger the graduation rule
 (per DEC-0240,
 DEC-0136).
+The component's story, ST-0024, was sliced under
+EP-0005 by the epic-scope amendment DEC-0149 records.
 
 ## Ubiquitous Language
 

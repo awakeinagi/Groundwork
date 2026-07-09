@@ -89,6 +89,13 @@ amended and go stale, needing re-affirmation.
 
 **T7 — awakeinagi.** Confirmed all five points for recording.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  the embedding and vector-store ports made swappable here underpin
+  the full-text and semantic search that DEC-0067 assigns to the
+  retrieval layer.
+
 ## Decisions Produced
 
 - DEC-0121 — four

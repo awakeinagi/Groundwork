@@ -41,7 +41,9 @@ mediation flow (DEC-0005);
 provenance (outcome 1) begins with raw transcript capture
 (DEC-0052)
 and confirmed distillation
-(DEC-0051).
+(DEC-0051). Sessions are
+unsupervised from the first release (DEC-0003) and 1:1, with the agent
+synthesizing across sessions (DEC-0021).
 
 ## Scope
 
@@ -58,7 +60,7 @@ and confirmed distillation
 - **Distillation with in-session confirmation**
   (DEC-0051):
   plain-language playback at checkpoints; confirmed DECs commit as
-  accepted with turn-span citations.
+  accepted with turn-span citations (per DEC-0015).
 - **Guardrails** (DEC-0054):
   pack-defined unproductive-pattern handling with graceful exits and
   Arbiter notification; role decision rights from governance config —
@@ -66,7 +68,8 @@ and confirmed distillation
   participant input treated as data, never instructions.
 - **Conflict flow** (DEC-0005):
   intent-first discovery, informed compromise proposals, escalation with
-  full documentation.
+  full documentation; escalated Conflicts never auto-resolve on a clock
+  by default (DEC-0183).
 - **Incremental synthesis** (DEC-0055):
   merge on each session close; conflict detection against prior sessions;
   shared draft visible to participants, comments entering as CPs.
@@ -74,10 +77,14 @@ and confirmed distillation
   declarative per-pack recipes (required paths, preferred consolidations,
   token budget, on-demand graph tools) resolved by EP-0004/EP-0007.
 - **Session lifecycle** (DEC-0057):
-  open across pauses; inactivity auto-close with partial distillation;
-  resume via a new session loading the prior as context.
+  open across pauses; inactivity auto-close with partial distillation
+  (a streaming turn resets the inactivity clock and is never truncated
+  mid-turn, per DEC-0182); resume via a new session loading the prior
+  as context.
 - **CP triage** (DEC-0047):
-  mechanical / session / rejected classification with rationale.
+  mechanical / session / rejected classification with rationale;
+  drift-captured proposals from the work-management connector arrive
+  through this flow (DEC-0044).
 - **Glossary maintenance** (DEC-0012):
   term challenge and CONTEXT.md upkeep during every session.
 - **Evaluation harness** (DEC-0058):
@@ -98,7 +105,10 @@ Conflict, Synthesis, Strategy Pack, Decision Rights, Change Proposal — per
 ## Interfaces & Contracts to Define
 
 - **Session engine contract**: open/resume/append-turn/close, streaming —
-  the pluggable-UI seam.
+  the pluggable-UI seam. EP-0008's inbound API exposes this contract to
+  UI channels over HTTP + SSE, so engine-contract decisions here
+  constrain the platform's endpoint and streaming shape (the
+  EP-0002→EP-0008 impact edge, per DEC-0026).
 - **Strategy pack format spec**: bundle layout, `pack.yaml` schema
   (phases, stopping criteria, escalation triggers, guardrail policy,
   context recipe), skill/tool declarations, model adapter boundary.

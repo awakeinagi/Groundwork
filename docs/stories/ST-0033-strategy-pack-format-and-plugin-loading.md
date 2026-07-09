@@ -13,7 +13,7 @@ links:
   depends-on: []
   impacts: [ST-0035, ST-0038, ST-0040, ST-0041]
   impacted-by: []
-cites: [DEC-0053, DEC-0181]
+cites: [DEC-0053, DEC-0058, DEC-0181]
 ---
 
 # ST-0033: Strategy Pack Format and Plugin Loading
@@ -23,9 +23,9 @@ cites: [DEC-0053, DEC-0181]
 The versioned, plugin-like bundle format that defines how the agent
 conducts one kind of session — prompts, skills, tools, policies, and
 context recipe, per artifact type and phase. Every downstream in-session
-capability (guardrails, context assembly, glossary maintenance, and the
-eval harness that gates changes to any of it) is pack-defined and reads
-this format.
+capability (guardrails ST-0035, context assembly ST-0038, glossary
+maintenance ST-0040, and the eval harness ST-0041 that gates changes to
+any of it) is pack-defined and reads this format.
 
 ## Acceptance Criteria
 

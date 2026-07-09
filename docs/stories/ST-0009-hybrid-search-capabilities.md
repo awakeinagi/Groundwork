@@ -12,7 +12,7 @@ links:
   depends-on: []
   impacts: []
   impacted-by: []
-cites: [DEC-0119, DEC-0120]
+cites: [DEC-0067, DEC-0100, DEC-0119, DEC-0120]
 ---
 
 # ST-0009: Hybrid Search Capabilities beyond v1

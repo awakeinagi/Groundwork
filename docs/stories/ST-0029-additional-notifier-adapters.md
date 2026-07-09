@@ -10,7 +10,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   depends-on: [ST-0024]
-cites: [DEC-0075, DEC-0156]
+cites: [DEC-0075, DEC-0100, DEC-0156]
 ---
 
 # ST-0029: Additional Notifier Adapters

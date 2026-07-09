@@ -10,6 +10,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   depends-on: [CMP-0005]
+cites: [DEC-0045, DEC-0050, DEC-0079]
 ---
 
 # CMP-0006: Bitbucket Data Center Connector

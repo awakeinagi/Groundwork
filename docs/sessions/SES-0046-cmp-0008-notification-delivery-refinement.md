@@ -115,6 +115,15 @@ Dependencies: CMP-0015.
 
 Confirmed both decisions and the element decomposition.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  the connector boundary settled here follows the pattern of CMP-0005
+  (Code-Host Connector Protocol) — resolved inputs, capability
+  manifest, conformance suite — and the rejected person-id delivery
+  alternative would have pulled person-id resolution, owned by
+  CMP-0007 (Identity & Access), into the connector.
+
 ## Decisions Produced
 
 - DEC-0240 —

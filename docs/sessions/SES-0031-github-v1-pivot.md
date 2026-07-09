@@ -118,6 +118,14 @@ only which host is named as v1.
 
 **T7 — Product Owner.** Reviewed and approved the consolidated diff.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  the pivot exercised the host-agnostic code-host connector protocol
+  specified by story ST-0019 and implemented by CMP-0005 — the seam
+  that made the GitHub swap an adapter change rather than a contract
+  change.
+
 ## Decisions Produced
 
 - DEC-0172 —

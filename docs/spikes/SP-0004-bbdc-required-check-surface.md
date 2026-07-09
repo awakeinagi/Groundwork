@@ -11,7 +11,8 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   relates-to: [ST-0020, ST-0013, ST-0014]
-cites: [DEC-0036, DEC-0050, DEC-0141, DEC-0142, DEC-0145, DEC-0150, DEC-0172]
+cites: [DEC-0036, DEC-0050, DEC-0141, DEC-0142, DEC-0145, DEC-0150,
+        DEC-0172, DEC-0173]
 ---
 
 # SP-0004: BBDC Required-Check Surface Validation

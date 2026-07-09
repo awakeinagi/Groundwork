@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0003, ST-0012]
   impacts: [ST-0018]
   impacted-by: [ST-0012]
-cites: [DEC-0033, DEC-0034, DEC-0039, DEC-0075, DEC-0143, DEC-0147]
+cites: [DEC-0005, DEC-0033, DEC-0034, DEC-0039, DEC-0075, DEC-0143, DEC-0147]
 ---
 
 # ST-0015: The `conflicts-open` Check and Conflict Operations
@@ -22,7 +22,9 @@ cites: [DEC-0033, DEC-0034, DEC-0039, DEC-0075, DEC-0143, DEC-0147]
 
 The operational side of conflict governance: the blocking check that
 keeps contested artifacts from merging, the Arbiter's queue, and the
-electable timeout-to-default path with its System Decisions.
+electable timeout-to-default path with its System Decisions. Conflict
+lifecycle transitions and timeout-fired System Decisions recorded here
+are event sources ST-0018's governance event log captures.
 
 ## Acceptance Criteria
 

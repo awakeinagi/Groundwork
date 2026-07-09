@@ -14,7 +14,8 @@ links:
   impacts: [ST-0018]
   impacted-by: [ST-0012, ST-0016]
   relates-to: [SP-0001]
-cites: [DEC-0028, DEC-0033, DEC-0038, DEC-0041, DEC-0075, DEC-0146, DEC-0147]
+cites: [DEC-0028, DEC-0033, DEC-0038, DEC-0041, DEC-0075, DEC-0076, DEC-0146,
+        DEC-0147]
 ---
 
 # ST-0017: Re-affirmation Flow and Approver Queues
@@ -37,7 +38,7 @@ that tell each approver what to clear first.
    DEC-0033).
 2. Rejecting a re-affirmation routes the artifact to full
    re-refinement — a new session — and the rejection is recorded in the
-   governance event log
+   governance event log (ST-0018)
    (per DEC-0038).
 3. Each approver's work queue is a derived view — computed at read time
    from stale artifacts, open gate PRs, governance routing, and

@@ -12,7 +12,8 @@ component-type: event
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
-cites: [DEC-0059, DEC-0060, DEC-0080, DEC-0103, DEC-0128, DEC-0131, DEC-0134]
+cites: [DEC-0018, DEC-0059, DEC-0060, DEC-0080, DEC-0103, DEC-0128, DEC-0131,
+        DEC-0133, DEC-0134]
 ---
 
 # CMP-0002: ChangeEvent Contract

@@ -86,3 +86,8 @@ the staleness state this check consumes
 Bulk recomputation and the reconciliation sweep share the single-item
 evaluation path — one evaluator, three triggers (event, sweep,
 governance merge).
+
+Check activity is also an event source: registrations and every
+recomputation — event-triggered, sweep, or governance-merge — land in
+ST-0018's governance event log, which is where dashboards read this
+check's behavior.

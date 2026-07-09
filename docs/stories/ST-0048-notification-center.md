@@ -69,3 +69,8 @@ The notification event schema (event → center entry → connector
 delivery) is a contract this story consumes, not one it owns — confirm
 its shape against EP-0005's
 notifier work before locking the center's data model.
+
+The center's reads, read/unread updates, and preference writes define
+ST-0058's notification
+routes — the Inbound API's notification surface is specified against
+this story's data model.

@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0012]
   impacts: [ST-0014]
   impacted-by: [ST-0012]
-cites: [DEC-0033, DEC-0036, DEC-0037, DEC-0045, DEC-0046, DEC-0079,
+cites: [DEC-0033, DEC-0036, DEC-0037, DEC-0045, DEC-0046, DEC-0079, DEC-0132,
         DEC-0140, DEC-0142, DEC-0143, DEC-0172]
 ---
 

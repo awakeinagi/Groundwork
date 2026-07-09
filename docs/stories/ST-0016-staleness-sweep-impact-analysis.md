@@ -45,16 +45,16 @@ renders.
    DEC-0038,
    DEC-0096).
 3. The report is written into affected re-affirmation PR descriptions
-   and stored in the event log as telemetry; it is never committed to
-   the canonical repo
+   and stored in the event log (ST-0018) as telemetry; it is never
+   committed to the canonical repo
    (per DEC-0146,
    DEC-0144).
 4. Sweeps are idempotent under at-least-once event redelivery:
    re-processing the same ChangeEvent produces no duplicate marks or
    reports (per DEC-0145).
 5. Stale state produced here is what blocks: descendants' `gate-policy`
-   checks consume it and new derivation from stale artifacts is refused
-   until cleared
+   checks (ST-0014) consume it and new derivation from stale artifacts
+   is refused until cleared
    (per DEC-0038).
 
 ## Component Impact

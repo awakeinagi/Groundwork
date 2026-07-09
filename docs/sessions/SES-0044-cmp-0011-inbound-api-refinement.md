@@ -103,6 +103,12 @@ DEC-0163/DEC-0042,
 the fixed-named-endpoints constraint) are already settled by the two
 stories and fold into the doc without new DECs.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session refined CMP-0011, a component of the Backend
+  Application Platform epic EP-0008.
+
 ## Decisions Produced
 
 - DEC-0229

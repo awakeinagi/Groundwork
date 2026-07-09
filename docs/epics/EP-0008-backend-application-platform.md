@@ -14,7 +14,7 @@ links:
   impacts: [EP-0006]
   impacted-by: [EP-0001, EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
 cites: [DEC-0001, DEC-0018, DEC-0121, DEC-0122, DEC-0102, DEC-0124, DEC-0187,
-        DEC-0201, DEC-0202, DEC-0203, DEC-0204, DEC-0205]
+        DEC-0190, DEC-0201, DEC-0202, DEC-0203, DEC-0204, DEC-0205]
 ---
 
 # EP-0008: Backend Application Platform
@@ -69,7 +69,8 @@ components build against, instead of each other's internals.
 - **Inbound API**: a FastAPI/ASGI application serving the Web UI's
   HTTP + SSE needs
   (DEC-0202,
-  DEC-0187).
+  DEC-0187), in Python per the reference-implementation stack
+  (DEC-0018).
 - **Queue Port**: contract plus v1 default adapter — durable,
   app-database-backed
   (DEC-0203,
@@ -97,7 +98,8 @@ components build against, instead of each other's internals.
 - External Queue/KV-store adapters (Celery/RQ, AWS SQS, Redis, etc.) —
   deferred behind `TRG-0001`/`TRG-0002`
   (SP-0009,
-  SP-0010).
+  SP-0010, per
+  DEC-0205).
 - Additional KV-store use cases beyond the baseline coordination-state
   and general-caching scope — deferred
   (SP-0011).
@@ -173,3 +175,10 @@ Stories, derived via SES-0039:
   ephemeral in-memory Queue adapter, deferred/backlog.
 - ST-0064 —
   dedicated embedded KV-store library adapter, deferred/backlog.
+
+Components, contract-completed from the stories above:
+- CMP-0010 — Composition Root
+- CMP-0011 — Inbound API
+- CMP-0012 — Queue Port
+- CMP-0013 — Background Job Execution Runtime
+- CMP-0014 — KV-Store Port

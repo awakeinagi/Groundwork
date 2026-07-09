@@ -13,9 +13,10 @@ links:
   depends-on: [EP-0001, EP-0002, EP-0003]
   impacts: [EP-0002, EP-0008]
   impacted-by: [EP-0001, EP-0002, EP-0003, EP-0005, EP-0007, EP-0008]
-cites: [DEC-0001, DEC-0003, DEC-0022, DEC-0026, DEC-0032, DEC-0041, DEC-0042,
-        DEC-0055, DEC-0071, DEC-0072, DEC-0073, DEC-0074, DEC-0075, DEC-0076,
-        DEC-0184, DEC-0185, DEC-0186, DEC-0187, DEC-0188]
+cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0022, DEC-0026, DEC-0032, DEC-0041,
+        DEC-0042, DEC-0043, DEC-0051, DEC-0055, DEC-0057, DEC-0071, DEC-0072,
+        DEC-0073, DEC-0074, DEC-0075, DEC-0076, DEC-0184, DEC-0185, DEC-0186,
+        DEC-0187, DEC-0188]
 ---
 
 # EP-0006: Refinement Web UI
@@ -71,6 +72,9 @@ at SES-0010):
 - **Identity**: login via the pluggable auth provider; OAuth host-identity
   linking flow (DEC-0043).
 
+The goal-scoped v1 surface set (goal artifact view, goal gate surface)
+tracks the v1 vertical slice — goal refinement end-to-end (DEC-0022).
+
 **In — post-v1 stories** (each arriving with the capability that needs
 it): governance dashboards (DEC-0042);
 impact-ranked re-affirmation and approval queues
@@ -100,7 +104,9 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
   impact realized by DEC-0074),
   storage API (EP-0001), approval + metrics APIs (EP-0003), graph queries
   (EP-0004), identity (EP-0005), recipe resolver outputs and profile store
-  (EP-0007).
+  (EP-0007). All of these reach the UI through EP-0008's inbound API:
+  the UI's HTTP + SSE transport needs define that route and streaming
+  surface (DEC-0187) — the EP-0006→EP-0008 impact edge (per DEC-0026).
 - **UI-pluggability boundary**: the typed session-engine contract is the
   seam — an alternative front end (Slack bot, CLI) must be buildable
   against it without backend changes.
@@ -123,7 +129,7 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
   embeddable npm React component library for the stated Next.js 15 App
   Router / Tailwind CSS 4 / Radix UI host, plus a thin standalone app in
   this repo wrapping the same package
-  (DEC-0184–DEC-0187).
+  (DEC-0184, DEC-0185, DEC-0186, DEC-0187).
 - Accessibility and responsive baseline — resolved at
   SES-0034: WCAG 2.1
   AA plus Tailwind's default breakpoints, folded into every v1 story's
@@ -146,4 +152,12 @@ conversation UX), ST-0045
 
 Deferred to release 2: ST-0050–ST-0056
 (dashboards, re-affirmation queues, profile viewer, consolidation review,
-synthesis commenting, CP triage views, full artifact/graph browsing).
+synthesis commenting, CP triage views, full artifact/graph browsing):
+
+- ST-0050 — governance dashboards
+- ST-0051 — impact-ranked re-affirmation and approval queues
+- ST-0052 — participant profile viewer/editor with consent management
+- ST-0053 — consolidation review and flagging
+- ST-0054 — synthesis shared-draft commenting feeding change proposals
+- ST-0055 — change proposal triage views
+- ST-0056 — full artifact/graph browsing

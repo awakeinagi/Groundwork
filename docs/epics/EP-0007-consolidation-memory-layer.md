@@ -13,9 +13,9 @@ links:
   depends-on: [EP-0001, EP-0004]
   impacts: [EP-0006, EP-0008]
   impacted-by: [EP-0001, EP-0002, EP-0004]
-cites: [DEC-0017, DEC-0026, DEC-0056, DEC-0063, DEC-0065, DEC-0066, DEC-0067,
-        DEC-0068, DEC-0069, DEC-0102, DEC-0071, DEC-0072, DEC-0121, DEC-0122,
-        DEC-0123, DEC-0124]
+cites: [DEC-0016, DEC-0017, DEC-0026, DEC-0056, DEC-0058, DEC-0063, DEC-0065,
+        DEC-0066, DEC-0067, DEC-0068, DEC-0069, DEC-0102, DEC-0071, DEC-0072,
+        DEC-0115, DEC-0120, DEC-0121, DEC-0122, DEC-0123, DEC-0124]
 ---
 
 # EP-0007: Consolidation Memory Layer
@@ -54,6 +54,8 @@ rides on (DEC-0071).
 - **Search** (DEC-0067):
   full-text + embedding-based semantic search over bodies; derived and
   rebuildable; embedding-model version pinned, swap = re-embed batch.
+  Body-level search lives here because the Graph Index carries
+  frontmatter metadata only (DEC-0063).
 - **Serving** (DEC-0068):
   `resolve(recipe, task) → bundle` — deterministic assembly of graph
   paths, fresh consolidations, and search results, ranked and truncated to
@@ -104,7 +106,10 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
   hardening DEC-0067's
   "swap = re-embed batch". v1 ships the DuckDB + vss vector adapter and
   both embedding adapters
-  (DEC-0124).
+  (DEC-0124). Both ports are bound to their configured adapters at
+  startup by EP-0008's Composition Root, so the seam contracts decided
+  here constrain that platform wiring (the EP-0007→EP-0008 impact
+  edge, per DEC-0026).
 - **Catalog schema**: the static consolidation catalog as repo
   configuration.
 - **Faithfulness-check contract**: generation → pass/blocked with report.

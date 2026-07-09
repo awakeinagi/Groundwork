@@ -17,7 +17,7 @@ cites: [DEC-0002, DEC-0013, DEC-0016, DEC-0024, DEC-0026, DEC-0028, DEC-0032,
         DEC-0036, DEC-0043, DEC-0044, DEC-0045, DEC-0046, DEC-0047, DEC-0048,
         DEC-0049, DEC-0050, DEC-0075, DEC-0132, DEC-0142, DEC-0148, DEC-0149,
         DEC-0150, DEC-0151, DEC-0152, DEC-0153, DEC-0154, DEC-0155, DEC-0156,
-        DEC-0172, DEC-0173]
+        DEC-0172, DEC-0173, DEC-0014, DEC-0033]
 ---
 
 # EP-0005: Connectors & Identity
@@ -54,9 +54,12 @@ DEC-0049).
 - **Code-host connector** (DEC-0045):
   operations for fork/branch/worktree push, PR open/merge/review-state,
   review posting (per-user OAuth and program-user paths, per
-  DEC-0043),
+  DEC-0043; the
+  role→review-path mapping lives in deployment configuration, per
+  DEC-0154),
   branch-protection and team/required-check administration (consumed by
-  EP-0003's policy compiler), read-only browse/search filtered by the
+  EP-0003's policy compiler, per DEC-0036), read-only browse/search
+  filtered by the
   `governance/repos.yaml` allowlist (DEC-0049),
   and a capability manifest with a documented minimum set. v1
   implementation: **GitHub (cloud)**; Bitbucket Data Center deferred to
@@ -68,7 +71,8 @@ DEC-0049).
   release-2 scoped per
   DEC-0148):
   host-agnostic contract with Jira Data Center as reference adapter;
-  projection created on first merge to main; split
+  projection created on first merge to main (issues carry a summary
+  plus a link back to the canonical doc, DEC-0013); split
   field ownership — content canonical-owned, workflow Jira-owned read as
   projection-side telemetry (DEC-0048,
   DEC-0151);
@@ -108,6 +112,9 @@ Change Proposal — per [CONTEXT.md](../../CONTEXT.md).
   (DEC-0132)
   and the gate engine's registration/administration operations
   (DEC-0142).
+  Connector-contract decisions here shape EP-0001's fork/branch/PR
+  orchestration, which consumes these operations (the EP-0005→EP-0001
+  impact edge).
 - **Work-management connector contract**: projection operations,
   field-ownership map, drift events with diffs, backlog read,
   projection-side telemetry
@@ -117,7 +124,12 @@ Change Proposal — per [CONTEXT.md](../../CONTEXT.md).
   manifest, channel preferences
   (DEC-0075).
 - **Auth provider contract**: authenticate → auth subject; person-id
-  resolution against the registry; role claims for EP-0003.
+  resolution against the registry; role claims for EP-0003. The
+  auth-provider and notifier contracts shape EP-0006's login /
+  OAuth-linking flow and notification center (the EP-0005→EP-0006
+  impact edge), and EP-0008's inbound API authenticates through this
+  contract and calls into the connectors rather than reimplementing
+  them (the EP-0005→EP-0008 impact edge, per DEC-0026).
 - **Person registry schema**: `governance/people.yaml` (tier-1 validated;
   schema owned by ST-0012).
 - **Attribution block schema**: the service-signed program-user review
@@ -193,4 +205,9 @@ Derived at SES-0026:
   (BBDC, dormant alongside its deferred story),
   CMP-0009 (GitHub, v1),
   CMP-0007,
-  CMP-0008.
+  CMP-0008,
+  CMP-0015 (Secret Store, graduated out of CMP-0007).
+
+Component refinement sessions under this epic: SES-0030 (CMP-0005
+Code-Host Connector Protocol) and SES-0046 (CMP-0008 Notification
+Delivery).

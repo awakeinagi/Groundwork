@@ -11,7 +11,8 @@ links:
   satisfies: [BG-0001]
   impacts: [ST-0026, ST-0027]
   impacted-by: [ST-0019]
-cites: [DEC-0013, DEC-0033, DEC-0045, DEC-0048, DEC-0148, DEC-0151, DEC-0155]
+cites: [DEC-0013, DEC-0033, DEC-0045, DEC-0048, DEC-0100, DEC-0148, DEC-0151,
+        DEC-0155]
 ---
 
 # ST-0025: Work-Management Projection Lifecycle and Field Ownership

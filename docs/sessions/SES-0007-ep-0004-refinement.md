@@ -59,6 +59,14 @@ only. (c) Scheduled rebuild-and-diff.
 pattern, ratified with the epic's approval); rewrote EP-0004 and moved it
 to `gated`.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  the refined EP-0004 depends on EP-0001 (Artifact Store & Format
+  Engine) — the index overlays EP-0001's fork-pull item branches, and
+  per the T4–T5 index-content decision artifact bodies stay in
+  EP-0001's store.
+
 ## Decisions Produced
 
 DEC-0059,

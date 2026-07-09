@@ -135,6 +135,12 @@ understanding before building.
 **T15 — Sponsor.** "Yes, we are aligned on the goals of the Groundwork
 project. Please proceed."
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session's inception grilling produced the Groundwork business
+  goal BG-0001, which derives from it.
+
 ## Decisions Produced
 
 DEC-0001,

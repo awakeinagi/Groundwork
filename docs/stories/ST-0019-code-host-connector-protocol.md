@@ -11,8 +11,8 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   impacts: [ST-0020, ST-0021, ST-0023, ST-0024, ST-0025, ST-0031]
-cites: [DEC-0028, DEC-0032, DEC-0036, DEC-0043, DEC-0045, DEC-0049, DEC-0079,
-        DEC-0132, DEC-0142, DEC-0145, DEC-0150]
+cites: [DEC-0014, DEC-0028, DEC-0032, DEC-0036, DEC-0043, DEC-0045, DEC-0049,
+        DEC-0079, DEC-0132, DEC-0142, DEC-0145, DEC-0150, DEC-0172]
 ---
 
 # ST-0019: Code-Host Connector Protocol and Capability Manifest
@@ -36,6 +36,7 @@ have already forward-declared.
    administration; read-only browse/search; permission probe; and
    webhook/event subscription
    (per DEC-0028,
+   DEC-0032,
    DEC-0043,
    DEC-0132,
    DEC-0142,
@@ -103,3 +104,9 @@ SP-0004's findings
 land — if BBDC cannot express the assumed semantics, the protocol
 shape, not just the adapter, may need rework
 (per DEC-0150).
+
+The manifest-plus-conformance shape established here is the "standard
+connector pattern" EP-0005's sibling contracts follow: ST-0024's
+notifier contract and ST-0025's work-management contract each declare
+per-adapter capability manifests in this story's schema-plus-minimum-set
+shape (per DEC-0045).

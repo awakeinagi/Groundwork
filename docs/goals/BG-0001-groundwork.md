@@ -8,10 +8,11 @@ sponsor: awakeinagi@gmail.com
 created: 2026-07-05
 links:
   derives-from: [SES-0001]
-cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006, DEC-0011,
-        DEC-0014, DEC-0015, DEC-0018, DEC-0019, DEC-0022, DEC-0025,
-        DEC-0098, DEC-0099, DEC-0189, DEC-0190, DEC-0191, DEC-0192,
-        DEC-0193, DEC-0194]
+cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006,
+        DEC-0009, DEC-0010, DEC-0011, DEC-0013, DEC-0014, DEC-0015,
+        DEC-0018, DEC-0019, DEC-0021, DEC-0022, DEC-0024, DEC-0025,
+        DEC-0027, DEC-0098, DEC-0099, DEC-0189, DEC-0190, DEC-0191,
+        DEC-0192, DEC-0193, DEC-0194]
 ---
 
 # BG-0001: Groundwork — ground implementation in refined business intent
@@ -288,6 +289,18 @@ DEC-0011
 - EP-0005 — Connectors & Identity
 - EP-0006 — Refinement Web UI
 - EP-0007 — Consolidation Memory Layer
+- EP-0008 — Backend Application Platform (derived late, closing the
+  structural-deliverable gap found in the SES-0035 retrospective)
 - SP-0001 — Ranking algorithm
   for impact-based refinement ordering (cross-cutting spike, per
   DEC-0027)
+- SP-0006 — An amends link type for partial supersession (deferred,
+  backlog)
+- SP-0007 — Contract-item-level graph nodes with per-item decision
+  citations
+
+Format provenance: this goal's refinement and gating follow the
+SES-0035 template redesign — the tiered goal-grilling question bank
+(per DEC-0192), the deliverable-coverage pass at epic derivation whose
+re-run yielded EP-0008 (per DEC-0193), and the gate-time Context and
+Process Flow diagrams (per DEC-0194).

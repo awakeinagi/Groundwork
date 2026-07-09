@@ -11,7 +11,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0019, SP-0004]
   impacted-by: [ST-0019]
-cites: [DEC-0045, DEC-0050, DEC-0079, DEC-0150, DEC-0172]
+cites: [DEC-0045, DEC-0050, DEC-0079, DEC-0100, DEC-0150, DEC-0172]
 ---
 
 # ST-0020: Bitbucket Data Center Connector

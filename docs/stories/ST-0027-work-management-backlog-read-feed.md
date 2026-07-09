@@ -11,7 +11,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0025]
   impacted-by: [ST-0025]
-cites: [DEC-0016, DEC-0148, DEC-0155]
+cites: [DEC-0016, DEC-0100, DEC-0148, DEC-0155]
 ---
 
 # ST-0027: Work-Management Backlog Read Feed

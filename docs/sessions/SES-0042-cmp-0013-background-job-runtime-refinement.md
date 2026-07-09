@@ -74,6 +74,12 @@ only the word "queue") was noise from generic term overlap.
 graph tool's `elements` command. Consumed only within `CMP-0013`
 today; no graduation indicated.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session refined CMP-0013, a component of the Backend
+  Application Platform epic EP-0008.
+
 ## Decisions Produced
 
 DEC-0222,

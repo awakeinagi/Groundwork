@@ -12,7 +12,7 @@ links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]
   relates-to: [ST-0033]
-cites: [DEC-0056, DEC-0181]
+cites: [DEC-0053, DEC-0056, DEC-0181]
 ---
 
 # SP-0008: Pack Format Expressiveness vs. Simplicity

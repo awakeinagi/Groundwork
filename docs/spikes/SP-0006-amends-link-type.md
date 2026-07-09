@@ -10,7 +10,7 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   relates-to: [EP-0001, SP-0007]
-cites: [DEC-0157, DEC-0159]
+cites: [DEC-0048, DEC-0130, DEC-0151, DEC-0157, DEC-0159]
 ---
 
 # SP-0006: The `amends` Link Type

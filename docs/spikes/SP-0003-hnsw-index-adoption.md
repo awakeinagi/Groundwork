@@ -11,7 +11,7 @@ links:
   derives-from: [EP-0007]
   satisfies: [BG-0001]
   relates-to: [SP-0002]
-cites: [DEC-0114, DEC-0115, DEC-0119]
+cites: [DEC-0023, DEC-0100, DEC-0102, DEC-0114, DEC-0115, DEC-0119]
 ---
 
 # SP-0003: HNSW Index Adoption for DuckDB Vector Search at Scale

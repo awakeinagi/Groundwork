@@ -167,6 +167,14 @@ default include-all + annotate + redirect; `--current` flag pre-filters
 **T16 — awakeinagi.** "Approved. Let's also add new recipes in the
 skill's cookbook reference for using these new capabilities."
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  the semantic search prototyped here at skill scale dogfoods the
+  capability owned in the product by EP-0007 (Consolidation Memory
+  Layer), the epic responsible for semantic search over artifact
+  bodies.
+
 ## Decisions Produced
 
 - DEC-0111 —

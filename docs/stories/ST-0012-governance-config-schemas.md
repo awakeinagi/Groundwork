@@ -82,3 +82,9 @@ proposal-capture behavior
 rights config this story defines is what
 EP-0002's guardrails
 consult.
+
+The same configuration drives the engine's downstream behavior:
+ST-0015's timeout-to-default elections resolve against
+`gate-policies.yaml`'s configured defaults, and
+ST-0017's approver queues are computed from `domains.yaml` routing and
+`roles.yaml` delegation entries defined here.

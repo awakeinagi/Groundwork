@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0019, ST-0022]
   impacted-by: [ST-0019, ST-0022]
 cites: [DEC-0033, DEC-0043, DEC-0046, DEC-0143, DEC-0152, DEC-0153, DEC-0154,
-        DEC-0232]
+        DEC-0172, DEC-0232]
 ---
 
 # ST-0021: Delegated Reviews and Program-User Attribution

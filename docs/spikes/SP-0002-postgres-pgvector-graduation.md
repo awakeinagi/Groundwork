@@ -12,7 +12,8 @@ links:
   satisfies: [BG-0001]
   relates-to: [SP-0001, EP-0007]
 cites: [DEC-0061, DEC-0062, DEC-0059, DEC-0060, DEC-0064, DEC-0070,
-        DEC-0102, DEC-0105]
+        DEC-0102, DEC-0105, DEC-0023, DEC-0050, DEC-0067, DEC-0100,
+        DEC-0103]
 ---
 
 # SP-0002: Postgres + pgvector Graduation Evaluation
@@ -23,7 +24,11 @@ cites: [DEC-0061, DEC-0062, DEC-0059, DEC-0060, DEC-0064, DEC-0070,
 > Originally "Graph Engine Selection", approved 2026-07-06 — the v1
 > engine question was answered by
 > DEC-0102: embedded
-> LadybugDB (graph) + DuckDB (app database + vector search). Deferred to
+> LadybugDB (graph) + DuckDB (app database + vector search). The
+> original charter derived from DEC-0061 (engine selection via this
+> spike) as extended by DEC-0070 (search/vector infrastructure folded
+> into the same evaluation) — both since superseded by DEC-0102.
+> Deferred to
 > `backlog`; revived when any of `TRG-0001`–`TRG-0004` in the
 > [trigger registry](../TRIGGERS.md) fires.
 

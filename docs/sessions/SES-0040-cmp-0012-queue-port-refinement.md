@@ -89,6 +89,12 @@ or needing independently versioned conformance) via the graph tool's
 `elements` command. None are consumed outside `CMP-0012` today; no
 graduation indicated.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session refined CMP-0012, a component of the Backend
+  Application Platform epic EP-0008.
+
 ## Decisions Produced
 
 DEC-0214,

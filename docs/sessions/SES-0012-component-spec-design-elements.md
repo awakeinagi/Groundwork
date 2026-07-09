@@ -128,6 +128,13 @@ approval.
 
 **T13 — Sponsor.** Confirmed — record them.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  the granularity grilling was anchored on CMP-0001, the Artifact
+  Store Service component of the epic EP-0001 (Artifact Store &
+  Format Engine).
+
 ## Decisions Produced
 
 DEC-0080,

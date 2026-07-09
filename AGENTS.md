@@ -41,10 +41,17 @@ Component Docs. Every stage transition passes a **human approval gate**.
    decisions (`status: accepted`) are never edited. New conversation = a
    new `SES-`. Changed mind = a new `DEC-` with `supersedes:` set — then
    mark every artifact citing the old decision `status: stale` and have
-   the approver re-affirm or re-refine each. Sole exception:
+   the approver re-affirm or re-refine each. Two sanctioned exceptions,
+   neither of which triggers staleness or re-gating: (a)
    reference-formatting edits (converting between reference notations,
    repairing a reference after a rename) change no meaning and are
-   permitted (per DEC-0091, applied by DEC-0243).
+   permitted (per DEC-0091, applied by DEC-0243); (b) cross-reference
+   enrichment — adding bare-ID mentions, `cites:` entries, or link
+   entries that surface *already-existing* relationships, never
+   creating new ones (per DEC-0248). In closed sessions, enrichment
+   goes in a dated `### Post-Close Enrichment` subsection appended at
+   the bottom of the Transcript section; transcript turns are never
+   edited.
 4. **IDs.** `PREFIX-nnnn`, sequential per prefix, **never reused** (even
    after deletion). Scan all of `docs/` for the current max before
    allocating. Filename = `ID-kebab-slug.md`.
@@ -53,7 +60,11 @@ Component Docs. Every stage transition passes a **human approval gate**.
    comma-separated when several apply. A claim no decision
    supports means more refinement is needed — never invent a citation.
    Decisions carry `source-span: "SES-nnnn @ Tx-Ty"` pointing at
-   transcript turns that actually support them.
+   transcript turns that actually support them. On goals, epics,
+   stories, spikes, and components, `cites:` and body prose stay
+   synchronized in both directions (per DEC-0247): every cited DEC
+   appears in the prose, and every DEC the prose references is in
+   `cites:` (or a frontmatter link). `cites:` IS the considered set.
 6. **Typed links only** in frontmatter `links:` — `derives-from`,
    `satisfies`, `depends-on`, `conflicts-with`, `supersedes`,
    `relates-to`, `impacts`, `impacted-by` (the last two: same-type,
@@ -65,7 +76,13 @@ Component Docs. Every stage transition passes a **human approval gate**.
    non-artifact files (CONTEXT.md, specs, code) and URLs. Frontmatter
    stays bare IDs and remains what tools read; humans browse via
    `python3 tools/serve_docs.py` → `docs/human_docs.html` (per
-   DEC-0244, DEC-0245).
+   DEC-0244, DEC-0245). Edges also carry prose obligations, checked
+   before every commit: a goal/epic's body references every artifact
+   deriving from it — update the parent's Derived Work in the same
+   edit that creates the child (per DEC-0246); an artifact with an
+   `impacts` edge explains each impact in its own body — the impactor
+   explains, the impactee stays silent (per DEC-0249); a session's
+   body references every `relates-to` target (per DEC-0250).
 7. **Glossary.** When a new or ambiguous term comes up, resolve it in
    `CONTEXT.md` immediately and use it exactly thereafter.
 8. **Conflicts block.** Artifacts linked to an unresolved `CFL-` cannot
@@ -75,7 +92,7 @@ Component Docs. Every stage transition passes a **human approval gate**.
    `## Design Elements`: each element is declared `### <Name> (<type>)`
    with `<type>` from the closed set `entity | value | service | event |
    protocol`, directly followed by a mandated `Implements:` line naming
-   ≥1 story (markdown-linked) whose implementation the element handles,
+   ≥1 story by bare ID whose implementation the element handles,
    and carries element-scoped contract items (`<Name>.B-1` behavior,
    `.A-1` API, `.D-1` data). Implements references must agree with each
    story's Component Impact; a CMP cannot gate while a story naming it

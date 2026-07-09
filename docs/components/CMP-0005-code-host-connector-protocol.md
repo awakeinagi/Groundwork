@@ -45,6 +45,9 @@ DEC-0142).
 > longer provisional: GitHub's documented Checks API and
 > required-status-checks are known to support the assumed semantics
 > (per DEC-0173).
+> The equivalent BBDC validation remains
+> SP-0004's question, deferred with its adapter and answered on
+> revival (per DEC-0150).
 
 ## Ubiquitous Language
 
@@ -52,6 +55,10 @@ Connector, Code-Host Connector, Capability Manifest, Adapter — per
 [CONTEXT.md](../../CONTEXT.md).
 
 ## Design Elements
+
+Decomposition per DEC-0171: three elements, one protocol carrying all
+operation families; the graduation review found none graduating at
+this time.
 
 ### CodeHostConnector (protocol)
 

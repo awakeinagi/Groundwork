@@ -26,7 +26,11 @@ Server-Sent Events for
 ST-0032's
 append-turn output, with automatic reconnect and resume so a network
 blip never drops or duplicates a stakeholder's session turns
-(DEC-0187).
+(DEC-0187). The endpoint
+rides the same FastAPI/ASGI surface as
+ST-0058 — native SSE
+support is part of why FastAPI was selected
+(per DEC-0202).
 
 ## Acceptance Criteria
 

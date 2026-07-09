@@ -50,6 +50,13 @@ relaxed to allow cross-cutting spikes to derive directly from a Business
 Goal, since refinement ordering is a goal-level concern that exists before
 any epic is approved.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session extended the artifact model under the Groundwork
+  business goal BG-0001 — the refinement-ordering spike it defined is
+  a goal-level concern deriving directly from BG-0001.
+
 ## Decisions Produced
 
 DEC-0026,

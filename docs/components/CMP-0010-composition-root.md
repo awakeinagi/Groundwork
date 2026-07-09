@@ -34,7 +34,9 @@ a typed application container and injects each bound Port into consumers
 by constructor
 (DEC-0226),
 and owns the deterministic process startup/shutdown ordering
-(DEC-0227).
+(DEC-0227). The process
+being composed is Groundwork's standalone application
+(per DEC-0001).
 
 ## Ubiquitous Language
 

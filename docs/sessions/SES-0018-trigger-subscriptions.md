@@ -57,6 +57,14 @@ session) that created it." — each subscriber line carries its own
 `(per DEC-nnnn)` citation; the entry-level `**Cites:**` remains the
 arming decision.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  the SP-0002 deferral whose multi-trigger subscription motivated this
+  session was set by DEC-0105, and the per-subscription decision
+  citations extend DEC-0107's rule that firing or retiring a trigger
+  cites a decision.
+
 ## Decisions Produced
 
 - DEC-0109 — trigger

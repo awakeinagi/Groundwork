@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0034, ST-0036]
   impacts: [ST-0039]
   impacted-by: [ST-0032, ST-0034, ST-0036]
-cites: [DEC-0021, DEC-0030, DEC-0055]
+cites: [DEC-0021, DEC-0030, DEC-0055, DEC-0180]
 ---
 
 # ST-0037: Incremental Synthesis and Shared Draft

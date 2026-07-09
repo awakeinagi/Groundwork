@@ -11,7 +11,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   relates-to: [ST-0021, ST-0022]
-cites: [DEC-0152]
+cites: [DEC-0100, DEC-0152]
 ---
 
 # SP-0005: External Secret-Store Adapter Evaluation

@@ -13,7 +13,7 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
 cites: [DEC-0077, DEC-0080, DEC-0102, DEC-0103, DEC-0121, DEC-0122, DEC-0124,
-        DEC-0125, DEC-0129, DEC-0135, DEC-0139]
+        DEC-0125, DEC-0129, DEC-0131, DEC-0133, DEC-0135, DEC-0139]
 ---
 
 # CMP-0003: App Database Port

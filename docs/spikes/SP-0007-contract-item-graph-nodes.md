@@ -10,7 +10,7 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   relates-to: [EP-0004, SP-0006]
-cites: [DEC-0158, DEC-0160]
+cites: [DEC-0157, DEC-0158, DEC-0160]
 ---
 
 # SP-0007: Contract-Item Graph Nodes

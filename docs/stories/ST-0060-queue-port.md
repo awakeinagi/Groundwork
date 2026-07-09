@@ -77,7 +77,8 @@ DEC-0135).
 ## Out of Scope
 
 - The in-process runtime that consumes this port —
-  ST-0061.
+  ST-0061 (split per
+  DEC-0208).
 - The ephemeral in-memory adapter alternate — deferred
   (ST-0063).
 - External adapters (AWS SQS, etc.) — deferred, evaluated by

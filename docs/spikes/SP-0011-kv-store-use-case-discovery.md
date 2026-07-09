@@ -11,7 +11,7 @@ links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]
   relates-to: []
-cites: [DEC-0203]
+cites: [DEC-0023, DEC-0100, DEC-0203]
 ---
 
 # SP-0011: KV-Store Additional Use-Case Discovery

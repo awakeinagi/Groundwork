@@ -75,4 +75,6 @@ is already available from this story's session/context provider. The
 standalone app (ST-0049)
 bootstraps this story's login flow itself; an embedding host may instead
 supply its own already-authenticated context and use only the linking
-flow.
+flow. ST-0048's notification center keys directly on that authenticated
+context: its per-participant event list, read state, and channel
+preferences all resolve against the person-id this story surfaces.

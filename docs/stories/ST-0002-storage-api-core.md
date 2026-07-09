@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0001]
   impacts: [ST-0003, ST-0004, ST-0005, ST-0006, ST-0008]
   impacted-by: [ST-0001]
-cites: [DEC-0018, DEC-0029, DEC-0034, DEC-0035]
+cites: [DEC-0018, DEC-0029, DEC-0033, DEC-0034, DEC-0035]
 ---
 
 # ST-0002: Storage Service Core and OpenAPI Contract
@@ -56,3 +56,8 @@ operations beyond session append/close (ST-0006); events (ST-0008).
 
 Python reference implementation per DEC-0018, but the OpenAPI contract is
 the deliverable of record — write it first.
+
+Artifact creation on this surface is what invokes ST-0005's ID
+allocator, and the branch-aware write routing here — creations landing
+on unmerged item branches — is the concurrency case that allocator must
+stay correct under.

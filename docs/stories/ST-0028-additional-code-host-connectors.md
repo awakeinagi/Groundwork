@@ -10,7 +10,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   depends-on: [ST-0019]
-cites: [DEC-0045, DEC-0156, DEC-0172]
+cites: [DEC-0045, DEC-0100, DEC-0156, DEC-0172]
 ---
 
 # ST-0028: Additional Code-Host Connectors

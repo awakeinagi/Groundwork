@@ -13,7 +13,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   depends-on: [CMP-0003]
-cites: [DEC-0152, DEC-0232, DEC-0239]
+cites: [DEC-0136, DEC-0152, DEC-0232, DEC-0239]
 ---
 
 # CMP-0015: Secret Store

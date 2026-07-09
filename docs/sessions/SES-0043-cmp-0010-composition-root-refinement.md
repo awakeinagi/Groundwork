@@ -87,6 +87,12 @@ ST-0057's ACs + the confirmed
 decisions and would be written into the doc without needing separate
 DECs.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session refined CMP-0010, a component of the Backend
+  Application Platform epic EP-0008.
+
 ## Decisions Produced
 
 - DEC-0226

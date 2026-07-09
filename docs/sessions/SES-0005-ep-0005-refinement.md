@@ -59,6 +59,13 @@ required-check surface; Jira Data Center is the likely (unconfirmed) Jira
 flavor. Extended the EP-0005→EP-0002 impact edge: CP triage becomes session
 -agent scope. EP-0005 moved to `gated`.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session's outcomes impact EP-0001 (Artifact Store & Format
+  Engine) — notably the first-class Change Proposal artifact type
+  (SPEC, checker, directory) added at T6, a format-engine concern.
+
 ## Decisions Produced
 
 DEC-0043,

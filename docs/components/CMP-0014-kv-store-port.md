@@ -13,8 +13,9 @@ links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]
   depends-on: []
-cites: [DEC-0121, DEC-0122, DEC-0129, DEC-0135, DEC-0139, DEC-0203,
-        DEC-0204, DEC-0205, DEC-0211, DEC-0219, DEC-0220, DEC-0221]
+cites: [DEC-0121, DEC-0122, DEC-0129, DEC-0133, DEC-0135, DEC-0139,
+        DEC-0203, DEC-0204, DEC-0205, DEC-0211, DEC-0219, DEC-0220,
+        DEC-0221, DEC-0222]
 ---
 
 # CMP-0014: KV-Store Port
@@ -50,7 +51,8 @@ Implements: ST-0062
   problem(not-found)`. Returns `not-found` immediately for an expired
   key — lazy expiry, no separate pass required for correctness (per
   DEC-0211,
-  DEC-0219).
+  DEC-0219; typed error enumeration per
+  DEC-0139).
 - `KvStorePort.A-2` — `set(namespace, key, value, ttl)`. `ttl` is a
   required parameter — no no-expiry variant exists (per
   DEC-0220).

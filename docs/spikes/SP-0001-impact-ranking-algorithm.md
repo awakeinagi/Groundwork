@@ -10,7 +10,7 @@ links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
   relates-to: [EP-0001, EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
-cites: [DEC-0026, DEC-0027]
+cites: [DEC-0007, DEC-0026, DEC-0027, DEC-0041]
 ---
 
 # SP-0001: Ranking Algorithm for Impact-Based Refinement Ordering

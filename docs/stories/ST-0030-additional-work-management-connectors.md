@@ -10,7 +10,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   depends-on: [ST-0025]
-cites: [DEC-0155, DEC-0156]
+cites: [DEC-0100, DEC-0155, DEC-0156]
 ---
 
 # ST-0030: Additional Work-Management Connectors

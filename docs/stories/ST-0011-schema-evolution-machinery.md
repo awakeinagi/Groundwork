@@ -10,7 +10,7 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
   relates-to: [ST-0001]
-cites: [DEC-0100, DEC-0133]
+cites: [DEC-0018, DEC-0034, DEC-0097, DEC-0100, DEC-0133]
 ---
 
 # ST-0011: Schema Evolution and Migration Machinery

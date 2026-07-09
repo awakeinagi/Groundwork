@@ -12,9 +12,9 @@ links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]
   depends-on: [CMP-0012]
-cites: [DEC-0102, DEC-0121, DEC-0131, DEC-0139, DEC-0203, DEC-0205,
-        DEC-0206, DEC-0208, DEC-0210, DEC-0211, DEC-0214, DEC-0222,
-        DEC-0223, DEC-0224, DEC-0225]
+cites: [DEC-0102, DEC-0121, DEC-0131, DEC-0132, DEC-0133, DEC-0139,
+        DEC-0203, DEC-0204, DEC-0205, DEC-0206, DEC-0208, DEC-0210,
+        DEC-0211, DEC-0214, DEC-0222, DEC-0223, DEC-0224, DEC-0225]
 ---
 
 # CMP-0013: Background Job Execution Runtime
@@ -22,7 +22,8 @@ cites: [DEC-0102, DEC-0121, DEC-0131, DEC-0139, DEC-0203, DEC-0205,
 ## Purpose
 
 The in-process asyncio runtime that consumes the Queue Port
-(CMP-0012): claims, executes, and
+(CMP-0012, added to the Port family per
+DEC-0203): claims, executes, and
 acks/retries background jobs, with no external broker or separate
 worker process in v1
 (DEC-0208). The
@@ -144,7 +145,11 @@ Implements: ST-0061
   consumes exclusively for all durable state; consumed sections:
   `QueuePort.A-2` (claim/ack/nack), `QueuePort.B-4`/`B-5`/`B-6`
   (stale-lease, dead-letter, and delivery semantics the runtime relies
-  on rather than reimplements).
+  on rather than reimplements). Consumption is port-mediated only —
+  no engine API is referenced (per
+  DEC-0121); the lease and dead-letter discipline consumed here is the
+  port failure-semantics rule's (per
+  DEC-0139).
 
 ## Acceptance & Test Expectations
 

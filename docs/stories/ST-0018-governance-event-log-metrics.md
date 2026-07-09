@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0008, ST-0010]
   impacted-by: [ST-0014, ST-0015, ST-0016, ST-0017]
-cites: [DEC-0018, DEC-0042, DEC-0102, DEC-0121, DEC-0144, DEC-0146]
+cites: [DEC-0018, DEC-0042, DEC-0075, DEC-0102, DEC-0121, DEC-0144, DEC-0146]
 ---
 
 # ST-0018: Governance Event Log and Metrics API

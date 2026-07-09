@@ -62,3 +62,9 @@ review UI (EP-0006); the GitHub connector implementation itself (EP-0005).
 The fake connector is a permanent test double — its simulated review/check
 semantics track the contract spec, never any particular host's quirks
 (per DEC-0079).
+
+ST-0004's per-session worktrees sit on top of the item branch this
+story manages: worktrees are cut from the item branch and their
+sole-version changes merge back to it, so the branch creation, reuse,
+and PR-lifecycle semantics defined here bound what worktree isolation
+can assume.

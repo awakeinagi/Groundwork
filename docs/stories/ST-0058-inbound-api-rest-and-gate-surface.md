@@ -28,7 +28,10 @@ drill-down, gate actions, conflict reads, and notification reads/writes
 streaming is a separate story
 (ST-0059) per the
 Data-Seam channel split
-(DEC-0207).
+(DEC-0207). An HTTP
+surface exists at all because Groundwork ships as a standalone
+application with its own backend services
+(per DEC-0001).
 
 ## Acceptance Criteria
 

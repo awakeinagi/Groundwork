@@ -15,11 +15,12 @@ links:
 cites: [DEC-0005, DEC-0007, DEC-0018, DEC-0020, DEC-0028, DEC-0033, DEC-0034,
         DEC-0036, DEC-0037, DEC-0038, DEC-0039, DEC-0040, DEC-0041, DEC-0042,
         DEC-0043, DEC-0045, DEC-0046, DEC-0049, DEC-0050, DEC-0054, DEC-0063,
-        DEC-0075, DEC-0079, DEC-0096, DEC-0097, DEC-0102, DEC-0121, DEC-0124,
-        DEC-0127, DEC-0130, DEC-0131, DEC-0132, DEC-0136, DEC-0140, DEC-0141,
-        DEC-0142, DEC-0143, DEC-0144, DEC-0145, DEC-0146, DEC-0147, DEC-0150,
-        DEC-0162, DEC-0163, DEC-0164, DEC-0165, DEC-0172, DEC-0173,
-        DEC-0176, DEC-0233, DEC-0234, DEC-0238, DEC-0241]
+        DEC-0075, DEC-0079, DEC-0080, DEC-0089, DEC-0096, DEC-0097, DEC-0102,
+        DEC-0121, DEC-0124, DEC-0127, DEC-0130, DEC-0131, DEC-0132, DEC-0133,
+        DEC-0136, DEC-0140, DEC-0141, DEC-0142, DEC-0143, DEC-0144, DEC-0145,
+        DEC-0146, DEC-0147, DEC-0150, DEC-0153, DEC-0162, DEC-0163, DEC-0164,
+        DEC-0165, DEC-0172, DEC-0173, DEC-0176, DEC-0233, DEC-0234, DEC-0238,
+        DEC-0241]
 ---
 
 # CMP-0004: Governance & Gate Engine
@@ -47,14 +48,18 @@ Decomposition per DEC-0162,
 amended by DEC-0234:
 nine elements here — the `GovernanceConfig` value graduated to
 CMP-0016 together
-with the shared `RoleResolution` service, so role-membership and
-delegation-window evaluation is implemented exactly once for this
+with the shared `RoleResolution` service (an application of the
+mandatory pre-gate graduation review, per DEC-0136), so
+role-membership and delegation-window evaluation is implemented
+exactly once for this
 component and CMP-0007 both.
 References to `GovernanceConfig` below resolve against
 CMP-0016's
 contract via `## Dependencies`. The governance file schemas are owned
 and published by CMP-0001
-(`SchemaValidator.D-2`). All API items resolve against this document's
+(`SchemaValidator.D-2`); the governed file content spans, among the
+rest, each role's decision rights (per DEC-0054) and the agent repo
+read allowlist (per DEC-0049). All API items resolve against this document's
 own value/event elements or against dependency contracts named in
 `## Dependencies`, per the schema-resolution rule
 (DEC-0089).
@@ -242,7 +247,8 @@ Implements: ST-0016
   (per DEC-0007,
   DEC-0038,
   DEC-0096,
-  DEC-0033).
+  DEC-0033,
+  DEC-0130).
 - `StalenessSweepService.B-2` — idempotent under at-least-once
   ChangeEvent redelivery: re-processing the same event produces no
   duplicate marks or reports
@@ -292,7 +298,8 @@ Implements: ST-0017
   CMP-0001's
   `MechanicalWriteService.A-1..A-8` closed operation set
   (per DEC-0038,
-  DEC-0033).
+  DEC-0033,
+  DEC-0130).
 - `ReaffirmationService.B-2` — rejecting a re-affirmation routes the
   artifact to full re-refinement (a new session); the rejection is
   recorded in `GovernanceEventLog`
@@ -419,6 +426,9 @@ Implements: ST-0018
   SP-0004's to
   answer, on revival
   (per DEC-0150).
+  BBDC's original selection as sole v1 host (DEC-0050) is superseded
+  by DEC-0172; the adapter's story and spike are parked under the
+  `deferred` lifecycle status (per DEC-0097).
 - `IG-2` — `GovernanceEventLog` persists behind the App Database Port
   (CMP-0003); v1 adapter is DuckDB
   (per DEC-0121,

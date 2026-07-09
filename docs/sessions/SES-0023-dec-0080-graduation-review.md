@@ -71,6 +71,13 @@ SPEC + skill playbook), with the graph tool's element-inventory command
 noted as the mechanical aid, and a facilitator-memory note so future
 sessions apply rule-decisions as checklists.
 
+### Post-Close Enrichment
+
+- 2026-07-08 — Cross-reference enrichment (per DEC-0248, DEC-0250):
+  this session continued directly from SES-0022, the contract-
+  refinement session whose CMP-0001 gate presentation prompted the
+  DEC-0080 review run here.
+
 ## Decisions Produced
 
 - DEC-0134 —

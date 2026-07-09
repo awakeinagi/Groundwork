@@ -11,8 +11,8 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
   impacts: [ST-0008]
-cites: [DEC-0018, DEC-0077, DEC-0102, DEC-0103, DEC-0121, DEC-0122, DEC-0124,
-        DEC-0125, DEC-0135]
+cites: [DEC-0018, DEC-0077, DEC-0102, DEC-0103, DEC-0105, DEC-0121, DEC-0122,
+        DEC-0124, DEC-0125, DEC-0135]
 ---
 
 # ST-0010: App Database Port

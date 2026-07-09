@@ -33,7 +33,9 @@ reconnect/resume
 DEC-0207). It
 computes nothing itself — it fronts the Governance & Gate Engine, the
 Canonical Store, and the session engine, translating transport and
-errors only.
+errors only. The surface exists because Groundwork ships as a
+standalone application whose stakeholders work through a web UI, not
+a terminal (per DEC-0001).
 
 ## Ubiquitous Language
 

@@ -53,7 +53,8 @@ CMP-0002 — supplies the event
 schema and delivery guarantees (graduated seam per
 DEC-0134);
 CMP-0003 — supplies the
-outbox operation family and atomicity guarantee. Emission wiring lives
+outbox operation family and atomicity guarantee (graduated seam per
+DEC-0135). Emission wiring lives
 in CMP-0001's
 behavior contract.
 

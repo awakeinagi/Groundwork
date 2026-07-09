@@ -11,8 +11,9 @@ links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
   impacts: [ST-0002, ST-0007]
-cites: [DEC-0009, DEC-0018, DEC-0034, DEC-0037, DEC-0047, DEC-0080, DEC-0082,
-        DEC-0097, DEC-0098, DEC-0104]
+cites: [DEC-0009, DEC-0018, DEC-0026, DEC-0034, DEC-0037, DEC-0046, DEC-0047,
+        DEC-0049, DEC-0054, DEC-0080, DEC-0082, DEC-0097, DEC-0098, DEC-0104,
+        DEC-0133]
 ---
 
 # ST-0001: Tier-1 Schema Suite and Validation Library
@@ -21,7 +22,8 @@ cites: [DEC-0009, DEC-0018, DEC-0034, DEC-0037, DEC-0047, DEC-0080, DEC-0082,
 
 Machine-readable JSON Schemas for every artifact type's frontmatter and
 every governance config file, plus the validation library the storage
-service runs on every write — the executable form of the SPEC documents.
+service (ST-0002) runs on every write — the executable form of the SPEC
+documents.
 
 ## Acceptance Criteria
 

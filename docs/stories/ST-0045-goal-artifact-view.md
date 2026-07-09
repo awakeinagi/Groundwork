@@ -84,3 +84,9 @@ drill-down, typed-link list) are the reusable core
 ST-0046 and
 ST-0047 build on — design them for
 reuse, not goal-specific one-offs.
+
+The read contract this view needs — full artifact content plus
+decision and transcript drill-down — is what
+ST-0058's artifact-read
+routes serve; the Inbound API's route surface is specified against
+this story's data needs.
