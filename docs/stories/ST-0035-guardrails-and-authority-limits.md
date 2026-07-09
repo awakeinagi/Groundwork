@@ -5,7 +5,7 @@ title: Guardrails and authority limits
 status: approved
 owner: ds-lead
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 created: 2026-07-08
 links:
   derives-from: [EP-0002]
@@ -13,18 +13,20 @@ links:
   depends-on: [ST-0032, ST-0033]
   impacts: [ST-0041]
   impacted-by: [ST-0032, ST-0033]
-cites: [DEC-0054]
+cites: [DEC-0054, DEC-0278]
 ---
 
 # ST-0035: Guardrails and Authority Limits
 
 ## Summary
 
-The three protective layers every session runs under: pack-defined
+The protective layers every session runs under: pack-defined
 unproductive-pattern detection with graceful exits, governance-derived
 decision-rights enforcement that keeps out-of-authority statements from
-becoming accepted Decisions, and injection hygiene that treats
-participant input as data, never instructions.
+becoming accepted Decisions, injection hygiene that treats participant
+input as data, never instructions, and the intake authority gate that
+halts out-of-rights change instructions at the door
+(DEC-0278).
 
 ## Acceptance Criteria
 
@@ -50,6 +52,12 @@ participant input as data, never instructions.
    distinguishable in the session record from a normal close, so
    downstream distillation and the eval harness can tell partial records
    from complete ones.
+6. At intake open, the proposer's decision rights are resolved through
+   AC3's governance lookup; an instruction outside those rights halts
+   intake — no session proceeds — and the attempt is captured verbatim
+   as a CP with source `unauthorized-attempt` via the typed
+   `create-change-proposal` operation, awaiting the authority holder(s)
+   (per DEC-0278).
 
 ## Component Impact
 

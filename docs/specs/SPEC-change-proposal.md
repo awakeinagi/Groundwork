@@ -12,7 +12,7 @@ Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 
 ```yaml
 type: change-proposal
-source: jira-drift | ui-suggestion | implementation-feedback
+source: jira-drift | ui-suggestion | implementation-feedback | unauthorized-attempt
 proposed-by: <person-id>
 triage: pending | mechanical | session | rejected
 links:
@@ -23,10 +23,11 @@ links:
 
 CPs use the `triage` field, not the common status lifecycle: created
 `pending`; the session agent triages to `mechanical` (trivial — a
-mechanical-fix PR is opened citing the CP), `session` (substantive — a
-refinement session is opened with the CP as input, and the proposer is
-invited), or `rejected` (with rationale). Terminal states persist; CPs are
-never deleted.
+mechanical-fix PR is opened citing the CP), `session` (substantive — an
+intake-opened refinement session is opened carrying the CP verbatim as
+its proposal, `origin: cp`, and the proposer is invited,
+DEC-0277), or `rejected` (with rationale). Terminal states persist; CPs
+are never deleted.
 
 ## Required body sections
 
@@ -45,3 +46,7 @@ never deleted.
 - A Decision produced by a CP-triggered session cites the session normally;
   the session's record links `relates-to` the CP, preserving the chain
   proposer → CP → session → Decision.
+- CPs with source `unauthorized-attempt` are written by the intake
+  authority check when an instruction exceeds the instructor's decision
+  rights (DEC-0262, DEC-0278): intake halts, the attempt is preserved
+  verbatim, and the CP awaits disposition by the authority holder(s).

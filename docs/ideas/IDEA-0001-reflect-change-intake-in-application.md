@@ -2,7 +2,7 @@
 id: IDEA-0001
 type: idea
 title: Reflect the change-intake workflow in the Groundwork application's session engine and UI
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 proposed-by: awakeinagi@gmail.com
@@ -35,4 +35,4 @@ session refined.
 
 ## Disposition
 
-Pending.
+Taken up 2026-07-09 by SES-0052 (intake session per DEC-0261).

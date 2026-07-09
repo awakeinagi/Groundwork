@@ -5,7 +5,7 @@ title: Strategy pack format and plugin loading
 status: approved
 owner: ds-lead
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 created: 2026-07-08
 links:
   derives-from: [EP-0002]
@@ -13,7 +13,8 @@ links:
   depends-on: []
   impacts: [ST-0035, ST-0038, ST-0040, ST-0041]
   impacted-by: []
-cites: [DEC-0053, DEC-0058, DEC-0181]
+cites: [DEC-0053, DEC-0058, DEC-0181, DEC-0256, DEC-0266, DEC-0273,
+        DEC-0275, DEC-0283]
 ---
 
 # ST-0033: Strategy Pack Format and Plugin Loading
@@ -32,8 +33,10 @@ any of it) is pack-defined and reads this format.
 1. The bundle layout and `pack.yaml` schema cover phases, stopping
    criteria, escalation triggers, guardrail policy, and a context recipe
    declaration, one pack per artifact-type-and-phase (goal-refinement,
-   epic-refinement, story-refinement, conflict-mediation, CP-triage)
-   (per DEC-0053).
+   epic-refinement, story-refinement, conflict-mediation, CP-triage),
+   plus the artifact-type-independent change-intake pack
+   (per DEC-0053,
+   DEC-0275).
 2. Packs are stored in the canonical repo and PR-gated like governance
    config — a pack change cannot land without passing the eval harness's
    benchmark suite
@@ -49,6 +52,21 @@ any of it) is pack-defined and reads this format.
 5. Skill and tool declarations within a pack resolve to a closed,
    documented set of loadable capabilities — a pack cannot declare an
    undeclared or arbitrary code capability.
+6. The **change-intake pack** owns the intake protocol's conversational
+   layer from proposal through path-pick and classification: the
+   restate/align phases, locate-first via its context recipe and
+   on-demand search/graph tools, and path stopping criteria covering the
+   full, expedited, idea-capture, and mechanical outcomes (the
+   mechanical disposition per
+   DEC-0283). It
+   completes with a recorded in-session hand-off to the matching
+   artifact-type pack; the engine's intake invariants remain outside the
+   pack
+   (per DEC-0275,
+   DEC-0273; the
+   step-tracking and locate-first protocol content it encodes per
+   DEC-0256,
+   DEC-0266).
 
 ## Component Impact
 

@@ -5,15 +5,16 @@ title: Session engine lifecycle and contract
 status: approved
 owner: ds-lead
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 created: 2026-07-08
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]
   depends-on: []
-  impacts: [ST-0034, ST-0035, ST-0036, ST-0037, ST-0040, ST-0059]
+  impacts: [ST-0016, ST-0017, ST-0034, ST-0035, ST-0036, ST-0037, ST-0040, ST-0059]
   impacted-by: []
-cites: [DEC-0021, DEC-0035, DEC-0057, DEC-0182]
+cites: [DEC-0021, DEC-0035, DEC-0057, DEC-0182, DEC-0273, DEC-0274, DEC-0279,
+        DEC-0280]
 ---
 
 # ST-0032: Session Engine Lifecycle and Contract
@@ -26,7 +27,10 @@ participant conducting one 1:1 conversation with the agent. Every other
 in-session capability in this epic (transcript capture ST-0034,
 guardrails ST-0035, conflict mediation ST-0036, synthesis ST-0037,
 glossary maintenance ST-0040) executes inside a session this engine
-opened, under this story's lifecycle and inactivity semantics.
+opened, under this story's lifecycle and inactivity semantics. Sessions
+carry a kind and, when intake-opened, the intake context that starts
+the record at the verbatim proposal — the engine end of the
+change-intake protocol (DEC-0273, DEC-0274).
 
 ## Acceptance Criteria
 
@@ -55,10 +59,38 @@ opened, under this story's lifecycle and inactivity semantics.
    AC3 only starts counting after the current turn fully completes.
    Auto-close never truncates a turn mid-stream
    (per DEC-0182).
+7. The session contract carries a kind — `full | expedited |
+   idea-capture` — and an optional intake-opening context: the verbatim
+   proposal, the proposer, an origin (`user | agent | cp | idea`), and a
+   source ref when the origin is a CP or Idea. Expedited and
+   idea-capture sessions always carry intake context; full sessions open
+   either planned or intake-opened
+   (per DEC-0274).
+8. An intake-opened session begins its transcript at the verbatim
+   proposal (T1) followed by the agent's restatement; the engine runs
+   the intake authority check (ST-0035) at open, and does not enter
+   grilling phases before a confirmed typed alignment turn exists
+   (per DEC-0273,
+   DEC-0280).
+9. A session that modified approved artifacts cannot close until the
+   staleness cascade is marked: superseding Decisions and stale marks
+   are durably written via the staleness sweep (ST-0016) before close.
+   Re-affirmation is presented in-session when the participant holds the
+   approval right; otherwise the stale marks feed ST-0017's
+   re-affirmation queues
+   (per DEC-0279).
 
 ## Component Impact
 
 None yet — a Component Doc for this epic's bounded context is stubbed once the first story here refines toward it.
+
+## Impact Notes
+
+AC9's close-cascade invariant shapes EP-0003's staleness machinery:
+ST-0016's sweep must be synchronously invocable at session close, and
+ST-0017's re-affirmation queues receive their stale marks from sessions
+closing under this contract — the ST-0032 → ST-0016/ST-0017 impact
+edges (per DEC-0279).
 
 ## Out of Scope
 

@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0049]
   impacts: [ST-0055, ST-0056]
-cites: [DEC-0258, DEC-0260, DEC-0261, DEC-0269, DEC-0270, DEC-0271]
+cites: [DEC-0258, DEC-0260, DEC-0261, DEC-0269, DEC-0270, DEC-0271, DEC-0281]
 ---
 
 # ST-0065: Idea Capture and Minimal List
@@ -20,9 +20,11 @@ cites: [DEC-0258, DEC-0260, DEC-0261, DEC-0269, DEC-0270, DEC-0271]
 ## Summary
 
 Release-1 UI support for the Idea artifact (DEC-0258): capturing raw
-change intent at the moment it strikes — mid-session or not — and
-seeing what has been captured. Capture is the release-1 value
-(DEC-0270); browsing/queue surfaces remain release-2 territory.
+change intent at the moment it strikes — mid-session or not — seeing
+what has been captured, and taking a captured Idea up into an
+intake-opened session (DEC-0281). Capture and take-up are the
+release-1 value (DEC-0270); browsing/queue surfaces remain release-2
+territory.
 
 ## Acceptance Criteria
 
@@ -43,6 +45,12 @@ seeing what has been captured. Capture is the release-1 value
 5. The list offers **decline with required rationale**, recorded in
    the Idea's Disposition and setting status `declined`; the action is
    gate-policy-checked against governance config (per DEC-0270).
+6. The list offers a **take-up** action on a captured Idea: it opens
+   an intake-opened session with the Idea's verbatim text as the
+   proposal (`origin: idea`) and sets the Idea `taken-up` via
+   `set-idea-disposition`, the Disposition naming the opened session —
+   fulfilling the hand-off point DEC-0271 reserved (per DEC-0281,
+   DEC-0261).
 
 ## Component Impact
 
@@ -60,13 +68,12 @@ affordances as constraints (per DEC-0270).
 
 ## Out of Scope
 
-The take-up flow — selecting an Idea and opening an intake session
-from it — is IDEA-0001's future session; the list view reserves the
-hand-off point (an Idea's record is exposed; no session-opening
-affordance exists yet) (per DEC-0271). Work-queue surfacing beside
-untriaged CPs and full browsing: release 2, ST-0055 and ST-0056.
-Idea editing after capture: Ideas are verbatim captures, not
-documents under refinement (per DEC-0258).
+Work-queue surfacing beside untriaged CPs and full browsing: release
+2, ST-0055 and ST-0056. Idea editing after capture: Ideas are verbatim
+captures, not documents under refinement (per DEC-0258). The intake
+session the take-up action opens — its protocol, cards, and lifecycle —
+belongs to ST-0032/ST-0044; this story owns only the affordance and
+the disposition write.
 
 ## Notes for Implementers
 

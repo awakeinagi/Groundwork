@@ -4,7 +4,7 @@ type: epic
 title: Refinement Web UI
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-05
 links:
@@ -16,7 +16,7 @@ links:
 cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0022, DEC-0026, DEC-0032, DEC-0041,
         DEC-0042, DEC-0043, DEC-0051, DEC-0055, DEC-0057, DEC-0071, DEC-0072,
         DEC-0073, DEC-0074, DEC-0075, DEC-0076, DEC-0184, DEC-0185, DEC-0186,
-        DEC-0187, DEC-0188]
+        DEC-0187, DEC-0188, DEC-0280]
 ---
 
 # EP-0006: Refinement Web UI
@@ -101,7 +101,9 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
 
 - Consumes: session engine with **typed turn payloads** (question-card,
   decision-playback, elaboration-request/response — the EP-0006→EP-0002
-  impact realized by DEC-0074),
+  impact realized by DEC-0074 —
+  plus the alignment card for intake-opened sessions per
+  DEC-0280),
   storage API (EP-0001), approval + metrics APIs (EP-0003), graph queries
   (EP-0004), identity (EP-0005), recipe resolver outputs and profile store
   (EP-0007). All of these reach the UI through EP-0008's inbound API:

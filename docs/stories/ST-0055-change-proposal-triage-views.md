@@ -10,8 +10,8 @@ links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]
   depends-on: [ST-0045]
-  impacted-by: [ST-0065]
-cites: [DEC-0047, DEC-0073, DEC-0100, DEC-0133]
+  impacted-by: [ST-0039, ST-0065]
+cites: [DEC-0047, DEC-0073, DEC-0100, DEC-0133, DEC-0277]
 ---
 
 # ST-0055: Change Proposal Triage Views
@@ -38,6 +38,10 @@ pass a gate):
 2. Triage actions call the typed `create-change-proposal`/`set-cp-triage`
    operations (ST-0039) rather than
    a parallel write path.
+3. The "session" triage action opens an intake-opened session carrying
+   the CP verbatim as its proposal (`origin: cp`), per
+   ST-0039 AC2 (per
+   DEC-0277).
 
 ## Component Impact
 

@@ -4,7 +4,7 @@ type: epic
 title: Refinement Session Agent
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 owner: ds-lead
 created: 2026-07-05
 links:
@@ -16,7 +16,7 @@ links:
 cites: [DEC-0003, DEC-0005, DEC-0012, DEC-0015, DEC-0021, DEC-0026, DEC-0044,
         DEC-0047, DEC-0051, DEC-0052, DEC-0053, DEC-0054, DEC-0055, DEC-0056,
         DEC-0057, DEC-0058, DEC-0178, DEC-0179, DEC-0180, DEC-0181,
-        DEC-0182, DEC-0183]
+        DEC-0182, DEC-0183, DEC-0274]
 ---
 
 # EP-0002: Refinement Session Agent
@@ -104,7 +104,9 @@ Conflict, Synthesis, Strategy Pack, Decision Rights, Change Proposal — per
 
 ## Interfaces & Contracts to Define
 
-- **Session engine contract**: open/resume/append-turn/close, streaming —
+- **Session engine contract**: open/resume/append-turn/close, streaming,
+  session kinds and the intake-opening context
+  (DEC-0274) —
   the pluggable-UI seam. EP-0008's inbound API exposes this contract to
   UI channels over HTTP + SSE, so engine-contract decisions here
   constrain the platform's endpoint and streaming shape (the

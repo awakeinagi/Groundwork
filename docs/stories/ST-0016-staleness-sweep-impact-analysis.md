@@ -4,7 +4,7 @@ type: story
 title: Staleness sweeps and impact analysis
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-08
 links:
@@ -12,6 +12,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0006, ST-0008]
   impacts: [ST-0014, ST-0017, ST-0018]
+  impacted-by: [ST-0032]
 cites: [DEC-0007, DEC-0033, DEC-0038, DEC-0096, DEC-0144, DEC-0145, DEC-0146]
 ---
 

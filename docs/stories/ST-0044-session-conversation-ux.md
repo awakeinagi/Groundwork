@@ -5,7 +5,7 @@ title: Session conversation UX — question and decision-playback cards
 status: approved
 owner: eng-lead
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 created: 2026-07-08
 links:
   derives-from: [EP-0006]
@@ -13,7 +13,7 @@ links:
   depends-on: [ST-0043]
   impacts: [ST-0047]
   impacted-by: [ST-0043, ST-0059]
-cites: [DEC-0051, DEC-0074, DEC-0184, DEC-0186, DEC-0187, DEC-0188]
+cites: [DEC-0051, DEC-0074, DEC-0184, DEC-0186, DEC-0187, DEC-0188, DEC-0280]
 ---
 
 # ST-0044: Session Conversation UX — Question and Decision-Playback Cards
@@ -22,10 +22,12 @@ cites: [DEC-0051, DEC-0074, DEC-0184, DEC-0186, DEC-0187, DEC-0188]
 
 The conversation content rendered inside
 ST-0043's shell: free
-chat mixed with typed question cards (recommended-first options) and
-decision-playback cards, each carrying the guaranteed affordances the
-sponsor amended into the session UX
-(per DEC-0074).
+chat mixed with typed question cards (recommended-first options),
+decision-playback cards, and alignment cards for intake-opened
+sessions, each carrying the guaranteed affordances the sponsor amended
+into the session UX
+(per DEC-0074,
+DEC-0280).
 
 ## Acceptance Criteria
 
@@ -55,6 +57,12 @@ sponsor amended into the session UX
    and screen-reader-labeled, the elaborate/free-text affordances are
    reachable without a mouse) and reflow usably from `sm` up
    (per DEC-0188).
+7. An alignment card renders the agent's restatement of an
+   intake-opened session's intent with confirm and amend actions; an
+   amendment produces a fresh restatement turn rather than editing the
+   record, and the confirmed alignment card is the typed turn the
+   engine's alignment-before-grilling invariant keys on
+   (per DEC-0280).
 
 ## Component Impact
 
@@ -72,7 +80,7 @@ the mediation-specific rendering of conflict tensions
 ## Notes for Implementers
 
 The typed turn payloads this story renders (question-card,
-decision-playback, elaboration-request/response) are the
+decision-playback, elaboration-request/response, alignment-card) are the
 EP-0006→EP-0002
 contract elaboration the epic flags in its Risks — confirm the payload
 shapes against the session-engine's actual contract before locking this

@@ -17,6 +17,14 @@ facilitator: <agent identity + model version>
 strategy-pack: <pack/version>   # which methodology conducted the session
                                 # (per DEC-0053); absent for pre-app sessions
 transcript-fidelity: verbatim | reconstructed
+kind: full | expedited | idea-capture   # session weight (DEC-0274); absent means
+                                        # full (pre-app and planned sessions)
+intake:                                 # present iff the session is intake-opened
+                                        # (DEC-0274); expedited and idea-capture
+                                        # sessions always carry it
+  origin: user | agent | cp | idea
+  proposed-by: <person-id>
+  source-ref: <CP-/IDEA- id>            # when origin is cp or idea
 links:
   relates-to: [BG-....]       # artifact(s) the session refined; may be empty
                               # for inception sessions that create the artifact
@@ -47,6 +55,10 @@ immutable. Follow-up conversation is a new Session linking
 
 - Append-only: turns are never edited or deleted after the fact. Corrections
   happen in later turns or later sessions.
+- An intake-opened session's Transcript begins at the verbatim proposal:
+  T1 is the proposal itself, T2 the agent's restatement, followed by the
+  alignment loop — provenance starts at intent
+  (DEC-0273, DEC-0274).
 - Every Decision distilled from a session must cite a turn span that actually
   supports it.
 - Multi-stakeholder input is achieved by Synthesis across separate 1:1

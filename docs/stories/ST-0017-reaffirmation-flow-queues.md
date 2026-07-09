@@ -4,7 +4,7 @@ type: story
 title: Re-affirmation flow and impact-ranked approver queues
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-08
 links:
@@ -12,7 +12,7 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0003, ST-0012, ST-0016]
   impacts: [ST-0018]
-  impacted-by: [ST-0012, ST-0016]
+  impacted-by: [ST-0012, ST-0016, ST-0032]
   relates-to: [SP-0001]
 cites: [DEC-0028, DEC-0033, DEC-0038, DEC-0041, DEC-0075, DEC-0076, DEC-0146,
         DEC-0147]
