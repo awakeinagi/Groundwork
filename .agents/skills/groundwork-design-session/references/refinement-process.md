@@ -237,6 +237,11 @@ refinement, not as a separate exercise:
 - Gate prep includes confirming the artifact's `overview:` is still
   faithful to the body (DEC-0288) — an explicit checklist item,
   recorded like the graduation review.
+- Gate prep for epics, stories/spikes, and components includes the
+  required system-architect **reviewer** consultation (DEC-0292,
+  dual-instance debate per DEC-0293 — see §System-architect
+  consultation under Per-stage playbooks); at component gate prep it
+  runs before the graduation review.
 - When an artifact's refinement is complete, set `status: gated` and
   present it to the approver (in manual mode: the user, in conversation).
   Summarize what they're ratifying — the key content and the decisions it
@@ -317,6 +322,37 @@ against, reconciled afterward.
 
 ## Per-stage playbooks
 
+### System-architect consultation (required at EP/ST/CMP — DEC-0292..DEC-0296)
+
+The `system-architect` project agent (definition in
+`.claude/agents/system-architect.md`, knowledge corpus in the
+`system-architecture-bp` skill) is consulted at two moments:
+
+- **Advisor** — before/during refinement of the artifact: candidate
+  approaches, trade-offs, risks, seam and pattern suggestions, and
+  grilling questions worth asking.
+- **Reviewer** — at gate prep: critique of the draft against best
+  practices, addressed in-session before gating. At component gate
+  prep the reviewer consultation runs **before** the element-graduation
+  review (DEC-0136) — critique may reshape elements; graduation is the
+  final structural checklist (DEC-0292).
+
+Both moments are **required** at epic, story/spike, and component
+refinement and gate prep; **discretionary** at business-goal level.
+Every consultation runs the dual-instance debate (DEC-0293): spawn two
+instances — one *record-grounded* (packet includes the relevant
+accepted decisions) and one *best-practice-independent* (no record) —
+on the strongest available model, **passing the model explicitly at
+every spawn** (the frontmatter pin alone does not take effect); relay
+positions between them for at most two rebuttal rounds; present the
+joint verdict (or documented disagreement, as alternatives) to the
+stakeholder. The outcome is always a proposal the stakeholder
+ratifies; contradicting an accepted decision lands only via normal
+supersession. Consultations enter the session record as attributed
+facilitator turns whose following stakeholder turns are the
+dispositions (DEC-0296) — no separate findings protocol, no
+attachments.
+
 ### Goal refinement (idea → BG)
 Grill using the question bank in
 [goal-grilling-questions.md](goal-grilling-questions.md), organized by BG
@@ -363,8 +399,9 @@ new epic (or spike, or late-derived anything) is added to the goal's
 Derived Work section (DEC-0246) — the checker blocks a parent that
 doesn't reference its children. Every `impacts` edge you draw needs
 prose in the impactor's body explaining how it shapes the target
-(DEC-0249). Then refine each epic in its own session, in impact order.
-Epic-level questions: boundaries between epics (per the seam catalog);
+(DEC-0249). Then refine each epic in its own session, in impact order,
+opening with the required system-architect advisor consultation
+(§System-architect consultation). Epic-level questions: boundaries between epics (per the seam catalog);
 the bounded context and its terms; which interfaces/contracts the epic
 must define; risks worth a spike; what's deliberately deferred to
 stories. There is no fixed number of epics — apply only the seams that
@@ -411,7 +448,8 @@ fixed number of stories — apply only the seams that carve a real
 boundary; see the seam catalog's split-vs-merge guidance before
 over-fragmenting. Flag open
 design points per story and resolve them in a story-refinement session
-before gating. Edge-case behavior surfaced but not resolved upstream
+before gating — story-refinement sessions open with the required
+system-architect advisor consultation (§System-architect consultation). Edge-case behavior surfaced but not resolved upstream
 (goal-level Illustrative Scenario, epic-level Risks & Open Questions)
 becomes concrete, testable Acceptance Criteria here. A spike is done when
 its findings are recorded as decisions.
@@ -442,7 +480,8 @@ release alongside the armed triggers that would revive them.
 ### Component docs (the deliverable)
 Create a `CMP-` per bounded-context component, drafted early (stub with
 Purpose + Pending sections is fine), made contract-complete as stories
-settle. Structure the doc element-first: enumerate the component's typed
+settle; contract-refinement sessions open with the required
+system-architect advisor consultation (§System-architect consultation). Structure the doc element-first: enumerate the component's typed
 design elements (`### <Name> (<type>)`, closed set entity | value |
 service | event | protocol) and give each its own contract block with
 element-scoped item IDs — the element's type dictates which contract
@@ -456,7 +495,9 @@ repositories/workflows/policies as compositions of the five types, never
 ad-hoc types. When an element is consumed by more than one component (or
 needs independently versioned conformance), graduate it to its own
 `component-type:`-tagged CMP. **Graduation review is a required
-step before gating**: check every element against the graduation rule
+step before gating** (run it after the system-architect reviewer
+consultation, DEC-0292 — critique may reshape elements): check every
+element against the graduation rule
 (consumed by more than one CMP — actual or contract-certain — or
 needing independently versioned conformance; the graph tool's
 `elements` command lists candidates) and record the outcome in the

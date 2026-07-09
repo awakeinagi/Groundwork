@@ -220,6 +220,21 @@ split-vs-merge guidance in
 [references/epic-slicing-seams.md](references/epic-slicing-seams.md) and
 [references/story-slicing-seams.md](references/story-slicing-seams.md).
 
+**System-architect consultation at EP/ST/CMP (required —
+DEC-0292..DEC-0296).** Epic, story/spike, and component refinement
+sessions open with an **advisor** consultation of the
+`system-architect` project agent (`.claude/agents/system-architect.md`,
+knowledge in the `system-architecture-bp` skill), and their gate prep
+includes a **reviewer** consultation — at component gate prep it runs
+before the DEC-0136 graduation review. Discretionary at BG level.
+Every consultation is a dual-instance debate (record-grounded vs
+best-practice-independent, ≤2 rebuttal rounds; strongest model passed
+explicitly at every spawn); the verdict is a proposal the stakeholder
+ratifies, recorded as attributed transcript turns with inline
+dispositions. Protocol details in
+[references/refinement-process.md](references/refinement-process.md)
+§System-architect consultation.
+
 ## Concise reads & progressive disclosure (read this before opening files)
 
 Every artifact carries a frontmatter `overview:` (max 250 words,
