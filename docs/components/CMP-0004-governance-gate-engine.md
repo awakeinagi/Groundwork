@@ -19,7 +19,7 @@ cites: [DEC-0005, DEC-0007, DEC-0018, DEC-0020, DEC-0028, DEC-0033, DEC-0034,
         DEC-0127, DEC-0130, DEC-0131, DEC-0132, DEC-0136, DEC-0140, DEC-0141,
         DEC-0142, DEC-0143, DEC-0144, DEC-0145, DEC-0146, DEC-0147, DEC-0150,
         DEC-0162, DEC-0163, DEC-0164, DEC-0165, DEC-0172, DEC-0173,
-        DEC-0176, DEC-0233, DEC-0234, DEC-0238]
+        DEC-0176, DEC-0233, DEC-0234, DEC-0238, DEC-0241]
 ---
 
 # CMP-0004: Governance & Gate Engine
@@ -518,12 +518,16 @@ Implements: [ST-0018](../stories/ST-0018-governance-event-log-metrics.md)
   description) via
   [CMP-0001](CMP-0001-artifact-store-service.md)'s `StorageService`,
   never by assuming the graph query returns it.
-- **Notification center / notifier connectors**
-  ([EP-0005](../epics/EP-0005-connectors-and-identity.md)/[EP-0006](../epics/EP-0006-refinement-web-ui.md),
-  not yet a standalone CMP) — consumption forward-declared. Operations
-  consumed: batched notification delivery for queue updates and
-  conflict escalations
-  (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+- **Notification center**
+  ([EP-0006](../epics/EP-0006-refinement-web-ui.md), not yet a
+  standalone CMP) — consumption forward-declared. Operations consumed:
+  batched notification delivery for queue updates and conflict
+  escalations. This component calls the center; external delivery
+  reaches the notifier connector protocol
+  ([CMP-0008](CMP-0008-notification-delivery.md)) through the center,
+  not directly
+  (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md),
+  [DEC-0241](../decisions/DEC-0241-notifier-delivery-boundary.md)).
 
 ## Acceptance & Test Expectations
 

@@ -41,6 +41,12 @@ is gated).
   a host-agnostic, capability-declaring contract. GitHub (cloud) is the
   reference adapter; Bitbucket Data Center, Bitbucket Cloud, and GitLab are
   future adapters against the same contract.
+- **Notifier Connector** — the pluggable connector family for external
+  notification delivery: a delivery-pipe protocol that receives a
+  resolved channel address and pre-rendered notification payload from
+  the notification center (EP-0006) and returns a terminal delivery
+  result. Email is the reference adapter; Slack, Teams, and other
+  channels are future adapters against the same contract.
 - **Capability Manifest** — the structured declaration a connector adapter
   publishes stating which above-minimum operations it supports; a
   documented minimum set is required to run Groundwork at all, and the
