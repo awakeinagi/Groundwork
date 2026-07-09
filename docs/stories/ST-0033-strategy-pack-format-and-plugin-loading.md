@@ -33,19 +33,19 @@ this format.
    criteria, escalation triggers, guardrail policy, and a context recipe
    declaration, one pack per artifact-type-and-phase (goal-refinement,
    epic-refinement, story-refinement, conflict-mediation, CP-triage)
-   (per [DEC-0053](../decisions/DEC-0053-strategy-packs-as-plugins.md)).
+   (per DEC-0053).
 2. Packs are stored in the canonical repo and PR-gated like governance
    config — a pack change cannot land without passing the eval harness's
    benchmark suite
-   (per [DEC-0053](../decisions/DEC-0053-strategy-packs-as-plugins.md),
-   [DEC-0058](../decisions/DEC-0058-evaluation-harness.md)).
+   (per DEC-0053,
+   DEC-0058).
 3. The pack core is model-agnostic; the underlying LLM is swappable
    through a defined model-adapter boundary while pack behavior is
    maintained
-   (per [DEC-0053](../decisions/DEC-0053-strategy-packs-as-plugins.md)).
+   (per DEC-0053).
 4. Every session records which pack version and which model conducted
    it, in the session's frontmatter
-   (per [DEC-0053](../decisions/DEC-0053-strategy-packs-as-plugins.md)).
+   (per DEC-0053).
 5. Skill and tool declarations within a pack resolve to a closed,
    documented set of loadable capabilities — a pack cannot declare an
    undeclared or arbitrary code capability.
@@ -60,13 +60,13 @@ The specific policy content of any one pack (guardrail rules, context
 recipe values) — those are per-pack configuration, not this story's
 schema; whether the schema is declarative-only or needs a scripting
 escape hatch is not yet settled
-(pending [SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md),
-per [DEC-0181](../decisions/DEC-0181-sp-0008-pack-format-expressiveness-spike.md)).
+(pending SP-0008,
+per DEC-0181).
 
 ## Notes for Implementers
 
 Do not treat this story's schema as final before
-[SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md)'s
+SP-0008's
 findings land — if declarative fields can't express real pack
 variation, the schema (not just individual packs) may need a scripting
 or templating layer.

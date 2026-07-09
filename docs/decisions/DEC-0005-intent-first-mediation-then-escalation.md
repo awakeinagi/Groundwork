@@ -18,7 +18,7 @@ links:
 
 Contradictory and competing requests are the core pain point Groundwork
 exists to fix. With unsupervised sessions
-([DEC-0003](DEC-0003-unsupervised-sessions.md)), conflict handling cannot
+(DEC-0003), conflict handling cannot
 default to "sort it out in the room."
 
 ## Decision

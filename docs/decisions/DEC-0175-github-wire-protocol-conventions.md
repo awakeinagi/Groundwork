@@ -17,10 +17,10 @@ links:
 
 ## Context
 
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)
+CMP-0005
 leaves the wire protocol, error mapping, and idempotency mechanics to
 each adapter as Implementation Guidance, not contract. GitHub's REST
-API has three properties [CMP-0009](../components/CMP-0009-github-connector.md)
+API has three properties CMP-0009
 needed a concrete answer for: no general idempotency-key support on
 creation endpoints, an HTTP 403 that is overloaded between
 "permission-denied" and secondary rate-limit abuse detection, and a
@@ -42,7 +42,7 @@ choice between REST and GraphQL surfaces of unequal coverage.
    natural key (`provision_fork`, `branch.create`, `pr.open`) first
    reads for the existing resource; if found, that resource is
    returned instead of issuing the write. Satisfies
-   [DEC-0167](DEC-0167-connector-typed-error-idempotency-convention.md)'s
+   DEC-0167's
    idempotency requirement without depending on GitHub's inconsistent
    "already exists" error strings across endpoints.
 
@@ -72,12 +72,12 @@ per-endpoint error text.
 - **Create-then-catch-409/422**: fewer calls in the common
   first-time-creation case, but GitHub's "already exists" error
   strings aren't consistent across endpoints — a fragile parse target
-  for something [DEC-0167](DEC-0167-connector-typed-error-idempotency-convention.md)
+  for something DEC-0167
   requires to be reliable.
 
 ## Implications
 
-[CMP-0009](../components/CMP-0009-github-connector.md)'s
+CMP-0009's
 Implementation Guidance states both the REST/GraphQL split and the
 403/idempotency conventions as normative constraints on every
 `CodeHostConnector` operation the adapter implements.

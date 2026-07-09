@@ -17,14 +17,14 @@ links:
 ## Context
 
 Consolidations were conceived for "frequently travelled paths"
-([DEC-0017](DEC-0017-consolidation-memory-layer.md)), but at launch there
+(DEC-0017), but at launch there
 is no traffic to measure — and sessions need curated context most in
 exactly that period.
 
 ## Decision
 
 A small always-on catalog ships with the system: per-goal neighborhood,
-per-epic bundle, glossary-per-context. On top, [EP-0004](../epics/EP-0004-graph-index.md)'s path-usage
+per-epic bundle, glossary-per-context. On top, EP-0004's path-usage
 telemetry proposes new consolidations when uncatalogued paths cross heat
 thresholds, and retirement when heat decays. Humans can also request a
 consolidation explicitly.
@@ -44,5 +44,5 @@ scale.
 ## Implications
 
 The catalog definition is configuration in the canonical repo (same
-governance-as-code pattern, [DEC-0037](DEC-0037-governance-as-code.md));
+governance-as-code pattern, DEC-0037);
 threshold tuning is deployment configuration.

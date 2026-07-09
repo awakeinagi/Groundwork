@@ -22,17 +22,17 @@ The participant directed a v1 stack change: defer Postgres + pgvector to
 a future spike; the first version uses an embedded LadybugDB for the
 graph and DuckDB for the app database and vector/semantic search.
 Already settled going in: engine selection was assigned to a prototype
-spike ([DEC-0061](../decisions/DEC-0061-engine-via-spike.md)) extended
+spike (DEC-0061) extended
 with the search workload
-([DEC-0070](../decisions/DEC-0070-extend-sp-0002-search-infra.md));
+(DEC-0070);
 the change-event stream is a Postgres transactional outbox
-([DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md));
+(DEC-0078);
 openCypher support is a hard requirement
-([DEC-0062](../decisions/DEC-0062-tiered-query-api.md)); ops burden is a
+(DEC-0062); ops burden is a
 first-class criterion
-([DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)); deferred
+(DEC-0050); deferred
 status covers stories and epics only
-([DEC-0097](../decisions/DEC-0097-deferred-status.md)).
+(DEC-0097).
 
 ## Transcript
 
@@ -42,24 +42,24 @@ LadybugDB for the graph and DuckDB for the app database and
 vector/semantic search.
 
 **T2 — facilitator.** Presented the impact map:
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s question
+SP-0002's question
 answered by decision rather than prototype (noting the skill's own graph
 tool has been dogfooding embedded LadybugDB with openCypher over this
 repository);
-[DEC-0061](../decisions/DEC-0061-engine-via-spike.md)/[DEC-0070](../decisions/DEC-0070-extend-sp-0002-search-infra.md)
-superseded, staling [EP-0004](../epics/EP-0004-graph-index.md) and
-[EP-0007](../epics/EP-0007-consolidation-memory-layer.md);
-[DEC-0078](../decisions/DEC-0078-postgres-outbox-events.md)'s host
+DEC-0061/DEC-0070
+superseded, staling EP-0004 and
+EP-0007;
+DEC-0078's host
 database gone from v1, touching
-[ST-0008](../stories/ST-0008-change-event-stream.md) (gated) and
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) (draft).
+ST-0008 (gated) and
+CMP-0001 (draft).
 Flagged honestly: embedded engines make v1 single-process/single-writer
 — an ops-burden win but it retires the multi-node criterion for v1.
 Asked: the spike's fate (recommended archive + future spike on trigger),
 outbox fate (recommended keep pattern, host in DuckDB), and what
 triggers the future evaluation (recommended named need triggers).
 
-**T3 — awakeinagi.** On [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md): re-scope it to the future evaluation
+**T3 — awakeinagi.** On SP-0002: re-scope it to the future evaluation
 rather than archive — "and let's make a decision to also allow deferred
 status (similar to stories) for spikes." Outbox: keep the pattern,
 hosted in DuckDB, as recommended. Triggers: "Let's also add tracked
@@ -94,22 +94,22 @@ updates).
 
 ## Decisions Produced
 
-- [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md) — v1 storage
+- DEC-0102 — v1 storage
   stack: embedded LadybugDB (graph) + DuckDB (app database +
   vector/semantic search); supersedes prototype-spike selection
-- [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md) — the
+- DEC-0103 — the
   change-event outbox pattern survives, hosted in the app database
-- [DEC-0104](../decisions/DEC-0104-deferred-extends-to-spikes.md) —
+- DEC-0104 —
   deferred status and release scoping extend to spikes
-- [DEC-0105](../decisions/DEC-0105-sp-0002-rescoped-deferred.md) —
+- DEC-0105 —
   `SP-0002` re-scoped to the Postgres + pgvector graduation evaluation,
   deferred to backlog under armed triggers
-- [DEC-0106](../decisions/DEC-0106-trigger-registry.md) — the trigger
+- DEC-0106 — the trigger
   registry: docs/TRIGGERS.md, parseable entries, armed-only context
   loading
-- [DEC-0107](../decisions/DEC-0107-trigger-firing-cites-decision.md) —
+- DEC-0107 —
   firing and retiring a trigger cite a decision
-- [DEC-0108](../decisions/DEC-0108-trigger-surfacing.md) — armed
+- DEC-0108 — armed
   triggers surface in the status report, at release-gate reviews, and
   under checker validation
 

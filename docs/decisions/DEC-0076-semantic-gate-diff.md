@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-Gate sign-off is PR approval ([DEC-0032](DEC-0032-ui-wraps-pr-gate.md)),
+Gate sign-off is PR approval (DEC-0032),
 but a Product Owner re-affirming a changed goal cannot be handed a raw
 markdown diff.
 
@@ -34,7 +34,7 @@ it too.
 
 Approval quality is bounded by comprehension; the semantic rendering makes
 the human gate a real check rather than a rubber stamp, for exactly the
-audience [DEC-0032](DEC-0032-ui-wraps-pr-gate.md) exists to serve.
+audience DEC-0032 exists to serve.
 
 ## Alternatives Considered
 
@@ -45,5 +45,5 @@ audience [DEC-0032](DEC-0032-ui-wraps-pr-gate.md) exists to serve.
 
 Change summaries are agent-generated at PR open/update (a strategy-pack
 duty); summary faithfulness is eval-covered
-([DEC-0058](DEC-0058-evaluation-harness.md)); the impact report comes from
-the gate engine's analysis ([DEC-0038](DEC-0038-subtree-staleness-reaffirmation.md)).
+(DEC-0058); the impact report comes from
+the gate engine's analysis (DEC-0038).

@@ -16,10 +16,10 @@ links:
 
 ## Context
 
-PR approval is the gate ([DEC-0028](DEC-0028-fork-pull-pr-gating.md)), but
+PR approval is the gate (DEC-0028), but
 code hosts natively express only approval counts and path-based reviewer
 rules — not policies like "a DS Lead must approve any story touching a DS
-domain" ([DEC-0020](DEC-0020-configurable-gate-policies.md)).
+domain" (DEC-0020).
 
 ## Decision
 
@@ -45,7 +45,7 @@ lacks. Neither alone suffices.
 ## Implications
 
 The gate engine compiles `gate-policies.yaml`
-([DEC-0037](DEC-0037-governance-as-code.md)) into branch-protection
+(DEC-0037) into branch-protection
 settings via the code-host connector — requiring team and required-check
-administration operations in the [EP-0005](../epics/EP-0005-connectors-and-identity.md) contract. Host review-semantics
-variance (Bitbucket vs GitHub) becomes an [EP-0005](../epics/EP-0005-connectors-and-identity.md) refinement concern.
+administration operations in the EP-0005 contract. Host review-semantics
+variance (Bitbucket vs GitHub) becomes an EP-0005 refinement concern.

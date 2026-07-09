@@ -19,12 +19,12 @@ links:
 ## Context
 
 Embedded v1 default adapters for Queue and KV-store
-([DEC-0204](DEC-0204-v1-default-adapters-deferred-alternates.md)) will
+(DEC-0204) will
 eventually need external adapters (AWS SQS, Redis, etc.) once Groundwork
 runs multi-node or needs more than one concurrent writer — exactly the
 conditions `TRG-0001` and `TRG-0002` already watch for, currently
 subscribing
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s
+SP-0002's
 app-database graduation.
 
 ## Decision
@@ -34,12 +34,12 @@ the existing `TRG-0001` (multi-node/HA) and `TRG-0002` (concurrent
 writers) armed triggers rather than arming new ones, per the process
 rule to reuse an existing trigger with the same condition. Two new
 deferred/backlog spikes are opened, subscribed to both:
-[SP-0009](../spikes/SP-0009-aws-sqs-queue-adapter-evaluation.md) (AWS
+SP-0009 (AWS
 SQS adapter evaluation for the Queue Port — named by stakeholder
 request) and
-[SP-0010](../spikes/SP-0010-external-kv-store-adapter-evaluation.md)
+SP-0010
 (external KV-store adapter evaluation), mirroring
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s role for
+SP-0002's role for
 the app-database Port.
 
 ## Rationale
@@ -49,7 +49,7 @@ multiple app instances any more than the embedded app database can —
 the same two conditions govern all three Ports' graduation, so reusing
 the triggers avoids duplicating a condition already tracked and keeps
 one firing revive every affected spike at once
-([DEC-0110](DEC-0110-subscription-lifecycle.md)).
+(DEC-0110).
 
 ## Alternatives Considered
 
@@ -60,13 +60,13 @@ one firing revive every affected spike at once
 - **One combined spike for both Queue and KV-store external adapters**:
   rejected — the stakeholder named AWS SQS specifically for the Queue
   Port, and this project's existing pattern
-  ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md),
-  [SP-0005](../spikes/SP-0005-external-secret-store-adapter.md)) is one
+  (SP-0002,
+  SP-0005) is one
   spike per adapter-graduation question, not bundled evaluations.
 
 ## Implications
 
 `docs/TRIGGERS.md`'s `TRG-0001` and `TRG-0002` entries gain subscriber
 lines for
-[SP-0009](../spikes/SP-0009-aws-sqs-queue-adapter-evaluation.md) and
-[SP-0010](../spikes/SP-0010-external-kv-store-adapter-evaluation.md).
+SP-0009 and
+SP-0010.

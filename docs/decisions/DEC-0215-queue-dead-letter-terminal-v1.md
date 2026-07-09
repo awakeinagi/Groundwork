@@ -18,11 +18,11 @@ links:
 
 ## Context
 
-[DEC-0210](DEC-0210-queue-port-outbox-pattern-reuse.md) established
+DEC-0210 established
 that dead-lettered jobs are "visible through the port's own bookkeeping
 surface, never silently dropped," but left open whether the port itself
 exposes an operation to move a dead-lettered job back to queued.
-[ST-0060](../stories/ST-0060-queue-port.md)'s Acceptance Criteria name
+ST-0060's Acceptance Criteria name
 visibility, not recovery.
 
 ## Decision
@@ -40,5 +40,5 @@ unrequested operation would be scope creep the gate test doesn't
 require. Visibility (queryable dead-letter state) is the actual v1
 guarantee — recovery ergonomics can be added later as a gated contract
 change if a real need surfaces, consistent with how
-[CMP-0003](../components/CMP-0003-app-database-port.md)'s dead-letter
+CMP-0003's dead-letter
 handling (`AppDatabasePort.B-5`) also stops at visibility.

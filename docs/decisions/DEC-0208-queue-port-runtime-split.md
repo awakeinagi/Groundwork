@@ -18,21 +18,21 @@ links:
 
 ## Context
 
-[EP-0008](../epics/EP-0008-backend-application-platform.md) scoped both
+EP-0008 scoped both
 the Queue Port (contract + v1 adapter) and the "runtime/async execution
 model" (in-process asyncio background tasks running against it) as one
 Scope bullet. This project already has a directly analogous precedent:
-[ST-0010](../stories/ST-0010-app-database-port.md) (App Database Port
+ST-0010 (App Database Port
 contract + DuckDB adapter) is a separate story from
-[ST-0008](../stories/ST-0008-change-event-stream.md) (the dispatcher
+ST-0008 (the dispatcher
 that consumes it).
 
 ## Decision
 
 The Queue Port splits into
-[ST-0060](../stories/ST-0060-queue-port.md) — the Protocol contract,
+ST-0060 — the Protocol contract,
 conformance suite, and v1 durable app-database-backed adapter — and
-[ST-0061](../stories/ST-0061-background-job-execution-runtime.md) — the
+ST-0061 — the
 in-process asyncio runtime that enqueues, consumes, acknowledges, and
 retries jobs against it.
 
@@ -42,7 +42,7 @@ Mirrors the project's own established seam
 (port-contract-and-adapter vs. the consumer that rides it) rather than
 inventing a new one. A Queue Port with no consumer isn't independently
 demoable, but the contract's conformance suite is verifiable on its own
-before any runtime consumes it — exactly [ST-0010](../stories/ST-0010-app-database-port.md)'s
+before any runtime consumes it — exactly ST-0010's
 shape.
 
 ## Alternatives Considered
@@ -54,8 +54,8 @@ shape.
 
 ## Implications
 
-[ST-0061](../stories/ST-0061-background-job-execution-runtime.md)
-depends-on [ST-0060](../stories/ST-0060-queue-port.md).
-[ST-0063](../stories/ST-0063-ephemeral-in-memory-queue-adapter.md) (the
+ST-0061
+depends-on ST-0060.
+ST-0063 (the
 deferred ephemeral adapter) is impacted-by
-[ST-0060](../stories/ST-0060-queue-port.md)'s contract, not the runtime.
+ST-0060's contract, not the runtime.

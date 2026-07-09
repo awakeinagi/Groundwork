@@ -22,9 +22,9 @@ system itself.
 
 ## Decision
 
-Full dogfood. The inception grilling session is [SES-0001](../sessions/SES-0001-groundwork-inception.md); its distilled
+Full dogfood. The inception grilling session is SES-0001; its distilled
 decisions are the first DEC records; Groundwork's own business goal is
-[BG-0001](../goals/BG-0001-groundwork.md); its components get contract-complete Component Docs in exactly the
+BG-0001; its components get contract-complete Component Docs in exactly the
 format the system will produce — authored manually (with agent assistance)
 until the tool can host itself.
 
@@ -32,7 +32,7 @@ until the tool can host itself.
 
 The doc format gets validated before a line of application code exists, and
 the resulting specs directly satisfy the rebuild-in-any-language requirement
-([DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md)).
+(DEC-0018).
 
 ## Alternatives Considered
 

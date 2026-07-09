@@ -18,17 +18,17 @@ cites: [DEC-0026, DEC-0027]
 ## Question
 
 Given a set of same-level artifacts and their directional impact links
-([DEC-0026](../decisions/DEC-0026-directional-impact-links.md)), what
+(DEC-0026), what
 algorithm produces a refinement order that minimizes decision rework — i.e.,
 maximizes the chance that when we refine an artifact, the decisions it is
 impacted by have already been made? The answer must be well-defined in the
 presence of cycles, since real impact graphs contain them (the current epic
-set has [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0003](../epics/EP-0003-governance-and-gate-engine.md) and [EP-0002](../epics/EP-0002-refinement-session-agent.md)↔[EP-0006](../epics/EP-0006-refinement-web-ui.md)).
+set has EP-0001↔EP-0003 and EP-0002↔EP-0006).
 
 ## Consumers
 
-Two, per [DEC-0027](../decisions/DEC-0027-impact-ranked-refinement-order.md)
-and [DEC-0041](../decisions/DEC-0041-impact-ranked-reaffirmation-queue.md):
+Two, per DEC-0027
+and DEC-0041:
 initial refinement ordering among siblings, and re-affirmation queue
 ordering after staleness sweeps. The objective function must serve both
 (they may weight differently: re-affirmation clears against a live blocked
@@ -40,18 +40,18 @@ Refinement ordering is the first scheduling decision Groundwork makes at
 every level — goals, epics, stories, spikes — and it recurs every time
 impact edges change or new siblings appear. Until this spike concludes,
 ordering is human judgment informed by raw edges
-([DEC-0027](../decisions/DEC-0027-impact-ranked-refinement-order.md)), which
+(DEC-0027), which
 does not scale and hides its reasoning. The Governance engine's
-re-refinement queueing ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md))
-and the Graph Index's query contract ([EP-0004](../epics/EP-0004-graph-index.md))
+re-refinement queueing (EP-0003)
+and the Graph Index's query contract (EP-0004)
 both have interfaces shaped by whatever the algorithm needs.
 
 ## Method
 
 1. Formalize the objective: define "decision rework" cost over an ordering
    of a directed graph with cycles, and what ties mean.
-2. Evaluate candidate approaches against that objective on the real [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)–
-   [EP-0007](../epics/EP-0007-consolidation-memory-layer.md) graph plus synthetic graphs (larger, denser, cyclic):
+2. Evaluate candidate approaches against that objective on the real EP-0001–
+   EP-0007 graph plus synthetic graphs (larger, denser, cyclic):
    - condensation of strongly connected components + topological sort of the
      DAG of SCCs, with an intra-SCC tie-break rule (cycle members refined
      iteratively or jointly);
@@ -61,13 +61,13 @@ both have interfaces shaped by whatever the algorithm needs.
    - minimum feedback arc set orderings (minimize edges pointing backward
      in the refinement sequence).
 3. Investigate **provisional bounding decisions** (sponsor guidance,
-   [SES-0003](../sessions/SES-0003-ep-0001-refinement.md) @ T1): rather than strictly ordering refinement, impacted items
+   SES-0003 @ T1): rather than strictly ordering refinement, impacted items
    may first receive "subject to change" decisions or best guesses — made by
    the agent, humans, or both — that provide guidance and boundaries for
    refining the item that impacts them, with reconciliation once the
    impactor's real decisions land. Assess: whether this needs a
    `provisional` decision status, how reconciliation interacts with the
-   staleness machinery ([DEC-0007](../decisions/DEC-0007-impact-analysis-stale-marks.md)),
+   staleness machinery (DEC-0007),
    and whether provisional bounds change what the ranking algorithm should
    optimize (e.g., cycles become tractable by bounding one direction).
 4. Consider extensions the data model may need: edge weights (impact

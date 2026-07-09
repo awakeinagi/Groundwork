@@ -32,11 +32,11 @@ one-time model fetch, fully local afterward.
 
 POC-measured on the real corpus: the full 922-chunk corpus embeds in
 0.14 s and cold start is sub-second — fast enough to make
-auto-refresh-on-search ([DEC-0117](DEC-0117-index-freshness.md))
+auto-refresh-on-search (DEC-0117)
 viable. Static-embedding quality is below transformer models but proved
 sufficient in POC retrieval tests; the known paraphrase weakness showed
 up only in the rejected trigger-matching capability
-([DEC-0120](DEC-0120-v1-scope-and-backlog-capture.md)).
+(DEC-0120).
 
 ## Alternatives Considered
 
@@ -54,5 +54,5 @@ up only in the rejected trigger-matching capability
 Embedding dimension (256) is read from the model at runtime, not
 hard-coded. A model swap means a full re-index — cheap at current scale;
 at graduated scale this is one of
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s existing
+SP-0002's existing
 evaluation points.

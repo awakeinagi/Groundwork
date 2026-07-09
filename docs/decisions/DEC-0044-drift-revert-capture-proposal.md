@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-[DEC-0002](DEC-0002-doc-store-canonical.md) requires reconciling Jira edits
+DEC-0002 requires reconciling Jira edits
 toward canon; the open question was what happens to the editor's work.
 
 ## Decision
@@ -25,7 +25,7 @@ On detecting a direct edit to a canonical-owned Jira field, the connector
 promptly restores the projection to canonical content and comments on the
 issue with an explanation and links. The edit is **not discarded**: its diff
 is captured as a Change Proposal artifact
-([DEC-0047](DEC-0047-change-proposal-artifact.md)) routed to the item's
+(DEC-0047) routed to the item's
 refinement flow, where the agent triages it — trivial changes become a
 mechanical-fix PR citing the CP; substantive changes trigger a refinement
 session invitation to the editor.
@@ -45,4 +45,4 @@ and makes the redirect respectful of the editor's work.
 
 Drift detection needs the edit's before/after (webhook payload or
 event-stream diff on Bitbucket/Jira Data Center); CP triage becomes session
--agent scope ([EP-0002](../epics/EP-0002-refinement-session-agent.md), via the [EP-0005](../epics/EP-0005-connectors-and-identity.md)→[EP-0002](../epics/EP-0002-refinement-session-agent.md) impact edge).
+-agent scope (EP-0002, via the EP-0005→EP-0002 impact edge).

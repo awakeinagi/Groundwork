@@ -30,7 +30,7 @@ the graph. Every completed spike produces at least one Decision, even
 ## Rationale
 
 One mechanism, not two: the existing impact-analysis machinery
-([DEC-0007](DEC-0007-impact-analysis-stale-marks.md)) then marks affected
+(DEC-0007) then marks affected
 stories and contracts stale automatically, and spike knowledge becomes
 citable provenance like any other decision.
 

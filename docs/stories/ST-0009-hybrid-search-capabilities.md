@@ -18,11 +18,11 @@ cites: [DEC-0119, DEC-0120]
 # ST-0009: Hybrid Search Capabilities beyond v1
 
 > Deferred to `backlog` at creation (per
-> [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md),
+> DEC-0120,
 > the deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
+> DEC-0100).
 > No trigger subscription — revival is by want. POC evidence from
-> [SES-0019](../sessions/SES-0019-semantic-search-hybrid-tooling.md)
+> SES-0019
 > (T13) is summarized inline so revival starts from the tuning
 > insights, not from scratch.
 
@@ -30,9 +30,9 @@ cites: [DEC-0119, DEC-0120]
 
 Three semantic+graph capabilities that tested as promising-but-not-ready
 in the
-[SES-0019](../sessions/SES-0019-semantic-search-hybrid-tooling.md)
+SES-0019
 feasibility POCs, to extend the hybrid search tooling
-([DEC-0119](../decisions/DEC-0119-hybrid-retrieval-semantics.md)) when
+(DEC-0119) when
 revived:
 
 1. **Unlinked-neighbor audit** — surface artifact pairs with high
@@ -58,13 +58,13 @@ revived:
    Elements across Component Docs to propose seam graduation
    ([SPEC-design-elements](../specs/SPEC-design-elements.md)). *POC
    evidence:* untestable — only
-   [CMP-0001](../components/CMP-0001-artifact-store-service.md) exists;
+   CMP-0001 exists;
    within-component element similarities ran 0.57–0.81, suggesting
    cross-CMP discrimination will need element-contract-block
    embeddings, not whole-section ones. Revisit when ≥2 CMPs exist.
 
 Explicitly **not** included: trigger matching — rejected with evidence
-(per [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md)),
+(per DEC-0120),
 not deferred.
 
 ## Acceptance Criteria
@@ -75,32 +75,32 @@ pass a gate):
 1. The unlinked-neighbor audit reports pairs an eng-lead judges ≥50%
    actionable (missing edge, duplicate, or conflict) on the then-current
    corpus, counting element-mediated links as connected (per
-   [DEC-0119](../decisions/DEC-0119-hybrid-retrieval-semantics.md),
-   [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md)).
+   DEC-0119,
+   DEC-0120).
 2. Glossary-drift detection's false-positive rate is measured and
    below an agreed precision bar before it surfaces to agents (per
-   [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md)).
+   DEC-0120).
 3. Seam clustering runs only when ≥2 CMPs exist and ranks cross-CMP
    element pairs for graduation review (per
-   [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md)).
+   DEC-0120).
 
 ## Component Impact
 
 None yet — this extends the skill's local tooling today; system-side
-placement (the [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+placement (the EP-0007
 retrieval layer's search API per
-[DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)) is decided
+DEC-0067) is decided
 at revival.
 
 ## Out of Scope
 
 Trigger matching (rejected, see above); HNSW indexing
-([SP-0003](../spikes/SP-0003-hnsw-index-adoption.md)); any change to
+(SP-0003); any change to
 the v1 search tool's shipped semantics.
 
 ## Notes for Implementers
 
 The throwaway POC scripts referenced in
-[SES-0019](../sessions/SES-0019-semantic-search-hybrid-tooling.md) were
+SES-0019 were
 scratch artifacts and are not preserved; the measured findings above
 are the durable record.

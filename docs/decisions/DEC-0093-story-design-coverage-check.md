@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[DEC-0092](DEC-0092-element-implements-line.md) governs elements that
+DEC-0092 governs elements that
 exist, but alone it leaves "story X is 100% designed" unfalsifiable:
 nothing would detect an approved story that no element anywhere picked
 up. The reverse direction needs its own check, and its timing matters —
@@ -32,7 +32,7 @@ element's Implements line. Enforced at two points:
    whose Component Impact names that CMP has no referencing element in
    it.
 2. **Corpus-wide audit**: the tier-2 suite
-   ([ST-0007](../stories/ST-0007-tier2-check-suite.md)) and the gap
+   (ST-0007) and the gap
    tooling report every approved story with zero referencing elements
    as an uncovered design gap. The audit reports; it does not block
    commits.
@@ -60,7 +60,7 @@ making story approval impossible before component design starts.
 ## Implications
 
 [SPEC-component](../specs/SPEC-component.md) gains the gate rule;
-[ST-0007](../stories/ST-0007-tier2-check-suite.md) gains the audit
+ST-0007 gains the audit
 criterion; the skill's `gaps` tooling reports uncovered approved
 stories. A CMP author must account for every story naming their
 component before gating.

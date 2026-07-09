@@ -27,7 +27,7 @@ facilitator in the loop, from the first release.
 
 ## Rationale
 
-Sponsor's call at [SES-0001](../sessions/SES-0001-groundwork-inception.md) T3, accepting the higher bar over the facilitated
+Sponsor's call at SES-0001 T3, accepting the higher bar over the facilitated
 on-ramp the agent recommended.
 
 ## Alternatives Considered
@@ -41,8 +41,8 @@ on-ramp the agent recommended.
 
 The session agent, UI, and guardrails must be production-grade at v1: the
 agent cannot rely on a human to rescue a confused session. This raises the
-stakes of [DEC-0005](DEC-0005-intent-first-mediation-then-escalation.md)
-(mediation) and [DEC-0006](DEC-0006-gate-every-stage.md) (gates as the
+stakes of DEC-0005
+(mediation) and DEC-0006 (gates as the
 quality backstop), and shaped
-[DEC-0022](DEC-0022-v1-goal-refinement-slice.md) (v1 focuses on session
+DEC-0022 (v1 focuses on session
 quality).

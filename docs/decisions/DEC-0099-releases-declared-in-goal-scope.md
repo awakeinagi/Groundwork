@@ -18,7 +18,7 @@ links:
 ## Context
 
 The controlled vocabulary of
-[DEC-0098](DEC-0098-semver-release-labels.md) needs one canonical,
+DEC-0098 needs one canonical,
 validated home; otherwise nothing stops an undeclared release label
 appearing with no gated record of what it means.
 
@@ -44,7 +44,7 @@ re-scoping a release is an amendment to the goal, passing its gate.
 
 Releases are scope statements, and Scope belongs to the goal — this puts
 release definitions behind the same human gate that ratifies scope
-everywhere else. [DEC-0022](DEC-0022-v1-goal-refinement-slice.md)
+everywhere else. DEC-0022
 already lives as exactly this kind of statement; the declaration
 codifies it. Exact matching was the facilitator's call, flagged and
 confirmed: prefix-matching (declared `1` covering a story marked `1.2`)
@@ -64,6 +64,6 @@ invites ambiguity about which declared release owns a story.
 
 [SPEC-business-goal](../specs/SPEC-business-goal.md) gains the
 subsection and its format.
-[BG-0001](../goals/BG-0001-groundwork.md) needs an amendment declaring
+BG-0001 needs an amendment declaring
 its releases before the first `release:` label can validate; `backlog`
 is usable immediately without any declaration.

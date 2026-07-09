@@ -18,11 +18,11 @@ links:
 
 ## Context
 
-[DEC-0206](../decisions/DEC-0206-composition-root-yaml-config.md) fixed
+DEC-0206 fixed
 the v1 config as a single reviewable YAML file, with env vars reserved
 for secrets and environment-specific overrides "layered on top." It did
 not fix *how the YAML path is located* nor *the scope of what env vars
-may override* — which [CMP-0010](../components/CMP-0010-composition-root.md)
+may override* — which CMP-0010
 must pin down.
 
 ## Decision
@@ -31,7 +31,7 @@ The YAML config path is resolved from a **single environment variable**
 (e.g. `GROUNDWORK_CONFIG`) with a **documented default path**.
 Environment variables may override only a **documented, enumerated set**
 of values: the master secret-decryption key
-([DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md))
+(DEC-0152)
 plus a small set of per-deployment values (e.g. resource paths and
 endpoints). **Arbitrary dotted-path / deep-key env overrides are not
 supported**, and **Adapter selection is never driven by an env var** —
@@ -39,7 +39,7 @@ it lives only in the YAML.
 
 ## Rationale
 
-Preserves [DEC-0206](../decisions/DEC-0206-composition-root-yaml-config.md)'s
+Preserves DEC-0206's
 load-bearing rationale: the one YAML file remains the single reviewable
 source of the deployment topology (which Adapter binds which Port).
 Arbitrary deep overrides would re-open exactly that — the true topology
@@ -53,14 +53,14 @@ sacrificing auditability.
 - **Arbitrary dotted-path env overrides** (`GW__QUEUE__ADAPTER=…`):
   rejected — maximally flexible but reintroduces the scattered,
   hard-to-audit topology
-  [DEC-0206](../decisions/DEC-0206-composition-root-yaml-config.md)
+  DEC-0206
   explicitly rejected, and lets adapter selection escape the YAML.
 
 ## Implications
 
-[CMP-0010](../components/CMP-0010-composition-root.md)'s config-loading
+CMP-0010's config-loading
 contract documents the path env var + default and the closed override
 set; an override key outside the enumerated set is not silently
 honored. Consistent with
-[DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)'s
+DEC-0122's
 "selection is deployment configuration, never code."

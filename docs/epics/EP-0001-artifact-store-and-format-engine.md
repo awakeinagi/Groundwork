@@ -30,49 +30,49 @@ repository.
 
 ## Why (Goal Alignment)
 
-[BG-0001](../goals/BG-0001-groundwork.md)'s traceability outcome depends on artifacts being well-formed and
-their links resolvable at all times ([DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)).
-Canonical-store discipline ([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md))
+BG-0001's traceability outcome depends on artifacts being well-formed and
+their links resolvable at all times (DEC-0009).
+Canonical-store discipline (DEC-0002)
 holds because this service is the single write authority
-([DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md)); human
+(DEC-0029); human
 ratification is durable because gate sign-off is PR approval on the upstream
-repository ([DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
+repository (DEC-0028).
 
 ## Scope
 
-**In** (refined at [SES-0003](../sessions/SES-0003-ep-0001-refinement.md)):
+**In** (refined at SES-0003):
 
-- **Git model** ([DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)):
+- **Git model** (DEC-0028):
   application-owned fork of upstream; one item branch per artifact under
   refinement, carrying the item plus its sessions and decisions; PR to
   upstream main opened with the branch; merge = approval; post-merge changes
   reuse the branch with a new PR. The frontmatter `status` field is kept
   synchronized with branch/PR state by the service.
-- **Concurrency** ([DEC-0030](../decisions/DEC-0030-session-worktrees-branch-merge.md)):
+- **Concurrency** (DEC-0030):
   one git worktree per user session; sole-version worktrees merge into the
   generic item branch; divergent versions get user-suffixed branches until
   reconciled (synthesis or Conflict flow).
-- **Access** ([DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md)):
+- **Access** (DEC-0029):
   all writes via the storage API; read-only git access sanctioned for
   external consumers pinned to refs.
-- **ID allocation** ([DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md)):
+- **ID allocation** (DEC-0031):
   sequential per prefix, never reused, serialized by a thread/process-safe
   service lock.
-- **Mechanical writes** ([DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)):
+- **Mechanical writes** (DEC-0033):
   typed operations only (`append-turn`, `mark-stale`, `set-jira-key`, …);
   agents hold no git credentials; direct-commit or program-user auto-PR
   fallback with a deterministic mechanical-diff CI check, per deployment.
-- **Validation** ([DEC-0034](../decisions/DEC-0034-two-tier-validation.md)):
+- **Validation** (DEC-0034):
   tier 1 (schema + branch-local link resolution) on every write to any
   branch; tier 2 (completeness: required sections, decision citations,
   reciprocal impact links, no open conflicts) as required PR checks.
-- **Type-aware write rules** ([DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)):
+- **Type-aware write rules** (DEC-0035):
   session artifacts are append-only at the API level.
 
-**Out:** graph queries ([EP-0004](EP-0004-graph-index.md)); gate *policy* — who must approve what —
-([EP-0003](EP-0003-governance-and-gate-engine.md), which compiles policies onto host branch-protection via [EP-0005](EP-0005-connectors-and-identity.md));
-the PR review UI ([EP-0006](EP-0006-refinement-web-ui.md), per [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md));
-rendering ([EP-0006](EP-0006-refinement-web-ui.md)).
+**Out:** graph queries (EP-0004); gate *policy* — who must approve what —
+(EP-0003, which compiles policies onto host branch-protection via EP-0005);
+the PR review UI (EP-0006, per DEC-0032);
+rendering (EP-0006).
 
 ## Domain Context
 
@@ -84,7 +84,7 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
 ## Interfaces & Contracts to Define
 
 - **Storage API contract** (OpenAPI, language-neutral per
-  [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)):
+  DEC-0018):
   CRUD via item branches, versioned reads, typed mechanical operations,
   session lifecycle (open worktree / append-turn / close), branch and PR
   orchestration operations.
@@ -93,57 +93,57 @@ status lifecycle, Item Branch, Session Worktree, Mechanical Write — per
 - **Tier-2 check suite**: the productionized `tools/check_links.py` plus the
   mechanical-diff validator, packaged as required PR checks.
 - **Change-event stream**: artifact-changed events (branch-aware) consumed
-  by the Graph Index ([EP-0004](EP-0004-graph-index.md)), impact analysis ([EP-0003](EP-0003-governance-and-gate-engine.md)), and consolidation
-  freshness ([EP-0007](EP-0007-consolidation-memory-layer.md)).
-- **App database port** ([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)):
+  by the Graph Index (EP-0004), impact analysis (EP-0003), and consolidation
+  freshness (EP-0007).
+- **App database port** (DEC-0121):
   the Protocol seam for the relational/transactional workload (outbox per
-  [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md),
+  DEC-0103,
   bookkeeping, counters); adapters config-selected with a conformance
-  suite ([DEC-0122](../decisions/DEC-0122-config-selected-adapters.md));
+  suite (DEC-0122);
   v1 ships the DuckDB adapter only
-  ([DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
-- **Consumed from [EP-0005](EP-0005-connectors-and-identity.md)**: code-host connector operations for fork, PR
+  (DEC-0124).
+- **Consumed from EP-0005**: code-host connector operations for fork, PR
   open/merge, review state, and required-check registration.
 
 ## Risks & Open Questions
 
 - Counter durability across restarts and multi-node deployment (distributed
-  lock) — story-level design ([DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md) implication).
+  lock) — story-level design (DEC-0031 implication).
 - Branch-aware reads for the Graph Index: which branches does the index see,
-  and how are draft-only artifacts marked in query results? ([EP-0004](EP-0004-graph-index.md)
-  refinement input, via the EP-0001→[EP-0004](EP-0004-graph-index.md) impact edge.)
+  and how are draft-only artifacts marked in query results? (EP-0004
+  refinement input, via the EP-0001→EP-0004 impact edge.)
 - Worktree lifecycle hygiene: abandoned sessions, worktree GC, and the
   reconciliation queue for user-suffixed branches.
 - Upstream host permission model: service identity vs. program user vs.
-  delegated approver reviews — to be pinned during [EP-0005](EP-0005-connectors-and-identity.md) refinement.
+  delegated approver reviews — to be pinned during EP-0005 refinement.
 
 ## Derived Work
 
-- [CMP-0001](../components/CMP-0001-artifact-store-service.md) — Artifact
+- CMP-0001 — Artifact
   Store Service (contract-completed by the stories below)
-- [CMP-0002](../components/CMP-0002-change-event.md) — ChangeEvent
+- CMP-0002 — ChangeEvent
   Contract (graduated event seam per
-  [DEC-0134](../decisions/DEC-0134-graduate-change-event.md))
-- [CMP-0003](../components/CMP-0003-app-database-port.md) — App Database
+  DEC-0134)
+- CMP-0003 — App Database
   Port (graduated protocol seam per
-  [DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md))
-- [ST-0001](../stories/ST-0001-tier1-schema-suite.md) — Tier-1 schema suite
+  DEC-0135)
+- ST-0001 — Tier-1 schema suite
   and validation library
-- [ST-0002](../stories/ST-0002-storage-api-core.md) — Storage service core
+- ST-0002 — Storage service core
   and OpenAPI contract
-- [ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md) —
+- ST-0003 —
   Item-branch and gate-PR lifecycle orchestration
-- [ST-0004](../stories/ST-0004-session-worktree-management.md) — Session
+- ST-0004 — Session
   worktree management and divergence handling
-- [ST-0005](../stories/ST-0005-id-allocation.md) — ID allocation
-- [ST-0006](../stories/ST-0006-typed-mechanical-writes.md) — Typed
+- ST-0005 — ID allocation
+- ST-0006 — Typed
   mechanical write operations
-- [ST-0007](../stories/ST-0007-tier2-check-suite.md) — Tier-2 completeness
+- ST-0007 — Tier-2 completeness
   check suite
-- [ST-0008](../stories/ST-0008-change-event-stream.md) — Branch-aware
+- ST-0008 — Branch-aware
   change-event stream
-- [ST-0010](../stories/ST-0010-app-database-port.md) — App database
+- ST-0010 — App database
   port: protocol contract, conformance suite, DuckDB adapter
-- [ST-0011](../stories/ST-0011-schema-evolution-machinery.md) — Schema
+- ST-0011 — Schema
   evolution and migration machinery (deferred, `backlog`, trigger
   `TRG-0005`)

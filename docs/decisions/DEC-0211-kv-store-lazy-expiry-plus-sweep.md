@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md) scoped the
+DEC-0203 scoped the
 KV-store Port to coordination state plus general-purpose caching, both
 of which need TTL support; the expiry mechanism itself was undecided
 going into story derivation.
@@ -29,7 +29,7 @@ going into story derivation.
 no separate expiry pass needed for correctness), and a best-effort
 periodic sweep job — itself the first concrete job running on the new
 async runtime
-([ST-0061](../stories/ST-0061-background-job-execution-runtime.md)) —
+(ST-0061) —
 reclaims expired rows so storage doesn't grow unbounded from keys that
 are set and never read again.
 
@@ -40,7 +40,7 @@ write-heavy, read-rarely keys (a plausible profile for rate-limiting
 counters); a periodic sweep bounds that without adding a second storage
 mechanism — it's a job the Queue/runtime story already provides a home
 for, at zero new infrastructure cost consistent with the v1 embedded
-posture ([DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md)).
+posture (DEC-0102).
 
 ## Alternatives Considered
 
@@ -51,7 +51,7 @@ posture ([DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md)).
 
 ## Implications
 
-[ST-0062](../stories/ST-0062-kv-store-port.md)'s Acceptance Criteria
+ST-0062's Acceptance Criteria
 require both mechanisms; the sweep job is a concrete demonstration of
-[ST-0061](../stories/ST-0061-background-job-execution-runtime.md)'s
+ST-0061's
 runtime and is named in that story's Notes.

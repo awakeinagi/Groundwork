@@ -25,7 +25,7 @@ observation provenance-worthy, or a mechanical registry edit?
 Firing a trigger requires a decision (derived from a session or spike)
 recording the observation that the condition holds. The consequence
 executes citing that same decision — since revival already requires a
-citation ([DEC-0100](DEC-0100-scope-moves-cite-decisions.md)), one
+citation (DEC-0100), one
 decision serves both the firing and the revival, no double ceremony.
 The registry entry flips to `fired` with the date, the decision link,
 and the outcome. Retiring a no-longer-relevant trigger works
@@ -47,4 +47,4 @@ git archaeology.
 ## Implications
 
 The checker requires fired/retired entries to carry a decision link
-([DEC-0108](DEC-0108-trigger-surfacing.md)).
+(DEC-0108).

@@ -17,20 +17,20 @@ links:
 
 ## Context
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) reached
+CMP-0001 reached
 its gate with two elements that already satisfied
-[DEC-0080](DEC-0080-hybrid-component-granularity.md)'s graduation
+DEC-0080's graduation
 criteria; the rule was cited in the draft but never applied
 element-by-element. The participant caught it at the gate and directed
 that the review become mandatory — for the system being designed and
 for the facilitation skill
-([SES-0023](../sessions/SES-0023-dec-0080-graduation-review.md) T3).
+(SES-0023 T3).
 
 ## Decision
 
 Before any Component Doc is set `gated`, the facilitator must run an
 **explicit graduation review**: every design element is checked against
-the [DEC-0080](DEC-0080-hybrid-component-granularity.md) criteria
+the DEC-0080 criteria
 (consumed by more than one CMP — actual or contract-certain — or
 needing independently versioned conformance), and the outcome is
 recorded in the gating session. The review is a named step in
@@ -61,4 +61,4 @@ only a required step does.
 [SPEC-component](../specs/SPEC-component.md) gains the rule; the
 design-session skill's playbook gains the step (synced to the vendored
 and installed copies). First execution:
-[DEC-0134](DEC-0134-graduate-change-event.md)/[DEC-0135](DEC-0135-graduate-app-database-port.md).
+DEC-0134/DEC-0135.

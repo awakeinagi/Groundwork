@@ -18,15 +18,15 @@ links:
 
 ## Context
 
-[DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md)
+DEC-0187
 requires a transport-agnostic client abstraction but left connection-
 drop behavior unspecified. Story derivation needed to decide whether
-[ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md)
+ST-0059
 pins this down now or defers it to Component Doc stage.
 
 ## Decision
 
-[ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md)'s
+ST-0059's
 Acceptance Criteria require: the client reconnects automatically with
 backoff on a dropped connection, and resumes the stream from the
 last-seen SSE event id (standard `Last-Event-ID` semantics) — without
@@ -37,7 +37,7 @@ dropping or duplicating turns for the UI.
 A dropped connection during a live refinement session is exactly the
 kind of edge case
 [refinement-process.md](../../CONTEXT.md)'s story-derivation guidance
-calls out: surfaced but unresolved upstream ([DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md)
+calls out: surfaced but unresolved upstream (DEC-0187
 left it open), so it becomes concrete, testable Acceptance Criteria
 here rather than an implementer's silent guess. It is also directly
 observable and testable (kill the connection, assert resume), fitting
@@ -52,6 +52,6 @@ contract to pin it down first.
 
 ## Implications
 
-[ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md)'s
+ST-0059's
 Component Doc, once drafted, must implement `Last-Event-ID`-based
 resume as a Constraint, not merely a Note.

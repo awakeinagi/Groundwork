@@ -32,7 +32,7 @@ over these files, not a separate store.
 ## Rationale
 
 Approval-rights changes get the full audit trail; a clone rebuilds complete
-system state (consistent with [DEC-0008](DEC-0008-git-backed-markdown-store.md));
+system state (consistent with DEC-0008);
 no second source of truth to drift.
 
 ## Alternatives Considered
@@ -45,7 +45,7 @@ no second source of truth to drift.
 ## Implications
 
 Governance files get their own schema (tier-1 validated like artifacts,
-per [DEC-0034](DEC-0034-two-tier-validation.md)); the gate engine watches
+per DEC-0034); the gate engine watches
 them and recompiles branch protection on change
-([DEC-0036](DEC-0036-host-base-plus-service-gate-check.md)); host teams
+(DEC-0036); host teams
 are a *projection* of `roles.yaml`, synced by the connector.

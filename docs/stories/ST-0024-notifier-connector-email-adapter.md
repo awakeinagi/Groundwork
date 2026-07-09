@@ -28,33 +28,33 @@ with the in-app notification center remaining the source of truth.
 1. The notifier contract defines delivery of a notification to a
    recipient (person-id) over a channel, with each adapter declaring a
    capability manifest in the standard connector pattern
-   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md),
-   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
-   [DEC-0149](../decisions/DEC-0149-notifier-story-under-ep-0005.md)).
+   (per DEC-0075,
+   DEC-0045,
+   DEC-0149).
 2. The v1 email adapter implements the contract and passes its
    conformance expectations
-   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+   (per DEC-0075).
 3. Delivery respects per-user channel preferences, including
    digest/batching settings, resolved per recipient
-   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+   (per DEC-0075).
 4. Delivery success/failure is reported back to the notification
    center; a failed or unconfigured external delivery never loses the
    notification, which remains authoritative in-app
-   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+   (per DEC-0075).
 5. Adapter credentials (SMTP/provider) live in the encrypted secret
    store — never in config files, the repo, logs, or error output
-   (per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)).
+   (per DEC-0152).
 
 ## Component Impact
 
-[CMP-0008](../components/CMP-0008-notification-delivery.md) — supplies
+CMP-0008 — supplies
 the notifier protocol and email-adapter contract sections.
 
 ## Out of Scope
 
 The notification center itself — event routing rules, read state, the
-in-app surface ([EP-0006](../epics/EP-0006-refinement-web-ui.md), per
-[DEC-0075](../decisions/DEC-0075-notification-center-connectors.md));
+in-app surface (EP-0006, per
+DEC-0075);
 Slack/Teams and other channels
-([ST-0029](ST-0029-additional-notifier-adapters.md), deferred);
+(ST-0029, deferred);
 preference storage — account-side, with the center.

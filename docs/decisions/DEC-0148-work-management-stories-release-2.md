@@ -17,14 +17,14 @@ links:
 
 ## Context
 
-[EP-0005](../epics/EP-0005-connectors-and-identity.md) carries no
+EP-0005 carries no
 `release:` label (current release), but
-[BG-0001](../goals/BG-0001-groundwork.md) declares release `2` as
+BG-0001 declares release `2` as
 "connectors, full Graph Index, consolidations" and
-[DEC-0022](DEC-0022-v1-goal-refinement-slice.md) excludes Jira sync
+DEC-0022 excludes Jira sync
 from the v1 slice. Story derivation had to reconcile the epic's default
 with the goal's release plan — including the agent's Jira backlog read
-feed, which [DEC-0016](DEC-0016-agent-context-feeds.md) associated with
+feed, which DEC-0016 associated with
 v1 context work.
 
 ## Decision
@@ -45,10 +45,10 @@ access alone would still drag in the connector substrate.
 ## Alternatives Considered
 
 - **Keep Jira work in the current release**: contradicts
-  [DEC-0022](DEC-0022-v1-goal-refinement-slice.md)'s sequencing without
+  DEC-0022's sequencing without
   superseding it.
 - **A thin v1 read-only backlog feed**: honors
-  [DEC-0016](DEC-0016-agent-context-feeds.md)'s implication literally,
+  DEC-0016's implication literally,
   but ships connector plumbing for a feed the v1 slice doesn't need.
 - **`backlog` label**: understates a commitment the goal already names
   as release 2.

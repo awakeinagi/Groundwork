@@ -19,7 +19,7 @@ links:
 
 The participant asked whether Out of Scope items should be required to
 exist as deferred spikes/stories so they stay tracked
-([SES-0022](../sessions/SES-0022-cmp-0001-contract-refinement.md) T7).
+(SES-0022 T7).
 Out of Scope entries are two species: boundary statements (behavior
 that belongs elsewhere or nowhere, denied so implementers don't assume
 it) and future work in disguise (wanted-later work living only as
@@ -32,9 +32,9 @@ component docs:
 
 1. **Future work** — an entry meaning "we will want this later" **must
    exist as a deferred story or spike** (with a `release:` label per
-   [DEC-0098](DEC-0098-semver-release-labels.md) and, when revival has
+   DEC-0098 and, when revival has
    an observable condition, a trigger subscription per
-   [DEC-0109](DEC-0109-trigger-subscriptions.md)), and the entry links
+   DEC-0109), and the entry links
    to it. Prose-only future work is a review-time smell.
 2. **Boundary statements** — entries denying adjacent behavior link the
    owning artifact if one exists, or stand alone if the behavior is
@@ -61,11 +61,11 @@ is actually trackable.
 
 ## Implications
 
-First application: [ST-0001](../stories/ST-0001-tier1-schema-suite.md)'s
+First application: ST-0001's
 schema-evolution Out of Scope line becomes
-[ST-0011](../stories/ST-0011-schema-evolution-machinery.md)
+ST-0011
 (`backlog`, deferred at creation per this decision and
-[DEC-0100](DEC-0100-scope-moves-cite-decisions.md)) subscribed to a new
+DEC-0100) subscribed to a new
 trigger `TRG-0005` ("first post-launch artifact-spec change"), armed by
 this decision. [SPEC-story](../specs/SPEC-story.md) and
 [SPEC-component](../specs/SPEC-component.md) record the rule.

@@ -17,7 +17,7 @@ links:
 ## Context
 
 Candidate extra types — repository/store, workflow/process, policy/rule —
-were rejected from the taxonomy ([DEC-0082](DEC-0082-closed-element-type-taxonomy.md))
+were rejected from the taxonomy (DEC-0082)
 because each models as a composition of the five types. The sponsor
 amended the recommendation: that modeling knowledge must not be lost.
 
@@ -27,14 +27,14 @@ The design-elements spec includes a patterns catalog showing how common
 system constructs are modeled as compositions of the five element types,
 naming for each pattern the required sub-elements that keep the
 composition independently buildable-and-testable (per
-[DEC-0011](DEC-0011-contract-complete-component-docs.md)). Initial
+DEC-0011). Initial
 patterns: repository/store, workflow/process (saga), policy/rule. The
 catalog is guidance for CMP authors, not additional gate rules; it grows
 as new constructs recur.
 
 ## Rationale
 
-Sponsor amendment ([SES-0012](../sessions/SES-0012-component-spec-design-elements.md) @ T7): a closed taxonomy only works if
+Sponsor amendment (SES-0012 @ T7): a closed taxonomy only works if
 authors are shown how to express the constructs the rejected types would
 have named — otherwise pressure to reopen the enum returns with the
 first repository.

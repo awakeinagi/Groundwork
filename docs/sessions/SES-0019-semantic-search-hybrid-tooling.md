@@ -21,11 +21,11 @@ The participant directed adding semantic search to the facilitation
 skill's local tooling using DuckDB + the vss extension, citing
 [blog.brunk.io/posts/similarity-search-with-duckdb](https://blog.brunk.io/posts/similarity-search-with-duckdb)
 as the technical reference. Already settled going in:
-[DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md) commits v1 to
+DEC-0102 commits v1 to
 embedded DuckDB for the app database and vector/semantic search — this
 work dogfoods that decision, the same way the skill's LadybugDB graph
 tool dogfoods the embedded graph choice (noted in
-[SES-0017](SES-0017-v1-storage-stack-and-triggers.md) T2). `TRG-0003`
+SES-0017 T2). `TRG-0003`
 in the [trigger registry](../TRIGGERS.md) already watches for vector
 search exceeding acceptable latency. The session ran two throwaway
 POC investigations against this repository's real corpus before
@@ -50,7 +50,7 @@ working offline set is **three** packages — `duckdb`,
 `duckdb-extensions`, `duckdb-extension-vss` — with
 `import_extension("vss")` then `LOAD vss`, no network `INSTALL`.
 Opened the session, recapped
-[DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md) as settled, and
+DEC-0102 as settled, and
 grilled round 1:
 (a) where the work lands (recommended skill tooling + decisions
 recorded here as dogfood evidence); (b) embedding backend (recommended
@@ -90,17 +90,17 @@ graph for maximum effectiveness."
 docs → 922 chunks). Results: embedding 0.14 s total, queries ~35 ms
 brute-force. Headline: for "which database engine stores the graph and
 handles vector search," pure semantic search ranked superseded
-[DEC-0070](../decisions/DEC-0070-extend-sp-0002-search-infra.md) first
-and never surfaced [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md)
+DEC-0070 first
+and never surfaced DEC-0102
 (rank 10) — on a corpus that keeps superseded decisions forever,
 semantic search alone actively misleads. One graph hop along
 `SUPERSEDES` redirects stale hits to accepted successors. Graph-boosted
 re-ranking (1-hop score propagation over cites/derives edges, 0.25
 decay) promoted the correct artifact set
-([EP-0004](../epics/EP-0004-graph-index.md),
-[SES-0017](SES-0017-v1-storage-stack-and-triggers.md),
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md),
-[DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md)) and demoted
+(EP-0004,
+SES-0017,
+SP-0002,
+DEC-0102) and demoted
 templated boilerplate sections that fooled pure similarity. Subtree scoping via `DERIVES*` worked. Inline provenance
 expansion duplicated the graph tool's `trace` — delegated instead.
 LadybugDB verified to open `read_only=True` against the live graph.
@@ -131,12 +131,12 @@ Tested poorly: unlinked-neighbor audit (template-similarity noise
 dominates; needs tuning — element-mediated links must count as
 connected); trigger matching (missed the clearest concurrent-writer
 paraphrase at 0.23 — and armed triggers already load into agent context
-per [DEC-0106](../decisions/DEC-0106-trigger-registry.md)); glossary
+per DEC-0106); glossary
 drift (flagged 14% of chunks, mostly false positives); seam clustering
 (untestable — one CMP exists). Arrow bulk insert fixed POC 1's slow
 load (25 s → 129 ms). Accidental discovery: the live `.groundwork-graph`
 was stale (missing
-[SES-0018](SES-0018-trigger-subscriptions.md)'s decisions entirely),
+SES-0018's decisions entirely),
 meaning missing
 `SUPERSEDES` redirects exactly where they matter most — the search tool
 must detect graph staleness and warn. Recommended v1 = tested core +
@@ -155,7 +155,7 @@ clause applied before similarity ranking — exact and faster (32 ms vs
 clauses silently bypass vss's HNSW index — another point for no-HNSW).
 On the noisy query, `status NOT IN ('superseded','stale')` removed all
 three superseded chunks and
-[DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md) entered the
+DEC-0102 entered the
 top-8 (rank 10 → 7).
 No new metadata needed — artifact ID, type, and status are already
 columns on every chunk row, kept current by auto-refresh. Nuance:
@@ -169,34 +169,34 @@ skill's cookbook reference for using these new capabilities."
 
 ## Decisions Produced
 
-- [DEC-0111](../decisions/DEC-0111-skill-semantic-search-duckdb-vss.md) —
+- DEC-0111 —
   semantic search joins the skill tooling on DuckDB + vss, pip-bundled
   extension, dogfooding
-  [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md)
-- [DEC-0112](../decisions/DEC-0112-model2vec-static-embeddings.md) —
+  DEC-0102
+- DEC-0112 —
   embeddings via model2vec static (potion-base-8M)
-- [DEC-0113](../decisions/DEC-0113-section-and-turn-chunking.md) —
+- DEC-0113 —
   corpus: section chunks plus per-turn transcript rows, with metadata
   columns
-- [DEC-0114](../decisions/DEC-0114-no-persisted-hnsw.md) — exact
+- DEC-0114 — exact
   brute-force search; no persisted HNSW index; experimental persistence
   flag never set
-- [DEC-0115](../decisions/DEC-0115-sp-0003-hnsw-deferred.md) —
-  [SP-0003](../spikes/SP-0003-hnsw-index-adoption.md) deferred spike
+- DEC-0115 —
+  SP-0003 deferred spike
   for HNSW adoption, subscribed to `TRG-0003`
-- [DEC-0116](../decisions/DEC-0116-separate-search-script-and-index.md) —
+- DEC-0116 —
   separate `groundwork_search.py` and gitignored `.groundwork-search`
   index
-- [DEC-0117](../decisions/DEC-0117-index-freshness.md) — auto-refresh
+- DEC-0117 — auto-refresh
   on search; graph-staleness warning
-- [DEC-0118](../decisions/DEC-0118-cite-ready-output-and-guidance.md) —
+- DEC-0118 —
   two-tier cite-ready output; SKILL.md guidance and cookbook recipes
-- [DEC-0119](../decisions/DEC-0119-hybrid-retrieval-semantics.md) —
+- DEC-0119 —
   hybrid retrieval semantics (redirect, boost, scoping, filters,
   `--current`, `similar`, dedupe, trace delegation)
-- [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md) —
+- DEC-0120 —
   v1 scope cut; rejected/deferred capabilities captured in
-  [ST-0009](../stories/ST-0009-hybrid-search-capabilities.md)
+  ST-0009
 
 ## Conflicts Raised
 

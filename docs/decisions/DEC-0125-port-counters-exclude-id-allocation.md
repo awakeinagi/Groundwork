@@ -17,28 +17,28 @@ links:
 
 ## Context
 
-[DEC-0121](DEC-0121-infrastructure-ports.md) describes the app database
+DEC-0121 describes the app database
 port's workload as "outbox, bookkeeping, counters."
-[DEC-0077](DEC-0077-id-rescan-on-boot.md) says artifact-ID counter
+DEC-0077 says artifact-ID counter
 state has **no persistent store anywhere** — startup rescans all refs
 for the max ID per prefix. Read literally, "counters" behind a
 persistent port contradicts that
-([SES-0021](../sessions/SES-0021-gated-story-realignment.md) T2-T4).
+(SES-0021 T2-T4).
 
 ## Decision
 
-Clarifying — not superseding — [DEC-0121](DEC-0121-infrastructure-ports.md):
+Clarifying — not superseding — DEC-0121:
 its "counters" means **operational bookkeeping counters** (outbox
 dispatch/retry counts, debounce and regeneration state,
 session-inactivity tracking, telemetry tallies) — state whose loss is
 an inconvenience, never a source of truth about the design docs.
 Artifact-ID allocation state is **excluded from the port**:
-[DEC-0077](DEC-0077-id-rescan-on-boot.md) stands unchanged, and the
+DEC-0077 stands unchanged, and the
 app database port contract exposes no ID-counter surface.
 
 ## Rationale
 
-[DEC-0121](DEC-0121-infrastructure-ports.md) never discussed ID
+DEC-0121 never discussed ID
 allocation and lists no supersession; in Groundwork, supersession is
 explicit, never incidental. The specific decision governs its own
 territory over an illustrative workload list. Persisting ID counters
@@ -48,14 +48,14 @@ to accept it.
 
 ## Alternatives Considered
 
-- **Supersede [DEC-0077](DEC-0077-id-rescan-on-boot.md) and move ID
+- **Supersede DEC-0077 and move ID
   counters into the app database** — saves the boot-time ref scan, but
   accepts a counter that can disagree with committed reality across
   refs, and forces rewriting
-  [ST-0005](../stories/ST-0005-id-allocation.md)'s criteria. Rejected.
+  ST-0005's criteria. Rejected.
 
 ## Implications
 
-[ST-0010](../stories/ST-0010-app-database-port.md)'s scope states the
-exclusion explicitly; [ST-0005](../stories/ST-0005-id-allocation.md) is
+ST-0010's scope states the
+exclusion explicitly; ST-0005 is
 unchanged.

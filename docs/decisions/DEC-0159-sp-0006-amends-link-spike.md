@@ -27,12 +27,12 @@ tool treat it?) are not obvious.
 
 ## Decision
 
-[SP-0006](../spikes/SP-0006-amends-link-type.md) — a timeboxed spike —
+SP-0006 — a timeboxed spike —
 evaluates the `amends` link type: staleness semantics, checker rules,
 graph-tool support, migration of existing narrowing decisions
-([DEC-0151](DEC-0151-workflow-telemetry-projection-side.md)→[DEC-0048](DEC-0048-project-on-approval-field-ownership.md),
-[DEC-0151](DEC-0151-workflow-telemetry-projection-side.md)→[DEC-0130](DEC-0130-mechanical-ops-shared-allowlist.md)),
-and whether the [DEC-0157](DEC-0157-relates-to-sweep-at-distillation.md)
+(DEC-0151→DEC-0048,
+DEC-0151→DEC-0130),
+and whether the DEC-0157
 sweep already covers the need at acceptable cost. Adoption, if any, is
 a decision the spike produces.
 
@@ -51,6 +51,6 @@ structural change deserves evidence, not reflex.
 
 ## Implications
 
-[SP-0006](../spikes/SP-0006-amends-link-type.md) is drafted deriving
-from [BG-0001](../goals/BG-0001-groundwork.md) (process-level); its
+SP-0006 is drafted deriving
+from BG-0001 (process-level); its
 findings must produce at least one decision.

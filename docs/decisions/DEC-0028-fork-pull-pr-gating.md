@@ -46,8 +46,8 @@ isolated from main by construction.
 
 ## Implications
 
-Gate mechanics ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)) execute through the code-host connector ([EP-0005](../epics/EP-0005-connectors-and-identity.md)) —
-confirming the [EP-0005](../epics/EP-0005-connectors-and-identity.md)↔[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) impact edges. Approvers interact via the UI
-([DEC-0032](DEC-0032-ui-wraps-pr-gate.md)); the frontmatter `status` field
+Gate mechanics (EP-0003) execute through the code-host connector (EP-0005) —
+confirming the EP-0005↔EP-0001 impact edges. Approvers interact via the UI
+(DEC-0032); the frontmatter `status` field
 is kept synchronized with branch/PR state by the store. Graph reads over
-in-refinement branches become an [EP-0004](../epics/EP-0004-graph-index.md) concern.
+in-refinement branches become an EP-0004 concern.

@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-[DEC-0008](DEC-0008-git-backed-markdown-store.md)'s rationale wants the implementation swarm to consume docs the way
+DEC-0008's rationale wants the implementation swarm to consume docs the way
 it consumes code, but unmediated writes would bypass validation, ID
 allocation, and lifecycle enforcement.
 
@@ -39,6 +39,6 @@ the repo remains the zero-infrastructure distribution format for readers.
 
 ## Implications
 
-The storage API contract ([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)) is the sole write surface; host-side
+The storage API contract (EP-0001) is the sole write surface; host-side
 branch protection should reject pushes from anything but the service
-identity ([DEC-0033](DEC-0033-typed-mechanical-writes.md)).
+identity (DEC-0033).

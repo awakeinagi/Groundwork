@@ -22,39 +22,39 @@ cites: [DEC-0005, DEC-0039, DEC-0073, DEC-0165, DEC-0183, DEC-0184, DEC-0186, DE
 
 A read surface for an open `CFL-` conflict: the tension, each party's
 intent, the mediation record, and escalation status. Mediation itself
-happens in-session ([ST-0044](ST-0044-session-conversation-ux.md)); this
+happens in-session (ST-0044); this
 view is where anyone — including a party not in that session — can see
 where a conflict stands
-(per [DEC-0005](../decisions/DEC-0005-intent-first-mediation-then-escalation.md)).
+(per DEC-0005).
 
 ## Acceptance Criteria
 
 1. The view renders the conflict's tension statement and every party's
    stated intent (not just their position), sourced from the `CFL-`
    artifact's content
-   (per [DEC-0005](../decisions/DEC-0005-intent-first-mediation-then-escalation.md)).
+   (per DEC-0005).
 2. The mediation record renders as a read-only excerpt reusing
-   [ST-0045](ST-0045-goal-artifact-view.md)'s provenance drill-down to
+   ST-0045's provenance drill-down to
    link back to the session transcript spans where mediation happened.
 3. Escalation status (open, escalated, resolved) renders with the
    arbitrating party/role if escalated, and the resolving decision if
-   resolved (per [DEC-0039](../decisions/DEC-0039-conflict-escalation-operations.md)).
+   resolved (per DEC-0039).
    The status reflects `ConflictGate`'s actual operation surface —
    escalate, resolve, override-approver — and, when escalated, that the
    conflict does not default into any general timeout-to-default
-   election (per [DEC-0165](../decisions/DEC-0165-conflict-gate-operation-surface.md),
-   [DEC-0183](../decisions/DEC-0183-conflicts-no-default-timeout-election.md)).
+   election (per DEC-0165,
+   DEC-0183).
 4. The `conflicts-with` links to every artifact in tension render as
    navigable entries, each showing that artifact's current status (a
    blocked gate is visibly explained, not just absent).
 5. The view is read-only in v1 — no in-view mediation or escalation
    actions; those remain session-driven
-   (per [DEC-0073](../decisions/DEC-0073-v1-ui-surfaces.md)).
+   (per DEC-0073).
 6. The view ships as a `'use client'` export of the npm package (per
-   [DEC-0184](../decisions/DEC-0184-ui-ships-as-embeddable-npm-component-library.md),
-   [DEC-0186](../decisions/DEC-0186-all-components-client-boundaries.md)).
+   DEC-0184,
+   DEC-0186).
 7. The view meets WCAG 2.1 AA and reflows usably from `sm` up
-   (per [DEC-0188](../decisions/DEC-0188-shared-accessibility-responsive-baseline.md)).
+   (per DEC-0188).
 
 ## Component Impact
 
@@ -64,8 +64,8 @@ once the first story here refines toward it.
 ## Out of Scope
 
 Conducting mediation or triggering escalation
-([ST-0044](ST-0044-session-conversation-ux.md), backend conflict flow in
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)); a conflict
+(ST-0044, backend conflict flow in
+EP-0002); a conflict
 triage/queue list view (candidate post-v1 work, not scoped here).
 
 ## Notes for Implementers

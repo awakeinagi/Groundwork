@@ -18,7 +18,7 @@ links:
 ## Context
 
 Deferred work needs watchable revival conditions
-([SES-0017](../sessions/SES-0017-v1-storage-stack-and-triggers.md) @ T3:
+(SES-0017 @ T3:
 "tracked triggers... in a tracked file"). The design constraint from the
 participant: the file must be easily parsable so tooling can retrieve
 trigger conditions into an agent's context without excessive token use —
@@ -65,7 +65,7 @@ not accumulated history.
 ## Implications
 
 [SPEC-triggers](../specs/SPEC-triggers.md) defines the format; the
-checker validates it ([DEC-0108](DEC-0108-trigger-surfacing.md)); the
+checker validates it (DEC-0108); the
 status report and skill tooling parse armed entries. The registry is not
 an artifact (no frontmatter, no artifact ID); `TRG-` IDs are
 registry-scoped.

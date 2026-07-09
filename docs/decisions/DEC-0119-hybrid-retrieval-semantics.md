@@ -20,8 +20,8 @@ links:
 POC 1 proved pure semantic search actively misleads on this corpus:
 superseded decisions are immutable and stay forever, and for "which
 database engine stores the graph and handles vector search" the top
-hit was superseded [DEC-0070](DEC-0070-extend-sp-0002-search-infra.md)
-while current [DEC-0102](DEC-0102-v1-embedded-stack.md) sat at rank 10.
+hit was superseded DEC-0070
+while current DEC-0102 sat at rank 10.
 The graph knows what the vectors cannot: current truth, structure, and
 scope.
 
@@ -57,15 +57,15 @@ pre-filters are opt-in.
 
 All POC-measured on the real corpus: the redirect fixed the misleading
 query; boosting promoted the correct artifact set
-([EP-0004](../epics/EP-0004-graph-index.md),
-[SES-0017](../sessions/SES-0017-v1-storage-stack-and-triggers.md),
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md),
-[DEC-0102](DEC-0102-v1-embedded-stack.md)) and demoted the four
+(EP-0004,
+SES-0017,
+SP-0002,
+DEC-0102) and demoted the four
 identical "Derived Work — None yet" boilerplate hits that fooled cosine
 similarity; `--current` brought
-[DEC-0102](DEC-0102-v1-embedded-stack.md) from rank 10 into the top-8;
+DEC-0102 from rank 10 into the top-8;
 pre-filtering is exact
-and free precisely because [DEC-0114](DEC-0114-no-persisted-hnsw.md)
+and free precisely because DEC-0114
 chose brute force (vss's HNSW index is silently bypassed by `WHERE`
 clauses). Include-all remains the default because superseded text is
 often the best-matching text and history questions ("why did we
@@ -83,6 +83,6 @@ safe instead of hiding them.
 ## Implications
 
 The script depends on `ladybug<1.0` read-only
-([DEC-0116](DEC-0116-separate-search-script-and-index.md)) and warns
-when the graph is stale ([DEC-0117](DEC-0117-index-freshness.md)).
+(DEC-0116) and warns
+when the graph is stale (DEC-0117).
 Boost weight (0.25, one hop) is a starting point, tunable with use.

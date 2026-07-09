@@ -19,7 +19,7 @@ links:
 
 The participant asked for all nine proposed hybrid capabilities to be
 tested for feasibility before scoping
-([SES-0019](../sessions/SES-0019-semantic-search-hybrid-tooling.md)
+(SES-0019
 T12). POC 2 ran each against the real corpus and produced clear
 verdicts.
 
@@ -29,14 +29,14 @@ verdicts.
 current-truth redirect, graph boost, subtree scoping, `--type`/
 `--status`/`--current` pre-filters, `--turns` prior-art recall,
 `similar <ID>`, and the graph-staleness warning (all per
-[DEC-0119](DEC-0119-hybrid-retrieval-semantics.md)).
+DEC-0119).
 
 **Not shipped**, with POC evidence:
 
 - **Trigger matching** — *rejected*: missed the clearest paraphrase
   (concurrent-writer statement scored 0.23 vs `TRG-0002`), and armed
   triggers already load into agent context by design
-  ([DEC-0106](DEC-0106-trigger-registry.md)); the reading agent does
+  (DEC-0106); the reading agent does
   this matching natively.
 - **Unlinked-neighbor audit** — *deferred*: mechanically instant but
   naive output was template-similarity noise; needs tuning (count
@@ -47,9 +47,9 @@ current-truth redirect, graph boost, subtree scoping, `--type`/
   than one Component Doc exists.
 
 The deferred three are captured in **one backlog story**,
-[ST-0009](../stories/ST-0009-hybrid-search-capabilities.md)
+ST-0009
 (`deferred`, `release: backlog`; this decision is the deferral citation
-per [DEC-0100](DEC-0100-scope-moves-cite-decisions.md)).
+per DEC-0100).
 
 ## Rationale
 
@@ -68,7 +68,7 @@ built together.
 
 ## Implications
 
-[ST-0009](../stories/ST-0009-hybrid-search-capabilities.md) sits in
+ST-0009 sits in
 the backlog without a trigger subscription — revival is by want, not
 by watched condition. Trigger matching is recorded as
 rejected-with-evidence and should not be re-proposed without new facts.

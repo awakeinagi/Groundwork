@@ -29,19 +29,19 @@ validator.
 ## Acceptance Criteria
 
 1. The suite runs as a required check on every gate PR and blocks merge on
-   failure (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).
+   failure (per DEC-0034).
 2. Checks cover, at minimum: ID uniqueness and filename match; all links
    and citations resolve; work artifacts trace to a goal; decisions derive
    from a session or spike; impact-link reciprocity and same-type rule;
    no approved artifact linked to an open conflict; required body sections
-   present; contract items in CMP docs cite decisions (per [DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md),
-   [DEC-0026](../decisions/DEC-0026-directional-impact-links.md), [DEC-0034](../decisions/DEC-0034-two-tier-validation.md), [DEC-0011](../decisions/DEC-0011-contract-complete-component-docs.md)).
+   present; contract items in CMP docs cite decisions (per DEC-0009,
+   DEC-0026, DEC-0034, DEC-0011).
 3. Session-file diffs are verified append-only — any rewrite of an
-   existing turn fails the check (per [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)).
+   existing turn fails the check (per DEC-0035).
 4. The mechanical-diff validator verifies auto-PRs touch only allowlisted
-   fields/append regions (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   fields/append regions (per DEC-0033).
 5. Every failure is reported with a human-readable explanation naming the
-   artifact, the rule, and the fix (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).
+   artifact, the rule, and the fix (per DEC-0034).
 6. For component docs, the suite parses `### <ElementName> (<type>)`
    element headings in Design Elements sections: every type resolves
    against the closed element-type enum, each element's typed contract
@@ -50,16 +50,16 @@ validator.
    inline or to declared value/event elements, element-scoped item IDs
    are well-formed and unique within the doc, and Implementation
    Guidance Constraints cite decisions while Notes are exempt (per
-   [DEC-0081](../decisions/DEC-0081-element-first-contract-layout.md), [DEC-0088](../decisions/DEC-0088-revised-typed-obligations.md), [DEC-0089](../decisions/DEC-0089-api-schema-resolution-rule.md), [DEC-0085](../decisions/DEC-0085-implementation-guidance-split.md), [DEC-0087](../decisions/DEC-0087-parseable-element-headings.md)).
+   DEC-0081, DEC-0088, DEC-0089, DEC-0085, DEC-0087).
 7. Each element heading is followed by an `Implements:` line whose story
    links (≥1) resolve, and every referenced story's Component Impact
    links the containing component doc; violations block the CMP's gate
-   (per [DEC-0092](../decisions/DEC-0092-element-implements-line.md),
-   [DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md)).
+   (per DEC-0092,
+   DEC-0094).
 8. A story design-coverage audit reports every approved story with no
    referencing element; on a component doc's gate PR, an uncovered story
    whose Component Impact names that component blocks the gate (per
-   [DEC-0093](../decisions/DEC-0093-story-design-coverage-check.md)).
+   DEC-0093).
 9. Release-scoping checks: the `deferred` status and `release:` field
    appear only on stories, epics, and spikes; every `release:` label is
    `backlog` or matches a release declared in the governing Business
@@ -67,8 +67,8 @@ validator.
    release imply each other (an epic's label defaulting its derived
    stories and spikes, either able to override); and a component design
    element whose `Implements:` line references only deferred stories is
-   reported as an audit warning (per [DEC-0097](../decisions/DEC-0097-deferred-status.md),
-   [DEC-0098](../decisions/DEC-0098-semver-release-labels.md), [DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md), [DEC-0104](../decisions/DEC-0104-deferred-extends-to-spikes.md), [DEC-0101](../decisions/DEC-0101-deferred-out-of-metrics.md)).
+   reported as an audit warning (per DEC-0097,
+   DEC-0098, DEC-0099, DEC-0104, DEC-0101).
 10. Trigger-registry validation: `docs/TRIGGERS.md` is well-formed —
     entry headings match the strict format with unique, never-reused
     TRG IDs; required fields are present per status (including the
@@ -76,22 +76,22 @@ validator.
     non-armed entries); all links resolve; every subscriber line
     carries an action verb, a resolvable target link, and its own
     decision citation; and armed triggers subscribe only `deferred`
-    artifacts, at least one each (per [DEC-0109](../decisions/DEC-0109-trigger-subscriptions.md),
-    [DEC-0110](../decisions/DEC-0110-subscription-lifecycle.md), [DEC-0108](../decisions/DEC-0108-trigger-surfacing.md)).
+    artifacts, at least one each (per DEC-0109,
+    DEC-0110, DEC-0108).
 11. The suite passes against this repository's full bootstrap corpus as
     its initial regression baseline.
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
+CMP-0001 — supplies
 its Acceptance & Test Expectations; runs in CI, invoked via the code-host
 connector's required-check surface.
 
 ## Out of Scope
 
 The `gate-policy` and `conflicts-open` checks (Governance engine,
-[EP-0003](../epics/EP-0003-governance-and-gate-engine.md)) — this story provides the check *platform* they plug into only if
-that platform falls out naturally; otherwise they ship with [EP-0003](../epics/EP-0003-governance-and-gate-engine.md).
+EP-0003) — this story provides the check *platform* they plug into only if
+that platform falls out naturally; otherwise they ship with EP-0003.
 
 ## Notes for Implementers
 

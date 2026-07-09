@@ -19,12 +19,12 @@ links:
 ## Context
 
 The Queue Port's v1 durable adapter
-([DEC-0204](../decisions/DEC-0204-v1-default-adapters-deferred-alternates.md))
+(DEC-0204)
 needs a concrete retry/failure contract before
-[ST-0060](../stories/ST-0060-queue-port.md)'s Acceptance Criteria can be
-testable. [CMP-0003](../components/CMP-0003-app-database-port.md)'s
+ST-0060's Acceptance Criteria can be
+testable. CMP-0003's
 outbox already defines exactly this shape for at-least-once delivery
-([DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
+(DEC-0139).
 
 ## Decision
 
@@ -34,13 +34,13 @@ on ack/nack of an expired or unknown lease (job remains/becomes
 claimable again), and dead-letter parking after a configurable maximum
 of failed deliveries — visible through the port's own bookkeeping
 surface, never silently dropped. Delivery is at-least-once; consumers
-(the background runtime, [ST-0061](../stories/ST-0061-background-job-execution-runtime.md))
+(the background runtime, ST-0061)
 are idempotent by contract.
 
 ## Rationale
 
 This is an already-proven pattern in this exact codebase
-([DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)),
+(DEC-0139),
 for the same underlying problem (durable, at-least-once, retryable work
 items behind a Port). Reusing it means one failure-semantics vocabulary
 project-wide instead of two competing ones for superficially different
@@ -56,7 +56,7 @@ Ports.
 
 ## Implications
 
-[ST-0060](../stories/ST-0060-queue-port.md)'s Acceptance Criteria and,
+ST-0060's Acceptance Criteria and,
 later, its Component Doc's failure contract cite
-[DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)
+DEC-0139
 directly rather than re-deriving the same guarantees independently.

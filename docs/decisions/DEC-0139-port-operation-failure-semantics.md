@@ -17,8 +17,8 @@ links:
 
 ## Context
 
-The [SES-0024](../sessions/SES-0024-decision-recall-audit.md) audit
-judge flagged that [CMP-0003](../components/CMP-0003-app-database-port.md)
+The SES-0024 audit
+judge flagged that CMP-0003
 defined no failure semantics for port operations — an adapter author
 holding only the contract could not know what a conforming adapter does
 on an expired lease, exhausted retries, or a crash mid-transaction.
@@ -41,7 +41,7 @@ The app database port contract defines:
 4. **Typed error conditions per operation** — each port operation
    enumerates its error conditions in the contract as in-process typed
    errors (the HTTP problem+json model of
-   [DEC-0127](DEC-0127-problem-json-error-model.md) governs the API
+   DEC-0127 governs the API
    surface, not the port).
 
 ## Rationale

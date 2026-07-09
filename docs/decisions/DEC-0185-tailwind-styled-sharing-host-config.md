@@ -19,7 +19,7 @@ links:
 ## Context
 
 The stated host stack styles with Tailwind CSS 4 + Radix UI. Given
-[DEC-0184](DEC-0184-ui-ships-as-embeddable-npm-component-library.md)'s
+DEC-0184's
 direct-render packaging, the components need a styling strategy that
 either matches or stays independent of that host stack.
 

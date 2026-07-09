@@ -28,7 +28,7 @@ gate in the UI. No Jira sync, no epic generation, minimal Graph Index.
 ## Rationale
 
 Proves the hardest and most novel part — an agent grilling business users
-unsupervised ([DEC-0003](DEC-0003-unsupervised-sessions.md)) — with the
+unsupervised (DEC-0003) — with the
 fewest integrations. Session quality is the core pain point; integrations
 are known-shape work.
 

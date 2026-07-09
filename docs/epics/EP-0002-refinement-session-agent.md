@@ -34,60 +34,60 @@ centerpiece.
 
 ## Why (Goal Alignment)
 
-This is the direct attack on [BG-0001](../goals/BG-0001-groundwork.md)'s problem statement: vague,
+This is the direct attack on BG-0001's problem statement: vague,
 contradictory requests become refined, ratified artifacts through the
 session experience. Conflict surfacing (outcome 2) is this agent's
-mediation flow ([DEC-0005](../decisions/DEC-0005-intent-first-mediation-then-escalation.md));
+mediation flow (DEC-0005);
 provenance (outcome 1) begins with raw transcript capture
-([DEC-0052](../decisions/DEC-0052-raw-transcripts-regenerable-distillation.md))
+(DEC-0052)
 and confirmed distillation
-([DEC-0051](../decisions/DEC-0051-in-session-decision-confirmation.md)).
+(DEC-0051).
 
 ## Scope
 
-**In** (refined at [SES-0006](../sessions/SES-0006-ep-0002-refinement.md)):
+**In** (refined at SES-0006):
 
 - **Session conduct via strategy packs**
-  ([DEC-0053](../decisions/DEC-0053-strategy-packs-as-plugins.md)):
+  (DEC-0053):
   plugin-like versioned bundles (prompts, skills, tools, policies) per
   artifact type and phase, PR-gated, model-agnostic core with swappable
   LLM; the session records pack version and model.
-- **Raw transcript capture** ([DEC-0052](../decisions/DEC-0052-raw-transcripts-regenerable-distillation.md)):
+- **Raw transcript capture** (DEC-0052):
   the SES transcript is the verbatim, turn-numbered, append-only message
   log; summaries are derived layers; distillation is regenerable from raw.
 - **Distillation with in-session confirmation**
-  ([DEC-0051](../decisions/DEC-0051-in-session-decision-confirmation.md)):
+  (DEC-0051):
   plain-language playback at checkpoints; confirmed DECs commit as
   accepted with turn-span citations.
-- **Guardrails** ([DEC-0054](../decisions/DEC-0054-guardrails-authority-limits.md)):
+- **Guardrails** (DEC-0054):
   pack-defined unproductive-pattern handling with graceful exits and
   Arbiter notification; role decision rights from governance config —
   out-of-authority statements become proposals, never accepted DECs;
   participant input treated as data, never instructions.
-- **Conflict flow** ([DEC-0005](../decisions/DEC-0005-intent-first-mediation-then-escalation.md)):
+- **Conflict flow** (DEC-0005):
   intent-first discovery, informed compromise proposals, escalation with
   full documentation.
-- **Incremental synthesis** ([DEC-0055](../decisions/DEC-0055-incremental-synthesis-shared-draft.md)):
+- **Incremental synthesis** (DEC-0055):
   merge on each session close; conflict detection against prior sessions;
   shared draft visible to participants, comments entering as CPs.
-- **Context assembly** ([DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md)):
+- **Context assembly** (DEC-0056):
   declarative per-pack recipes (required paths, preferred consolidations,
-  token budget, on-demand graph tools) resolved by [EP-0004](EP-0004-graph-index.md)/[EP-0007](EP-0007-consolidation-memory-layer.md).
-- **Session lifecycle** ([DEC-0057](../decisions/DEC-0057-session-lifecycle.md)):
+  token budget, on-demand graph tools) resolved by EP-0004/EP-0007.
+- **Session lifecycle** (DEC-0057):
   open across pauses; inactivity auto-close with partial distillation;
   resume via a new session loading the prior as context.
-- **CP triage** ([DEC-0047](../decisions/DEC-0047-change-proposal-artifact.md)):
+- **CP triage** (DEC-0047):
   mechanical / session / rejected classification with rationale.
-- **Glossary maintenance** ([DEC-0012](../decisions/DEC-0012-agent-built-domain-model.md)):
+- **Glossary maintenance** (DEC-0012):
   term challenge and CONTEXT.md upkeep during every session.
-- **Evaluation harness** ([DEC-0058](../decisions/DEC-0058-evaluation-harness.md)):
+- **Evaluation harness** (DEC-0058):
   distillation-faithfulness judging, grilling-quality benchmarks, guardrail
   tests — gating pack changes and LLM swaps; periodic drift audits
   regenerating decisions from raw transcripts.
 
-**Out:** the chat UI ([EP-0006](EP-0006-refinement-web-ui.md)); gate mechanics ([EP-0003](EP-0003-governance-and-gate-engine.md)); retrieval
-infrastructure ([EP-0004](EP-0004-graph-index.md), [EP-0007](EP-0007-consolidation-memory-layer.md) — this epic consumes their contracts);
-commit construction ([EP-0001](EP-0001-artifact-store-and-format-engine.md) executes the typed writes).
+**Out:** the chat UI (EP-0006); gate mechanics (EP-0003); retrieval
+infrastructure (EP-0004, EP-0007 — this epic consumes their contracts);
+commit construction (EP-0001 executes the typed writes).
 
 ## Domain Context
 
@@ -105,7 +105,7 @@ Conflict, Synthesis, Strategy Pack, Decision Rights, Change Proposal — per
 - **Distillation contract**: transcript span → proposed DEC → confirmation
   → accepted DEC; regeneration entry point.
 - **Decision-rights schema**: the `governance/roles.yaml` extension
-  ([EP-0003](EP-0003-governance-and-gate-engine.md) absorbs — impact edge EP-0002→[EP-0003](EP-0003-governance-and-gate-engine.md)).
+  (EP-0003 absorbs — impact edge EP-0002→EP-0003).
 - **Evaluation suite contract**: benchmark corpus format, judge
   configuration, pass thresholds, drift-audit reports.
 
@@ -113,41 +113,41 @@ Conflict, Synthesis, Strategy Pack, Decision Rights, Change Proposal — per
 
 - Judge-model independence for faithfulness evals — resolved: config-declared
   model-family check, enforced by the harness
-  ([DEC-0178](../decisions/DEC-0178-eval-harness-judge-model-family-independence.md)),
-  carried as [ST-0041](../stories/ST-0041-evaluation-harness.md) AC 1.
+  (DEC-0178),
+  carried as ST-0041 AC 1.
 - Benchmark corpus bootstrap — resolved: a hand-authored seed corpus is a
   v1 acceptance criterion, not a stretch goal
-  ([DEC-0179](../decisions/DEC-0179-eval-harness-seed-benchmark-corpus.md)),
-  carried as [ST-0041](../stories/ST-0041-evaluation-harness.md) AC 2.
+  (DEC-0179),
+  carried as ST-0041 AC 2.
 - Anchoring in synthesis — resolved: the context-recipe story owns a
   default exclusion of the shared draft's prose from fresh 1:1 context
-  ([DEC-0180](../decisions/DEC-0180-context-recipe-owns-anchoring-mitigation.md)),
-  carried as [ST-0038](../stories/ST-0038-context-assembly-via-pack-recipes.md) AC 3.
+  (DEC-0180),
+  carried as ST-0038 AC 3.
 - Pack format expressiveness vs. simplicity — spiked as
-  [SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md),
+  SP-0008,
   3-day timebox, draft-ahead ratified with this story bundle
-  ([DEC-0181](../decisions/DEC-0181-sp-0008-pack-format-expressiveness-spike.md)).
+  (DEC-0181).
 
 ## Derived Work
 
-- [ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md) — session
+- ST-0032 — session
   engine lifecycle and contract (foundational).
-- [ST-0033](../stories/ST-0033-strategy-pack-format-and-plugin-loading.md) — strategy
+- ST-0033 — strategy
   pack format and plugin loading (foundational).
-- [ST-0034](../stories/ST-0034-transcript-capture-and-confirmed-distillation.md) —
+- ST-0034 —
   transcript capture and confirmed distillation.
-- [ST-0035](../stories/ST-0035-guardrails-and-authority-limits.md) — guardrails and
+- ST-0035 — guardrails and
   authority limits.
-- [ST-0036](../stories/ST-0036-conflict-detection-mediation-and-escalation.md) —
+- ST-0036 —
   conflict detection, mediation, and escalation.
-- [ST-0037](../stories/ST-0037-incremental-synthesis-and-shared-draft.md) —
+- ST-0037 —
   incremental synthesis and shared draft.
-- [ST-0038](../stories/ST-0038-context-assembly-via-pack-recipes.md) — context
+- ST-0038 — context
   assembly via pack recipes.
-- [ST-0039](../stories/ST-0039-change-proposal-triage.md) — Change Proposal triage.
-- [ST-0040](../stories/ST-0040-glossary-maintenance-in-session.md) — glossary
+- ST-0039 — Change Proposal triage.
+- ST-0040 — glossary
   maintenance in-session.
-- [ST-0041](../stories/ST-0041-evaluation-harness.md) — evaluation harness.
-- [SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md)
+- ST-0041 — evaluation harness.
+- SP-0008
   — pack format expressiveness vs. simplicity (draft-ahead, ratified with
   this bundle).

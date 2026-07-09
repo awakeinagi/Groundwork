@@ -13,18 +13,18 @@ links:
   relates-to: [EP-0002, EP-0005, EP-0003]
 ---
 
-# SES-0006: [EP-0002](../epics/EP-0002-refinement-session-agent.md) Refinement Session
+# SES-0006: EP-0002 Refinement Session
 
 ## Purpose
 
-Refine [EP-0002](../epics/EP-0002-refinement-session-agent.md) (Refinement
+Refine EP-0002 (Refinement
 Session Agent) — the v1 centerpiece — to gate-readiness: distillation
 trust, methodology structure, unsupervised-session guardrails, synthesis
 mechanics, context assembly, session lifecycle, and evaluation.
 
 ## Transcript
 
-**T1 — Sponsor.** Approved [EP-0005](../epics/EP-0005-connectors-and-identity.md). Move on to [EP-0002](../epics/EP-0002-refinement-session-agent.md).
+**T1 — Sponsor.** Approved EP-0005. Move on to EP-0002.
 
 **T2 — Agent.** Round 1: (a) when a distilled Decision becomes accepted
 (recommended in-session confirmation playback); (b) where the grilling
@@ -53,24 +53,24 @@ periodic drift audits re-running distillation from raw transcripts).
 
 **T5 — Sponsor.** All three as recommended.
 
-**T6 — Agent (synthesis).** Distilled [DEC-0051](../decisions/DEC-0051-in-session-decision-confirmation.md)–[DEC-0058](../decisions/DEC-0058-evaluation-harness.md); rewrote [EP-0002](../epics/EP-0002-refinement-session-agent.md)
+**T6 — Agent (synthesis).** Distilled DEC-0051–DEC-0058; rewrote EP-0002
 and moved it to `gated`. Updated SPEC-session (raw-log fidelity,
 `strategy-pack` field) and the glossary (Strategy Pack, Decision Rights).
-Noted a new impact edge [EP-0002](../epics/EP-0002-refinement-session-agent.md)→[EP-0003](../epics/EP-0003-governance-and-gate-engine.md): decision-rights configuration
-extends `governance/roles.yaml`, a requirement [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)'s config schema must
-absorb — in a live deployment this edge change would queue an [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)
+Noted a new impact edge EP-0002→EP-0003: decision-rights configuration
+extends `governance/roles.yaml`, a requirement EP-0003's config schema must
+absorb — in a live deployment this edge change would queue an EP-0003
 re-affirmation.
 
 ## Decisions Produced
 
-[DEC-0051](../decisions/DEC-0051-in-session-decision-confirmation.md),
-[DEC-0052](../decisions/DEC-0052-raw-transcripts-regenerable-distillation.md),
-[DEC-0053](../decisions/DEC-0053-strategy-packs-as-plugins.md),
-[DEC-0054](../decisions/DEC-0054-guardrails-authority-limits.md),
-[DEC-0055](../decisions/DEC-0055-incremental-synthesis-shared-draft.md),
-[DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md),
-[DEC-0057](../decisions/DEC-0057-session-lifecycle.md),
-[DEC-0058](../decisions/DEC-0058-evaluation-harness.md)
+DEC-0051,
+DEC-0052,
+DEC-0053,
+DEC-0054,
+DEC-0055,
+DEC-0056,
+DEC-0057,
+DEC-0058
 
 ## Conflicts Raised
 

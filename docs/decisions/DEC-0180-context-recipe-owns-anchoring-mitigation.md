@@ -17,9 +17,9 @@ links:
 
 ## Context
 
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)'s Risks flagged
+EP-0002's Risks flagged
 that the incremental synthesis draft
-([DEC-0055](DEC-0055-incremental-synthesis-shared-draft.md)), visible to
+(DEC-0055), visible to
 all participants for async comment, could leak into later 1:1 sessions
 and bias their framing (anchoring). This needed a home: the synthesis
 story (which produces the draft) or the context-assembly story (which
@@ -27,9 +27,9 @@ controls what enters a session's context).
 
 ## Decision
 
-The context-recipe story ([ST-0038](../stories/ST-0038-context-assembly-via-pack-recipes.md))
+The context-recipe story (ST-0038)
 owns the mitigation: strategy-pack context recipes
-([DEC-0056](DEC-0056-context-recipes-in-packs.md)) exclude the
+(DEC-0056) exclude the
 synthesized draft's prose from 1:1 grilling context by default —
 only structured facts (settled, accepted decisions) flow into a new
 session, never the draft's framing or phrasing.
@@ -54,6 +54,6 @@ default can be enforced.
 
 ## Implications
 
-[ST-0038](../stories/ST-0038-context-assembly-via-pack-recipes.md)'s
+ST-0038's
 acceptance criteria state the default-exclusion rule as a testable
 behavior.

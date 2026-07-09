@@ -20,8 +20,8 @@ links:
 
 Root cause of the missing backend-platform epic: nobody checked, at
 epic-derivation time, whether every deliverable named in
-[BG-0001](../goals/BG-0001-groundwork.md) (including
-[DEC-0001](DEC-0001-standalone-application.md)'s "backend services") had
+BG-0001 (including
+DEC-0001's "backend services") had
 an owning epic. Domain-first (DDD bounded-context) decomposition naturally
 produces domain epics and never surfaces structural/cross-cutting
 deliverables like a composition root or API layer — it answers "what does
@@ -32,7 +32,7 @@ it do," never "what makes it a running program."
 Before finalizing a draft epic set, run a required **deliverable-coverage
 pass**: extract every deliverable named in the goal's Decision/Scope text
 and System Context section (per
-[DEC-0190](DEC-0190-system-context-bg-section.md)), and confirm each maps
+DEC-0190), and confirm each maps
 to at least one derived epic. Explicitly watch for structural/
 cross-cutting deliverables that read as generic connective tissue and get
 silently treated as covered by the union of domain epics. Record the

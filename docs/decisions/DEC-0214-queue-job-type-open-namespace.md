@@ -18,11 +18,11 @@ links:
 
 ## Context
 
-[CMP-0012](../components/CMP-0012-queue-port.md) (Queue Port) needed a
+CMP-0012 (Queue Port) needed a
 job-type shape decided before its `enqueue`/`claim` operations could be
-specified. [CMP-0002](../components/CMP-0002-change-event.md)'s
+specified. CMP-0002's
 `ChangeEvent.kind` precedent uses a closed enum with gated extension
-([DEC-0128](DEC-0128-change-event-closed-schema.md)); the Queue Port
+(DEC-0128); the Queue Port
 needed its own explicit call rather than inheriting that shape by
 default.
 
@@ -31,17 +31,17 @@ default.
 `job-type` is an open string namespace: any value is a valid job-type
 at the port level, and new job types are added by registering a
 handler on the background job execution runtime
-([ST-0061](../stories/ST-0061-background-job-execution-runtime.md)),
+(ST-0061),
 never by a contract change to this port.
 
 ## Rationale
 
 `ChangeEvent.kind` is closed because its consumers (Graph Index,
 governance sweeps) branch on the enum directly and a silent new value
-would break them ([DEC-0128](DEC-0128-change-event-closed-schema.md)).
+would break them (DEC-0128).
 Jobs have the opposite consumption pattern: the port never interprets
 `job-type` itself, only the runtime's registered handler does
-([ST-0061](../stories/ST-0061-background-job-execution-runtime.md)'s
+(ST-0061's
 Notes for Implementers already anticipates future jobs — notifier
 retries, staleness sweeps — registering against a generic dispatch
 loop). Gating every future job type through this CMP would add

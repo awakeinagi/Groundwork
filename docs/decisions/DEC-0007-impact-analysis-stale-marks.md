@@ -40,8 +40,8 @@ propagation).
 
 ## Implications
 
-Requires the typed link graph ([DEC-0009](DEC-0009-typed-links-stable-ids.md))
-and Graph Index ([DEC-0010](DEC-0010-graph-index-derived.md)). The same
+Requires the typed link graph (DEC-0009)
+and Graph Index (DEC-0010). The same
 mechanism serves superseded Decisions and spike findings
-([DEC-0023](DEC-0023-spike-findings-become-decisions.md)) and Consolidation
-freshness ([DEC-0017](DEC-0017-consolidation-memory-layer.md)).
+(DEC-0023) and Consolidation
+freshness (DEC-0017).

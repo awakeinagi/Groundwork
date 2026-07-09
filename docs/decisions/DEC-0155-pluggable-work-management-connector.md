@@ -17,9 +17,9 @@ links:
 
 ## Context
 
-[EP-0005](../epics/EP-0005-connectors-and-identity.md) recorded an open
+EP-0005 recorded an open
 assumption: Jira Data Center (self-hosted Atlassian stack, per
-[DEC-0050](DEC-0050-bitbucket-datacenter-v1.md)'s rationale). Asked to
+DEC-0050's rationale). Asked to
 confirm, the sponsor confirmed the flavor **and** amended the framing:
 the agile work-management system must not be a Jira-shaped foundation.
 
@@ -27,7 +27,7 @@ the agile work-management system must not be a Jira-shaped foundation.
 
 The "Jira connector" generalizes to a **work-management connector**
 family: a host-agnostic, capability-declaring contract (the
-[DEC-0045](DEC-0045-capability-declaring-connectors.md) pattern applied
+DEC-0045 pattern applied
 to work management) owning projection lifecycle, drift capture, and the
 backlog read feed. **Jira Data Center — confirmed as the deployed
 flavor — is the reference adapter.** Future adapters (monday.com,
@@ -52,7 +52,7 @@ The deferred release-2 stories are drafted against the generic contract
 with Jira DC as reference; DC webhook/event capability validation
 happens at their revival. Additional work-management adapters are
 future work captured per
-[DEC-0156](DEC-0156-future-connector-families-deferred.md). The
+DEC-0156. The
 glossary gains **Work-Management Connector**; prior "Jira connector"
 phrasing in earlier artifacts reads as the Jira DC adapter of this
 family.

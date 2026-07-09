@@ -30,54 +30,54 @@ bootstrap-era email identities.
 1. Authentication sits behind a provider contract (authenticate →
    auth subject); v1 ships a simple email/OIDC provider, and swapping
    in organizational SSO is a new adapter, not a core change
-   (per [DEC-0024](../decisions/DEC-0024-pluggable-auth.md)).
+   (per DEC-0024).
 2. Auth subjects resolve to stable person-ids via
    `governance/people.yaml`; artifacts and provenance fields reference
    person-ids, and each connector resolves its own identity column
    (host username, Jira accountId) from the same registry entry
-   (per [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+   (per DEC-0046).
 3. Role claims are resolved for an authenticated person from
    `governance/roles.yaml` membership **including active time-bounded
    delegation entries** — a delegate holds the role's claims exactly
    while the delegation window is open — and exposed to the gate
    engine's policy evaluation
-   (per [DEC-0046](../decisions/DEC-0046-person-registry.md),
-   [DEC-0040](../decisions/DEC-0040-role-pool-delegation.md),
-   [DEC-0024](../decisions/DEC-0024-pluggable-auth.md)).
+   (per DEC-0046,
+   DEC-0040,
+   DEC-0024).
 4. Per-user OAuth host-identity linkage is keyed by person-id, with
    tokens held envelope-encrypted in the app database via the App
    Database Port — never in the repo
-   (per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md),
-   [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+   (per DEC-0152,
+   DEC-0046).
 5. When the registry is first populated, a mechanical migration
    rewrites bootstrap-period email values in `owner`/`decided-by`/
    `approved-by` frontmatter to person-ids — metadata-only, via the
    `migrate-person-ids` operation of the typed mechanical-write
-   allowlist ([ST-0006](ST-0006-typed-mechanical-writes.md))
-   (per [DEC-0046](../decisions/DEC-0046-person-registry.md),
-   [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   allowlist (ST-0006)
+   (per DEC-0046,
+   DEC-0033).
 
 ## Component Impact
 
-[CMP-0007](../components/CMP-0007-identity-and-access.md) — supplies
+CMP-0007 — supplies
 the auth-provider protocol, person-resolution, session, and role-claims
 contract sections.
 
-[CMP-0015](../components/CMP-0015-secret-store.md) — supplies the
+CMP-0015 — supplies the
 graduated secret-store contract OAuth tokens live behind
-(per [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md)).
+(per DEC-0232).
 
-[CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md) —
+CMP-0016 —
 supplies the `RoleClaims` schema and shared delegation-window
 evaluation behind the role-claims criterion
-(per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
+(per DEC-0234).
 
 ## Out of Scope
 
 Review posting and attribution
-([ST-0021](ST-0021-delegated-reviews-and-attribution.md)); the
+(ST-0021); the
 `governance/people.yaml` schema itself — owned by
-[ST-0012](ST-0012-governance-config-schemas.md); login/session UI
-([EP-0006](../epics/EP-0006-refinement-web-ui.md)); Participant
+ST-0012; login/session UI
+(EP-0006); Participant
 Profiles — interaction memory, not identity
-([EP-0002](../epics/EP-0002-refinement-session-agent.md)).
+(EP-0002).

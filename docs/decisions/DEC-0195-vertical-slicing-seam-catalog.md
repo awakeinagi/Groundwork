@@ -36,7 +36,7 @@ Adopt a six-seam catalog in `references/epic-slicing-seams.md` as the
 epic-derivation slicing guidance: Access, Timeline, Protocol,
 Integration, Sophistication, and a new sixth seam, Bounded-Context /
 Domain-Capability — added because it's the seam
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)..[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+EP-0001..EP-0007
 actually used, and the original five skew toward customer-facing product
 decomposition rather than internal/platform tooling. Each seam is
 documented with a Rule, Examples, and a "Why this seam works"
@@ -46,7 +46,7 @@ slicing**, matching standard usage. The Sophistication seam carries an
 explicit caveat: baseline error handling stays inside the core epic
 (definition-of-done, not phase-2 work) — only genuinely advanced
 hardening earns its own epic, consistent with
-[DEC-0191](DEC-0191-illustrative-scenario-bg-section.md)'s existing
+DEC-0191's existing
 treatment of edge cases.
 
 ## Rationale

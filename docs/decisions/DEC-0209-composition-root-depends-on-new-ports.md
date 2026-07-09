@@ -18,9 +18,9 @@ links:
 
 ## Context
 
-[DEC-0201](../decisions/DEC-0201-composition-root-split.md) scoped
-[EP-0008](../epics/EP-0008-backend-application-platform.md)'s own
-epic-level `depends-on` to [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)
+DEC-0201 scoped
+EP-0008's own
+epic-level `depends-on` to EP-0001
 only, not the full set of composed engines. Story derivation needed the
 finer-grained build-order question: does the Composition Root story
 itself need to wait on the two new Ports (Queue, KV-store) it also
@@ -29,22 +29,22 @@ yet anywhere in the codebase.
 
 ## Decision
 
-[ST-0057](../stories/ST-0057-composition-root.md) (Composition Root)
+ST-0057 (Composition Root)
 has `depends-on:
-[ST-0010](../stories/ST-0010-app-database-port.md),
-[ST-0060](../stories/ST-0060-queue-port.md),
-[ST-0062](../stories/ST-0062-kv-store-port.md)]` — it cannot wire an
+ST-0010,
+ST-0060,
+ST-0062]` — it cannot wire an
 Adapter for a Port whose contract doesn't exist yet.
 
 ## Rationale
 
-[DEC-0201](../decisions/DEC-0201-composition-root-split.md)'s epic-level
+DEC-0201's epic-level
 scoping was about which *epics* must be sequenced first, and correctly
-left out [EP-0004](../epics/EP-0004-graph-index.md)/[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+left out EP-0004/EP-0007
 because their Ports already exist (approved, built). The two new Ports
 in this epic have no such existing implementation to wire against, so
 the same "wiring needs the wired thing to exist" logic that motivated
-naming [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)
+naming EP-0001
 applies to them at story grain.
 
 ## Alternatives Considered
@@ -52,10 +52,10 @@ applies to them at story grain.
 - **No depends-on edge — build against contracts/stubs in parallel**:
   rejected — a stub can unblock coding, but the story's own Acceptance
   Criteria require binding *real* v1 adapters, which don't exist until
-  [ST-0060](../stories/ST-0060-queue-port.md)/[ST-0062](../stories/ST-0062-kv-store-port.md)
+  ST-0060/ST-0062
   are built.
 
 ## Implications
 
-None beyond [ST-0057](../stories/ST-0057-composition-root.md)'s
+None beyond ST-0057's
 frontmatter `depends-on` list.

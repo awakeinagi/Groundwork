@@ -18,19 +18,19 @@ links:
 
 ## Context
 
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)'s Risks named
+EP-0002's Risks named
 "pack format expressiveness vs. simplicity" as a candidate spike once
 stories were derived — a genuine unknown blocking
-[ST-0033](../stories/ST-0033-strategy-pack-format-and-plugin-loading.md)'s
+ST-0033's
 schema design: can a declarative `pack.yaml` express real strategy-pack
 variation, or does it need to escalate to a scripting/templating layer?
 
 ## Decision
 
-[SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md)
+SP-0008
 is timeboxed at 3 days. Question: can a declarative `pack.yaml` schema
 (phases, stopping criteria, escalation triggers, guardrail policy,
-context recipe — per [DEC-0053](DEC-0053-strategy-packs-as-plugins.md))
+context recipe — per DEC-0053)
 express real pack variation without a general scripting layer? Method:
 draft the schema against three concrete pack scenarios spanning the
 phase list (goal-refinement, conflict-mediation, CP-triage) and check
@@ -42,7 +42,7 @@ Three scenarios chosen for maximum shape diversity (a linear grilling
 flow, a mediation flow with escalation branching, a triage
 classification flow) give the spike a real test of expressiveness in a
 timebox short enough not to block
-[ST-0033](../stories/ST-0033-strategy-pack-format-and-plugin-loading.md)'s
+ST-0033's
 refinement.
 
 ## Alternatives Considered
@@ -54,7 +54,7 @@ refinement.
 
 ## Implications
 
-[ST-0033](../stories/ST-0033-strategy-pack-format-and-plugin-loading.md)
+ST-0033
 is drafted now but its schema section should not be treated as final
-until [SP-0008](../spikes/SP-0008-pack-format-expressiveness-vs-simplicity.md)'s
+until SP-0008's
 findings land.

@@ -18,45 +18,45 @@ links:
 
 ## Context
 
-[EP-0008](../epics/EP-0008-backend-application-platform.md) named one
+EP-0008 named one
 Inbound API deliverable (FastAPI, HTTP + SSE). Story derivation needed
 to decide whether that is one story or more, per the story-slicing
 seam catalog's Data Seam channel variant
-([DEC-0198](../decisions/DEC-0198-story-slicing-seam-catalog.md)).
+(DEC-0198).
 
 ## Decision
 
 The Inbound API is split into two stories:
-[ST-0058](../stories/ST-0058-inbound-api-rest-and-gate-surface.md) — REST
+ST-0058 — REST
 routes for goal/epic/story/session views and gate actions, and
-[ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md) — the
+ST-0059 — the
 SSE streaming endpoint for the session-engine client
-([DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md)).
+(DEC-0187).
 
 ## Rationale
 
 The two are independently testable and demoable: REST artifact/gate
 routes can be exercised and gated without streaming working, and the
 SSE endpoint's event-schema/reconnect contract
-([DEC-0213](../decisions/DEC-0213-sse-reconnect-resume-contract.md)) is
+(DEC-0213) is
 a distinct, individually-verifiable concern — the Data Seam's
 different-entry-method variant, applied to channel rather than data
 type. Keeps each story's Acceptance Criteria list from ballooning past a
 tight, individually-testable set
-([DEC-0200](../decisions/DEC-0200-no-fixed-story-count.md)).
+(DEC-0200).
 
 ## Alternatives Considered
 
 - **One combined "Inbound API" story**: rejected — SSE was required
-  from day one by [DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md),
+  from day one by DEC-0187,
   but "required from day one" doesn't mean "inseparable"; bundling would
   make the REST routes wait on streaming's reconnect/backoff details
   being settled before either could gate.
 
 ## Implications
 
-[ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md)
-depends-on [ST-0058](../stories/ST-0058-inbound-api-rest-and-gate-surface.md)
+ST-0059
+depends-on ST-0058
 (shares the FastAPI app scaffolding) and on
-[ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)
+ST-0032
 (the streaming contract it exposes).

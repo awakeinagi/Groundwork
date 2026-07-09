@@ -17,15 +17,15 @@ links:
 
 ## Context
 
-[CMP-0011](../components/CMP-0011-inbound-api.md) requires an
+CMP-0011 requires an
 authenticated Participant on every route via
-[ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)'s
+ST-0022's
 provider contract; who owns the session between login and
 request-time identity was undefined.
 
 ## Decision
 
-[CMP-0007](../components/CMP-0007-identity-and-access.md) issues and
+CMP-0007 issues and
 validates sessions: `issue_session` after provider authentication,
 `validate_session` on every request, `revoke_session` on logout. The
 token is an opaque random handle; session state (person-id, expiry)
@@ -40,7 +40,7 @@ role change) and fit the embedded single-process stack.
 
 ## Alternatives Considered
 
-- **[CMP-0011](../components/CMP-0011-inbound-api.md) mints its own cookie/JWT**: splits identity across two
+- **CMP-0011 mints its own cookie/JWT**: splits identity across two
   components; claim refresh and revocation get harder.
 - **Stateless per-request auth**: awkward for the email provider path.
 - **Signed stateless tokens**: revocation needs a denylist anyway;
@@ -49,5 +49,5 @@ role change) and fit the embedded single-process stack.
 ## Implications
 
 Role claims are resolved fresh at validation time, not baked into the
-token; [CMP-0011](../components/CMP-0011-inbound-api.md)'s
+token; CMP-0011's
 auth behavior is unchanged (it already delegates to this contract).

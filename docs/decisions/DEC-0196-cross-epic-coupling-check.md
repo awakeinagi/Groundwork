@@ -21,8 +21,8 @@ links:
 The stakeholder wanted mechanical detection of bad epic splits before
 deep refinement burns time on them. Groundwork already tracks cross-epic
 coupling via `impacts`/`impacted-by` edges
-([DEC-0026](DEC-0026-directional-impact-links.md),
-[DEC-0027](DEC-0027-impact-ranked-refinement-order.md)), but nothing read
+(DEC-0026,
+DEC-0027), but nothing read
 that graph back for split quality.
 
 ## Decision
@@ -33,7 +33,7 @@ edges are drawn — before any epic is refined in depth — it flags
 **mutual** (bidirectional) `impacts` coupling between sibling epics as a
 candidate for re-seaming. One-directional fan-out is reported as context
 only, never as a finding: bounded-context slicing (per
-[DEC-0195](DEC-0195-vertical-slicing-seam-catalog.md)'s sixth seam)
+DEC-0195's sixth seam)
 routinely produces heavy one-way fan-out from foundational epics without
 indicating a bad split. The check is advisory only — findings are
 reviewed and dispositioned in-session, never auto-blocking, consistent
@@ -48,11 +48,11 @@ epic — pure noise, since foundational bounded-context epics (the
 Artifact Store, Governance) are legitimately referenced broadly by
 design. Mutual coupling is the signal that survived validation: it found
 exactly the three cycles
-([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0003](../epics/EP-0003-governance-and-gate-engine.md),
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0005](../epics/EP-0005-connectors-and-identity.md),
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)↔[EP-0006](../epics/EP-0006-refinement-web-ui.md))
+(EP-0001↔EP-0003,
+EP-0001↔EP-0005,
+EP-0002↔EP-0006)
 already documented as known, deliberate cycles in
-[SES-0002](../sessions/SES-0002-impact-relationships.md), with zero
+SES-0002, with zero
 false positives.
 
 ## Alternatives Considered
@@ -70,4 +70,4 @@ false positives.
 `refinement-process.md`'s Epic playbook and `SKILL.md` gain a required
 step citing this script; `epic-slicing-seams.md` documents its usage and
 the split-vs-merge signals it feeds
-([DEC-0197](DEC-0197-no-fixed-epic-count.md)).
+(DEC-0197).

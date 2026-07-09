@@ -18,15 +18,15 @@ links:
 
 ## Context
 
-[ST-0060](../stories/ST-0060-queue-port.md) AC5 describes the v1
+ST-0060 AC5 describes the v1
 durable adapter as "a queue table riding the App Database Port" —
 ambiguous between routing through `AppDatabasePort`'s outbox/
 bookkeeping operations as its storage mechanism, or a sibling adapter
 with its own table on the same co-located DuckDB engine instance. This
 is the identical layering ambiguity
-[SES-0039](../sessions/SES-0039-ep-0008-story-derivation.md) already
+SES-0039 already
 resolved for the KV-store Port
-([ST-0062](../stories/ST-0062-kv-store-port.md)).
+(ST-0062).
 
 ## Decision
 
@@ -38,14 +38,14 @@ pattern" means the *retry/dead-letter/stale-lease semantics* are
 mirrored, not that the Queue adapter is implemented on top of
 `AppDatabasePort.A-2`'s outbox operations. No SQL crosses the Queue
 Port's own seam either
-(per [DEC-0129](DEC-0129-port-typed-operation-families.md)).
+(per DEC-0129).
 
 ## Rationale
 
 Consistent with the KV-store Port precedent settled in the same
 refinement thread: one DuckDB engine instance, separate Port contracts,
 zero cross-port operation consumption
-([DEC-0121](DEC-0121-infrastructure-ports.md)). Routing through
+(DEC-0121). Routing through
 `AppDatabasePort`'s outbox family would couple Queue Port's conformance
 to App Database Port internals and blur which port's conformance suite
 is actually being exercised — the same reasoning that settled the

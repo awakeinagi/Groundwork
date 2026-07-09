@@ -18,22 +18,22 @@ links:
 
 ## Context
 
-[DEC-0097](DEC-0097-deferred-status.md) limited `deferred` to stories
+DEC-0097 limited `deferred` to stories
 and epics. Re-scoping
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) to a future
+SP-0002 to a future
 evaluation exposed the gap: a research question can be real, captured,
 and intentionally not current — exactly what deferral expresses — with
 no way to park it honestly.
 
 ## Decision
 
-Supersedes [DEC-0097](DEC-0097-deferred-status.md), restating its scope:
+Supersedes DEC-0097, restating its scope:
 the `deferred` lifecycle status and the `release:` field
-([DEC-0098](DEC-0098-semver-release-labels.md)) are valid for
+(DEC-0098) are valid for
 **stories, epics, and spikes**. All other semantics are unchanged —
 entry from any active status; no gates and no derivation while deferred;
 revival to `draft`; deferral and revival each cite a decision
-([DEC-0100](DEC-0100-scope-moves-cite-decisions.md)); a spike inherits
+(DEC-0100); a spike inherits
 its release default from its parent epic (a cross-cutting spike deriving
 from a Business Goal carries its own label).
 
@@ -61,5 +61,5 @@ focus on stories, not a considered boundary.
 [SPEC-spike](../specs/SPEC-spike.md), the checker's release-scoped type
 set, status tooling, and the glossary's Deferred entry all widen to
 include spikes. Artifacts citing
-[DEC-0097](DEC-0097-deferred-status.md) are walked for staleness (none
+DEC-0097 are walked for staleness (none
 cite it in frontmatter at supersession time).

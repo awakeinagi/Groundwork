@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[DEC-0210](DEC-0210-queue-port-outbox-pattern-reuse.md) established
+DEC-0210 established
 "bounded retries per job" but left open whether the bound is one
 deployment-wide configured value or overridable per job at enqueue
 time.
@@ -27,17 +27,17 @@ time.
 
 v1 defines a single deployment-wide max-retry value, set via the
 Composition Root's deployment configuration
-([DEC-0206](DEC-0206-composition-root-yaml-config.md)); `enqueue()`
+(DEC-0206); `enqueue()`
 carries no per-job retry-bound parameter.
 
 ## Rationale
 
 Matches the App Database Port precedent
-([CMP-0003](../components/CMP-0003-app-database-port.md)), which
+(CMP-0003), which
 exposes no per-operation retry override either — retry policy is
 adapter/deployment configuration, not a per-call parameter. No cited
 Acceptance Criterion in
-[ST-0060](../stories/ST-0060-queue-port.md) or
-[ST-0061](../stories/ST-0061-background-job-execution-runtime.md)
+ST-0060 or
+ST-0061
 calls for per-job tuning; a single default keeps the contract simplest
 and can be extended later if a real job type needs a different bound.

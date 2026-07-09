@@ -35,7 +35,7 @@ retained, but the artifact re-earns its gate in the current context.
 
 The participant's framing: it isn't sensible to approve a story before
 it is in scope — gates ratify work that feeds the next stage
-([DEC-0006](DEC-0006-gate-every-stage.md)). Reviving to `draft` rather
+(DEC-0006). Reviving to `draft` rather
 than restoring the pre-deferral status is the same principle applied at
 the exit: the world moved on while the story was parked, and silent
 re-approval is what staleness machinery exists to prevent. Allowing
@@ -62,7 +62,7 @@ The lifecycle diagram in
 [SPEC-artifact-common](../specs/SPEC-artifact-common.md) gains the
 state; the "nothing derives from an unapproved parent" rule covers
 deferred epics with no new machinery. A deferred artifact carries a
-`release:` label per [DEC-0098](DEC-0098-semver-release-labels.md) and
+`release:` label per DEC-0098 and
 cites its deferral decision per
-[DEC-0100](DEC-0100-scope-moves-cite-decisions.md). Skill references
+DEC-0100. Skill references
 sync.

@@ -26,9 +26,9 @@ Three surfaces:
 
 1. **Status report**: every run lists armed triggers — ID, target,
    condition inline — adjacent to the Deferred section (the items they
-   would revive, per [DEC-0101](DEC-0101-deferred-out-of-metrics.md)).
+   would revive, per DEC-0101).
 2. **Release-gate review**: any release-declaration amendment to a
-   Business Goal ([DEC-0099](DEC-0099-releases-declared-in-goal-scope.md))
+   Business Goal (DEC-0099)
    must review the registry — has any armed condition been met?
 3. **Checker validation**: heading format
    (`## TRG-nnnn (armed|fired|retired)`), unique sequential IDs, required
@@ -40,7 +40,7 @@ Three surfaces:
 The status report is the skill's step-0 read — armed triggers there cost
 a few lines and reach every session. Release amendments are exactly when
 "should deferred work come back?" is live. Checker validation keeps the
-strict format ([DEC-0106](DEC-0106-trigger-registry.md)) actually strict.
+strict format (DEC-0106) actually strict.
 
 ## Alternatives Considered
 

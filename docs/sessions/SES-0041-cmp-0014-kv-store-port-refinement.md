@@ -17,9 +17,9 @@ links:
 
 ## Purpose
 
-Refine the stubbed [CMP-0014](../components/CMP-0014-kv-store-port.md)
+Refine the stubbed CMP-0014
 (KV-store Port) toward contract-completeness. Most of the contract is
-already settled by [ST-0062](../stories/ST-0062-kv-store-port.md)'s
+already settled by ST-0062's
 Acceptance Criteria, including the adapter-layering ambiguity (resolved
 at story grain, unlike the identical ambiguity that needed a session
 for the Queue Port). This session resolves the remaining points: the
@@ -38,9 +38,9 @@ recommended answer:
 2. TTL requirement — mandatory on every `set()` vs. optional
    (no-TTL keys live forever). Recommended: mandatory, to structurally
    enforce the port's ephemeral-only scope
-   ([DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md)) rather
+   (DEC-0203) rather
    than let it drift into a second permanent store.
-3. Atomic lock primitive — [ST-0062](../stories/ST-0062-kv-store-port.md)'s
+3. Atomic lock primitive — ST-0062's
    scope names "single-writer coordination locks," but plain
    `get()`+`set()` composition races. Flagged this as a contract gap:
    recommended adding an atomic `set-if-absent` operation so the
@@ -50,9 +50,9 @@ recommended answer:
 **T2 — Stakeholder.** Confirmed all three recommendations as given.
 
 **T3 — Facilitator.** Decision-recall audit on the drafted
-[CMP-0014](../components/CMP-0014-kv-store-port.md) surfaced the same
+CMP-0014 surfaced the same
 two citation-consistency gaps found for its sibling
-[CMP-0012](../components/CMP-0012-queue-port.md) in the same session
+CMP-0012 in the same session
 thread: `DEC-0135` (port-graduation pattern, invoked by the header
 blockquote but missing from `cites:`) and `DEC-0205` (trigger-deferral
 decision backing the External Adapters Out of Scope bullet). Also
@@ -65,7 +65,7 @@ KV adapter directly, citing the general-purpose decisions
 (`DEC-0204`, `DEC-0129`) that both narrow from, so citing a
 Queue-specific decision here would misattribute provenance. All other
 candidates
-([CMP-0004](../components/CMP-0004-governance-gate-engine.md)/[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)
+(CMP-0004/CMP-0005
 decomposition decisions, release-label grammar, BBDC connector
 specifics) were noise from generic term overlap.
 
@@ -75,9 +75,9 @@ only within `CMP-0014` today; no graduation indicated.
 
 ## Decisions Produced
 
-[DEC-0219](../decisions/DEC-0219-kv-store-namespaced-keys.md),
-[DEC-0220](../decisions/DEC-0220-kv-store-ttl-mandatory.md),
-[DEC-0221](../decisions/DEC-0221-kv-store-atomic-set-if-absent.md)
+DEC-0219,
+DEC-0220,
+DEC-0221
 
 ## Conflicts Raised
 

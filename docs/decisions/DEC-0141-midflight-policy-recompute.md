@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[EP-0003](../epics/EP-0003-governance-and-gate-engine.md) deferred the
+EP-0003 deferred the
 recomputation semantics of mid-flight governance changes to story
 level: when `roles.yaml` or `gate-policies.yaml` changes while gate PRs
 are open, what happens to their checks?
@@ -48,5 +48,5 @@ approvals after unrelated policy edits.
 ## Implications
 
 Bulk recomputation is one trigger class of the event-driven check
-engine ([DEC-0145](DEC-0145-event-driven-check-recomputation.md));
-criterion in [ST-0014](../stories/ST-0014-gate-policy-check.md).
+engine (DEC-0145);
+criterion in ST-0014.

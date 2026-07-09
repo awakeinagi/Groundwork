@@ -19,12 +19,12 @@ cites: [DEC-0077, DEC-0080, DEC-0102, DEC-0103, DEC-0121, DEC-0122, DEC-0124,
 # CMP-0003: App Database Port
 
 > Standalone `protocol`-type component, graduated out of
-> [CMP-0001](CMP-0001-artifact-store-service.md) per
-> [DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md) under
-> the [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md)
+> CMP-0001 per
+> DEC-0135 under
+> the DEC-0080
 > rule: independently versioned conformance. The pattern for all four
 > infrastructure ports of
-> [DEC-0121](../decisions/DEC-0121-infrastructure-ports.md).
+> DEC-0121.
 
 ## Purpose
 
@@ -42,56 +42,56 @@ Port, Adapter, Mechanical Write, Canonical Store — per
 
 ### AppDatabasePort (protocol)
 
-Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
-[ST-0008](../stories/ST-0008-change-event-stream.md)
+Implements: ST-0010,
+ST-0008
 
 - `AppDatabasePort.A-1` — `begin() → UnitOfWork` with atomic
   commit/rollback across all operations enlisted in it; typed error
   conditions: `unavailable`, `uow-closed` (operations on a committed or
-  rolled-back unit) (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md), [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
+  rolled-back unit) (per DEC-0129, DEC-0139).
 - `AppDatabasePort.A-2` — outbox family: `outbox.append(events[],
   uow)`; `outbox.claim(batch-size) → leased events`;
   `outbox.ack(lease)` / `outbox.nack(lease)` for the dispatcher's retry
   loop. Event payloads conform to
-  [CMP-0002](CMP-0002-change-event.md); typed error conditions:
+  CMP-0002; typed error conditions:
   `stale-lease` (expired or unknown lease on ack/nack), `uow-closed`
-  on append (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md), [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
+  on append (per DEC-0103, DEC-0129, DEC-0139).
 - `AppDatabasePort.A-3` — bookkeeping family:
   `bookkeeping.put/get/delete(namespace, key, document)` for
   operational records (worktree state, branch metadata, retry
   counters); no ID-counter surface exists on the port; typed error
-  conditions: `not-found` on get/delete of an absent key (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md),
-  [DEC-0125](../decisions/DEC-0125-port-counters-exclude-id-allocation.md), [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
+  conditions: `not-found` on get/delete of an absent key (per DEC-0129,
+  DEC-0125, DEC-0139).
 - `AppDatabasePort.B-1` — atomicity: outbox append and the write's
   bookkeeping commit or roll back together within one UnitOfWork
-  (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
+  (per DEC-0103, DEC-0129).
 - `AppDatabasePort.B-2` — no SQL crosses the seam; Adapters implement
   semantics, not a dialect; Adapter selection is deployment
-  configuration only (per [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md), [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)).
+  configuration only (per DEC-0129, DEC-0122).
 - `AppDatabasePort.B-3` — conformance: the shared suite exercises every
   operation family, including UnitOfWork atomicity under failure
   injection; passing it is the definition of a valid Adapter
-  (per [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)).
+  (per DEC-0122).
 - `AppDatabasePort.B-4` — stale-lease safety: `ack`/`nack` with an
   expired or unknown lease fails with `stale-lease` and the event
   remains (or becomes again) claimable — safe under at-least-once
   delivery because consumers are idempotent per
-  [CMP-0002](CMP-0002-change-event.md)'s delivery contract
-  (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
+  CMP-0002's delivery contract
+  (per DEC-0139).
 - `AppDatabasePort.B-5` — dead-lettering: after a configurable maximum
   of failed deliveries an event parks in a dead-letter state, visible
   through the bookkeeping surface and never silently dropped;
   replay-from-git remains the ultimate recovery path
-  (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
+  (per DEC-0139, DEC-0103).
 - `AppDatabasePort.B-6` — crash atomicity: a crash at any point inside
   a UnitOfWork leaves no partially visible state after restart;
   exercised by the conformance suite's failure injection
-  (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
+  (per DEC-0139, DEC-0129).
 
 ## Component Invariants
 
 - `C-1` — all state behind the port is derived state: rebuildable from
-  the fork's refs, never a source of truth (per [DEC-0131](../decisions/DEC-0131-rebuild-sufficiency-invariant.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
+  the fork's refs, never a source of truth (per DEC-0131, DEC-0103).
 
 ## Implementation Guidance
 
@@ -99,10 +99,10 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
 
 - `IG-1` — v1 ships the DuckDB Adapter only; second storage adapters
   arrive with the graduation evaluation
-  ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md))
-  (per [DEC-0124](../decisions/DEC-0124-v1-adapter-set.md), [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md)).
+  (SP-0002)
+  (per DEC-0124, DEC-0102).
 - `IG-2` — the conformance suite is published with the port contract
-  and runs against any Adapter without modification (per [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)).
+  and runs against any Adapter without modification (per DEC-0122).
 
 ### Notes
 
@@ -112,30 +112,30 @@ Implements: [ST-0010](../stories/ST-0010-app-database-port.md),
 
 ## Dependencies
 
-- [CMP-0002](CMP-0002-change-event.md) — outbox rows carry ChangeEvent
+- CMP-0002 — outbox rows carry ChangeEvent
   payloads; this port consumes only its schema (`ChangeEvent.D-1`).
 
 ## Acceptance & Test Expectations
 
 1. The conformance suite passes with the v1 DuckDB Adapter
-   (per [DEC-0122](../decisions/DEC-0122-config-selected-adapters.md), [DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
+   (per DEC-0122, DEC-0124).
 2. Atomicity under failure injection: a crash between bookkeeping write
    and outbox append leaves no half-committed unit of work
-   (per [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0129](../decisions/DEC-0129-port-typed-operation-families.md)).
+   (per DEC-0103, DEC-0129).
 3. Failure-path conformance: stale-lease rejection with the event
    re-claimable, dead-letter parking after retry exhaustion, and every
    enumerated typed error condition are exercised by the suite
-   (per [DEC-0139](../decisions/DEC-0139-port-operation-failure-semantics.md)).
+   (per DEC-0139).
 
 ## Out of Scope
 
-Boundary statements (per [DEC-0133](../decisions/DEC-0133-out-of-scope-differentiated-rule.md)):
+Boundary statements (per DEC-0133):
 
 - The other three infrastructure ports — vector store and embedding
-  ([EP-0007](../epics/EP-0007-consolidation-memory-layer.md)), graph
-  store ([EP-0004](../epics/EP-0004-graph-index.md)) — arrive as their
-  own protocol CMPs per [DEC-0135](../decisions/DEC-0135-graduate-app-database-port.md).
+  (EP-0007), graph
+  store (EP-0004) — arrive as their
+  own protocol CMPs per DEC-0135.
 - Artifact-ID allocation state — excluded from the port; rescan-on-boot
-  is the sole mechanism (per [DEC-0125](../decisions/DEC-0125-port-counters-exclude-id-allocation.md), [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
+  is the sole mechanism (per DEC-0125, DEC-0077).
 - Dispatcher scheduling and retry policy — the consumer's concern
-  ([CMP-0001](CMP-0001-artifact-store-service.md)).
+  (CMP-0001).

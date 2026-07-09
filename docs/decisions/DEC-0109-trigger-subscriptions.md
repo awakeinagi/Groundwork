@@ -18,14 +18,14 @@ links:
 
 ## Context
 
-[DEC-0106](DEC-0106-trigger-registry.md) gave each trigger one
+DEC-0106 gave each trigger one
 `**Consequence:**` line. That duplicates conditions when several items
 share one (each would need its own trigger) and leaves no structure for
 removing a single item's subscription when it revives.
 
 ## Decision
 
-Supersedes [DEC-0106](DEC-0106-trigger-registry.md), restating the
+Supersedes DEC-0106, restating the
 registry with subscriptions. `docs/TRIGGERS.md` is unchanged in
 location, ID discipline, statuses, armed-only context loading, and
 never-delete history. The entry format becomes:
@@ -47,7 +47,7 @@ never-delete history. The entry format becomes:
 - **A firing revives all subscribers.** The condition holding is a fact
   about the world, not about one item; each consequence executes citing
   the one firing decision
-  ([DEC-0107](DEC-0107-trigger-firing-cites-decision.md) unchanged).
+  (DEC-0107 unchanged).
 - Fired/retired entries keep their subscriber lines as history.
 
 ## Rationale
@@ -73,7 +73,7 @@ unsubscription a one-line deletion the checker can reason about.
 
 [SPEC-triggers](../specs/SPEC-triggers.md) is rewritten; the existing
 `TRG-0001`–`TRG-0004` entries convert to the new format (subscriber:
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md), per
-[DEC-0105](DEC-0105-sp-0002-rescoped-deferred.md)); checker and status
+SP-0002, per
+DEC-0105); checker and status
 tooling parse subscriber lines. Lifecycle invariants are
-[DEC-0110](DEC-0110-subscription-lifecycle.md).
+DEC-0110.

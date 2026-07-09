@@ -17,14 +17,14 @@ links:
 
 ## Context
 
-[DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)
+DEC-0045
 requires a documented minimum capability set a host must support to
 run Groundwork at all, with the gate engine's policy compiler adapting
 to or emulating whatever a manifest declares above that minimum — but
 never defined where the line sits. Bitbucket Data Center, the v1
 baseline, already lacks native path-scoped reviewer rules
-([DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)), and
-[SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) has not yet
+(DEC-0050), and
+SP-0004 has not yet
 confirmed BBDC's required-check surface — so the minimum set must not
 assume capabilities still under spike.
 
@@ -39,7 +39,7 @@ pass/fail on a PR somehow). **Above minimum, adaptable or emulatable**:
 native required-check *registration*, team synchronization, review
 dismissal, and native path-scoped reviewer rules — the service-computed
 `gate-policy` check
-([DEC-0036](../decisions/DEC-0036-host-base-plus-service-gate-check.md))
+(DEC-0036)
 is precisely the emulation path when a host lacks these.
 
 ## Rationale
@@ -47,7 +47,7 @@ is precisely the emulation path when a host lacks these.
 Every minimum-set item is either load-bearing for the fork-pull gate
 mechanism itself (orchestration, review, check-result posting) or for
 the agent's read context — none of it is BBDC-specific, so the set
-holds even if [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)
+holds even if SP-0004
 surfaces BBDC quirks in the check-administration family. Treating
 required-check *registration* as above-minimum (rather than mandatory)
 keeps the minimum set from foreclosing hosts with weaker admin APIs
@@ -57,12 +57,12 @@ before the one open spike about admin-API feasibility even reports.
 
 - **Require native check registration in the minimum** — simpler
   mental model, but forecloses weaker-admin-API hosts pre-emptively and
-  is riskier given [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)
+  is riskier given SP-0004
   hasn't yet confirmed BBDC's own surface is adequate.
 
 ## Implications
 
 `CapabilityManifest`'s schema
-([CMP-0005](../components/CMP-0005-code-host-connector-protocol.md))
+(CMP-0005)
 encodes exactly this minimum/above-minimum split; a manifest with any
 minimum-set flag false makes a connector invalid for deployment.

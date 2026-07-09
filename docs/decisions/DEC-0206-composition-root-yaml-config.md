@@ -18,17 +18,17 @@ links:
 
 ## Context
 
-[EP-0008](../epics/EP-0008-backend-application-platform.md) explicitly
+EP-0008 explicitly
 left the Composition Root's config schema format (structured file,
 environment variables, or both) open, to resolve at story derivation
-([SES-0038](../sessions/SES-0038-ep-0008-refinement.md)).
+(SES-0038).
 
 ## Decision
 
 The v1 Composition Root reads a single structured **YAML** deployment
 config file naming the Adapter selected for each of the six Ports
-([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md),
-[DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md)), plus each
+(DEC-0121,
+DEC-0203), plus each
 Adapter's own configuration block. Environment variables are reserved
 for secrets and environment-specific overrides (e.g. an API key or a
 per-deployment path) layered on top of the file, never the primary
@@ -38,11 +38,11 @@ mechanism for adapter selection.
 
 Matches this project's own established pattern for deployment-scoped
 settings — "deployment configuration" already names a place, not a
-mechanism ([DEC-0154](../decisions/DEC-0154-review-path-mapping-deployment-config.md)),
+mechanism (DEC-0154),
 and structured YAML is the format the project already uses for
 comparable config-as-data surfaces (governance-as-code's
 `gate-policies.yaml`, per
-[DEC-0037](../decisions/DEC-0037-governance-as-code.md)). One
+DEC-0037). One
 reviewable file for the whole topology (which Adapter binds which
 Port) is easier to audit than scattered environment variables.
 
@@ -56,7 +56,7 @@ Port) is easier to audit than scattered environment variables.
 
 ## Implications
 
-[ST-0057](../stories/ST-0057-composition-root.md)'s Acceptance Criteria
+ST-0057's Acceptance Criteria
 require the YAML schema and env-override precedence rules; the schema
 itself is part of the Composition Root's Component Doc contract once
 drafted.

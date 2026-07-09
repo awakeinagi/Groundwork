@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-Deferring a story ([DEC-0097](DEC-0097-deferred-status.md)) and bringing
+Deferring a story (DEC-0097) and bringing
 it back both change what a release contains. Is that provenance-worthy,
 or a mechanical status flip?
 
@@ -33,7 +33,7 @@ from the artifact itself, indefinitely.
 
 Scoping something out of a release is a genuine trade-off — exactly the
 bar this system sets for Decision records
-([DEC-0015](DEC-0015-transcript-decision-citation-chain.md)). In-session
+(DEC-0015). In-session
 capture stays cheap because one deferral decision can park a batch.
 
 ## Alternatives Considered

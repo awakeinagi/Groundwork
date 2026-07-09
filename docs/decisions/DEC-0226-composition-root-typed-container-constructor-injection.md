@@ -18,11 +18,11 @@ links:
 
 ## Context
 
-[DEC-0201](../decisions/DEC-0201-composition-root-split.md) gives
-[EP-0008](../epics/EP-0008-backend-application-platform.md) the
+DEC-0201 gives
+EP-0008 the
 Composition Root — the single place where Port contracts bind to
 concrete Adapters at startup. Drafting
-[CMP-0010](../components/CMP-0010-composition-root.md) needed the
+CMP-0010 needed the
 central open question: *what does the Root produce*, and how do
 consumers receive their bound Ports?
 
@@ -43,7 +43,7 @@ its own signature, keeps the binding graph in one auditable place
 with test doubles and injects them, no framework or global reset
 needed. It matches the "single place, everything else programs against
 Port contracts only" intent of
-[DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)/[DEC-0201](../decisions/DEC-0201-composition-root-split.md).
+DEC-0121/DEC-0201.
 
 ## Alternatives Considered
 
@@ -58,11 +58,11 @@ Port contracts only" intent of
 
 ## Implications
 
-[CMP-0010](../components/CMP-0010-composition-root.md)'s contract
+CMP-0010's contract
 exposes a container-builder service and a typed container value;
-[CMP-0011](../components/CMP-0011-inbound-api.md),
-[CMP-0013](../components/CMP-0013-background-job-execution-runtime.md),
+CMP-0011,
+CMP-0013,
 and every engine consumer receive their Ports as constructor
 arguments, consistent with
-[DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)'s
+DEC-0122's
 config-selected-adapter seam.

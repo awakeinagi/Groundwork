@@ -23,7 +23,7 @@ embeddings looks exactly like a healthy one — stale results are
 silent. And the hybrid features depend on a *second* derived view (the
 graph) with its own freshness: POC 2 accidentally discovered the live
 `.groundwork-graph` was missing
-[SES-0018](../sessions/SES-0018-trigger-subscriptions.md)'s decisions
+SES-0018's decisions
 entirely, which silently disables `SUPERSEDES` redirects exactly for
 the newest decisions.
 
@@ -62,5 +62,5 @@ loud warning is the honest boundary.
 Status changes (e.g., a DEC becoming superseded) reach the index
 automatically, since editing frontmatter changes the file hash — the
 `--current` filter and redirect annotations of
-[DEC-0119](DEC-0119-hybrid-retrieval-semantics.md) stay correct
+DEC-0119 stay correct
 without ceremony.

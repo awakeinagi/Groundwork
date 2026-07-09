@@ -45,4 +45,4 @@ from accumulating as permanently open provenance.
 
 The inactivity window is per-deployment (possibly per-pack) configuration;
 re-orientation behavior is pack-defined; auto-close is a mechanical write
-([DEC-0033](DEC-0033-typed-mechanical-writes.md)).
+(DEC-0033).

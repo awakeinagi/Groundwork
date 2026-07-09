@@ -17,25 +17,25 @@ links:
 
 ## Context
 
-The [CMP-0001](../components/CMP-0001-artifact-store-service.md) draft
+The CMP-0001 draft
 stub lumped five stories into one StorageService element, left
-[ST-0007](../stories/ST-0007-tier2-check-suite.md) uncovered, and left
+ST-0007 uncovered, and left
 the tier-1 validation library's home undecided
-([SES-0022](../sessions/SES-0022-cmp-0001-contract-refinement.md) T1).
+(SES-0022 T1).
 
 ## Decision
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) comprises **thirteen** design elements:
+CMP-0001 comprises **thirteen** design elements:
 
 - **Services**: `StorageService` (core read/write API,
-  [ST-0002](../stories/ST-0002-storage-api-core.md));
-  `BranchOrchestrator` ([ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md));
-  `WorktreeManager` ([ST-0004](../stories/ST-0004-session-worktree-management.md));
-  `IdAllocator` ([ST-0005](../stories/ST-0005-id-allocation.md));
-  `MechanicalWriteService` ([ST-0006](../stories/ST-0006-typed-mechanical-writes.md));
+  ST-0002);
+  `BranchOrchestrator` (ST-0003);
+  `WorktreeManager` (ST-0004);
+  `IdAllocator` (ST-0005);
+  `MechanicalWriteService` (ST-0006);
   `SchemaValidator` (tier-1 library and schema assets,
-  [ST-0001](../stories/ST-0001-tier1-schema-suite.md));
-  `CheckSuite` (tier-2 suite, [ST-0007](../stories/ST-0007-tier2-check-suite.md)).
+  ST-0001);
+  `CheckSuite` (tier-2 suite, ST-0007).
 - **Entities**: `Artifact`; `ItemBranch` (branch/PR lifecycle and
   status-coherence home); `SessionWorktree` (worktree lifecycle and
   restart-reconstructibility home).
@@ -50,9 +50,9 @@ split is a contract-organization choice, not a deployment one.
 Element-per-story keeps contract blocks reviewable and item IDs
 meaningful; a single mega-service would run to dozens of unrelated
 items. SchemaValidator is independently reimplementable
-([DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md)) so it
+(DEC-0018) so it
 deserves a standalone contract; CheckSuite closes the known
-[ST-0007](../stories/ST-0007-tier2-check-suite.md) coverage gap inside
+ST-0007 coverage gap inside
 the component rather than minting a second CMP and gate. ItemBranch and
 SessionWorktree have identity and lifecycle — modeling them as entities
 gives the coherence and reconstructibility guarantees a single testable
@@ -60,12 +60,12 @@ home instead of restating them across API items.
 
 ## Alternatives Considered
 
-- **One StorageService element for [ST-0002](../stories/ST-0002-storage-api-core.md)..[ST-0006](../stories/ST-0006-typed-mechanical-writes.md)** — fewer headings,
+- **One StorageService element for ST-0002..ST-0006** — fewer headings,
   unreviewable contract block.
 - **Split only IdAllocator** — middle ground; rejected with the full
   split preferred for uniform story↔element mapping.
 - **CheckSuite as its own CMP** — a separately deployed CI artifact,
   but it shares the Canonical Store language wholesale and would add a
-  second gate before [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) completes.
+  second gate before EP-0001 completes.
 - **Branch/worktree lifecycles as service behavior items** — no single
   home for the cross-cutting invariants.

@@ -29,41 +29,41 @@ attribution block where it doesn't.
 
 1. An approver with a linked host identity has their UI approval posted
    as a host PR review *as them* — host-side audit shows the real
-   person (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+   person (per DEC-0043).
 2. For roles on the program-user path, the review body carries the
    structured attribution block — person-id, PR reference, decision
    timestamp — signed with the service's asymmetric key; the public key
    is available to verifiers via deployment configuration
-   (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
-   [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+   (per DEC-0153,
+   DEC-0043).
 3. The attribution block's schema and signing rules are published as a
    contract item so the `gate-policy` check can verify signature,
    person-id resolution, and role membership independently
-   (per [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
-   [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+   (per DEC-0153,
+   DEC-0046).
 4. Which roles use which path is read from deployment configuration;
    no governance file is consulted or modified
-   (per [DEC-0154](../decisions/DEC-0154-review-path-mapping-deployment-config.md),
-   [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+   (per DEC-0154,
+   DEC-0043).
 5. OAuth tokens and the signing key are stored and read only through
    the encrypted secret store; a token never appears in the repo, logs,
-   or error output (per [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md),
-   [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+   or error output (per DEC-0152,
+   DEC-0046).
 6. An expired or revoked OAuth token fails the review post with a
    re-authorization prompt to the approver — never a silent fallback to
    the program user, which would misattribute the review path
-   (per [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
-   [DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md)).
+   (per DEC-0043,
+   DEC-0153).
 
 ## Component Impact
 
-[CMP-0007](../components/CMP-0007-identity-and-access.md) — supplies
+CMP-0007 — supplies
 the review-delegation, token-handling, and attribution-signing
 contract sections.
 
-[CMP-0015](../components/CMP-0015-secret-store.md) — supplies the
+CMP-0015 — supplies the
 graduated secret-store contract the tokens and signing key live behind
-(per [DEC-0232](../decisions/DEC-0232-graduate-secret-store.md)).
+(per DEC-0232).
 
 ## Out of Scope
 
@@ -71,23 +71,23 @@ Program-user approvals of mechanical and System-Decision auto-PRs —
 those are machine-verified by the diff/template checks and carry **no**
 human attribution block; the attribution requirement applies only to
 reviews that stand in for a human approver's gate decision
-(per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md),
-[DEC-0143](../decisions/DEC-0143-system-decisions-via-auto-pr.md)).
+(per DEC-0033,
+DEC-0143).
 Verifying the attribution at gate time — that's the `gate-policy`
 check's side of the seam
-([ST-0014](ST-0014-gate-policy-check.md), per
-[DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md));
+(ST-0014, per
+DEC-0153);
 the UI review surface itself
-([EP-0006](../epics/EP-0006-refinement-web-ui.md)); the host review
-API plumbing ([ST-0019](ST-0019-code-host-connector-protocol.md)
-defines it, [ST-0031](ST-0031-github-connector.md) implements it for
-v1, per [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md);
-[ST-0020](ST-0020-bitbucket-data-center-connector.md), deferred,
+(EP-0006); the host review
+API plumbing (ST-0019
+defines it, ST-0031 implements it for
+v1, per DEC-0172;
+ST-0020, deferred,
 would implement it for Bitbucket Data Center).
 
 ## Notes for Implementers
 
 The attribution block schema is produced here and consumed by
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) — a
+CMP-0004 — a
 contract-certain two-consumer seam; expect it to be weighed for
 graduation at component review.

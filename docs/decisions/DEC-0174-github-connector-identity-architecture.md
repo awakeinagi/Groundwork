@@ -17,15 +17,15 @@ links:
 
 ## Context
 
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)'s
+CMP-0005's
 `C-2` requires read-context credentials
 (`CodeHostConnector.A-9`) to never be the same credential as
 orchestration writes (`A-1`–`A-8`).
-[DEC-0028](DEC-0028-fork-pull-pr-gating.md) has "the agent" own "a local
+DEC-0028 has "the agent" own "a local
 fork of the upstream doc repository" but never specified where that
-fork lives on a real host. [DEC-0043](DEC-0043-oauth-reviews-program-user-fallback.md)'s
+fork lives on a real host. DEC-0043's
 program-user review path needed a concrete GitHub identity.
-[CMP-0009](../components/CMP-0009-github-connector.md) (GitHub, cloud)
+CMP-0009 (GitHub, cloud)
 had to answer all three concretely to be contract-complete.
 
 ## Decision
@@ -48,11 +48,11 @@ architecture:
    membership or visibility settings.
 3. **Program-user reviews post under the Orchestrator App's bot
    identity.** All role-scoped program-user reviews
-   ([DEC-0043](DEC-0043-oauth-reviews-program-user-fallback.md)) post
+   (DEC-0043) post
    via the Orchestrator App's installation token, appearing host-side
    as the App's bot account (e.g. `groundwork[bot]`). Role
    differentiation is carried entirely in
-   [DEC-0153](DEC-0153-service-signed-attribution-block.md)'s signed
+   DEC-0153's signed
    attribution block, not in distinct GitHub identities — no
    per-role GitHub account is provisioned.
 
@@ -63,7 +63,7 @@ audit than a single-App, code-enforced boundary that a future
 permission-broadening PR could silently erode. A dedicated fork
 account keeps forked item branches off the source org's own namespace,
 matching the classic contributor fork-and-PR pattern
-[DEC-0028](DEC-0028-fork-pull-pr-gating.md) already assumes. GitHub
+DEC-0028 already assumes. GitHub
 Apps natively support posting reviews under their own bot identity, so
 no additional per-role GitHub accounts need provisioning or
 credentialing — the attribution block already carries the real human
@@ -79,7 +79,7 @@ identity, which is the property that actually matters for audit.
   silently break if the App's permission set were ever broadened for
   an unrelated reason.
 - **Direct branches on the source repo (no literal fork)**: simpler,
-  but diverges from [DEC-0028](DEC-0028-fork-pull-pr-gating.md)'s
+  but diverges from DEC-0028's
   "local fork" language and puts in-refinement item branches directly
   on the source org's repo.
 - **Dedicated machine-user account per role** for program reviews:
@@ -90,7 +90,7 @@ identity, which is the property that actually matters for audit.
 
 ## Implications
 
-[CMP-0009](../components/CMP-0009-github-connector.md)'s
+CMP-0009's
 Implementation Guidance names both App registrations and their
 permission sets explicitly. Deployment documentation (out of this
 design's scope) must cover provisioning two App registrations instead

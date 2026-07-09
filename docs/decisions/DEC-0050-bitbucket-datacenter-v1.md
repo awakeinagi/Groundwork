@@ -17,7 +17,7 @@ links:
 ## Context
 
 The connector contract is host-agnostic
-([DEC-0045](DEC-0045-capability-declaring-connectors.md)); v1 needed its
+(DEC-0045); v1 needed its
 reference implementation and capability-manifest baseline picked.
 
 ## Decision
@@ -43,8 +43,8 @@ confirm during story refinement).
 
 The capability baseline is BBDC's: no native CODEOWNERS-style path-scoped
 reviewer requirements, so the `gate-policy` required check carries more
-enforcement weight ([DEC-0036](DEC-0036-host-base-plus-service-gate-check.md));
+enforcement weight (DEC-0036);
 merge checks / Code Insights are the native required-check surface;
 reviewer groups and default reviewers approximate team routing. Webhook
-payloads for drift diffs ([DEC-0044](DEC-0044-drift-revert-capture-proposal.md))
+payloads for drift diffs (DEC-0044)
 use the Data Center event families.

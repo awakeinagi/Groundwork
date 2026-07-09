@@ -24,7 +24,7 @@ multi-party conversations or separate 1:1 conversations the agent merges.
 Each refinement session is 1:1 — one participant with the agent. The agent
 synthesizes perspectives across sessions into the target artifact, detecting
 cross-participant conflicts between sessions and running the mediation flow
-([DEC-0005](DEC-0005-intent-first-mediation-then-escalation.md)).
+(DEC-0005).
 
 ## Rationale
 

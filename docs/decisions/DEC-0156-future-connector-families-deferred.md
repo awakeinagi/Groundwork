@@ -19,22 +19,22 @@ links:
 
 The new stories' Out of Scope sections name future work — GitHub /
 Bitbucket Cloud / GitLab hosts
-([DEC-0050](DEC-0050-bitbucket-datacenter-v1.md)), Slack/Teams
-notifiers ([DEC-0075](DEC-0075-notification-center-connectors.md)),
-and, after [DEC-0155](DEC-0155-pluggable-work-management-connector.md),
+(DEC-0050), Slack/Teams
+notifiers (DEC-0075),
+and, after DEC-0155,
 non-Jira work-management systems — which
-[DEC-0133](DEC-0133-out-of-scope-differentiated-rule.md) requires to
+DEC-0133 requires to
 exist as deferred artifacts, not prose.
 
 ## Decision
 
 Three deferred `backlog` stories capture the families — additional
 code-host connectors
-([ST-0028](../stories/ST-0028-additional-code-host-connectors.md)),
+(ST-0028),
 additional notifier adapters
-([ST-0029](../stories/ST-0029-additional-notifier-adapters.md)),
+(ST-0029),
 additional work-management connectors
-([ST-0030](../stories/ST-0030-additional-work-management-connectors.md))
+(ST-0030)
 — each subscribed to its own armed demand trigger: a deployment
 requiring a host other than Bitbucket Data Center (TRG-0007), a
 channel beyond email (TRG-0008), or a work-management system other
@@ -59,4 +59,4 @@ human-testable.
 Out of Scope entries across the new stories link these three; the
 trigger registry gains TRG-0007..TRG-0009 citing this decision;
 deferrals cite this decision per
-[DEC-0100](DEC-0100-scope-moves-cite-decisions.md).
+DEC-0100.

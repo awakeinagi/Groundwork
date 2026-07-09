@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[ST-0008](../stories/ST-0008-change-event-stream.md) fixed the event
+ST-0008 fixed the event
 stream's delivery semantics but not the payload vocabulary or its
 evolution story.
 
@@ -29,7 +29,7 @@ The `ChangeEvent` payload comprises: `event_id`, `schema_version`,
 `created | content-amended | status-changed | merged | deleted`.
 Extending the enum or changing the payload is a contract change through
 a gate — the same discipline as the mechanical-write allowlist
-([DEC-0033](DEC-0033-typed-mechanical-writes.md)); `schema_version`
+(DEC-0033); `schema_version`
 lets consumers handle evolution explicitly.
 
 ## Rationale

@@ -18,12 +18,12 @@ links:
 
 ## Purpose
 
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) existed
+CMP-0004 existed
 only as a stub — Purpose section plus a list of pending headings. All
 seven of its stories
-([ST-0012](../stories/ST-0012-governance-config-schemas.md)–[ST-0018](../stories/ST-0018-governance-event-log-metrics.md))
+(ST-0012–ST-0018)
 were already approved with detailed acceptance criteria citing
-[DEC-0140](../decisions/DEC-0140-seeded-governance-bootstrap.md)–[DEC-0147](../decisions/DEC-0147-derived-queue-views.md),
+DEC-0140–DEC-0147,
 so this session's grilling targeted only the genuinely open translation
 choices: how the component decomposes into Design Elements, and the
 handful of concrete contract shapes (metrics API surface, check
@@ -34,64 +34,64 @@ unspecified.
 
 **T1 — Facilitator.** Proposed a 10-element decomposition — one element
 per story concern: `GovernanceConfig`(value), `GovernanceInit`(service)
-for [ST-0012](../stories/ST-0012-governance-config-schemas.md);
+for ST-0012;
 `PolicyCompiler`(service) for
-[ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md);
+ST-0013;
 `GatePolicyCheck`(service) for
-[ST-0014](../stories/ST-0014-gate-policy-check.md); `ConflictGate`
+ST-0014; `ConflictGate`
 (service) for
-[ST-0015](../stories/ST-0015-conflicts-open-check-and-operations.md);
+ST-0015;
 `StalenessSweepService`(service), `ImpactReport`(value) for
-[ST-0016](../stories/ST-0016-staleness-sweep-impact-analysis.md);
+ST-0016;
 `ReaffirmationService`(service) for
-[ST-0017](../stories/ST-0017-reaffirmation-flow-queues.md);
+ST-0017;
 `GovernanceEvent`(event), `GovernanceEventLog`(service) for
-[ST-0018](../stories/ST-0018-governance-event-log-metrics.md) —
+ST-0018 —
 mirroring
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s
+CMP-0001's
 one-service-per-capability granularity, against a coarser
 single-`GovernanceEngine`-service alternative.
 
 **T2 — Product Owner.** No option selected outright; raised: "should we
 break these into multiple CMPs?" — questioning whether any element
 should graduate to a standalone component under
-[DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md)'s
+DEC-0080's
 seam-graduation rule, before committing to the nested-element shape.
 
 **T3 — Facilitator.** Walked the graduation test (consumed by more than
 one CMP, or needs independent conformance versioning) against all ten
 candidate elements. Found one plausible case — `GovernanceConfig`,
-since [ST-0012](../stories/ST-0012-governance-config-schemas.md)'s
+since ST-0012's
 implementer notes flag
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)'s session
+EP-0002's session
 guardrails as a future consumer of the decision-rights portion — but
 concluded it doesn't clear the bar today: the governance file schemas
 are already owned and published by
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)
+CMP-0001
 (`SchemaValidator.D-2`), so a future session-agent component can read
 `governance/roles.yaml` directly via `StorageService.A-1` against that
 published schema without depending on
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) at all. No
+CMP-0004 at all. No
 other element has a plausible second consumer — `GovernanceEvent` and
 `ImpactReport` are consumed externally only through
 `GovernanceEventLog`'s API (ordinary component-boundary consumption,
 not a shared seam). Recommended: no graduation now, matching the
 precedent that
-[CMP-0002](../components/CMP-0002-change-event.md)/[CMP-0003](../components/CMP-0003-app-database-port.md)
+CMP-0002/CMP-0003
 graduated out of
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) only once
+CMP-0001 only once
 there was an actual second consumer, not a hypothetical one.
 
 **T4 — Product Owner.** Confirmed: all ten elements stay nested in
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md). If
-[EP-0002](../epics/EP-0002-refinement-session-agent.md) later makes
+CMP-0004. If
+EP-0002 later makes
 governance decision-rights an actual dependency, that graduation call
-gets made when [EP-0002](../epics/EP-0002-refinement-session-agent.md)
+gets made when EP-0002
 is refined.
 
 **T5 — Facilitator.** Three further contract-shape questions, each with
 a recommended option:
-1. [ST-0018](../stories/ST-0018-governance-event-log-metrics.md)'s
+1. ST-0018's
    metrics/query API — fixed named endpoints per dashboard metric
    (approval latency, stale counts, conflict aging, gate throughput)
    plus a provenance-grade-only event search, versus one generic
@@ -108,15 +108,15 @@ a recommended option:
 **T6 — Product Owner.** Selected the recommended option on all three:
 fixed named endpoints; live evaluation with no cache (citing
 rebuild-sufficiency and coherence with
-[DEC-0141](../decisions/DEC-0141-midflight-policy-recompute.md)'s
+DEC-0141's
 mid-flight recompute); and the four-operation Arbiter surface.
 
 ## Decisions Produced
 
-[DEC-0162](../decisions/DEC-0162-cmp-0004-element-decomposition.md),
-[DEC-0163](../decisions/DEC-0163-governance-metrics-api-named-endpoints.md),
-[DEC-0164](../decisions/DEC-0164-gate-policy-check-live-evaluation.md),
-[DEC-0165](../decisions/DEC-0165-conflict-gate-operation-surface.md)
+DEC-0162,
+DEC-0163,
+DEC-0164,
+DEC-0165
 
 ## Conflicts Raised
 

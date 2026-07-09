@@ -29,7 +29,7 @@ them are the trackable units.
 
 ## Rationale
 
-Minimizes the drift surface ([DEC-0002](DEC-0002-doc-store-canonical.md)):
+Minimizes the drift surface (DEC-0002):
 the less content mirrored into Jira, the less can diverge, and Jira
 formatting would mangle full doc bodies anyway.
 

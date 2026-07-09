@@ -33,7 +33,7 @@ user-suffixed branches are used (e.g. `EP-0010-epic_desc-user1`,
 Sessions are isolated by construction (no locks to leak, no mid-session
 interference), and divergence is represented explicitly as branches — which
 is also where the agent's cross-session synthesis
-([DEC-0021](DEC-0021-one-on-one-sessions.md)) naturally operates:
+(DEC-0021) naturally operates:
 reconciling user branches into the item branch before the PR is approved.
 
 ## Alternatives Considered
@@ -49,4 +49,4 @@ The store manages worktree lifecycle per session; unreconciled user branches
 are a visible pre-gate state the UI must surface; conflicting user branches
 that reflect *design* disagreement (not just text conflict) should surface
 through the Conflict artifact flow
-([DEC-0005](DEC-0005-intent-first-mediation-then-escalation.md)).
+(DEC-0005).

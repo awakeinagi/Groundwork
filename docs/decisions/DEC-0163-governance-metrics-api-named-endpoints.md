@@ -17,13 +17,13 @@ links:
 
 ## Context
 
-[ST-0018](../stories/ST-0018-governance-event-log-metrics.md) requires
+ST-0018 requires
 a "language-neutral metrics/query API" exposing at minimum approval
 latency, stale counts, conflict aging, and gate throughput for
-[EP-0006](../epics/EP-0006-refinement-web-ui.md) dashboards, plus
+EP-0006 dashboards, plus
 provenance queries answering
 only from provenance-grade events
-([DEC-0144](DEC-0144-two-grade-governance-event-log.md)). The API shape
+(DEC-0144). The API shape
 — fixed endpoints versus a generic parametrized query — was undecided.
 
 ## Decision
@@ -38,7 +38,7 @@ query language.
 
 Matches the story's explicit "at minimum" list exactly, keeps the
 contract simple and directly testable against
-[DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md)'s
+DEC-0018's
 language-neutral OpenAPI deliverable, and avoids designing an
 aggregation query language before any second consumer demands one.
 

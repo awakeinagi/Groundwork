@@ -18,13 +18,13 @@ links:
 
 ## Context
 
-[DEC-0166](DEC-0166-cmp-0005-drafted-provisional-check-admin.md) marked
+DEC-0166 marked
 `CodeHostConnector.A-5`/`A-6` (check-run result posting and
 required-check registration) provisional because
-[SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) had not yet
+SP-0004 had not yet
 validated whether BBDC's merge-check / Code Insights surface could
 support per-PR blocking, re-reporting, and un-passing an already-green
-check. [DEC-0172](DEC-0172-github-v1-bbdc-deferred.md) moves v1 off
+check. DEC-0172 moves v1 off
 BBDC entirely, onto GitHub.
 
 ## Decision
@@ -32,16 +32,16 @@ BBDC entirely, onto GitHub.
 `CodeHostConnector.A-5`/`A-6` are no longer provisional. GitHub's
 required-status-checks and Checks API are documented, stable features
 that support exactly the semantics
-[SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) existed to
+SP-0004 existed to
 validate for BBDC: per-PR merge blocking on a named check, re-posting
 results on recomputation
-([DEC-0145](DEC-0145-event-driven-check-recomputation.md)), and
+(DEC-0145), and
 flipping a passed check back to failing on an open PR to re-block merge
-([DEC-0141](DEC-0141-midflight-policy-recompute.md)). [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)
+(DEC-0141). SP-0004
 is repurposed: it no longer blocks any current-release story, and is
 deferred to backlog as the validation spike for if/when
-[ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md) (BBDC)
-revives, per [DEC-0172](DEC-0172-github-v1-bbdc-deferred.md).
+ST-0020 (BBDC)
+revives, per DEC-0172.
 
 ## Rationale
 
@@ -50,7 +50,7 @@ host assumption; GitHub's check-administration surface is well
 documented and widely relied upon (it is the mechanism nearly every
 CI/CD integration on GitHub uses for exactly this blocking/re-reporting
 pattern), so the same category of risk doesn't apply. Re-scoping
-[SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) rather than
+SP-0004 rather than
 discarding it keeps the question answerable later without re-deriving
 it from scratch.
 
@@ -64,10 +64,10 @@ it from scratch.
 
 ## Implications
 
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)'s
+CMP-0005's
 provisional banner, `A-5`/`A-6` flags, `IG-2`, and the related
 Out-of-Scope entry are removed; the doc's `cites` list drops
-[DEC-0166](DEC-0166-cmp-0005-drafted-provisional-check-admin.md) in
-favor of this decision. [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md)
-and [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) move to
-`deferred`/`backlog` (per [DEC-0172](DEC-0172-github-v1-bbdc-deferred.md)).
+DEC-0166 in
+favor of this decision. ST-0020
+and SP-0004 move to
+`deferred`/`backlog` (per DEC-0172).

@@ -18,9 +18,9 @@ links:
 ## Context
 
 Per-user OAuth tokens belong in "the service secret store, never the
-repo" ([DEC-0046](DEC-0046-person-registry.md)), but the v1 embedded
-stack ([DEC-0102](DEC-0102-v1-embedded-stack.md)) defines no secret
-store, and [DEC-0121](DEC-0121-infrastructure-ports.md) requires
+repo" (DEC-0046), but the v1 embedded
+stack (DEC-0102) defines no secret
+store, and DEC-0121 requires
 consumers to program against ports.
 
 ## Decision
@@ -28,18 +28,18 @@ consumers to program against ports.
 Connector secrets (OAuth tokens, host credentials, the attribution
 signing key) are stored envelope-encrypted at rest in the app database,
 accessed through the App Database Port
-([CMP-0003](../components/CMP-0003-app-database-port.md)); the master
+(CMP-0003); the master
 key comes from deployment configuration (environment or key file) and
 is never persisted alongside the data. An external vault (HashiCorp
 Vault, cloud KMS) becomes a future adapter, evaluated by the deferred
-spike [SP-0005](../spikes/SP-0005-external-secret-store-adapter.md),
+spike SP-0005,
 which arms trigger TRG-0006 (enterprise secret-store mandate) — the
 sponsor's amendment to the facilitator's recommendation.
 
 ## Rationale
 
 Zero extra infrastructure, honoring
-[DEC-0102](DEC-0102-v1-embedded-stack.md)'s ops-burden stance; envelope
+DEC-0102's ops-burden stance; envelope
 encryption keeps a copied database file useless without the deployment
 key; the trigger keeps the enterprise-mandate path watched instead of
 forgotten.
@@ -55,9 +55,9 @@ forgotten.
 
 ## Implications
 
-[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md) and
-[ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+ST-0021 and
+ST-0022
 build against the encrypted store;
-[SP-0005](../spikes/SP-0005-external-secret-store-adapter.md) is
+SP-0005 is
 deferred `backlog` citing this decision; TRG-0006 is armed citing this
 decision.

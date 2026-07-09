@@ -21,7 +21,7 @@ links:
 Next.js App Router renders React Server Components by default, but
 Groundwork's UI is inherently interactive and streaming (question cards,
 live decision-playback, streaming turn append per
-[ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)
+ST-0032
 AC5). The host needs to know exactly where the server/client boundary
 falls when composing the package into its own tree.
 

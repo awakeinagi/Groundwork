@@ -28,21 +28,21 @@ deployment.
 
 1. IDs are allocated sequentially per prefix and never reused, including
    for artifacts later deleted or abandoned on unmerged branches
-   (per [DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)).
+   (per DEC-0009).
 2. Concurrent creation requests never mint duplicate IDs; allocation is
-   serialized by a thread/process-safe lock in the service (per [DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md)).
+   serialized by a thread/process-safe lock in the service (per DEC-0031).
 3. Allocation accounts for artifacts existing only on unmerged item
    branches — a fresh scan of all refs yields no ID collisions
-   (per [DEC-0031](../decisions/DEC-0031-service-lock-id-allocation.md)).
+   (per DEC-0031).
 4. Counter state survives service restart via rescan-on-boot: startup
    scans all refs for the max existing ID per prefix; no persistent
-   counter store exists anywhere (per [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
+   counter store exists anywhere (per DEC-0077).
 5. Single-allocator deployment is a documented constraint of the service
-   (per [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
+   (per DEC-0077).
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
+CMP-0001 — supplies
 the ID-allocation sections of its Behavior and Data Contracts.
 
 ## Out of Scope
@@ -52,4 +52,4 @@ ID formats and prefixes themselves (fixed by SPEC-artifact-common).
 ## Notes for Implementers
 
 The boot scan must cover every ref, not just main — unmerged item branches
-hold allocated IDs (per [DEC-0077](../decisions/DEC-0077-id-rescan-on-boot.md)).
+hold allocated IDs (per DEC-0077).

@@ -32,41 +32,41 @@ renders.
    Component Doc with an element whose `Implements:` line references
    it — and marks every approved member stale in one mechanical sweep
    of `mark-stale` operations
-   (per [DEC-0007](../decisions/DEC-0007-impact-analysis-stale-marks.md),
-   [DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md),
-   [DEC-0096](../decisions/DEC-0096-implements-staleness-propagation.md),
-   [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md),
-   [DEC-0145](../decisions/DEC-0145-event-driven-check-recomputation.md)).
+   (per DEC-0007,
+   DEC-0038,
+   DEC-0096,
+   DEC-0033,
+   DEC-0145).
 2. Each sweep produces an impact report: what changed, the affected
    set including in-flight work (open PRs on affected artifacts), the
    specific referencing elements of any component doc staled over an
    Implements edge, and the approvers affected
-   (per [DEC-0007](../decisions/DEC-0007-impact-analysis-stale-marks.md),
-   [DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md),
-   [DEC-0096](../decisions/DEC-0096-implements-staleness-propagation.md)).
+   (per DEC-0007,
+   DEC-0038,
+   DEC-0096).
 3. The report is written into affected re-affirmation PR descriptions
    and stored in the event log as telemetry; it is never committed to
    the canonical repo
-   (per [DEC-0146](../decisions/DEC-0146-impact-reports-pr-and-log.md),
-   [DEC-0144](../decisions/DEC-0144-two-grade-governance-event-log.md)).
+   (per DEC-0146,
+   DEC-0144).
 4. Sweeps are idempotent under at-least-once event redelivery:
    re-processing the same ChangeEvent produces no duplicate marks or
-   reports (per [DEC-0145](../decisions/DEC-0145-event-driven-check-recomputation.md)).
+   reports (per DEC-0145).
 5. Stale state produced here is what blocks: descendants' `gate-policy`
    checks consume it and new derivation from stale artifacts is refused
    until cleared
-   (per [DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md)).
+   (per DEC-0038).
 
 ## Component Impact
 
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) — supplies
+CMP-0004 — supplies
 its sweep and impact-analysis contract sections.
 
 ## Out of Scope
 
 Clearing staleness — the re-affirmation flow
-([ST-0017](ST-0017-reaffirmation-flow-queues.md)); the graph queries
-consumed here ([EP-0004](../epics/EP-0004-graph-index.md) owns the
+(ST-0017); the graph queries
+consumed here (EP-0004 owns the
 query contract); the `mark-stale` operations themselves
-([ST-0006](ST-0006-typed-mechanical-writes.md) — this story is their
+(ST-0006 — this story is their
 invoking side).

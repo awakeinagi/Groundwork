@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[DEC-0203](DEC-0203-queue-kv-ports-added.md) scopes the KV-store Port
+DEC-0203 scopes the KV-store Port
 to *ephemeral* coordination state and caching. Whether `set()` requires
 a TTL, or allows a permanent (no-expiry) key, was undecided going into
 contract drafting.
@@ -35,6 +35,6 @@ Making TTL mandatory structurally enforces the port's declared
 ephemeral-only scope rather than relying on convention — an
 implementer cannot accidentally grow a second permanent store behind
 this seam. It also keeps the lazy-plus-sweep expiry mechanism
-([DEC-0211](DEC-0211-kv-store-lazy-expiry-plus-sweep.md)) universally
+(DEC-0211) universally
 applicable: every key is eventually reclaimable, with no carve-out to
 special-case.

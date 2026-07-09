@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[DEC-0043](DEC-0043-oauth-reviews-program-user-fallback.md) made which
+DEC-0043 made which
 roles review via OAuth versus the program user "per-deployment
 configuration" without locating that configuration — governance file
 (PR-gated) or deployment settings.
@@ -25,7 +25,7 @@ configuration" without locating that configuration — governance file
 ## Decision
 
 The role→review-path mapping lives in **deployment configuration**,
-taking [DEC-0043](DEC-0043-oauth-reviews-program-user-fallback.md) at
+taking DEC-0043 at
 its word. It is not a `governance/` file.
 
 ## Rationale
@@ -33,7 +33,7 @@ its word. It is not a `governance/` file.
 The mapping reflects seat procurement — an operational fact about the
 deployment, not an approval rule. The audit trail of who approved what
 is already carried by the signed attribution block
-([DEC-0153](DEC-0153-service-signed-attribution-block.md)) and the
+(DEC-0153) and the
 host review record, so PR-gating the mapping adds ceremony without
 adding assurance.
 
@@ -41,7 +41,7 @@ adding assurance.
 
 - **Extend `governance/gate-policies.yaml`**: Arbiter-gated and
   repo-audited, but touches the approved
-  [ST-0012](../stories/ST-0012-governance-config-schemas.md) schema set
+  ST-0012 schema set
   and gates an ops fact behind design governance.
 
 ## Implications

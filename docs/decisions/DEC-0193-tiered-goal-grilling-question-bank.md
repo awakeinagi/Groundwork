@@ -21,9 +21,9 @@ links:
 The expanded goal-level question set (Problem, Current State & Gap,
 System Context, Illustrative Scenario, sharpened Outcomes/Scope/
 Constraints — per
-[DEC-0189](DEC-0189-current-state-and-gap-bg-section.md),
-[DEC-0190](DEC-0190-system-context-bg-section.md),
-[DEC-0191](DEC-0191-illustrative-scenario-bg-section.md)) is now large
+DEC-0189,
+DEC-0190,
+DEC-0191) is now large
 enough that inlining it in the process document would bloat it. Not all
 of it carries equal certainty — edge cases and integration specifics are
 expected to be revised downstream in a way a goal's foundational framing
@@ -38,7 +38,7 @@ confidence. Volatility runs High → Low as questions get more concrete:
 High-tier answers are treated as settled once confirmed; Low-tier answers
 are provisional, expected to be revised at Epic/Story/Spike level. The
 tiering is communicated to the approver explicitly at gate time (per
-[DEC-0192](DEC-0192-goal-gate-context-and-flow-diagrams.md)).
+DEC-0192).
 
 ## Rationale
 

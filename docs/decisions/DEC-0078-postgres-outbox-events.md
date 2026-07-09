@@ -16,9 +16,9 @@ links:
 
 ## Context
 
-The change-event stream ([ST-0008](../stories/ST-0008-change-event-stream.md)) needed a transport delivering
+The change-event stream (ST-0008) needed a transport delivering
 at-least-once with per-artifact ordering to the Graph Index, governance,
-and consolidation consumers ([DEC-0060](DEC-0060-session-sync-global-async.md)).
+and consolidation consumers (DEC-0060).
 
 ## Decision
 
@@ -31,7 +31,7 @@ correctness anchor if the outbox is lost.
 
 Boring, debuggable, at-least-once by construction, and no new
 infrastructure for a self-hosted enterprise deployment
-([DEC-0050](DEC-0050-bitbucket-datacenter-v1.md) ops-burden logic) serving
+(DEC-0050 ops-burden logic) serving
 a handful of internal consumers.
 
 ## Alternatives Considered
@@ -43,5 +43,5 @@ a handful of internal consumers.
 ## Implications
 
 Postgres is now definitively in the reference stack (also a data point for
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s Postgres+AGE candidate); dispatcher lag is the bounded-lag knob
-of [DEC-0060](DEC-0060-session-sync-global-async.md).
+SP-0002's Postgres+AGE candidate); dispatcher lag is the bounded-lag knob
+of DEC-0060.

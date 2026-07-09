@@ -17,7 +17,7 @@ links:
 ## Context
 
 Rebuild output is the correctness definition
-([DEC-0060](DEC-0060-session-sync-global-async.md)); incremental-update
+(DEC-0060); incremental-update
 bugs produce graph drift that is invisible until a wrong traversal
 misleads an impact analysis or manifest.
 
@@ -41,5 +41,5 @@ into an alerting metric.
 
 ## Implications
 
-Rebuild time budget becomes a monitored metric (and an [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) criterion);
+Rebuild time budget becomes a monitored metric (and an SP-0002 criterion);
 divergence alarms flow into the governance/ops observability surface.

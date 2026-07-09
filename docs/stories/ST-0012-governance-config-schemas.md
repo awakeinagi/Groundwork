@@ -37,48 +37,48 @@ seeding that bootstraps them.
    excludes), and `governance/people.yaml` (the person registry —
    stable person-ids that `roles.yaml` membership and provenance
    fields reference)
-   (per [DEC-0037](../decisions/DEC-0037-governance-as-code.md),
-   [DEC-0054](../decisions/DEC-0054-guardrails-authority-limits.md),
-   [DEC-0040](../decisions/DEC-0040-role-pool-delegation.md),
-   [DEC-0039](../decisions/DEC-0039-conflict-escalation-operations.md),
-   [DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md),
-   [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+   (per DEC-0037,
+   DEC-0054,
+   DEC-0040,
+   DEC-0039,
+   DEC-0049,
+   DEC-0046).
 2. Tier-1 validation runs on every PR touching `governance/` and
    blocks malformed configuration with explanations naming file, rule,
-   and fix (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md),
-   [DEC-0037](../decisions/DEC-0037-governance-as-code.md)).
+   and fix (per DEC-0034,
+   DEC-0037).
 3. `governance/` is Arbiter-owned: every change goes through the same
    PR gate as artifacts, and changing approval rights is itself a gated
-   change (per [DEC-0037](../decisions/DEC-0037-governance-as-code.md)).
+   change (per DEC-0037).
 4. A deployment-time init command seeds the founding governance files —
    initial Arbiter and roles from deployment configuration — directly
    into the repository's initial history, before branch protection is
-   first compiled (per [DEC-0140](../decisions/DEC-0140-seeded-governance-bootstrap.md)).
+   first compiled (per DEC-0140).
 
 ## Component Impact
 
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) — supplies
+CMP-0004 — supplies
 its governance-config schema and validation contract sections.
 
-[CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md) —
+CMP-0016 —
 supplies the graduated `GovernanceConfig` value contract
-(per [DEC-0234](../decisions/DEC-0234-graduate-governance-config-role-resolution.md)).
+(per DEC-0234).
 
 ## Out of Scope
 
 Compiling this configuration onto the host
-([ST-0013](ST-0013-policy-compilation-host-provisioning.md)); evaluating
-it at gate time ([ST-0014](ST-0014-gate-policy-check.md)); identity and
-auth provider linkage ([EP-0005](../epics/EP-0005-connectors-and-identity.md));
-the Admin UI editor over these files ([EP-0006](../epics/EP-0006-refinement-web-ui.md),
+(ST-0013); evaluating
+it at gate time (ST-0014); identity and
+auth provider linkage (EP-0005);
+the Admin UI editor over these files (EP-0006,
 which edits — never stores — governance state per
-[DEC-0037](../decisions/DEC-0037-governance-as-code.md)).
+DEC-0037).
 
 ## Notes for Implementers
 
 Decision-rights vocabulary should align with the session engine's
 proposal-capture behavior
-([DEC-0054](../decisions/DEC-0054-guardrails-authority-limits.md)) — the
+(DEC-0054) — the
 rights config this story defines is what
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)'s guardrails
+EP-0002's guardrails
 consult.

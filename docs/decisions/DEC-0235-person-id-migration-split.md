@@ -17,37 +17,37 @@ links:
 
 ## Context
 
-[ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+ST-0022
 AC5: when `governance/people.yaml` is first populated, bootstrap-era
 email values in `owner`/`decided-by`/`approved-by` frontmatter migrate
 to person-ids via the `migrate-person-ids` operation of the typed
 mechanical-write allowlist
-([DEC-0033](DEC-0033-typed-mechanical-writes.md),
-[DEC-0130](DEC-0130-mechanical-ops-shared-allowlist.md)). Whose
+(DEC-0033,
+DEC-0130). Whose
 contract carries what was open.
 
 ## Decision
 
-[CMP-0007](../components/CMP-0007-identity-and-access.md) exposes a
+CMP-0007 exposes a
 batch email→person-id mapping operation (a pure resolver over the
 registry); the migration itself is
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s
+CMP-0001's
 `migrate-person-ids` mechanical-write operation, initiated by an
 operator action.
 
 ## Rationale
 
-Mechanical writes stay single-owner ([CMP-0001](../components/CMP-0001-artifact-store-service.md)'s allowlist); identity
+Mechanical writes stay single-owner (CMP-0001's allowlist); identity
 stays a pure resolver with no write-orchestration responsibility or
 hidden trigger.
 
 ## Alternatives Considered
 
-- **[CMP-0007](../components/CMP-0007-identity-and-access.md) detects first population and triggers the migration**:
+- **CMP-0007 detects first population and triggers the migration**:
   less operator ceremony, but a hidden write trigger inside identity.
 - **Ops runbook only**: leaves an acceptance criterion uncontracted.
 
 ## Implications
 
-[CMP-0007](../components/CMP-0007-identity-and-access.md) carries the resolver item; [CMP-0001](../components/CMP-0001-artifact-store-service.md)'s existing allowlisted
-operation is the executor — no [CMP-0001](../components/CMP-0001-artifact-store-service.md) contract change.
+CMP-0007 carries the resolver item; CMP-0001's existing allowlisted
+operation is the executor — no CMP-0001 contract change.

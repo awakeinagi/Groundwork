@@ -3,9 +3,12 @@
 Copy-paste starting points. Replace bracketed placeholders; keep required
 sections even when brief ("None identified" / "N/A — <reason>" is valid
 and auditable; silence is not). Dates absolute. IDs: scan `docs/` for the
-prefix's current max before allocating. Body cross-references must be
-markdown links `[<ID>](relative/path.md)` — bare IDs in prose fail the
-checker; frontmatter values stay bare IDs.
+prefix's current max before allocating. Body cross-references to
+artifacts are **bare IDs** (`DEC-0152`, `CMP-0009`); citation clauses
+are `(per DEC-0152, DEC-0239)`. Inline markdown links targeting
+artifact files fail the checker, and every bare ID must resolve; links
+are still used for non-artifact files and URLs. Frontmatter values stay
+bare IDs.
 
 ## Contents
 
@@ -80,7 +83,7 @@ transaction, trigger to output]
 enumeration is Epic/Story work, not goal work]
 
 ## Outcomes & Success Criteria
-1. [Observable, ideally metric-shaped result] (per [DEC-0001](../decisions/DEC-0001-....md))
+1. [Observable, ideally metric-shaped result] (per DEC-0001)
 2. ...
 
 ## Scope
@@ -178,11 +181,11 @@ cites: [DEC-....]
 [The change, its beneficiary, the value.]
 
 ## Acceptance Criteria
-1. [Individually testable] (per [DEC-....](../decisions/DEC-....md))
-2. ... (per [DEC-....](../decisions/DEC-....md))
+1. [Individually testable] (per DEC-....)
+2. ... (per DEC-....)
 
 ## Component Impact
-[CMP docs this story builds or modifies (markdown-linked); contract
+[CMP docs this story builds or modifies (bare IDs); contract
 sections affected. Elements in those CMPs back-reference this story via
 `Implements:` lines and may only reference stories whose Component
 Impact links their CMP.]
@@ -264,32 +267,32 @@ cites: [DEC-....]
 
 ### [ElementName] (service)
 
-Implements: [ST-....](../stories/ST-....md)   ← mandatory, ≥1 story whose
+Implements: ST-....   ← mandatory, ≥1 story whose
 implementation this element handles; the story's Component Impact must
 link this CMP back
 
 [One-line responsibility. Contract kinds per type: entity ⇒ B+D (A only
 if boundary-exposed); value ⇒ D; service ⇒ A+B; event ⇒ D+B (delivery
 semantics); protocol ⇒ A+B (conformance).]
-- [ElementName].B-1: [behavioral guarantee] (per [DEC-....](../decisions/DEC-....md))
+- [ElementName].B-1: [behavioral guarantee] (per DEC-....)
 - [ElementName].A-1: [operation: signature, request/response schemas —
   inline or referencing a declared value/event element — errors,
-  idempotency/ordering] (per [DEC-....](../decisions/DEC-....md))
+  idempotency/ordering] (per DEC-....)
 
 ### [ElementName] (value)
 
-Implements: [ST-....](../stories/ST-....md)
+Implements: ST-....
 
-- [ElementName].D-1: [schema, equality/immutability invariants] (per [DEC-....](../decisions/DEC-....md))
+- [ElementName].D-1: [schema, equality/immutability invariants] (per DEC-....)
 
 ## Component Invariants
-- C-1: [cross-element guarantee] (per [DEC-....](../decisions/DEC-....md))
+- C-1: [cross-element guarantee] (per DEC-....)
 
 ## Implementation Guidance
 
 ### Constraints
 - IG-1: [normative for the reference implementation, e.g. a spike-chosen
-  store] (per [DEC-....](../decisions/DEC-....md))
+  store] (per DEC-....)
 
 ### Notes
 - [Advisory, may be stack-specific; never load-bearing — contracts must
@@ -336,7 +339,7 @@ links:
 ...
 
 ## Decisions Produced
-[DEC-....](../decisions/DEC-....md), [DEC-....](../decisions/DEC-....md)
+DEC-...., DEC-....
 
 ## Conflicts Raised
 None.

@@ -20,10 +20,10 @@ links:
 Design elements carry the contracts, but nothing recorded which stories'
 requirements each element realizes — so "is this story fully designed?"
 and any percent-complete estimate had no data to stand on.
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) already
+CMP-0001 already
 named its filling stories informally in each element's Pending block;
 the instinct existed without a rule. Elements deliberately have no
-frontmatter ([DEC-0087](DEC-0087-parseable-element-headings.md)), so the
+frontmatter (DEC-0087), so the
 reference must be parseable body syntax.
 
 ## Decision
@@ -31,7 +31,7 @@ reference must be parseable body syntax.
 Every design element carries a mandated **`Implements:`** line directly
 under its `### <ElementName> (<type>)` heading, listing one or more
 stories as resolvable markdown links
-(per [DEC-0090](DEC-0090-clickable-body-cross-references.md)):
+(per DEC-0090):
 
 ```markdown
 ### StorageService (service)
@@ -56,11 +56,11 @@ An element no story motivates is a design smell — either the epic needs
 another story or the element is speculative — mirroring the existing
 rule that an acceptance criterion no decision supports means "refine
 more, never invent provenance". Mandatory-with-enforcement because
-[DEC-0090](DEC-0090-clickable-body-cross-references.md) demonstrated
+DEC-0090 demonstrated
 that non-enforced conventions drift, and the completion metrics
-([DEC-0095](DEC-0095-percent-complete-metrics.md)) would otherwise sit
+(DEC-0095) would otherwise sit
 on unreliable data. The line-under-heading placement reuses the
-[DEC-0087](DEC-0087-parseable-element-headings.md) pattern: parseable
+DEC-0087 pattern: parseable
 body syntax as single source of truth, no frontmatter mirror.
 
 ## Alternatives Considered
@@ -73,7 +73,7 @@ body syntax as single source of truth, no frontmatter mirror.
   syntaxes to validate and teach; not needed until a real case demands
   finer attribution.
 - **Advisory only**: rejected — drifts, per the
-  [DEC-0090](DEC-0090-clickable-body-cross-references.md) lesson.
+  DEC-0090 lesson.
 - **`Realizes:` as the line name**: avoids rewording
   [SPEC-story](../specs/SPEC-story.md), but the metric story ("percent
   implemented") would no longer match the edge name.
@@ -84,10 +84,10 @@ body syntax as single source of truth, no frontmatter mirror.
 declaration rule; [SPEC-component](../specs/SPEC-component.md) gains the
 gate rule; [SPEC-story](../specs/SPEC-story.md) Component Impact is
 reworded; the glossary gains **Implements**;
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s elements
+CMP-0001's elements
 gain Implements lines; the tier-2 suite
-([ST-0007](../stories/ST-0007-tier2-check-suite.md)) validates presence
+(ST-0007) validates presence
 and resolution; `tools/check_links.py` and the skill's bundled tooling
 enforce and index the line. Coverage, reciprocity, metrics, and
 staleness ride this edge per
-[DEC-0093](DEC-0093-story-design-coverage-check.md)–[DEC-0096](DEC-0096-implements-staleness-propagation.md).
+DEC-0093–DEC-0096.

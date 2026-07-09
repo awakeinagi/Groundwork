@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-Gates at every stage ([DEC-0006](DEC-0006-gate-every-stage.md)) need a rule
+Gates at every stage (DEC-0006) need a rule
 for who approves what — the governance keystone given unsupervised sessions.
 
 ## Decision

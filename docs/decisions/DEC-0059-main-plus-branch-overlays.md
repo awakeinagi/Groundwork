@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-Under fork-pull ([DEC-0028](DEC-0028-fork-pull-pr-gating.md)) drafts live
+Under fork-pull (DEC-0028) drafts live
 on item branches; mid-session agents need graph queries over their drafts
 in the context of approved reality, while impact analysis and manifests
 must see only ratified truth.
@@ -38,7 +38,7 @@ traversal silently filter-dependent.
 
 ## Alternatives Considered
 
-- **Main-only index**: context recipes ([DEC-0056](DEC-0056-context-recipes-in-packs.md))
+- **Main-only index**: context recipes (DEC-0056)
   lose graph queries exactly when the agent is building new links.
 - **Flattened multi-branch**: same artifact differing across branches makes
   answers ambiguous.
@@ -46,4 +46,4 @@ traversal silently filter-dependent.
 ## Implications
 
 Overlay lifecycle tracks item-branch lifecycle (created on branch open,
-dropped on merge/abandon); overlay support is an [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) engine criterion.
+dropped on merge/abandon); overlay support is an SP-0002 engine criterion.

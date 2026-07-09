@@ -17,7 +17,7 @@ links:
 ## Context
 
 Multiple stakeholders refine the same item in separate 1:1 sessions
-([DEC-0021](DEC-0021-one-on-one-sessions.md)); synthesis timing determines
+(DEC-0021); synthesis timing determines
 how fresh conflicts are when detected.
 
 ## Decision
@@ -25,10 +25,10 @@ how fresh conflicts are when detected.
 Synthesis runs as each session closes: the agent merges new material into
 the item draft on the item branch, runs conflict detection against prior
 sessions' decisions, and on divergence opens the mediation flow with the
-affected participants ([DEC-0005](DEC-0005-intent-first-mediation-then-escalation.md)).
+affected participants (DEC-0005).
 The evolving synthesized draft is visible to all participants for async
 comment; comments enter as Change Proposals
-([DEC-0047](DEC-0047-change-proposal-artifact.md)). The PR gate sees one
+(DEC-0047). The PR gate sees one
 coherent draft plus full multi-session provenance.
 
 ## Rationale
@@ -47,4 +47,4 @@ keeps participants invested without the anchoring risk of live co-editing
 ## Implications
 
 Session-close triggers a synthesis step in the session engine; draft
-visibility and commenting are [EP-0006](../epics/EP-0006-refinement-web-ui.md) UI surface.
+visibility and commenting are EP-0006 UI surface.

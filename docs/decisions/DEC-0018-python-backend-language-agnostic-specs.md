@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-The standalone application ([DEC-0001](DEC-0001-standalone-application.md))
+The standalone application (DEC-0001)
 needs a reference stack, and the organization's engineers and data scientists
 live in Python.
 
@@ -43,4 +43,4 @@ product; implementations are replaceable.
 
 Contracts are expressed in language-neutral forms (JSON Schema, OpenAPI);
 this requirement is itself a test the dogfooded specs
-([DEC-0019](DEC-0019-full-dogfood.md)) must pass.
+(DEC-0019) must pass.

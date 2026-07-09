@@ -16,21 +16,21 @@ links:
 
 ## Context
 
-Distillation faithfulness and grilling quality are [EP-0002](../epics/EP-0002-refinement-session-agent.md)'s flagged
+Distillation faithfulness and grilling quality are EP-0002's flagged
 risks; pack changes and model swaps
-([DEC-0053](DEC-0053-strategy-packs-as-plugins.md)) need a quality gate,
-and [DEC-0052](DEC-0052-raw-transcripts-regenerable-distillation.md)
+(DEC-0053) need a quality gate,
+and DEC-0052
 requires a drift-detection mechanism.
 
 ## Decision
 
-The evaluation harness is in [EP-0002](../epics/EP-0002-refinement-session-agent.md)'s scope. It covers: **distillation
+The evaluation harness is in EP-0002's scope. It covers: **distillation
 faithfulness** (an independent judge verifies each Decision is supported by
 its cited turn span), **grilling quality** (coverage, dependency ordering,
 recommended-answer discipline on benchmark scenarios), and **guardrail
-behavior** ([DEC-0054](DEC-0054-guardrails-authority-limits.md)).
+behavior** (DEC-0054).
 Strategy-pack changes and LLM swaps cannot merge without passing evals —
-the tier-2 pattern ([DEC-0034](DEC-0034-two-tier-validation.md)) applied to
+the tier-2 pattern (DEC-0034) applied to
 methodology. Additionally, periodic **drift audits** re-run distillation
 from raw transcripts and diff against accepted Decisions.
 

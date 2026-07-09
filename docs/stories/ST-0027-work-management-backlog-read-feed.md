@@ -17,9 +17,9 @@ cites: [DEC-0016, DEC-0148, DEC-0155]
 # ST-0027: Work-Management Backlog Read Feed
 
 > Deferred to release `2` at creation (per
-> [DEC-0148](../decisions/DEC-0148-work-management-stories-release-2.md),
+> DEC-0148,
 > the deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
+> DEC-0100).
 > No trigger subscription — revival is release-2 planning.
 
 ## Summary
@@ -36,20 +36,20 @@ pass a gate):
 1. The work-management contract's backlog read operations expose issue
    summaries, status, and links sufficient for overlap/conflict
    detection against in-flight items
-   (per [DEC-0016](../decisions/DEC-0016-agent-context-feeds.md),
-   [DEC-0155](../decisions/DEC-0155-pluggable-work-management-connector.md)).
+   (per DEC-0016,
+   DEC-0155).
 2. Read access is read-only and scoped; no backlog write operation is
    expressible through the feed
-   (per [DEC-0016](../decisions/DEC-0016-agent-context-feeds.md)).
+   (per DEC-0016).
 
 ## Component Impact
 
 None yet — lands in the work-management connector component stubbed at
-revival (see [ST-0025](ST-0025-work-management-projection-lifecycle.md)).
+revival (see ST-0025).
 
 ## Out of Scope
 
 What the agent does with the feed — overlap detection lives with the
-session agent ([EP-0002](../epics/EP-0002-refinement-session-agent.md));
-projection sync ([ST-0025](ST-0025-work-management-projection-lifecycle.md),
+session agent (EP-0002);
+projection sync (ST-0025,
 deferred).

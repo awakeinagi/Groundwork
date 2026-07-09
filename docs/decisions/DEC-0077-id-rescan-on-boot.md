@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-[DEC-0031](DEC-0031-service-lock-id-allocation.md) serialized allocation
+DEC-0031 serialized allocation
 behind a service lock but left counter durability across restarts open.
 
 ## Decision
@@ -42,6 +42,6 @@ documentation scale.
 
 ## Implications
 
-[ST-0005](../stories/ST-0005-id-allocation.md)'s durability and multi-node criteria resolve to this design;
+ST-0005's durability and multi-node criteria resolve to this design;
 horizontal scaling of the allocator, if ever needed, is a future decision
 that supersedes this one.

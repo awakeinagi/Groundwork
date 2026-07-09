@@ -18,32 +18,32 @@ links:
 ## Context
 
 Role-membership and delegation-window evaluation
-([DEC-0040](DEC-0040-role-pool-delegation.md)) was about to exist
-twice: [CMP-0007](../components/CMP-0007-identity-and-access.md)
+(DEC-0040) was about to exist
+twice: CMP-0007
 resolves role claims for API/UI callers
-([ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+(ST-0022
 AC3), and the approved `GatePolicyCheck.B-1/B-3` evaluates roles and
 delegation itself for PR verdicts. A dependency cycle also arises
-([CMP-0004](../components/CMP-0004-governance-gate-engine.md) consumes [CMP-0007](../components/CMP-0007-identity-and-access.md)'s attribution block; [CMP-0007](../components/CMP-0007-identity-and-access.md) would
-consume [CMP-0004](../components/CMP-0004-governance-gate-engine.md)'s claims evaluation). The governance file *schemas*
+(CMP-0004 consumes CMP-0007's attribution block; CMP-0007 would
+consume CMP-0004's claims evaluation). The governance file *schemas*
 are not in play — they are owned by
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)
+CMP-0001
 (`SchemaValidator.D-2`), a premise corrected in-session before this
-decision was recorded ([SES-0045](../sessions/SES-0045-cmp-0007-identity-refinement.md) T9–T10).
+decision was recorded (SES-0045 T9–T10).
 
 ## Decision
 
 The `GovernanceConfig` typed value graduates out of
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) into a
+CMP-0004 into a
 new standalone component,
-[CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md),
+CMP-0016,
 which also carries a `RoleResolution` service — role membership plus
 active time-bounded delegation, evaluated at an explicit governance
 ref and point in time. Both
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) and
-[CMP-0007](../components/CMP-0007-identity-and-access.md) consume it;
+CMP-0004 and
+CMP-0007 consume it;
 the file schemas remain
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s.
+CMP-0001's.
 
 ## Rationale
 
@@ -51,24 +51,24 @@ Delegation logic implemented exactly once — divergence between the
 gate engine's and identity's answers to "who holds this role right
 now" is precisely the class of bug the gate engine exists to prevent.
 Explicit ref/time parameters keep
-[DEC-0164](DEC-0164-gate-policy-check-live-evaluation.md)'s
+DEC-0164's
 live-evaluation stance intact. The cycle dissolves: both consumers
-point at [CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md).
+point at CMP-0016.
 
 ## Alternatives Considered
 
-- **Schemas-only sourcing, both evaluate independently**: no [CMP-0004](../components/CMP-0004-governance-gate-engine.md)
+- **Schemas-only sourcing, both evaluate independently**: no CMP-0004
   amendment, but duplicated delegation logic.
-- **RoleResolution homed in [CMP-0007](../components/CMP-0007-identity-and-access.md)**: one fewer CMP, but deepens the
-  gate engine's dependency on identity and widens the [CMP-0004](../components/CMP-0004-governance-gate-engine.md) rewrite.
+- **RoleResolution homed in CMP-0007**: one fewer CMP, but deepens the
+  gate engine's dependency on identity and widens the CMP-0004 rewrite.
 
 ## Implications
 
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) is
-amended (element moves out; `depends-on` gains [CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md) and [CMP-0007](../components/CMP-0007-identity-and-access.md))
+CMP-0004 is
+amended (element moves out; `depends-on` gains CMP-0016 and CMP-0007)
 and re-gated, revising
-[DEC-0162](DEC-0162-cmp-0004-element-decomposition.md)'s ten-element,
+DEC-0162's ten-element,
 none-graduated decomposition;
-[ST-0012](../stories/ST-0012-governance-config-schemas.md) and
-[ST-0014](../stories/ST-0014-gate-policy-check.md) add [CMP-0016](../components/CMP-0016-governance-config-and-role-resolution.md) to
+ST-0012 and
+ST-0014 add CMP-0016 to
 Component Impact.

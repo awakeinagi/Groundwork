@@ -26,21 +26,21 @@ to a general scripting/templating layer?
 
 ## Why It Blocks
 
-[ST-0033](../stories/ST-0033-strategy-pack-format-and-plugin-loading.md)'s
+ST-0033's
 schema is drafted but not final — a declarative-only schema that can't
 express real branching or conditional behavior would force a rework of
 the format itself, not just individual packs, and every other story in
 this epic (guardrails, context assembly, glossary maintenance, eval
 harness) builds on packs conforming to that format
-(per [DEC-0181](../decisions/DEC-0181-sp-0008-pack-format-expressiveness-spike.md)).
+(per DEC-0181).
 
 ## Method
 
 1. Draft the `pack.yaml` schema per
-   [DEC-0053](../decisions/DEC-0053-strategy-packs-as-plugins.md) and
-   [ST-0033](../stories/ST-0033-strategy-pack-format-and-plugin-loading.md),
+   DEC-0053 and
+   ST-0033,
    including the context-recipe field
-   (per [DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md))
+   (per DEC-0056)
    that scenario 2 and 3 below will exercise for expressiveness.
 2. Design three concrete pack scenarios chosen for maximum shape
    diversity: a linear grilling flow (goal-refinement), a mediation flow

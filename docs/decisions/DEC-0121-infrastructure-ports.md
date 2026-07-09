@@ -20,11 +20,11 @@ links:
 The participant made modularity a requirement: the embedding model
 (local or external via REST APIs), the vector DB, and the app DB must
 each be easily swappable/pluggable
-([SES-0020](../sessions/SES-0020-pluggable-infrastructure-ports.md) T1).
+(SES-0020 T1).
 The accepted v1 stack is embedded-only
-([DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md)) with
+(DEC-0102) with
 graduation deferred behind triggers
-([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)) — a
+(SP-0002) — a
 graduation that is only cheap if the engines sit behind seams.
 
 ## Decision
@@ -34,19 +34,19 @@ each defined as a Protocol design element in the owning component's
 contract:
 
 1. **App database port** — relational/transactional workload: outbox
-   ([DEC-0103](DEC-0103-outbox-in-app-database.md)), bookkeeping,
+   (DEC-0103), bookkeeping,
    counters. Owned by the Canonical Store context
-   ([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)).
+   (EP-0001).
 2. **Vector store port** — embed/index/query over vectors. Owned by the
    retrieval layer
-   ([EP-0007](../epics/EP-0007-consolidation-memory-layer.md), per
-   [DEC-0067](DEC-0067-retrieval-owns-search.md)).
+   (EP-0007, per
+   DEC-0067).
 3. **Embedding port** — text → vector, satisfiable by a local model or
    an external model behind a REST API. Owned by the retrieval layer.
 4. **Graph store port** — the openCypher-capable engine behind the
    Graph Index's executor boundary
-   ([EP-0004](../epics/EP-0004-graph-index.md), language requirement per
-   [DEC-0062](DEC-0062-tiered-query-api.md)).
+   (EP-0004, language requirement per
+   DEC-0062).
 
 Vector store and app database are **deliberately separate ports** even
 though one DuckDB engine implements both in v1 — a future deployment
@@ -55,7 +55,7 @@ contracts only; no consumer touches an engine API directly.
 
 **Scope**: this binds the Groundwork product. The facilitation skill's
 local tooling (graph/search scripts,
-[DEC-0111](DEC-0111-skill-semantic-search-duckdb-vss.md)–[DEC-0120](DEC-0120-v1-scope-and-backlog-capture.md))
+DEC-0111–DEC-0120)
 stays hard-wired to its embedded stack — its value is being trivially
 runnable.
 

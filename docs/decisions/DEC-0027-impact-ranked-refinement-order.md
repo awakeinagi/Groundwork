@@ -16,17 +16,17 @@ links:
 
 ## Context
 
-With impact links in place ([DEC-0026](DEC-0026-directional-impact-links.md)),
+With impact links in place (DEC-0026),
 the question "which sibling do we refine first?" becomes answerable from the
 graph — but not trivially: real impact graphs contain cycles (the initial
-epic set already has [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0003](../epics/EP-0003-governance-and-gate-engine.md) and [EP-0002](../epics/EP-0002-refinement-session-agent.md)↔[EP-0006](../epics/EP-0006-refinement-web-ui.md)), so simple
+epic set already has EP-0001↔EP-0003 and EP-0002↔EP-0006), so simple
 topological ordering fails.
 
 ## Decision
 
 Refinement order among same-level artifacts is determined by a ranking
 algorithm over the impact graph. The algorithm is developed through a
-dedicated research spike ([SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md)).
+dedicated research spike (SP-0001).
 Until the spike concludes, ordering is human judgment informed by the raw
 impact edges.
 
@@ -47,7 +47,7 @@ an unvalidated choice at a load-bearing spot.
 
 ## Implications
 
-[SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md) is created deriving directly from [BG-0001](../goals/BG-0001-groundwork.md);
+SP-0001 is created deriving directly from BG-0001;
 [SPEC-spike](../specs/SPEC-spike.md) is relaxed to allow cross-cutting,
 process-level spikes to derive from a Business Goal (not only an Epic),
 since refinement ordering is a goal-level concern that exists before any

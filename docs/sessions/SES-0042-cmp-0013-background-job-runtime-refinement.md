@@ -18,11 +18,11 @@ links:
 ## Purpose
 
 Refine the stubbed
-[CMP-0013](../components/CMP-0013-background-job-execution-runtime.md)
+CMP-0013
 (Background Job Execution Runtime) toward contract-completeness,
 consuming the now-approved
-[CMP-0012](../components/CMP-0012-queue-port.md) (Queue Port). This
-session resolves the design points [ST-0061](../stories/ST-0061-background-job-execution-runtime.md)
+CMP-0012 (Queue Port). This
+session resolves the design points ST-0061
 left open at story grain: the job-handler registration surface, how
 uncaught handler exceptions are treated, whether the runtime enforces a
 per-job execution timeout, and the shape of the bounded-concurrency
@@ -40,7 +40,7 @@ recommended answer:
    registration co-located with the job's owner rather than
    centralized in the Composition Root — closing the "forward-declared"
    open point flagged in
-   [CMP-0014](../components/CMP-0014-kv-store-port.md)'s Notes.
+   CMP-0014's Notes.
 2. Uncaught handler exceptions — auto-nack (retry per the Queue Port's
    bound, eventually dead-letter) vs. propagate/crash. Recommended:
    auto-nack, so one broken job never takes down the runtime.
@@ -48,7 +48,7 @@ recommended answer:
    auto-nack on expiry, vs. no runtime-enforced timeout. Recommended:
    enforce one, as the minimal safeguard against a hung handler
    starving the bounded concurrency pool
-   ([ST-0061](../stories/ST-0061-background-job-execution-runtime.md)
+   (ST-0061
    AC6).
 4. Concurrency scope — a single global cap vs. per-job-type caps.
    Recommended: single global cap, simplest for v1 with only one
@@ -57,14 +57,14 @@ recommended answer:
 **T2 — Stakeholder.** Confirmed all four recommendations as given.
 
 **T3 — Facilitator.** Decision-recall audit on the drafted
-[CMP-0013](../components/CMP-0013-background-job-execution-runtime.md):
+CMP-0013:
 nothing missing. Closest near-misses were `DEC-0217` (Queue Port's Job
 envelope schema) and `DEC-0152` (secrets encrypted in the app
 database) — both already properly carried transitively through the
 `depends-on` relationship to
-[CMP-0012](../components/CMP-0012-queue-port.md) rather than needing
+CMP-0012 rather than needing
 independent citation here, the same pattern
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) already
+CMP-0001 already
 uses for its own dependencies. Everything else in the candidate set
 (vector-store graduation spikes, BBDC connector decisions, workflow
 telemetry, an unrelated "Approver/Arbiter queue" UI concept sharing
@@ -76,10 +76,10 @@ today; no graduation indicated.
 
 ## Decisions Produced
 
-[DEC-0222](../decisions/DEC-0222-runtime-owns-handler-registration.md),
-[DEC-0223](../decisions/DEC-0223-runtime-auto-nack-on-exception.md),
-[DEC-0224](../decisions/DEC-0224-runtime-per-job-type-timeout.md),
-[DEC-0225](../decisions/DEC-0225-runtime-global-concurrency-cap.md)
+DEC-0222,
+DEC-0223,
+DEC-0224,
+DEC-0225
 
 ## Conflicts Raised
 

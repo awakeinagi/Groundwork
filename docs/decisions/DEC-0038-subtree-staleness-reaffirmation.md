@@ -16,14 +16,14 @@ links:
 
 ## Context
 
-[DEC-0007](DEC-0007-impact-analysis-stale-marks.md) established impact
+DEC-0007 established impact
 analysis + stale marks; the spread, blocking effect, and clearing mechanism
 needed definition.
 
 ## Decision
 
 When an approved artifact changes, its entire derived subtree is marked
-stale in one mechanical sweep ([DEC-0033](DEC-0033-typed-mechanical-writes.md))
+stale in one mechanical sweep (DEC-0033)
 with the impact report attached. Blocking: stale artifacts cannot have new
 children derived, and any open PR whose artifact has a stale ancestor fails
 the `gate-policy` check until the ancestor clears. Clearing: lightweight
@@ -46,6 +46,6 @@ so clearing is sized to the change: cheap when cosmetic, thorough when not.
 ## Implications
 
 Re-affirmation is a first-class gate-engine flow with its own queue
-([DEC-0041](DEC-0041-impact-ranked-reaffirmation-queue.md)); the
+(DEC-0041); the
 `gate-policy` check evaluates ancestor staleness, not just approver
-composition ([DEC-0036](DEC-0036-host-base-plus-service-gate-check.md)).
+composition (DEC-0036).

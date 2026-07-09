@@ -3,7 +3,7 @@
 A first-class record of contradictory or competing requests — the artifact
 form of Groundwork's core pain point. Conflicts block downstream generation
 from every artifact they touch until resolved
-([DEC-0005](../decisions/DEC-0005-intent-first-mediation-then-escalation.md)).
+(DEC-0005).
 
 Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 

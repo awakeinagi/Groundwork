@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-[DEC-0005](DEC-0005-intent-first-mediation-then-escalation.md) defined the
+DEC-0005 defined the
 mediation-then-escalation flow; the operational mechanics — where escalated
 conflicts land, what they block, and whether they expire — needed
 definition.

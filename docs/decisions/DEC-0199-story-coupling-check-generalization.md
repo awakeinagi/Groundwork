@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[DEC-0196](DEC-0196-cross-epic-coupling-check.md)'s coupling check
+DEC-0196's coupling check
 already does most of what a story-level version needs: parse
 `impacts`/`impacted-by`, group by parent, flag mutual coupling. INVEST's
 "Independent" criterion makes this signal arguably more important at
@@ -29,12 +29,12 @@ independently shippable than epics.
 
 `scripts/groundwork_epic_coupling.py` is extended with a `--type
 {epic,story}` flag (default `epic`, so
-[DEC-0196](DEC-0196-cross-epic-coupling-check.md)'s documented CLI
+DEC-0196's documented CLI
 behavior and output are unchanged). Story mode groups stories and
 spikes together, keyed by their parent epic's `derives-from` link, since
 they're derived together as one step and can legitimately impact each
 other. The same mutual-coupling-only, fan-out-as-context design from
-[DEC-0196](DEC-0196-cross-epic-coupling-check.md) carries over
+DEC-0196 carries over
 unchanged — no new heuristic was needed.
 
 ## Rationale
@@ -54,12 +54,12 @@ project's existing story-level slicing.
 - **A separate, duplicate script for stories**: rejected — the
   frontmatter-parsing and mutual-coupling-detection logic is identical;
   duplicating it would mean fixing the same bug (like
-  [DEC-0196](DEC-0196-cross-epic-coupling-check.md)'s density-display
+  DEC-0196's density-display
   bug) twice going forward.
 - **Rename the script to something generic** (e.g.
   `groundwork_slice_coupling.py`): rejected — the current filename is
   already cited by ID/path in
-  [DEC-0196](DEC-0196-cross-epic-coupling-check.md), an accepted
+  DEC-0196, an accepted
   decision; renaming it would mean updating an already-ratified citation
   rather than additively extending it.
 

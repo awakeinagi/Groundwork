@@ -17,13 +17,13 @@ cites: [DEC-0045, DEC-0050, DEC-0079, DEC-0150, DEC-0172]
 # ST-0020: Bitbucket Data Center Connector
 
 > Deferred to `backlog` (per
-> [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md), the
+> DEC-0172, the
 > deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)):
+> DEC-0100):
 > GitHub took v1's slot
-> ([ST-0031](ST-0031-github-connector.md)). Subscribed to trigger
+> (ST-0031). Subscribed to trigger
 > `TRG-0010` — a deployment requiring Bitbucket Data Center revives it
-> (together with [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)).
+> (together with SP-0004).
 > Content and citations below are retained unchanged from approval;
 > revival re-refines and re-gates.
 
@@ -38,40 +38,40 @@ normalized event schema.
 ## Acceptance Criteria
 
 1. The connector implements the full protocol from
-   [ST-0019](ST-0019-code-host-connector-protocol.md) and passes its
-   conformance suite (per [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md),
-   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
+   ST-0019 and passes its
+   conformance suite (per DEC-0050,
+   DEC-0045).
 2. Its capability manifest declares BBDC's real surface — including the
    absence of native path-scoped reviewer requirements — so the gate
    engine's compiler routes that enforcement through the `gate-policy`
    check rather than assuming host support
-   (per [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md),
-   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
+   (per DEC-0050,
+   DEC-0045).
 3. Required-check registration and result posting are implemented on
-   the surface [SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)
+   the surface SP-0004
    validates (merge checks / Code Insights), honoring the spike's
-   findings (per [DEC-0150](../decisions/DEC-0150-sp-0004-bbdc-check-surface-spike.md),
-   [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
+   findings (per DEC-0150,
+   DEC-0050).
 4. Team administration maps role projections onto BBDC reviewer groups
-   and default reviewers (per [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)).
+   and default reviewers (per DEC-0050).
 5. Data Center webhook event families are translated into the
    protocol's normalized event schema with no host-specific payloads
-   leaking to consumers (per [DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md),
-   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
+   leaking to consumers (per DEC-0050,
+   DEC-0045).
 6. Consumer test suites that pass against the local-git fake pass
    against this connector unchanged — the swap-in is the pluggability
-   validation (per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md),
-   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)).
+   validation (per DEC-0079,
+   DEC-0045).
 
 ## Component Impact
 
-[CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md) —
+CMP-0006 —
 the whole component.
 
 ## Out of Scope
 
-Other hosts ([ST-0028](ST-0028-additional-code-host-connectors.md),
+Other hosts (ST-0028,
 deferred); the protocol itself
-([ST-0019](ST-0019-code-host-connector-protocol.md)); Jira Data Center
+(ST-0019); Jira Data Center
 — a work-management concern
-([ST-0025](ST-0025-work-management-projection-lifecycle.md), deferred).
+(ST-0025, deferred).

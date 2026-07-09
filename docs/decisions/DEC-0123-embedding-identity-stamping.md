@@ -17,12 +17,12 @@ links:
 
 ## Context
 
-A pluggable embedding port ([DEC-0121](DEC-0121-infrastructure-ports.md))
+A pluggable embedding port (DEC-0121)
 creates a silent failure mode: vectors from different models are
 incomparable (and often differently dimensioned), so a config-time model
-swap ([DEC-0122](DEC-0122-config-selected-adapters.md)) against an
+swap (DEC-0122) against an
 existing index would return garbage similarity scores with no error.
-[DEC-0067](DEC-0067-retrieval-owns-search.md) already pinned the
+DEC-0067 already pinned the
 embedding-model version with "swap = re-embed batch"; the port contract
 must make that enforceable.
 

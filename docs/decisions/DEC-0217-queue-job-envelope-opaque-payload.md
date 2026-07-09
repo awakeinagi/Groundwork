@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[CMP-0012](../components/CMP-0012-queue-port.md) needed a job payload
+CMP-0012 needed a job payload
 shape before its `enqueue`/`claim` API items could be written: a fixed
 port-defined envelope with an opaque payload, or per-job-type typed
 payload schemas declared at the port (which would require every new
@@ -27,7 +27,7 @@ job type to add a value element to this CMP).
 ## Decision
 
 The port defines a fixed job envelope — job-id, job-type (open string
-per [DEC-0214](DEC-0214-queue-job-type-open-namespace.md)), payload (an
+per DEC-0214), payload (an
 opaque JSON document), attempt-count, and enqueued-at timestamp — as a
 `Job` value element. The `payload` field's internal shape is
 uninterpreted by the port; only the runtime's registered handler for
@@ -39,6 +39,6 @@ Mirrors `AppDatabasePort.A-3`'s bookkeeping `document`, already opaque
 to the port for the same reason: the port's job is transport and
 durability, not payload semantics. Declaring per-job-type schemas at
 the port would couple this CMP to every future job type, contradicting
-[DEC-0214](DEC-0214-queue-job-type-open-namespace.md)'s open-namespace
+DEC-0214's open-namespace
 choice — new job types would still need a gated change here for their
 payload shape even though the type name itself is open.

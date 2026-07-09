@@ -15,15 +15,16 @@ Rules enforced:
      service, event, protocol) — both `component-type:` frontmatter and
      `### <Name> (<type>)` headings in Design Elements sections — and
      element names are unique within a doc.
-  8. Body cross-references are clickable and resolve: relative links in
-     bodies point at existing files; a link whose text begins with an
-     artifact ID targets that artifact's file; bare artifact IDs in body
-     prose (outside code spans/fenced blocks, excluding the artifact's
-     own ID) are violations.
+  8. Body cross-references are bare artifact IDs and resolve
+     (DEC-0242): every bare artifact ID in body prose (outside code
+     spans/fenced blocks) resolves to an existing artifact; an inline
+     markdown link targeting an artifact file is a violation — use the
+     bare ID; remaining relative links (non-artifact files) must
+     resolve.
   9. In component docs, every design-element heading is directly
-     followed by an `Implements:` line naming >=1 story via resolvable
-     markdown links; each referenced story's body links the component
-     doc back (reciprocity with its Component Impact).
+     followed by an `Implements:` line naming >=1 story by bare ID;
+     each referenced story's body references the component doc back
+     (reciprocity with its Component Impact).
  10. (audit, non-blocking) Approved stories with no referencing design
      element are reported as design-coverage warnings.
  11. `deferred` status and `release:` fields appear only on stories,
@@ -40,10 +41,11 @@ Rules enforced:
  14. The trigger registry (docs/TRIGGERS.md), when present, is
      well-formed: headings `## TRG-nnnn (armed|fired|retired)`, unique
      IDs, required fields per status (Condition/Subscribers/Cites; plus
-     Fired/Retired with a decision link), resolvable relative links, and
-     subscriber lines each carrying a linked target plus a `(per DEC)`
-     citation. On armed entries every subscribed artifact is `deferred`
-     and there is at least one subscriber (DEC-0109, DEC-0110).
+     Fired/Retired naming a decision), resolvable IDs and relative
+     links, and subscriber lines each carrying an artifact-ID target
+     plus a `(per DEC)` citation. On armed entries every subscribed
+     artifact is `deferred` and there is at least one subscriber
+     (DEC-0109, DEC-0110).
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -87,6 +89,8 @@ RELEASES_HEADER_RE = re.compile(r"^\*\*Releases:\*\*\s*$", re.MULTILINE)
 RELEASE_ITEM_RE = re.compile(r"^-\s+`([^`]+)`(\s*\(current\))?")
 TRIGGER_HEAD_RE = re.compile(r"^## (TRG-\d{4}) \((armed|fired|retired)\)\s*$")
 TRIGGER_ANY_HEAD_RE = re.compile(r"^## .*TRG", re.IGNORECASE)
+ARTIFACT_FILE_RE = re.compile(
+    r"(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}-[^/\s]*\.md$")
 
 
 def parse_frontmatter(path):
@@ -328,7 +332,6 @@ def main():
         if not section:
             continue
         sec_text = section.group(1)
-        cmp_path = (root / fm["_path"]).resolve()
         heads = list(ELEMENT_HEADING_RE.finditer(sec_text))
         for i, h in enumerate(heads):
             name = h.group(1)
@@ -339,8 +342,8 @@ def main():
                               f"Implements: line directly under its heading")
                 continue
             para = block.split("\n\n", 1)[0]
-            story_ids = [text for text, _ in MD_LINK_RE.findall(para)
-                         if ID_RE.match(text) and text.startswith("ST-")]
+            story_ids = [s for s in dict.fromkeys(BARE_ID_RE.findall(para))
+                         if s.startswith("ST-")]
             if not story_ids:
                 errors.append(f"{fm['_path']}: element {name} Implements "
                               f"line names no stories")
@@ -351,15 +354,13 @@ def main():
                     errors.append(f"{fm['_path']}: element {name} "
                                   f"implements {sid}, which is not a story")
                     continue
-                st_base = (root / st["_path"]).parent
-                back = any(
-                    (st_base / tgt.split("#")[0]).resolve() == cmp_path
-                    for _, tgt in MD_LINK_RE.findall(st["_body"] or "")
-                    if not tgt.startswith(EXTERNAL_TARGET))
+                st_prose = INLINE_CODE_RE.sub("", FENCED_CODE_RE.sub(
+                    "", st["_body"] or ""))
+                back = aid in BARE_ID_RE.findall(st_prose)
                 if not back:
                     errors.append(f"{fm['_path']}: element {name} "
                                   f"implements {sid}, but {sid}'s Component "
-                                  f"Impact does not link {aid}")
+                                  f"Impact does not reference {aid}")
                 story_covered.add(sid)
             # Rule 13 (audit): element motivated only by deferred stories
             statuses = [artifacts.get(sid, {}).get("status")
@@ -375,7 +376,7 @@ def main():
             warnings.append(f"{fm['_path']}: approved story {aid} has no "
                             f"referencing design element (coverage gap)")
 
-    # Rule 8: body cross-references are clickable and resolve
+    # Rule 8: body cross-references are bare IDs and resolve (DEC-0242)
     for aid, fm in artifacts.items():
         prose = INLINE_CODE_RE.sub("", FENCED_CODE_RE.sub("",
                                                           fm["_body"] or ""))
@@ -383,19 +384,18 @@ def main():
         for text, target in MD_LINK_RE.findall(prose):
             if target.startswith(EXTERNAL_TARGET):
                 continue
-            dest = (base / target.split("#")[0]).resolve()
-            tid = BARE_ID_RE.match(text)
-            if not dest.exists():
+            plain = target.split("#")[0]
+            if ARTIFACT_FILE_RE.search(plain):
+                errors.append(f"{fm['_path']}: inline artifact link "
+                              f"[{text}]({target}) — use the bare ID "
+                              f"(per DEC-0242)")
+            elif not (base / plain).resolve().exists():
                 errors.append(f"{fm['_path']}: link [{text}]({target}) "
                               f"does not resolve")
-            elif tid and not dest.name.startswith(tid.group(0) + "-"):
-                errors.append(f"{fm['_path']}: link [{text}]({target}) "
-                              f"targets a different artifact")
-        bare = {b for b in BARE_ID_RE.findall(MD_LINK_RE.sub("", prose))
-                if b != aid}
-        for b in sorted(bare):
-            errors.append(f"{fm['_path']}: bare cross-reference {b} in "
-                          f"prose — must be a markdown link")
+        for b in sorted(set(BARE_ID_RE.findall(MD_LINK_RE.sub("", prose)))):
+            if b not in artifacts:
+                errors.append(f"{fm['_path']}: cross-reference {b} does "
+                              f"not resolve to any artifact")
 
     # Rule 14: trigger registry well-formedness
     reg = docs / "TRIGGERS.md"
@@ -425,8 +425,6 @@ def main():
                 continue
             if current is not None:
                 blocks[current].append(line)
-        path_to_aid = {(root / fm["_path"]).resolve(): a
-                       for a, fm in artifacts.items()}
         for tid, lines in blocks.items():
             block = "\n".join(lines)
             fields = {f for f in ("Condition", "Subscribers", "Cites")
@@ -450,21 +448,19 @@ def main():
                 errors.append(f"docs/TRIGGERS.md: {tid} has an empty "
                               f"**Subscribers:** list")
             for ln in sub_lines:
-                links_in = MD_LINK_RE.findall(ln)
-                if not links_in:
+                ids_in = BARE_ID_RE.findall(ln)
+                if not ids_in:
                     errors.append(f"docs/TRIGGERS.md: {tid} subscriber "
-                                  f"line has no linked target: {ln!r}")
+                                  f"line has no artifact-ID target: {ln!r}")
                     continue
-                if "(per [" not in ln:
+                if not re.search(r"\(per DEC-\d{4}", ln):
                     errors.append(f"docs/TRIGGERS.md: {tid} subscriber "
                                   f"line lacks a (per DEC) citation: "
                                   f"{ln!r}")
                 if tstatus == "armed":
-                    tgt = links_in[0][1]
-                    dest = (docs / tgt.split("#")[0]).resolve()
-                    aid = path_to_aid.get(dest)
-                    if aid is None:
-                        continue  # unresolved link reported separately
+                    aid = ids_in[0]
+                    if aid not in artifacts:
+                        continue  # unresolved ID reported separately
                     if artifacts[aid].get("status") != "deferred":
                         errors.append(
                             f"docs/TRIGGERS.md: {tid} (armed) subscribes "
@@ -478,15 +474,26 @@ def main():
                 if len(seg) < 2:
                     errors.append(f"docs/TRIGGERS.md: {tid} is {tstatus} "
                                   f"but lacks **{marker}:** field")
-                elif not MD_LINK_RE.search(seg[1].split("**", 1)[0]):
+                elif not re.search(r"DEC-\d{4}", seg[1].split("**", 1)[0]):
                     errors.append(f"docs/TRIGGERS.md: {tid} **{marker}:** "
-                                  f"lacks a decision link")
-        for text_, target in MD_LINK_RE.findall(text):
+                                  f"names no decision")
+        reg_prose = INLINE_CODE_RE.sub("", FENCED_CODE_RE.sub("", text))
+        for text_, target in MD_LINK_RE.findall(reg_prose):
             if target.startswith(EXTERNAL_TARGET):
                 continue
-            if not (docs / target.split("#")[0]).resolve().exists():
+            plain = target.split("#")[0]
+            if ARTIFACT_FILE_RE.search(plain):
+                errors.append(f"docs/TRIGGERS.md: inline artifact link "
+                              f"[{text_}]({target}) — use the bare ID "
+                              f"(per DEC-0242)")
+            elif not (docs / plain).resolve().exists():
                 errors.append(f"docs/TRIGGERS.md: link [{text_}]({target}) "
                               f"does not resolve")
+        for b in sorted(set(BARE_ID_RE.findall(
+                MD_LINK_RE.sub("", reg_prose)))):
+            if b not in artifacts:
+                errors.append(f"docs/TRIGGERS.md: cross-reference {b} does "
+                              f"not resolve to any artifact")
 
     if warnings:
         print(f"WARN: {len(warnings)} audit warning(s)\n")

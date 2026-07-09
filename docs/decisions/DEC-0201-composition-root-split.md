@@ -18,22 +18,22 @@ links:
 
 ## Context
 
-[EP-0008](../epics/EP-0008-backend-application-platform.md) (Backend
+EP-0008 (Backend
 Application Platform) needed a boundary against
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md),
-[EP-0004](../epics/EP-0004-graph-index.md), and
-[EP-0007](../epics/EP-0007-consolidation-memory-layer.md), which already
+EP-0001,
+EP-0004, and
+EP-0007, which already
 own the four infrastructure Port contracts
-([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)).
+(DEC-0121).
 
 ## Decision
 
-[EP-0008](../epics/EP-0008-backend-application-platform.md) owns the
+EP-0008 owns the
 **Composition Root**: the single place where Port contracts are bound to
 concrete Adapters at process startup, from deployment configuration.
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)/[EP-0004](../epics/EP-0004-graph-index.md)/[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+EP-0001/EP-0004/EP-0007
 continue to own what each Port contractually guarantees;
-[EP-0008](../epics/EP-0008-backend-application-platform.md) only wires
+EP-0008 only wires
 them, and never redefines a Port's contract.
 
 ## Rationale
@@ -45,11 +45,11 @@ scope (wiring, not re-specifying) consistent with the Protocol Seam's
 
 ## Alternatives Considered
 
-- **[EP-0008](../epics/EP-0008-backend-application-platform.md) owns the
+- **EP-0008 owns the
   Port contracts too**: rejected — would move
-  [DEC-0121](DEC-0121-infrastructure-ports.md)'s scope into this epic,
+  DEC-0121's scope into this epic,
   re-scoping/staling
-  [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)/[EP-0004](../epics/EP-0004-graph-index.md)/[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+  EP-0001/EP-0004/EP-0007
   for no functional benefit.
 - **Defer composition-root ownership to story level**: rejected — the
   epic-level boundary needs to be settled before stories can be sliced
@@ -58,8 +58,8 @@ scope (wiring, not re-specifying) consistent with the Protocol Seam's
 
 ## Implications
 
-[EP-0008](../epics/EP-0008-backend-application-platform.md)'s Scope and
+EP-0008's Scope and
 Domain Context reflect this split; its `depends-on` is scoped to
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) only
+EP-0001 only
 (the app-database Port contract it wires first), not the full set of
 composed engines.

@@ -4,7 +4,7 @@ A lightweight artifact capturing a change someone proposed from *outside*
 the refinement pipeline — a direct Jira edit, a UI suggestion, or (future)
 implementation-swarm feedback — so the intent survives redirection into the
 proper flow and every proposal has a durable triage record
-([DEC-0047](../decisions/DEC-0047-change-proposal-artifact.md)).
+(DEC-0047).
 
 Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 
@@ -39,7 +39,7 @@ never deleted.
 ## Rules
 
 - CPs are created by connectors and the UI via typed operations
-  ([DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)); they never
+  (DEC-0033); they never
   modify their target artifact directly — the mechanical-fix PR or
   refinement session does, citing the CP.
 - A Decision produced by a CP-triggered session cites the session normally;

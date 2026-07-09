@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[DEC-0137](DEC-0137-decision-recall-audit-step.md) set the audit's
+DEC-0137 set the audit's
 judge topology as an Opus-class judge (solo, for candidate lists ≤15;
 fork when the facilitator itself runs an Opus-class model, else a
 fresh Opus agent) with a fallback to sharded Sonnet-class batches only
@@ -28,7 +28,7 @@ every judge invocation, with no Opus tier at all.
 ## Decision
 
 The decision-recall audit's judge subagent always runs on a **Sonnet
-5** model. This replaces [DEC-0137](DEC-0137-decision-recall-audit-step.md)
+5** model. This replaces DEC-0137
 point 2's topology in full:
 
 - lists ≤15 → **one** Sonnet 5 judge; fork (inherits session context)
@@ -39,13 +39,13 @@ point 2's topology in full:
   on Sonnet 5 agents.
 - **One candidate per agent remains forbidden** — isolated relevance
   judges over-flag (acquiescence bias) — unchanged from
-  [DEC-0137](DEC-0137-decision-recall-audit-step.md).
+  DEC-0137.
 
-Every other clause of [DEC-0137](DEC-0137-decision-recall-audit-step.md)
+Every other clause of DEC-0137
 (retrieval mechanics, the ≤4-finding
 cap, "Nothing to add" as a valid outcome, in-session disposition, and
 the audit's status as a complement — not a replacement — for rule-type
-checklists like [DEC-0136](DEC-0136-graduation-review-required.md))
+checklists like DEC-0136)
 stands unchanged.
 
 ## Rationale
@@ -57,7 +57,7 @@ audit's cost profile predictable.
 
 ## Alternatives Considered
 
-- **Keep [DEC-0137](DEC-0137-decision-recall-audit-step.md)'s split
+- **Keep DEC-0137's split
   (Opus ≤15, Sonnet shards >15)** — rejected by
   direct sponsor instruction; no technical concern raised in-session,
   a policy preference for a single model tier.
@@ -68,6 +68,6 @@ The skill's `SKILL.md` and `references/semantic-search.md` — both the
 installed copy (`~/.claude/skills/groundwork-design-session/`) and this
 project's vendored copy (`.agents/skills/groundwork-design-session/`)
 — are updated to state the Sonnet-5-only topology, consistent with
-[DEC-0137](DEC-0137-decision-recall-audit-step.md)'s original sync
+DEC-0137's original sync
 requirement. Its status flips to `superseded`; its retrieval mechanics, finding cap, and
 complement-not-replacement framing remain live via this decision.

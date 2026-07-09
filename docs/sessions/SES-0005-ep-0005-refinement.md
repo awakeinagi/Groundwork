@@ -13,18 +13,18 @@ links:
   relates-to: [EP-0005, EP-0003, EP-0001]
 ---
 
-# SES-0005: [EP-0005](../epics/EP-0005-connectors-and-identity.md) Refinement Session
+# SES-0005: EP-0005 Refinement Session
 
 ## Purpose
 
-Refine [EP-0005](../epics/EP-0005-connectors-and-identity.md) (Connectors &
+Refine EP-0005 (Connectors &
 Identity) to gate-readiness, absorbing the requirements accumulated from
-[SES-0003](SES-0003-ep-0001-refinement.md) (PR orchestration, host permission model) and [SES-0004](SES-0004-ep-0003-refinement.md) (policy
+SES-0003 (PR orchestration, host permission model) and SES-0004 (policy
 compilation, team/required-check administration, host variance).
 
 ## Transcript
 
-**T1 — Sponsor.** Approved [EP-0003](../epics/EP-0003-governance-and-gate-engine.md). Proceed to [EP-0005](../epics/EP-0005-connectors-and-identity.md).
+**T1 — Sponsor.** Approved EP-0003. Proceed to EP-0005.
 
 **T2 — Agent.** Round 1: (a) acting-on-behalf for UI-driven PR reviews when
 business approvers may lack code-host seats (recommended per-user OAuth
@@ -50,25 +50,25 @@ read-only codebase scope (recommended `governance/repos.yaml` allowlist);
 split field ownership. (c) Allowlist in governance config. (d) **Bitbucket
 Data Center only** for v1.
 
-**T6 — Agent (synthesis).** Distilled [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)–[DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md). Added the Change
+**T6 — Agent (synthesis).** Distilled DEC-0043–DEC-0050. Added the Change
 Proposal artifact type (SPEC, checker, directory). Noted consequences of
 the Bitbucket Data Center baseline: no native path-scoped reviewer
 requirements, so the `gate-policy` required check carries more enforcement
 weight on BBDC, and merge-check/Code Insights integration is the native
 required-check surface; Jira Data Center is the likely (unconfirmed) Jira
-flavor. Extended the [EP-0005](../epics/EP-0005-connectors-and-identity.md)→[EP-0002](../epics/EP-0002-refinement-session-agent.md) impact edge: CP triage becomes session
--agent scope. [EP-0005](../epics/EP-0005-connectors-and-identity.md) moved to `gated`.
+flavor. Extended the EP-0005→EP-0002 impact edge: CP triage becomes session
+-agent scope. EP-0005 moved to `gated`.
 
 ## Decisions Produced
 
-[DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
-[DEC-0044](../decisions/DEC-0044-drift-revert-capture-proposal.md),
-[DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
-[DEC-0046](../decisions/DEC-0046-person-registry.md),
-[DEC-0047](../decisions/DEC-0047-change-proposal-artifact.md),
-[DEC-0048](../decisions/DEC-0048-project-on-approval-field-ownership.md),
-[DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md),
-[DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md)
+DEC-0043,
+DEC-0044,
+DEC-0045,
+DEC-0046,
+DEC-0047,
+DEC-0048,
+DEC-0049,
+DEC-0050
 
 ## Conflicts Raised
 

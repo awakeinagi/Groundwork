@@ -17,11 +17,11 @@ links:
 
 ## Context
 
-Every API item across [CMP-0001](../components/CMP-0001-artifact-store-service.md)'s
+Every API item across CMP-0001's
 services needs one error shape; the OpenAPI contract is the deliverable
-of record ([DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md))
+of record (DEC-0018)
 and tier-1 failures must carry field-level errors
-([DEC-0034](DEC-0034-two-tier-validation.md)).
+(DEC-0034).
 
 ## Decision
 

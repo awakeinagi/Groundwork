@@ -18,13 +18,13 @@ links:
 
 ## Context
 
-[CMP-0013](../components/CMP-0013-background-job-execution-runtime.md)
+CMP-0013
 needed a wiring answer for how a `job-type` (open string namespace per
-[DEC-0214](DEC-0214-queue-job-type-open-namespace.md)) gets a handler
+DEC-0214) gets a handler
 attached: a registration API this CMP owns and any producer calls
 directly, or centralized registration performed by the Composition
 Root during process startup.
-[CMP-0014](../components/CMP-0014-kv-store-port.md)'s Notes
+CMP-0014's Notes
 forward-declared this as an open point (the periodic expiry-sweep job
 needs to register somewhere).
 
@@ -40,7 +40,7 @@ maintaining a central registry of every job type in the system.
 
 Keeps a job's registration co-located with the component that owns its
 business logic, the same locality principle the port/runtime split
-([DEC-0208](DEC-0208-queue-port-runtime-split.md)) already follows: the
+(DEC-0208) already follows: the
 runtime provides generic dispatch machinery, not domain knowledge of
 what jobs exist. A centralized Composition Root registry would force it
 to import every future job-owning module just to wire handlers,

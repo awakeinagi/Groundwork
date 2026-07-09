@@ -18,7 +18,7 @@ links:
 ## Purpose
 
 Continuation of the goal-template redesign work
-([SES-0035](SES-0035-goal-template-redesign.md)), turning to the next gap
+(SES-0035), turning to the next gap
 identified there: the Epic derivation playbook asked "boundaries between
 epics" as a question but gave no concrete method for finding good ones.
 The stakeholder proposed a set of business/domain slicing heuristics for
@@ -41,23 +41,23 @@ business seam (the good pattern proposed); "horizontal/layer slice" is
 the conventional term for the DB/Frontend/Stripe anti-pattern being
 warned against. Validated the five seams against this project's own
 epics: the Integration Seam matches
-[EP-0005](../epics/EP-0005-connectors-and-identity.md)'s isolation of
+EP-0005's isolation of
 Jira/code-host/auth risk; the Protocol Seam's "Core Platform Engine & API
 Foundation" example is nearly verbatim the still-pending `EP-0008`
-identified in [SES-0035](SES-0035-goal-template-redesign.md). Caveated
+identified in SES-0035. Caveated
 the Sophistication Seam: baseline error
 handling belongs in the core epic (definition-of-done), not deferred —
 only genuinely advanced hardening should get its own epic, tying to
-[DEC-0191](../decisions/DEC-0191-illustrative-scenario-bg-section.md).
+DEC-0191.
 Proposed a sixth seam, Bounded-Context/Domain-Capability, since that's
-what [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)..[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+what EP-0001..EP-0007
 actually used and the given five skew toward customer-facing product
 decomposition. Proposed tying seam quality to the existing
 `impacts`/`impacted-by` mechanism
-([DEC-0026](../decisions/DEC-0026-directional-impact-links.md),
-[DEC-0027](../decisions/DEC-0027-impact-ranked-refinement-order.md)) as a
+(DEC-0026,
+DEC-0027) as a
 self-check, and cautioned that stacking a six-seam checklist on top of
-[DEC-0194](../decisions/DEC-0194-epic-derivation-coverage-pass.md)'s
+DEC-0194's
 coverage pass risks over-fragmenting small goals. Proposed placement in a
 new `references/epic-slicing-seams.md`.
 
@@ -80,11 +80,11 @@ fan-out from foundational epics (the Artifact Store, Governance), which
 is expected, not a defect. Redesigned the check to treat mutual coupling
 as the only actionable finding and one-directional fan-out as
 informational context. Re-tested: found exactly the three mutual pairs
-([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0003](../epics/EP-0003-governance-and-gate-engine.md),
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)↔[EP-0005](../epics/EP-0005-connectors-and-identity.md),
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)↔[EP-0006](../epics/EP-0006-refinement-web-ui.md))
+(EP-0001↔EP-0003,
+EP-0001↔EP-0005,
+EP-0002↔EP-0006)
 already documented as known, deliberate cycles in
-[SES-0002](SES-0002-impact-relationships.md) — a clean validation against
+SES-0002 — a clean validation against
 real project history, zero false positives. Fixed a density-percentage
 display bug (exceeding 100%) surfaced during testing, caused by dividing
 a directed-edge count by an undirected-pair count.
@@ -101,9 +101,9 @@ existing consistency-check paragraph).
 
 ## Decisions Produced
 
-[DEC-0195](../decisions/DEC-0195-vertical-slicing-seam-catalog.md),
-[DEC-0196](../decisions/DEC-0196-cross-epic-coupling-check.md),
-[DEC-0197](../decisions/DEC-0197-no-fixed-epic-count.md)
+DEC-0195,
+DEC-0196,
+DEC-0197
 
 ## Conflicts Raised
 

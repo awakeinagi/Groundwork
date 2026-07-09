@@ -39,7 +39,7 @@ requires unambiguous semantics; inline wiki-links can't provide them.
   ambiguous, traversal unreliable.
 - **Graph database as truth**: most queryable, but splits truth — resolved by
   adopting the graph as a derived index instead
-  ([DEC-0010](DEC-0010-graph-index-derived.md)).
+  (DEC-0010).
 
 ## Implications
 

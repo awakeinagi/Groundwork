@@ -17,12 +17,12 @@ links:
 
 ## Context
 
-[SES-0023](../sessions/SES-0023-dec-0080-graduation-review.md) showed a
+SES-0023 showed a
 relevant decision can go unapplied; its complement — a relevant
 decision absent from context entirely — had no systematic catch. The
 participant proposed an exploratory-subagent audit at each stage,
 refined through a POC
-([SES-0024](../sessions/SES-0024-decision-recall-audit.md)).
+(SES-0024).
 
 ## Decision
 
@@ -50,10 +50,10 @@ preparation, the facilitator runs a **decision-recall audit**:
 The audit catches *content-relevant* misses only (POC-measured ~60%
 per stage at k=15, compounding across stages). Rule-type decisions
 that govern structure do not surface — POC replay showed
-[DEC-0080](DEC-0080-hybrid-component-granularity.md) scrubbed from
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) ranks
+DEC-0080 scrubbed from
+CMP-0001 ranks
 nowhere — so this step complements, never replaces, the
-[DEC-0136](DEC-0136-graduation-review-required.md) checklists.
+DEC-0136 checklists.
 
 ## Rationale
 
@@ -72,13 +72,13 @@ saving no meaningful latency.
   token-efficient at large k; kept as an available variant, not the
   default, since single-judge handles today's list sizes.
 - **No audit; rely on facilitator recall** — the status quo the
-  [SES-0023](../sessions/SES-0023-dec-0080-graduation-review.md)
+  SES-0023
   lesson argues against.
 
 ## Implications
 
 The skill's playbook, SKILL.md, and semantic-search reference carry the
 step (synced to vendored and installed copies). When
-[EP-0002](../epics/EP-0002-refinement-session-agent.md) (Refinement
+EP-0002 (Refinement
 Session Agent) derives stories, the audit capability must be considered
 for the product's session agent — this decision is design input there.

@@ -29,7 +29,7 @@ sessions, backend services, and connector integrations.
 ## Rationale
 
 Business stakeholders must interact with the system directly and unsupervised
-([DEC-0003](DEC-0003-unsupervised-sessions.md)); they will not work in a
+(DEC-0003); they will not work in a
 terminal. A skills-first approach cannot deliver that experience.
 
 ## Alternatives Considered
@@ -41,6 +41,6 @@ terminal. A skills-first approach cannot deliver that experience.
 
 ## Implications
 
-Real application concerns arrive early: auth ([DEC-0024](DEC-0024-pluggable-auth.md)),
-roles and gates in the UI ([DEC-0006](DEC-0006-gate-every-stage.md)), and a
+Real application concerns arrive early: auth (DEC-0024),
+roles and gates in the UI (DEC-0006), and a
 production-quality session experience.

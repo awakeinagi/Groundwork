@@ -30,11 +30,11 @@ links:
    declaration: as design settles, elements in those CMPs back-reference
    the story via `Implements:` lines, and an element may only reference
    a story whose Component Impact links its CMP
-   ([DEC-0092](../decisions/DEC-0092-element-implements-line.md),
-   [DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md)).
+   (DEC-0092,
+   DEC-0094).
 4. **Out of Scope** — adjacent work explicitly excluded. Entries are two
    species with different obligations
-   ([DEC-0133](../decisions/DEC-0133-out-of-scope-differentiated-rule.md)):
+   (DEC-0133):
    an entry that is *future work* ("wanted later") must exist as a
    deferred story or spike and be linked from the entry — prose-only
    future work is a review-time smell; a *boundary statement* (behavior
@@ -50,21 +50,21 @@ links:
 - A story whose `depends-on` includes a non-`approved` Component Doc cannot
   pass its gate.
 - Jira projection follows the same summary-plus-link rule as Epics
-  ([DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)).
+  (DEC-0013).
 - Amending or superseding an approved story marks every Component Doc
   with a referencing element stale, element-scoped
-  ([DEC-0096](../decisions/DEC-0096-implements-staleness-propagation.md)).
+  (DEC-0096).
   A story's design and implementation percent-complete are computed over
   the elements referencing it
-  ([DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md)).
+  (DEC-0095).
 - **Release scoping** (see
   [SPEC-artifact-common](SPEC-artifact-common.md) § Release scoping): a
   story targeted at anything other than a current release is `deferred`
-  ([DEC-0097](../decisions/DEC-0097-deferred-status.md)) and carries a
+  (DEC-0097) and carries a
   `release:` label
-  ([DEC-0098](../decisions/DEC-0098-semver-release-labels.md)); its
+  (DEC-0098); its
   parent epic's label is the default. Deferral and revival each cite a
-  Decision ([DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md));
+  Decision (DEC-0100);
   revival lands at `draft`. Deferred stories are excluded from design-%
   rollups and coverage warnings and surface in the deferred report
-  ([DEC-0101](../decisions/DEC-0101-deferred-out-of-metrics.md)).
+  (DEC-0101).

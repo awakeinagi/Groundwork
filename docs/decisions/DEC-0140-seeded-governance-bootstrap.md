@@ -17,10 +17,10 @@ links:
 
 ## Context
 
-Governance-as-code ([DEC-0037](DEC-0037-governance-as-code.md)) makes
+Governance-as-code (DEC-0037) makes
 `governance/` PR-gated with the Arbiter as owner — but at deployment
 time no governance files exist to gate their own creation, and no
-Arbiter exists to approve them ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)'s
+Arbiter exists to approve them (EP-0003's
 recorded bootstrap risk).
 
 ## Decision
@@ -51,6 +51,6 @@ is exactly as auditable as everything after it.
 ## Implications
 
 The init flow ships with the governance config story
-([ST-0012](../stories/ST-0012-governance-config-schemas.md)); the
+(ST-0012); the
 lock-behind sequencing is a compilation-story criterion
-([ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md)).
+(ST-0013).

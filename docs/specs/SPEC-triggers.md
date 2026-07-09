@@ -2,14 +2,14 @@
 
 The tracked file of watched conditions with subscribed deferred items,
 revived when a condition fires. Established by
-[DEC-0106](../decisions/DEC-0106-trigger-registry.md), reshaped with
+DEC-0106, reshaped with
 subscriptions by
-[DEC-0109](../decisions/DEC-0109-trigger-subscriptions.md); firing
+DEC-0109; firing
 semantics per
-[DEC-0107](../decisions/DEC-0107-trigger-firing-cites-decision.md);
+DEC-0107;
 lifecycle invariants per
-[DEC-0110](../decisions/DEC-0110-subscription-lifecycle.md); surfacing
-and validation per [DEC-0108](../decisions/DEC-0108-trigger-surfacing.md).
+DEC-0110; surfacing
+and validation per DEC-0108.
 
 The registry is **not an artifact**: one file, `docs/TRIGGERS.md`, no
 YAML frontmatter, no artifact ID. `TRG-` IDs are registry-scoped —
@@ -49,16 +49,16 @@ context cheaply:
 - **Armed** — the condition is being watched. Tooling that loads
   triggers into agent context loads **armed entries only**.
 - **Fired** — the condition was observed to hold, recorded by a decision
-  ([DEC-0107](../decisions/DEC-0107-trigger-firing-cites-decision.md)).
+  (DEC-0107).
   **A firing revives all subscribers** — the condition holding is a fact
   about the world, not about one item; each consequence executes citing
   the one firing decision, which also satisfies
-  [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md) for
+  DEC-0100 for
   each revival.
 - **Retired** — the condition is no longer worth watching;
   decision-cited.
 
-## Lifecycle invariants ([DEC-0110](../decisions/DEC-0110-subscription-lifecycle.md))
+## Lifecycle invariants (DEC-0110)
 
 1. An armed trigger's subscribers are all currently `deferred`
    artifacts, and there is at least one — checker-enforced, which makes

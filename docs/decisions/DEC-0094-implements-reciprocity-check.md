@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-With [DEC-0092](DEC-0092-element-implements-line.md) there are two views
+With DEC-0092 there are two views
 of the same relationship: the story's coarse forward declaration
 (Component Impact, written at story-gate time before elements exist) and
 the element's fine-grained Implements claim (written as design settles).
@@ -54,5 +54,5 @@ re-scoping should be visible.
 [SPEC-story](../specs/SPEC-story.md) notes the consistency obligation;
 [SPEC-design-elements](../specs/SPEC-design-elements.md) states the
 constraint on Implements targets;
-[ST-0007](../stories/ST-0007-tier2-check-suite.md) and
+ST-0007 and
 `tools/check_links.py` enforce it.

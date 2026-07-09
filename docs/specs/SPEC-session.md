@@ -1,9 +1,9 @@
 # SPEC: Session (SES)
 
 The append-only record of one 1:1 refinement conversation between the agent
-and one participant ([DEC-0021](../decisions/DEC-0021-one-on-one-sessions.md)).
+and one participant (DEC-0021).
 Sessions are the raw material of provenance: Decisions cite spans of them
-([DEC-0015](../decisions/DEC-0015-transcript-decision-citation-chain.md)).
+(DEC-0015).
 
 Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 
@@ -35,7 +35,7 @@ immutable. Follow-up conversation is a new Session linking
    Decisions can cite spans (`SES-0042 @ T31–T38`). The transcript **is the
    raw message log** — verbatim and never summarized in place; condensed
    views are derived layers elsewhere, and distillation must be re-runnable
-   from this record ([DEC-0052](../decisions/DEC-0052-raw-transcripts-regenerable-distillation.md)).
+   from this record (DEC-0052).
    `verbatim` fidelity is the standard once the application hosts sessions;
    `reconstructed` is permitted only for pre-application bootstrap records
    and must say so.
@@ -50,4 +50,4 @@ immutable. Follow-up conversation is a new Session linking
 - Every Decision distilled from a session must cite a turn span that actually
   supports it.
 - Multi-stakeholder input is achieved by Synthesis across separate 1:1
-  sessions, not shared sessions ([DEC-0021](../decisions/DEC-0021-one-on-one-sessions.md)).
+  sessions, not shared sessions (DEC-0021).

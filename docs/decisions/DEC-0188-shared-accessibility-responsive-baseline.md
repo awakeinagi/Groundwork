@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[EP-0006](../epics/EP-0006-refinement-web-ui.md)'s Risks flagged
+EP-0006's Risks flagged
 "accessibility and responsive baseline" as needing a story-level
 definition before v1 build, with no standard named yet.
 
@@ -25,7 +25,7 @@ definition before v1 build, with no standard named yet.
 
 The standard is WCAG 2.1 AA plus Tailwind's default breakpoint set
 (`sm`/`md`/`lg`/`xl`/`2xl`, per
-[DEC-0185](DEC-0185-tailwind-styled-sharing-host-config.md)'s shared
+DEC-0185's shared
 Tailwind config). Every v1 story's Acceptance Criteria carries an item
 citing this decision instead of a standalone "accessibility baseline"
 story, since the standard has nothing to build on its own — it only has

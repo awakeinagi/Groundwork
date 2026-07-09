@@ -53,5 +53,5 @@ database, the other DuckDB.
 
 Project `.gitignore` gains `.groundwork-search` (and its WAL). The
 search script treats the graph file as read-only input; it never writes
-graph state ([DEC-0117](DEC-0117-index-freshness.md) covers its
+graph state (DEC-0117 covers its
 staleness warning).

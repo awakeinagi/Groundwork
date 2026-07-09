@@ -17,35 +17,35 @@ links:
 
 ## Context
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) consumes
+CMP-0001 consumes
 the code-host connector contract, but
-[EP-0005](../epics/EP-0005-connectors-and-identity.md) has not been
+EP-0005 has not been
 refined — that contract does not exist yet. Blocking this component's gate on
 it would serialize the two epics.
 
 ## Decision
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s Dependencies section **enumerates exactly the connector
+CMP-0001's Dependencies section **enumerates exactly the connector
 operations it requires** — fork provisioning, branch create/delete,
 PR open/merge/review-state, required-check registration, and a
 permission probe — consumed via the capability manifest
-([DEC-0045](DEC-0045-capability-declaring-connectors.md)). This
-consumption list is a **binding input to [EP-0005](../epics/EP-0005-connectors-and-identity.md)'s refinement**: the
+(DEC-0045). This
+consumption list is a **binding input to EP-0005's refinement**: the
 connector protocol CMP must satisfy it or raise a conflict. The component is
 gate-eligible on the strength of the list; the local-git fake connector
-([DEC-0079](DEC-0079-local-git-fake-connector.md)) proves the seam
+(DEC-0079) proves the seam
 implementable today.
 
 ## Rationale
 
 The consumer-side shape is already fully determined by approved stories
-([ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md)); waiting
+(ST-0003); waiting
 for the provider-side design adds serialization without information.
 Dependency sections cite contract sections, not internals — a precise
 consumption list is exactly what that discipline needs.
 
 ## Alternatives Considered
 
-- **Refine [EP-0005](../epics/EP-0005-connectors-and-identity.md) first** — strictly cleaner dependency order; rejected
-  as delaying the [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)
+- **Refine EP-0005 first** — strictly cleaner dependency order; rejected
+  as delaying the EP-0001
   deliverable for a contract whose consumer half is already known.

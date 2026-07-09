@@ -17,27 +17,27 @@ links:
 
 ## Context
 
-[DEC-0080](DEC-0080-hybrid-component-granularity.md)'s second
+DEC-0080's second
 graduation criterion is independently versioned conformance. Every
 port carries a conformance suite any adapter must pass
-([DEC-0122](DEC-0122-config-selected-adapters.md)) — adapter authors
+(DEC-0122) — adapter authors
 are conformance implementers who need the port contract without the
 consuming component's internals.
 
 ## Decision
 
 The `AppDatabasePort` element graduates to
-[CMP-0003](../components/CMP-0003-app-database-port.md), a standalone
+CMP-0003, a standalone
 CMP with `component-type: protocol`, owned by the Canonical Store
-context ([DEC-0121](DEC-0121-infrastructure-ports.md) ownership
+context (DEC-0121 ownership
 unchanged). It carries the typed operation families
-([DEC-0129](DEC-0129-port-typed-operation-families.md)) and the
+(DEC-0129) and the
 conformance expectations;
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) becomes a
+CMP-0001 becomes a
 consumer via `depends-on`. **Pattern**: the remaining infrastructure
 ports (vector store, embedding, graph store) likewise arrive as
 standalone `protocol`-type CMPs in their owning contexts when
-[EP-0004](../epics/EP-0004-graph-index.md)/[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+EP-0004/EP-0007
 derive them.
 
 ## Rationale
@@ -48,6 +48,6 @@ deliberation.
 
 ## Alternatives Considered
 
-- **Keep nested until a second adapter ships** — the [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) graduation
+- **Keep nested until a second adapter ships** — the SP-0002 graduation
   path would then re-open an approved store doc to extract the seam it
   needs.

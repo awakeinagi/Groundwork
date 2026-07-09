@@ -18,9 +18,9 @@ links:
 
 ## Context
 
-[EP-0006](../epics/EP-0006-refinement-web-ui.md)'s reference frontend
+EP-0006's reference frontend
 must be a genuine drop-in for a specific class of host: an existing
-Next.js 15 (App Router) application using React. [DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md)
+Next.js 15 (App Router) application using React. DEC-0018
 committed to a TypeScript frontend but left the delivery shape open.
 
 ## Decision
@@ -64,10 +64,10 @@ consumption modes get it.
 
 ## Implications
 
-Every v1 story in [EP-0006](../epics/EP-0006-refinement-web-ui.md)
+Every v1 story in EP-0006
 ships as exported React components/hooks from one package; component
 docs for this bounded context must define the package's public API
 surface (component props, hooks, session-engine client) as its
-contract. A new story ([ST-0049](../stories/ST-0049-standalone-application-shell.md))
+contract. A new story (ST-0049)
 covers the standalone app's routing/layout/auth-bootstrap shell around
 that same package.

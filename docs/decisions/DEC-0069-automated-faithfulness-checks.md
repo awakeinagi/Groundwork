@@ -25,7 +25,7 @@ often for human review to be meaningful.
 
 No human gate. Every generation passes an automated faithfulness check —
 no-new-claims verification against sources (the
-[DEC-0058](DEC-0058-evaluation-harness.md) harness pattern) — before the
+DEC-0058 harness pattern) — before the
 consolidation may serve; failures block serving and alert. Samples get
 periodic independent-judge review, and every served element carries source
 refs so any consumer can drop to ground truth.
@@ -34,7 +34,7 @@ refs so any consumer can drop to ground truth.
 
 Human gates ratify decisions; consolidations contain none. Machine
 verification matched to a mechanical guarantee (faithfulness to sources)
-is the same trade [DEC-0033](DEC-0033-typed-mechanical-writes.md) made for
+is the same trade DEC-0033 made for
 mechanical writes.
 
 ## Alternatives Considered
@@ -46,4 +46,4 @@ mechanical writes.
 
 The faithfulness checker is a retrieval-layer component with its own eval
 coverage; blocked-consolidation alerts flow to the ops surface
-([DEC-0042](DEC-0042-governance-reporting-split.md)).
+(DEC-0042).

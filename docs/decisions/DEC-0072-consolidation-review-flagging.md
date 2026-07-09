@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-[DEC-0069](DEC-0069-automated-faithfulness-checks.md) guards consolidation
+DEC-0069 guards consolidation
 generation with automated checks and no human gate — leaving no path for a
 human to catch what the agents and eval system miss, even though a bad
 summary silently biases every consuming session.
@@ -30,7 +30,7 @@ quarantines it immediately — treated as stale, never served, the recipe
 resolver falling back to underlying sources — pending disposition in a
 review queue: regenerate, fix sources, or correct the faithfulness
 checker. Confirmed misses become regression cases in the evaluation corpus
-([DEC-0058](DEC-0058-evaluation-harness.md)).
+(DEC-0058).
 
 ## Rationale
 
@@ -50,7 +50,7 @@ automated guard converge on the human standard.
 
 ## Implications
 
-Review/flag surface joins the [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)→[EP-0006](../epics/EP-0006-refinement-web-ui.md) impact edge (alongside
-profiles); flag/quarantine/disposition semantics are [EP-0007](../epics/EP-0007-consolidation-memory-layer.md) contract
+Review/flag surface joins the EP-0007→EP-0006 impact edge (alongside
+profiles); flag/quarantine/disposition semantics are EP-0007 contract
 items; quarantine events flow to the ops surface
-([DEC-0042](DEC-0042-governance-reporting-split.md)).
+(DEC-0042).

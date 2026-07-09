@@ -20,7 +20,7 @@ links:
 
 The Story and spike derivation playbook lacked concrete slicing
 guidance the same way the Epic playbook did before
-[DEC-0195](DEC-0195-vertical-slicing-seam-catalog.md). The stakeholder
+DEC-0195. The stakeholder
 proposed five vertical-slicing seams (Data, Chronological, Fidelity,
 Logic, Operational), validated against Richard Lawrence's "Patterns for
 Splitting User Stories," plus a sixth (Operations/CRUD) proposed during
@@ -40,7 +40,7 @@ whose real content is an investigation should become a Spike, not an
 undersized story — rather than adding it as a seventh seam. Mike Cohn's
 SPIDR mnemonic is noted as a complementary cross-reference. The Fidelity
 seam carries an explicit caveat, tying to
-[DEC-0188](DEC-0188-shared-accessibility-responsive-baseline.md):
+DEC-0188:
 "basic" means unstyled, never sub-baseline — every story, including the
 mechanics-first one, still owes the shared accessibility/responsive
 conformance citation.
@@ -52,7 +52,7 @@ it via the DPR source) establishes these are established patterns, not
 ad hoc guesses. The Spike cross-reference avoids inventing a redundant
 seam for something Groundwork's artifact model already solves
 structurally. The
-[DEC-0188](DEC-0188-shared-accessibility-responsive-baseline.md) caveat
+DEC-0188 caveat
 forecloses a plausible
 misreading — that "get it working with raw elements first" means the
 mechanics-only story is exempt from baseline accessibility — before it

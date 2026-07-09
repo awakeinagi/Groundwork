@@ -40,6 +40,6 @@ conflict-detection value.
 
 ## Implications
 
-Context feeds are required ([DEC-0016](DEC-0016-agent-context-feeds.md));
+Context feeds are required (DEC-0016);
 conflict detection must compare new goals against artifacts that never went
 through Groundwork.

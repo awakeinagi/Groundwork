@@ -18,18 +18,18 @@ links:
 ## Context
 
 Staleness walks `derives-from`/`satisfies`
-([DEC-0007](DEC-0007-impact-analysis-stale-marks.md)), and Component
+(DEC-0007), and Component
 Docs typically derive from epics — so a story amendment would often
 never reach the CMP whose elements realize it. A superseded story could
 leave elements claiming coverage of requirements that no longer exist,
 and the completion metrics
-([DEC-0095](DEC-0095-percent-complete-metrics.md)) would silently
+(DEC-0095) would silently
 report on a stale basis.
 
 ## Decision
 
 The element→story Implements edge
-([DEC-0092](DEC-0092-element-implements-line.md)) participates in
+(DEC-0092) participates in
 staleness propagation, one direction only: when an approved story is
 amended or superseded, every Component Doc containing an element that
 references it is marked `stale`, and the impact report names the
@@ -41,7 +41,7 @@ Component Doc and element edits never stale stories.
 This is what keeps "story X is 100% designed" honest after change. The
 cost — story churn triggers CMP re-affirmations — is the cheap path by
 design: re-affirmation, not re-refinement, per
-[DEC-0038](DEC-0038-subtree-staleness-reaffirmation.md). Element-scoped
+DEC-0038. Element-scoped
 impact reporting keeps it from becoming whole-document panic.
 
 ## Alternatives Considered
@@ -54,8 +54,8 @@ impact reporting keeps it from becoming whole-document panic.
 
 ## Implications
 
-Impact analysis ([EP-0004](../epics/EP-0004-graph-index.md) walks, the
+Impact analysis (EP-0004 walks, the
 skill's `impact` command, and the storage service's stale-marking
 mechanical writes per
-[DEC-0033](DEC-0033-typed-mechanical-writes.md)) must traverse
+DEC-0033) must traverse
 IMPLEMENTS edges story→CMP; impact reports gain element scoping.

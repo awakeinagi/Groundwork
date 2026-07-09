@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[ST-0062](../stories/ST-0062-kv-store-port.md)'s scope names
+ST-0062's scope names
 "single-writer coordination locks" as a use case, but a plain
 `get()`-then-`set()` composition races: two callers can both observe
 "absent" before either writes, both believing they acquired the lock.
@@ -41,4 +41,4 @@ callers to use the App Database Port's UnitOfWork for what is meant to
 be lightweight coordination state). It follows the same "typed
 operation family, no caller-composed race" discipline the App Database
 Port already established for its own atomicity guarantees
-([DEC-0139](DEC-0139-port-operation-failure-semantics.md)).
+(DEC-0139).

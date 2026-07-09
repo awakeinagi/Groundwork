@@ -19,17 +19,17 @@ links:
 
 Timeout-to-default auto-resolutions must be recorded as Decisions
 citing the election and the default rule
-([DEC-0039](DEC-0039-conflict-escalation-operations.md)) — but creating
+(DEC-0039) — but creating
 a Decision artifact is design content, which the mechanical-write
 allowlist deliberately cannot express
-([DEC-0033](DEC-0033-typed-mechanical-writes.md)).
+(DEC-0033).
 
 ## Decision
 
 The gate engine drafts each System Decision from a fixed template —
 citing the artifact's timeout election and the configured default
 rule — and routes it through the existing
-[DEC-0033](DEC-0033-typed-mechanical-writes.md) auto-PR machinery:
+DEC-0033 auto-PR machinery:
 program-user approval gated by a deterministic template-conformance
 check. No new write path; the mechanical allowlist is untouched.
 
@@ -53,6 +53,6 @@ the outcome). PR history keeps every auto-resolution visible.
 
 The template-conformance check joins the validator family the gate
 engine provisions
-([DEC-0142](DEC-0142-gate-engine-owns-check-registration.md));
+(DEC-0142);
 "System Decision" enters the glossary; criteria land in
-[ST-0015](../stories/ST-0015-conflicts-open-check-and-operations.md).
+ST-0015.

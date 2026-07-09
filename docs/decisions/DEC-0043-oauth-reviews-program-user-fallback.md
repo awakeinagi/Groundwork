@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-The UI wraps the PR gate ([DEC-0032](DEC-0032-ui-wraps-pr-gate.md)), so an
+The UI wraps the PR gate (DEC-0032), so an
 approve click must become a host PR review — but business approvers may not
 have code-host seats.
 
@@ -46,4 +46,4 @@ verification pair keeps the fallback honest.
 
 The connector contract includes delegated-review (OAuth token per user) and
 program-user review operations; the person registry
-([DEC-0046](DEC-0046-person-registry.md)) stores the OAuth linkage.
+(DEC-0046) stores the OAuth linkage.

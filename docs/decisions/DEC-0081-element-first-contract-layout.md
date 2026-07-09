@@ -47,5 +47,5 @@ would give.
 
 [SPEC-component](../specs/SPEC-component.md) restructured;
 [SPEC-design-elements](../specs/SPEC-design-elements.md) defines the ID
-scheme; [ST-0007](../stories/ST-0007-tier2-check-suite.md) checks item-ID well-formedness and uniqueness. [CMP-0001](../components/CMP-0001-artifact-store-service.md)
+scheme; ST-0007 checks item-ID well-formedness and uniqueness. CMP-0001
 (draft) restructured to the new layout.

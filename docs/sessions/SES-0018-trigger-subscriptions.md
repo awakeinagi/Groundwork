@@ -18,10 +18,10 @@ links:
 ## Purpose
 
 The participant identified two gaps in the trigger registry as designed
-in [SES-0017](SES-0017-v1-storage-stack-and-triggers.md)
-([DEC-0106](../decisions/DEC-0106-trigger-registry.md)): an item
+in SES-0017
+(DEC-0106): an item
 subscribed to several triggers (like
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) under
+SP-0002 under
 `TRG-0001`–`TRG-0004`) must be unsubscribed from the others when one
 fires — a revived item cannot be re-revived; and one trigger should be
 subscribable by multiple items so the same condition is never duplicated.
@@ -59,10 +59,10 @@ arming decision.
 
 ## Decisions Produced
 
-- [DEC-0109](../decisions/DEC-0109-trigger-subscriptions.md) — trigger
+- DEC-0109 — trigger
   entries hold a subscriber list; each subscription is individually
   decision-cited; a firing revives all subscribers
-- [DEC-0110](../decisions/DEC-0110-subscription-lifecycle.md) —
+- DEC-0110 —
   subscription lifecycle invariants: armed triggers subscribe only
   deferred artifacts (≥1); revival unsubscribes the item everywhere
   else; an emptied armed trigger auto-retires

@@ -17,7 +17,7 @@ links:
 ## Context
 
 The agent's existing-context feeds include read-only codebase access
-([DEC-0016](DEC-0016-agent-context-feeds.md)); the scope of that access
+(DEC-0016); the scope of that access
 needed governance.
 
 ## Decision
@@ -25,7 +25,7 @@ needed governance.
 `governance/repos.yaml` lists the repositories the agent may read, with
 optional path excludes for secrets or sensitive areas; connector tokens are
 read-only and scoped to the list; changes are PR-gated like all governance
-([DEC-0037](DEC-0037-governance-as-code.md)). Any Decision influenced by
+(DEC-0037). Any Decision influenced by
 code the agent read cites repo + ref, keeping provenance intact.
 
 ## Rationale

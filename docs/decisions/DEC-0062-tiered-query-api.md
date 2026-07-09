@@ -18,7 +18,7 @@ links:
 
 Consumers range from fixed shapes (trace-to-goal for the UI, build-order
 for manifests) through agent on-demand exploration
-([DEC-0056](DEC-0056-context-recipes-in-packs.md)) to power-user analysis —
+(DEC-0056) to power-user analysis —
 and the sponsor wants an advanced query language available — while the
 engine must stay swappable.
 
@@ -32,7 +32,7 @@ endpoint**: read-only **openCypher** with depth/time/result-size guards and
 a required view parameter. openCypher is chosen over raw engine passthrough
 because it is an engine-independent standard (Neo4j, KuzuDB, Memgraph,
 Apache AGE) — the advanced tier constrains the engine choice
-([DEC-0061](DEC-0061-engine-via-spike.md)) instead of the engine
+(DEC-0061) instead of the engine
 constraining the contract.
 
 ## Rationale
@@ -49,6 +49,6 @@ resource-exhaustion surface.
 
 ## Implications
 
-openCypher support is a hard [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) criterion; guard limits are
+openCypher support is a hard SP-0002 criterion; guard limits are
 deployment configuration; GraphQL remains a possible future convenience
-layer for [EP-0006](../epics/EP-0006-refinement-web-ui.md), not a commitment.
+layer for EP-0006, not a commitment.

@@ -18,36 +18,36 @@ links:
 
 ## Context
 
-[DEC-0116](DEC-0116-separate-search-script-and-index.md) designed
+DEC-0116 designed
 `scripts/groundwork_search.py` but it had not been built; the audit POC
-([SES-0024](../sessions/SES-0024-decision-recall-audit.md)) de-risked
+(SES-0024) de-risked
 its retrieval core.
 
 ## Decision
 
 The POC is promoted into the skill's `scripts/groundwork_search.py`
 implementing `search`, `similar`, `audit`, and `build` per the accepted
-semantics ([DEC-0111](DEC-0111-skill-semantic-search-duckdb-vss.md),
-[DEC-0113](DEC-0113-section-and-turn-chunking.md),
-[DEC-0114](DEC-0114-no-persisted-hnsw.md),
-[DEC-0117](DEC-0117-index-freshness.md),
-[DEC-0118](DEC-0118-cite-ready-output-and-guidance.md),
-[DEC-0119](DEC-0119-hybrid-retrieval-semantics.md)), with two recorded
+semantics (DEC-0111,
+DEC-0113,
+DEC-0114,
+DEC-0117,
+DEC-0118,
+DEC-0119), with two recorded
 implementation stances:
 
 1. **Hybrid graph features compute from frontmatter links directly**
    (one-hop boost with 0.25 decay, `--within` subtree closure,
    superseded redirect) — the same edges
-   [DEC-0119](DEC-0119-hybrid-retrieval-semantics.md) names, without
+   DEC-0119 names, without
    the read-only LadybugDB dependency of
-   [DEC-0116](DEC-0116-separate-search-script-and-index.md)'s
+   DEC-0116's
    dependency list. The graph tool remains authoritative for
    provenance traversal; the staleness warning of
-   [DEC-0117](DEC-0117-index-freshness.md) is kept.
+   DEC-0117 is kept.
 2. **The vss extension is not loaded**: similarity is brute-force
-   (already mandated by [DEC-0114](DEC-0114-no-persisted-hnsw.md));
+   (already mandated by DEC-0114);
    vss returns with HNSW if
-   [SP-0003](../spikes/SP-0003-hnsw-index-adoption.md) revives.
+   SP-0003 revives.
 
 ## Rationale
 
@@ -58,7 +58,7 @@ retrieval semantic intact.
 
 ## Alternatives Considered
 
-- **Implement [DEC-0116](DEC-0116-separate-search-script-and-index.md)'s dependency list verbatim** — ladybug read-only
+- **Implement DEC-0116's dependency list verbatim** — ladybug read-only
   + vss loaded; rejected as dependencies without behavior at current
   corpus scale.
 

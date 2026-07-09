@@ -26,9 +26,9 @@ links:
 4. **Scope** — explicitly in and explicitly out. If the goal's work is
    release-scoped, this section also declares the named releases as a
    machine-parseable list
-   ([DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md)):
+   (DEC-0099):
    one item per release, the value in a code span (a SemVer prefix per
-   [DEC-0098](../decisions/DEC-0098-semver-release-labels.md)), the
+   DEC-0098), the
    current release marked `(current)`:
 
    ```markdown
@@ -42,7 +42,7 @@ links:
    re-scoping a release is a gated amendment to this goal. Any such
    amendment must review the [trigger registry](../TRIGGERS.md) — has an
    armed condition been met?
-   ([DEC-0108](../decisions/DEC-0108-trigger-surfacing.md)).
+   (DEC-0108).
 5. **Constraints** — non-negotiables: regulatory, technical, budget, timeline,
    organizational.
 6. **Stakeholders & Roles** — who cares, who answers questions, who approves.
@@ -58,4 +58,4 @@ links:
   decisions, they attach to the Epics/Components that implement them.
 - When a goal changes after approval, Impact Analysis runs over its subtree
   and descendants are marked `stale`
-  ([DEC-0007](../decisions/DEC-0007-impact-analysis-stale-marks.md)).
+  (DEC-0007).

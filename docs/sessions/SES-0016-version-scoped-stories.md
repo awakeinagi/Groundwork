@@ -24,14 +24,14 @@ easy way to rediscover them when the time is right. Already settled going
 in: the status lifecycle is a closed set meaning refinement maturity
 ([SPEC-artifact-common](../specs/SPEC-artifact-common.md)); the link
 vocabulary is closed
-([DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)); "v1"
+(DEC-0009); "v1"
 already exists informally in accepted decisions
-([DEC-0022](../decisions/DEC-0022-v1-goal-refinement-slice.md),
-[DEC-0073](../decisions/DEC-0073-v1-ui-surfaces.md)); uncovered approved
+(DEC-0022,
+DEC-0073); uncovered approved
 stories are flagged as design gaps
-([DEC-0093](../decisions/DEC-0093-story-design-coverage-check.md)) and
+(DEC-0093) and
 design percent-complete is equal-weighted over stories
-([DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md)) — any
+(DEC-0095) — any
 scoping mechanism must tell those tools which stories don't count yet.
 
 ## Transcript
@@ -113,17 +113,17 @@ story.
 
 ## Decisions Produced
 
-- [DEC-0097](../decisions/DEC-0097-deferred-status.md) — `deferred`
+- DEC-0097 — `deferred`
   joins the lifecycle for stories and epics; revival lands at `draft`
-- [DEC-0098](../decisions/DEC-0098-semver-release-labels.md) —
+- DEC-0098 —
   `release:` frontmatter field with SemVer-prefix values plus reserved
   `backlog`
-- [DEC-0099](../decisions/DEC-0099-releases-declared-in-goal-scope.md) —
+- DEC-0099 —
   release labels declared in the Business Goal's Scope section,
   checker-validated by exact match
-- [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md) —
+- DEC-0100 —
   deferral and revival each cite a decision
-- [DEC-0101](../decisions/DEC-0101-deferred-out-of-metrics.md) —
+- DEC-0101 —
   deferred items leave metric denominators and coverage warnings; gain a
   dedicated discovery view
 

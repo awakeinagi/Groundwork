@@ -102,12 +102,14 @@ Rules:
 - Link values are bare artifact IDs; the vocabulary above is **closed** —
   no invented link types. Empty lists may be omitted.
 - Frontmatter links are the authoritative relationships; the frontmatter
-  is what tools read. In body prose, cross-references must be inline
-  markdown links (`[EP-0003](../epics/EP-0003-....md)`) — navigational
-  only, no graph semantics, but mandatory: a bare artifact ID outside
-  code spans/fenced blocks (other than the artifact's own ID) is an
-  integrity violation the checker reports, and link targets must resolve
-  to the named artifact's file.
+  is what tools read. In body prose, cross-references to artifacts are
+  **bare IDs** (`EP-0003`, `DEC-0152`; citation clauses `(per DEC-0152,
+  DEC-0239)`) — navigational rendering is a viewer concern, no graph
+  semantics in prose. Every bare ID outside code spans/fenced blocks
+  must resolve to an existing artifact, and an inline markdown link
+  targeting an artifact file is an integrity violation the checker
+  reports. Markdown links remain for non-artifact files (CONTEXT.md,
+  specs, code) and URLs.
 - **Impact links**: "X impacts Y" means decisions recorded while refining
   X are expected to constrain, shape, or invalidate decisions in Y. They
   connect *same-type* artifacts only, and both endpoints record the
@@ -304,7 +306,7 @@ dangling type references block the gate. The `### Name (type)` headings
 are the single machine-readable source of truth (no frontmatter element
 list). **Implements lines**: every element declares, directly under its
 heading, the story or stories whose implementation it handles
-(`Implements: [ST-nnnn](…)`, ≥1, resolvable — missing or empty is a
+(`Implements: ST-nnnn`, ≥1, resolvable — missing or empty is a
 gate-blocker; an element no story motivates means refine or cut). An
 element may only reference a story whose Component Impact links this
 CMP; a CMP cannot gate while a story naming it has no referencing
@@ -390,8 +392,10 @@ into projects at bootstrap):
 6. Impact links are reciprocal and same-type.
 7. Component design elements use the closed type enum; element names are
    unique within a doc.
-8. Body cross-references are resolvable markdown links; bare artifact IDs
-   in prose are violations.
+8. Body cross-references are bare artifact IDs that resolve to existing
+   artifacts; inline markdown links targeting artifact files are
+   violations; remaining relative links (non-artifact files) must
+   resolve.
 9. Every element heading is directly followed by an `Implements:` line
    naming ≥1 resolvable story whose Component Impact links the CMP back;
    approved stories no element implements are reported as design-coverage

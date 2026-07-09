@@ -23,12 +23,12 @@ handle, to make story/epic/goal completion decidable and to enable a
 percent-complete estimate per level of the design. Already settled going
 in: elements are declared only via parseable `### <Name> (<type>)`
 headings with no frontmatter mirror
-([DEC-0087](../decisions/DEC-0087-parseable-element-headings.md)); body
+(DEC-0087); body
 cross-references must be resolvable markdown links
-([DEC-0090](../decisions/DEC-0090-clickable-body-cross-references.md));
+(DEC-0090);
 stories declare doc-level story→CMP impact in their Component Impact
 section; and
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) already
+CMP-0001 already
 names its filling stories informally in each element's Pending block.
 
 ## Transcript
@@ -42,7 +42,7 @@ level of the design, an important and much needed metric.
 
 **T2 — Facilitator.** Framed the anchors above, flagged that the change
 would re-amend the gated validation stories (as
-[SES-0012](SES-0012-component-spec-design-elements.md) did), and surfaced
+SES-0012 did), and surfaced
 a hidden fork: "completed" ultimately depends on implementation status,
 which lives beyond the Handoff Manifest, while the design tree natively
 measures only design completion. Round 1 questions with recommendations:
@@ -70,9 +70,9 @@ Component Docs this story *implements* or modifies" — the same word in
 the opposite direction. Questions with recommendations: (1) where
 implementation status lives — recommended projection-side, never in
 canon (Graph Index joins element→story edges with Jira story status in
-v1 via the existing [EP-0005](../epics/EP-0005-connectors-and-identity.md)
+v1 via the existing EP-0005
 connector; per-element contract-test feed as a later
-[EP-0004](../epics/EP-0004-graph-index.md) enhancement), over mechanical
+EP-0004 enhancement), over mechanical
 writes into canon or story-level-Jira-forever; (2) naming — recommended
 fixing **Implements** as element→story in the glossary and mechanically
 rewording Component Impact to "builds or modifies", over `Realizes:` or
@@ -89,15 +89,15 @@ an informational-only edge.
 language — the Implements line, the coverage check, the reciprocity
 check, the percent-complete semantics, and staleness propagation — plus
 the follow-through plan (spec amendments, glossary entry, Implements
-lines in [CMP-0001](../components/CMP-0001-artifact-store-service.md),
-re-amendment of [ST-0007](../stories/ST-0007-tier2-check-suite.md),
+lines in CMP-0001,
+re-amendment of ST-0007,
 checker and skill updates).
 
 **T7 — awakeinagi.** Asked for a detailed overview of each decision
 before confirming.
 
 **T8 — Facilitator.** Provided per-decision overviews: what each decides,
-why (including the [DEC-0090](../decisions/DEC-0090-clickable-body-cross-references.md)
+why (including the DEC-0090
 lesson that non-enforced conventions drift), worked syntax examples, edge
 cases (helper elements inherit their parent element's stories; graduated
 seam CMPs reference the stories that birthed the seam), timing (coverage
@@ -110,11 +110,11 @@ honesty → metric arithmetic → truth over time).
 
 ## Decisions Produced
 
-[DEC-0092](../decisions/DEC-0092-element-implements-line.md),
-[DEC-0093](../decisions/DEC-0093-story-design-coverage-check.md),
-[DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md),
-[DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md),
-[DEC-0096](../decisions/DEC-0096-implements-staleness-propagation.md)
+DEC-0092,
+DEC-0093,
+DEC-0094,
+DEC-0095,
+DEC-0096
 
 ## Conflicts Raised
 

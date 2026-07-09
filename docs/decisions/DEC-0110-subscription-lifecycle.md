@@ -18,7 +18,7 @@ links:
 ## Context
 
 With multi-subscriber triggers
-([DEC-0109](DEC-0109-trigger-subscriptions.md)) and multi-trigger items
+(DEC-0109) and multi-trigger items
 (the graduation spike sits under four conditions), revival must clean up
 the subscription graph: a revived item cannot be revived again.
 
@@ -60,6 +60,6 @@ waiting on.
 The checker validates armed-subscriber status and non-empty armed
 triggers; [SPEC-triggers](../specs/SPEC-triggers.md) records the
 lifecycle. When a trigger fires and revives all its subscribers
-([DEC-0109](DEC-0109-trigger-subscriptions.md)), each revived item's
+(DEC-0109), each revived item's
 other subscriptions are removed and any trigger thereby emptied retires
 — one decision, one commit, whole-graph consistency.

@@ -16,9 +16,9 @@ links:
 
 ## Context
 
-PR approval is the gate sign-off ([DEC-0028](DEC-0028-fork-pull-pr-gating.md)),
+PR approval is the gate sign-off (DEC-0028),
 but people interface with Groundwork via its UI
-([DEC-0002](DEC-0002-doc-store-canonical.md)) — a Product Owner approving a
+(DEC-0002) — a Product Owner approving a
 Business Goal should not need to navigate a Bitbucket/GitHub pull request.
 
 ## Decision
@@ -28,7 +28,7 @@ provenance, impact report) and its approve/request-changes actions drive the
 host's PR-review API through the code-host connector. The PR remains the
 durable, auditable gate record. Technical users may also review host-side;
 both paths land in the same PR record. Committee gates
-([DEC-0020](DEC-0020-configurable-gate-policies.md)) map onto the host's
+(DEC-0020) map onto the host's
 required-reviewer/approval-count mechanics, configured by the gate engine.
 
 ## Rationale
@@ -47,5 +47,5 @@ substrate instead of a parallel app-internal approval store.
 ## Implications
 
 Approvers need host identities the connector can act for (or on behalf of,
-via delegated review) — an [EP-0005](../epics/EP-0005-connectors-and-identity.md) contract requirement. Gate-policy
-configuration ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)) compiles down to host branch-protection settings.
+via delegated review) — an EP-0005 contract requirement. Gate-policy
+configuration (EP-0003) compiles down to host branch-protection settings.

@@ -18,24 +18,24 @@ links:
 ## Context
 
 The design percent-complete rollups
-([DEC-0095](DEC-0095-percent-complete-metrics.md)) and story-coverage
-warnings ([DEC-0093](DEC-0093-story-design-coverage-check.md)) assume
+(DEC-0095) and story-coverage
+warnings (DEC-0093) assume
 every story counts. Deferred stories
-([DEC-0097](DEC-0097-deferred-status.md)) would read as false gaps and
+(DEC-0097) would read as false gaps and
 artificially deflate current-release progress.
 
 ## Decision
 
 Clarifying — not superseding —
-[DEC-0093](DEC-0093-story-design-coverage-check.md) and
-[DEC-0095](DEC-0095-percent-complete-metrics.md): their denominators are
+DEC-0093 and
+DEC-0095: their denominators are
 **in-scope stories only**. `deferred` stories leave the design-%
 rollups and the uncovered-story warnings. New audit warning: a
 component design element whose `Implements:` line references *only*
 deferred stories (in-scope contract content motivated by nothing in
 scope). Discovery surface: the status report gains a **Deferred**
 section grouped by release label and sorted by SemVer precedence with
-`backlog` last (per [DEC-0098](DEC-0098-semver-release-labels.md)), and
+`backlog` last (per DEC-0098), and
 the graph tooling a backlog view/filter.
 
 ## Rationale
@@ -58,4 +58,4 @@ directly instead of polluting the completion metrics.
 
 `tools/check_links.py` and the skill's status/graph tooling need
 updates; the deferred-only-Implements warning extends the audit family
-of [DEC-0093](DEC-0093-story-design-coverage-check.md).
+of DEC-0093.

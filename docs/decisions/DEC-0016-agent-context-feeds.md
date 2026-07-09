@@ -17,7 +17,7 @@ links:
 ## Context
 
 Refining new goals requires awareness of the existing world
-([DEC-0004](DEC-0004-new-goals-existing-context.md)): current systems,
+(DEC-0004): current systems,
 in-flight backlog, prior decisions.
 
 ## Decision
@@ -33,7 +33,7 @@ graph.
 
 These are the three places organizational truth actually lives. The
 cross-reference system and Graph Index
-([DEC-0010](DEC-0010-graph-index-derived.md)) exist precisely to make feed
+(DEC-0010) exist precisely to make feed
 (3) efficiently navigable.
 
 ## Alternatives Considered
@@ -41,7 +41,7 @@ cross-reference system and Graph Index
 - **Wiki/Confluence ingestion**: deferred; can be added as another read
   connector later.
 - **Human-curated context packs**: evolved into the Consolidation memory
-  layer ([DEC-0017](DEC-0017-consolidation-memory-layer.md)) rather than a
+  layer (DEC-0017) rather than a
   manual authoring burden.
 
 ## Implications

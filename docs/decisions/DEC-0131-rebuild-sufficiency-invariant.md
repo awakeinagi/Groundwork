@@ -17,15 +17,15 @@ links:
 
 ## Context
 
-Rescan-on-boot ([DEC-0077](DEC-0077-id-rescan-on-boot.md)), the
-outbox-is-plumbing rule ([DEC-0103](DEC-0103-outbox-in-app-database.md)),
-and event replayability ([ST-0008](../stories/ST-0008-change-event-stream.md))
+Rescan-on-boot (DEC-0077), the
+outbox-is-plumbing rule (DEC-0103),
+and event replayability (ST-0008)
 each assert a piece of the same guarantee without a component-level
 home.
 
 ## Decision
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) guarantees
+CMP-0001 guarantees
 as a component invariant: **every piece of derived state — app
 database contents, outbox, worktrees, ID counters, and any cache — is
 reconstructible from the fork's git refs alone.** A deployment restored
@@ -34,7 +34,7 @@ from only the fork repository converges to correct service state.
 ## Rationale
 
 This is the load-bearing generalization of canonical-store discipline
-([DEC-0002](DEC-0002-doc-store-canonical.md)): git is the single source
+(DEC-0002): git is the single source
 of truth, so anything not rebuildable from it would be a second truth.
 Naming it once at component level keeps each element's design honest —
 any proposed persistent state must answer "how is this rebuilt from

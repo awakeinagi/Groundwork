@@ -29,36 +29,36 @@ stays synchronized with branch/PR state throughout.
 
 1. Creating an artifact opens a dedicated item branch on the fork and a PR
    against upstream main, carrying the artifact and its associated
-   sessions/decisions as they accrue (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
+   sessions/decisions as they accrue (per DEC-0028).
 2. PR merge transitions the artifact to `approved`, recording approver
-   identities resolved from the PR's reviews (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md), [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md),
-   [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+   identities resolved from the PR's reviews (per DEC-0028, DEC-0032,
+   DEC-0043).
 3. Post-merge edits to the same item reuse its branch and open a new PR;
    the artifact returns to `in-refinement`/`gated` accordingly
-   (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
+   (per DEC-0028).
 4. Frontmatter `status` and branch/PR state can never disagree at rest:
    every lifecycle transition updates both atomically or reconciles on
-   next event (per [DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)).
+   next event (per DEC-0028).
 5. All host interactions go through the code-host connector contract and
    respect its capability manifest; v1 target is GitHub (cloud)
-   (per [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md), [DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)).
+   (per DEC-0045, DEC-0172).
 6. The full orchestration test suite passes hermetically against the
    local-git fake connector, which implements the complete contract
    including its capability manifest and ships as part of this story
-   (per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).
+   (per DEC-0079).
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
+CMP-0001 — supplies
 the branch/PR sections of its Behavior and API Contracts.
 
 ## Out of Scope
 
 Gate *policy* evaluation (Governance engine's `gate-policy` check); the
-review UI ([EP-0006](../epics/EP-0006-refinement-web-ui.md)); the GitHub connector implementation itself ([EP-0005](../epics/EP-0005-connectors-and-identity.md)).
+review UI (EP-0006); the GitHub connector implementation itself (EP-0005).
 
 ## Notes for Implementers
 
 The fake connector is a permanent test double — its simulated review/check
 semantics track the contract spec, never any particular host's quirks
-(per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).
+(per DEC-0079).

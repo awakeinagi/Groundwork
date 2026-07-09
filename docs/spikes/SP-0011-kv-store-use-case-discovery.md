@@ -17,9 +17,9 @@ cites: [DEC-0203]
 # SP-0011: KV-Store Additional Use-Case Discovery
 
 > Deferred to `backlog` at creation (per
-> [DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md), the
+> DEC-0203, the
 > deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)). Not
+> DEC-0100). Not
 > trigger-subscribed — revived manually when a concrete candidate use
 > case is proposed, not by a scale condition.
 
@@ -28,7 +28,7 @@ cites: [DEC-0203]
 What additional KV-store use cases — beyond the two already scoped
 (ephemeral coordination state as the baseline, general-purpose caching
 as a supported extension, per
-[DEC-0203](../decisions/DEC-0203-queue-kv-ports-added.md)) — does
+DEC-0203) — does
 Groundwork need, and does the current Port contract (get / set / delete,
 with TTL) accommodate them without modification?
 
@@ -50,7 +50,7 @@ guarantee.
    contract vs. routing the use case to a different Port (or a new one).
 4. Record contract extensions — or explicit confirmation that none are
    needed — as Decisions, per
-   [DEC-0023](../decisions/DEC-0023-spike-findings-become-decisions.md).
+   DEC-0023.
 
 ## Findings
 

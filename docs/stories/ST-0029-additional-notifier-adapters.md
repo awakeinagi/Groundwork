@@ -16,9 +16,9 @@ cites: [DEC-0075, DEC-0156]
 # ST-0029: Additional Notifier Adapters
 
 > Deferred to `backlog` at creation (per
-> [DEC-0156](../decisions/DEC-0156-future-connector-families-deferred.md),
+> DEC-0156,
 > the deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
+> DEC-0100).
 > Subscribed to trigger TRG-0008 — a deployment requiring a
 > notification channel beyond email revives it.
 
@@ -34,20 +34,20 @@ Indicative until revival re-refines this story (deferred stories cannot
 pass a gate):
 
 1. Each new adapter implements the notifier contract from
-   [ST-0024](ST-0024-notifier-connector-email-adapter.md) and passes
+   ST-0024 and passes
    its conformance expectations
-   (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+   (per DEC-0075).
 2. Channel selection stays a per-user preference; the in-app
    notification center remains the source of truth regardless of
-   channel (per [DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)).
+   channel (per DEC-0075).
 
 ## Component Impact
 
 None yet — adapters land in or alongside
-[CMP-0008](../components/CMP-0008-notification-delivery.md) at revival.
+CMP-0008 at revival.
 
 ## Out of Scope
 
 The notifier contract and email adapter
-([ST-0024](ST-0024-notifier-connector-email-adapter.md)); notification
-routing rules ([EP-0006](../epics/EP-0006-refinement-web-ui.md)).
+(ST-0024); notification
+routing rules (EP-0006).

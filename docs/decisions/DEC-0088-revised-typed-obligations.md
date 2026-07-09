@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-The sponsor challenged [DEC-0083](DEC-0083-typed-contract-obligations.md):
+The sponsor challenged DEC-0083:
 shouldn't entities define behavior and API contracts (the public API of
 the object)? The original table compressed entity behavior into
 "identity & lifecycle invariants" and said nothing about when an entity
@@ -25,7 +25,7 @@ owes an API contract.
 
 ## Decision
 
-The typed obligations table is revised (superseding [DEC-0083](DEC-0083-typed-contract-obligations.md)):
+The typed obligations table is revised (superseding DEC-0083):
 
 - **entity** ⇒ **behavior contract** (identity semantics, lifecycle
   states, allowed transitions, domain-operation semantics) + **data
@@ -47,9 +47,9 @@ must guarantee is contract material, expressible as behavior items
 without prescribing method signatures. Mandating A-kind on every entity
 would force language-shaped signatures onto internal classes,
 constraining implementation shape against
-[DEC-0011](DEC-0011-contract-complete-component-docs.md)'s
+DEC-0011's
 observable-guarantee standard and
-[DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md); the
+DEC-0018; the
 conditional captures the one case where an entity genuinely fronts the
 boundary.
 
@@ -57,13 +57,13 @@ boundary.
 
 - **B+A+D all mandatory for entities**: uniform, but most entity
   A-sections would restate their B-items in implementation-shaped form.
-- **Keep [DEC-0083](DEC-0083-typed-contract-obligations.md) as-is**: leaves entity operation semantics without a
+- **Keep DEC-0083 as-is**: leaves entity operation semantics without a
   clearly mandated home.
 
 ## Implications
 
 Obligations table updated in
-[SPEC-design-elements](../specs/SPEC-design-elements.md); [ST-0007](../stories/ST-0007-tier2-check-suite.md) and
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) cites move from [DEC-0083](DEC-0083-typed-contract-obligations.md) to this decision. Service I/O coverage
+[SPEC-design-elements](../specs/SPEC-design-elements.md); ST-0007 and
+CMP-0001 cites move from DEC-0083 to this decision. Service I/O coverage
 is handled separately by
-[DEC-0089](DEC-0089-api-schema-resolution-rule.md).
+DEC-0089.

@@ -16,7 +16,7 @@ links:
 
 ## Context
 
-The drift flow ([DEC-0044](DEC-0044-drift-revert-capture-proposal.md))
+The drift flow (DEC-0044)
 captures edits as "change proposals" — a concept the taxonomy lacked.
 Similar proposal-shaped input will arrive from UI suggestion-edits and,
 eventually, implementation-swarm feedback.
@@ -41,11 +41,11 @@ declined) and a uniform triage flow, at the cost of one small spec.
 
 - **Draft commit on the item branch**: an external edit mutating canonical
   drafts uninvited blurs the API-writes-only rule
-  ([DEC-0029](DEC-0029-api-writes-git-reads.md)).
+  (DEC-0029).
 - **Session-only**: unactioned proposals evaporate without audit.
 
 ## Implications
 
 New [SPEC-change-proposal](../specs/SPEC-change-proposal.md); checker and
 common spec updated with the `CP` prefix; CP triage added to the session
-agent's scope ([EP-0002](../epics/EP-0002-refinement-session-agent.md)).
+agent's scope (EP-0002).

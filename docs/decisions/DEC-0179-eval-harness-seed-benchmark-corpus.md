@@ -17,11 +17,11 @@ links:
 
 ## Context
 
-[EP-0002](../epics/EP-0002-refinement-session-agent.md)'s Risks flagged
+EP-0002's Risks flagged
 that grilling-quality and guardrail benchmarks need scenarios to judge
 against, and none exist before the first production session. Left
 unresolved, the harness would ship toothless — unable to gate pack
-changes or model swaps ([DEC-0058](DEC-0058-evaluation-harness.md)) —
+changes or model swaps (DEC-0058) —
 until enough real sessions accumulated.
 
 ## Decision
@@ -45,10 +45,10 @@ be the only source or the harness is unusable at launch.
   to gate anything until real sessions accumulate — exactly when pack
   changes are most likely (early iteration) and least protected.
 - **Separate spike on corpus methodology**: the scenario shape (one per
-  strategy-pack phase) is already implied by [DEC-0053](DEC-0053-strategy-packs-as-plugins.md)'s
+  strategy-pack phase) is already implied by DEC-0053's
   phase list; a spike would re-derive what's already decided.
 
 ## Implications
 
-[ST-0041](../stories/ST-0041-evaluation-harness.md)'s acceptance criteria
+ST-0041's acceptance criteria
 require the seed corpus as a deliverable, not a stretch goal.

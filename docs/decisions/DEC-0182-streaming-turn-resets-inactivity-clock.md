@@ -19,8 +19,8 @@ links:
 ## Context
 
 The decision-recall audit on
-[ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)
-flagged a race [DEC-0057](DEC-0057-session-lifecycle.md) left open:
+ST-0032
+flagged a race DEC-0057 left open:
 streaming turn append (AC5) can overlap with the inactivity-window
 auto-close (AC3) — what happens if the window elapses while a turn is
 still streaming?
@@ -44,9 +44,9 @@ anything.
 - **Auto-close can truncate a partial turn**: simpler timer
   implementation, but risks data loss on exactly the participant input
   the system exists to capture faithfully
-  (per [DEC-0052](DEC-0052-raw-transcripts-regenerable-distillation.md)).
+  (per DEC-0052).
 
 ## Implications
 
-[ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)
+ST-0032
 AC6 states this as a testable behavior.

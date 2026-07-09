@@ -3,7 +3,7 @@
 Curated, derived reference material summarizing a frequently traveled path of
 the artifact graph — Groundwork's memory layer. Consolidations exist to keep
 agent context windows lean: an agent reads one Consolidation instead of
-crawling a dozen artifacts ([DEC-0017](../decisions/DEC-0017-consolidation-memory-layer.md)).
+crawling a dozen artifacts (DEC-0017).
 
 Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 
@@ -41,7 +41,7 @@ audience: session-agent | implementation-swarm | human-reviewer
   immediately (treated as stale) pending disposition — regenerate, fix
   sources, or correct the faithfulness checker. Confirmed misses become
   evaluation-corpus regression cases
-  ([DEC-0072](../decisions/DEC-0072-consolidation-review-flagging.md)).
+  (DEC-0072).
 - Consolidations are derived artifacts: they can always be deleted and
   rebuilt from sources. Nothing may cite a Consolidation as provenance —
   provenance citations go to Decisions and Sessions only.

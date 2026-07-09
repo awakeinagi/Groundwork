@@ -18,16 +18,16 @@ cites: [DEC-0059, DEC-0060, DEC-0080, DEC-0103, DEC-0128, DEC-0131, DEC-0134]
 # CMP-0002: ChangeEvent Contract
 
 > Standalone `event`-type component, graduated out of
-> [CMP-0001](CMP-0001-artifact-store-service.md) per
-> [DEC-0134](../decisions/DEC-0134-graduate-change-event.md) under the
-> [DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md)
+> CMP-0001 per
+> DEC-0134 under the
+> DEC-0080
 > rule: multiple consuming components.
 
 ## Purpose
 
 The cross-component seam every derived system rides: the schema and
 delivery semantics of the artifact-changed event emitted for each
-canonical write. Producers ([CMP-0001](CMP-0001-artifact-store-service.md))
+canonical write. Producers (CMP-0001)
 and consumers (Graph Index, governance sweeps, consolidation freshness)
 depend on this contract, not on each other.
 
@@ -40,7 +40,7 @@ Canonical Store, Artifact, Item Branch — per
 
 ### ChangeEvent (event)
 
-Implements: [ST-0008](../stories/ST-0008-change-event-stream.md)
+Implements: ST-0008
 
 - `ChangeEvent.D-1` — payload schema: `event_id` (uuid),
   `schema_version` (int), `artifact_id` (artifact-ID string per
@@ -48,26 +48,26 @@ Implements: [ST-0008](../stories/ST-0008-change-event-stream.md)
   `artifact_type`, `branch`, `commit` (sha), `kind` (closed enum:
   `created | content-amended | status-changed | merged | deleted`),
   `changed_fields[]`, `occurred_at` (timestamp). Extending the enum or
-  changing the payload is a gated contract change (per [DEC-0128](../decisions/DEC-0128-change-event-closed-schema.md),
-  [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)).
+  changing the payload is a gated contract change (per DEC-0128,
+  DEC-0059).
 - `ChangeEvent.B-1` — emission: every write landing in the repository —
   content, mechanical, merge — emits exactly one event, produced via
-  the emitter's transactional outbox (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md)).
+  the emitter's transactional outbox (per DEC-0059, DEC-0103).
 - `ChangeEvent.B-2` — delivery: at-least-once with per-artifact
   ordering; consumers are idempotent by contract; no cross-artifact
-  ordering or exactly-once guarantee exists (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
+  ordering or exactly-once guarantee exists (per DEC-0060).
 - `ChangeEvent.B-3` — merge events carry what the Graph Index needs to
   promote overlay state to the main view and drop the overlay
-  (per [DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)).
+  (per DEC-0059).
 - `ChangeEvent.B-4` — replayability: the stream is derivable from git
   history for any ref range; a consumer rebuilt from scratch converges
   to the state of one that consumed live. Delivery plumbing is never
-  truth (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md), [DEC-0103](../decisions/DEC-0103-outbox-in-app-database.md), [DEC-0131](../decisions/DEC-0131-rebuild-sufficiency-invariant.md)).
+  truth (per DEC-0060, DEC-0103, DEC-0131).
 
 ## Component Invariants
 
 - `C-1` — schema evolution is explicit: no payload change ships without
-  a `schema_version` bump and a gated contract change (per [DEC-0128](../decisions/DEC-0128-change-event-closed-schema.md)).
+  a `schema_version` bump and a gated contract change (per DEC-0128).
 
 ## Implementation Guidance
 
@@ -75,7 +75,7 @@ Implements: [ST-0008](../stories/ST-0008-change-event-stream.md)
 
 - `IG-1` — the published event schema is language-neutral; producer and
   consumer implementations validate against the same asset
-  (per [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
+  (per DEC-0018).
 
 ### Notes
 
@@ -89,18 +89,18 @@ None — this contract is a leaf; the emitter and consumers depend on it.
 ## Acceptance & Test Expectations
 
 1. Schema-asset validation: producer output and consumer fixtures
-   validate against the published schema (per [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md), [DEC-0128](../decisions/DEC-0128-change-event-closed-schema.md)).
+   validate against the published schema (per DEC-0018, DEC-0128).
 2. Replay convergence: a consumer rebuilt from git history converges to
-   the state of a live consumer over the same ref range (per [DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)).
+   the state of a live consumer over the same ref range (per DEC-0060).
 
 ## Out of Scope
 
-Boundary statements (per [DEC-0133](../decisions/DEC-0133-out-of-scope-differentiated-rule.md)):
+Boundary statements (per DEC-0133):
 
 - Emission mechanics — the outbox, dispatcher, and retries belong to
-  [CMP-0001](CMP-0001-artifact-store-service.md) and
-  [CMP-0003](CMP-0003-app-database-port.md).
+  CMP-0001 and
+  CMP-0003.
 - Consumer-side processing (Graph Index overlays, staleness sweeps,
-  consolidation invalidation — [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)/[EP-0004](../epics/EP-0004-graph-index.md)/[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)).
-- User-facing notifications ([EP-0006](../epics/EP-0006-refinement-web-ui.md)
+  consolidation invalidation — EP-0003/EP-0004/EP-0007).
+- User-facing notifications (EP-0006
   — they derive from governance events, not raw store events).

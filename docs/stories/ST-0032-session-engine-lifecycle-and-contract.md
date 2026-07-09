@@ -34,26 +34,26 @@ session this engine opened.
    particular chat UI — the pluggable-UI seam. `append-turn` and `close`
    are the only mutations the storage API accepts for session artifacts —
    no edit or delete of existing turns, enforced server-side
-   (per [DEC-0021](../decisions/DEC-0021-one-on-one-sessions.md),
-   [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)).
+   (per DEC-0021,
+   DEC-0035).
 2. Sessions stay open across pauses by default; resuming re-orients the
    participant with what's settled and what's open
-   (per [DEC-0057](../decisions/DEC-0057-session-lifecycle.md)).
+   (per DEC-0057).
 3. After a configurable inactivity window, the engine auto-closes the
    session with partial distillation: confirmed decisions commit as
    accepted, unconfirmed material is marked `proposed`, and the record
    notes incompleteness
-   (per [DEC-0057](../decisions/DEC-0057-session-lifecycle.md)).
+   (per DEC-0057).
 4. A later return opens a *new* session that loads the prior one as
    context, never reopening a closed session
-   (per [DEC-0057](../decisions/DEC-0057-session-lifecycle.md)).
+   (per DEC-0057).
 5. Turn append is streaming-capable: a consuming UI can render partial
    agent output as it's produced, without changing the append-turn
    contract's eventual-consistency guarantee once a turn completes.
 6. A turn actively streaming counts as activity: the inactivity window of
    AC3 only starts counting after the current turn fully completes.
    Auto-close never truncates a turn mid-stream
-   (per [DEC-0182](../decisions/DEC-0182-streaming-turn-resets-inactivity-clock.md)).
+   (per DEC-0182).
 
 ## Component Impact
 
@@ -62,14 +62,14 @@ None yet — a Component Doc for this epic's bounded context is stubbed once the
 ## Out of Scope
 
 Transcript content and storage format
-([ST-0034](ST-0034-transcript-capture-and-confirmed-distillation.md));
+(ST-0034);
 what strategy pack drives the session's questions
-([ST-0033](ST-0033-strategy-pack-format-and-plugin-loading.md)); the
-chat UI consuming this engine ([EP-0006](../epics/EP-0006-refinement-web-ui.md)).
+(ST-0033); the
+chat UI consuming this engine (EP-0006).
 
 ## Notes for Implementers
 
 The engine's contract must be UI-agnostic enough that both a chat web UI
-([EP-0006](../epics/EP-0006-refinement-web-ui.md)) and a CLI/agent-driven
+(EP-0006) and a CLI/agent-driven
 facilitator (as used in this project's own bootstrap) can drive it
 without engine changes.

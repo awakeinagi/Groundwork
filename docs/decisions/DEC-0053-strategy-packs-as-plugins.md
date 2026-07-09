@@ -47,7 +47,7 @@ decoupled from methodology changes — the sponsor's plugin framing.
 ## Implications
 
 A pack format spec (bundle layout, `pack.yaml` schema, skill/tool
-declaration) becomes an [EP-0002](../epics/EP-0002-refinement-session-agent.md) contract deliverable; pack changes and LLM
+declaration) becomes an EP-0002 contract deliverable; pack changes and LLM
 swaps are gated by the evaluation harness
-([DEC-0058](DEC-0058-evaluation-harness.md)); context recipes live in the
-pack ([DEC-0056](DEC-0056-context-recipes-in-packs.md)).
+(DEC-0058); context recipes live in the
+pack (DEC-0056).

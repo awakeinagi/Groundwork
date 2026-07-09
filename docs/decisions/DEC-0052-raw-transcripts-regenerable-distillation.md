@@ -49,6 +49,6 @@ debate into a diff.
 
 [SPEC-session](../specs/SPEC-session.md) strengthened: transcript = raw
 message log. Periodic drift audits run regeneration diffs
-([DEC-0058](DEC-0058-evaluation-harness.md)). For pre-application sessions
+(DEC-0058). For pre-application sessions
 (this repo's bootstrap), `transcript-fidelity: reconstructed` marks the
 exception; app-hosted sessions are always `verbatim`.

@@ -57,13 +57,13 @@ is gated).
   a program-user review, cryptographically attributing the review to
   the human approver; verified by the `gate-policy` check.
 - **Orchestrator App** — the GitHub App registration backing every
-  write operation of [CMP-0009](docs/components/CMP-0009-github-connector.md)
+  write operation of CMP-0009
   (fork/branch/PR orchestration, review posting, check and
   branch-protection administration, team sync); posts program-user
   reviews under its own bot identity. Structurally distinct from the
   Reader App.
 - **Reader App** — the read-only GitHub App registration backing
-  [CMP-0009](docs/components/CMP-0009-github-connector.md)'s
+  CMP-0009's
   allowlisted context reads, installed only on allowlisted
   repositories. Never shares a credential with the Orchestrator App.
 - **Port** — a Protocol-typed seam for a swappable infrastructure
@@ -76,7 +76,7 @@ is gated).
   by deployment configuration and valid only if it passes the Port's
   conformance test suite.
 - **Composition Root** — the single place, owned by
-  [EP-0008](docs/epics/EP-0008-backend-application-platform.md), where
+  EP-0008, where
   Port contracts are bound to concrete Adapters at process startup, from
   deployment configuration. Every other engine programs against Port
   contracts only; only the Composition Root knows which Adapters are

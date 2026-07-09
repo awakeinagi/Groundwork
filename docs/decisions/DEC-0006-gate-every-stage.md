@@ -30,7 +30,7 @@ UI transitions the artifact to `approved`.
 
 Each layer of the grounding chain is human-ratified — the essential quality
 backstop given unsupervised sessions
-([DEC-0003](DEC-0003-unsupervised-sessions.md)). Slower, and worth it.
+(DEC-0003). Slower, and worth it.
 
 ## Alternatives Considered
 
@@ -40,5 +40,5 @@ backstop given unsupervised sessions
 ## Implications
 
 Gate mechanics need roles and policies
-([DEC-0020](DEC-0020-configurable-gate-policies.md)); status lifecycle
+(DEC-0020); status lifecycle
 includes `gated` ([SPEC-artifact-common](../specs/SPEC-artifact-common.md)).

@@ -26,11 +26,11 @@ sprint workflow.
 Projections are created when the artifact first merges to main (approved);
 drafts never appear in Jira. Field ownership is split: **content fields**
 (title, summary, description, doc link, doc-id) are canonical-owned — edits
-there are drift ([DEC-0044](DEC-0044-drift-revert-capture-proposal.md)).
+there are drift (DEC-0044).
 **Workflow fields** (status column, sprint, assignee, estimates) are
 Jira-owned — teams work normally, and the connector syncs workflow state
 into the doc store as implementation telemetry via mechanical writes
-([DEC-0033](DEC-0033-typed-mechanical-writes.md)), not drift.
+(DEC-0033), not drift.
 
 ## Rationale
 

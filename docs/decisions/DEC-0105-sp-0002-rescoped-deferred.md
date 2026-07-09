@@ -17,27 +17,27 @@ links:
 
 ## Context
 
-With the v1 stack decided ([DEC-0102](DEC-0102-v1-embedded-stack.md)),
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)'s original
+With the v1 stack decided (DEC-0102),
+SP-0002's original
 question — which engine backs the Graph Index — is answered. The open
 question that remains is *when and how to graduate* off the embedded
 stack.
 
 ## Decision
 
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) is amended
+SP-0002 is amended
 rather than archived: its question becomes **"when and how should
 Groundwork graduate from embedded LadybugDB/DuckDB to Postgres +
 pgvector (or equivalent server-grade infrastructure)?"**, its method is
 rewritten for that question, and it is set `deferred` with
-`release: backlog` (per [DEC-0104](DEC-0104-deferred-extends-to-spikes.md)).
+`release: backlog` (per DEC-0104).
 Revival is governed by the armed triggers `TRG-0001`–`TRG-0004` in the
 registry ([TRIGGERS.md](../TRIGGERS.md), per
-[DEC-0106](DEC-0106-trigger-registry.md)): multi-node/HA required; more
+DEC-0106): multi-node/HA required; more
 than one concurrent writer process; embedded performance degrading at
 scale; an enterprise deployment mandating external managed databases.
 This decision is the deferral citation required by
-[DEC-0100](DEC-0100-scope-moves-cite-decisions.md).
+DEC-0100.
 
 ## Rationale
 

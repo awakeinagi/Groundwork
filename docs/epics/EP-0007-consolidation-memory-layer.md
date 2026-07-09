@@ -31,54 +31,54 @@ checking, and opt-in, user-owned participant profiles.
 ## Why (Goal Alignment)
 
 Refinement and implementation agents need existing context
-([DEC-0016](../decisions/DEC-0016-agent-context-feeds.md)) without
+(DEC-0016) without
 overwhelming their windows — the sponsor's explicit concern behind
-[DEC-0017](../decisions/DEC-0017-consolidation-memory-layer.md). Semantic
+DEC-0017. Semantic
 search additionally powers cross-goal conflict detection
-([DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)) — [BG-0001](../goals/BG-0001-groundwork.md)
+(DEC-0067) — BG-0001
 outcome 2 — and profiles improve the session experience the whole system
-rides on ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)).
+rides on (DEC-0071).
 
 ## Scope
 
-**In** (refined at [SES-0008](../sessions/SES-0008-ep-0007-refinement.md)):
+**In** (refined at SES-0008):
 
-- **Placement** ([DEC-0065](../decisions/DEC-0065-catalog-plus-telemetry-placement.md)):
+- **Placement** (DEC-0065):
   static always-on catalog (per-goal neighborhood, per-epic bundle,
   glossary-per-context) as repo configuration; telemetry-driven additions
-  and retirements from [EP-0004](EP-0004-graph-index.md)'s path-usage statistics; explicit human
+  and retirements from EP-0004's path-usage statistics; explicit human
   requests.
-- **Freshness & churn** ([DEC-0066](../decisions/DEC-0066-debounced-on-demand-regeneration.md)):
+- **Freshness & churn** (DEC-0066):
   instant staleness (never served stale); debounced regeneration
   (quiet-window / max-wait) plus on-demand rebuild at request time.
-- **Search** ([DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)):
+- **Search** (DEC-0067):
   full-text + embedding-based semantic search over bodies; derived and
   rebuildable; embedding-model version pinned, swap = re-embed batch.
-- **Serving** ([DEC-0068](../decisions/DEC-0068-recipe-resolver.md)):
+- **Serving** (DEC-0068):
   `resolve(recipe, task) → bundle` — deterministic assembly of graph
   paths, fresh consolidations, and search results, ranked and truncated to
   the token budget, every element carrying source refs and freshness
   metadata.
-- **Quality** ([DEC-0069](../decisions/DEC-0069-automated-faithfulness-checks.md)):
+- **Quality** (DEC-0069):
   no human gate; automated no-new-claims faithfulness checks block serving
   on failure; periodic judge sampling.
-- **Human review & flagging** ([DEC-0072](../decisions/DEC-0072-consolidation-review-flagging.md)):
+- **Human review & flagging** (DEC-0072):
   consolidations browsable in the UI with source refs, freshness state,
   and check history; any user's flag quarantines immediately (never
   served; resolver falls back to sources) pending disposition —
   regenerate, fix sources, or correct the checker; confirmed misses feed
   the evaluation corpus as regression cases.
-- **Participant profiles** ([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md)):
+- **Participant profiles** (DEC-0071):
   opt-in per user; readable and editable by the subject via the UI; stored
   per-person outside the canonical artifact store; served as bundle
   elements. Org facts never live in profiles — they belong in artifacts.
 
-**Out:** graph structure queries ([EP-0004](EP-0004-graph-index.md) — this layer composes them); the
-profile/consent UI itself ([EP-0006](EP-0006-refinement-web-ui.md), via the new EP-0007→[EP-0006](EP-0006-refinement-web-ui.md) impact
+**Out:** graph structure queries (EP-0004 — this layer composes them); the
+profile/consent UI itself (EP-0006, via the new EP-0007→EP-0006 impact
 edge); search/vector engine internals beyond the committed embedded engine —
-DuckDB per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md), with
+DuckDB per DEC-0102, with
 graduation deferred to
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md);
+SP-0002;
 provenance citation of consolidations (forbidden — [SPEC-consolidation](../specs/SPEC-consolidation.md)).
 
 ## Domain Context
@@ -88,23 +88,23 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
 
 ## Interfaces & Contracts to Define
 
-- **Recipe resolver contract**: recipe schema in ([DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md)),
+- **Recipe resolver contract**: recipe schema in (DEC-0056),
   bundle schema out — EP-0007's primary language-neutral interface.
 - **Search API**: full-text + semantic query operations with ref-pinned
   results; embedding-version metadata.
 - **Vector store port and embedding port**
-  ([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)): two
+  (DEC-0121): two
   separate Protocol seams — vector index/query, and text → vector
   (local model or REST client); adapters config-selected with
   conformance suites
-  ([DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)). The
+  (DEC-0122). The
   embedding port exposes model identity + dimensionality, stamped on
   the vector index; mismatch refuses service and forces a full re-embed
-  ([DEC-0123](../decisions/DEC-0123-embedding-identity-stamping.md)),
-  hardening [DEC-0067](../decisions/DEC-0067-retrieval-owns-search.md)'s
+  (DEC-0123),
+  hardening DEC-0067's
   "swap = re-embed batch". v1 ships the DuckDB + vss vector adapter and
   both embedding adapters
-  ([DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
+  (DEC-0124).
 - **Catalog schema**: the static consolidation catalog as repo
   configuration.
 - **Faithfulness-check contract**: generation → pass/blocked with report.
@@ -115,20 +115,20 @@ Participant Profile — per [CONTEXT.md](../../CONTEXT.md).
 
 ## Risks & Open Questions
 
-- Search/vector infrastructure — extended [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md).
+- Search/vector infrastructure — extended SP-0002.
 - Consolidation effectiveness measurement (do bundles beat raw crawls?) —
-  evaluation design shared with the [DEC-0058](../decisions/DEC-0058-evaluation-harness.md) harness.
+  evaluation design shared with the DEC-0058 harness.
 - Profile schema and retention policy (what may a profile contain; how
   long) — story-level, with privacy review.
 - Embedding re-index cost at corpus scale on model swap — measure in
-  [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md).
+  SP-0002.
 
 ## Derived Work
 
-Stories/spikes follow gate approval of this epic ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) is
-shared with [EP-0004](EP-0004-graph-index.md)). Deferred captures (backlog, no gate):
+Stories/spikes follow gate approval of this epic (SP-0002 is
+shared with EP-0004). Deferred captures (backlog, no gate):
 
-- [SP-0003](../spikes/SP-0003-hnsw-index-adoption.md) — HNSW index
-  adoption at scale (deferred per [DEC-0115](../decisions/DEC-0115-sp-0003-hnsw-deferred.md))
-- [ST-0009](../stories/ST-0009-hybrid-search-capabilities.md) — hybrid
-  search capabilities beyond v1 (deferred per [DEC-0120](../decisions/DEC-0120-v1-scope-and-backlog-capture.md))
+- SP-0003 — HNSW index
+  adoption at scale (deferred per DEC-0115)
+- ST-0009 — hybrid
+  search capabilities beyond v1 (deferred per DEC-0120)

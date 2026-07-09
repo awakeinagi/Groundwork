@@ -35,12 +35,12 @@ Section hits land the agent on the right part of the right doc —
 cite-ready. Per-turn rows make "who said what, when" searchable: the
 POC's prior-art tests found the exact turn where clickable links were
 first requested
-([SES-0014](../sessions/SES-0014-clickable-cross-references.md) T1) and
+(SES-0014 T1) and
 where version scoping was raised
-([SES-0016](../sessions/SES-0016-version-scoped-stories.md) T1), 3 for 3. The metadata columns are what make DuckDB
+(SES-0016 T1), 3 for 3. The metadata columns are what make DuckDB
 pre-filtering possible (verified in-session: `--type`/`--status`/
 `--current` filters are plain `WHERE` clauses over these columns, per
-[DEC-0119](DEC-0119-hybrid-retrieval-semantics.md)) — no additional
+DEC-0119) — no additional
 metadata is needed beyond what frontmatter already provides.
 
 ## Alternatives Considered

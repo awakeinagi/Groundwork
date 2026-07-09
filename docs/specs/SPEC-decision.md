@@ -3,7 +3,7 @@
 The unit of provenance: a distilled, attributable decision extracted from a
 Session (or produced by a Spike's findings). Contracts, requirements, and
 acceptance criteria cite Decisions; Decisions cite their source
-([DEC-0015](../decisions/DEC-0015-transcript-decision-citation-chain.md)).
+(DEC-0015).
 
 Extends [SPEC-artifact-common](SPEC-artifact-common.md).
 

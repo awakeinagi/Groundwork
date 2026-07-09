@@ -30,47 +30,47 @@ the UI, and manifest generation.
 
 ## Why (Goal Alignment)
 
-The cross-reference system is [BG-0001](../goals/BG-0001-groundwork.md)'s alignment backbone; the Graph Index
+The cross-reference system is BG-0001's alignment backbone; the Graph Index
 makes it efficiently navigable at scale
-([DEC-0010](../decisions/DEC-0010-graph-index-derived.md)) without
+(DEC-0010) without
 compromising single-source-of-truth
-([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md)) — including for
+(DEC-0002) — including for
 drafts mid-refinement under the fork-pull model
-([DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)).
+(DEC-0059).
 
 ## Scope
 
-**In** (refined at [SES-0007](../sessions/SES-0007-ep-0004-refinement.md)):
+**In** (refined at SES-0007):
 
-- **View model** ([DEC-0059](../decisions/DEC-0059-main-plus-branch-overlays.md)):
+- **View model** (DEC-0059):
   main base + per-item-branch overlays; view-parameterized queries;
   ref/status tagging on every result; overlay lifecycle bound to item
   branches.
-- **Freshness** ([DEC-0060](../decisions/DEC-0060-session-sync-global-async.md)):
+- **Freshness** (DEC-0060):
   synchronous writes to the writer's overlay (read-your-writes for
   sessions); async propagation elsewhere via the change-event stream;
   rebuild output as the correctness definition.
-- **Query tiers** ([DEC-0062](../decisions/DEC-0062-tiered-query-api.md)):
+- **Query tiers** (DEC-0062):
   named traversals (trace-to-goal, subtree, impact-neighborhood, cited-by,
   conflict-neighborhood, build-order); bounded generic traversal primitive
-  for agent tools ([DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md));
+  for agent tools (DEC-0056);
   read-only openCypher endpoint with depth/time/result guards.
-- **Content depth** ([DEC-0063](../decisions/DEC-0063-metadata-only-graph.md)):
+- **Content depth** (DEC-0063):
   frontmatter metadata only; bodies fetched from the store; text/semantic
-  search explicitly deferred to the retrieval layer ([EP-0007](EP-0007-consolidation-memory-layer.md)).
-- **Verification** ([DEC-0064](../decisions/DEC-0064-scheduled-rebuild-diff.md)):
+  search explicitly deferred to the retrieval layer (EP-0007).
+- **Verification** (DEC-0064):
   scheduled rebuild-and-diff with alarming and atomic replacement;
   deterministic `rebuild(ref) → index`.
 - **Path-usage telemetry**: consumer-tagged traversal statistics (edge
-  heat, no participant content) feeding consolidation placement ([EP-0007](EP-0007-consolidation-memory-layer.md)).
+  heat, no participant content) feeding consolidation placement (EP-0007).
 
 **Out:** engine internals beyond the committed embedded engine —
-LadybugDB per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md);
+LadybugDB per DEC-0102;
 graduation to server-grade infrastructure (deferred
-[SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md), revived by
+SP-0002, revived by
 the [trigger registry](../TRIGGERS.md)); what
-callers do with results; canonical link data itself ([EP-0001](EP-0001-artifact-store-and-format-engine.md) owns and
-validates it); text search ([EP-0007](EP-0007-consolidation-memory-layer.md)'s neighborhood).
+callers do with results; canonical link data itself (EP-0001 owns and
+validates it); text search (EP-0007's neighborhood).
 
 ## Domain Context
 
@@ -82,34 +82,34 @@ and [SPEC-artifact-common](../specs/SPEC-artifact-common.md).
 
 - **Graph query API**: the three tiers, language-neutral (OpenAPI), view
   parameter mandatory; engine hidden behind the executor boundary.
-- **Graph store port** ([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)):
+- **Graph store port** (DEC-0121):
   the executor boundary formalized as a Protocol seam — an
   openCypher-capable engine contract
-  ([DEC-0062](../decisions/DEC-0062-tiered-query-api.md)); adapters
+  (DEC-0062); adapters
   config-selected with a conformance suite
-  ([DEC-0122](../decisions/DEC-0122-config-selected-adapters.md)); v1
+  (DEC-0122); v1
   ships the LadybugDB adapter only
-  ([DEC-0124](../decisions/DEC-0124-v1-adapter-set.md)).
+  (DEC-0124).
 - **Rebuild contract**: `rebuild(canonical-ref) → index`, deterministic;
   diff format for verification runs.
 - **Overlay lifecycle contract**: create/update/drop tied to item-branch
-  events from [EP-0001](EP-0001-artifact-store-and-format-engine.md)'s change stream.
-- **Path-usage telemetry schema**: consumed by [EP-0007](EP-0007-consolidation-memory-layer.md).
+  events from EP-0001's change stream.
+- **Path-usage telemetry schema**: consumed by EP-0007.
 
 ## Risks & Open Questions
 
 - Embedded-engine scale limits (overlay memory/cost at high concurrent
   session counts, rebuild time at corpus growth) — watched by the armed
   graduation triggers in the [trigger registry](../TRIGGERS.md); crossing
-  them revives [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)
-  (per [DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md),
-  [DEC-0105](../decisions/DEC-0105-sp-0002-rescoped-deferred.md)).
+  them revives SP-0002
+  (per DEC-0102,
+  DEC-0105).
 - Guard calibration for the openCypher tier (limits tight enough to
   protect, loose enough to be useful) — story-level tuning.
 
 ## Derived Work
 
-- [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md) — Postgres +
+- SP-0002 — Postgres +
   pgvector graduation evaluation (originally the engine-selection spike,
   drafted during this epic's refinement; re-scoped and deferred per
-  [DEC-0105](../decisions/DEC-0105-sp-0002-rescoped-deferred.md)).
+  DEC-0105).

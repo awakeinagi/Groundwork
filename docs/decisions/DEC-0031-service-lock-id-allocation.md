@@ -17,14 +17,14 @@ links:
 ## Context
 
 IDs are sequential per prefix and never reused
-([DEC-0009](DEC-0009-typed-links-stable-ids.md)); concurrent creations must
+(DEC-0009); concurrent creations must
 not mint the same ID — including creations on different item branches that
 have not yet merged.
 
 ## Decision
 
 The API server serializes ID allocation with a thread/process-safe lock.
-Because all writes flow through the service ([DEC-0029](DEC-0029-api-writes-git-reads.md)),
+Because all writes flow through the service (DEC-0029),
 service-side serialization is sufficient regardless of which branch a
 creation lands on.
 
@@ -45,4 +45,4 @@ committed counter file on main would lag branches.
 Counter durability across service restarts must be specified at story level
 (e.g., rescan all refs on boot, or a persisted allocation log); multi-node
 API deployment upgrades "process-safe lock" to a distributed lock — noted
-as an [EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) story concern.
+as an EP-0001 story concern.

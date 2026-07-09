@@ -26,24 +26,24 @@ passing" signal from beyond the Handoff Manifest.
 ## Decision
 
 Two metrics, both computed over the element→story Implements edges
-([DEC-0092](DEC-0092-element-implements-line.md)), both estimates rather
+(DEC-0092), both estimates rather
 than project management:
 
 - **Design %.** An element is **design-complete** when its typed
   contract obligations
-  ([DEC-0088](DEC-0088-revised-typed-obligations.md)) are met with no
+  (DEC-0088) are met with no
   Pending content. A story's design % is the fraction of elements
   referencing it that are design-complete; a story with no referencing
   element is 0% and flagged uncovered (per
-  [DEC-0093](DEC-0093-story-design-coverage-check.md)). An epic's
+  DEC-0093). An epic's
   design % is the equal-weighted average over its derived stories; a
   business goal's, over its epics.
 - **Implementation %.** The same rollup, with the per-story
   built-and-passing signal living **projection-side, never in canon**:
   v1 joins the Graph Index against Jira story status via the existing
-  connector ([EP-0005](../epics/EP-0005-connectors-and-identity.md),
-  [DEC-0013](DEC-0013-jira-summary-plus-link.md)); a later enhancement
-  under [EP-0004](../epics/EP-0004-graph-index.md) upgrades the join to
+  connector (EP-0005,
+  DEC-0013); a later enhancement
+  under EP-0004 upgrades the join to
   per-element contract-test results flowing back across the Handoff
   Manifest. No volatile build state is ever committed into design
   markdown.
@@ -51,10 +51,10 @@ than project management:
 ## Rationale
 
 Design % is available immediately and honestly (today every element of
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) is Pending,
+CMP-0001 is Pending,
 so its stories sit at 0% designed — true). Keeping implementation status
 out of canon preserves the Canonical Store as pure design and matches
-the projection principle ([DEC-0010](DEC-0010-graph-index-derived.md)):
+the projection principle (DEC-0010):
 volatile external facts are joined at query time, not committed.
 Equal weighting is chosen because any weighting scheme (story points,
 item counts) invents precision the docs don't contain; a future
@@ -74,10 +74,10 @@ decision can refine it with real data.
 
 ## Implications
 
-The Graph Index ([EP-0004](../epics/EP-0004-graph-index.md)) owes
+The Graph Index (EP-0004) owes
 IMPLEMENTS edges and the two rollup queries; the per-element
 contract-test feed is named future scope of that epic. Design % is
 computable by the skill's graph tooling today. Implementation % joins
-Jira status via [EP-0005](../epics/EP-0005-connectors-and-identity.md)
+Jira status via EP-0005
 connectors. Both metrics degrade gracefully: uncovered stories read 0%,
 never unknown.

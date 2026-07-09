@@ -28,31 +28,31 @@ branch, and type-aware write rules.
 ## Acceptance Criteria
 
 1. Reads return the artifact plus the ref (commit sha) it was read at, and
-   accept an optional ref/branch parameter for pinned reads (per [DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md)).
+   accept an optional ref/branch parameter for pinned reads (per DEC-0029).
 2. Every write path runs tier-1 validation before any commit is
    constructed; failures return the validation library's field-level
-   errors (per [DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).
+   errors (per DEC-0034).
 3. The service is the only holder of repository write credentials; no
    other identity can push (verified by host-side permission test)
-   (per [DEC-0029](../decisions/DEC-0029-api-writes-git-reads.md), [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   (per DEC-0029, DEC-0033).
 4. Session artifacts expose only `append-turn` and `close` mutation
    operations; edit/delete of existing turns is unrepresentable in the API
-   (per [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md)).
+   (per DEC-0035).
 5. The full surface is defined in OpenAPI and published with the spec set;
    a conformance test suite runs against the contract, not the
-   implementation (per [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
+   implementation (per DEC-0018).
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
+CMP-0001 — supplies
 its API Contract core.
 
 ## Out of Scope
 
-Branch/PR orchestration ([ST-0003](ST-0003-item-branch-pr-orchestration.md)); worktrees ([ST-0004](ST-0004-session-worktree-management.md)); mechanical
-operations beyond session append/close ([ST-0006](ST-0006-typed-mechanical-writes.md)); events ([ST-0008](ST-0008-change-event-stream.md)).
+Branch/PR orchestration (ST-0003); worktrees (ST-0004); mechanical
+operations beyond session append/close (ST-0006); events (ST-0008).
 
 ## Notes for Implementers
 
-Python reference implementation per [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md), but the OpenAPI contract is
+Python reference implementation per DEC-0018, but the OpenAPI contract is
 the deliverable of record — write it first.

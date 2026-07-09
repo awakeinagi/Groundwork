@@ -46,4 +46,4 @@ elements with their own citable data-contract items.
 ## Implications
 
 Rule recorded in [SPEC-design-elements](../specs/SPEC-design-elements.md);
-enforced by the tier-2 suite ([ST-0007](../stories/ST-0007-tier2-check-suite.md)) as part of element validation.
+enforced by the tier-2 suite (ST-0007) as part of element validation.

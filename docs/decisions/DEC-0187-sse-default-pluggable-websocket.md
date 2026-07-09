@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)
+ST-0032
 AC5 requires turn append to be streaming-capable so a consuming UI can
 render partial agent output as it's produced. The v1 package needs a
 concrete transport assumption, but the sponsor also wants room for

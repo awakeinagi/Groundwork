@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-The [SES-0026](../sessions/SES-0026-ep-0005-story-derivation.md)
+The SES-0026
 incident was findable lexically: the cancelled operation's name
 appeared verbatim in the artifacts that still enumerated it. Contract
 identifiers in code spans — operation names, field names, config paths
@@ -40,14 +40,14 @@ dispositions.
 ## Rationale
 
 Exact-identifier joins complement the embedding audit
-([DEC-0137](DEC-0137-decision-recall-audit-step.md)): embeddings find
+(DEC-0137): embeddings find
 conceptual overlap, identifier joins find contract overlap, and
 contract overlap is what bites. Replayed on the incident, the tool
-flags [ST-0006](../stories/ST-0006-typed-mechanical-writes.md) and
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) from
-[DEC-0151](DEC-0151-workflow-telemetry-projection-side.md) — and its
+flags ST-0006 and
+CMP-0001 from
+DEC-0151 — and its
 first live run additionally surfaced
-[DEC-0130](DEC-0130-mechanical-ops-shared-allowlist.md)'s enumeration
+DEC-0130's enumeration
 of the cancelled operation, which the semantic audit had missed.
 
 ## Alternatives Considered
@@ -57,13 +57,13 @@ of the cancelled operation, which the semantic audit had missed.
 - **Full lexical index with stemming/BM25** — heavier machinery for
   marginal gain over containment on quasi-formal identifiers.
 - **Contract items as graph nodes** — the structural upgrade; deferred
-  to [SP-0007](../spikes/SP-0007-contract-item-graph-nodes.md)
-  ([DEC-0160](DEC-0160-sp-0007-item-nodes-spike.md)).
+  to SP-0007
+  (DEC-0160).
 
 ## Implications
 
 Ships in `scripts/groundwork_consistency.py` alongside the sweep
-([DEC-0157](DEC-0157-relates-to-sweep-at-distillation.md)); the skill
+(DEC-0157); the skill
 docs carry the step. Design input for the product's session agent when
-[EP-0002](../epics/EP-0002-refinement-session-agent.md) derives
+EP-0002 derives
 stories.

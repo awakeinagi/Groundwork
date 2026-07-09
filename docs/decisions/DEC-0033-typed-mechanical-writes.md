@@ -19,7 +19,7 @@ links:
 Mechanical mutations (stale marks, jira-key backfill, transcript turn
 appends, counters) record system facts, not design decisions — routing them
 through human PR approval would create approval spam. But direct commits
-raise two concerns ([SES-0003](../sessions/SES-0003-ep-0001-refinement.md) @ T5): enterprise rules may forbid direct
+raise two concerns (SES-0003 @ T5): enterprise rules may forbid direct
 commits to upstream main, and safeguards must guarantee the agent commits
 *only* metadata/append-only mutations, never bypassing the approval process.
 
@@ -34,7 +34,7 @@ Three-part safeguard:
    service constructs the commit from the operation's parameters; an
    arbitrary diff is *inexpressible* through the mechanical path. Content
    changes have exactly one route: the item-branch → PR path
-   ([DEC-0028](DEC-0028-fork-pull-pr-gating.md)).
+   (DEC-0028).
 3. **Verified fallback for protected mains**: where enterprise branch
    protection forbids direct pushes, the service opens auto-PRs approved by
    a dedicated program user — gated by a deterministic mechanical-diff CI
@@ -58,5 +58,5 @@ flooding humans with unrejectable approvals.
 ## Implications
 
 The mechanical-operation allowlist is part of the storage API contract
-([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)); the mechanical-diff validator is a required CI check the gate
-engine provisions ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)/[EP-0005](../epics/EP-0005-connectors-and-identity.md)).
+(EP-0001); the mechanical-diff validator is a required CI check the gate
+engine provisions (EP-0003/EP-0005).

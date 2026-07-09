@@ -347,7 +347,7 @@ service | event | protocol) and give each its own contract block with
 element-scoped item IDs — the element's type dictates which contract
 kinds it owes (see the CMP section of groundwork-system.md). Directly
 under each heading, an `Implements:` line names the story or stories
-the element handles (≥1, markdown-linked, consistent with each story's
+the element handles (≥1, by bare ID, consistent with each story's
 Component Impact); before gating, verify every story naming this CMP
 has a referencing element — an uncovered story is a design gap, an
 unmotivated element means refine or cut. Model

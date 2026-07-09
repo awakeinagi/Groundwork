@@ -29,7 +29,7 @@ user**: no profile exists or accrues without explicit consent. Profile
 data is **easily readable and editable by its subject via the UI** — users
 see exactly what the agent remembers about them and can correct or delete
 it. Profiles feed session conduct through the same bundle mechanism
-([DEC-0068](DEC-0068-recipe-resolver.md)) as any other context element.
+(DEC-0068) as any other context element.
 
 ## Rationale
 
@@ -49,6 +49,6 @@ the value.
 
 Profile storage is per-person, outside the canonical artifact store (it is
 personal data, not design truth) — storage design at story level. New
-impact edge [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)→[EP-0006](../epics/EP-0006-refinement-web-ui.md): profile viewer/editor and consent surface are
+impact edge EP-0007→EP-0006: profile viewer/editor and consent surface are
 UI requirements. Org facts the agent learns still belong in artifacts
 (glossary, decisions), never in profiles.

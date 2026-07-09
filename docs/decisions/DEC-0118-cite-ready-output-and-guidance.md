@@ -20,13 +20,13 @@ links:
 Search output must serve an agent's next action (cite, open, traverse)
 without flooding its context — the same token-economy concern that
 shaped armed-only trigger loading
-([DEC-0106](DEC-0106-trigger-registry.md)). And agents need to know
+(DEC-0106). And agents need to know
 *when* to reach for semantic search versus the graph tool.
 
 ## Decision
 
 Results are **two-tier**: a graph-boosted **artifact ranking** on top
-(per [DEC-0119](DEC-0119-hybrid-retrieval-semantics.md)), then the
+(per DEC-0119), then the
 exact **chunk hits** — each with artifact ID, section heading or turn
 number, status, similarity score, a short snippet, and any
 superseded-by redirect; deduplicated per artifact. Skill documentation

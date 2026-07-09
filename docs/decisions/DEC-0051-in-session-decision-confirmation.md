@@ -41,6 +41,6 @@ what they meant; the confirmation becomes part of the provenance chain.
 ## Implications
 
 Playback checkpoints are strategy-pack behavior
-([DEC-0053](DEC-0053-strategy-packs-as-plugins.md)); sessions auto-closed
+(DEC-0053); sessions auto-closed
 for inactivity commit only confirmed DECs, the rest staying `proposed`
-([DEC-0057](DEC-0057-session-lifecycle.md)).
+(DEC-0057).

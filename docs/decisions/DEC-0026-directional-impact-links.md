@@ -35,7 +35,7 @@ same-type restriction are enforced mechanically by the link checker.
 ## Rationale
 
 Directional edges are the minimum structure a refinement-ordering algorithm
-needs ([DEC-0027](DEC-0027-impact-ranked-refinement-order.md)). Storing both
+needs (DEC-0027). Storing both
 directions keeps each artifact self-describing when read in isolation
 (important for agents holding a single doc); the consistency risk of
 redundant storage is eliminated by checker-enforced reciprocity rather than

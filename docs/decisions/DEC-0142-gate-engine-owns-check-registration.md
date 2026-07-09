@@ -18,11 +18,11 @@ links:
 ## Context
 
 The decision-recall audit at story derivation surfaced an ownership
-ambiguity: [DEC-0132](DEC-0132-connector-consumption-forward-declared.md)
+ambiguity: DEC-0132
 forward-declares "required-check registration" among
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s consumed
+CMP-0001's consumed
 connector operations, while
-[DEC-0036](DEC-0036-host-base-plus-service-gate-check.md) has the gate
+DEC-0036 has the gate
 engine administering branch protection and required checks. Two
 components appeared to administer what blocks merge.
 
@@ -31,24 +31,24 @@ components appeared to administer what blocks merge.
 Required-check registration — which checks are required on which
 branches — is exclusively the gate engine's policy-compilation duty,
 covering `gate-policy`, `conflicts-open`, the tier-2 suite, and the
-mechanical-diff validator. [CMP-0001](../components/CMP-0001-artifact-store-service.md)'s
+mechanical-diff validator. CMP-0001's
 forward-declared operation is narrowed to *posting its own check
 results* (the tier-2 suite and mechanical-diff verdicts it computes).
 The registration and result-posting operations themselves live in
-[EP-0005](../epics/EP-0005-connectors-and-identity.md)'s connector
+EP-0005's connector
 contract, which both components consume.
 
 ## Rationale
 
 One component owns what-blocks-merge: branch-protection settings get a
 single writer and reconciler, preserving the seam
-[DEC-0036](DEC-0036-host-base-plus-service-gate-check.md) drew. The
+DEC-0036 drew. The
 storage service keeps computing what it is authoritative for without
 administering policy.
 
 ## Alternatives Considered
 
-- **[CMP-0001](../components/CMP-0001-artifact-store-service.md)
+- **CMP-0001
   registers everything**: one host-admin caller, but the
   component deciding merge policy no longer controls what blocks merge.
 - **Each component registers its own checks**: branch protection
@@ -56,11 +56,11 @@ administering policy.
 
 ## Implications
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s
+CMP-0001's
 Dependencies list is amended (registration → check-run result posting)
 for re-affirmation; the gate engine's registration duty lands in
-[ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md).
-[DEC-0132](DEC-0132-connector-consumption-forward-declared.md)'s rule —
-forward-declared consumption binds [EP-0005](../epics/EP-0005-connectors-and-identity.md)
+ST-0013.
+DEC-0132's rule —
+forward-declared consumption binds EP-0005
 refinement — is unchanged; the gate engine's operations join that
 binding list.

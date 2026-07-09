@@ -29,7 +29,7 @@ directly, never a source of truth.
 ## Rationale
 
 Gets graph-query ergonomics for agents without splitting truth between git
-and a database — the same drift problem [DEC-0002](DEC-0002-doc-store-canonical.md)
+and a database — the same drift problem DEC-0002
 eliminates for Jira must not be reintroduced internally.
 
 ## Alternatives Considered
@@ -42,5 +42,5 @@ eliminates for Jira must not be reintroduced internally.
 
 The Graph Index is a component with a rebuild contract; choice of graph
 engine is deferred behind its interface. Consolidation path analysis
-([DEC-0017](DEC-0017-consolidation-memory-layer.md)) and impact analysis
-([DEC-0007](DEC-0007-impact-analysis-stale-marks.md)) consume it.
+(DEC-0017) and impact analysis
+(DEC-0007) consume it.

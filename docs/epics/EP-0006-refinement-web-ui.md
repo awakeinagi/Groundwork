@@ -33,59 +33,59 @@ UI layer itself remains pluggable.
 ## Why (Goal Alignment)
 
 Groundwork is a standalone application because stakeholders interact with
-it directly ([DEC-0001](../decisions/DEC-0001-standalone-application.md)),
-unsupervised ([DEC-0003](../decisions/DEC-0003-unsupervised-sessions.md)) —
+it directly (DEC-0001),
+unsupervised (DEC-0003) —
 the UI is where that bet is won or lost. Canonical-store discipline
-([DEC-0002](../decisions/DEC-0002-doc-store-canonical.md)) requires the UI
+(DEC-0002) requires the UI
 to be good enough that people prefer it over editing Jira, and gate
 quality is bounded by what approvers can comprehend
-([DEC-0076](../decisions/DEC-0076-semantic-gate-diff.md)).
+(DEC-0076).
 
 ## Scope
 
-**In — v1** ([DEC-0073](../decisions/DEC-0073-v1-ui-surfaces.md), refined
-at [SES-0010](../sessions/SES-0010-ep-0006-refinement.md)):
+**In — v1** (DEC-0073, refined
+at SES-0010):
 
-- **Session experience** ([DEC-0074](../decisions/DEC-0074-structured-hybrid-session-ux.md)):
+- **Session experience** (DEC-0074):
   conversation stream mixing free chat with typed cards — question cards
   (options, recommended-first) and decision-playback cards
-  ([DEC-0051](../decisions/DEC-0051-in-session-decision-confirmation.md)) —
+  (DEC-0051) —
   plus a progress panel (settled/open/parked). Guaranteed affordances on
   every question: notes/clarifications on any choice, a free-text response,
   and an "elaborate" option (agent expands with examples and
   compare/contrast). Pause/resume per
-  [DEC-0057](../decisions/DEC-0057-session-lifecycle.md).
+  DEC-0057.
 - **Goal artifact view**: rendered Business Goal with provenance
   drill-down (goal → decisions → transcript spans) and typed-link
   navigation.
-- **Goal gate surface** ([DEC-0076](../decisions/DEC-0076-semantic-gate-diff.md)):
+- **Goal gate surface** (DEC-0076):
   semantic section-level diff, agent change summary, impact report,
   provenance links, approve/request-changes driving the host PR via the
-  connector ([DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md)); raw
+  connector (DEC-0032); raw
   diff one click away.
 - **Minimal conflict view**: tension, party intents, mediation record,
   escalation status (mediation itself happens in-session).
-- **Notification center** ([DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)):
+- **Notification center** (DEC-0075):
   in-app source of truth with read state; email delivery via the first
   notifier connector; per-user channel preferences.
 - **Identity**: login via the pluggable auth provider; OAuth host-identity
-  linking flow ([DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)).
+  linking flow (DEC-0043).
 
 **In — post-v1 stories** (each arriving with the capability that needs
-it): governance dashboards ([DEC-0042](../decisions/DEC-0042-governance-reporting-split.md));
+it): governance dashboards (DEC-0042);
 impact-ranked re-affirmation and approval queues
-([DEC-0041](../decisions/DEC-0041-impact-ranked-reaffirmation-queue.md));
+(DEC-0041);
 participant profile viewer/editor with consent management
-([DEC-0071](../decisions/DEC-0071-opt-in-participant-profiles.md));
+(DEC-0071);
 consolidation review and flagging
-([DEC-0072](../decisions/DEC-0072-consolidation-review-flagging.md));
+(DEC-0072);
 synthesis shared-draft commenting feeding CPs
-([DEC-0055](../decisions/DEC-0055-incremental-synthesis-shared-draft.md));
+(DEC-0055);
 CP triage views; full artifact/graph browsing across all types.
 
-**Out:** the agent behind the sessions ([EP-0002](EP-0002-refinement-session-agent.md)); approval semantics
-([EP-0003](EP-0003-governance-and-gate-engine.md)); connectors and auth providers themselves ([EP-0005](EP-0005-connectors-and-identity.md)); retrieval
-and profiles storage ([EP-0007](EP-0007-consolidation-memory-layer.md)).
+**Out:** the agent behind the sessions (EP-0002); approval semantics
+(EP-0003); connectors and auth providers themselves (EP-0005); retrieval
+and profiles storage (EP-0007).
 
 ## Domain Context
 
@@ -96,11 +96,11 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
 ## Interfaces & Contracts to Define
 
 - Consumes: session engine with **typed turn payloads** (question-card,
-  decision-playback, elaboration-request/response — the EP-0006→[EP-0002](EP-0002-refinement-session-agent.md)
-  impact realized by [DEC-0074](../decisions/DEC-0074-structured-hybrid-session-ux.md)),
-  storage API ([EP-0001](EP-0001-artifact-store-and-format-engine.md)), approval + metrics APIs ([EP-0003](EP-0003-governance-and-gate-engine.md)), graph queries
-  ([EP-0004](EP-0004-graph-index.md)), identity ([EP-0005](EP-0005-connectors-and-identity.md)), recipe resolver outputs and profile store
-  ([EP-0007](EP-0007-consolidation-memory-layer.md)).
+  decision-playback, elaboration-request/response — the EP-0006→EP-0002
+  impact realized by DEC-0074),
+  storage API (EP-0001), approval + metrics APIs (EP-0003), graph queries
+  (EP-0004), identity (EP-0005), recipe resolver outputs and profile store
+  (EP-0007).
 - **UI-pluggability boundary**: the typed session-engine contract is the
   seam — an alternative front end (Slack bot, CLI) must be buildable
   against it without backend changes.
@@ -109,41 +109,41 @@ match [CONTEXT.md](../../CONTEXT.md) exactly.
 
 ## Risks & Open Questions
 
-- Typed-payload contract elaboration must land in [EP-0002](EP-0002-refinement-session-agent.md)'s session-engine
+- Typed-payload contract elaboration must land in EP-0002's session-engine
   stories — recorded as a story-level contract elaboration within
-  [ST-0044](../stories/ST-0044-session-conversation-ux.md), consuming
-  [ST-0032](../stories/ST-0032-session-engine-lifecycle-and-contract.md)'s
-  contract (would be an [EP-0002](EP-0002-refinement-session-agent.md)
+  ST-0044, consuming
+  ST-0032's
+  contract (would be an EP-0002
   re-affirmation in live operation).
 - Async session ergonomics: re-orientation quality after long pauses —
-  resolved into [ST-0043](../stories/ST-0043-session-progress-and-lifecycle-shell.md)
-  AC2 (per [DEC-0057](../decisions/DEC-0057-session-lifecycle.md)).
+  resolved into ST-0043
+  AC2 (per DEC-0057).
 - Frontend framework and packaging selection — resolved at
-  [SES-0034](../sessions/SES-0034-ep-0006-story-derivation.md): an
+  SES-0034: an
   embeddable npm React component library for the stated Next.js 15 App
   Router / Tailwind CSS 4 / Radix UI host, plus a thin standalone app in
   this repo wrapping the same package
-  ([DEC-0184](../decisions/DEC-0184-ui-ships-as-embeddable-npm-component-library.md)–[DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md)).
+  (DEC-0184–DEC-0187).
 - Accessibility and responsive baseline — resolved at
-  [SES-0034](../sessions/SES-0034-ep-0006-story-derivation.md): WCAG 2.1
+  SES-0034: WCAG 2.1
   AA plus Tailwind's default breakpoints, folded into every v1 story's
   acceptance criteria rather than a standalone story
-  ([DEC-0188](../decisions/DEC-0188-shared-accessibility-responsive-baseline.md)).
+  (DEC-0188).
 
 ## Derived Work
 
-v1 stories ([SES-0034](../sessions/SES-0034-ep-0006-story-derivation.md)):
-[ST-0042](../stories/ST-0042-identity-login-and-oauth-linking.md)
-(identity), [ST-0043](../stories/ST-0043-session-progress-and-lifecycle-shell.md)
+v1 stories (SES-0034):
+ST-0042
+(identity), ST-0043
 (session progress/lifecycle shell),
-[ST-0044](../stories/ST-0044-session-conversation-ux.md) (session
-conversation UX), [ST-0045](../stories/ST-0045-goal-artifact-view.md)
-(goal artifact view), [ST-0046](../stories/ST-0046-goal-gate-surface.md)
-(goal gate surface), [ST-0047](../stories/ST-0047-minimal-conflict-view.md)
-(minimal conflict view), [ST-0048](../stories/ST-0048-notification-center.md)
-(notification center), [ST-0049](../stories/ST-0049-standalone-application-shell.md)
+ST-0044 (session
+conversation UX), ST-0045
+(goal artifact view), ST-0046
+(goal gate surface), ST-0047
+(minimal conflict view), ST-0048
+(notification center), ST-0049
 (standalone application shell).
 
-Deferred to release 2: [ST-0050](../stories/ST-0050-governance-dashboards.md)–[ST-0056](../stories/ST-0056-full-artifact-graph-browsing.md)
+Deferred to release 2: ST-0050–ST-0056
 (dashboards, re-affirmation queues, profile viewer, consolidation review,
 synthesis commenting, CP triage views, full artifact/graph browsing).

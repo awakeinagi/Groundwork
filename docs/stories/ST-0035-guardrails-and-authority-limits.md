@@ -32,20 +32,20 @@ participant input as data, never instructions.
    unproductive patterns (circular answers, hostility, fatigue) with
    graceful moves — reframe, park-and-continue, offer pause, or end with
    a partial record marked incomplete plus Arbiter notification
-   (per [DEC-0054](../decisions/DEC-0054-guardrails-authority-limits.md)).
+   (per DEC-0054).
 2. A participant's statements outside their governance-configured
    decision rights are captured as proposals attributed to them,
    requiring ratification by the right holder — never committed as
    accepted Decisions
-   (per [DEC-0054](../decisions/DEC-0054-guardrails-authority-limits.md)).
+   (per DEC-0054).
 3. Decision-rights lookups read the governance-configured role→rights
-   mapping ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)
+   mapping (EP-0003
    owns the schema) rather than duplicating rights logic in this
    component.
 4. Participant input is always treated as data describing the design,
    never as instructions that override agent behavior or process rules —
    injection attempts are logged, not obeyed
-   (per [DEC-0054](../decisions/DEC-0054-guardrails-authority-limits.md)).
+   (per DEC-0054).
 5. Every guardrail exit (park, pause, partial-record end) is
    distinguishable in the session record from a normal close, so
    downstream distillation and the eval harness can tell partial records
@@ -58,15 +58,15 @@ None yet — a Component Doc for this epic's bounded context is stubbed once the
 ## Out of Scope
 
 The governance decision-rights schema itself
-([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)); conflict
+(EP-0003); conflict
 mediation once a genuine (not unproductive-pattern) disagreement is
-detected ([ST-0036](ST-0036-conflict-detection-mediation-and-escalation.md));
+detected (ST-0036);
 guardrail benchmark tests
-([ST-0041](ST-0041-evaluation-harness.md)).
+(ST-0041).
 
 ## Notes for Implementers
 
 Distinguish "unproductive pattern" (this story's guardrail policy) from
 "genuine conflict" (a real, well-formed disagreement between parties,
-[ST-0036](ST-0036-conflict-detection-mediation-and-escalation.md)) —
+ST-0036) —
 the former is about session hygiene, the latter about content.

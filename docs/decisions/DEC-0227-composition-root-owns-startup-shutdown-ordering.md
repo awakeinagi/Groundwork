@@ -22,10 +22,10 @@ Binding Adapters is not order-free: engine resources (the DuckDB /
 LadybugDB handles) must open before their Adapters bind, services
 construct after their Ports exist, and the Background Job Execution
 Runtime's `start()`/`stop()` must be wired
-([CMP-0013](../components/CMP-0013-background-job-execution-runtime.md)
+(CMP-0013
 already forward-declares the Composition Root does this, per
-[DEC-0132](../decisions/DEC-0132-connector-consumption-forward-declared.md)).
-Drafting [CMP-0010](../components/CMP-0010-composition-root.md) needed
+DEC-0132).
+Drafting CMP-0010 needed
 to decide who owns that ordering: the Root, or the ASGI/API layer.
 
 ## Decision
@@ -36,7 +36,7 @@ Startup order: open engine resources → bind Adapters to Ports → build
 the typed container's services → `JobRuntime.start()` → ready. Shutdown
 runs the reverse: stop claiming new jobs → drain in-flight work (grace
 period) → close engine resources.
-[CMP-0011](../components/CMP-0011-inbound-api.md)'s FastAPI/ASGI
+CMP-0011's FastAPI/ASGI
 **lifespan** hook *invokes* these — it decides *when* in the ASGI
 lifecycle they fire, but does not own the ordering itself.
 
@@ -53,17 +53,17 @@ the application up and down through the same sequence.
 
 - **API/ASGI layer owns lifecycle; Root only returns a container**:
   rejected — pushes ordering and drain/close discipline into
-  [CMP-0011](../components/CMP-0011-inbound-api.md), coupling it to
-  [CMP-0013](../components/CMP-0013-background-job-execution-runtime.md)
+  CMP-0011, coupling it to
+  CMP-0013
   internals and leaving no shared bring-up path for non-HTTP
   entrypoints.
 
 ## Implications
 
-[CMP-0010](../components/CMP-0010-composition-root.md) contracts the
+CMP-0010 contracts the
 `startup()`/`shutdown()` sequence and its ordering as behavior items;
-[CMP-0011](../components/CMP-0011-inbound-api.md) consumes them from its
+CMP-0011 consumes them from its
 ASGI lifespan rather than orchestrating bring-up itself
-([DEC-0226](../decisions/DEC-0226-composition-root-typed-container-constructor-injection.md),
-[DEC-0202](../decisions/DEC-0202-fastapi-selected.md),
-[DEC-0208](../decisions/DEC-0208-queue-port-runtime-split.md)).
+(DEC-0226,
+DEC-0202,
+DEC-0208).

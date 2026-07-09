@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[DEC-0153](DEC-0153-service-signed-attribution-block.md) fixed the
+DEC-0153 fixed the
 signed attribution block with a single service key and its public key
 in deployment configuration, leaving rotation (compromise, policy)
 unaddressed.
@@ -26,7 +26,7 @@ unaddressed.
 
 The attribution-block schema carries a `key_id`; deployment
 configuration holds an ordered list of active public keys keyed by
-id. The verifier ([CMP-0004](../components/CMP-0004-governance-gate-engine.md))
+id. The verifier (CMP-0004)
 verifies against the key matching the block's `key_id`. Rotation: add
 the new key to the list, re-key the signer, retire the old key once
 open PRs drain.
@@ -43,7 +43,7 @@ attribution on every open PR.
 
 ## Implications
 
-Narrows [DEC-0153](DEC-0153-service-signed-attribution-block.md)'s
+Narrows DEC-0153's
 "the public key is deployment configuration" to a keyed list; the
-schema published by [CMP-0007](../components/CMP-0007-identity-and-access.md)
+schema published by CMP-0007
 and consumed by the gate engine includes `key_id` from v1.

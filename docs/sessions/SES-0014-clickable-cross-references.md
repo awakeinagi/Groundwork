@@ -19,9 +19,9 @@ links:
 
 The participant proposed updating the design-doc specs so cross-references
 are clickable, and asked for concerns before committing to the change.
-Already settled going in: [DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)
+Already settled going in: DEC-0009
 (frontmatter typed links over bare stable IDs as the machine-readable
-backbone) and [DEC-0010](../decisions/DEC-0010-graph-index-derived.md)
+backbone) and DEC-0010
 (the Graph Index is derived from frontmatter only).
 
 ## Transcript
@@ -33,16 +33,16 @@ cross-references clickable. Any concerns about that change?
 [SPEC-artifact-common](../specs/SPEC-artifact-common.md) already prescribes
 inline references as `[<ID>](relative/path.md)`, but practice has diverged —
 the 121-artifact corpus mixes markdown links with bare IDs in body prose
-(e.g. [ST-0001](../stories/ST-0001-tier1-schema-suite.md) wrote citations
+(e.g. ST-0001 wrote citations
 as bare `per DEC-0034, DEC-0009` text). So the change is really about
 scope and enforcement, with three concerns:
 
-1. *Frontmatter must stay bare IDs.* [DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)
+1. *Frontmatter must stay bare IDs.* DEC-0009
    makes frontmatter the machine-readable backbone; the Graph Index and
    `tools/check_links.py` parse those YAML values as plain IDs. Making them
-   markdown links breaks both tools and would require superseding [DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)
+   markdown links breaks both tools and would require superseding DEC-0009
    with a huge blast radius. Prose links are explicitly non-semantic
-   "navigational sugar", so a prose-side mandate complements [DEC-0009](../decisions/DEC-0009-typed-links-stable-ids.md)
+   "navigational sugar", so a prose-side mandate complements DEC-0009
    rather than conflicting with it. Recommended: scope to body prose only.
 2. *Link rot is unpoliced.* IDs are immutable but slugs and directories are
    embedded in relative paths, and the checker validates only
@@ -65,8 +65,8 @@ verified by diff review).
 
 ## Decisions Produced
 
-[DEC-0090](../decisions/DEC-0090-clickable-body-cross-references.md),
-[DEC-0091](../decisions/DEC-0091-formatting-only-linkification-pass.md)
+DEC-0090,
+DEC-0091
 
 ## Conflicts Raised
 

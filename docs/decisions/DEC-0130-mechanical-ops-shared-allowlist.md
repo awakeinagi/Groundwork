@@ -18,7 +18,7 @@ links:
 ## Context
 
 The closed mechanical operation set
-([DEC-0033](DEC-0033-typed-mechanical-writes.md)) needed a contract
+(DEC-0033) needed a contract
 modeling: value elements per operation, or API items on the service.
 
 ## Decision

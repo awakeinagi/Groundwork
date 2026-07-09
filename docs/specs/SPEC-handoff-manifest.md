@@ -2,7 +2,7 @@
 
 The machine-readable package Groundwork emits at its southern boundary: the
 complete input an Implementation Swarm needs to build a set of approved
-components in parallel ([DEC-0014](../decisions/DEC-0014-docs-are-the-product.md)).
+components in parallel (DEC-0014).
 This is an interface contract — swarm orchestration itself is out of scope.
 
 ## Format
@@ -40,4 +40,4 @@ build-order:                          # topological order over depends-on;
    complete input. If an implementer needs information not reachable from
    there, that is a documentation defect to feed back into refinement — the
    iterative path toward fully self-contained component docs
-   ([DEC-0011](../decisions/DEC-0011-contract-complete-component-docs.md)).
+   (DEC-0011).

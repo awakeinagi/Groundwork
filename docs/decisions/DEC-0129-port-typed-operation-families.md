@@ -18,7 +18,7 @@ links:
 ## Context
 
 "Consumers program against port contracts only"
-([DEC-0121](DEC-0121-infrastructure-ports.md)) leaves open whether the
+(DEC-0121) leaves open whether the
 port is a typed operation surface or a SQL pass-through.
 
 ## Decision
@@ -26,10 +26,10 @@ port is a typed operation surface or a SQL pass-through.
 The `AppDatabasePort` contract defines **engine-neutral typed operation
 families**: transactional unit-of-work (atomic commit/rollback), outbox
 append within a unit of work plus dispatch claim/ack/nack leasing
-([DEC-0103](DEC-0103-outbox-in-app-database.md)), and keyed
+(DEC-0103), and keyed
 operational-bookkeeping records (namespace, key, document). **No SQL
 crosses the seam.** The conformance suite
-([DEC-0122](DEC-0122-config-selected-adapters.md)) tests exactly these
+(DEC-0122) tests exactly these
 semantics — notably atomicity of write-bookkeeping plus outbox-append.
 
 ## Rationale

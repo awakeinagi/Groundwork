@@ -17,8 +17,8 @@ links:
 ## Context
 
 Bitbucket and GitHub differ in review semantics, required-check APIs, and
-team models; the gate engine ([EP-0003](../epics/EP-0003-governance-and-gate-engine.md)) must stay host-agnostic
-([DEC-0036](DEC-0036-host-base-plus-service-gate-check.md)).
+team models; the gate engine (EP-0003) must stay host-agnostic
+(DEC-0036).
 
 ## Decision
 
@@ -32,7 +32,7 @@ check where possible.
 ## Rationale
 
 New hosts become new connectors plus manifests, never core changes —
-the pluggable-boundary constraint of [BG-0001](../goals/BG-0001-groundwork.md) applied to variance, without
+the pluggable-boundary constraint of BG-0001 applied to variance, without
 sacrificing richer hosts' features to the lowest common denominator.
 
 ## Alternatives Considered
@@ -44,4 +44,4 @@ sacrificing richer hosts' features to the lowest common denominator.
 
 The minimum capability set is part of the connector spec (CMP-level); the
 v1 baseline is set by Bitbucket Data Center
-([DEC-0050](DEC-0050-bitbucket-datacenter-v1.md)).
+(DEC-0050).

@@ -17,24 +17,24 @@ links:
 
 ## Context
 
-[EP-0005](../epics/EP-0005-connectors-and-identity.md) recorded a
+EP-0005 recorded a
 candidate spike: Bitbucket Data Center has no native path-scoped
 reviewer requirements, so the `gate-policy` check carries more
-enforcement weight ([DEC-0050](DEC-0050-bitbucket-datacenter-v1.md)) —
+enforcement weight (DEC-0050) —
 and the whole gate design
-([DEC-0036](DEC-0036-host-base-plus-service-gate-check.md),
-[DEC-0142](DEC-0142-gate-engine-owns-check-registration.md)) assumes
+(DEC-0036,
+DEC-0142) assumes
 BBDC merge checks / Code Insights can host the registered required
 checks.
 
 ## Decision
 
-[SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) — a
+SP-0004 — a
 timeboxed spike against a real Bitbucket Data Center instance —
 validates that merge checks / Code Insights suffice as the
 required-check surface (per-PR blocking, re-reporting on recomputation,
 program-user visibility) **before**
-[ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md) gates.
+ST-0020 gates.
 Findings land as decisions.
 
 ## Rationale
@@ -53,6 +53,6 @@ capability, not code we control), which is what spikes are for.
 
 ## Implications
 
-[ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md)
+ST-0020
 depends on the spike; the spike is drafted in this derivation bundle
 and ratified with it.

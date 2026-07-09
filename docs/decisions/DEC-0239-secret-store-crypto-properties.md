@@ -17,14 +17,14 @@ links:
 
 ## Context
 
-[DEC-0152](DEC-0152-secrets-encrypted-in-app-database.md) requires
+DEC-0152 requires
 envelope encryption with a deployment-provided master key; how
 specific the graduated secret store's contract should be about
 algorithms was open.
 
 ## Decision
 
-[CMP-0015](../components/CMP-0015-secret-store.md)'s contract items
+CMP-0015's contract items
 state properties — envelope encryption, AEAD, per-secret data keys,
 master key never persisted alongside the data. The named v1 defaults
 (AES-256-GCM data keys; master key from environment or key file) are

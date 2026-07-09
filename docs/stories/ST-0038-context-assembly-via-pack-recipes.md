@@ -34,33 +34,33 @@ fresh 1:1 sessions.
    preferred consolidations, fallback crawls, a token budget with
    priority order for truncation, and whether on-demand graph-query
    tools are enabled mid-session
-   (per [DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md)).
+   (per DEC-0056).
 2. The retrieval layer resolves a pack's recipe via a `resolve(recipe,
    task) → bundle` operation against
-   [EP-0004](../epics/EP-0004-graph-index.md)'s Graph Index and
-   [EP-0007](../epics/EP-0007-consolidation-memory-layer.md)'s
+   EP-0004's Graph Index and
+   EP-0007's
    Consolidation layer at session start, and again on demand mid-session
    when the recipe enables on-demand tools; resolution is deterministic
    for a given (recipe, task, repo-ref, index-state) and every returned
    bundle element carries source refs and freshness metadata
-   (per [DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md),
-   [DEC-0068](../decisions/DEC-0068-recipe-resolver.md)).
+   (per DEC-0056,
+   DEC-0068).
 3. By default, a resolved context recipe excludes the incremental
    synthesis shared draft's prose from a fresh 1:1 session's context;
    only structured facts (settled, accepted decisions reachable via the
    graph) flow in — never the draft's framing or phrasing — unless a
    pack explicitly opts in for a documented reason
-   (per [DEC-0180](../decisions/DEC-0180-context-recipe-owns-anchoring-mitigation.md)).
+   (per DEC-0180).
 4. When a token budget is exceeded, required paths are fetched, fresh
    consolidations substitute where they cover a path, search fills
    remaining content gaps, and everything is ranked and truncated to the
    budget by the recipe's declared priority order — never an
    undocumented heuristic
-   (per [DEC-0068](../decisions/DEC-0068-recipe-resolver.md)).
+   (per DEC-0068).
 5. Recipe resolution degrades gracefully when a preferred consolidation
    is stale or missing, falling back to the declared crawl rather than
    failing the session open
-   (per [DEC-0068](../decisions/DEC-0068-recipe-resolver.md)).
+   (per DEC-0068).
 
 ## Component Impact
 
@@ -69,12 +69,12 @@ None yet — a Component Doc for this epic's bounded context is stubbed once the
 ## Out of Scope
 
 The Graph Index and Consolidation layer's own query/build mechanics
-([EP-0004](../epics/EP-0004-graph-index.md),
-[EP-0007](../epics/EP-0007-consolidation-memory-layer.md) — this story
+(EP-0004,
+EP-0007 — this story
 consumes their contracts); the pack schema fields the recipe lives inside
-([ST-0033](ST-0033-strategy-pack-format-and-plugin-loading.md)); what
+(ST-0033); what
 produces the shared draft being excluded by default
-([ST-0037](ST-0037-incremental-synthesis-and-shared-draft.md)).
+(ST-0037).
 
 ## Notes for Implementers
 

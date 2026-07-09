@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[DEC-0058](DEC-0058-evaluation-harness.md) requires the distillation-faithfulness
+DEC-0058 requires the distillation-faithfulness
 judge to differ from the session model, but left the enforcement
 mechanism open. Without a check, a deployment could silently point both
 roles at the same model family and lose the independence guarantee.
@@ -47,5 +47,5 @@ and model swaps.
 
 ## Implications
 
-[ST-0041](../stories/ST-0041-evaluation-harness.md)'s acceptance criteria
+ST-0041's acceptance criteria
 require the family-check enforcement as a testable behavior.

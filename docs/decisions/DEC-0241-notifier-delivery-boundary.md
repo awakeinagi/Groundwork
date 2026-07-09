@@ -17,10 +17,10 @@ links:
 
 ## Context
 
-[CMP-0008](../components/CMP-0008-notification-delivery.md)'s contract
+CMP-0008's contract
 needs a clear seam with the notification center
-([ST-0048](../stories/ST-0048-notification-center.md),
-[EP-0006](../epics/EP-0006-refinement-web-ui.md)): who resolves
+(ST-0048,
+EP-0006): who resolves
 per-user channel preferences, who renders notification content, who
 composes digests, and what the `deliver()` operation receives.
 
@@ -40,21 +40,21 @@ The notifier connector is a delivery pipe. The boundary:
 
 3. **Center composes digests.** Digest/batch timing, accumulation, and
    composition are the center's concern
-   ([DEC-0075](DEC-0075-notification-center-connectors.md)'s "batched
+   (DEC-0075's "batched
    via configured channels"). The connector sees one `deliver()` call
    per logical message, whether a single event or a pre-composed digest.
 
 4. **Idempotent on notification_id.** A retry with the same
    `notification_id` returns the previous result without re-sending,
    following the connector convention
-   ([DEC-0167](DEC-0167-connector-typed-error-idempotency-convention.md)).
+   (DEC-0167).
 
 ## Rationale
 
 Matches the code-host connector pattern: connectors receive resolved
 inputs (repo + credentials), not "figure out which repo." Preference
 storage is already the center's
-([ST-0048](../stories/ST-0048-notification-center.md) AC3); splitting
+(ST-0048 AC3); splitting
 resolution across two components would duplicate logic.
 Pre-rendered content keeps adapters simple and future channels
 (Slack/Teams, deferred behind `TRG-0008`) render-free. Opaque addresses
@@ -64,17 +64,17 @@ mean a new channel type adds an adapter, never a protocol type change.
 
 - **Person-id delivery (connector resolves preferences)**: more
   autonomous connector, but duplicates center logic and contradicts
-  [ST-0048](../stories/ST-0048-notification-center.md)'s preference
+  ST-0048's preference
   ownership.
 - **Structured data, adapter renders**: channel-native output (Slack
   blocks vs. HTML email) but a second template surface per adapter.
 - **Connector-side batching**: requires the connector to own a
   timer/flush lifecycle and preference awareness — crossing the boundary
-  [ST-0048](../stories/ST-0048-notification-center.md) drew.
+  ST-0048 drew.
 
 ## Implications
 
-[CMP-0008](../components/CMP-0008-notification-delivery.md)'s
+CMP-0008's
 NotifierConnector protocol specifies resolved inputs only;
 its typed error vocabulary and conformance expectations follow the
 established connector pattern.

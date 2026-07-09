@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[ST-0061](../stories/ST-0061-background-job-execution-runtime.md) AC6
+ST-0061 AC6
 requires the runtime to execute a bounded number of jobs concurrently,
 never unbounded fan-out. Without a per-execution timeout, a single
 handler that hangs (e.g. a stuck network call) occupies a concurrency
@@ -31,7 +31,7 @@ Each registered handler declares (or defaults to a runtime-wide
 fallback) a maximum execution duration; the runtime cancels a handler
 that exceeds it and calls `QueuePort.nack` as if the handler had
 raised, per
-[DEC-0223](DEC-0223-runtime-auto-nack-on-exception.md)'s exception
+DEC-0223's exception
 path.
 
 ## Rationale
@@ -39,6 +39,6 @@ path.
 A concurrency bound that can be silently eroded by hung jobs isn't
 really a bound. Timeout-triggered nack reuses the exact same
 failure-handling path exceptions already take
-([DEC-0223](DEC-0223-runtime-auto-nack-on-exception.md)) rather than
+(DEC-0223) rather than
 inventing a second one — a timeout is simply another way execution
 fails to complete cleanly.

@@ -33,12 +33,12 @@ Platform") to capture the connective tissue tying the seven domain epics
 into a runnable v1 application.
 
 **T2 — Facilitator.** Confirmed none of
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)..[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+EP-0001..EP-0007
 covers this; searched accepted decisions for prior ground
-([DEC-0121](../decisions/DEC-0121-infrastructure-ports.md) infra ports,
-[DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md) SSE
-transport, [DEC-0001](../decisions/DEC-0001-standalone-application.md)/
-[DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)
+(DEC-0121 infra ports,
+DEC-0187 SSE
+transport, DEC-0001/
+DEC-0018
 standalone-app/stack) and found the composition/runtime layer genuinely
 undecided. Asked for the raw scope and the "why now."
 
@@ -52,24 +52,24 @@ ready to present.
 
 **T5 — Stakeholder.** Interrupted before answering: asked why this never
 surfaced as an epic during the original
-[BG-0001](../goals/BG-0001-groundwork.md) →
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)..[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)
+BG-0001 →
+EP-0001..EP-0007
 derivation.
 
 **T6 — Facilitator.** Traced
-[SES-0001](SES-0001-groundwork-inception.md)/[SES-0002](SES-0002-impact-relationships.md):
-the seven epics were derived directly from [SES-0001](SES-0001-groundwork-inception.md)'s synthesis (T14),
+SES-0001/SES-0002:
+the seven epics were derived directly from SES-0001's synthesis (T14),
 mapping 1:1 onto the sponsor-named bounded contexts (storage, sessions,
 governance, graph, connectors/identity, UI, memory). "Standalone
 application" was captured only as a single goal-level constraint
-([DEC-0001](../decisions/DEC-0001-standalone-application.md)) and never
+(DEC-0001) and never
 decomposed into its own bounded context — domain-first decomposition
 answers "what does it do," not "what makes it a running program." That gap
 only becomes visible once actually assembling a runnable v1, which is
 where the stakeholder now is.
 
 **T7 — Stakeholder.** Pushed further:
-[DEC-0001](../decisions/DEC-0001-standalone-application.md)'s own
+DEC-0001's own
 Decision text literally names "backend services" as one of three
 deliverables (web UI, backend services, connector integrations) — how
 could a real gap exist when the requirement was written down? What
@@ -78,25 +78,25 @@ think it necessary?
 
 **T8 — Facilitator.** Traced where "backend services"-shaped decisions
 actually landed:
-[DEC-0121](../decisions/DEC-0121-infrastructure-ports.md) (infra ports)
+DEC-0121 (infra ports)
 under
-[EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md)/[EP-0004](../epics/EP-0004-graph-index.md)/[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)'s
-[SES-0020](SES-0020-pluggable-infrastructure-ports.md),
-[DEC-0187](../decisions/DEC-0187-sse-default-pluggable-websocket.md) (SSE
+EP-0001/EP-0004/EP-0007's
+SES-0020,
+DEC-0187 (SSE
 transport) under
-[EP-0006](../epics/EP-0006-refinement-web-ui.md)'s
-[SES-0034](SES-0034-ep-0006-story-derivation.md),
-[DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md)
+EP-0006's
+SES-0034,
+DEC-0152
 (secrets storage) under
-[EP-0005](../epics/EP-0005-connectors-and-identity.md)'s
-[SES-0026](SES-0026-ep-0005-story-derivation.md),
-[DEC-0163](../decisions/DEC-0163-governance-metrics-api-named-endpoints.md)
+EP-0005's
+SES-0026,
+DEC-0163
 (governance API shape) under
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md)'s
-[SES-0029](SES-0029-cmp-0004-governance-gate-engine-refinement.md) — each
+CMP-0004's
+SES-0029 — each
 answered narrowly by whichever domain epic needed it that day, never by a
 question aimed at "backend services" as its own deliverable. Root cause:
-[SES-0001](SES-0001-groundwork-inception.md) T14's synthesis listed capability-shaped items (pipeline,
+SES-0001 T14's synthesis listed capability-shaped items (pipeline,
 storage, governance, graph, memory) but never asked the structural
 follow-up ("a standalone app has some process and API shape; what is it?")
 after committing to "standalone application" in T2-T3.
@@ -183,12 +183,12 @@ Mode 2 pointer updated.
 
 ## Decisions Produced
 
-[DEC-0189](../decisions/DEC-0189-current-state-and-gap-bg-section.md),
-[DEC-0190](../decisions/DEC-0190-system-context-bg-section.md),
-[DEC-0191](../decisions/DEC-0191-illustrative-scenario-bg-section.md),
-[DEC-0192](../decisions/DEC-0192-goal-gate-context-and-flow-diagrams.md),
-[DEC-0193](../decisions/DEC-0193-tiered-goal-grilling-question-bank.md),
-[DEC-0194](../decisions/DEC-0194-epic-derivation-coverage-pass.md)
+DEC-0189,
+DEC-0190,
+DEC-0191,
+DEC-0192,
+DEC-0193,
+DEC-0194
 
 ## Conflicts Raised
 

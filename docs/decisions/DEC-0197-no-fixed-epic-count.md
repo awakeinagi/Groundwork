@@ -19,9 +19,9 @@ links:
 ## Context
 
 Combining a six-seam checklist
-([DEC-0195](DEC-0195-vertical-slicing-seam-catalog.md)) with the existing
+(DEC-0195) with the existing
 deliverable-coverage pass
-([DEC-0194](DEC-0194-epic-derivation-coverage-pass.md)) risked reading as
+(DEC-0194) risked reading as
 a mandate to maximize epic count — apply every seam to every goal
 regardless of its size.
 
@@ -32,7 +32,7 @@ required number of epics per goal; the six seams are candidate cuts to
 consider, not a quota to fill. Concrete signals are given for when to
 split a candidate epic (independent "Why"s for each half; the halves fall
 on opposite sides of a named seam; zero-mutual-blocking parallelism; the
-[coupling check](DEC-0196-cross-epic-coupling-check.md) shows low
+the coupling check (DEC-0196) shows low
 coupling) versus when to keep two candidates merged (the coupling check
 shows persistent mutual coupling that never resolves; one half has no
 standalone outcome of its own; the goal's total scope is too narrow to
@@ -45,7 +45,7 @@ mapped to *an* epic); without an explicit counterweight, pairing it with
 a six-seam checklist could drive artificial fragmentation on small
 goals. Tying the split/merge judgment to the same mechanical signal used
 to catch bad splits (mutual coupling,
-[DEC-0196](DEC-0196-cross-epic-coupling-check.md)) makes the two
+DEC-0196) makes the two
 decisions reinforce each other instead of duplicating guidance.
 
 ## Alternatives Considered

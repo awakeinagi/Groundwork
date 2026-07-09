@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-"Easily swappable/pluggable" ([DEC-0121](DEC-0121-infrastructure-ports.md))
+"Easily swappable/pluggable" (DEC-0121)
 needs an operational definition — clean seams with code-level wiring,
 config-time selection, or runtime plugin discovery.
 
@@ -33,12 +33,12 @@ adapter.
 ## Rationale
 
 Config selection is the strength the requirement actually needs: the
-graduation path ([SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md))
+graduation path (SP-0002)
 becomes "write an adapter, pass the suite, flip the config." The
 conformance suite is what makes a port real rather than aspirational —
 it is the executable form of the port contract, in the same spirit as
 the storage API's contract-first conformance testing
-([DEC-0018](DEC-0018-python-backend-language-agnostic-specs.md)).
+(DEC-0018).
 
 ## Alternatives Considered
 

@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-[DEC-0090](DEC-0090-clickable-body-cross-references.md) makes bare body
+DEC-0090 makes bare body
 cross-references integrity violations, but much of the existing corpus —
 including closed sessions (append-only) and accepted decisions (immutable)
 — predates the rule. Strict immutability would leave the corpus permanently

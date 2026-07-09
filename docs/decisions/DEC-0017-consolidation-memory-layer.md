@@ -34,7 +34,7 @@ provenance.
 Gets the context-window economy of summaries with a freshness guarantee that
 requires no judgment: ref mismatch = stale. Keeping consolidations
 non-citable preserves the provenance chain's integrity
-([DEC-0015](DEC-0015-transcript-decision-citation-chain.md)).
+(DEC-0015).
 
 ## Alternatives Considered
 
@@ -45,5 +45,5 @@ non-citable preserves the provenance chain's integrity
 ## Implications
 
 Formalized in [SPEC-consolidation](../specs/SPEC-consolidation.md). Requires
-graph-path usage analysis ([DEC-0010](DEC-0010-graph-index-derived.md)) to
+graph-path usage analysis (DEC-0010) to
 know which paths are hot, and a maintenance process for regeneration.

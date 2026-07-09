@@ -49,11 +49,11 @@ as separate gated artifact types (BG/EP/ST).
   incrementally during epic/story refinement; baking it into the BG would
   force goal-level re-affirmation for changes the sponsor never needed to
   weigh in on, undermining the gating discipline
-  [BG-0001](../goals/BG-0001-groundwork.md)'s own Outcome 4 ("Parallel
+  BG-0001's own Outcome 4 ("Parallel
   implementability") depends on.
 
 ## Implications
 
 Epic and Story playbooks in `references/refinement-process.md` gain a
 carry-forward step to pick up flagged-but-unresolved bad paths.
-[BG-0001](../goals/BG-0001-groundwork.md) is backfilled with this section.
+BG-0001 is backfilled with this section.

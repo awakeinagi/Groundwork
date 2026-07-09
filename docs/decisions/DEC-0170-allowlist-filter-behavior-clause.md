@@ -17,11 +17,11 @@ links:
 
 ## Context
 
-[ST-0023](../stories/ST-0023-read-only-context-access.md)'s Component
-Impact says [CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)
+ST-0023's Component
+Impact says CMP-0005
 supplies "the read-operation and allowlist-filter contract sections" —
 leaving open whether `governance/repos.yaml` filtering and path
-excludes ([DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md))
+excludes (DEC-0049)
 deserve their own design element or belong inside the read operations
 themselves.
 
@@ -44,7 +44,7 @@ with identity. A separate value/service element would model a
 cross-cutting concern as if it were a first-class capability, adding
 element bookkeeping (an `Implements:` line, a graduation check) without
 a corresponding design payoff. Keeping the seam small also matches
-[CMP-0002](../components/CMP-0002-change-event.md)/[CMP-0003](../components/CMP-0003-app-database-port.md)'s
+CMP-0002/CMP-0003's
 pattern of one element per genuinely distinct capability.
 
 ## Alternatives Considered
@@ -58,6 +58,6 @@ pattern of one element per genuinely distinct capability.
 
 `CodeHostConnector.A-9`'s contract items state the allowlist and
 path-exclude behavior directly, citing
-[DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md); the
+DEC-0049; the
 conformance suite tests it as part of the read-operation family, not as
 a standalone test target.

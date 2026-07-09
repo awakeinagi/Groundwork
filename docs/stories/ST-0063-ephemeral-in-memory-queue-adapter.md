@@ -20,15 +20,15 @@ cites: [DEC-0204]
 ## Summary
 
 An `asyncio.Queue`-backed alternate Adapter for the Queue Port
-([ST-0060](ST-0060-queue-port.md)) — a real, useful option (e.g. tests,
+(ST-0060) — a real, useful option (e.g. tests,
 local dev without persistence overhead) but not the v1 default, and not
 built in v1
-(per [DEC-0204](../decisions/DEC-0204-v1-default-adapters-deferred-alternates.md)).
+(per DEC-0204).
 
 ## Acceptance Criteria
 
 1. Passes the Queue Port's conformance suite
-   ([ST-0060](ST-0060-queue-port.md)) like any other Adapter, when
+   (ST-0060) like any other Adapter, when
    built.
 2. Jobs do not survive a process restart — documented as the Adapter's
    defining trade-off against the durable default, never mistaken for
@@ -40,7 +40,7 @@ None — deferred; no Component Doc work occurs until revived.
 
 ## Out of Scope
 
-The durable v1 default adapter — [ST-0060](ST-0060-queue-port.md).
+The durable v1 default adapter — ST-0060.
 
 ## Notes for Implementers
 
@@ -48,4 +48,4 @@ Not subscribed to `TRG-0001`/`TRG-0002` — those triggers govern
 graduation to *external* adapters, not the choice between two embedded
 options. Revive manually if a concrete need (e.g. a testing/dev-
 environment preference) surfaces
-(per [DEC-0204](../decisions/DEC-0204-v1-default-adapters-deferred-alternates.md)).
+(per DEC-0204).

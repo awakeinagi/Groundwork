@@ -45,4 +45,4 @@ every large merge.
 
 Bounded-lag targets are deployment configuration; the rebuild-equals-truth
 definition is operationally enforced by
-[DEC-0064](DEC-0064-scheduled-rebuild-diff.md).
+DEC-0064.

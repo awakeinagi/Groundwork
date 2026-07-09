@@ -52,6 +52,6 @@ already watches.
 ## Implications
 
 HNSW adoption is deferred to
-[SP-0003](../spikes/SP-0003-hnsw-index-adoption.md) under `TRG-0003`
-([DEC-0115](DEC-0115-sp-0003-hnsw-deferred.md)). Result quality is
+SP-0003 under `TRG-0003`
+(DEC-0115). Result quality is
 exact by construction — no recall/accuracy trade-off to tune today.

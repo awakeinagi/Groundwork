@@ -29,39 +29,39 @@ decision citing repo + ref.
 1. Browse/search operations return content only from repositories
    listed in `governance/repos.yaml`; a repository absent from the
    allowlist is indistinguishable from one that doesn't exist
-   (per [DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md)).
+   (per DEC-0049).
 2. Per-repository path excludes are enforced on every operation —
    excluded paths never appear in listings, search results, or file
-   reads (per [DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md)).
+   reads (per DEC-0049).
 3. Connector tokens used for context reads are read-only and scoped to
    the allowlisted repositories
-   (per [DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md)).
+   (per DEC-0049).
 4. A published repo+ref citation format lets Decisions influenced by
    code reads record exactly what was read; the session agent's context
    feed surfaces it with every read result
-   (per [DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md),
-   [DEC-0016](../decisions/DEC-0016-agent-context-feeds.md)).
+   (per DEC-0049,
+   DEC-0016).
 5. No write operation to any codebase is expressible through the
-   context-access surface (per [DEC-0014](../decisions/DEC-0014-docs-are-the-product.md)).
+   context-access surface (per DEC-0014).
 6. The allowlist and path-exclude enforcement suite passes hermetically
    against the local-git fake connector
-   (per [DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md)).
+   (per DEC-0079).
 
 ## Component Impact
 
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md) —
+CMP-0005 —
 supplies the read-operation and allowlist-filter contract sections;
-[CMP-0009](../components/CMP-0009-github-connector.md) — the GitHub
+CMP-0009 — the GitHub
 (v1) implementation of both, per
-[DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md);
-[CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md) —
+DEC-0172;
+CMP-0006 —
 the deferred Bitbucket Data Center implementation.
 
 ## Out of Scope
 
 What the agent does with the context — retrieval, prompting, overlap
-detection ([EP-0002](../epics/EP-0002-refinement-session-agent.md));
+detection (EP-0002);
 the `repos.yaml` schema, owned by
-[ST-0012](ST-0012-governance-config-schemas.md); the work-management
+ST-0012; the work-management
 backlog read feed
-([ST-0027](ST-0027-work-management-backlog-read-feed.md), deferred).
+(ST-0027, deferred).

@@ -4,14 +4,14 @@ The typed constituents of a Component Doc: the taxonomy, the contract
 obligations each type carries, how elements are declared and identified,
 when an element graduates to its own CMP, and the catalog of modeling
 patterns. Referenced by [SPEC-component](SPEC-component.md)
-([DEC-0086](../decisions/DEC-0086-design-elements-spec-home.md)); this
+(DEC-0086); this
 spec is language-agnostic per
-[DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md).
+DEC-0018.
 
 ## The taxonomy
 
 Exactly five element types
-([DEC-0082](../decisions/DEC-0082-closed-element-type-taxonomy.md)).
+(DEC-0082).
 The set is **closed**: adding a type requires a refinement session, an
 accepted Decision, and a change to this spec. Ad-hoc types are tier-1
 validation failures.
@@ -36,7 +36,7 @@ model; service → function or class with methods; event → pydantic model
 ## Typed contract obligations
 
 An element's type determines which contract kinds its block must define
-([DEC-0088](../decisions/DEC-0088-revised-typed-obligations.md),
+(DEC-0088,
 superseding DEC-0083). Missing mandated kinds are gate-blockers, checked
 per element by the tier-2 suite (ST-0007).
 
@@ -49,7 +49,7 @@ per element by the tier-2 suite (ST-0007).
 | protocol | API contract implementations must satisfy (A), conformance expectations (B) | — |
 
 **Schema-resolution rule**
-([DEC-0089](../decisions/DEC-0089-api-schema-resolution-rule.md)): in
+(DEC-0089): in
 every API contract item, each request/response schema is either defined
 inline (language-neutral form) or resolves to a declared **value** or
 **event** element — in the same doc or in a `depends-on` component's
@@ -59,8 +59,8 @@ value/event elements those items reference.
 
 ## Declaration syntax and item IDs
 
-([DEC-0087](../decisions/DEC-0087-parseable-element-headings.md),
-[DEC-0081](../decisions/DEC-0081-element-first-contract-layout.md))
+(DEC-0087,
+DEC-0081)
 
 - Elements are declared **only** as level-3 headings inside a CMP's
   `## Design Elements` section: `### <ElementName> (<type>)`.
@@ -68,24 +68,24 @@ value/event elements those items reference.
   one of the five, lowercase. This heading is the single source of
   truth — there is **no** frontmatter mirror; machine consumers query
   element nodes via the Graph Index
-  ([DEC-0010](../decisions/DEC-0010-graph-index-derived.md)).
+  (DEC-0010).
 - Directly under its heading, every element carries a mandated
   **`Implements:`** line listing, as resolvable markdown links, the
   story or stories whose implementation the element handles
-  ([DEC-0092](../decisions/DEC-0092-element-implements-line.md)). At
+  (DEC-0092). At
   least one story is required; a missing line, empty list, or
   unresolvable target is a gate-blocker. An element may only reference
   a story whose Component Impact section links this CMP
-  ([DEC-0094](../decisions/DEC-0094-implements-reciprocity-check.md)).
+  (DEC-0094).
   Private helper values/events list the same stories as the element
   they support; a graduated seam CMP references the stories that
   birthed the seam. The Graph Index derives element→story `IMPLEMENTS`
   edges from these lines; story amendments propagate staleness to
   referencing CMPs with element-scoped impact reports
-  ([DEC-0096](../decisions/DEC-0096-implements-staleness-propagation.md)),
+  (DEC-0096),
   and the design/implementation percent-complete metrics are computed
   over these edges
-  ([DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md)).
+  (DEC-0095).
 - Contract items are element-scoped:
   `<ElementName>.<K>-<n>` where `K` ∈ `B` (behavior), `A` (API),
   `D` (data), numbered sequentially per element and kind
@@ -97,11 +97,11 @@ value/event elements those items reference.
 - Item IDs are unique within their doc. Cross-document references name
   the doc: `CMP-0001 § StorageService.B-3`.
 - Every contract item cites at least one Decision, exactly as before
-  ([DEC-0011](../decisions/DEC-0011-contract-complete-component-docs.md)).
+  (DEC-0011).
 
 ## Seam graduation
 
-([DEC-0080](../decisions/DEC-0080-hybrid-component-granularity.md))
+(DEC-0080)
 
 By default elements live nested inside their bounded-context CMP. An
 element **graduates** to its own standalone CMP when it is a seam
@@ -120,12 +120,12 @@ contract), shared event schemas, shared value kernels.
 
 ## Modeling patterns catalog
 
-([DEC-0084](../decisions/DEC-0084-modeling-patterns-catalog.md))
+(DEC-0084)
 
 Common constructs are modeled as **compositions** of the five types —
 never as new types. Each pattern names the sub-elements required so the
 composition stays independently buildable-and-testable
-([DEC-0011](../decisions/DEC-0011-contract-complete-component-docs.md)).
+(DEC-0011).
 Guidance for authors, not additional gate rules. The catalog grows by
 mechanical spec edit as constructs recur.
 

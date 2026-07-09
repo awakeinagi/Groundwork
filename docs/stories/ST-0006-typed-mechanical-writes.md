@@ -30,36 +30,36 @@ changes inexpressible through this path.
    `append-turn`, `close-session`, `mark-stale`, `clear-stale`,
    `set-jira-key`, `migrate-person-ids`, `create-change-proposal`,
    `set-cp-triage` — each constructing its commit entirely from typed
-   parameters (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md), [DEC-0035](../decisions/DEC-0035-store-enforced-append-only-transcripts.md), [DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md), [DEC-0047](../decisions/DEC-0047-change-proposal-artifact.md), [DEC-0048](../decisions/DEC-0048-project-on-approval-field-ownership.md),
-   [DEC-0046](../decisions/DEC-0046-person-registry.md)).
+   parameters (per DEC-0033, DEC-0035, DEC-0038, DEC-0047, DEC-0048,
+   DEC-0046).
    `set-jira-status` was removed from the set at the
-   [SES-0026](../sessions/SES-0026-ep-0005-story-derivation.md) audit —
+   SES-0026 audit —
    workflow telemetry never reaches canon (per
-   [DEC-0151](../decisions/DEC-0151-workflow-telemetry-projection-side.md));
+   DEC-0151);
    `migrate-person-ids` replaces it, covering the one-time
-   bootstrap-identity migration (per [DEC-0046](../decisions/DEC-0046-person-registry.md),
-   [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   bootstrap-identity migration (per DEC-0046,
+   DEC-0033).
 2. No mechanical operation can modify artifact body content or non-
    allowlisted frontmatter fields; attempts are rejected structurally, not
-   by policy check (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   by policy check (per DEC-0033).
 3. Agent processes hold no git credentials; only the storage service's
    identity can construct commits (verified by deployment test)
-   (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   (per DEC-0033).
 4. Where upstream branch protection forbids direct pushes, mechanical
    writes flow through auto-PRs approved by the program user, gated by the
-   mechanical-diff validator as a required check (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   mechanical-diff validator as a required check (per DEC-0033).
 5. Direct-commit vs. auto-PR mode is per-deployment configuration with no
-   code change (per [DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+   code change (per DEC-0033).
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
+CMP-0001 — supplies
 the mechanical-write allowlist in its API and Behavior Contracts.
 
 ## Out of Scope
 
-The mechanical-diff validator implementation ([ST-0007](ST-0007-tier2-check-suite.md)); who *invokes*
-mark-stale (Governance engine, [EP-0003](../epics/EP-0003-governance-and-gate-engine.md)).
+The mechanical-diff validator implementation (ST-0007); who *invokes*
+mark-stale (Governance engine, EP-0003).
 
 ## Notes for Implementers
 

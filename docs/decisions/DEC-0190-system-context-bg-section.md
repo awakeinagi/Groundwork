@@ -18,11 +18,11 @@ links:
 
 ## Context
 
-[DEC-0001](DEC-0001-standalone-application.md) (goal-level, physical form
+DEC-0001 (goal-level, physical form
 factor) named three deliverables — web UI, backend services, connector
 integrations — but only two got their own epic. "Backend services" was
 silently absorbed into the union of the domain epics derived from
-[SES-0001](../sessions/SES-0001-groundwork-inception.md)'s synthesis. No
+SES-0001's synthesis. No
 Business Goal section forced an explicit, complete boundary-level
 description of what's being built.
 
@@ -44,14 +44,14 @@ framing, cross-referenced against arc42's "System Scope and Context"
 template section. C4 Level 2 specifically asks "what are the
 separately-deployable/runnable units" — the question that would have
 surfaced a backend/API container independent of the domain engines had it
-been asked at [BG-0001](../goals/BG-0001-groundwork.md)'s inception. The section's answers directly feed the
+been asked at BG-0001's inception. The section's answers directly feed the
 epic-derivation deliverable-coverage pass
-([DEC-0194](DEC-0194-epic-derivation-coverage-pass.md)).
+(DEC-0194).
 
 ## Alternatives Considered
 
 - **Rely on epic derivation alone to catch gaps**, leaving physical
-  form-factor decisions like [DEC-0001](DEC-0001-standalone-application.md)
+  form-factor decisions like DEC-0001
   as the only goal-level boundary statement: rejected — epic derivation
   happens after the goal is already
   gated and approved, too late to change the goal's own framing.
@@ -61,5 +61,5 @@ epic-derivation deliverable-coverage pass
 ## Implications
 
 Feeds the mandatory Context Diagram at goal gate
-([DEC-0192](DEC-0192-goal-gate-context-and-flow-diagrams.md)).
-[BG-0001](../goals/BG-0001-groundwork.md) is backfilled with this section.
+(DEC-0192).
+BG-0001 is backfilled with this section.

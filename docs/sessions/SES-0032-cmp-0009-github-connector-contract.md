@@ -13,56 +13,56 @@ links:
   relates-to: [CMP-0009, ST-0031, CMP-0005]
 ---
 
-# SES-0032: [CMP-0009](../components/CMP-0009-github-connector.md) GitHub Connector — Contract Refinement
+# SES-0032: CMP-0009 GitHub Connector — Contract Refinement
 
 ## Purpose
 
-[CMP-0009](../components/CMP-0009-github-connector.md) was a stub
-(Purpose only) after [SES-0031](SES-0031-github-v1-pivot.md)
+CMP-0009 was a stub
+(Purpose only) after SES-0031
 took the v1 host slot from Bitbucket Data Center. This session settles
 the GitHub-specific implementation questions
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)'s
+CMP-0005's
 protocol deliberately leaves to each adapter — credential
 architecture, wire-protocol conventions, capability determination, and
 element decomposition — so the contract can be drafted to
 contract-complete. Already settled and not re-litigated: the protocol
-itself ([CMP-0005](../components/CMP-0005-code-host-connector-protocol.md),
+itself (CMP-0005,
 approved), GitHub as v1 host
-([DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)),
+(DEC-0172),
 check-run-based check administration
-([DEC-0173](../decisions/DEC-0173-check-admin-no-longer-provisional.md)),
-and [ST-0031](../stories/ST-0031-github-connector.md)'s acceptance
+(DEC-0173),
+and ST-0031's acceptance
 criteria.
 
 ## Transcript
 
-**T1 — Facilitator.** Read [CMP-0009](../components/CMP-0009-github-connector.md),
-[ST-0031](../stories/ST-0031-github-connector.md),
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md) in
-full, and the sibling stub [CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md)
-plus the decisions [CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)
-rests on ([DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md),
-[DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
-[DEC-0049](../decisions/DEC-0049-repo-read-allowlist.md),
-[DEC-0141](../decisions/DEC-0141-midflight-policy-recompute.md),
-[DEC-0142](../decisions/DEC-0142-gate-engine-owns-check-registration.md),
-[DEC-0145](../decisions/DEC-0145-event-driven-check-recomputation.md),
-[DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
-[DEC-0167](../decisions/DEC-0167-connector-typed-error-idempotency-convention.md)
+**T1 — Facilitator.** Read CMP-0009,
+ST-0031,
+CMP-0005 in
+full, and the sibling stub CMP-0006
+plus the decisions CMP-0005
+rests on (DEC-0043,
+DEC-0045,
+DEC-0049,
+DEC-0141,
+DEC-0142,
+DEC-0145,
+DEC-0153,
+DEC-0167
 through
-[DEC-0173](../decisions/DEC-0173-check-admin-no-longer-provisional.md)).
+DEC-0173).
 Identified four dependency-ordered
 question clusters: identity/credentials, wire-protocol conventions,
 capability/administration surface, and element decomposition.
 
 **T2 — Facilitator.** Round 1, four questions, each with a
 recommendation: (1) credential separation for
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)'s
+CMP-0005's
 `C-2` — recommending two GitHub Apps (Orchestrator, Reader) over one
 App with two installations or code-enforced separation; (2) where
 `provision_fork` forks land — recommending a dedicated service-owned
 account over direct branches on the source repo; (3) the program-user
-review identity for [DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md) —
+review identity for DEC-0043 —
 recommending the Orchestrator App's own bot identity over a dedicated
 machine-user account per role; (4) REST vs. GraphQL — recommending
 REST primary with GraphQL for gaps (CODEOWNERS-derived reviewer
@@ -93,7 +93,7 @@ GitHub's two branch-protection systems backs `A-7` — recommending
 classic per-branch branch protection over the newer repository
 rulesets model; (3) whether `review_dismissal` is declared `true` for
 v1 — recommending yes, since the API is stable and
-[DEC-0141](../decisions/DEC-0141-midflight-policy-recompute.md)'s
+DEC-0141's
 recompute flows can use it.
 
 **T7 — Product Owner.** Accepted all three recommendations as given.
@@ -110,94 +110,94 @@ further amendments before recording.
 
 **T9 — Product Owner.** Confirmed the read-back matched.
 
-**T10 — Facilitator.** Drafted [CMP-0009](../components/CMP-0009-github-connector.md)
+**T10 — Facilitator.** Drafted CMP-0009
 to contract-complete: a single `GitHubConnector` service element
 mapping every `CodeHostConnector` operation family onto concrete
 GitHub REST/GraphQL endpoints, Component Invariants, Implementation
 Guidance, Dependencies, Acceptance & Test Expectations, and Out of
 Scope. Ran `groundwork_consistency.py sweep`/`terms` on
-[DEC-0174](../decisions/DEC-0174-github-connector-identity-architecture.md)–[DEC-0177](../decisions/DEC-0177-cmp-0009-element-decomposition.md)
+DEC-0174–DEC-0177
 and, while reviewing the hits, found three approved artifacts still
-naming [CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md)/[ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md)
+naming CMP-0006/ST-0020
 as *the* implementation of protocol operations GitHub now actually
-implements for v1 — staleness gaps [SES-0031](SES-0031-github-v1-pivot.md)'s
+implements for v1 — staleness gaps SES-0031's
 sweep missed because their citations of the superseded
-[DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md) were
-indirect (via [ST-0019](../stories/ST-0019-code-host-connector-protocol.md)/[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)/[ST-0023](../stories/ST-0023-read-only-context-access.md)'s
+DEC-0050 were
+indirect (via ST-0019/ST-0021/ST-0023's
 own prose, not their frontmatter `cites`):
-[ST-0019](../stories/ST-0019-code-host-connector-protocol.md)'s Out of
+ST-0019's Out of
 Scope named only the BBDC implementation;
-[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)'s
-Out of Scope named only [ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md)
+ST-0021's
+Out of Scope named only ST-0020
 for "the host review API plumbing";
-[ST-0023](../stories/ST-0023-read-only-context-access.md)'s Component
-Impact named only [CMP-0006](../components/CMP-0006-bitbucket-data-center-connector.md)
+ST-0023's Component
+Impact named only CMP-0006
 as "the BBDC implementation" of the read-operation/allowlist sections.
 Corrected all three to name the GitHub v1 implementation
-([ST-0031](../stories/ST-0031-github-connector.md)/[CMP-0009](../components/CMP-0009-github-connector.md))
+(ST-0031/CMP-0009)
 alongside the deferred Bitbucket Data Center one, rather than dropping
-the BBDC reference. [CMP-0009](../components/CMP-0009-github-connector.md)
+the BBDC reference. CMP-0009
 set to `gated`, pending decision-recall audit and the Product Owner's
 approval; the three story diffs are re-affirmations, presented
 alongside the gate.
 
 **T12 — Facilitator.** Ran the decision-recall audit
 (`groundwork_search.py audit`, against
-[CMP-0009](../components/CMP-0009-github-connector.md)) and spawned a
+CMP-0009) and spawned a
 Sonnet 5 judge fork over its 15 candidates. Verdict: nothing to add —
 every candidate was either fully superseded and already carried
 through a cited decision
-([DEC-0166](../decisions/DEC-0166-cmp-0005-drafted-provisional-check-admin.md)
-by [DEC-0173](../decisions/DEC-0173-check-admin-no-longer-provisional.md),
-[DEC-0050](../decisions/DEC-0050-bitbucket-datacenter-v1.md) by
-[DEC-0172](../decisions/DEC-0172-github-v1-bbdc-deferred.md)), another
+(DEC-0166
+by DEC-0173,
+DEC-0050 by
+DEC-0172), another
 component's own citation obligation
-([CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)/[CMP-0004](../components/CMP-0004-governance-gate-engine.md)/[CMP-0001](../components/CMP-0001-artifact-store-service.md)
+(CMP-0005/CMP-0004/CMP-0001
 decomposition decisions), meta/process decisions about the audit
 tooling itself, or scoped to an unrelated component. Closest
-near-miss, [DEC-0036](../decisions/DEC-0036-host-base-plus-service-gate-check.md)
+near-miss, DEC-0036
 (host branch protection + service `gate-policy` check), judged not
-missing — [CMP-0009](../components/CMP-0009-github-connector.md)'s
+missing — CMP-0009's
 role there is purely mechanical execution, already carried through its
-citation of [DEC-0142](../decisions/DEC-0142-gate-engine-owns-check-registration.md)
+citation of DEC-0142
 and its `depends-on: [CMP-0005]`. The judge separately flagged a real
 contract gap outside the candidate list: `A-11`'s local webhook
 registration state (`(repo, event_types, callback_url)` filter tuples)
 had no stated persistence story across a connector restart. Addressed
 by adding `IG-8` (callers re-register on process start, idempotent;
 any gap is bounded by
-[DEC-0145](../decisions/DEC-0145-event-driven-check-recomputation.md)'s
+DEC-0145's
 reconciliation sweep) and Acceptance & Test Expectations item 9 — no
 new decision needed, since the resolution follows directly from
-already-accepted [DEC-0145](../decisions/DEC-0145-event-driven-check-recomputation.md)
-and [DEC-0167](../decisions/DEC-0167-connector-typed-error-idempotency-convention.md).
+already-accepted DEC-0145
+and DEC-0167.
 
 **T13 — Product Owner.** Reviewed the gate summary — the
-[CMP-0009](../components/CMP-0009-github-connector.md) contract plus
-the bundled [ST-0019](../stories/ST-0019-code-host-connector-protocol.md)/[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md)/[ST-0023](../stories/ST-0023-read-only-context-access.md)
+CMP-0009 contract plus
+the bundled ST-0019/ST-0021/ST-0023
 re-affirmation diffs — and approved.
 
-**T14 — Facilitator.** Set [CMP-0009](../components/CMP-0009-github-connector.md)
+**T14 — Facilitator.** Set CMP-0009
 to `approved` (`approved-by: awakeinagi@gmail.com`, `approved-on:
 2026-07-08`).
-[ST-0019](../stories/ST-0019-code-host-connector-protocol.md),
-[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md), and
-[ST-0023](../stories/ST-0023-read-only-context-access.md) remain
+ST-0019,
+ST-0021, and
+ST-0023 remain
 `approved` with their diffs re-affirmed — no re-gate needed, since
 none of their contract shapes changed, only which adapter they name.
 
 ## Decisions Produced
 
-- [DEC-0174](../decisions/DEC-0174-github-connector-identity-architecture.md) —
+- DEC-0174 —
   two GitHub Apps, dedicated fork account, bot-identity program
   reviews.
-- [DEC-0175](../decisions/DEC-0175-github-wire-protocol-conventions.md) —
+- DEC-0175 —
   REST-primary/GraphQL-for-gaps, 403 disambiguation, check-before-create
   idempotency.
-- [DEC-0176](../decisions/DEC-0176-github-capability-and-admin-surface.md) —
+- DEC-0176 —
   `team_sync` introspection, `review_dismissal: true`, classic branch
   protection, per-installation webhook secrets.
-- [DEC-0177](../decisions/DEC-0177-cmp-0009-element-decomposition.md) —
+- DEC-0177 —
   single `GitHubConnector` service element, no graduation.
 
 ## Conflicts Raised

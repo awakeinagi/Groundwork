@@ -17,7 +17,7 @@ links:
 ## Context
 
 The UI owes surfaces to every sibling epic; the v1 slice
-([DEC-0022](DEC-0022-v1-goal-refinement-slice.md)) needed its UI subset
+(DEC-0022) needed its UI subset
 pinned so the trust-critical session experience gets the attention.
 
 ## Decision
@@ -34,7 +34,7 @@ views, and epic/story/component browsing.
 
 Building surfaces for artifact types the v1 pipeline cannot yet produce is
 motion without progress; the session experience is where the unsupervised
-bet ([DEC-0003](DEC-0003-unsupervised-sessions.md)) is won or lost.
+bet (DEC-0003) is won or lost.
 
 ## Alternatives Considered
 
@@ -43,6 +43,6 @@ bet ([DEC-0003](DEC-0003-unsupervised-sessions.md)) is won or lost.
 
 ## Implications
 
-Post-v1 surface stories inherit their requirements from [DEC-0041](DEC-0041-impact-ranked-reaffirmation-queue.md)/0042/
+Post-v1 surface stories inherit their requirements from DEC-0041/0042/
 0047/0071/0072; the v1 conflict view covers display and escalation status
 only (mediation happens in-session).

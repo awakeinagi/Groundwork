@@ -17,25 +17,25 @@ links:
 
 ## Context
 
-[DEC-0153](DEC-0153-service-signed-attribution-block.md) flagged the
+DEC-0153 flagged the
 attribution-block schema as a cross-component seam to weigh at
 graduation review:
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) verifies
-it, while [CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)
+CMP-0004 verifies
+it, while CMP-0005
 passes it through explicitly opaquely.
 
 ## Decision
 
 The `AttributionBlock` value element stays in
-[CMP-0007](../components/CMP-0007-identity-and-access.md).
-[CMP-0004](../components/CMP-0004-governance-gate-engine.md) adds a
+CMP-0007.
+CMP-0004 adds a
 `depends-on` edge consuming its schema and verification items. This is
 the recorded outcome of the graduation review for this element.
 
 ## Rationale
 
 One external consumer does not meet the more-than-one-CMP bar
-([DEC-0136](DEC-0136-graduation-review-required.md)); the block's
+(DEC-0136); the block's
 signing rules are inseparable from the review-delegation service that
 produces it.
 

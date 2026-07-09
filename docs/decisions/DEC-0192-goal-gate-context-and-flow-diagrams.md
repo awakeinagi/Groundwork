@@ -21,7 +21,7 @@ links:
 The stakeholder's proposed "Next Steps" flow ended in a visual workflow
 diagram for stakeholder sign-off before technical design begins. System
 Context's answers (per
-[DEC-0190](DEC-0190-system-context-bg-section.md)) are inherently
+DEC-0190) are inherently
 box-and-boundary shaped and map cleanly onto a diagram.
 
 ## Decision
@@ -42,7 +42,7 @@ A diagram catches boundary misunderstandings (a missing actor, an unnamed
 external system) faster than prose review. Keeping it embedded in the
 versioned doc, rather than a separate diagramming tool or artifact,
 preserves git-backed markdown as the single source of truth (per
-[DEC-0008](DEC-0008-git-backed-markdown-store.md)).
+DEC-0008).
 
 ## Alternatives Considered
 
@@ -54,5 +54,5 @@ preserves git-backed markdown as the single source of truth (per
 
 `references/refinement-process.md`'s Goal playbook and Gates section, and
 `references/templates.md`'s Business Goal template, carry the two Mermaid
-subsections. [BG-0001](../goals/BG-0001-groundwork.md)'s gate presentation
+subsections. BG-0001's gate presentation
 includes both diagrams.

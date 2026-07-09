@@ -18,11 +18,11 @@ links:
 
 ## Context
 
-[DEC-0127](../decisions/DEC-0127-problem-json-error-model.md) already
+DEC-0127 already
 establishes RFC 9457 problem+json as the storage API's error model. The
-new Inbound API ([ST-0058](../stories/ST-0058-inbound-api-rest-and-gate-surface.md))
+new Inbound API (ST-0058)
 is a different surface (the UI-facing FastAPI app, not
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s internal
+CMP-0001's internal
 service API) and needed its own explicit call: reuse the existing model
 or define a new one.
 
@@ -30,7 +30,7 @@ or define a new one.
 
 Every non-2xx response from the Inbound API is `application/problem+json`
 per RFC 9457, following
-[DEC-0127](../decisions/DEC-0127-problem-json-error-model.md)'s
+DEC-0127's
 established shape (stable `type` URI per failure class, tier-1
 field-level errors in an `errors[]` extension member where applicable).
 The Inbound API defines its own problem-type vocabulary (e.g.
@@ -43,8 +43,8 @@ classes differ by surface.
 One error-model standard for the whole application is simpler to build
 client tooling against than two competing envelopes for two HTTP
 surfaces that both ultimately serve the same UI
-([EP-0006](../epics/EP-0006-refinement-web-ui.md)). The decision-recall
-audit surfaced [DEC-0127](../decisions/DEC-0127-problem-json-error-model.md)
+(EP-0006). The decision-recall
+audit surfaced DEC-0127
 directly — this is exactly the kind of duplicate-decision risk that
 check exists to catch.
 
@@ -57,7 +57,7 @@ check exists to catch.
 
 ## Implications
 
-[ST-0058](../stories/ST-0058-inbound-api-rest-and-gate-surface.md)'s
+ST-0058's
 Acceptance Criteria cite
-[DEC-0127](../decisions/DEC-0127-problem-json-error-model.md) directly
+DEC-0127 directly
 rather than restating the envelope shape as a new requirement.

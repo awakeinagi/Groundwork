@@ -16,14 +16,14 @@ links:
 
 ## Context
 
-[DEC-0063](DEC-0063-metadata-only-graph.md) kept text search out of the
+DEC-0063 kept text search out of the
 Graph Index and deferred ownership here. Cross-goal conflict detection
 ("does a similar goal already exist?") needs semantic similarity — a core
-[EP-0002](../epics/EP-0002-refinement-session-agent.md) requirement, not an optimization.
+EP-0002 requirement, not an optimization.
 
 ## Decision
 
-[EP-0007](../epics/EP-0007-consolidation-memory-layer.md)'s retrieval layer owns full-text and embedding-based semantic
+EP-0007's retrieval layer owns full-text and embedding-based semantic
 search over artifact bodies, built as a derived, rebuildable index (the
 same pattern as the Graph Index): rebuilt from the store at any ref, with
 the embedding-model version pinned — a model swap is a re-embed batch job,
@@ -44,6 +44,6 @@ write-authority contract.
 
 ## Implications
 
-Search infrastructure is evaluated in the extended [SP-0002](../spikes/SP-0002-postgres-pgvector-graduation.md)
-([DEC-0070](DEC-0070-extend-sp-0002-search-infra.md)); search results in
+Search infrastructure is evaluated in the extended SP-0002
+(DEC-0070); search results in
 bundles carry the same source-ref citations as everything else.

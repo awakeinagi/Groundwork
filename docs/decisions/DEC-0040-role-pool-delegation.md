@@ -24,10 +24,10 @@ named person is unavailable.
 By default, any member of the required role's pool satisfies a gate — the
 domain mapping expresses a *preferred* approver, not an exclusive one
 (host teams already match the pool, per
-[DEC-0036](DEC-0036-host-base-plus-service-gate-check.md)). Where
+DEC-0036). Where
 exclusivity matters, governance config supports explicit, time-bounded
 delegation entries (person → delegate), edited via the same PR flow
-([DEC-0037](DEC-0037-governance-as-code.md)).
+(DEC-0037).
 
 ## Rationale
 

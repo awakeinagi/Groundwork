@@ -16,9 +16,9 @@ cites: [DEC-0155, DEC-0156]
 # ST-0030: Additional Work-Management Connectors
 
 > Deferred to `backlog` at creation (per
-> [DEC-0156](../decisions/DEC-0156-future-connector-families-deferred.md),
+> DEC-0156,
 > the deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
+> DEC-0100).
 > Subscribed to trigger TRG-0009 — a deployment requiring a
 > work-management system other than Jira Data Center revives it.
 
@@ -34,21 +34,21 @@ Indicative until revival re-refines this story (deferred stories cannot
 pass a gate):
 
 1. Each new adapter implements the work-management contract from
-   [ST-0025](ST-0025-work-management-projection-lifecycle.md) —
+   ST-0025 —
    projection lifecycle, field-ownership map, drift events, backlog
    read — and declares its capability manifest
-   (per [DEC-0155](../decisions/DEC-0155-pluggable-work-management-connector.md)).
+   (per DEC-0155).
 2. Swapping systems is deployment configuration plus a conformant
    adapter; no core change
-   (per [DEC-0155](../decisions/DEC-0155-pluggable-work-management-connector.md)).
+   (per DEC-0155).
 
 ## Component Impact
 
 None yet — one component per adapter, stubbed at revival against the
 work-management contract component (itself stubbed when
-[ST-0025](ST-0025-work-management-projection-lifecycle.md) revives).
+ST-0025 revives).
 
 ## Out of Scope
 
 The contract and Jira DC reference adapter
-([ST-0025](ST-0025-work-management-projection-lifecycle.md), deferred).
+(ST-0025, deferred).

@@ -17,9 +17,9 @@ cites: [DEC-0152]
 # SP-0005: External Secret-Store Adapter Evaluation
 
 > Deferred to `backlog` at creation (per
-> [DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md),
+> DEC-0152,
 > the deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
+> DEC-0100).
 > Subscribed to trigger TRG-0006 — an enterprise deployment mandating
 > an external secret store revives it.
 
@@ -29,7 +29,7 @@ When an enterprise deployment mandates an external secret store, which
 adapter target (HashiCorp Vault, cloud KMS, other) best serves the
 connector-secrets workload — and how do secrets migrate from the
 embedded envelope-encrypted store
-([DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md))
+(DEC-0152)
 without a re-authorization storm for every linked OAuth identity?
 
 ## Why It Blocks
@@ -37,9 +37,9 @@ without a re-authorization storm for every linked OAuth identity?
 Nothing today — that is why it is deferred. On the trigger firing, it
 blocks the affected deployment: secrets handling is on the path of
 every delegated review
-([ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md))
+(ST-0021)
 and identity linkage
-([ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)).
+(ST-0022).
 
 ## Method
 

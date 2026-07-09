@@ -42,15 +42,15 @@ Component Docs. Every stage transition passes a **human approval gate**.
    new `SES-`. Changed mind = a new `DEC-` with `supersedes:` set — then
    mark every artifact citing the old decision `status: stale` and have
    the approver re-affirm or re-refine each. Sole exception:
-   reference-formatting edits (wrapping a bare ID in a markdown link,
-   repairing a link path after a slug rename) change no meaning and are
-   permitted.
+   reference-formatting edits (converting between reference notations,
+   repairing a reference after a rename) change no meaning and are
+   permitted (per DEC-0091, applied by DEC-0243).
 4. **IDs.** `PREFIX-nnnn`, sequential per prefix, **never reused** (even
    after deletion). Scan all of `docs/` for the current max before
    allocating. Filename = `ID-kebab-slug.md`.
 5. **Provenance.** Every acceptance criterion and every contract item in
-   a Component Doc ends with a linked citation
-   `(per [DEC-nnnn](../decisions/DEC-nnnn-<slug>.md))`. A claim no decision
+   a Component Doc ends with a citation `(per DEC-nnnn)` — bare IDs,
+   comma-separated when several apply. A claim no decision
    supports means more refinement is needed — never invent a citation.
    Decisions carry `source-span: "SES-nnnn @ Tx-Ty"` pointing at
    transcript turns that actually support them.
@@ -58,11 +58,13 @@ Component Docs. Every stage transition passes a **human approval gate**.
    `satisfies`, `depends-on`, `conflicts-with`, `supersedes`,
    `relates-to`, `impacts`, `impacted-by` (the last two: same-type,
    reciprocal on both endpoints). Decision citations go in top-level
-   `cites:`. In body prose the inverse holds: every cross-reference must
-   be a markdown link `[<ID>](relative/path.md)` — a bare artifact ID
-   outside code spans/blocks (other than the artifact's own ID) fails
-   the checker. Body links are navigation only; frontmatter stays bare
-   IDs and remains what tools read.
+   `cites:`. In body prose, cross-references to artifacts are **bare
+   IDs** (`DEC-0152`, `CMP-0009`) — an inline markdown link targeting
+   an artifact file fails the checker, and every bare ID must resolve
+   to an existing artifact (per DEC-0242). Links are still used for
+   non-artifact files (CONTEXT.md, specs, code) and URLs. Frontmatter
+   stays bare IDs and remains what tools read; humans browse via
+   `python3 tools/serve_docs.py` + `tools/viewer.html` (per DEC-0244).
 7. **Glossary.** When a new or ambiguous term comes up, resolve it in
    `CONTEXT.md` immediately and use it exactly thereafter.
 8. **Conflicts block.** Artifacts linked to an unresolved `CFL-` cannot

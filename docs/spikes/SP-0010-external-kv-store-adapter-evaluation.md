@@ -17,9 +17,9 @@ cites: [DEC-0205]
 # SP-0010: External KV-Store Adapter Evaluation
 
 > Deferred to `backlog` at creation (per
-> [DEC-0205](../decisions/DEC-0205-graduation-trigger-reuse-and-spikes.md),
+> DEC-0205,
 > the deferral citation per
-> [DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
+> DEC-0100).
 > Subscribed to triggers `TRG-0001` and `TRG-0002` — either firing
 > revives it.
 
@@ -29,7 +29,7 @@ When `TRG-0001` or `TRG-0002` fires, which external KV-store adapter
 (Redis/ElastiCache, Memcached, other) best serves the coordination-state
 and caching workload — and how does data migrate from the embedded,
 app-database-backed KV table
-([DEC-0204](../decisions/DEC-0204-v1-default-adapters-deferred-alternates.md))?
+(DEC-0204)?
 
 ## Why It Blocks
 
@@ -48,7 +48,7 @@ do) and any caching-dependent story.
 4. Define the migration path for existing coordination/cache state and
    the rollback story.
 5. Record the adapter choice and migration plan as Decisions, per
-   [DEC-0023](../decisions/DEC-0023-spike-findings-become-decisions.md).
+   DEC-0023.
 
 ## Findings
 

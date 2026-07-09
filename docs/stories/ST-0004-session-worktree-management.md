@@ -27,27 +27,27 @@ abandoned worktrees are cleaned up.
 ## Acceptance Criteria
 
 1. Opening a session provisions a dedicated worktree off the item branch;
-   all of that session's writes land there (per [DEC-0030](../decisions/DEC-0030-session-worktrees-branch-merge.md)).
+   all of that session's writes land there (per DEC-0030).
 2. On session close, if the worktree holds the only live version of the
-   item, its changes merge into the generic item branch (per [DEC-0030](../decisions/DEC-0030-session-worktrees-branch-merge.md)).
+   item, its changes merge into the generic item branch (per DEC-0030).
 3. If multiple sessions produced divergent versions, user-suffixed
    branches (e.g. `EP-0010-desc-user1`) are created and the divergence is
-   surfaced to the synthesis flow rather than auto-merged (per [DEC-0030](../decisions/DEC-0030-session-worktrees-branch-merge.md),
-   [DEC-0055](../decisions/DEC-0055-incremental-synthesis-shared-draft.md)).
+   surfaced to the synthesis flow rather than auto-merged (per DEC-0030,
+   DEC-0055).
 4. Worktrees of sessions auto-closed for inactivity are garbage-collected
-   after their partial distillation commits (per [DEC-0057](../decisions/DEC-0057-session-lifecycle.md)).
+   after their partial distillation commits (per DEC-0057).
 5. Worktree state is reconstructible after service restart: no in-flight
    session is orphaned or double-provisioned.
 
 ## Component Impact
 
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — supplies
+CMP-0001 — supplies
 the concurrency sections of its Behavior Contract.
 
 ## Out of Scope
 
-The synthesis logic itself (Session Agent, [EP-0002](../epics/EP-0002-refinement-session-agent.md)); conflict-artifact
-creation for design-level disagreement (agent's call, per [DEC-0030](../decisions/DEC-0030-session-worktrees-branch-merge.md)
+The synthesis logic itself (Session Agent, EP-0002); conflict-artifact
+creation for design-level disagreement (agent's call, per DEC-0030
 implications).
 
 ## Notes for Implementers

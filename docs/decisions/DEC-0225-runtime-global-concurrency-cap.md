@@ -18,7 +18,7 @@ links:
 
 ## Context
 
-[ST-0061](../stories/ST-0061-background-job-execution-runtime.md) AC6
+ST-0061 AC6
 requires a configurable, small-by-default concurrency limit but left
 open whether it applies globally across all job-types or per-type.
 
@@ -26,7 +26,7 @@ open whether it applies globally across all job-types or per-type.
 
 v1 defines a single deployment-wide configured concurrency cap, set via
 the Composition Root's deployment configuration
-([DEC-0206](DEC-0206-composition-root-yaml-config.md)), applying
+(DEC-0206), applying
 across all job-types combined. No per-job-type override exists.
 
 ## Rationale

@@ -17,16 +17,16 @@ links:
 
 ## Context
 
-[DEC-0038](DEC-0038-subtree-staleness-reaffirmation.md) attaches an
+DEC-0038 attaches an
 impact report to every staleness sweep and
-[DEC-0076](DEC-0076-semantic-gate-diff.md) renders it at gate review —
+DEC-0076 renders it at gate review —
 but where the report durably lives was undefined.
 
 ## Decision
 
 The gate engine writes each sweep's impact report into the affected
 re-affirmation PRs' descriptions (host-side, visible to reviewers per
-[DEC-0076](DEC-0076-semantic-gate-diff.md)) and stores it in the
+DEC-0076) and stores it in the
 governance event log for dashboards. Reports are never committed to the
 canonical repo.
 
@@ -42,13 +42,13 @@ and every sweep's commits would themselves emit ChangeEvents.
   but derived content in the canonical store that goes stale the moment
   the graph moves.
 - **App database only**: host-side reviewers — the audience
-  [DEC-0076](DEC-0076-semantic-gate-diff.md) explicitly serves — would
+  DEC-0076 explicitly serves — would
   see nothing in the PR.
 
 ## Implications
 
 Log-stored reports are telemetry-grade
-([DEC-0144](DEC-0144-two-grade-governance-event-log.md)) — the
+(DEC-0144) — the
 provenance-grade record of a re-affirmation is the PR itself. Criteria
-land in [ST-0016](../stories/ST-0016-staleness-sweep-impact-analysis.md)
-and [ST-0017](../stories/ST-0017-reaffirmation-flow-queues.md).
+land in ST-0016
+and ST-0017.

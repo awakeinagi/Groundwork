@@ -17,11 +17,11 @@ links:
 
 ## Context
 
-[ST-0014](../stories/ST-0014-gate-policy-check.md)'s `gate-policy`
+ST-0014's `gate-policy`
 check evaluates domain-conditional approvers,
 role verification, committee quorum, staleness, and attribution on
 every relevant event and reconciliation sweep pass
-([DEC-0145](DEC-0145-event-driven-check-recomputation.md)). Whether the
+(DEC-0145). Whether the
 evaluator reads `governance/*.yaml` and PR facts fresh each call, or
 consults a persisted `CompiledPolicy` snapshot refreshed on governance
 ChangeEvents, was undecided.
@@ -36,11 +36,11 @@ nothing about policy evaluation is persisted between calls.
 
 ## Rationale
 
-Keeps [CMP-0004](../components/CMP-0004-governance-gate-engine.md) inside
-[DEC-0131](DEC-0131-rebuild-sufficiency-invariant.md)'s discipline
+Keeps CMP-0004 inside
+DEC-0131's discipline
 without adding a second place policy state can go stale, and stays
 trivially coherent with
-[DEC-0141](DEC-0141-midflight-policy-recompute.md)'s mid-flight
+DEC-0141's mid-flight
 recomputation: a governance-change merge simply triggers the same
 live-read evaluation on every open PR, rather than requiring a cache
 invalidation step that could itself lag or duplicate.
@@ -50,10 +50,10 @@ invalidation step that could itself lag or duplicate.
 A cached `CompiledPolicy` value, refreshed on governance ChangeEvents —
 rejected: it would speed reads at the cost of a rebuild-sufficiency
 surface and a second state machine (cache freshness) to keep correct
-under [DEC-0145](DEC-0145-event-driven-check-recomputation.md)'s
+under DEC-0145's
 at-least-once delivery, for a performance gain not shown to be
 necessary at v1's embedded, single-process scale
-([DEC-0102](DEC-0102-v1-embedded-stack.md)).
+(DEC-0102).
 
 ## Implications
 

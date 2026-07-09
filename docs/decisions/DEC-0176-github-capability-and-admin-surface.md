@@ -19,13 +19,13 @@ links:
 
 Four remaining above-minimum-capability and administration questions
 needed concrete GitHub answers for
-[CMP-0009](../components/CMP-0009-github-connector.md) to be
+CMP-0009 to be
 contract-complete: how `team_sync`'s capability flag gets determined
 given GitHub's org-level permission requirement; whether
 `review_dismissal` is declared for v1; which of GitHub's two
 overlapping branch-protection systems backs `CodeHostConnector.A-7`;
 and how the webhook signing secret required by
-[DEC-0169](DEC-0169-connector-push-webhook-delivery.md) is scoped and
+DEC-0169 is scoped and
 stored.
 
 ## Decision
@@ -34,14 +34,14 @@ stored.
    connector queries its actually-granted permissions and sets the
    manifest's `team_sync` flag to `true` only if org-level
    `members` permission was granted; a repo-only installation
-   declares `false`, and [CMP-0004](../components/CMP-0004-governance-gate-engine.md)'s
+   declares `false`, and CMP-0004's
    policy compiler emulates role routing instead
-   (per [DEC-0045](DEC-0045-capability-declaring-connectors.md)).
+   (per DEC-0045).
 2. **`review_dismissal: true`** — GitHub's
    `pulls/reviews/{id}/dismissals` endpoint is stable and available;
    declaring it lets the policy compiler use native dismissal instead
    of emulating it, including for
-   [DEC-0141](DEC-0141-midflight-policy-recompute.md)'s mid-flight
+   DEC-0141's mid-flight
    recomputation flows.
 3. **Classic branch protection backs `A-7`.** Per-branch
    `/branches/{branch}/protection` REST endpoints implement
@@ -50,7 +50,7 @@ stored.
 4. **Per-installation webhook secrets.** Each App installation
    generates and stores its own HMAC-SHA256 signing secret
    (`X-Hub-Signature-256`) in the encrypted app-database secret store
-   (per [DEC-0152](DEC-0152-secrets-encrypted-in-app-database.md)),
+   (per DEC-0152),
    rotated independently per installation.
 
 ## Rationale
@@ -60,7 +60,7 @@ honest against what a given deployment's App installation actually
 received, rather than assuming org-admin cooperation as an install-time
 precondition. `review_dismissal` costs nothing to declare true and
 gives the policy compiler a native option for an operation
-[DEC-0141](DEC-0141-midflight-policy-recompute.md) already needs.
+DEC-0141 already needs.
 Classic branch protection matches `A-7`'s per-branch
 `protection.set(repo, branch, rules)` shape directly and is the more
 battle-tested surface; rulesets' extra bulk/org-wide power isn't
@@ -76,7 +76,7 @@ deployment the Orchestrator App touches.
   produces a manifest that lies about a specific deployment's actual
   capability.
 - **`review_dismissal: false` for v1**: reduces v1 scope, but gives up
-  a native mechanic [DEC-0141](DEC-0141-midflight-policy-recompute.md)'s
+  a native mechanic DEC-0141's
   recompute story could use, for no cost saved (the API already
   exists and is stable).
 - **Repository rulesets**: more powerful (bulk rules across repos,
@@ -87,6 +87,6 @@ deployment the Orchestrator App touches.
 
 ## Implications
 
-[CMP-0009](../components/CMP-0009-github-connector.md)'s Design
+CMP-0009's Design
 Elements and Implementation Guidance state all four as normative,
 citing this decision.

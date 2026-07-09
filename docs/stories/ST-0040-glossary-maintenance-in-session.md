@@ -31,21 +31,21 @@ exercise.
 1. When a participant uses a vague or overloaded term, the agent proposes
    a precise canonical term and confirms it with the participant before
    treating it as resolved
-   (per [DEC-0012](../decisions/DEC-0012-agent-built-domain-model.md)).
+   (per DEC-0012).
 2. When a term conflicts with an existing `CONTEXT.md` entry, the agent
    surfaces the conflict explicitly rather than silently picking one
    meaning
-   (per [DEC-0012](../decisions/DEC-0012-agent-built-domain-model.md)).
+   (per DEC-0012).
 3. The moment a term resolves, the agent writes the `CONTEXT.md` entry in
    the same session — never batched to session end or a separate pass
-   (per [DEC-0012](../decisions/DEC-0012-agent-built-domain-model.md)).
+   (per DEC-0012).
 4. Glossary entries are definitions only, with no implementation detail
    or spec content, and are gated the same as any other artifact change
-   (per [DEC-0012](../decisions/DEC-0012-agent-built-domain-model.md)).
+   (per DEC-0012).
 5. The engine surfaces the current `CONTEXT.md` to every strategy pack's
    context recipe by default, so term-challenge behavior has the existing
    glossary available regardless of which pack is running
-   (per [DEC-0056](../decisions/DEC-0056-context-recipes-in-packs.md)).
+   (per DEC-0056).
 
 ## Component Impact
 
@@ -56,12 +56,12 @@ None yet — a Component Doc for this epic's bounded context is stubbed once the
 Bounded-context boundary decisions that emerge from glossary terms
 (a judgment call made across sessions, not a mechanical rule this story
 enforces); `CONTEXT.md`'s gating mechanics as a file
-([EP-0001](../epics/EP-0001-artifact-store-and-format-engine.md) /
-[EP-0003](../epics/EP-0003-governance-and-gate-engine.md) own gate
+(EP-0001 /
+EP-0003 own gate
 machinery generally).
 
 ## Notes for Implementers
 
 Criterion 5's "surfaced by default" is a floor, not the full context
-recipe — [ST-0038](ST-0038-context-assembly-via-pack-recipes.md) owns
+recipe — ST-0038 owns
 what else a given pack's recipe pulls in.

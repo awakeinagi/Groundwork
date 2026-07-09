@@ -18,24 +18,24 @@ links:
 
 ## Context
 
-[ST-0058](../stories/ST-0058-inbound-api-rest-and-gate-surface.md) AC6
+ST-0058 AC6
 requires the route surface documented as a language-neutral contract
 (OpenAPI), per
-[DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md).
-Drafting [CMP-0011](../components/CMP-0011-inbound-api.md) needed to
+DEC-0018.
+Drafting CMP-0011 needed to
 decide how concrete the route surface is *inside the Component Doc*
 versus in that OpenAPI document.
 
 ## Decision
 
-[CMP-0011](../components/CMP-0011-inbound-api.md) contracts the route
+CMP-0011 contracts the route
 surface as **behavioral endpoint groups** — each group (artifact reads,
 gate actions, conflict reads, notifications, governance metrics, session
 SSE) a contract item stating its behavior, auth requirement, the
 component it calls into, and its problem+json failure classes. A
 **maintained OpenAPI document is named as the authoritative wire
 contract** for exact paths, verbs, and request/response schemas
-(satisfying [DEC-0018](../decisions/DEC-0018-python-backend-language-agnostic-specs.md)).
+(satisfying DEC-0018).
 The Component Doc does not restate every path and schema inline.
 
 ## Rationale
@@ -56,7 +56,7 @@ them.
 
 ## Implications
 
-[CMP-0011](../components/CMP-0011-inbound-api.md)'s Design Elements list
+CMP-0011's Design Elements list
 endpoint-group service items and carry a Constraint that the routes are
 published as OpenAPI; API-item schemas resolve to declared value
 elements or the named OpenAPI document, never to undocumented inline

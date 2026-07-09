@@ -17,7 +17,7 @@ links:
 
 ## Context
 
-`status: deferred` ([DEC-0097](DEC-0097-deferred-status.md)) says *that*
+`status: deferred` (DEC-0097) says *that*
 an artifact is parked, not *for which release*. The discovery
 requirement — bring parked items back when the time is right — needs a
 target, in a controlled vocabulary that tooling can validate and sort.
@@ -38,7 +38,7 @@ Semantics:
   "somewhere in the 1.x.x line"; `1.2` narrows it; `1.2.3` pins it.
   Narrowing an existing label as planning firms up is a mechanical edit;
   *moving* an item between releases cites a decision per
-  [DEC-0100](DEC-0100-scope-moves-cite-decisions.md).
+  DEC-0100.
 - **Absence of the field means the current release** — existing
   artifacts need no migration.
 - An epic's `release:` is the default for stories deriving from it; a
@@ -78,6 +78,6 @@ scopes, and are excluded. Absence-as-default keeps the common case
 [SPEC-story](../specs/SPEC-story.md) and
 [SPEC-epic](../specs/SPEC-epic.md) gain the field. The checker
 validates format, exact membership in the declared release set per
-[DEC-0099](DEC-0099-releases-declared-in-goal-scope.md), and the
+DEC-0099, and the
 deferred/release consistency rules. YAML users should quote values
 (`release: "1.2"`) so they parse as strings, not floats.

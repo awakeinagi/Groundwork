@@ -13,48 +13,48 @@ links:
   relates-to: [EP-0005]
 ---
 
-# SES-0026: [EP-0005](../epics/EP-0005-connectors-and-identity.md) Story Derivation
+# SES-0026: EP-0005 Story Derivation
 
 ## Purpose
 
-Slice the approved [EP-0005](../epics/EP-0005-connectors-and-identity.md)
+Slice the approved EP-0005
 (Connectors & Identity) into implementable stories, resolving the
 epic's four recorded open questions plus the findings of the
 pre-drafting decision-recall audit
-([DEC-0137](../decisions/DEC-0137-decision-recall-audit-step.md)).
+(DEC-0137).
 
 ## Transcript
 
-**T1 — Sponsor.** Create the stories for [EP-0005](../epics/EP-0005-connectors-and-identity.md).
+**T1 — Sponsor.** Create the stories for EP-0005.
 
 **T2 — Agent.** Prep: loaded the epic's cited decisions, the boundary
-seams ([ST-0003](../stories/ST-0003-item-branch-pr-orchestration.md)
+seams (ST-0003
 leaves the BBDC implementation to this epic;
-[ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md)
+ST-0013
 consumes team/check administration;
-[ST-0012](../stories/ST-0012-governance-config-schemas.md) owns the
+ST-0012 owns the
 `people.yaml`/`repos.yaml` schemas), and ran the decision-recall audit
 on the epic (judge fork). Findings: (1) the binding consumption lists —
-[CMP-0001](../components/CMP-0001-artifact-store-service.md)'s
+CMP-0001's
 forward-declared operations
-([DEC-0132](../decisions/DEC-0132-connector-consumption-forward-declared.md))
+(DEC-0132)
 and the gate engine's registration/administration set
-([DEC-0142](../decisions/DEC-0142-gate-engine-owns-check-registration.md));
+(DEC-0142);
 (2) a genuine tension —
-[DEC-0048](../decisions/DEC-0048-project-on-approval-field-ownership.md)'s
+DEC-0048's
 planned `jira-status` frontmatter telemetry versus
-[DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md)'s
+DEC-0095's
 rejection of volatile state in canon; (3) secrets have no defined home
 in the embedded stack
-([DEC-0046](../decisions/DEC-0046-person-registry.md),
-[DEC-0102](../decisions/DEC-0102-v1-embedded-stack.md),
-[DEC-0121](../decisions/DEC-0121-infrastructure-ports.md)); (4) the
-[DEC-0133](../decisions/DEC-0133-out-of-scope-differentiated-rule.md)
+(DEC-0046,
+DEC-0102,
+DEC-0121); (4) the
+DEC-0133
 future-work rule to walk per story. Plus a scope gap: the notifier
 connector contract assigned to this epic by
-[DEC-0075](../decisions/DEC-0075-notification-center-connectors.md)
+DEC-0075
 after its approval, and a release wrinkle:
-[BG-0001](../goals/BG-0001-groundwork.md) names connectors as release-2
+BG-0001 names connectors as release-2
 work while the PR gate needs the code-host connector in v1. Proposed a
 slate of ~7 current + 2 deferred stories + 1 spike. Round 1 with
 recommendations: (a) Jira sync stories born deferred at release 2
@@ -74,7 +74,7 @@ vs. a fifth port or OS keyring; (c) program-user attribution as a
 service-signed block, asymmetric key, gate-policy verifies signature +
 registry resolution (recommended) vs. HMAC or unsigned+log-cross-check;
 (d) role→review-path mapping in deployment configuration, taking
-[DEC-0043](../decisions/DEC-0043-oauth-reviews-program-user-fallback.md)
+DEC-0043
 at its word (recommended) vs. a governance file.
 
 **T5 — Sponsor.** (a), (c), (d) as recommended. (b) as recommended,
@@ -104,12 +104,12 @@ written?
 **T10 — Agent.** Answered: the work-management issue key (`PROJ-456`
 style) of the projection mirroring an artifact — the canon-side half of
 the two-way linkage (the issue carries the doc ID + link back per
-[DEC-0013](../decisions/DEC-0013-jira-summary-plus-link.md)). Written
+DEC-0013). Written
 once into the artifact's own frontmatter (the epic/story/spike specs
 already declare the field) via the `set-jira-key` typed mechanical
-write ([DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md))
+write (DEC-0033)
 when the projection is created on first merge to main
-([DEC-0048](../decisions/DEC-0048-project-on-approval-field-ownership.md))
+(DEC-0048)
 — by the storage service, never the agent or connector directly. A
 set-once metadata fact, unlike volatile workflow state, which stays
 projection-side.
@@ -117,75 +117,75 @@ projection-side.
 **T11 — Sponsor.** Confirmed — record.
 
 **T12 — Agent (synthesis).** Recorded
-[DEC-0148](../decisions/DEC-0148-work-management-stories-release-2.md)–[DEC-0156](../decisions/DEC-0156-future-connector-families-deferred.md);
-drafted [ST-0019](../stories/ST-0019-code-host-connector-protocol.md)–[ST-0024](../stories/ST-0024-notifier-connector-email-adapter.md)
-(current), [ST-0025](../stories/ST-0025-work-management-projection-lifecycle.md)–[ST-0027](../stories/ST-0027-work-management-backlog-read-feed.md)
-(release 2, deferred), [ST-0028](../stories/ST-0028-additional-code-host-connectors.md)–[ST-0030](../stories/ST-0030-additional-work-management-connectors.md)
+DEC-0148–DEC-0156;
+drafted ST-0019–ST-0024
+(current), ST-0025–ST-0027
+(release 2, deferred), ST-0028–ST-0030
 (backlog, trigger-subscribed), spikes
-[SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md) (draft-ahead,
+SP-0004 (draft-ahead,
 ratified with this bundle) and
-[SP-0005](../spikes/SP-0005-external-secret-store-adapter.md) (backlog);
+SP-0005 (backlog);
 armed TRG-0006–TRG-0009; stubbed
-[CMP-0005](../components/CMP-0005-code-host-connector-protocol.md)–[CMP-0008](../components/CMP-0008-notification-delivery.md);
-amended [EP-0005](../epics/EP-0005-connectors-and-identity.md) (scope,
+CMP-0005–CMP-0008;
+amended EP-0005 (scope,
 interfaces, risks→resolutions, Derived Work; set `stale` pending
 re-affirmation); added glossary entries **Work-Management Connector**
 and **Attribution Block**.
 
 **T13 — Agent (decision-recall audits,
-[DEC-0137](../decisions/DEC-0137-decision-recall-audit-step.md)).**
+DEC-0137).**
 Ran the audit on all fifteen drafts/amendments; two judge forks.
-Findings applied — [DEC-0150](../decisions/DEC-0150-sp-0004-bbdc-check-surface-spike.md):
+Findings applied — DEC-0150:
 sequencing note added to
-[ST-0019](../stories/ST-0019-code-host-connector-protocol.md) (check
+ST-0019 (check
 administration must not harden before the spike's findings);
-[DEC-0143](../decisions/DEC-0143-system-decisions-via-auto-pr.md)/[DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md):
-[ST-0021](../stories/ST-0021-delegated-reviews-and-attribution.md) Out
+DEC-0143/DEC-0033:
+ST-0021 Out
 of Scope now distinguishes human-attributed reviews from
 machine-verified auto-PR approvals, which carry no attribution block;
-[DEC-0040](../decisions/DEC-0040-role-pool-delegation.md): role claims
-in [ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)
+DEC-0040: role claims
+in ST-0022
 criterion 3 include active time-bounded delegations;
-[DEC-0079](../decisions/DEC-0079-local-git-fake-connector.md): hermetic
+DEC-0079: hermetic
 fake-connector criterion added to
-[ST-0023](../stories/ST-0023-read-only-context-access.md);
-[DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md):
+ST-0023;
+DEC-0152:
 adapter-credential criterion added to
-[ST-0024](../stories/ST-0024-notifier-connector-email-adapter.md);
-[DEC-0141](../decisions/DEC-0141-midflight-policy-recompute.md):
+ST-0024;
+DEC-0141:
 pass→fail un-passing added to
-[SP-0004](../spikes/SP-0004-bbdc-required-check-surface.md)'s
+SP-0004's
 validation matrix. "Nothing to add" verdicts: all six deferred/backlog
-stories, [SP-0005](../spikes/SP-0005-external-secret-store-adapter.md),
-[ST-0020](../stories/ST-0020-bitbucket-data-center-connector.md), and
+stories, SP-0005,
+ST-0020, and
 the amended epic. The judges' flagged contract gaps were repaired by
 amending two approved artifacts, now `stale` for re-affirmation in
 this gate bundle:
-[ST-0006](../stories/ST-0006-typed-mechanical-writes.md) and
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) drop the
+ST-0006 and
+CMP-0001 drop the
 `set-jira-status` mechanical operation (cancelled by
-[DEC-0151](../decisions/DEC-0151-workflow-telemetry-projection-side.md))
+DEC-0151)
 and gain `migrate-person-ids`, giving
-[ST-0022](../stories/ST-0022-identity-auth-and-person-resolution.md)'s
+ST-0022's
 bootstrap-identity migration its sanctioned typed operation (per
-[DEC-0046](../decisions/DEC-0046-person-registry.md),
-[DEC-0033](../decisions/DEC-0033-typed-mechanical-writes.md)).
+DEC-0046,
+DEC-0033).
 
 ## Decisions Produced
 
-[DEC-0148](../decisions/DEC-0148-work-management-stories-release-2.md),
-[DEC-0149](../decisions/DEC-0149-notifier-story-under-ep-0005.md),
-[DEC-0150](../decisions/DEC-0150-sp-0004-bbdc-check-surface-spike.md),
-[DEC-0151](../decisions/DEC-0151-workflow-telemetry-projection-side.md),
-[DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md),
-[DEC-0153](../decisions/DEC-0153-service-signed-attribution-block.md),
-[DEC-0154](../decisions/DEC-0154-review-path-mapping-deployment-config.md),
-[DEC-0155](../decisions/DEC-0155-pluggable-work-management-connector.md),
-[DEC-0156](../decisions/DEC-0156-future-connector-families-deferred.md)
+DEC-0148,
+DEC-0149,
+DEC-0150,
+DEC-0151,
+DEC-0152,
+DEC-0153,
+DEC-0154,
+DEC-0155,
+DEC-0156
 
 ## Conflicts Raised
 
-None — the [DEC-0048](../decisions/DEC-0048-project-on-approval-field-ownership.md)/[DEC-0095](../decisions/DEC-0095-percent-complete-metrics.md)
+None — the DEC-0048/DEC-0095
 telemetry tension was resolved in-session by
-[DEC-0151](../decisions/DEC-0151-workflow-telemetry-projection-side.md)
+DEC-0151
 before it hardened into a conflict.

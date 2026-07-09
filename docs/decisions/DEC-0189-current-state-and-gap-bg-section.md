@@ -19,7 +19,7 @@ links:
 ## Context
 
 Retrospective on `EP-0008`'s missing predecessor found that
-[DEC-0001](DEC-0001-standalone-application.md) named "backend services" as
+DEC-0001 named "backend services" as
 a deliverable, but nothing in the Business Goal template forced anyone to
 articulate why the current landscape didn't already cover it — the
 existing **Problem** section captures business pain, not a technical
@@ -33,7 +33,7 @@ this (systems, manual workarounds, prior tooling, or nothing), and what
 specific technology/capability gap lets the problem persist. Distinct from
 Problem (the human/business pain) and from System Context's
 build-vs-reuse question (per
-[DEC-0190](DEC-0190-system-context-bg-section.md), which scopes the *new*
+DEC-0190, which scopes the *new*
 system's own parts, not the ambient landscape).
 
 ## Rationale
@@ -56,5 +56,5 @@ happened with "backend services."
 `references/templates.md`, `references/groundwork-system.md`, and
 `references/refinement-process.md` in the `groundwork-design-session`
 skill are updated; the question bank lives in
-`references/goal-grilling-questions.md`. [BG-0001](../goals/BG-0001-groundwork.md) is backfilled with this
+`references/goal-grilling-questions.md`. BG-0001 is backfilled with this
 section.

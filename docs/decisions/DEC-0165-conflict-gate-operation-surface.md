@@ -17,11 +17,11 @@ links:
 
 ## Context
 
-[ST-0015](../stories/ST-0015-conflicts-open-check-and-operations.md)
+ST-0015
 requires the `conflicts-open` blocking check plus Arbiter
 conflict operations: escalation, resolution, approver override, and the
 electable timeout-to-default path
-([DEC-0039](DEC-0039-conflict-escalation-operations.md)). Whether these
+(DEC-0039). Whether these
 operations get explicit API items or stay implicit (mechanical writes
 or session-agent-driven) was undecided.
 
@@ -31,18 +31,18 @@ or session-agent-driven) was undecided.
 `resolve(conflict-id, decision-ref)`, `override-approver(gate-ref,
 new-approver)` — plus the `conflicts-open` check evaluation and the
 timeout-fire path that drafts a System Decision via the auto-PR
-machinery ([DEC-0143](DEC-0143-system-decisions-via-auto-pr.md)). The
+machinery (DEC-0143). The
 per-artifact timeout-to-default election itself is expressed in
 artifact frontmatter, tier-1 validated by
-[CMP-0001](../components/CMP-0001-artifact-store-service.md) — not a
+CMP-0001 — not a
 service operation.
 
 ## Rationale
 
 Matches
-[ST-0015](../stories/ST-0015-conflicts-open-check-and-operations.md)'s
+ST-0015's
 acceptance criteria one-to-one and gives the Arbiter
-queue ([DEC-0147](DEC-0147-derived-queue-views.md)) concrete operations
+queue (DEC-0147) concrete operations
 to act through rather than leaving escalation and override as
 unspecified session-agent behavior. Keeping the timeout election in
 frontmatter (not an API call) is consistent with every other
@@ -63,6 +63,6 @@ into the mechanical-write allowlist.
 
 `ConflictGate`'s API contract carries these three explicit items plus
 its check-evaluation and timeout-fire behavior items; the Arbiter UI
-([EP-0006](../epics/EP-0006-refinement-web-ui.md)) calls this surface
+(EP-0006) calls this surface
 directly rather than composing conflict resolution out of generic
 storage writes.

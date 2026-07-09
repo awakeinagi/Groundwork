@@ -18,21 +18,21 @@ links:
 # SES-0046: Notification Delivery Refinement
 
 Grilling session to refine
-[CMP-0008](../components/CMP-0008-notification-delivery.md) from a
+CMP-0008 from a
 draft stub to a contract-complete component doc, fed by approved story
-[ST-0024](../stories/ST-0024-notifier-connector-email-adapter.md) and
+ST-0024 and
 its cited decisions.
 
 ## Pre-session state
 
-[CMP-0008](../components/CMP-0008-notification-delivery.md) was a stub
+CMP-0008 was a stub
 with `Pending` sections. Its feeding story
-([ST-0024](../stories/ST-0024-notifier-connector-email-adapter.md))
+(ST-0024)
 was approved, covering the notifier connector contract, the v1 email
 adapter, per-user channel preference resolution, delivery feedback, and
 adapter credential handling. The related notification center story
-([ST-0048](../stories/ST-0048-notification-center.md), under
-[EP-0006](../epics/EP-0006-refinement-web-ui.md)) was also approved,
+(ST-0048, under
+EP-0006) was also approved,
 establishing that the center owns preference storage, routing, the
 preferences panel, and read/unread state — with notifier connector
 implementations explicitly out of scope.
@@ -42,32 +42,32 @@ implementations explicitly out of scope.
 ### T1 — Facilitator
 
 Recapped settled decisions
-([DEC-0075](../decisions/DEC-0075-notification-center-connectors.md),
-[DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md),
-[DEC-0149](../decisions/DEC-0149-notifier-story-under-ep-0005.md),
-[DEC-0152](../decisions/DEC-0152-secrets-encrypted-in-app-database.md),
-[DEC-0156](../decisions/DEC-0156-future-connector-families-deferred.md),
-[ST-0048](../stories/ST-0048-notification-center.md)'s boundary).
+(DEC-0075,
+DEC-0045,
+DEC-0149,
+DEC-0152,
+DEC-0156,
+ST-0048's boundary).
 Presented four structural boundary questions, each with a recommended
 answer:
 
 1. **Protocol graduation**: keep in
-   [CMP-0008](../components/CMP-0008-notification-delivery.md)
+   CMP-0008
    (recommended) or graduate to a standalone protocol-type CMP. Reasoning: one future direct
    consumer (notification center,
-   [EP-0006](../epics/EP-0006-refinement-web-ui.md), no CMP yet);
-   [CMP-0004](../components/CMP-0004-governance-gate-engine.md) goes
+   EP-0006, no CMP yet);
+   CMP-0004 goes
    through the center, not directly.
 2. **Delivery shape**: resolved channel address (recommended) or
    person-id delivery. Reasoning: matches code-host connector pattern;
-   [ST-0048](../stories/ST-0048-notification-center.md) owns
+   ST-0048 owns
    preferences.
 3. **Digest/batch composition**: center composes (recommended) or
    connector batches internally. Reasoning: routing and timing are the
    center's.
 4. **Conformance**: yes, formal expectations with a test-double adapter
    (recommended), following
-   [DEC-0045](../decisions/DEC-0045-capability-declaring-connectors.md)'s
+   DEC-0045's
    pattern.
 
 ### T2 — Stakeholder
@@ -84,9 +84,9 @@ Three contract-level detail questions for the `deliver()` operation:
    template surface.
 2. **Idempotency**: idempotent on `notification_id` (recommended),
    following
-   [DEC-0167](../decisions/DEC-0167-connector-typed-error-idempotency-convention.md)'s
+   DEC-0167's
    convention. Safe for durable job retries
-   ([DEC-0204](../decisions/DEC-0204-v1-default-adapters-deferred-alternates.md)).
+   (DEC-0204).
 3. **Channel address shape**: opaque string, adapter interprets
    (recommended) or typed per-channel union. Reasoning: new channel
    types add an adapter, never a protocol type change.
@@ -99,17 +99,17 @@ Accepted all three recommendations without amendment.
 
 Decision confirmation. Proposed two decisions:
 
-- [DEC-0240](../decisions/DEC-0240-notifier-protocol-stays-in-cmp-0008.md):
+- DEC-0240:
   graduation review — protocol stays in
-  [CMP-0008](../components/CMP-0008-notification-delivery.md); one
+  CMP-0008; one
   future consumer doesn't trigger
-  [DEC-0136](../decisions/DEC-0136-graduation-review-required.md).
-- [DEC-0241](../decisions/DEC-0241-notifier-delivery-boundary.md):
+  DEC-0136.
+- DEC-0241:
   delivery boundary — resolved-address, pre-rendered, center-resolved.
 
 Proposed three-element decomposition: NotifierConnector (protocol),
 NotifierCapabilityManifest (value), EmailNotifier (service).
-Dependencies: [CMP-0015](../components/CMP-0015-secret-store.md).
+Dependencies: CMP-0015.
 
 ### T6 — Stakeholder
 
@@ -117,8 +117,8 @@ Confirmed both decisions and the element decomposition.
 
 ## Decisions Produced
 
-- [DEC-0240](../decisions/DEC-0240-notifier-protocol-stays-in-cmp-0008.md) —
+- DEC-0240 —
   NotifierConnector protocol stays in
-  [CMP-0008](../components/CMP-0008-notification-delivery.md)
-- [DEC-0241](../decisions/DEC-0241-notifier-delivery-boundary.md) —
+  CMP-0008
+- DEC-0241 —
   delivery boundary: resolved-address, pre-rendered, center-resolved

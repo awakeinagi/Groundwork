@@ -18,28 +18,28 @@ links:
 
 ## Context
 
-[ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md)'s
+ST-0059's
 Acceptance Criteria mix server-side duties (emit SSE event ids, honor
 `Last-Event-ID` on resume — AC3) with client-side ones (automatic
 reconnect with backoff, a transport-agnostic client interface — AC2,
-AC3). [CMP-0011](../components/CMP-0011-inbound-api.md) is the *backend*
+AC3). CMP-0011 is the *backend*
 Inbound API component; its contract needed a clean stopping line.
 
 ## Decision
 
-[CMP-0011](../components/CMP-0011-inbound-api.md) contracts the **server
+CMP-0011 contracts the **server
 half** of reconnect/resume: emit **stable, monotonically ascending SSE
 event ids**; on a reconnect carrying `Last-Event-ID`, **resume the
 stream with no turn dropped or duplicated**; return problem+json on
 handshake/setup failures
-([DEC-0212](../decisions/DEC-0212-inbound-api-reuses-problem-json.md));
+(DEC-0212);
 and never treat a reconnect as a new activity signal
-([DEC-0182](../decisions/DEC-0182-streaming-turn-resets-inactivity-clock.md)).
+(DEC-0182).
 The **client-side transport-agnostic abstraction and automatic
-reconnect-with-backoff** ([ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md) AC2 and the backoff schedule of AC3)
-are owned by the Web UI ([EP-0006](../epics/EP-0006-refinement-web-ui.md),
-[ST-0043](../stories/ST-0043-session-progress-and-lifecycle-shell.md)/[ST-0044](../stories/ST-0044-session-conversation-ux.md),
-which [ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md)
+reconnect-with-backoff** (ST-0059 AC2 and the backoff schedule of AC3)
+are owned by the Web UI (EP-0006,
+ST-0043/ST-0044,
+which ST-0059
 impacts) and are an Out-of-Scope boundary in this component.
 
 ## Rationale
@@ -48,23 +48,23 @@ Emitting ids and honoring `Last-Event-ID` is server behavior and must be
 contracted where the endpoint lives. Reconnect timing, backoff schedule,
 and the transport-agnostic client interface are *browser-client*
 behavior; putting them in a backend component doc would make it own UI
-behavior that [EP-0006](../epics/EP-0006-refinement-web-ui.md)'s stories
+behavior that EP-0006's stories
 are the natural home for. The standard `Last-Event-ID` contract is
 precisely the interface between the two halves.
 
 ## Alternatives Considered
 
-- **[CMP-0011](../components/CMP-0011-inbound-api.md) also specifies the
+- **CMP-0011 also specifies the
   client transport abstraction + reconnect/backoff**: rejected — puts all
-  of [ST-0059](../stories/ST-0059-inbound-api-session-sse-streaming.md)
+  of ST-0059
   in one doc at the
   cost of a backend component owning cross-boundary UI-client behavior;
   the front/back split follows the `Last-Event-ID` seam cleanly.
 
 ## Implications
 
-[CMP-0011](../components/CMP-0011-inbound-api.md)'s SSE elements contract
+CMP-0011's SSE elements contract
 only the server obligations and name the client half as an Out-of-Scope
-boundary linking [EP-0006](../epics/EP-0006-refinement-web-ui.md). The
+boundary linking EP-0006. The
 server-side `Last-Event-ID` resume remains a Constraint, not a Note, per
-[DEC-0213](../decisions/DEC-0213-sse-reconnect-resume-contract.md).
+DEC-0213.

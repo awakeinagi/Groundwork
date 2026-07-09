@@ -44,4 +44,4 @@ purpose — degrades silently.
 
 The Jira connector needs drift detection and a reconciliation flow, and the
 UI must be good enough that people prefer it (see
-[DEC-0013](DEC-0013-jira-summary-plus-link.md) for what Jira carries).
+DEC-0013 for what Jira carries).

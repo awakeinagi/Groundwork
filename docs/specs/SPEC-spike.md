@@ -31,7 +31,7 @@ links:
    vendor eval, literature).
 4. **Findings** — filled at completion: what was learned, with evidence.
 5. **Resulting Decisions** — the `DEC` records distilled from the findings
-   ([DEC-0023](../decisions/DEC-0023-spike-findings-become-decisions.md)).
+   (DEC-0023).
 
 ## Rules
 
@@ -40,15 +40,15 @@ links:
   change" is a Decision worth recording.
 - Publishing a spike-sourced Decision triggers Impact Analysis; affected
   siblings are marked `stale` automatically
-  ([DEC-0007](../decisions/DEC-0007-impact-analysis-stale-marks.md)).
+  (DEC-0007).
 - **Release scoping** (see
   [SPEC-artifact-common](SPEC-artifact-common.md) § Release scoping): a
   spike whose question matters later, not now, is `deferred` with a
   `release:` label
-  ([DEC-0104](../decisions/DEC-0104-deferred-extends-to-spikes.md)); its
+  (DEC-0104); its
   parent epic's label is the default. A deferred spike blocks nothing
   and its "Why It Blocks" section says so. Revival conditions belong in
   the [trigger registry](../TRIGGERS.md)
-  ([DEC-0106](../decisions/DEC-0106-trigger-registry.md)); deferral and
+  (DEC-0106); deferral and
   revival each cite a Decision
-  ([DEC-0100](../decisions/DEC-0100-scope-moves-cite-decisions.md)).
+  (DEC-0100).

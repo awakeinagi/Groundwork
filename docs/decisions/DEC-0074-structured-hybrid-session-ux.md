@@ -24,7 +24,7 @@ recommended-first, free-text override) — a validated pattern.
 
 The session is a conversation stream mixing free chat with typed
 interaction cards: **question cards** and **decision-playback cards**
-([DEC-0051](DEC-0051-in-session-decision-confirmation.md)), plus a
+(DEC-0051), plus a
 persistent progress panel (settled / open / parked). Every question card
 guarantees three affordances: (1) users can attach **notes/clarifications
 to any predetermined choice**; (2) a **free-text response** option is
@@ -49,11 +49,11 @@ without burdening those who don't.
 
 ## Implications
 
-The session-engine contract ([EP-0002](../epics/EP-0002-refinement-session-agent.md)) needs typed turn payloads —
+The session-engine contract (EP-0002) needs typed turn payloads —
 question-card, decision-playback, elaboration-request/response — realizing
-the [EP-0006](../epics/EP-0006-refinement-web-ui.md)→[EP-0002](../epics/EP-0002-refinement-session-agent.md) impact edge; recorded as a story-level contract
-elaboration within [EP-0002](../epics/EP-0002-refinement-session-agent.md)'s approved scope (in live operation this would
-queue an [EP-0002](../epics/EP-0002-refinement-session-agent.md) re-affirmation). Choice annotations land in the raw
-transcript ([DEC-0052](DEC-0052-raw-transcripts-regenerable-distillation.md))
+the EP-0006→EP-0002 impact edge; recorded as a story-level contract
+elaboration within EP-0002's approved scope (in live operation this would
+queue an EP-0002 re-affirmation). Choice annotations land in the raw
+transcript (DEC-0052)
 and are citable by distillation. Elaboration behavior is strategy-pack
-content ([DEC-0053](DEC-0053-strategy-packs-as-plugins.md)).
+content (DEC-0053).

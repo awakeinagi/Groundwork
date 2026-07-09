@@ -30,53 +30,53 @@ log.
 
 ## Why (Goal Alignment)
 
-[BG-0001](../goals/BG-0001-groundwork.md) outcome 3 (human-ratified layers) is this epic
-([DEC-0006](../decisions/DEC-0006-gate-every-stage.md),
-[DEC-0020](../decisions/DEC-0020-configurable-gate-policies.md)) — realized
+BG-0001 outcome 3 (human-ratified layers) is this epic
+(DEC-0006,
+DEC-0020) — realized
 under the fork-pull model as PR gating
-([DEC-0028](../decisions/DEC-0028-fork-pull-pr-gating.md)). The staleness
-machinery ([DEC-0007](../decisions/DEC-0007-impact-analysis-stale-marks.md),
-[DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md)) keeps
+(DEC-0028). The staleness
+machinery (DEC-0007,
+DEC-0038) keeps
 the traceability graph honest as intent evolves — alignment maintained over
 time, not just at creation.
 
 ## Scope
 
-**In** (refined at [SES-0004](../sessions/SES-0004-ep-0003-refinement.md)):
+**In** (refined at SES-0004):
 
-- **Policy enforcement** ([DEC-0036](../decisions/DEC-0036-host-base-plus-service-gate-check.md)):
+- **Policy enforcement** (DEC-0036):
   coarse rules compiled to host branch protection (artifact-type directory →
   reviewer group, approval counts for committees); rich rules
   (domain-conditional approvers, quorum composition, ancestor staleness,
   open conflicts) computed as the required `gate-policy` status check.
-- **Governance-as-code** ([DEC-0037](../decisions/DEC-0037-governance-as-code.md)):
+- **Governance-as-code** (DEC-0037):
   `governance/roles.yaml`, `domains.yaml`, `gate-policies.yaml` in the
   canonical repo, PR-gated with the Arbiter as owner; the gate engine
   recompiles host protections on change; host teams are projections of
   `roles.yaml`.
-- **Staleness** ([DEC-0038](../decisions/DEC-0038-subtree-staleness-reaffirmation.md)):
+- **Staleness** (DEC-0038):
   full-subtree mechanical sweeps with attached impact reports; stale
   ancestors fail descendants' `gate-policy` checks and block new
   derivation; cleared by lightweight re-affirmation PRs, escalating to full
   re-refinement only on rejection.
-- **Conflict operations** ([DEC-0039](../decisions/DEC-0039-conflict-escalation-operations.md)):
+- **Conflict operations** (DEC-0039):
   Arbiter work queue with notifications; `conflicts-open` blocking check;
   no auto-timeout by default, per-artifact election of timeout-to-default
   with system Decisions recording auto-resolutions.
-- **Delegation** ([DEC-0040](../decisions/DEC-0040-role-pool-delegation.md)):
+- **Delegation** (DEC-0040):
   role-pool approval by default (domain mapping = routing preference);
   explicit time-bounded delegation entries for exclusivity.
-- **Queueing** ([DEC-0041](../decisions/DEC-0041-impact-ranked-reaffirmation-queue.md)):
-  per-approver work queues ordered by impact rank ([SP-0001](../spikes/SP-0001-impact-ranking-algorithm.md)'s algorithm;
+- **Queueing** (DEC-0041):
+  per-approver work queues ordered by impact rank (SP-0001's algorithm;
   human judgment until it lands), batched notifications.
-- **Observability** ([DEC-0042](../decisions/DEC-0042-governance-reporting-split.md)):
+- **Observability** (DEC-0042):
   governance event log + language-neutral metrics/query API.
 
-**Out:** identity/auth itself ([EP-0005](EP-0005-connectors-and-identity.md)); the approval and dashboard UI
-([EP-0006](EP-0006-refinement-web-ui.md), per [DEC-0032](../decisions/DEC-0032-ui-wraps-pr-gate.md) and
-[DEC-0042](../decisions/DEC-0042-governance-reporting-split.md)); conflict
-mediation content ([EP-0002](EP-0002-refinement-session-agent.md) — this epic enforces blocking; the agent
-mediates); commit construction ([EP-0001](EP-0001-artifact-store-and-format-engine.md) executes mechanical writes this
+**Out:** identity/auth itself (EP-0005); the approval and dashboard UI
+(EP-0006, per DEC-0032 and
+DEC-0042); conflict
+mediation content (EP-0002 — this epic enforces blocking; the agent
+mediates); commit construction (EP-0001 executes mechanical writes this
 epic requests).
 
 ## Domain Context
@@ -89,18 +89,18 @@ Arbiter, Impact Analysis, Stale, Re-affirmation — per
 
 - **Governance config schemas**: roles, domains (with exclusivity flags),
   gate policies (including committee composition and timeout elections) —
-  tier-1 validated ([DEC-0034](../decisions/DEC-0034-two-tier-validation.md)).
+  tier-1 validated (DEC-0034).
 - **Policy compilation contract**: governance config → host
-  branch-protection settings, via [EP-0005](EP-0005-connectors-and-identity.md)'s team/required-check
+  branch-protection settings, via EP-0005's team/required-check
   administration operations.
 - **`gate-policy` / `conflicts-open` check contracts**: inputs (PR, graph
   state, governance config) → pass/fail with human-readable explanation.
 - **Impact-analysis contract**: changed artifact → affected set + impact
-  report (consumes [EP-0004](EP-0004-graph-index.md) graph queries; requests [EP-0001](EP-0001-artifact-store-and-format-engine.md) mechanical
+  report (consumes EP-0004 graph queries; requests EP-0001 mechanical
   writes).
 - **Re-affirmation flow contract**: stale artifact → re-affirm PR →
   cleared/rejected.
-- **Metrics/query API**: governance event log access for [EP-0006](EP-0006-refinement-web-ui.md)
+- **Metrics/query API**: governance event log access for EP-0006
   dashboards.
 
 ## Risks & Open Questions
@@ -109,28 +109,28 @@ Arbiter, Impact Analysis, Stale, Re-affirmation — per
   `roles.yaml`/`gate-policies.yaml` change — recomputation semantics at
   story level.
 - Host review-semantics variance (Bitbucket vs GitHub approval/dismissal
-  behavior) — pinned during [EP-0005](EP-0005-connectors-and-identity.md) refinement (impact edge EP-0003→[EP-0005](EP-0005-connectors-and-identity.md)).
+  behavior) — pinned during EP-0005 refinement (impact edge EP-0003→EP-0005).
 - Bootstrap: initial Arbiter and roles at deployment, before governance
   files exist to gate their own creation.
 
 ## Derived Work
 
-Derived at [SES-0025](../sessions/SES-0025-ep-0003-story-derivation.md):
+Derived at SES-0025:
 
-- [CMP-0004](../components/CMP-0004-governance-gate-engine.md) —
+- CMP-0004 —
   Governance & Gate Engine (stub; contract-completed by the stories
   below)
-- [ST-0012](../stories/ST-0012-governance-config-schemas.md) —
+- ST-0012 —
   Governance configuration schemas and lifecycle
-- [ST-0013](../stories/ST-0013-policy-compilation-host-provisioning.md) —
+- ST-0013 —
   Policy compilation and host provisioning
-- [ST-0014](../stories/ST-0014-gate-policy-check.md) — The `gate-policy`
+- ST-0014 — The `gate-policy`
   required check
-- [ST-0015](../stories/ST-0015-conflicts-open-check-and-operations.md) —
+- ST-0015 —
   The `conflicts-open` check and conflict operations
-- [ST-0016](../stories/ST-0016-staleness-sweep-impact-analysis.md) —
+- ST-0016 —
   Staleness sweeps and impact analysis
-- [ST-0017](../stories/ST-0017-reaffirmation-flow-queues.md) —
+- ST-0017 —
   Re-affirmation flow and approver queues
-- [ST-0018](../stories/ST-0018-governance-event-log-metrics.md) —
+- ST-0018 —
   Governance event log and metrics API
