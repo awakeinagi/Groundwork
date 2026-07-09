@@ -10,21 +10,29 @@ participant-role: stakeholder
 facilitator: Claude Code (Fable 5)
 transcript-fidelity: reconstructed
 overview: >-
-  Intake session for the stakeholder proposal raised at SES-0055 T9:
-  treat design elements as the atomic units of implementation —
-  terminal decomposition (no further breakdown), no internal
-  dependency relationships that can cause implementation race
-  conditions, and empty-context implementability via self-contained
-  fully-specified documentation — with a possible rename of "design
-  element" as part of the change. Would re-anchor
-  contract-completeness (DEC-0011) at element level, move build-order
-  and Handoff Manifest granularity from components to elements
-  (DEC-0014, SPEC-handoff-manifest), and shift the component doc
-  toward a grouping/context layer. Raised because it gates the
-  granularity-sensitive SES-0055 dispositions (IDEA-0006 manifest
-  ownership; IDEA-0009 items F5/F9). Session open; facilitator
-  restatement carried from SES-0055 T10, stakeholder alignment
-  confirmation pending.
+  Took up the SES-0055 T9 proposal (design elements as atomic
+  implementation units) through two dual-instance system-architect
+  consultations and a one-by-one decision walk, yielding
+  DEC-0297..DEC-0309: the dual-granularity model (element = terminal
+  specification/dispatch atom with gate-checked atomicity; component =
+  unchanged gate/coherence unit — DEC-0080 narrowed, not superseded);
+  mandated typed Uses: lines (interface | implementation | test) with
+  exact projection to component depends-on and strongest-member-wins
+  edge lifting; work packages as generated dispatch bundles with a
+  principled batching criterion and Shared Preamble; per-component
+  integration work packages; Slices as a new first-class artifact type
+  (SL-, owning end-to-end acceptance criteria); empty-context
+  semantics extending DEC-0011; manifest ownership (EP-0001
+  generation, EP-0004 topology, EP-0008 endpoint — resolving
+  IDEA-0006's core); test doubles owned by the contract-owning
+  component; the bounded-context grouping principle codified
+  (vertical-slice regrouping rejected unanimously); and — the largest
+  change — swarm orchestration entering v1 scope as a full deliverable
+  (DEC-0308 supersedes DEC-0014; ingestion deferred; SP-0012
+  chartered). Executed: SPEC-handoff-manifest v2, SPEC-slice,
+  SPEC-design-elements extension, nine glossary entries, gated
+  BG-0001/EP-0001/EP-0004/EP-0008 amendments, sweeps clean. Open:
+  gate approvals, Uses: retrofit, SP-0012 run.
 links:
   relates-to: [SES-0055, IDEA-0006, IDEA-0009, DEC-0011, DEC-0014,
                DEC-0136]
@@ -344,6 +352,23 @@ queued follow-on: Uses: retrofit across 53 elements + check_links
 projection check (blocked on retrofit), ST-0007 amendment, CMP-0001
 tier-2 amendment, slice derivation, SP-0012 run, epic home for the
 orchestrator.
+
+**T19 — Facilitator.** Decision-recall audit on the amended BG-0001
+(12 candidates, one Sonnet judge). Ten NO-GAP (epic/story/component-
+level, correctly absent from a boundary-level goal). Findings
+addressed: (1) DEC-0104 — the Process Flow's uncited claim that only
+epics/stories/spikes carry deferred + release is exactly DEC-0104's
+content; cited at the sentence. (2) Judge flagged DEC-0050 (BBDC sole
+v1 connector) against the Context Diagram's "GitHub/Bitbucket" —
+facilitator verification showed DEC-0172 (accepted, later) swapped v1
+to GitHub cloud with BBDC deferred behind TRG-0010; resolved by
+citing DEC-0172 on the external-dependency item, not DEC-0050. Noted
+for a future hygiene pass: DEC-0050's status is still accepted though
+DEC-0172 displaced its choice. (3) Judge's contract-sync catch:
+System Context item 4's output contract had not been updated for the
+scope amendment — extended with the Handoff Manifest and Swarm
+Orchestrator outputs (DEC-0300, DEC-0302, DEC-0308). BG-0001 remains
+gated awaiting approval.
 
 ## Decisions Produced
 

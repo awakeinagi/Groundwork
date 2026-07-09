@@ -31,7 +31,7 @@ cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006,
         DEC-0018, DEC-0019, DEC-0021, DEC-0022, DEC-0024, DEC-0025,
         DEC-0027, DEC-0098, DEC-0099, DEC-0189, DEC-0190, DEC-0191,
         DEC-0192, DEC-0193, DEC-0194, DEC-0300, DEC-0302, DEC-0304,
-        DEC-0308]
+        DEC-0308, DEC-0104, DEC-0172]
 ---
 
 # BG-0001: Groundwork — ground implementation in refined business intent
@@ -105,7 +105,11 @@ DEC-0190.
    system and the Graph Index
    (DEC-0002,
    DEC-0010,
-   DEC-0013).
+   DEC-0013); at the southern
+   boundary, the generated Handoff Manifest (work packages and Slices,
+   per DEC-0300, DEC-0302) and
+   the Swarm Orchestrator's dispatch of implementation agents and
+   reported results (DEC-0308).
 5. **Existing vs. new (this system's own parts).** Groundwork is
    greenfield — no pre-existing internal system performs this function;
    every engine (artifact store, session agent, governance, graph index,
@@ -121,7 +125,9 @@ DEC-0190.
    directly.
 7. **External systems it depends on.** A work-management system (Jira
    Data Center for v1, via the Work-Management Connector), a code host
-   (via the Code-Host Connector), and an auth provider (email/OIDC)
+   (GitHub cloud for v1 per DEC-0172, Bitbucket
+   Data Center deferred behind `TRG-0010`; via the Code-Host Connector),
+   and an auth provider (email/OIDC)
    (DEC-0024).
 
 ### Context Diagram
@@ -197,7 +203,8 @@ flowchart TD
 ```
 
 Components/Design Elements have no `deferred` state in the artifact model
-— only epics, stories, and spikes carry `deferred` + a `release:` label —
+— only epics, stories, and spikes carry `deferred` + a `release:` label
+(per DEC-0104) —
 so no deferred branch is drawn there.
 
 ## Illustrative Scenario
