@@ -66,12 +66,26 @@ Validate the graph at any time:
 python3 tools/check_links.py
 ```
 
-Browse the docs with rendered markdown, clickable cross-references,
-backlinks, and semantic/graph search (per DEC-0244):
+### Browsing the docs (human-readable rendering)
+
+Artifact bodies store cross-references as bare IDs (per DEC-0242), so
+raw markdown is optimized for agent context, not human reading. The
+single-page viewer at `docs/human_docs.html` is the human surface
+(per DEC-0244, DEC-0245): rendered markdown, clickable
+cross-references, per-artifact backlinks ("referenced by"), status
+badges, frontmatter chips, full-text search, and Mermaid diagrams.
 
 ```
-python3 tools/serve_docs.py     # then open http://127.0.0.1:8420/tools/viewer.html
+python3 tools/serve_docs.py         # default port 8420
+# then open http://127.0.0.1:8420/docs/human_docs.html
 ```
+
+`serve_docs.py` also exposes the skill's semantic search and graph
+tools as `/api` endpoints — the viewer's "Advanced search" panel
+(requires `uv` on PATH). Any static server with directory listings
+works for plain browsing (`python3 -m http.server` from the repo
+root); the advanced panel simply hides itself. Internet access is
+needed at view time for the Tailwind/Mermaid CDNs.
 
 ## Dogfooding
 

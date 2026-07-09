@@ -111,6 +111,9 @@
 
 <script>
 "use strict";
+// Repo root prefix — this file lives at <root>/docs/human_docs.html and
+// works under any mount path as long as the repo root is served.
+const BASE = location.pathname.replace(/docs\/human_docs\.html$/, "");
 const TYPE_DIRS = [
   ["goals", "Goals"], ["epics", "Epics"], ["stories", "Stories"],
   ["spikes", "Spikes"], ["components", "Components"],
@@ -296,7 +299,7 @@ function renderProse(text, selfId) {
 /* ---------- corpus loading ---------- */
 async function listDir(path) {
   try {
-    const html = await (await fetch("/" + path + "/")).text();
+    const html = await (await fetch(BASE + path + "/")).text();
     return [...html.matchAll(/href="([^"?]+\.md)"/g)].map(m =>
       path + "/" + decodeURIComponent(m[1]));
   } catch { return []; }
@@ -308,7 +311,7 @@ async function loadCorpus() {
   const paths = listings.flat().concat(EXTRA_FILES);
   await Promise.all(paths.map(async p => {
     try {
-      const raw = await (await fetch("/" + p)).text();
+      const raw = await (await fetch(BASE + p)).text();
       const [fm, body] = parseFM(raw);
       const doc = { path: p, raw, fm, body,
         title: fm?.title || p.split("/").pop() };
@@ -491,7 +494,7 @@ document.getElementById("q").addEventListener("input", e => {
 });
 async function probeApi() {
   try {
-    const r = await fetch("/api/ping");
+    const r = await fetch(BASE + "api/ping");
     apiOn = r.ok && (await r.text()).trim() === "ok";
   } catch { apiOn = false; }
   document.getElementById("apibox").classList.toggle("hidden", !apiOn);
@@ -504,19 +507,19 @@ document.querySelectorAll(".apibtn").forEach(btn =>
     if (kind === "search") {
       const q = document.getElementById("semq").value.trim();
       if (!q) return;
-      url = `/api/search?q=${encodeURIComponent(q)}&k=10`;
+      url = BASE + `api/search?q=${encodeURIComponent(q)}&k=10`;
     } else if (["impact", "trace"].includes(kind)) {
       const id = currentId();
       if (!id) { out.classList.remove("hidden");
         out.textContent = "Open an artifact first."; return; }
-      url = `/api/graph?cmd=${kind}&arg=${id}`;
+      url = BASE + `api/graph?cmd=${kind}&arg=${id}`;
     } else if (kind === "similar") {
       const id = currentId();
       if (!id) { out.classList.remove("hidden");
         out.textContent = "Open an artifact first."; return; }
-      url = `/api/similar?id=${id}`;
+      url = BASE + `api/similar?id=${id}`;
     } else {
-      url = `/api/graph?cmd=${kind}`;
+      url = BASE + `api/graph?cmd=${kind}`;
     }
     out.classList.remove("hidden");
     out.textContent = "running…";

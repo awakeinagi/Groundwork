@@ -63,7 +63,9 @@ Component Docs. Every stage transition passes a **human approval gate**.
    an artifact file fails the checker, and every bare ID must resolve
    to an existing artifact. Links are still used for non-artifact
    files (CONTEXT.md, specs, code) and URLs. Frontmatter stays bare
-   IDs and remains what tools read.
+   IDs and remains what tools read. Humans browse the rendered,
+   navigable docs via `python3 tools/serve_docs.py` →
+   `docs/human_docs.html`.
 7. **Glossary.** When a new or ambiguous term comes up, resolve it in
    `CONTEXT.md` immediately and use it exactly thereafter.
 8. **Conflicts block.** Artifacts linked to an unresolved `CFL-` cannot

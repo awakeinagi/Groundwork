@@ -42,8 +42,9 @@ frontier, and a recommended mode. Verify its recommendation yourself:
 
 If the directory contains an unrelated existing project (code, docs), the
 artifact tree lives alongside it — Groundwork manages `docs/`, `CONTEXT.md`,
-`AGENTS.md`, and `tools/check_links.py` and touches nothing else. Confirm
-with the user before bootstrapping into a non-empty repo.
+`AGENTS.md`, and `tools/` (`check_links.py`, `serve_docs.py`) and touches
+nothing else. Confirm with the user before bootstrapping into a non-empty
+repo.
 
 Before doing any Mode 2 or Mode 3 work, read
 [references/groundwork-system.md](references/groundwork-system.md) (the
@@ -59,9 +60,16 @@ to run sessions and gates). Templates for every artifact type are in
    CONTEXT.md          ← glossary seed (template in references/templates.md)
    AGENTS.md           ← copy assets/AGENTS.md from this skill, verbatim
    tools/check_links.py← copy scripts/check_links.py from this skill
+   tools/serve_docs.py ← copy scripts/serve_docs.py from this skill
+   docs/human_docs.html← copy assets/human_docs.html from this skill
    docs/{goals,epics,stories,spikes,components,sessions,decisions,
          conflicts,change-proposals,consolidations}/   (.gitkeep in each)
    ```
+   `docs/human_docs.html` + `serve_docs.py` are the human browsing
+   surface: rendered markdown, clickable bare-ID cross-references,
+   backlinks, and (when served via `serve_docs.py`) semantic + graph
+   search over the corpus. Cross-references in artifact bodies are bare
+   IDs; this viewer, not stored links, carries human navigation.
    If the repo already has an `AGENTS.md` or `CLAUDE.md`, don't overwrite —
    append the Groundwork section from the asset instead.
 2. If not a git repo, `git init`. Docs being versioned is load-bearing:
