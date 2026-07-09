@@ -313,12 +313,37 @@ ingestion explicitly deferred (revisited on SP-0012's findings).
 
 **T18 — Facilitator.** Distillation executed: DEC-0297..DEC-0309
 recorded as accepted; DEC-0014 marked superseded by DEC-0308.
-Follow-on artifact work in-session: SP-0012 chartered (orchestration
-model), gated BG-0001 scope amendment, gated EP-0001/EP-0004/EP-0008
-scope amendments (DEC-0305), SPEC-handoff-manifest supersession,
-SPEC-design-elements extension, SPEC-slice creation, CONTEXT.md
-glossary entries, IDEA-0006 narrowing, consistency sweep + terms
-check, decision-recall audit.
+Artifact work executed in-session: SP-0012 chartered (orchestration
+model, draft); gated BG-0001 scope amendment (orchestrator in,
+ingestion out, outcome 4 reworded to orchestrated empty-context
+dispatch); gated EP-0001/EP-0004/EP-0008 scope amendments per
+DEC-0305; SPEC-handoff-manifest superseded (manifest-version 2: work
+packages, typed depends-on, slices, Shared Preamble, seven rules);
+SPEC-design-elements extended (mandated Uses: line, qualifiers,
+projection, atomicity gate checks); SPEC-slice created (SL- artifact
+type); CONTEXT.md glossary gained Swarm Orchestrator, Work Package,
+Integration Work Package, Shared Preamble, Slice, Empty Context,
+Lifted Edge, Closure Axis, Uses; IDEA-0006 narrowed to the
+coverage-pass rerun + emission stories. Consistency sweep over the 13
+DECs (48 citer hits) dispositions: DEC-0080 citers (CMP-0001..0005,
+ST-0001) — cite granularity/graduation, unaffected by the DEC-0298
+rationale narrowing, consistent; DEC-0011 citers (BG-0001, CMP-0001,
+ST-0007) — crawl fallback survives per DEC-0304, consistent, but
+ST-0007's tier-2 suite gains new checks (Uses: validation, bundle
+closure, projection) — amendment queued with the retrofit work;
+DEC-0081 citers — Uses: line is additive to the element layout,
+consistent pending retrofit; DEC-0026 citers (epics, ST-0045) —
+DEC-0309 explicitly preserves impact-edge semantics
+(report-don't-enforce), consistent; DEC-0014 citers — BG-0001
+re-pointed in the gated amendment; EP-0005/CMP-0005/CMP-0009 cite it
+for boundary framing that DEC-0308 preserves (manifest remains the
+boundary contract) — re-point citations at next touch, no content
+drift. Terms check: one finding (DEC-0304/DEC-0305 shared
+canonical-ref unlinked) — fixed by adding the sibling link. Remaining
+queued follow-on: Uses: retrofit across 53 elements + check_links
+projection check (blocked on retrofit), ST-0007 amendment, CMP-0001
+tier-2 amendment, slice derivation, SP-0012 run, epic home for the
+orchestrator.
 
 ## Decisions Produced
 

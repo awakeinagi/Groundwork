@@ -2,7 +2,7 @@
 id: EP-0001
 type: epic
 title: Artifact Store & Format Engine
-status: approved
+status: gated
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
@@ -16,6 +16,9 @@ overview: >-
   All writes go through its API. The store is git-backed markdown with
   YAML frontmatter per DEC-0008, supporting concurrent session
   refinement and typed mechanical writes. Approved 2026-07-07.
+  Amended per SES-0056/DEC-0305: owns Handoff Manifest, work-package 
+  bundle, and Shared Preamble generation/validation/write as 
+  reproducible store artifacts. Gated pending re-approval.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
@@ -23,7 +26,7 @@ links:
   impacted-by: [EP-0003, EP-0005]
 cites: [DEC-0008, DEC-0009, DEC-0002, DEC-0018, DEC-0026, DEC-0028, DEC-0029,
         DEC-0030, DEC-0031, DEC-0032, DEC-0033, DEC-0034, DEC-0035, DEC-0103,
-        DEC-0121, DEC-0122, DEC-0124, DEC-0134, DEC-0135]
+        DEC-0121, DEC-0122, DEC-0124, DEC-0134, DEC-0135, DEC-0300, DEC-0303, DEC-0305, DEC-0309]
 ---
 
 # EP-0001: Artifact Store & Format Engine
@@ -68,6 +71,13 @@ repository (DEC-0028).
 - **ID allocation** (DEC-0031):
   sequential per prefix, never reused, serialized by a thread/process-safe
   service lock.
+- **Handoff Manifest & work-package generation** (DEC-0305,
+  DEC-0300): generation, validation, and write of the Handoff Manifest,
+  work-package bundles, and Shared Preamble as reproducible generated
+  store artifacts pinned to a canonical-ref; topology consumed from
+  EP-0004's build-order and lifted-edge derivations
+  (DEC-0309); bundle-closure validation at generation
+  (DEC-0303).
 - **Mechanical writes** (DEC-0033):
   typed operations only (`append-turn`, `mark-stale`, `set-jira-key`, …);
   agents hold no git credentials; direct-commit or program-user auto-PR

@@ -2,7 +2,7 @@
 id: EP-0004
 type: epic
 title: Cross-Reference Graph Index
-status: approved
+status: gated
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
@@ -16,6 +16,10 @@ overview: >-
   agents, gate engine, UI, and manifest generation. Freshness via
   synchronous writes to writer's overlay and async propagation. Approved
   2026-07-07.
+  Amended per SES-0056/DEC-0305: supplies manifest topology — typed 
+  element DAG from Uses: lines, lifted component edges, build-order 
+  over implementation edges, cross-epic edge report. Gated pending 
+  re-approval.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
@@ -24,7 +28,7 @@ links:
   impacted-by: [EP-0001, EP-0002, EP-0003]
 cites: [DEC-0002, DEC-0009, DEC-0010, DEC-0026, DEC-0056, DEC-0059, DEC-0060,
         DEC-0102, DEC-0062, DEC-0063, DEC-0064, DEC-0105, DEC-0121, DEC-0122,
-        DEC-0124]
+        DEC-0124, DEC-0299, DEC-0305, DEC-0309]
 ---
 
 # EP-0004: Cross-Reference Graph Index
@@ -61,6 +65,12 @@ drafts mid-refinement under the fork-pull model
   synchronous writes to the writer's overlay (read-your-writes for
   sessions); async propagation elsewhere via the change-event stream;
   rebuild output as the correctness definition.
+- **Manifest topology** (DEC-0305,
+  DEC-0309): the typed element DAG from Uses: declarations
+  (DEC-0299), lifted component edges
+  (strongest-member-wins), topological ordering over implementation
+  edges, and the cross-epic structural-edge report — supplied to
+  EP-0001's manifest generation via a declared dependency.
 - **Query tiers** (DEC-0062):
   named traversals (trace-to-goal, subtree, impact-neighborhood, cited-by,
   conflict-neighborhood, build-order); bounded generic traversal primitive

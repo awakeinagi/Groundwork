@@ -25,7 +25,8 @@ links:
   derives-from: [SES-0056]
   satisfies: [BG-0001]
   relates-to: [DEC-0308, DEC-0300, DEC-0302, DEC-0305, DEC-0309]
-cites: [DEC-0308, DEC-0300, DEC-0301, DEC-0302, DEC-0304, DEC-0309]
+cites: [DEC-0308, DEC-0300, DEC-0301, DEC-0302, DEC-0304, DEC-0309,
+        DEC-0102]
 ---
 
 # SP-0012: Implementation-Swarm Orchestration Model
@@ -49,9 +50,10 @@ settled soundly.
 ## Method
 
 1. Draft the orchestrator's consumption loop against the ratified
-   contracts: manifest → slices (ordered, walking skeleton first) →
-   work packages (element + integration) → dispatch → verify
-   acceptance → report.
+   contracts: manifest → slices (ordered, walking skeleton first,
+   DEC-0302) → work packages (element per DEC-0300 + integration per
+   DEC-0301, sequenced on lifted implementation edges per DEC-0309) →
+   dispatch → verify acceptance → report.
 2. Define the agent-facing contract: inputs (bundle + Shared
    Preamble, empty-context semantics per DEC-0304), outputs
    (execution status, test/acceptance results), failure and retry

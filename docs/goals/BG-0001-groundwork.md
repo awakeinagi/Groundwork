@@ -2,7 +2,7 @@
 id: BG-0001
 type: business-goal
 title: Groundwork — ground implementation in refined business intent
-status: approved
+status: gated
 owner: awakeinagi@gmail.com
 sponsor: awakeinagi@gmail.com
 created: 2026-07-05
@@ -14,17 +14,24 @@ overview: >-
   through unsupervised 1:1 Q&A sessions with stakeholders, product
   owners, and engineering leads, producing a gated hierarchy of
   Business Goals, Epics, Stories/Spikes, and contract-complete
-  Component Docs — all provenance-linked to decisions that shaped them.
-  Success criteria include traceability, conflict surfacing,
-  human-ratified layers, parallel implementability, and sync without
-  drift to external systems.
+  Component Docs — all provenance-linked to decisions that shaped
+  them — plus, per DEC-0308 (SES-0056, superseding DEC-0014), the
+  Swarm Orchestrator that dispatches implementation agents from the
+  Handoff Manifest's work packages and Slices, verifies acceptance,
+  and reports results. Success criteria include traceability, conflict
+  surfacing, human-ratified layers, parallel implementability (now
+  via orchestrated empty-context dispatch, DEC-0304), and sync
+  without drift to external systems. Feedback-loop ingestion stays
+  out of v1 (SP-0012 revisits). Gated pending re-approval of the
+  scope amendment.
 links:
   derives-from: [SES-0001]
 cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006,
-        DEC-0009, DEC-0010, DEC-0011, DEC-0013, DEC-0014, DEC-0015,
+        DEC-0009, DEC-0010, DEC-0011, DEC-0013, DEC-0015,
         DEC-0018, DEC-0019, DEC-0021, DEC-0022, DEC-0024, DEC-0025,
         DEC-0027, DEC-0098, DEC-0099, DEC-0189, DEC-0190, DEC-0191,
-        DEC-0192, DEC-0193, DEC-0194]
+        DEC-0192, DEC-0193, DEC-0194, DEC-0300, DEC-0302, DEC-0304,
+        DEC-0308]
 ---
 
 # BG-0001: Groundwork — ground implementation in refined business intent
@@ -229,11 +236,13 @@ conflict resolves
 3. **Human-ratified layers**: no artifact feeds the next stage without a
    named approver's sign-off (per
    DEC-0006).
-4. **Parallel implementability**: an implementation swarm can build
-   components from the Handoff Manifest with (ideally) no context beyond the
-   docs and their cross-references (per
+4. **Parallel implementability**: the Swarm Orchestrator dispatches an
+   implementation swarm from the Handoff Manifest's work packages and
+   Slices, each agent starting with empty conversational context —
+   its bundle, the Shared Preamble, and the pinned corpus (per
    DEC-0011,
-   DEC-0014).
+   DEC-0304,
+   DEC-0308).
 5. **Sync without drift**: Jira reflects the canonical docs at all times;
    detected drift reconciles toward canon (per
    DEC-0002).
@@ -254,13 +263,19 @@ labels follow DEC-0098.
 **In:** the refinement pipeline (sessions, synthesis, conflict handling);
 the artifact model and canonical store; gates and governance; the
 cross-reference graph and derived Graph Index; the consolidation memory
-layer; Jira projection; read-only code-host context; the Handoff Manifest.
+layer; Jira projection; read-only code-host context; the Handoff Manifest
+(work packages and Slices, per DEC-0300 and
+DEC-0302); the Swarm Orchestrator — dispatching
+implementation agents from the manifest, verifying slice acceptance, and
+reporting results (per DEC-0308, which supersedes
+the prior exclusion; orchestration-model spike
+SP-0012 precedes its epic derivation).
 
-**Out:** orchestrating the implementation swarm
-(DEC-0014);
-retroactive ingestion of the existing backlog
+**Out:** retroactive ingestion of the existing backlog
 (DEC-0004);
-post-implementation feedback ingestion (a candidate future goal).
+post-implementation feedback ingestion into the doc corpus (deferred by
+DEC-0308, revisited on
+SP-0012's findings).
 
 ## Constraints
 

@@ -27,8 +27,15 @@ docs/
 ├── conflicts/   CFL-*  Contradictory-request records (blocking)
 ├── change-proposals/ CP-*   Out-of-band + unauthorized-attempt capture
 ├── ideas/       IDEA-* Raw pre-classification idea captures (work queue)
+├── slices/      SL-*   End-to-end behavior slices with acceptance criteria
+│                       (DEC-0302, SPEC-slice)
 └── consolidations/   CON-* Derived context summaries (never citable)
 ```
+
+Design elements inside Component Docs carry mandated `Implements:` and
+typed `Uses:` lines (`interface | implementation | test`, DEC-0299); a
+component's `depends-on` must equal the exact projection of its
+members' cross-component `Uses:` targets (DEC-0309).
 
 Pipeline: Idea → Sessions → Business Goal → Epics → Stories/Spikes →
 Component Docs. Every stage transition passes a **human approval gate**.

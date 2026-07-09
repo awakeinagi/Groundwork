@@ -93,12 +93,56 @@ is gated).
   person hold at this moment": direct role memberships plus roles held
   through an active time-bounded delegation window, evaluated at an
   explicit governance ref and point in time.
-- **Handoff Manifest** — the machine-readable package (component docs,
-  contracts, dependency order) that Groundwork emits for an implementation
-  swarm. Groundwork's southern boundary.
-- **Implementation Swarm** — the set of AI agents and/or developers that build
-  components from Component Docs. Out of Groundwork's scope; consumes the
-  Handoff Manifest.
+- **Handoff Manifest** — the machine-readable package Groundwork emits
+  at its southern boundary: ordered Slices referencing Work Packages,
+  with typed dependency order, pinned to a canonical-ref. Generated and
+  written by the Artifact Store (DEC-0305), topology supplied by the
+  Graph Index.
+- **Implementation Swarm** — the set of AI agents and/or developers that
+  build the system from Work Packages. Dispatched and verified by the
+  Swarm Orchestrator; consumes the Handoff Manifest.
+- **Swarm Orchestrator** — the v1 deliverable (DEC-0308, superseding
+  DEC-0014's exclusion) that consumes the Handoff Manifest, dispatches
+  implementation agents per Slice ordering and lifted implementation
+  edges, verifies acceptance, and reports results. Feedback-loop
+  ingestion into the corpus remains out of v1 scope.
+- **Work Package** — the generated dispatch unit of implementation
+  (DEC-0300): one or more design elements' contract blocks plus the
+  transitive closure of referenced contract items, applicable component
+  invariants/IG constraints, a glossary slice, and a Shared Preamble
+  reference. Never hand-authored; same canonical-ref ⇒ identical
+  bundles. An element stands alone iff it carries self-contained
+  implementable A/B items; otherwise it rides with its
+  enforcing/consuming element.
+- **Integration Work Package** — the per-component generated work
+  package (DEC-0301) that depends on the component's element work
+  packages and verifies its C-n invariants and Acceptance & Test
+  Expectations.
+- **Shared Preamble** — the single generated document of swarm-wide
+  cross-cutting context (reference stack, error model, repo
+  conventions) referenced by every work-package bundle instead of
+  duplicated into each (DEC-0300).
+- **Slice (SL)** — a first-class artifact (DEC-0302, SPEC-slice): a
+  named, owned vertical subset of work packages forming one end-to-end
+  behavior, carrying the acceptance-criteria block that is the durable
+  home of end-to-end test expectations. Referenced by the manifest in
+  ordered sequence, walking skeleton first. Slices reference work
+  packages across components; they never regroup components
+  (DEC-0307).
+- **Empty Context** — the implementing agent's starting state
+  (DEC-0304): no conversational history; only its work-package bundle
+  plus the Shared Preamble. Crawling the corpus pinned at
+  canonical-ref remains sanctioned (DEC-0011).
+- **Lifted Edge** — a coarse-grained dependency edge derived from
+  fine-grained ones (DEC-0309): a component's depends-on is the exact
+  projection of its members' cross-component Uses: targets, typed
+  strongest-member-wins (implementation > interface > test). At epic
+  boundaries lifting is reported, never enforced.
+- **Closure Axis** — the single shared reason-for-change a component's
+  elements are grouped around (DEC-0307, Common Closure Principle):
+  changes of that kind stay inside the component (e.g. CMP-0001/the
+  storage model, CMP-0009/GitHub's API surface, CMP-0004/governance
+  semantics).
 
 ## Artifacts
 
@@ -184,6 +228,16 @@ names below are reserved words when used as element types.
   Declared on the mandated `Implements:` line under each element heading;
   the word is reserved for this direction (a Story *builds or modifies* a
   Component Doc, never "implements" it).
+- **Uses** — the directed, typed relationship *Design Element ⇒ Design
+  Element* (DEC-0299): every dependency on another element is declared
+  on the mandated `Uses:` line as a named contract item with an
+  edge-type qualifier from the closed set `interface` (contract-only;
+  non-serializing — consumer builds against stubs from the referenced
+  items, which ship in its bundle; the default), `implementation`
+  (requires the built artifact; the only qualifier constraining
+  build-order), `test` (needed only at test execution; targets must be
+  owned test-double elements, DEC-0306). "Atomic" means no
+  *unspecified* dependencies, not no dependencies (DEC-0297).
 - **Design-Complete** — the property of a Design Element whose typed
   contract obligations are fully met with no pending content; the unit the
   design percent-complete metric counts. A Story is design-complete when

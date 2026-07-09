@@ -86,6 +86,29 @@ DEC-0081)
   and the design/implementation percent-complete metrics are computed
   over these edges
   (DEC-0095).
+- Directly under the `Implements:` line, every element carries a
+  mandated **`Uses:`** line (DEC-0299) declaring each dependency on
+  another element as a named contract item with an edge-type
+  qualifier from the closed set `interface | implementation | test`:
+  `Uses: SchemaValidator.A-1 (interface), ItemBranch.B-2 (implementation)`
+  — or `Uses: none`. Semantics: `(interface)` is contract-only and
+  non-serializing (the consumer builds against stubs generated from
+  the referenced items, which ship in its work-package bundle; the
+  default when omitted); `(implementation)` requires the built
+  artifact and is the only qualifier constraining build-order;
+  `(test)` is needed only at test execution and must target an owned
+  test-double element (DEC-0306 — a test double is an element of the
+  component owning the contract it fakes, promoted from Notes on
+  first `(test)` reference). Unresolvable targets or unknown
+  qualifiers are gate-blockers. A component's frontmatter
+  `depends-on` must equal the exact projection of its members'
+  cross-component `Uses:` targets, and the lifted component edge is
+  typed strongest-member-wins, `implementation > interface > test`
+  (DEC-0309); the checker enforces the projection in both directions.
+  The element's atomicity — terminal, dependencies declared and
+  typed, obligations complete — is verified at gate time per
+  DEC-0303 (DEC-0136 checklist extension plus the mechanical
+  bundle-closure check).
 - Contract items are element-scoped:
   `<ElementName>.<K>-<n>` where `K` ∈ `B` (behavior), `A` (API),
   `D` (data), numbered sequentially per element and kind

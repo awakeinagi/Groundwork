@@ -45,4 +45,11 @@ grilling there, under the ratified atom model.
 
 ## Disposition
 
-Pending.
+Partially resolved by SES-0056: manifest ownership settled by
+DEC-0305 (EP-0001 generation/validation/write, EP-0004 topology,
+EP-0008 endpoint), and the manifest schema superseded by
+DEC-0300/DEC-0302 (work packages, slices). Remaining at take-up: the
+DEC-0194 coverage-pass rerun over BG-0001's Scope-In list, and
+derivation of the manifest-emission stories under EP-0001. The
+release question (v1) is implied by DEC-0308's orchestrator
+deliverable consuming the manifest.

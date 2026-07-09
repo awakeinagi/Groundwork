@@ -2,7 +2,7 @@
 id: EP-0008
 type: epic
 title: Backend Application Platform
-status: approved
+status: gated
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
@@ -15,6 +15,9 @@ overview: >-
   surface using FastAPI/ASGI/SSE, and two new infrastructure ports —
   Queue and KV-store — extending the Port family. Identified as a
   missing piece during SES-0035 retrospective.
+  Amended per SES-0056/DEC-0305: Inbound API exposes the manifest 
+  trigger endpoint only; no manifest domain logic. Gated pending 
+  re-approval.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
@@ -22,7 +25,7 @@ links:
   impacts: [EP-0006]
   impacted-by: [EP-0001, EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
 cites: [DEC-0001, DEC-0018, DEC-0121, DEC-0122, DEC-0102, DEC-0124, DEC-0187,
-        DEC-0190, DEC-0201, DEC-0202, DEC-0203, DEC-0204, DEC-0205]
+        DEC-0190, DEC-0201, DEC-0202, DEC-0203, DEC-0204, DEC-0205, DEC-0305]
 ---
 
 # EP-0008: Backend Application Platform
@@ -64,6 +67,10 @@ components build against, instead of each other's internals.
 ## Scope
 
 **In:**
+- **Manifest trigger endpoint** (DEC-0305): the Inbound API exposes
+  the endpoint that triggers Handoff Manifest generation; generation,
+  validation, and write are EP-0001's, topology EP-0004's — no manifest
+  domain logic lives here (DEC-0201).
 - **Composition Root**: binds the six Port contracts (app database,
   vector store, embedding, graph store, Queue, KV-store) to concrete
   Adapters at process startup, from deployment configuration

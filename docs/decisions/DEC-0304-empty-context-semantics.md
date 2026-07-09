@@ -22,7 +22,7 @@ overview: >-
   mandate.
 links:
   derives-from: [SES-0056]
-  relates-to: [DEC-0011, DEC-0300, DEC-0297]
+  relates-to: [DEC-0011, DEC-0300, DEC-0297, DEC-0305]
 ---
 
 # DEC-0304: Empty-Context Semantics

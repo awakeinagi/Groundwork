@@ -4,8 +4,6 @@ description: Writes or refreshes the frontmatter `overview:` field of Groundwork
 model: claude-haiku-4-5
 effort: high
 tools: Read, Edit, Grep, Glob, Task, Skill
-hooks:
-  - Pos
 skills:
   - groundwork-design-session
   - groundwork-overview
