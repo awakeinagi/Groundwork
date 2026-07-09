@@ -45,6 +45,7 @@ Relationship tables — **direction matters**:
 | `CONFLICTS_WITH` | artifact → conflict | open-conflict linkage. |
 | `RELATES_TO` | as written | weak association (sessions ↔ artifacts, etc.). |
 | `HAS_ELEMENT` | component → element | design-element ownership. |
+| `MENTIONS` | referrer → referent | a bare artifact ID in the referrer's body prose (code spans/fenced blocks excluded; DEC-0251). The edge records only that a reference exists — bodies stay in the docs. |
 | `IMPLEMENTS` | element → story | the element's `Implements:` line — which stories' implementation it handles. |
 
 ## Command reference
@@ -55,7 +56,7 @@ Relationship tables — **direction matters**:
 | `sync PATH\|ID ...` | after editing/deleting a few artifacts |
 | `impact ID` | **before** superseding a decision or amending an approved artifact — shows derivation descendants (the would-be-stale set), citers, impact-edge neighbors, dependents |
 | `trace ID` | session prep — ancestors to the goal + cited decisions with source-spans |
-| `gaps` | periodic audit — unresolved refs, citations of superseded DECs, uncited accepted DECs, approved goals/epics with nothing derived, sessions with no decisions, approved stories no element implements |
+| `gaps` | periodic audit — unresolved refs, citations of superseded DECs, uncited accepted DECs, approved goals/epics with nothing derived, sessions with no decisions, approved stories no element implements, plus the reciprocity audits (DEC-0251): derived children unlisted in the parent body, dead/missing cites, impact edges without impactor prose, session relates-to targets unmentioned |
 | `order [type]` | choosing the next sibling to refine (ready + largest impact fan-out first) |
 | `elements [etype]` | reviewing the element model; spotting seam-graduation candidates; per-element implemented stories + completeness |
 | `progress` | the design percent-complete rollup — story → epic → goal over `IMPLEMENTS` edges; uncovered stories read 0% |
@@ -63,6 +64,17 @@ Relationship tables — **direction matters**:
 | `query CYPHER` | everything below |
 
 ## Cypher cookbook
+
+Prose references with no frontmatter relationship (candidate missing
+edges — the inverse of the `gaps` reciprocity audits):
+
+```cypher
+MATCH (a:Artifact)-[:MENTIONS]->(b:Artifact)
+WHERE NOT EXISTS { MATCH (a)-[:CITES|RELATES_TO|DERIVES|SUPERSEDES|
+                            IMPACTS|DEPENDS_ON|CONFLICTS_WITH]->(b) }
+  AND NOT EXISTS { MATCH (b)-[:DERIVES|IMPACTS]->(a) }
+RETURN a.id, b.id ORDER BY a.id, b.id
+```
 
 Approval queue — everything gated, oldest first:
 

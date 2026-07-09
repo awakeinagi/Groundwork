@@ -221,7 +221,7 @@ Use it whenever a question is really a graph traversal:
 |---|---|
 | Before superseding a decision or amending an approved artifact — who goes stale? | `impact <ID>` |
 | Session prep: why does this artifact exist, on which decisions? | `trace <ID>` |
-| Periodic audit: dangling refs, citations of superseded DECs, uncited decisions, frontier | `gaps` |
+| Periodic audit: dangling refs, citations of superseded DECs, uncited decisions, frontier, reciprocity gaps (unlisted children, dead/missing cites, unexplained impact edges, unmentioned session subjects) | `gaps` |
 | Choosing what to refine next among siblings | `order [type]` |
 | Element inventory across components (seam-graduation candidates) | `elements [etype]` |
 | Percent-complete estimate — design % per story/epic/goal | `progress` |

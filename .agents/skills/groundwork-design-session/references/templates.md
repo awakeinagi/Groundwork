@@ -109,7 +109,9 @@ answer shapes this split.]
 None identified. [or link CFL artifacts]
 
 ## Derived Work
-- [EP links, maintained as they are created]
+- [Bare IDs, maintained as children are created — the checker blocks a
+  parent that doesn't reference every artifact deriving from it
+  (DEC-0246), including late-derived ones]
 ```
 
 ## Epic (EP)
@@ -153,6 +155,8 @@ Bounded context: **[name]**. Terms: [glossary terms used/introduced].
 
 ## Derived Work
 None yet — stories/spikes follow gate approval of this epic.
+[Then bare IDs, maintained as children are created — checker-enforced
+(DEC-0246), including late-derived ones]
 ```
 
 ## Story (ST)
@@ -330,13 +334,19 @@ links:
 # SES-0001: [Title]
 
 ## Purpose
-[What the session set out to refine; what was already settled.]
+[What the session set out to refine; what was already settled. Must
+reference every artifact in `relates-to` (DEC-0250).]
 
 ## Transcript
 **T1 — [Participant].** [Faithful account of what they said.]
 **T2 — Facilitator.** [Questions asked, with the recommendations given.]
 **T3 — [Participant].** [Answers, including amendments verbatim in spirit.]
 ...
+
+### Post-Close Enrichment
+[Only if needed, appended after close (DEC-0248): dated bare-ID
+cross-references surfacing already-existing relationships. Turns above
+are never edited.]
 
 ## Decisions Produced
 DEC-...., DEC-....

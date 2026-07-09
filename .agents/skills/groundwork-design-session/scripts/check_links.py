@@ -46,6 +46,19 @@ Rules enforced:
      plus a `(per DEC)` citation. On armed entries every subscribed
      artifact is `deferred` and there is at least one subscriber
      (DEC-0109, DEC-0110).
+ 15. Derived-work completeness (DEC-0246): every artifact whose
+     `derives-from` names a business goal or epic is referenced by
+     bare ID in that parent's body prose.
+ 16. Cites/prose synchronization (DEC-0247), on goals, epics, stories,
+     spikes, and components: every `cites:` DEC appears in body prose
+     (no dead cites), and every DEC referenced in body prose appears
+     in `cites:` or a frontmatter link (no missing cites).
+ 17. Impactor-side impact prose (DEC-0249): an artifact carrying an
+     `impacts` edge references each impact target in its body prose.
+ 18. Session mention completeness (DEC-0250): every artifact in a
+     session's `relates-to` is referenced in the session's body prose
+     (for closed sessions, appended as Post-Close Enrichment per
+     DEC-0248).
 
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
@@ -376,10 +389,17 @@ def main():
             warnings.append(f"{fm['_path']}: approved story {aid} has no "
                             f"referencing design element (coverage gap)")
 
-    # Rule 8: body cross-references are bare IDs and resolve (DEC-0242)
+    # Body prose bare-ID mentions, shared by rules 8 and 15-18
+    mentions = {}
     for aid, fm in artifacts.items():
         prose = INLINE_CODE_RE.sub("", FENCED_CODE_RE.sub("",
                                                           fm["_body"] or ""))
+        fm["_prose"] = prose
+        mentions[aid] = set(BARE_ID_RE.findall(MD_LINK_RE.sub("", prose)))
+
+    # Rule 8: body cross-references are bare IDs and resolve (DEC-0242)
+    for aid, fm in artifacts.items():
+        prose = fm["_prose"]
         base = (root / fm["_path"]).parent
         for text, target in MD_LINK_RE.findall(prose):
             if target.startswith(EXTERNAL_TARGET):
@@ -392,10 +412,58 @@ def main():
             elif not (base / plain).resolve().exists():
                 errors.append(f"{fm['_path']}: link [{text}]({target}) "
                               f"does not resolve")
-        for b in sorted(set(BARE_ID_RE.findall(MD_LINK_RE.sub("", prose)))):
+        for b in sorted(mentions[aid]):
             if b not in artifacts:
                 errors.append(f"{fm['_path']}: cross-reference {b} does "
                               f"not resolve to any artifact")
+
+    # Rule 15: derived-work completeness (DEC-0246)
+    for aid, fm in artifacts.items():
+        for p in as_list((fm.get("links") or {}).get("derives-from")):
+            parent = artifacts.get(p)
+            if parent is None:
+                continue  # unresolved target: rule 2
+            if parent.get("type") in ("business-goal", "epic") \
+                    and aid not in mentions[p]:
+                errors.append(f"{parent['_path']}: body does not reference "
+                              f"derived child {aid} (per DEC-0246)")
+
+    # Rule 16: cites/prose synchronization (DEC-0247)
+    CITES_SYNC_TYPES = {"business-goal", "epic", "story", "spike",
+                        "component"}
+    for aid, fm in artifacts.items():
+        if fm.get("type") not in CITES_SYNC_TYPES:
+            continue
+        cited = set(as_list(fm.get("cites")))
+        for c in sorted(cited):
+            if c in artifacts and c not in mentions[aid]:
+                errors.append(f"{fm['_path']}: dead cite {c} — cited in "
+                              f"frontmatter, never referenced in body "
+                              f"prose (per DEC-0247)")
+        linked = set()
+        for v in (fm.get("links") or {}).values():
+            linked |= set(as_list(v))
+        for b in sorted(mentions[aid]):
+            if b.startswith("DEC-") and b in artifacts \
+                    and b not in cited and b not in linked:
+                errors.append(f"{fm['_path']}: body references {b} but "
+                              f"cites: omits it (per DEC-0247)")
+
+    # Rule 17: impactor-side impact prose (DEC-0249)
+    for aid, fm in artifacts.items():
+        for t in as_list((fm.get("links") or {}).get("impacts")):
+            if t in artifacts and t not in mentions[aid]:
+                errors.append(f"{fm['_path']}: impacts {t} but body prose "
+                              f"never explains the impact (per DEC-0249)")
+
+    # Rule 18: session mention completeness (DEC-0250)
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "session":
+            continue
+        for t in as_list((fm.get("links") or {}).get("relates-to")):
+            if t in artifacts and t not in mentions[aid]:
+                errors.append(f"{fm['_path']}: session relates-to {t} but "
+                              f"body never references it (per DEC-0250)")
 
     # Rule 14: trigger registry well-formedness
     reg = docs / "TRIGGERS.md"

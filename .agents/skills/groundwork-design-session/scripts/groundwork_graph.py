@@ -55,6 +55,8 @@ Schema:
   Artifact-[:CITES]->Artifact
   Artifact-[:HAS_ELEMENT]->Element
   Element-[:IMPLEMENTS]->Artifact           element's Implements: stories
+  Artifact-[:MENTIONS]->Artifact            bare-ID reference in body prose
+                                            (DEC-0251; code spans excluded)
 
 Element.complete is a heuristic for "design-complete" (DEC-0095): the
 element's block contains at least one of its own contract items
@@ -90,9 +92,12 @@ LINK_TO_REL = {
     # impacted-by is the inverse of impacts; stored once in impacts direction
 }
 REL_TABLES = ["DERIVES", "IMPACTS", "DEPENDS_ON", "CONFLICTS_WITH",
-              "SUPERSEDES", "RELATES_TO", "CITES"]
+              "SUPERSEDES", "RELATES_TO", "CITES", "MENTIONS"]
 IMPLEMENTS_RE = re.compile(r"^Implements:", re.MULTILINE)
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+BARE_ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}\b")
+FENCED_CODE_RE = re.compile(r"```.*?(?:```|\Z)", re.DOTALL)
+INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
 
 DDL = [
     "CREATE NODE TABLE Artifact(id STRING PRIMARY KEY, type STRING, "
@@ -109,6 +114,7 @@ DDL = [
     "CREATE REL TABLE CITES(FROM Artifact TO Artifact)",
     "CREATE REL TABLE HAS_ELEMENT(FROM Artifact TO Element)",
     "CREATE REL TABLE IMPLEMENTS(FROM Element TO Artifact)",
+    "CREATE REL TABLE MENTIONS(FROM Artifact TO Artifact)",
 ]
 
 
@@ -138,15 +144,19 @@ def parse_artifact(path, root):
                 stripped = block.lstrip("\n")
                 if stripped.startswith("Implements:"):
                     para = stripped.split("\n\n", 1)[0]
-                    stories = [t for t, _ in MD_LINK_RE.findall(para)
-                               if t.startswith("ST-") and ID_RE.match(t)]
+                    stories = [s for s in dict.fromkeys(
+                        BARE_ID_RE.findall(para)) if s.startswith("ST-")]
                 complete = ("Pending" not in block and
                             re.search(rf"{re.escape(name)}\.[BAD]-\d+",
                                       block) is not None)
                 elements.append({"name": name, "etype": etype,
                                  "stories": stories, "complete": complete})
+    prose = INLINE_CODE_RE.sub("", FENCED_CODE_RE.sub("", body))
+    own = str(fm["id"])
+    mentions = sorted(set(BARE_ID_RE.findall(MD_LINK_RE.sub("", prose)))
+                      - {own})
     return {
-        "id": str(fm["id"]),
+        "id": own,
         "props": {
             "type": str(fm.get("type") or ""),
             "title": str(fm.get("title") or ""),
@@ -160,6 +170,7 @@ def parse_artifact(path, root):
         },
         "links": fm.get("links") or {},
         "cites": fm.get("cites") or [],
+        "mentions": mentions,
         "elements": elements,
     }
 
@@ -238,6 +249,8 @@ class Graph:
                 pairs.append((spec[0], spec[1], str(t)))
         for t in as_list(art["cites"]):
             pairs.append(("CITES", None, str(t)))
+        for t in art.get("mentions", []):
+            pairs.append(("MENTIONS", None, t))
         for rel, ltype, target in pairs:
             self.ensure_placeholder(target)
             prop = " {ltype: $lt}" if ltype else ""
@@ -411,6 +424,48 @@ def cmd_gaps(g, root, args):
         "OPTIONAL MATCH (e:Element)-[:IMPLEMENTS]->(s) "
         "WITH s, count(e) AS c WHERE c = 0 "
         "RETURN s.id AS id, s.title AS title ORDER BY id"), args.json)
+    print("\nDerived children unlisted in parent body (DEC-0246):")
+    emit(g.rows(
+        "MATCH (c:Artifact)-[r:DERIVES]->(p:Artifact) "
+        "WHERE r.ltype = 'derives-from' "
+        "AND p.type IN ['business-goal', 'epic'] "
+        "OPTIONAL MATCH (p)-[m:MENTIONS]->(c) "
+        "WITH p, c, count(m) AS n WHERE n = 0 "
+        "RETURN p.id AS parent, c.id AS unlisted_child "
+        "ORDER BY parent, unlisted_child"), args.json)
+    print("\nDead cites — cited, never referenced in prose (DEC-0247):")
+    emit(g.rows(
+        "MATCH (a:Artifact)-[:CITES]->(d:Artifact) "
+        "WHERE a.type IN ['business-goal', 'epic', 'story', 'spike', "
+        "'component'] AND d.type <> 'missing' "
+        "OPTIONAL MATCH (a)-[m:MENTIONS]->(d) "
+        "WITH a, d, count(m) AS n WHERE n = 0 "
+        "RETURN a.id AS artifact, d.id AS dead_cite "
+        "ORDER BY artifact, dead_cite"), args.json)
+    print("\nDecisions referenced in prose but uncited (DEC-0247):")
+    emit(g.rows(
+        "MATCH (a:Artifact)-[:MENTIONS]->(d:Artifact {type: 'decision'}) "
+        "WHERE a.type IN ['business-goal', 'epic', 'story', 'spike', "
+        "'component'] "
+        "OPTIONAL MATCH (a)-[l:CITES|RELATES_TO|DERIVES|SUPERSEDES|"
+        "IMPACTS|DEPENDS_ON|CONFLICTS_WITH]->(d) "
+        "WITH a, d, count(l) AS n WHERE n = 0 "
+        "RETURN a.id AS artifact, d.id AS uncited_mention "
+        "ORDER BY artifact, uncited_mention"), args.json)
+    print("\nImpact edges unexplained in the impactor's prose (DEC-0249):")
+    emit(g.rows(
+        "MATCH (a:Artifact)-[:IMPACTS]->(t:Artifact) "
+        "OPTIONAL MATCH (a)-[m:MENTIONS]->(t) "
+        "WITH a, t, count(m) AS n WHERE n = 0 "
+        "RETURN a.id AS impactor, t.id AS unexplained_target "
+        "ORDER BY impactor, unexplained_target"), args.json)
+    print("\nSession relates-to targets unmentioned in body (DEC-0250):")
+    emit(g.rows(
+        "MATCH (s:Artifact {type: 'session'})-[:RELATES_TO]->(t:Artifact) "
+        "OPTIONAL MATCH (s)-[m:MENTIONS]->(t) "
+        "WITH s, t, count(m) AS n WHERE n = 0 "
+        "RETURN s.id AS session, t.id AS unmentioned_target "
+        "ORDER BY session, unmentioned_target"), args.json)
 
 
 def cmd_order(g, root, args):

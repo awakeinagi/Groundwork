@@ -79,7 +79,9 @@ epic being refined, a conflict being mediated).
    the transcript is `reconstructed` — a faithful turn-by-turn write-up of
    the actual exchange, including what YOU asked and recommended, and the
    user's answers with their amendments. Never compress the user's words
-   into what you wished they'd said.
+   into what you wished they'd said. Every artifact in the session's
+   `relates-to` must be referenced in the body (DEC-0250) — the Purpose
+   section naturally names them; the checker enforces it.
 4½. **Decision-recall audit.** After drafting or materially amending
    the artifact (and again before any gate), run the search tool's
    `audit` command and spawn a judge subagent with the emitted packet —
@@ -90,7 +92,11 @@ epic being refined, a conflict being mediated).
    still need their explicit checklists (e.g. the graduation review).
 5. Sessions are **append-only and immutable once closed**. More
    conversation later = a new session linking `relates-to` the same
-   artifact.
+   artifact. One sanctioned carve-out: cross-reference enrichment
+   (DEC-0248) — bare-ID references surfacing already-existing
+   relationships may be appended in a dated `### Post-Close
+   Enrichment` subsection at the bottom of the Transcript section.
+   Transcript turns themselves are never edited.
 
 ## Distilling decisions
 
@@ -266,7 +272,12 @@ Derive draft epics covering the goal — each a coherent body of work with a
 clear "Why" tied to the goal's outcomes, sliced along a real business or
 domain seam (never by architectural layer) per
 [epic-slicing-seams.md](epic-slicing-seams.md). Add impact edges between
-them. Then refine each epic in its own session, in impact order.
+them. **Deriving a child updates the parent in the same edit**: every
+new epic (or spike, or late-derived anything) is added to the goal's
+Derived Work section (DEC-0246) — the checker blocks a parent that
+doesn't reference its children. Every `impacts` edge you draw needs
+prose in the impactor's body explaining how it shapes the target
+(DEC-0249). Then refine each epic in its own session, in impact order.
 Epic-level questions: boundaries between epics (per the seam catalog);
 the bounded context and its terms; which interfaces/contracts the epic
 must define; risks worth a spike; what's deliberately deferred to
@@ -306,9 +317,13 @@ architectural layer) per
 unknowns (research questions, not tasks — see the seam catalog's Spike
 cross-reference before writing a story whose real content is an
 investigation). Give stories `depends-on` (build order) *and* impact
-edges (decision influence) — they differ. There is no fixed number of
-stories — apply only the seams that carve a real boundary; see the seam
-catalog's split-vs-merge guidance before over-fragmenting. Flag open
+edges (decision influence) — they differ. As at epic derivation:
+every derived story/spike is added to the epic's Derived Work section
+in the same edit (DEC-0246), and every `impacts` edge carries prose in
+the impactor's body explaining the influence (DEC-0249). There is no
+fixed number of stories — apply only the seams that carve a real
+boundary; see the seam catalog's split-vs-merge guidance before
+over-fragmenting. Flag open
 design points per story and resolve them in a story-refinement session
 before gating. Edge-case behavior surfaced but not resolved upstream
 (goal-level Illustrative Scenario, epic-level Risks & Open Questions)

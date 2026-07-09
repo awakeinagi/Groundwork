@@ -171,7 +171,7 @@ frontmatter, no artifact ID) tracks watched conditions with subscribed
 deferred items: entries under strict headings
 `## TRG-nnnn (armed|fired|retired)` with `**Condition:**` (observable,
 human-testable), `**Subscribers:**` (one line per subscription:
-action verb + markdown-linked target + that subscription's own
+action verb + bare-ID target + that subscription's own
 `(per DEC)` citation — one condition, many watchers, each individually
 attributable), `**Cites:**` (the arming decision), and — once
 fired/retired — `**Fired:**`/`**Retired:**` with date, decision link,
@@ -410,11 +410,37 @@ into projects at bootstrap):
     links, decision link on every fired/retired entry, decision-cited
     subscriber lines, and armed triggers subscribing only deferred
     artifacts (≥1).
+12. **Derived-work completeness** (DEC-0246): every artifact whose
+    `derives-from` names a goal or epic is referenced by bare ID in
+    that parent's body (the Derived Work section, normally).
+13. **Cites/prose synchronization** (DEC-0247), on goals, epics,
+    stories, spikes, and components — both directions: no dead cites
+    (a `cites:` DEC the body never references) and no missing cites
+    (a body-referenced DEC absent from `cites:` and links). `cites:`
+    is the complete considered set.
+14. **Impactor-side impact prose** (DEC-0249): an artifact carrying an
+    `impacts` edge references each target in its body — the impactor
+    explains how it shapes the impactee. The impactee carries no prose
+    obligation.
+15. **Session mention completeness** (DEC-0250): every artifact in a
+    session's `relates-to` is referenced in the session body — at
+    write time in the Purpose section; retroactively via a Post-Close
+    Enrichment entry.
 
 Beyond the checker, the human-enforced rules: closed sessions and accepted
 decisions are immutable; acceptance criteria and contract items cite
 decisions; glossary terms are used exactly; staleness propagates
 story→CMP over Implements references.
+
+Immutability has one sanctioned carve-out — **cross-reference
+enrichment** (DEC-0248, extending DEC-0091): adding bare-ID mentions,
+`cites:` entries, or link entries that surface *already-existing*
+relationships never alters recorded meaning and does not trigger
+staleness or re-gating. In closed sessions such additions go in a dated
+`### Post-Close Enrichment` subsection appended at the bottom of the
+Transcript section; transcript turns are testimony and are never
+edited. Enrichment never *creates* relationships — only surfaces ones
+the frontmatter or graph already records.
 
 ## Operating modes
 
