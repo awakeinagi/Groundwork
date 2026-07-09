@@ -10,7 +10,8 @@ produce and validate exactly this format (DEC-0018).
 - Every artifact has an immutable ID: `<PREFIX>-<4-digit zero-padded number>`.
 - Prefixes: `BG` (Business Goal), `EP` (Epic), `ST` (Story), `SP` (Spike),
   `CMP` (Component Doc), `SES` (Session), `DEC` (Decision), `CFL` (Conflict),
-  `CON` (Consolidation), `CP` (Change Proposal).
+  `CON` (Consolidation), `CP` (Change Proposal), `IDEA` (Idea; added per
+  DEC-0268).
 - Numbers are allocated sequentially per prefix and never reused, even for
   deleted artifacts.
 - Filename: `<ID>-<kebab-case-slug>.md` in the type's directory. The slug may
@@ -22,7 +23,8 @@ produce and validate exactly this format (DEC-0018).
 ---
 id: EP-0002
 type: epic            # business-goal | epic | story | spike | component |
-                      # session | decision | conflict | consolidation
+                      # session | decision | conflict | change-proposal |
+                      # idea | consolidation
 title: Refinement Session Agent
 status: draft
 owner: eng-lead       # role or named person accountable for the gate
@@ -93,7 +95,10 @@ any active status ──▶ deferred ──▶ draft   (stories, epics & spikes)
   deferral and revival cite a Decision
   (DEC-0100).
 
-Decisions and Sessions use reduced lifecycles defined in their own specs.
+Decisions, Sessions, Change Proposals, and Ideas use reduced lifecycles
+defined in their own specs; Ideas (`captured → taken-up | declined`)
+never enter the gate lifecycle
+(DEC-0269).
 
 ## Release scoping
 

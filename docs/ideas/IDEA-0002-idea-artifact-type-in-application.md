@@ -2,7 +2,7 @@
 id: IDEA-0002
 type: idea
 title: Add the Idea artifact type to the application's data model, specs, and triage surfaces
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 proposed-by: awakeinagi@gmail.com
@@ -31,4 +31,4 @@ dogfooding of the type it proposes.
 
 ## Disposition
 
-Pending.
+Taken up 2026-07-09 by SES-0051 (intake session per DEC-0261).

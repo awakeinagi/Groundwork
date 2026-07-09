@@ -4,7 +4,7 @@ type: story
 title: Typed mechanical write operations and credential separation
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-06
 links:
@@ -12,7 +12,8 @@ links:
   satisfies: [BG-0001]
   depends-on: [ST-0002]
   impacted-by: [ST-0002]
-cites: [DEC-0033, DEC-0035, DEC-0038, DEC-0046, DEC-0047, DEC-0048, DEC-0151]
+cites: [DEC-0033, DEC-0035, DEC-0038, DEC-0046, DEC-0047, DEC-0048, DEC-0151,
+        DEC-0272]
 ---
 
 # ST-0006: Typed Mechanical Write Operations
@@ -29,9 +30,10 @@ changes inexpressible through this path.
 1. The mechanical operation set is closed and explicit — at minimum
    `append-turn`, `close-session`, `mark-stale`, `clear-stale`,
    `set-jira-key`, `migrate-person-ids`, `create-change-proposal`,
-   `set-cp-triage` — each constructing its commit entirely from typed
+   `set-cp-triage`, `create-idea`, `set-idea-disposition` — each
+   constructing its commit entirely from typed
    parameters (per DEC-0033, DEC-0035, DEC-0038, DEC-0047, DEC-0048,
-   DEC-0046).
+   DEC-0046, DEC-0272).
    `set-jira-status` was removed from the set at the
    SES-0026 audit —
    workflow telemetry never reaches canon (per

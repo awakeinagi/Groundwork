@@ -4,7 +4,7 @@ type: component
 title: Artifact Store Service
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-06
 context: canonical-store
@@ -20,7 +20,8 @@ cites: [DEC-0009, DEC-0011, DEC-0018, DEC-0026, DEC-0028, DEC-0029, DEC-0030,
         DEC-0093, DEC-0094, DEC-0097, DEC-0098, DEC-0099, DEC-0101, DEC-0102,
         DEC-0103, DEC-0104, DEC-0108, DEC-0109, DEC-0110, DEC-0121, DEC-0122,
         DEC-0124, DEC-0125, DEC-0126, DEC-0127, DEC-0130, DEC-0131, DEC-0132,
-        DEC-0133, DEC-0134, DEC-0135, DEC-0142, DEC-0151, DEC-0172]
+        DEC-0133, DEC-0134, DEC-0135, DEC-0142, DEC-0151, DEC-0172,
+        DEC-0258, DEC-0268, DEC-0269, DEC-0272]
 ---
 
 # CMP-0001: Artifact Store Service
@@ -71,9 +72,14 @@ Implements: ST-0001
   names the failing field path, the violated rule, and a human-readable
   message (per DEC-0034, DEC-0127).
 - `SchemaValidator.D-1` — one JSON Schema asset per artifact type (BG,
-  EP, ST, SP, CMP, SES, DEC, CFL, CON, CP), exactly matching its SPEC,
-  published language-neutrally with the spec set (per DEC-0034,
-  DEC-0018, DEC-0047).
+  EP, ST, SP, CMP, SES, DEC, CFL, CON, CP, IDEA), exactly matching its
+  SPEC, published language-neutrally with the spec set (per DEC-0034,
+  DEC-0018, DEC-0047, DEC-0268).
+- `SchemaValidator.D-5` — the Idea frontmatter schema validates the
+  reduced lifecycle (`captured | taken-up | declined`) and required
+  `proposed-by`; `release:` fields, gate-lifecycle statuses, and a
+  missing `proposed-by` are tier-1 rejections on Ideas. Idea
+  cross-artifact rules are tier-2, not here (per DEC-0268, DEC-0269).
 - `SchemaValidator.D-2` — schema assets for `governance/roles.yaml`
   (incl. decision-rights), `domains.yaml`, `gate-policies.yaml`,
   `people.yaml`, `repos.yaml` (per DEC-0037, DEC-0054,
@@ -183,17 +189,24 @@ Implements: ST-0005
 
 Implements: ST-0006
 
-- `MechanicalWriteService.A-1..A-8` — one API item per operation of the
-  closed set: `append-turn(session-id, turn-content)`,
+- `MechanicalWriteService.A-1..A-10` — one API item per operation of
+  the closed set: `append-turn(session-id, turn-content)`,
   `close-session(session-id)`, `mark-stale(artifact-id, cause-ref)`,
   `clear-stale(artifact-id, reaffirm-ref)`,
   `set-jira-key(artifact-id, key)`,
   `migrate-person-ids(registry-ref)`,
   `create-change-proposal(cp-document)`,
-  `set-cp-triage(cp-id, outcome)`. Each constructs its commit entirely
-  from typed parameters and returns `{commit-sha} |
+  `set-cp-triage(cp-id, outcome)`,
+  `create-idea(idea-document)`,
+  `set-idea-disposition(idea-id, outcome, rationale)`. Each constructs
+  its commit entirely from typed parameters and returns `{commit-sha} |
   problem(mechanical-op-rejected)` (per DEC-0033, DEC-0035,
-  DEC-0038, DEC-0047, DEC-0048, DEC-0130).
+  DEC-0038, DEC-0047, DEC-0048, DEC-0130, DEC-0272).
+  The Idea pair mirrors the CP pair: `create-idea` is the gateless
+  durable-write path for capture (tier-1-validated per
+  `SchemaValidator.D-5`), and `set-idea-disposition` fills the
+  Disposition section and flips `captured → taken-up | declined`
+  within the allowlist's append-regions (per DEC-0258, DEC-0272).
   `set-jira-status` was removed at the
   SES-0026 audit —
   workflow telemetry never reaches canon (per

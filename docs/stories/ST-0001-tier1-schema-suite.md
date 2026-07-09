@@ -4,7 +4,7 @@ type: story
 title: Tier-1 schema suite and validation library
 status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-07
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-06
 links:
@@ -13,7 +13,7 @@ links:
   impacts: [ST-0002, ST-0007]
 cites: [DEC-0009, DEC-0018, DEC-0026, DEC-0034, DEC-0037, DEC-0046, DEC-0047,
         DEC-0049, DEC-0054, DEC-0080, DEC-0082, DEC-0097, DEC-0098, DEC-0104,
-        DEC-0133]
+        DEC-0133, DEC-0268, DEC-0269]
 ---
 
 # ST-0001: Tier-1 Schema Suite and Validation Library
@@ -28,8 +28,8 @@ documents.
 ## Acceptance Criteria
 
 1. A JSON Schema exists for the frontmatter of every artifact type — BG,
-   EP, ST, SP, CMP, SES, DEC, CFL, CON, CP — exactly matching its SPEC
-   document (per DEC-0034, DEC-0009, DEC-0047).
+   EP, ST, SP, CMP, SES, DEC, CFL, CON, CP, IDEA — exactly matching its
+   SPEC document (per DEC-0034, DEC-0009, DEC-0047, DEC-0268).
 2. Schemas exist for `governance/roles.yaml` (including decision-rights),
    `domains.yaml`, `gate-policies.yaml`, `people.yaml`, and `repos.yaml`
    (per DEC-0037, DEC-0054, DEC-0046, DEC-0049).
@@ -56,6 +56,13 @@ documents.
    Cross-file validity — the label matching a release declared in the
    governing Business Goal — is explicitly NOT tier-1 (tier-2/PR check)
    (per DEC-0097, DEC-0098, DEC-0104, DEC-0034).
+8. The Idea frontmatter schema validates the reduced lifecycle
+   (`captured | taken-up | declined`) and required `proposed-by`; a
+   `release:` field, a gate-lifecycle status, or a missing
+   `proposed-by` on an Idea is a tier-1 rejection. Idea cross-artifact
+   rules (spawning-session cross-reference, take-up derivation,
+   decline rationale) are explicitly NOT tier-1 (tier-2/PR checks)
+   (per DEC-0268, DEC-0269).
 
 ## Component Impact
 

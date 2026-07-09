@@ -150,6 +150,9 @@ conversation UX), ST-0045
 (notification center), ST-0049
 (standalone application shell).
 
+Late-derived (SES-0051): ST-0065 (Idea capture and minimal list —
+release 1).
+
 Deferred to release 2: ST-0050–ST-0056
 (dashboards, re-affirmation queues, profile viewer, consolidation review,
 synthesis commenting, CP triage views, full artifact/graph browsing):
