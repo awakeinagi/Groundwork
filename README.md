@@ -66,6 +66,13 @@ Validate the graph at any time:
 python3 tools/check_links.py
 ```
 
+Browse the docs with rendered markdown, clickable cross-references,
+backlinks, and semantic/graph search (per DEC-0244):
+
+```
+python3 tools/serve_docs.py     # then open http://127.0.0.1:8420/tools/viewer.html
+```
+
 ## Dogfooding
 
 Groundwork is specified using its own artifact formats. The grilling session
