@@ -2,14 +2,19 @@
 id: DEC-0014
 type: decision
 title: Docs are the product; swarm orchestration is out of scope
-status: accepted
+status: superseded
+superseded-by: [DEC-0308]
 owner: awakeinagi@gmail.com
 created: 2026-07-05
 overview: >-
-  Groundwork responsibility ends at approved contract-complete component docs
-  plus machine-readable handoff manifest; swarm orchestration and feedback-loop
-  ingestion are separate concerns, keeping v1 scope sane and system identity
-  crisp as a specification producer.
+  SUPERSEDED by DEC-0308 (SES-0056): swarm orchestration is now in
+  scope for v1 as a full deliverable; feedback-loop ingestion remains
+  out of v1 scope, revisited on SP-0012's findings. Original decision:
+  Groundwork responsibility ends at approved contract-complete
+  component docs plus machine-readable handoff manifest; swarm
+  orchestration and feedback-loop ingestion are separate concerns,
+  keeping v1 scope sane and system identity crisp as a specification
+  producer.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T8-T9"
