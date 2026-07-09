@@ -2,7 +2,9 @@
 id: CMP-0008
 type: component
 title: Notification Delivery
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
 context: integration
