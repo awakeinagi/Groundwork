@@ -2,9 +2,9 @@
 id: EP-0001
 type: epic
 title: Artifact Store & Format Engine
-status: gated
+status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-07
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-05
 overview: >-
@@ -18,7 +18,7 @@ overview: >-
   refinement and typed mechanical writes. Approved 2026-07-07.
   Amended per SES-0056/DEC-0305: owns Handoff Manifest, work-package 
   bundle, and Shared Preamble generation/validation/write as 
-  reproducible store artifacts. Gated pending re-approval.
+  reproducible store artifacts. Amendment approved 2026-07-09.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

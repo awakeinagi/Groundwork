@@ -2,9 +2,9 @@
 id: EP-0008
 type: epic
 title: Backend Application Platform
-status: gated
+status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-08
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-08
 overview: >-
@@ -16,8 +16,7 @@ overview: >-
   Queue and KV-store — extending the Port family. Identified as a
   missing piece during SES-0035 retrospective.
   Amended per SES-0056/DEC-0305: Inbound API exposes the manifest 
-  trigger endpoint only; no manifest domain logic. Gated pending 
-  re-approval.
+  trigger endpoint only; no manifest domain logic. Amendment approved 2026-07-09.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

@@ -2,7 +2,7 @@
 id: SES-0056
 type: session
 title: Design elements as the atomic units of implementation
-status: open
+status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 participant: awakeinagi
@@ -31,8 +31,9 @@ overview: >-
   (DEC-0308 supersedes DEC-0014; ingestion deferred; SP-0012
   chartered). Executed: SPEC-handoff-manifest v2, SPEC-slice,
   SPEC-design-elements extension, nine glossary entries, gated
-  BG-0001/EP-0001/EP-0004/EP-0008 amendments, sweeps clean. Open:
-  gate approvals, Uses: retrofit, SP-0012 run.
+  BG-0001/EP-0001/EP-0004/EP-0008 amendments, sweeps clean; recall-audit findings
+  addressed; all four gated amendments approved 2026-07-09. Session
+  closed; follow-on queue in Session Close.
 links:
   relates-to: [SES-0055, IDEA-0006, IDEA-0009, DEC-0011, DEC-0014,
                DEC-0136]
@@ -369,6 +370,23 @@ System Context item 4's output contract had not been updated for the
 scope amendment — extended with the Handoff Manifest and Swarm
 Orchestrator outputs (DEC-0300, DEC-0302, DEC-0308). BG-0001 remains
 gated awaiting approval.
+
+**T20 — Stakeholder.** Approved all four gated amendments: BG-0001,
+EP-0001, EP-0004, EP-0008 (approved-by/approved-on recorded,
+2026-07-09). Session closed.
+
+## Session Close
+
+Thirteen decisions accepted (DEC-0297..DEC-0309); DEC-0014
+superseded; SP-0012 chartered (draft — needs its own refinement
+session); four amendments approved. Queued follow-on work: Uses:
+retrofit across the 53 elements plus the check_links projection
+check (blocked on retrofit); ST-0007 and CMP-0001 tier-2 check
+amendments; slice derivation (first: the walking skeleton);
+running SP-0012, then the orchestrator's epic home; IDEA-0006
+(coverage-pass rerun + emission stories), IDEA-0007, IDEA-0008,
+IDEA-0009 take-ups from SES-0055; DEC-0050 status hygiene
+(displaced by DEC-0172 but still marked accepted).
 
 ## Decisions Produced
 

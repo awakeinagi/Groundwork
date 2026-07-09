@@ -2,7 +2,9 @@
 id: BG-0001
 type: business-goal
 title: Groundwork — ground implementation in refined business intent
-status: gated
+status: approved
+approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-09
 owner: awakeinagi@gmail.com
 sponsor: awakeinagi@gmail.com
 created: 2026-07-05
@@ -22,8 +24,7 @@ overview: >-
   surfacing, human-ratified layers, parallel implementability (now
   via orchestrated empty-context dispatch, DEC-0304), and sync
   without drift to external systems. Feedback-loop ingestion stays
-  out of v1 (SP-0012 revisits). Gated pending re-approval of the
-  scope amendment.
+  out of v1 (SP-0012 revisits). Scope amendment approved 2026-07-09.
 links:
   derives-from: [SES-0001]
 cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006,

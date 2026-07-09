@@ -2,9 +2,9 @@
 id: EP-0004
 type: epic
 title: Cross-Reference Graph Index
-status: gated
+status: approved
 approved-by: awakeinagi@gmail.com
-approved-on: 2026-07-07
+approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-05
 overview: >-
@@ -18,8 +18,7 @@ overview: >-
   2026-07-07.
   Amended per SES-0056/DEC-0305: supplies manifest topology — typed 
   element DAG from Uses: lines, lifted component edges, build-order 
-  over implementation edges, cross-epic edge report. Gated pending 
-  re-approval.
+  over implementation edges, cross-epic edge report. Amendment approved 2026-07-09.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
