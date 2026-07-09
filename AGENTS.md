@@ -13,6 +13,9 @@ loaded.
 ```
 CONTEXT.md            glossary (ubiquitous language) — use its terms EXACTLY
 tools/check_links.py  graph integrity checker — must pass before every commit
+governance/           governance-as-code: people/roles/domains/gate-policies
+                      .yaml — who may approve what (per DEC-0037, DEC-0263;
+                      solo default: the one operator holds all roles)
 docs/
 ├── goals/       BG-*   Business Goals (root of all traceability)
 ├── epics/       EP-*   Epics derived from approved goals
@@ -22,7 +25,8 @@ docs/
 ├── sessions/    SES-*  Refinement conversation records (append-only)
 ├── decisions/   DEC-*  Distilled decisions (the unit of provenance)
 ├── conflicts/   CFL-*  Contradictory-request records (blocking)
-├── change-proposals/ CP-*   Out-of-band change capture
+├── change-proposals/ CP-*   Out-of-band + unauthorized-attempt capture
+├── ideas/       IDEA-* Raw pre-classification idea captures (work queue)
 └── consolidations/   CON-* Derived context summaries (never citable)
 ```
 
@@ -107,34 +111,76 @@ Component Docs. Every stage transition passes a **human approval gate**.
    with advisory Notes never load-bearing. An element consumed by more
    than one CMP graduates to its own CMP with `component-type:` set.
 
-## How design changes are made
+## How design changes are made — change intake
 
-All design content changes flow through **refinement sessions** with a
-human, not unilateral edits:
+**No semantic change to this corpus is made outside a recorded session
+(per DEC-0252). Hard rule, no waiver — including for users with full
+authority.** Discussion that changes nothing may stay off the record;
+the moment a change is instructed, run intake:
 
-1. Interview the stakeholder about the artifact being refined — focused
-   clarifying questions in small rounds, each with your recommended
-   answer stated first. Read existing decisions before asking; never
-   re-litigate what an accepted DEC settles.
-2. Play back the decisions you intend to record and get confirmation
-   in-conversation before marking them accepted.
-3. Record the session (`SES-`, turn-numbered transcript, faithful to what
-   was actually said), the decisions (`DEC-`, one decision each), and the
-   artifact updates (content + `cites` + links) together.
-4. Set the refined artifact to `status: gated` and ask the approver.
-5. Checker, then commit (session + decisions + artifact in one commit;
-   approval as its own commit: `Approve <ID> (<approver>, <date>)`).
+1. **First mention → todo list (per DEC-0256).** Create a minimal
+   tracked list — *restate intention; confirm alignment; start
+   session?* — expanding it to the confirmed path's steps once aligned.
+2. **Restate & align (per DEC-0255).** Restate the proposal's
+   *intention*; clarifications loop back to restatement until the
+   proposer confirms. Agent-noticed issues enter the same way, roles
+   reversed: you propose, the user disposes (per DEC-0257).
+3. **Authority check (per DEC-0262, DEC-0264).** Resolve the operator
+   against `governance/people.yaml` (git identity, honor system) and
+   the gate policies. An instruction outside the instructor's rights
+   does not proceed — capture it verbatim as a CP
+   (`source: unauthorized-attempt`) awaiting the authority holder(s).
+4. **Pick the path:**
+   - **Mechanical fix (per DEC-0253)** — zero semantic content (typo,
+     formatting, reference repair; no contract line, decision text,
+     status, approval field, or link semantics touched): commit
+     directly, descriptive message, no session. When in doubt, it's
+     semantic.
+   - **Idea capture (per DEC-0258)** — record IDEA artifact(s) verbatim
+     in a micro-session (zero linked decisions is valid).
+   - **Expedited session (per DEC-0254)** — small semantic change: one
+     round; every integrity step still runs.
+   - **Full grilling session** — everything else: focused clarifying
+     questions in small rounds, recommended answer stated first; read
+     existing decisions before asking; never re-litigate what an
+     accepted DEC settles.
+5. **The session record opens at the verbatim proposal** (T1), then
+   the restatement and alignment loop (per DEC-0255). Locate affected
+   artifacts up front (search + graph) and keep a working hypothesis
+   of the change's artifact level(s) through grilling (per DEC-0266).
+6. **Mid-session tangents — focus-artifact test (per DEC-0260):**
+   changes the artifact under refinement → grill now; needs a
+   different artifact → park as an IDEA (level unclear) or deferred
+   ST/SP (level clear, per DEC-0259) and continue. Cross-reference
+   spawned Ideas from the session. Captured Ideas are the work queue
+   (per DEC-0261): each take-up is its own new intake session, never
+   an extension.
+7. **Modifying approved artifacts:** superseding DECs, the staleness
+   walk, and re-affirmation all complete inside the session
+   (per DEC-0267) — never leave the corpus mid-cascade.
+8. **Close:** detailed summary + inspired-ideas check; play back the
+   decisions you intend to record and get confirmation before marking
+   them accepted; record the session (`SES-`, turn-numbered,
+   faithful), decisions (`DEC-`, one each), and artifact updates
+   together; `status: gated` → ask the approver. Checker, then commit
+   (session + decisions + artifacts in one commit; approval as its own
+   commit: `Approve <ID> (<approver>, <date>)`).
 
-Mechanical, non-design edits (fixing a broken link, adding a reciprocal
-edge, status bookkeeping) may be made directly — they must never change
-design meaning.
+Multi-party governance without the Groundwork application is
+git-mediated and asynchronous (per DEC-0265): each authority holder
+triages/ratifies/approves in their own sessions; committee gates
+collect sign-offs across commits/PRs. Local identity is declared and
+honor-system (per DEC-0264) — provenance, not tamper-proofing.
 
 ## Status lifecycle
 
 `draft → in-refinement → gated → approved` (then `stale ⇄ approved`, or
 `superseded`/`archived`). Sessions: `open → closed`. Decisions:
 `proposed → accepted → superseded`. Conflicts: `open → mediating →
-escalated → resolved`.
+escalated → resolved`. Change proposals: triage `pending → mechanical |
+session | rejected`. Ideas: `captured → taken-up | declined` — never
+gated, never release-labeled; take-up runs intake as a new session (per
+DEC-0258, DEC-0261).
 
 Stories, epics, and spikes may additionally be `deferred` — out of the
 current release, carrying a `release:` label (a SemVer prefix declared

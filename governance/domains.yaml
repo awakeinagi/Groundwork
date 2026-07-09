@@ -1,0 +1,4 @@
+# Groundwork governance — domain→approver mappings (seed; schema owned by
+# EP-0003, files-in-repo per DEC-0037). Solo default: no domain-specific
+# overrides; role defaults from gate-policies.yaml apply everywhere.
+domains: {}

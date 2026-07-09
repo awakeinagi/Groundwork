@@ -48,6 +48,9 @@ Three properties make the system work; protect them above all:
 CONTEXT.md               glossary — the project's ubiquitous language
 AGENTS.md                standing instructions for agents (Groundwork marker)
 tools/check_links.py     graph integrity checker — run before every commit
+governance/              governance-as-code (DEC-0263): roles.yaml,
+                         domains.yaml, gate-policies.yaml, people.yaml —
+                         seeded solo at bootstrap, edited via normal commits
 docs/
 ├── goals/               Business Goals        BG-*
 ├── epics/               Epics                 EP-*
@@ -58,6 +61,7 @@ docs/
 ├── decisions/           Decision records      DEC-*
 ├── conflicts/           Conflicts             CFL-*
 ├── change-proposals/    Change Proposals      CP-*
+├── ideas/               Ideas                 IDEA-*
 └── consolidations/      Consolidations        CON-*
 ```
 
@@ -78,7 +82,7 @@ docs/
 id: EP-0002
 type: epic          # business-goal | epic | story | spike | component |
                     # session | decision | conflict | change-proposal |
-                    # consolidation
+                    # idea | consolidation
 title: Short descriptive title
 status: draft
 owner: <person or role accountable for the gate>
@@ -195,6 +199,8 @@ Reduced lifecycles:
   immutable; changing course means a new decision with `supersedes` set.
 - **Conflict**: `open → mediating → escalated → resolved`.
 - **Change Proposal**: triage states `pending → mechanical | session | rejected`.
+- **Idea**: `captured → taken-up | declined`. Ideas pass no gates and
+  nothing derives from them except their take-up intake session.
 - **Consolidation**: `fresh | stale` (derived artifacts, mechanically
   invalidated when any source changes).
 
@@ -358,14 +364,39 @@ link `conflicts-with: [CFL-…]`, cannot pass a gate, and nothing new may
 derive from them. Frontmatter extras: `escalated-to:` once escalated.
 
 ### Change Proposal (CP) — `docs/change-proposals/`
-A change proposed from outside the refinement pipeline (an edit made
-elsewhere, a reviewer suggestion, implementation feedback), captured
-verbatim so intent survives redirection. Sections: **Proposed Change**,
-**Context**, **Triage Outcome** (mechanical fix / refinement session /
-rejected-with-rationale). Frontmatter extras: `source:`, `proposed-by:`,
-`triage:`. CPs never modify their target directly; the fix or session does,
-citing the CP. Optional in small manual projects — use when out-of-band
-input needs an audit trail.
+A captured change proposal awaiting triage or ratification, created in
+exactly two situations (DEC-0262): (1) **out-of-band** intent — an edit
+made elsewhere, a reviewer suggestion, implementation feedback, input
+queued while another session runs; (2) an **unauthorized change
+attempt** — a change instructed by someone whose decision rights
+(governance config) don't cover it; the change does not proceed, and
+the CP captures the attempt verbatim awaiting the authority holder(s).
+The CP is the artifact form of an out-of-authority proposal requiring
+ratification. A live instruction by an authorized user needs no CP —
+the intake session record is the capture. Sections: **Proposed
+Change**, **Context**, **Triage Outcome** (mechanical fix / refinement
+session / rejected-with-rationale). Frontmatter extras: `source:`
+(`ui-suggestion | jira-drift | implementation-feedback |
+unauthorized-attempt`), `proposed-by:`, `triage:`. CPs never modify
+their target directly; the fix or session does, citing the CP.
+
+### Idea (IDEA) — `docs/ideas/`
+A pre-classification capture of raw change intent (DEC-0258) — too raw
+to know whether it is goal-, epic-, story-, spike-, or component-shaped.
+The moment intent's level *is* clear, capture it as a deferred
+story/spike instead (DEC-0259); Ideas never carry `release:` labels or
+trigger subscriptions. Captured mid-session under the focus-artifact
+test (DEC-0260), or via an idea-capture micro-session (a session record
+with zero linked decisions is valid; one may batch several ideas). The
+spawning session cross-references every Idea it produces (`relates-to`
++ body mention). Captured Ideas are the project's brain-dump work
+queue (DEC-0261): the status report lists them, and each take-up runs
+the change-intake protocol as its own new session — never an extension
+of the session that spawned it. Sections: **The Idea** (verbatim),
+**Spark Context**, **Disposition** (pending → names the take-up
+session, or decline rationale + decider). Frontmatter extras:
+`proposed-by:`; `derives-from` points at the spawning session when
+there is one. Statuses: `captured → taken-up | declined`.
 
 ### Consolidation (CON) — `docs/consolidations/`
 A derived summary of a frequently-needed neighborhood of the graph (e.g.

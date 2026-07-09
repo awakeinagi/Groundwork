@@ -104,7 +104,7 @@ is gated).
 
 - **Artifact** — any identified, versioned document in the Canonical Store:
   Business Goal, Epic, Story, Spike, Component Doc, Session, Decision,
-  Conflict, Consolidation.
+  Conflict, Change Proposal, Idea, Consolidation.
 - **Business Goal (BG)** — the foundational statement of a refined business
   intent: problem, intent, outcomes, scope, constraints. Root of the
   traceability graph.
@@ -136,10 +136,20 @@ is gated).
   preferences, questions already covered) that improves repeat sessions;
   owned by its subject, who can read, edit, and delete it via the UI; never
   a home for org facts, which belong in artifacts.
-- **Change Proposal (CP)** — a captured change proposed from outside the
-  refinement pipeline (Jira drift, UI suggestion, implementation feedback),
-  preserved verbatim and triaged by the agent into a mechanical fix, a
-  refinement session, or an audited rejection.
+- **Change Proposal (CP)** — a captured change proposal awaiting triage or
+  ratification: either out-of-band intent (Jira drift, UI suggestion,
+  implementation feedback) or an unauthorized change attempt — a change
+  instructed by someone whose Decision Rights don't cover it. Preserved
+  verbatim and triaged into a mechanical fix, a refinement session, or an
+  audited rejection; the artifact form of an out-of-authority proposal
+  requiring ratification.
+- **Idea (IDEA)** — a pre-classification capture of raw change intent —
+  too raw to know which artifact level it lands at. Captured verbatim in
+  seconds (mid-session under the Focus-Artifact Test, or via an
+  idea-capture micro-session), it joins the work queue until an intake
+  session takes it up or it is declined with rationale. Never gated,
+  never release-labeled; classified intent defers as a Story/Spike
+  instead.
 
 ## Design elements
 
@@ -190,6 +200,26 @@ names below are reserved words when used as element types.
 - **Refinement Session** — a 1:1 Q&A conversation in which the agent sharpens
   a participant's request through clarifying questions. Unsupervised: no
   technical facilitator is present.
+- **Change Intake** — the mandatory protocol by which change intent enters
+  a Groundwork project: restate-and-align loop, then a session (full or
+  expedited), a mechanical fix, or idea capture. No semantic change to the
+  corpus happens outside a session; off-record discussion producing no
+  change is always allowed.
+- **Mechanical Fix** — a change with zero semantic content (typo,
+  formatting, reference repair) that alters no meaning and touches no
+  contract line, decision text, status, approval field, or link
+  semantics. Exempt from the session requirement; git history is its
+  audit trail. When in doubt, a change is semantic, not mechanical.
+- **Expedited Session** — a single-round intake session for small
+  semantic changes: proposal restated, confirmed once, recorded.
+  Compresses grilling only — every integrity step (distillation,
+  consistency checks, recall audit, staleness cascade, checker) still
+  runs.
+- **Focus-Artifact Test** — the mid-session rule for tangents: a thought
+  that changes the artifact under refinement is grilled now; one
+  requiring a different artifact is parked (as an Idea, or a deferred
+  Story/Spike when its level is already clear) and the session
+  continues.
 - **Synthesis** — the agent's merging of perspectives from multiple 1:1
   Sessions into a single artifact, surfacing cross-participant Conflicts.
 - **Strategy Pack** — a versioned, plugin-like bundle (prompts, skills,

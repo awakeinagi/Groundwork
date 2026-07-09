@@ -1,0 +1,16 @@
+# Groundwork governance — gate policies (seed; schema owned by EP-0003,
+# files-in-repo per DEC-0037; policy vocabulary per DEC-0020: fixed
+# role-mapping or committee). Solo god-mode default per DEC-0263: every
+# gate is single-approver. Committee example (commented) for teams:
+#
+#   decision-supersession:
+#     policy: committee
+#     roles: [product-owner, eng-lead, ds-lead]
+#
+gates:
+  business-goal: {policy: role, role: product-owner}
+  epic: {policy: role, role: product-owner}
+  story: {policy: role, role: eng-lead}
+  spike: {policy: role, role: eng-lead}
+  component: {policy: role, role: eng-lead}
+  decision-supersession: {policy: role, role: stakeholder}

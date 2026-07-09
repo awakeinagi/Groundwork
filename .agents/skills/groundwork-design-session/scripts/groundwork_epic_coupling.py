@@ -47,7 +47,7 @@ TYPE_CONFIG = {
 
 
 def parse_id_list(text):
-    return re.findall(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CP|CON)-\d{4}\b",
+    return re.findall(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CP|CON|IDEA)-\d{4}\b",
                        text)
 
 

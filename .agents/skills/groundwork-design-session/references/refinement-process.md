@@ -7,16 +7,87 @@ model this process produces.
 
 ## Contents
 
-1. [The grilling method](#the-grilling-method)
-2. [Running a session](#running-a-session)
-3. [Distilling decisions](#distilling-decisions)
-4. [Glossary discipline](#glossary-discipline)
-5. [Gates and approvals](#gates-and-approvals)
-6. [Conflicts](#conflicts)
-7. [Staleness and change](#staleness-and-change)
-8. [Impact edges and refinement order](#impact-edges-and-refinement-order)
-9. [Per-stage playbooks](#per-stage-playbooks)
-10. [Commit discipline](#commit-discipline)
+1. [Change intake](#change-intake)
+2. [The grilling method](#the-grilling-method)
+3. [Running a session](#running-a-session)
+4. [Distilling decisions](#distilling-decisions)
+5. [Glossary discipline](#glossary-discipline)
+6. [Gates and approvals](#gates-and-approvals)
+7. [Conflicts](#conflicts)
+8. [Staleness and change](#staleness-and-change)
+9. [Impact edges and refinement order](#impact-edges-and-refinement-order)
+10. [Per-stage playbooks](#per-stage-playbooks)
+11. [Commit discipline](#commit-discipline)
+
+## Change intake
+
+How change intent enters a Groundwork-managed project — any intent:
+idea, enhancement, fix; from the user, or from you (agent-noticed
+issues follow the same protocol with roles reversed: you propose, the
+user disposes — nothing changes without a human instruction,
+DEC-0257). The governing rule: **no semantic change to the corpus
+happens outside a recorded session** — a hard rule with no waiver,
+including for users holding full authority (DEC-0252). Discussion that
+changes nothing may stay off the record indefinitely; the moment a
+change is instructed, intake runs. If the instructing user lacks the
+authority the governance config requires, the change does not proceed —
+capture the attempt verbatim as a CP awaiting the authority holder(s)
+(DEC-0262).
+
+1. **First mention → todo list (DEC-0256).** The moment change intent
+   is mentioned, create a minimal todo list — *restate intention;
+   confirm alignment; start session?* — and expand it to the confirmed
+   path's steps once alignment lands. Work the list; nothing drops
+   silently.
+2. **Restate and align (DEC-0255).** Restate the *intention* you
+   understood and ask whether to begin a session. Clarifications and
+   additions loop back to restatement until the proposer confirms.
+3. **Authority check (DEC-0262, DEC-0263, DEC-0264).** Resolve the
+   instructing user against `governance/people.yaml` and the gate
+   policies. An instruction outside their decision rights proceeds no
+   further: a CP (`source: unauthorized-attempt`) captures the attempt
+   verbatim awaiting the authority holder(s), and intake ends there.
+4. **Pick the path:**
+   - **Mechanical fix (DEC-0253)** — zero semantic content: typos,
+     formatting, reference repair; alters no meaning, touches no
+     contract line, decision text, status, approval field, or link
+     semantics. No session; commit directly with a descriptive
+     message. When in doubt, it's semantic.
+   - **Idea capture (DEC-0258)** — the user wants the thought recorded,
+     not refined: a micro-session records IDEA artifact(s) verbatim
+     (zero linked decisions is valid; batching several is fine).
+   - **Expedited session (DEC-0254)** — small semantic change: one
+     round (restate, confirm, record). Compresses grilling only —
+     every integrity step below still runs.
+   - **Full grilling session** — everything else.
+5. **The record opens at the proposal (DEC-0255).** T1 reconstructs
+   the verbatim proposal, T2 your restatement, then the alignment
+   loop — provenance starts at intent, not at grilling.
+6. **Locate first (DEC-0266).** At session open, run semantic search
+   and a graph trace over the intent to find the artifacts it touches;
+   maintain a working hypothesis of the affected set and levels
+   (BG/EP/ST/SP/CMP/element) through grilling, and confirm it in the
+   closing summary. Classification is continuous, grounded in the
+   corpus, never a one-shot call on the proposal's wording.
+7. **Park tangents by the focus-artifact test (DEC-0260).** A thought
+   that changes the artifact this session is refining is enrichment —
+   grill it now. One that requires a different artifact is parked in
+   seconds — as an IDEA when its level is unclear (DEC-0259 boundary),
+   as a deferred ST/SP when clear — and the session continues. The
+   spawning session cross-references every Idea it produces.
+8. **Modifications complete their cascade in-session (DEC-0267).**
+   When the change modifies approved artifacts: record the superseding
+   DECs, run the staleness walk (`groundwork_graph.py impact`), mark
+   descendants stale, and present re-affirmation — before the session
+   closes. The corpus is never left mid-cascade.
+9. **Close: detailed summary + inspired-ideas check (DEC-0261).**
+   Present everything determined, confirm the classification, review
+   the Ideas the session captured, and ask for any last ones. Inspired
+   ideas never extend the current session — they join the work queue,
+   and each take-up runs this protocol as its own session (back-to-back
+   in one conversation is fine). Then the standard machinery, never
+   waived at any path: distill + confirm decisions, consistency
+   checks, recall audit, checker, commit.
 
 ## The grilling method
 
@@ -52,6 +123,10 @@ design tree, resolving dependencies between decisions one by one.
   "spike SP-nnnn"), or converted into decisions. Don't gold-plate: epic
   refinement settles epic-shaped questions; implementation detail belongs
   in stories and component docs.
+- **Focus-artifact test (DEC-0260).** Mid-session tangents: if the
+  thought changes the artifact under refinement, grill it now; if it
+  requires a different artifact, park it (IDEA, or deferred ST/SP when
+  its level is already clear) and continue — see §Change intake.
 - **Guardrails.** If answers become circular or the participant is
   clearly guessing outside their expertise, park the topic and move on,
   or propose ending the session with a partial record. Statements outside
@@ -63,7 +138,12 @@ design tree, resolving dependencies between decisions one by one.
 ## Running a session
 
 One session = one participant + one artifact focus (a goal being born, an
-epic being refined, a conflict being mediated).
+epic being refined, a conflict being mediated). Sessions come in three
+weights, all with identical integrity obligations: **full** (grilling
+rounds), **expedited** (single round for small semantic changes,
+DEC-0254), and **idea-capture micro-sessions** (verbatim IDEA capture,
+zero linked decisions valid, DEC-0258). Intake-opened sessions start
+their transcript at the verbatim proposal (DEC-0255).
 
 1. **Open** with purpose: what this session sets out to refine, and what's
    already settled (recap accepted decisions so they aren't re-litigated).
@@ -196,7 +276,8 @@ contradicts an accepted decision.
 ## Staleness and change
 
 When an approved artifact changes (or a decision it rests on is
-superseded):
+superseded) — and the whole walk below runs *inside* the session making
+the change, never as deferred follow-up work (DEC-0267):
 
 1. Walk the graph downward (`derives-from`/`satisfies` children,
    transitively) and set every approved descendant to `status: stale`.

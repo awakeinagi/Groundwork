@@ -60,6 +60,10 @@ Rules enforced:
      (for closed sessions, appended as Post-Close Enrichment per
      DEC-0248).
 
+Ideas (IDEA-*, docs/ideas/, DEC-0258) are pre-classification captures:
+they are exempt from goal tracing (rule 3) and never carry release
+fields; their statuses are captured | taken-up | declined.
+
 Exit code 0 = graph is sound; 1 = violations; 2 = setup problem.
 
 This file is installed into Groundwork projects as tools/check_links.py.
@@ -78,11 +82,12 @@ except ImportError:  # pragma: no cover
 
 LINK_TYPES = {"derives-from", "satisfies", "depends-on", "conflicts-with",
               "supersedes", "relates-to", "impacts", "impacted-by"}
-ID_RE = re.compile(r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}$")
+ID_RE = re.compile(r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}$")
 PREFIX_FOR_TYPE = {
     "business-goal": "BG", "epic": "EP", "story": "ST", "spike": "SP",
     "component": "CMP", "session": "SES", "decision": "DEC",
     "conflict": "CFL", "consolidation": "CON", "change-proposal": "CP",
+    "idea": "IDEA",
 }
 MUST_TRACE_TO_GOAL = {"epic", "story", "spike", "component"}
 SKIP_DIRS = {"specs"}  # non-artifact doc directories
@@ -94,7 +99,8 @@ DESIGN_ELEMENTS_RE = re.compile(r"^## Design Elements\s*$(.*?)(?=^## |\Z)",
 FENCED_CODE_RE = re.compile(r"```.*?(?:```|\Z)", re.DOTALL)
 INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
-BARE_ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}\b")
+BARE_ID_RE = re.compile(
+    r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}\b")
 EXTERNAL_TARGET = ("http://", "https://", "mailto:", "#")
 RELEASE_SCOPED_TYPES = {"story", "epic", "spike"}
 RELEASE_RE = re.compile(r"^(0|[1-9]\d*)(\.(0|[1-9]\d*)){0,2}$")
@@ -103,7 +109,7 @@ RELEASE_ITEM_RE = re.compile(r"^-\s+`([^`]+)`(\s*\(current\))?")
 TRIGGER_HEAD_RE = re.compile(r"^## (TRG-\d{4}) \((armed|fired|retired)\)\s*$")
 TRIGGER_ANY_HEAD_RE = re.compile(r"^## .*TRG", re.IGNORECASE)
 ARTIFACT_FILE_RE = re.compile(
-    r"(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}-[^/\s]*\.md$")
+    r"(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}-[^/\s]*\.md$")
 
 
 def parse_frontmatter(path):

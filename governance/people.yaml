@@ -1,0 +1,9 @@
+# Groundwork governance — person registry (seed; schema owned by EP-0003,
+# person-id model per DEC-0046). Maps stable person-ids to provider
+# identities. In skill-only mode the agent resolves the operator via git
+# identity (DEC-0264) — declared, honor-system.
+people:
+  - id: awakeinagi
+    name: awakeinagi
+    identities:
+      git-email: awakeinagi@gmail.com

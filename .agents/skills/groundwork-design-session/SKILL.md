@@ -1,6 +1,6 @@
 ---
 name: groundwork-design-session
-description: Run a Groundwork design session — refine raw product/business ideas into gated, provenance-linked design documentation (Business Goals → Epics → Stories/Spikes → contract-complete Component Docs) through structured grilling interviews. Use this whenever the user wants to start designing a new system or feature, asks to be grilled or interviewed about an idea, wants to turn vague requirements into implementable specs, mentions Groundwork, design docs, business goals, epics, refinement sessions, or asks to continue/resume design work in a project that has a docs/ artifact tree (BG-/EP-/ST-/DEC- files). Also use it to bootstrap the Groundwork documentation structure in a new or existing repo.
+description: Run a Groundwork design session — refine raw product/business ideas into gated, provenance-linked design documentation (Business Goals → Epics → Stories/Spikes → contract-complete Component Docs) through structured grilling interviews. Use this whenever the user wants to start designing a new system or feature, asks to be grilled or interviewed about an idea, wants to turn vague requirements into implementable specs, mentions Groundwork, design docs, business goals, epics, refinement sessions, or asks to continue/resume design work in a project that has a docs/ artifact tree (BG-/EP-/ST-/DEC- files). MANDATORY in any Groundwork-managed project (docs/ artifact tree or Groundwork AGENTS.md marker): invoke it the moment the user proposes ANY change — idea, enhancement, fix, however small — so the change-intake protocol runs; semantic changes there are not made outside a session. Also use it to bootstrap the Groundwork documentation structure in a new or existing repo.
 ---
 
 # Design Session (Groundwork)
@@ -22,6 +22,18 @@ and its origin. Grilling sessions run as many rounds as it takes for the
 artifact under refinement to be clearly, unambiguously specified; there is
 no round limit. It is always better to ask one more question than to stop
 short and leave a gap — err on the side of more questions, not fewer.
+
+**Change intake (all modes).** Whenever change intent surfaces in a
+Groundwork project — the user mentions an idea/enhancement/fix, or you
+notice an issue yourself — run the intake protocol
+(§Change intake of
+[references/refinement-process.md](references/refinement-process.md)):
+todo list at first mention (DEC-0256) → restate & align (DEC-0255) →
+path pick (mechanical fix DEC-0253 / idea capture DEC-0258 / expedited
+DEC-0254 / full session) → record opens at the verbatim proposal. No
+semantic change to the corpus ever happens outside a session (DEC-0252,
+hard rule); unauthorized attempts are captured as CPs per the
+governance config in `governance/` (DEC-0262, DEC-0263).
 
 ## Step 0 — Assess the project state (always do this first)
 
@@ -62,8 +74,11 @@ to run sessions and gates). Templates for every artifact type are in
    tools/check_links.py← copy scripts/check_links.py from this skill
    tools/serve_docs.py ← copy scripts/serve_docs.py from this skill
    docs/human_docs.html← copy assets/human_docs.html from this skill
+   governance/         ← seed people/roles/domains/gate-policies.yaml with
+                         solo god-mode defaults (templates.md §Governance
+                         seeds; DEC-0263 — all roles → the operator)
    docs/{goals,epics,stories,spikes,components,sessions,decisions,
-         conflicts,change-proposals,consolidations}/   (.gitkeep in each)
+         conflicts,change-proposals,ideas,consolidations}/  (.gitkeep each)
    ```
    `docs/human_docs.html` + `serve_docs.py` are the human browsing
    surface: rendered markdown, clickable bare-ID cross-references,
@@ -126,6 +141,9 @@ least once per session and once per approval.
      staleness section of the process reference).
    - Open conflicts (`CFL-*` not resolved) → these block their artifacts;
      run the mediation/escalation flow.
+   - Untriaged change proposals and captured Ideas (`IDEA-*`) → triage
+     CPs; offer intake sessions for queued Ideas (DEC-0261) — the
+     project's brain-dump work queue.
    - Approved artifacts with no derived work → derive the next layer
      (goal→epics, epic→stories/spikes, stories→component contracts).
    - Among sibling candidates, refine the one whose `impacted-by` list is

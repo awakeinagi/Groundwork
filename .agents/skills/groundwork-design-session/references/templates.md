@@ -15,8 +15,10 @@ bare IDs.
 [Business Goal](#business-goal-bg) · [Epic](#epic-ep) · [Story](#story-st) ·
 [Spike](#spike-sp) · [Component Doc](#component-doc-cmp) ·
 [Session](#session-ses) · [Decision](#decision-dec) · [Conflict](#conflict-cfl) ·
-[Change Proposal](#change-proposal-cp) · [Consolidation](#consolidation-con) ·
-[CONTEXT.md seed](#contextmd-seed) · [README seed](#readme-seed)
+[Change Proposal](#change-proposal-cp) · [Idea](#idea-idea) ·
+[Consolidation](#consolidation-con) ·
+[CONTEXT.md seed](#contextmd-seed) · [README seed](#readme-seed) ·
+[Governance seeds](#governance-seeds-governance)
 
 ## Business Goal (BG)
 
@@ -432,6 +434,7 @@ status: draft
 owner: [triager]
 created: [YYYY-MM-DD]
 source: ui-suggestion      # | jira-drift | implementation-feedback
+                           # | unauthorized-attempt (DEC-0262)
 proposed-by: [person]
 triage: pending            # pending | mechanical | session | rejected
 links:
@@ -448,6 +451,41 @@ links:
 
 ## Triage Outcome
 Pending.
+```
+
+## Idea (IDEA)
+
+```markdown
+---
+id: IDEA-0001
+type: idea
+title: [The raw idea in one line]
+status: captured           # captured | taken-up | declined
+owner: [proposer]
+created: [YYYY-MM-DD]
+proposed-by: [person]
+links:
+  derives-from: [SES-0001]   # the spawning session, when there is one
+  relates-to: []             # artifacts the idea appears to touch
+---
+
+# IDEA-0001: [Title]
+
+## The Idea
+
+[Verbatim capture — the proposer's words, not a refinement. Too raw to
+classify (DEC-0259) — if you already know its artifact level, capture a
+deferred story/spike instead.]
+
+## Spark Context
+
+[Where and when it arose — mid-session park (focus-artifact test,
+DEC-0260), brain-dump, review thought.]
+
+## Disposition
+
+Pending. [At take-up: names the intake session (status: taken-up). At
+decline: rationale + decider (status: declined).]
 ```
 
 ## Consolidation (CON)
@@ -524,6 +562,52 @@ the project glossary.
 Validate the artifact graph:
 
     python3 tools/check_links.py
+```
+
+## Governance seeds (governance/)
+
+Solo god-mode defaults (DEC-0263): one operator holds all roles, every
+gate single-approver. Reuses the governance-as-code file set (DEC-0037,
+DEC-0046); a project adopting the Groundwork application imports these
+unchanged. Local enforcement is procedural/honor-system (DEC-0264).
+
+```yaml
+# governance/people.yaml — person-ids ↔ identities (DEC-0046)
+people:
+  - id: [person-id]
+    name: [name]
+    identities:
+      git-email: [git email]
+```
+
+```yaml
+# governance/roles.yaml — role assignments (roles per DEC-0020)
+roles:
+  stakeholder: [[person-id]]
+  product-owner: [[person-id]]
+  eng-lead: [[person-id]]
+  ds-lead: [[person-id]]
+  arbiter: [[person-id]]
+```
+
+```yaml
+# governance/domains.yaml — domain→approver overrides (none by default)
+domains: {}
+```
+
+```yaml
+# governance/gate-policies.yaml — who approves what (DEC-0020: fixed
+# role-mapping or committee). Committee example:
+#   decision-supersession:
+#     policy: committee
+#     roles: [product-owner, eng-lead, ds-lead]
+gates:
+  business-goal: {policy: role, role: product-owner}
+  epic: {policy: role, role: product-owner}
+  story: {policy: role, role: eng-lead}
+  spike: {policy: role, role: eng-lead}
+  component: {policy: role, role: eng-lead}
+  decision-supersession: {policy: role, role: stakeholder}
 ```
 
 ## Trigger registry (docs/TRIGGERS.md)

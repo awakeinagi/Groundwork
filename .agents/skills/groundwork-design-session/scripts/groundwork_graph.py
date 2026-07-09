@@ -77,7 +77,7 @@ import ladybug
 import yaml
 
 SKIP_DIRS = {"specs"}
-ID_RE = re.compile(r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}$")
+ID_RE = re.compile(r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}$")
 ELEMENT_HEADING_RE = re.compile(r"^###\s+(\S+)\s+\(([^)]*)\)\s*$", re.MULTILINE)
 DESIGN_ELEMENTS_RE = re.compile(r"^## Design Elements\s*$(.*?)(?=^## |\Z)",
                                 re.MULTILINE | re.DOTALL)
@@ -95,7 +95,7 @@ REL_TABLES = ["DERIVES", "IMPACTS", "DEPENDS_ON", "CONFLICTS_WITH",
               "SUPERSEDES", "RELATES_TO", "CITES", "MENTIONS"]
 IMPLEMENTS_RE = re.compile(r"^Implements:", re.MULTILINE)
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
-BARE_ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP)-\d{4}\b")
+BARE_ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}\b")
 FENCED_CODE_RE = re.compile(r"```.*?(?:```|\Z)", re.DOTALL)
 INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
 

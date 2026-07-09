@@ -38,7 +38,7 @@ import sys
 from pathlib import Path
 
 ID_RE = re.compile(
-    r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CP|CON)-\d{4}$"
+    r"^(BG|EP|ST|SP|CMP|SES|DEC|CFL|CP|CON|IDEA)-\d{4}$"
 )
 CODE_SPAN_RE = re.compile(r"`([^`\n]+)`")
 FENCE_RE = re.compile(r"^(```|~~~)")
@@ -73,7 +73,7 @@ class Doc:
 
 
 def parse_id_list(text: str):
-    return re.findall(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CP|CON)-\d{4}\b",
+    return re.findall(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CP|CON|IDEA)-\d{4}\b",
                       text)
 
 

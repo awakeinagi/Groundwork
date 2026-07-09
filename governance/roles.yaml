@@ -1,0 +1,9 @@
+# Groundwork governance — role assignments (seed; schema owned by EP-0003,
+# files-in-repo per DEC-0037). Solo god-mode default per DEC-0263: one
+# operator holds all roles. Roles per DEC-0020 / CONTEXT.md.
+roles:
+  stakeholder: [awakeinagi]
+  product-owner: [awakeinagi]
+  eng-lead: [awakeinagi]
+  ds-lead: [awakeinagi]
+  arbiter: [awakeinagi]

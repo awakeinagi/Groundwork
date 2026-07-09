@@ -84,13 +84,16 @@ def main():
                   and f.get("status") != "resolved")
     pending_cp = by(lambda f: f.get("type") == "change-proposal"
                     and f.get("triage", "pending") == "pending")
+    open_ideas = by(lambda f: f.get("type") == "idea"
+                    and f.get("status") == "captured")
 
     print("\nOpen items:")
     for label, items in [("gated (awaiting approval)", gated),
                          ("stale (awaiting re-affirmation)", stale),
                          ("draft/in-refinement", wip),
                          ("open conflicts (BLOCKING)", open_cfl),
-                         ("untriaged change proposals", pending_cp)]:
+                         ("untriaged change proposals", pending_cp),
+                         ("captured ideas (work queue)", open_ideas)]:
         print(f"  {label:<32} {', '.join(items) if items else '-'}")
 
     # Deferred items grouped by release (SemVer precedence, backlog last)
