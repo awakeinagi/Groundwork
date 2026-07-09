@@ -220,6 +220,31 @@ split-vs-merge guidance in
 [references/epic-slicing-seams.md](references/epic-slicing-seams.md) and
 [references/story-slicing-seams.md](references/story-slicing-seams.md).
 
+## Concise reads & progressive disclosure (read this before opening files)
+
+Every artifact carries a frontmatter `overview:` (max 250 words,
+derived/non-normative — body wins; DEC-0284..DEC-0288). **Read
+overviews first; open a body only when the overview says the detail is
+there.** `scripts/groundwork_read.py` (pure stdlib, no index) serves
+the concise reads:
+
+```bash
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> overview <ID>... [--type T] [--status S]
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> outline <ID>
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> section <ID> <heading>
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> element <CMP-ID> <name>
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> item <CMP-ID> <item-ID>   # e.g. StorageService.B-3, C-2, IG-1
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> turns <SES-ID> <T4-T6>
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> term <glossary-term>
+python3 <skill-dir>/scripts/groundwork_read.py --root <project> citers <ID>
+```
+
+Search and graph outputs include overviews by default (`--no-overviews`
+to suppress; DEC-0290) — a hit list frequently answers the question
+with zero file reads. Whole-file reads are for artifacts you are
+actively editing or gating. When an edit changes an artifact's meaning,
+update its overview in the same edit (DEC-0288).
+
 ## The local graph index (LadybugDB)
 
 The skill bundles a queryable graph view of the artifact tree —

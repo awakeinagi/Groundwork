@@ -5,6 +5,11 @@ title: Refinement order is decided by ranking over the impact graph
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Refinement order among same-level artifacts determined by ranking algorithm
+  over impact graph developed through research spike SP-0001; until spike
+  concludes, ordering is human judgment informed by raw impact edges; encoding
+  logic as validated algorithm makes prioritization reproducible and explainable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0002 @ T1-T2"

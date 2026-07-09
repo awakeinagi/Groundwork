@@ -5,6 +5,16 @@ title: Raw chat transcripts are canonical ground truth; distillation is regenera
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The session transcript stored in the SES artifact is the raw message
+  log—verbatim, turn-numbered, append-only—not an agent summary. Any condensed
+  view (session summaries, consolidations) is derived and never replaces the
+  raw record. Distillation is a re-runnable function of the raw transcript: when
+  drift or hallucination is suspected, decisions and summaries are regenerated
+  from raw and diffed against what was accepted. This keeps everything
+  downstream—decisions, contracts, gates—trustworthy; the chain is only as
+  trustworthy as the fidelity of what citation spans point to. Regeneration
+  turns "do we trust the agent's reading?" into a diff.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0006 @ T3"

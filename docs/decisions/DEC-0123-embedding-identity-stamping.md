@@ -5,6 +5,14 @@ title: Embedding model identity and dimensionality are stamped on the vector ind
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The embedding port contract exposes the adapter's model identity and
+  vector dimensionality. The vector store stamps both onto every index.
+  On mismatch between configured embedding adapter and index stamp, the
+  system refuses to serve results from the stale index and requires full
+  re-embed before semantic search resumes. This converts silent corruption
+  of incomparable vectors into a loud, actionable state. Stamping identity
+  matters because two models can share a dimension and still be incomparable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0020 @ T4-T5, T6-T7"

@@ -5,6 +5,14 @@ title: Typed obligations refinement — entity behavior/API, service I/O coverag
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Follow-up to SES-0012, refining typed-obligations coverage for
+  entities and services. Settled: entity behavior and data contracts
+  mandatory (B+D), API contract conditional (A) — required exactly when
+  exposed at component boundary; service input/output via
+  schema-resolution gate rule ensuring every request/response schema is
+  defined inline or resolves to a value/event element. Produced 2
+  decisions; superseded DEC-0083 with DEC-0088.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

@@ -5,6 +5,14 @@ title: Multi-party governance in skill-only mode is git-mediated and asynchronou
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  The repository is the coordination medium for multi-party governance in
+  skill-only mode: CPs and gated artifacts land as commits/PRs; each
+  authority holder runs their own agent session to triage, ratify, or
+  approve—recorded in frontmatter (approved-by, approved-on) and session
+  records. Committee gates collect sign-offs across sessions, PR review
+  carries them. Asynchronous and lo-fi, fully auditable. Draws the
+  paradigm/application boundary crisply.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T16-T17"

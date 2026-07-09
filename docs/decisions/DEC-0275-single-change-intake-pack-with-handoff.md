@@ -5,6 +5,15 @@ title: A single change-intake pack owns the protocol through path-pick and hands
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0275 constrains the change-intake protocol to a single new pack in
+  the closed set (ST-0033 AC1), owning the protocol from proposal through
+  path-pick and locate-first classification, then handing off in-session
+  to the matching artifact-type pack for the grilling body. The expedited
+  path and idea-capture micro-sessions are phases/stopping-criteria of
+  this pack. The protocol's step machinery is pack content; the pack's
+  phase structure is the todo list and locate-first is the pack's context
+  recipe.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T4-T5, T8-T9"

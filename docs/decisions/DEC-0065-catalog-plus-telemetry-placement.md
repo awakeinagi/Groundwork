@@ -5,6 +5,14 @@ title: Consolidation placement is a static catalog plus telemetry-driven additio
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  A small always-on catalog ships with the system: per-goal neighborhood,
+  per-epic bundle, glossary-per-context. On top, EP-0004's path-usage telemetry
+  proposes new consolidations when uncatalogued paths cross heat thresholds, and
+  retirement when heat decays. Humans can also request consolidations explicitly.
+  At launch there is no traffic to measure; the catalog covers predictable paths
+  from day one while telemetry discovers the long tail no one predicted. Neither
+  approach alone survives both cold-start and scale.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0008 @ T2-T3"

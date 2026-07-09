@@ -5,6 +5,17 @@ title: Bare-ID cross-references and the doc viewer
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Method-level session addressing token overhead of markdown links
+  (~264 KB / 65k tokens corpus-wide, 25-30% of component docs). Converted
+  body prose from inline markdown artifact links to bare IDs (IDs
+  derivable from <ID>-<slug>.md pattern). Full-corpus migration, bare
+  IDs everywhere with non-artifact links remaining markdown. Inverted
+  checker to enforce bare IDs, flag inline artifact links. Built
+  single-page vanilla-JavaScript viewer (human_docs.html) with Tailwind
+  CSS, Mermaid rendering, full-text search, backlinks panel, graph and
+  semantic-search API endpoints from skill scripts. Produced
+  DEC-0242-DEC-0244.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

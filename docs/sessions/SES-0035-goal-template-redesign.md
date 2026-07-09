@@ -5,6 +5,15 @@ title: Goal-template redesign — backend-platform epic gap retrospective and BG
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Retrospective on why EP-0008 (Backend Application Platform) gap
+  emerged. Root cause: domain-first epic derivation answers what it does,
+  not what makes a running program; structural/cross-cutting deliverables
+  go unaddressed. Redesigned BG template and goal-grilling playbook with
+  two new required sections: Current State & Gap (diagnostic TOGAF-style)
+  and System Context (C4-inspired boundary, six ordered questions). Added
+  Illustrative Scenario guidance tiered High/Medium/Low per BABOK.
+  Updated templates, playbooks, and references. Produced DEC-0189-DEC-0194.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

@@ -5,6 +5,14 @@ title: A release-1 UI story delivers Idea capture and a minimal list with declin
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0270 constrains release-1 Idea UI to a new story (ST-0065)
+  delivering: in-session 'park as Idea' action on the conversation
+  surface proposable by the agent and invocable by the participant;
+  global quick-capture in the shell; minimal captured-Ideas list showing
+  title, status, and spark context; and decline with required
+  gate-policy-checked rationale. Work-queue surfacing beside untriaged
+  CPs joins release 2, recorded as revival scope in impacted stories.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0051 @ T6-T9"

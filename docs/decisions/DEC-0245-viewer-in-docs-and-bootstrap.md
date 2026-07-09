@@ -5,6 +5,14 @@ title: The doc viewer ships at docs/human_docs.html and is installed by project 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Amends DEC-0244: the viewer lives at docs/human_docs.html (not
+  tools/), with mount-relative fetch paths, and both tools
+  (human_docs.html, serve_docs.py) are installed by groundwork-design-session
+  bootstrap into new projects alongside check_links.py. This ensures
+  bare-ID convention never ships without its human-navigability
+  counterpart; agent-optimal storage and human-readable browsing land
+  together.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0048 @ T1-T4"

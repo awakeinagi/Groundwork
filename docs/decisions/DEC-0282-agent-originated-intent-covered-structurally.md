@@ -5,6 +5,14 @@ title: Agent-originated change intent needs no new application contract — the 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0282 constrains IDEA-0001's scope by noting that agent-originated
+  change intent needs no new application contract: an application agent
+  cannot land semantic change without a human-approved gate PR,
+  in-conversation proposals only become sessions when the participant
+  confirms, park-as-Idea is already agent-proposable, and origin: agent in
+  the intake context records provenance when sessions open. The gate
+  topology already enforces user disposition.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T10-T11"

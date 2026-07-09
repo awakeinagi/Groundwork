@@ -59,6 +59,12 @@ Rules enforced:
      session's `relates-to` is referenced in the session's body prose
      (for closed sessions, appended as Post-Close Enrichment per
      DEC-0248).
+ 19. Overview presence, cap, and resolution (DEC-0284, DEC-0286,
+     DEC-0287): every artifact's frontmatter contains a non-empty
+     `overview:` field of at most 250 words, and every bare artifact
+     ID inside it resolves (DEC-0242 extended to the overview
+     surface). Faithfulness to the body is a process obligation
+     (DEC-0288), not checked here.
 
 Ideas (IDEA-*, docs/ideas/, DEC-0258) are pre-classification captures:
 they are exempt from goal tracing (rule 3) and never carry release
@@ -169,6 +175,24 @@ def main():
         fm["_path"] = rel
         fm["_body"] = body
         artifacts[aid] = fm
+
+    # Rule 19: overview presence and word cap (DEC-0284, DEC-0286,
+    # DEC-0287).
+    for aid, fm in artifacts.items():
+        overview = fm.get("overview")
+        if not isinstance(overview, str) or not overview.strip():
+            errors.append(f"{fm['_path']}: {aid} has no non-empty "
+                          f"overview: frontmatter field (DEC-0284)")
+        elif len(overview.split()) > 250:
+            errors.append(f"{fm['_path']}: {aid} overview is "
+                          f"{len(overview.split())} words (max 250, "
+                          f"DEC-0286)")
+        else:
+            for ref in BARE_ID_RE.findall(overview):
+                if ref not in artifacts:
+                    errors.append(f"{fm['_path']}: {aid} overview "
+                                  f"references unknown artifact {ref} "
+                                  f"(DEC-0242, DEC-0287)")
 
     def refs(fm):
         links = fm.get("links") or {}

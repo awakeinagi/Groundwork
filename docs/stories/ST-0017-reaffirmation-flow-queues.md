@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  How staleness clears: lightweight re-affirmation PR reusing the item
+  branch and gate machinery, carrying upstream diff and impact report.
+  Approval clears via `clear-stale` operation; rejection escalates to
+  full re-refinement session. Impact-ranked queues guide each approver's
+  priority ordering.
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]

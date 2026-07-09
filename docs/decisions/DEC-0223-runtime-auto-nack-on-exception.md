@@ -5,6 +5,13 @@ title: Background Job Execution Runtime auto-nacks a job on an uncaught handler 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The runtime dispatch loop catches any handler exception and calls QueuePort.nack
+  on the job's behalf, feeding the Queue Port's retry/dead-letter bound. No
+  handler exception crashes the runtime or another in-flight job. This routes
+  exceptions through the existing nack path rather than inventing a separate
+  failure-handling mechanism, keeping exactly one failure path (retry →
+  dead-letter).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0042 @ T1-T2"

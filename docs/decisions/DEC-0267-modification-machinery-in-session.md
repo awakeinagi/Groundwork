@@ -5,6 +5,13 @@ title: Changes modifying approved artifacts fire the supersession and staleness 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0267 constrains intake sessions handling modifications to
+  approved artifacts to complete the cascade before close: superseding
+  decisions are recorded, the staleness walk runs, affected descendants
+  go stale, and re-affirmation is presented to the approver, all within
+  the session. Net-new changes skip this and derive artifacts under
+  existing gates. The corpus is never left mid-cascade at session close.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T18-T19"

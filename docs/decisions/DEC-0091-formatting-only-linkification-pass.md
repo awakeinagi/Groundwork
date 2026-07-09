@@ -5,6 +5,13 @@ title: Formatting-only linkification of immutable artifacts is sanctioned
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  A mechanical pass converts bare cross-references to markdown links across
+  the entire corpus, including closed sessions and accepted decisions, as a
+  formatting-only exception to immutability. This edit class—reference
+  formatting changing no words, meaning, or structure—is sanctioned for the
+  initial pass and future link-integrity repairs. Meaning-touching edits
+  remain forbidden. Git history preserves pre-pass text for audit integrity.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0014 @ T2-T3"

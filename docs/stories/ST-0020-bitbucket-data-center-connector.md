@@ -6,6 +6,12 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to backlog (trigger TRG-0010: deployment requiring Bitbucket
+  Data Center). V1 reference implementation of code-host connector
+  protocol: full protocol conformance, honest capability manifest,
+  merge checks / Code Insights for required-check surface, reviewer
+  groups for team routing, Data Center webhooks feeding normalized events.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

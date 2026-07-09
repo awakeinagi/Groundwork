@@ -5,6 +5,13 @@ title: SP-0003 captures HNSW adoption as a deferred spike subscribed to TRG-0003
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  SP-0003 is created deferred with release backlog, capturing HNSW adoption.
+  It subscribes to the existing armed trigger TRG-0003 (embedded engine
+  performance degrading at real scale) rather than arming a new trigger (reuse
+  over duplication). When TRG-0003 fires, both SP-0002 (graduate storage) and
+  SP-0003 (optimize search in-place) revive together as competing answers to
+  the same firing, studied together.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T4"

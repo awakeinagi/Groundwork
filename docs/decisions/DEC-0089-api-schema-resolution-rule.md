@@ -5,6 +5,13 @@ title: API-item request/response schemas must resolve — inline or to declared 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  For all API contract items (any element type), every request and response
+  schema must be defined inline (language-neutral form) or resolve to a
+  declared value or event element in the same doc or a depends-on
+  component. Dangling type references are gate-blockers. This closes the
+  coverage concern at the precise failure point without mandating empty
+  Data Contract sections on stateless services.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0013 @ T1-T3"

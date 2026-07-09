@@ -5,6 +5,16 @@ title: Change proposals are a first-class artifact type (CP)
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Change Proposal (CP) is a new lightweight artifact type capturing a diff,
+  proposer (person-id), source (jira-drift | ui-suggestion | 
+  implementation-feedback), triage state (pending | mechanical | session | 
+  rejected), and relates-to link to the target artifact. The agent triages:
+  trivial changes become mechanical fix PRs citing the CP; substantive changes
+  trigger refinement sessions with the CP as input; rejected proposals persist
+  with rationale. This gives every "someone outside the pipeline wants this
+  changed" event durable audit including what was proposed and declined, with a
+  uniform triage flow.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T4-T5"

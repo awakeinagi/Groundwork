@@ -5,6 +5,15 @@ title: "Agent context feeds: read-only codebases, Jira backlog, and the doc repo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Agents refining goals need awareness of the existing world: current systems,
+  in-flight work, and prior decisions. Three context feeds surface this: read-
+  only codebase access via code-host connectors showing existing integrations
+  and conventions; Jira backlog read access for conflict detection against
+  items outside Groundwork; and the git-tracked canonical docs themselves,
+  traversed via the cross-reference graph. The feeds sit behind pluggable
+  connector contracts, with the Graph Index enabling efficient navigation of
+  the doc feed.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T8-T9"

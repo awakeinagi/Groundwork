@@ -7,6 +7,21 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Implements the compiler from governance-as-code to host reality: branch
+  protection, reviewer-group teams, and required-check catalog — recompiled
+  on every governance change. Coarse rules compile to host branch protection;
+  artifact-type directories map to reviewer groups with committee approval
+  counts. Host teams are projections of roles.yaml, created and synced via
+  connector team-admin operations — never edited host-side. Team membership
+  references stable person-ids from people.yaml; username resolution stays
+  connector-side. Gate engine registers every required check (gate-policy,
+  conflicts-open, tier-2 suite, mechanical-diff validator, System-Decision
+  template check) and is sole writer/reconciler of branch-protection settings.
+  governance/ merges trigger recompilation; drift reconciles toward files.
+  First compilation after init commit locks gating behind founding config.
+  All host interactions through code-host connector contract; v1 is GitHub
+  cloud. Full suite passes hermetically against local-git fake connector.
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]

@@ -5,6 +5,12 @@ title: Business Goals gain a required System Context section (C4 Level 1/2 inspi
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Adds a required "System Context" section to the Business Goal
+  template (C4 Level 1/2 inspired), positioned after Intent: what's
+  being built, who uses it, where it lives, existing-vs-new for the
+  system's parts, and external dependencies. Feeds mandatory context
+  diagram at goal gate.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0035 @ T11-T12"

@@ -6,6 +6,12 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2 (trigger: release-2 planning). Agent's second
+  context feed: read-only access to work-management backlog for
+  overlap/conflict detection against items that never passed through
+  Groundwork. Exposes issue summaries, status, and links sufficient for
+  detection. No backlog write is expressible.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

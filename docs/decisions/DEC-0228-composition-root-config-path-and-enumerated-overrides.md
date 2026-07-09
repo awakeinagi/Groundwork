@@ -5,6 +5,14 @@ title: The config-file path comes from one env var with a default; env overrides
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The YAML config path is resolved from a single environment variable (e.g.,
+  GROUNDWORK_CONFIG) with a documented default path. Environment variables may
+  override only a documented, enumerated set of values: the master
+  secret-decryption key plus per-deployment values (resource paths, endpoints).
+  Arbitrary dotted-path overrides and env-driven adapter selection are not
+  supported. Preserves DEC-0206's rationale: one YAML file remains the single
+  reviewable source of deployment topology.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0043 @ T3"

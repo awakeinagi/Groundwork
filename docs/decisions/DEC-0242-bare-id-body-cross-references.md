@@ -5,6 +5,13 @@ title: Body cross-references are bare artifact IDs; the checker validates resolu
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Artifact body cross-references become bare IDs (DEC-0152, CMP-0009)
+  instead of inline markdown links, saving ~30% of read time on high-reread
+  documents with zero information loss. Non-artifact links stay markdown.
+  Replaces DEC-0090's linked form. tools/check_links.py inverts: bare
+  artifact IDs must resolve; artifact markdown links become violations.
+  Human navigability moves to the doc viewer (DEC-0244).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0047 @ T1-T4, T7-T8"

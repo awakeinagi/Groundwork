@@ -5,6 +5,13 @@ title: A mechanical path-pick closes the session with a recorded disposition; th
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0283 constrains mechanical path-picks discovered mid-conversation:
+  the session closes recording the path-pick disposition (zero decisions
+  is valid, same shape as idea-capture), and the fix executes through
+  existing paths (mechanical-fix PR or typed operation) exactly as ST-0039
+  AC2 handles CP trivia. No new contract; this is change-intake pack
+  stopping-criteria content.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T10-T11"

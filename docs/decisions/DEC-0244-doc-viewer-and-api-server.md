@@ -5,6 +5,15 @@ title: A single-file doc viewer plus a skill-backed API server carry human navig
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Two tools replace DEC-0090's human-navigability function: viewer.html,
+  a single-page webapp with sidebar, search, backlinks, bare-ID
+  linkification at render time, and frontmatter rendering; and
+  serve_docs.py, a stdlib HTTP server exposing /api/ endpoints for
+  semantic search and graph queries (groundwork_search.py and
+  groundwork_graph.py), with script output auto-linkified in the viewer.
+  Canonical files remain agent-optimal; viewer only needs internet when
+  humans use it.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0047 @ T4-T6, T8"

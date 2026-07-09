@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Infrastructure seam for background job execution. Operations: enqueue
+  (job-type open string, payload opaque JSON), claim lease, ack/nack with
+  retry, and status query. Job and JobStatus values; no per-job-type
+  schema validation on port. At-least-once delivery, no ordering guarantee
+  across jobs. Stale-lease safety mirrors App Database Port discipline.
+  Dead-lettering after configurable retry exhaustion, visible but no
+  recovery operation in v1. V1 durable Adapter: queue table on co-located
+  DuckDB. Conformance suite published with port.
 context: platform
 component-type: protocol
 links:

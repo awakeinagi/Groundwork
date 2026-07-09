@@ -7,6 +7,14 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Infrastructure seam for background/async job execution: Queue Port
+  defined as a Protocol design element with conformance test suite and
+  v1 durable app-database-backed adapter, so enqueued work rides a
+  config-swappable contract with bounded retries, stale-lease errors on
+  expired leases, dead-letter parking, and at-least-once delivery with
+  idempotent consumers. Per DEC-0121, DEC-0122, DEC-0129, DEC-0135,
+  DEC-0139, DEC-0152, DEC-0203, DEC-0204, DEC-0208, DEC-0210.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

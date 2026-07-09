@@ -5,6 +5,15 @@ title: Idea creation and disposition are typed mechanical-write operations, mirr
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0272 constrains Idea creation and disposition to typed
+  mechanical-write operations joining MechanicalWriteService's closed
+  set, mirroring Change Proposals one-to-one: create-idea for gateless
+  durable-write capture tier-1-validated against the Idea schema, and
+  set-idea-disposition to fill Disposition and flip captured →
+  taken-up | declined within allowlist append-regions. Both are
+  allowlisted operations under the existing mechanical-write machinery;
+  extending the allowlist is the gated contract change.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0051 @ T12-T13"

@@ -5,6 +5,14 @@ title: A session that modified approved artifacts cannot close until the stalene
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0279 constrains session close to require that sessions modifying
+  approved artifacts cannot close until the staleness sweep has run and
+  superseding decisions and stale marks are durably written. Re-affirmation
+  is presented in-session when the participant holds approval rights;
+  otherwise stale marks feed ST-0017's existing re-affirmation PRs and
+  impact-ranked queues. The cascade is marked, never unwalked, and the
+  corpus is never left mid-cascade.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T6-T7"

@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-06
 owner: eng-lead
 created: 2026-07-05
+overview: >-
+  EP-0003 delivers the Governance & Gate Engine that enforces human
+  ratification through the fork-pull model: compiles declarative
+  governance configuration (roles, domains, gate policies) onto code-host
+  branch protection and computed gate-policy and conflicts-open required
+  checks; runs staleness sweeps with re-affirmation flows; operates the
+  Arbiter conflict queue; and emits governance event logs. Gate policies
+  are refined through DEC-0006, DEC-0020, DEC-0036-0042. Approved
+  2026-07-06.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

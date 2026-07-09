@@ -5,6 +5,11 @@ title: A shared accessibility and responsive baseline is folded into every v1 st
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Establishes WCAG 2.1 AA plus Tailwind's default breakpoint set
+  (sm/md/lg/xl/2xl) as the shared baseline. Folded into every v1
+  story's acceptance criteria rather than a standalone story, keeping
+  constraints testable where they apply.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0034 @ T2-T3"

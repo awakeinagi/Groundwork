@@ -5,6 +5,16 @@ title: The application splits intake into engine-enforced invariants and pack-de
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0273 constrains the application's intake implementation to split
+  the paradigm's change-intake protocol into two layers: the session
+  engine enforces hard invariants (intake-opened sessions begin at
+  verbatim proposal, authority check runs at open, grilling requires
+  typed alignment confirmation, modified-artifacts sessions cannot close
+  until staleness cascade is marked); the conversational protocol
+  (restatement quality, alignment loop phrasing, locate-first steps, path
+  recommendation) is strategy-pack content, improvable through the gated
+  pack pipeline.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T4-T5"

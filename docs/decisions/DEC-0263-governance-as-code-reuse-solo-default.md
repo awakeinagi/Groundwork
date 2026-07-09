@@ -5,6 +5,14 @@ title: Skill-only projects reuse the governance-as-code files, seeded at bootstr
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Skill-only projects use the same governance-as-code files the
+  application is designed around: governance/roles.yaml, domains.yaml,
+  gate-policies.yaml, people.yaml (DEC-0046)—versioned in repo, edited
+  via normal PR/commit. Bootstrap seeds governance/ with solo god-mode
+  defaults: one person holding all roles, every gate single-approver.
+  A project later adopting the application imports governance unchanged.
+  Reuses schema per DEC-0037 (audit trail for rights changes).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T16-T18"

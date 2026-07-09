@@ -5,6 +5,15 @@ title: Skill-only identity is declared and git-resolved — procedural enforceme
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  governance/people.yaml maps person-ids to git identities; the agent
+  resolves the current operator via git config and treats them as that
+  person (asking identity only when git config missing or ambiguous).
+  Enforcement is procedural, not cryptographic: agent applies gate
+  policies and captures unauthorized attempts as CPs (DEC-0262), but a
+  local user can edit anything—their repo. Paradigm's local guarantee is
+  provenance and honest capture, not tamper-proofing; real enforcement
+  is the application's value-add.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T16-T17"

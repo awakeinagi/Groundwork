@@ -5,6 +5,18 @@ title: The encrypted secret store graduates to a standalone service-type CMP
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Decides that the encrypted secret store, previously drafted as a
+  CMP-0007 concern, graduates to its own standalone service-type
+  component, CMP-0015. CMP-0009 already stores per-installation
+  webhook signing secrets there, with CMP-0010 holding the master
+  key—a contract-certain second consumer triggering the graduation
+  rule (DEC-0136, DEC-0080). The new component is consumed by
+  CMP-0007 (OAuth tokens, attribution signing key) and CMP-0009
+  (webhook signing secrets). Keeps conformance (envelope encryption,
+  master-key handling) versioning independently of identity concerns,
+  following the pattern that graduated the App Database Port
+  (DEC-0135).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T1-T2"

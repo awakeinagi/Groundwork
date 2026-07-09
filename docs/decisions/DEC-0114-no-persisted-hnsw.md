@@ -5,6 +5,13 @@ title: Search is exact brute-force; no persisted HNSW index; the experimental pe
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Search uses exact brute-force cosine similarity over persistent DuckDB
+  embeddings with no HNSW index; the experimental persistence flag is never
+  set. Measured on ~922 chunks: ~35 ms per query; pre-filtered queries ~32 ms
+  (faster because filtering is exact, bypassing any index). Brute force is
+  exact, zero corruption risk, and removes experimental features. HNSW adoption
+  is deferred to SP-0003 under TRG-0003 at corpus scale.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T3-T4, T9, T15"

@@ -5,6 +5,11 @@ title: Staleness marks the whole subtree, blocks gates, and clears by re-affirma
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Approved artifact change marks entire derived subtree stale with impact report;
+  stale artifacts cannot spawn new children and block open PRs via gate-policy check
+  until cleared; clearing via lightweight re-affirmation review keeps cost proportional
+  to change magnitude—cosmetic changes cheap, substantive ones thorough.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0004 @ T2-T3"

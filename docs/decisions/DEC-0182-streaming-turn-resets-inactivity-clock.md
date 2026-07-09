@@ -5,6 +5,11 @@ title: A streaming turn resets the session inactivity clock; auto-close never tr
 status: accepted
 owner: ds-lead
 created: 2026-07-08
+overview: >-
+  Resolves DEC-0057's race condition: a turn actively streaming counts
+  as activity; the inactivity window only starts once the turn fully
+  completes. Auto-close never truncates mid-turn. Constrains session
+  lifecycle behavior.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0033 @ T9-T10"

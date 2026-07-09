@@ -7,6 +7,13 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  V1 reference implementation of code-host connector protocol: GitHub cloud.
+  Full protocol conformance with honest capability manifest including
+  native path-scoped reviewer requirements (CODEOWNERS). Checks API and
+  required-status-checks for required-check surface. Org teams for team
+  routing. GitHub webhooks feeding normalized events. Consumer test suites
+  pass unchanged from local-git fake.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

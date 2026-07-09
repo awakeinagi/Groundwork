@@ -5,6 +5,15 @@ title: Context assembly is a declarative recipe inside the strategy pack
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Each strategy pack declares a context recipe specifying required graph paths,
+  preferred consolidations, fallback crawls, a token budget with priority order
+  for truncation, and whether on-demand graph-query tools are enabled
+  mid-session. The retrieval layer (EP-0004/EP-0007) resolves the recipe at
+  session start and on demand. This makes context behavior versioned and
+  reviewable per session type rather than buried in code, consistent with the
+  pack-as-plugin framing (DEC-0053), since goal refinement and story refinement
+  genuinely need different context at the session start.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0006 @ T4-T5"

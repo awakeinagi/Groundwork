@@ -5,6 +5,14 @@ title: The Backend Application Platform epic owns the Composition Root; engine e
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  EP-0008 owns the Composition Root: the single place where Port
+  contracts are bound to concrete Adapters at process startup from
+  deployment configuration. EP-0001/EP-0004/EP-0007 continue to own
+  what each Port contractually guarantees. Keeps each engine's contract
+  stable regardless of Adapter selection, and gives EP-0008 a clean,
+  narrow scope (wiring, not re-specifying). Constrains EP-0008's scope
+  and depends-on relationships. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0038 @ T1"

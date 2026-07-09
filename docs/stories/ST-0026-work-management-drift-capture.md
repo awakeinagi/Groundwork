@@ -6,6 +6,12 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2 (trigger: release-2 planning). Drift handling:
+  direct edits to canonical-owned projection fields detected with
+  before/after capture, promptly reverted toward canon, and preserved
+  verbatim as Change Proposal artifacts. Editor receives respectful
+  redirection comment. Workflow-field edits are telemetry only, never drift.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

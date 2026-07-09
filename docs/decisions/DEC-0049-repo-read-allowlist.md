@@ -5,6 +5,15 @@ title: Agent codebase reads are governed by an allowlist in governance config
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  governance/repos.yaml lists the repositories the agent may read, with
+  optional path excludes for secrets or sensitive areas; connector tokens are
+  read-only and scoped to the list; changes are PR-gated like all governance
+  (DEC-0037). Any decision influenced by code the agent read cites repo and ref,
+  keeping provenance intact. This auditable middle ground grants the agent
+  org-wide read access (making per-session grants unnecessary friction) while
+  preventing prompt-injection amplification and keeping access controlled and
+  auditable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T4-T5"

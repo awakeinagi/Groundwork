@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Observability spine of governance: the two-grade event log (provenance
+  and telemetry) the engine emits for gate transitions, staleness sweeps,
+  re-affirmation outcomes, conflicts, checks, and System-Decision
+  auto-resolutions, plus a language-neutral metrics/query API for
+  dashboards. Persists behind App Database Port.
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]

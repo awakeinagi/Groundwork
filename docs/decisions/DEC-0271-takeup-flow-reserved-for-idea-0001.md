@@ -5,6 +5,13 @@ title: The Idea take-up flow is out of ST-0065's scope, reserved as a hand-off p
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0271 constrains the Idea take-up flow to be out of ST-0065's
+  scope, reserved as a hand-off point for IDEA-0001's future session.
+  The list view's contract exposes the full Idea record on selection but
+  provides no session-opening affordance until IDEA-0001 designs the
+  intake flow. This prevents scope bleed through the focus-artifact
+  boundary; until then, take-up happens through the agent path.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0051 @ T4-T5, T8-T9"

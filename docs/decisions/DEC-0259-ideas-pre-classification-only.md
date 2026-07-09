@@ -5,6 +5,13 @@ title: Ideas are pre-classification capture only — intent whose artifact level
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  An Idea captures intent too raw to classify—not yet known whether
+  goal-, epic-, story-, spike-, or component-shaped. The moment intent's
+  artifact level is clear, it is captured directly as deferred ST/SP via
+  existing deferral mechanism. Ideas never carry release: labels or
+  trigger subscriptions; taking an Idea up converts it through intake
+  session into artifacts that do. Preserves instant deferral path.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T14-T15"

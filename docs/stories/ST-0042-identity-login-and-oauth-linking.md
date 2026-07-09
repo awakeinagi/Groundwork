@@ -7,6 +7,12 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Auth surface for v1 stories: login flow against a pluggable auth
+  provider, and one-time OAuth linking of code-host identity so gate
+  approvals can post as the participant via their host identity or
+  service-signed fallback when no host seat is available. Per DEC-0024,
+  DEC-0043, DEC-0153, DEC-0184, DEC-0186, DEC-0188.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

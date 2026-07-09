@@ -5,6 +5,15 @@ title: ChangeEvent carries a closed change-kind enum and a schema-version field
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  ChangeEvent payload comprises event_id, schema_version, artifact_id,
+  artifact_type, branch, commit (sha), kind, changed_fields[], occurred_at.
+  kind is a closed enum: created | content-amended | status-changed |
+  merged | deleted. Extending the enum or changing the payload is a
+  contract change through a gate, following the same discipline as the
+  mechanical-write allowlist. schema_version lets consumers handle evolution
+  explicitly. Consumers can exhaustively match a closed enum; a typo'd kind
+  cannot ship silently.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0022 @ T3-T4"

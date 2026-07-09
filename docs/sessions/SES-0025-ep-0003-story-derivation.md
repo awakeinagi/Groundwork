@@ -5,6 +5,15 @@ title: EP-0003 story derivation — bootstrap, recomputation, check ownership, e
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Sliced Governance & Gate Engine epic into seven stories covering
+  config schemas, policy compilation, gate-policy checks, conflict
+  operations, staleness sweeps, re-affirmation, and event logging.
+  Resolved open questions on governance bootstrap, mid-flight policy
+  changes, required-check registration ownership, and timeout-to-default
+  mechanics through grilling and decision-recall audit. Produced
+  ST-0012-ST-0018 and DEC-0140-DEC-0147. Amended CMP-0001 per
+  DEC-0142.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

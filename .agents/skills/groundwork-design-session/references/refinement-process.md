@@ -155,7 +155,9 @@ their transcript at the verbatim proposal (DEC-0255).
    present* — this catches distillation errors at the source. Only
    confirmed decisions become `accepted`.
 4. **Close and record.** Write the `SES-` artifact: turn-numbered
-   transcript (`T1`, `T2`, …). When facilitating through a chat interface,
+   transcript (`T1`, `T2`, …). Every artifact written or semantically
+   edited in the session gets its `overview:` written or refreshed in
+   the same edit (DEC-0284, DEC-0288). When facilitating through a chat interface,
    the transcript is `reconstructed` — a faithful turn-by-turn write-up of
    the actual exchange, including what YOU asked and recommended, and the
    user's answers with their amendments. Never compress the user's words
@@ -232,6 +234,9 @@ refinement, not as a separate exercise:
 
 ## Gates and approvals
 
+- Gate prep includes confirming the artifact's `overview:` is still
+  faithful to the body (DEC-0288) — an explicit checklist item,
+  recorded like the graduation review.
 - When an artifact's refinement is complete, set `status: gated` and
   present it to the approver (in manual mode: the user, in conversation).
   Summarize what they're ratifying — the key content and the decisions it

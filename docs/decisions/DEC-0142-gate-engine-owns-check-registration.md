@@ -5,6 +5,15 @@ title: The gate engine owns all required-check registration; CMP-0001 posts its 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Required-check registration — which checks are required on which branches —
+  is exclusively the gate engine's policy-compilation duty, covering gate-
+  policy, conflicts-open, tier-2 suite, and mechanical-diff validator.
+  CMP-0001's forward-declared operation is narrowed to posting its own check
+  results (tier-2 suite and mechanical-diff verdicts). One component owns
+  what-blocks-merge: branch-protection settings get single writer and
+  reconciler, preserving the seam. Storage service keeps computing what it is
+  authoritative for without administering policy.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T2-T3"

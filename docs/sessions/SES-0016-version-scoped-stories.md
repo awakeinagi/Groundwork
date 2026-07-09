@@ -5,6 +5,16 @@ title: Version-scoping of stories — deferred status and SemVer release labels
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Supported version-scoping of stories via deferred lifecycle status and
+  release labels. Settled: `deferred` as a lifecycle status with
+  `release:` frontmatter field carrying target release (SemVer format
+  with major required, minor/patch optional); labels declared in
+  Business Goal's Scope section; deferral and revival each cite a
+  decision; tooling excludes deferred artifacts from metrics/coverage
+  warnings, provides dedicated deferred listing grouped by release, and
+  flags elements implementing only deferred stories. Deferred status also
+  applies to epics (which default their stories).
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

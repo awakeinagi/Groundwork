@@ -5,6 +5,12 @@ title: Workflow telemetry stays projection-side; the jira-key linkage is the onl
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The stable jira-key linkage (written once via set-jira-key mechanical
+  write when projection is created) is the only canonical write the
+  work-management connector makes. Volatile workflow state (status,
+  sprint, assignee, estimates) is read by connector, stored app-side,
+  and joined at query time. No jira-status frontmatter field exists.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T4-T5, clarified @ T9-T10"

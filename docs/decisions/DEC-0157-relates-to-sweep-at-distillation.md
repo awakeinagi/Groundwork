@@ -5,6 +5,13 @@ title: A relates-to sweep over accepted decisions' citers is required at decisio
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Immediately after new decisions are distilled, facilitator runs
+  consistency tool's sweep on each: for every accepted decision in new
+  DEC's relates-to/supersedes, tool lists that decision's ratified
+  citers and facilitator reviews each for consistency with the new
+  decision, recording disposition. Catches partial supersessions the
+  staleness walk misses.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0027 @ T1-T3"

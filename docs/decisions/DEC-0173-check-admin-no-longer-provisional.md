@@ -5,6 +5,11 @@ title: Check-administration operations are no longer provisional now that GitHub
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Removes the provisional flag from check-run result posting and
+  required-check registration operations now that GitHub (with stable,
+  documented check-administration APIs) is v1. Repurposes SP-0004 as a
+  BBDC-revival spike deferred behind TRG-0010.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0031 @ T1"

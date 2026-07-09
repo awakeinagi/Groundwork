@@ -5,6 +5,14 @@ title: Semantic changes to a Groundwork corpus happen only inside sessions — a
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  No semantic change to the artifact corpus is made outside a recorded
+  session. Off-record discussion without changes is always allowed; the
+  moment the user instructs a change, a session must capture intent and
+  decisions. When a user asks to skip the session, the agent declines to
+  edit and offers the expedited path (DEC-0254) instead. The rule has no
+  waiver, including for full-authority users. Enforced by the intake
+  protocol (DEC-0255).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T5, T10-T11"

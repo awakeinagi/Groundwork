@@ -7,6 +7,13 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Verbatim record every Decision traces back to, with confirmation loop
+  turning raw transcript into ratified provenance: raw, turn-numbered,
+  append-only transcript capture; plain-language playback of proposed
+  decisions at checkpoints; re-runnable distillation for drift/hallucination
+  detection. Only confirmed decisions commit to branch as accepted, with
+  source-span citing supporting turns.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

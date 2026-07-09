@@ -7,6 +7,13 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 created: 2026-07-08
+overview: >-
+  Protective layers every session runs under: pack-defined unproductive-pattern
+  detection with graceful exits, governance-derived decision-rights enforcement
+  keeping out-of-authority statements from becoming accepted Decisions, injection
+  hygiene treating participant input as data never instructions, and intake
+  authority gate halting out-of-rights change instructions. Every guardrail exit
+  distinguishable from normal close.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

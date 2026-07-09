@@ -5,6 +5,12 @@ title: KV-store Port TTL is mandatory on every set() — no permanent keys
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  set(namespace, key, value, ttl) requires a TTL on every call; the KvStorePort
+  contract defines no no-expiry variant. Mandatory TTL structurally enforces
+  the port's ephemeral-only scope, preventing implementers from accidentally
+  growing a second permanent store. It also keeps lazy-plus-sweep expiry
+  universally applicable since every key is eventually reclaimable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0041 @ T1-T2"

@@ -5,6 +5,15 @@ title: EP-0005 story derivation — release scoping, connector pluggability, att
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Sliced Connectors & Identity epic into stories resolving Jira sync
+  deferral, notifier connector scope, secrets storage architecture, and
+  attribution-block cryptography. Deferred Jira sync, backlog adapters,
+  and external vault spike behind triggers preserving pluggability.
+  Resolved telemetry tension via DEC-0151 (jira-key canonical, workflow
+  joined at query time). Adopted envelope encryption in app database for
+  secrets. Produced ST-0019-ST-0030, SP-0004-SP-0005, and
+  DEC-0148-DEC-0156.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

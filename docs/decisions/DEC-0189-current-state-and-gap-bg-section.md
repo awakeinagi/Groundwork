@@ -5,6 +5,11 @@ title: Business Goals gain a required Current State & Gap section
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Adds a required "Current State & Gap" section to the Business Goal
+  template, positioned after Problem: what exists today to address
+  this need and what specific technology/capability gap lets the
+  problem persist. Applies standard gap-analysis discipline.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0035 @ T13-T14"

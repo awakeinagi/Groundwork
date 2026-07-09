@@ -5,6 +5,15 @@ title: Viewer relocation to docs/ and bootstrap inclusion
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Short follow-up to SES-0047 on two stakeholder directives for the doc
+  viewer. Relocated single-page webapp from tools/ to docs/human_docs.html;
+  made all fetch paths mount-relative so viewer works wherever repo is
+  served. Added notes to README. Integrated into agent skill bootstrap:
+  skill installs docs/human_docs.html and tools/serve_docs.py alongside
+  check_links.py. Server resolves skill scripts from vendored .agents copy
+  first, falling back to ~/.claude install, so bootstrapped tool works in
+  any Groundwork project. Produced DEC-0245.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

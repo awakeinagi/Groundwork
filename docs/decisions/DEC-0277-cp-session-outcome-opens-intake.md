@@ -5,6 +5,14 @@ title: CP triage's session outcome opens an intake-opened session carrying the C
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0277 constrains CP triage to route into the intake protocol: the
+  triage session outcome opens an intake-opened session whose intake
+  context carries the CP verbatim as the proposal (origin: cp), with T1
+  as the CP's captured text and the restate-and-align loop running
+  against the proposer or their stand-in. ST-0039 AC2 and
+  SPEC-change-proposal's lifecycle are amended. One route for all change
+  intent prevents split decision paths.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T6-T7, T8-T9"

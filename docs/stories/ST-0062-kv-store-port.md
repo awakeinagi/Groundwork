@@ -7,6 +7,14 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Infrastructure seam for ephemeral coordination state and
+  general-purpose caching: KV-store Port defined as a Protocol design
+  element with conformance test suite and v1 default adapter reusing the
+  App Database Port, supporting get/set/delete with TTL via
+  lazy-on-read plus best-effort periodic sweep job, zero new deployment
+  surface. Per DEC-0121, DEC-0122, DEC-0129, DEC-0203, DEC-0204,
+  DEC-0211.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

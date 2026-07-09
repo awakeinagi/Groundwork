@@ -5,6 +5,17 @@ title: IDEA-0002 take-up — the Idea artifact type in the application
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Session took up IDEA-0002: reflecting the paradigm's Idea artifact type
+  in the application's storage, validation, and UI. Refined whether Ideas
+  would be tier-1 only or include tier-2 cross-artifact rules, when
+  queue visibility would ship (release 1 with minimal capture/list or
+  release 2 with full browse), and resolved a contract gap: Ideas need
+  mechanical write operations (create-idea, set-idea-disposition) to
+  bypass PR-gated writes. Produced 5 decisions (DEC-0268..DEC-0272),
+  amended ST-0001 and CMP-0001, created new story ST-0065 (release-1
+  capture and minimal list), and fixed the mechanical-write service with
+  two new operations.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Code (claude-fable-5)

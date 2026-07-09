@@ -5,6 +5,12 @@ title: CMP-0009 uses two GitHub Apps (Orchestrator, Reader) for credential separ
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Establishes CMP-0009's identity architecture: two GitHub Apps
+  (Orchestrator and Reader) for credential separation per DEC-0145's
+  C-2 constraint, forked branches on a dedicated service account, and
+  program-user reviews posting under the Orchestrator App's bot
+  identity with signed attribution blocks.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0032 @ T2-T3"

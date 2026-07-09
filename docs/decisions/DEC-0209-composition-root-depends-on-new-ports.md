@@ -5,6 +5,14 @@ title: Composition Root's story-level depends-on includes the new Queue Port and
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  ST-0057 (Composition Root) depends-on ST-0010, ST-0060, ST-0062
+  because it cannot wire an Adapter for a Port whose contract doesn't
+  exist yet. Unlike four pre-existing Ports already approved and built,
+  the two new Ports require story-grain sequencing beyond epic-level
+  scoping. Story's Acceptance Criteria require binding real v1 adapters,
+  which don't exist until Queue and KV-store Port stories complete.
+  Constrains ST-0057's depends-on list. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T1-T2"

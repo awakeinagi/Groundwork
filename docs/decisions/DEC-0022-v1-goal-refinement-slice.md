@@ -5,6 +5,11 @@ title: The v1 vertical slice is goal refinement end-to-end
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  v1 delivers goal refinement end-to-end: session to transcript to distilled
+  decisions to business goal doc in git store to approval gate in UI; excludes
+  Jira sync, epic generation, minimal graph index; proves novel unsupervised
+  agent grilling with fewest integrations to focus attention on core Q&A quality.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T10-T11"

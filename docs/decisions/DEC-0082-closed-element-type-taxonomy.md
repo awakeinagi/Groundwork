@@ -5,6 +5,13 @@ title: Closed five-type element taxonomy — entity, value, service, event, prot
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The element-type taxonomy is exactly five types—entity, value, service,
+  event, protocol—defined language-neutrally. The set is closed; adding a
+  type requires a refinement session and decision. Every current Groundwork
+  element fits the five; a closed enum is machine-validatable and gives the
+  Implementation Swarm stable semantics. Deliberate friction keeps the
+  shared vocabulary from sprawling.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T6-T7"

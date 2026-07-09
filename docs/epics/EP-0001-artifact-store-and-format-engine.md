@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-05
+overview: >-
+  EP-0001 delivers the canonical Artifact Store & Format Engine as the
+  authoritative storage service for the goal→docs refinement system:
+  owns the fork-pull git model over upstream docs, allocates immutable
+  artifact IDs, validates every write, orchestrates item branches,
+  session worktrees, and gate PRs, and enforces link-graph integrity.
+  All writes go through its API. The store is git-backed markdown with
+  YAML frontmatter per DEC-0008, supporting concurrent session
+  refinement and typed mechanical writes. Approved 2026-07-07.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

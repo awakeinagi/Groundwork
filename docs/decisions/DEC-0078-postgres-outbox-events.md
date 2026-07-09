@@ -5,6 +5,13 @@ title: The change-event stream is a transactional outbox in the service's Postgr
 status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The change-event stream is a transactional outbox in the service's
+  Postgres, with each canonical write recording its event atomically with
+  write bookkeeping. A dispatcher delivers to consumers with retries.
+  Replay-from-git remains the recovery path and correctness anchor if the
+  outbox is lost. This provides at-least-once delivery with per-artifact
+  ordering and no new infrastructure for on-prem deployment.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0011 @ T2-T3"

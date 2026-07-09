@@ -5,6 +5,15 @@ title: Queue Port job-type is an open string namespace, not a closed enum
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  job-type is an open string namespace: any value is valid at port
+  level; new job types registered as handlers on background job
+  execution runtime (ST-0061), never via port contract change. Contrasts
+  with ChangeEvent.kind (DEC-0128) which is closed because consumers
+  branch on enum directly. Queue Port never interprets job-type itself,
+  only registered handlers do. Gating every future job type through port
+  CMP would add ceremony with no consumer needing closed guarantee.
+  Constrains CMP-0012 contract. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0040 @ T1-T2"

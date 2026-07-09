@@ -5,6 +5,15 @@ title: No fixed story count; INVEST-grounded split-vs-merge heuristics adopted
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  States explicitly there is no fixed or required number of stories per
+  epic; splitting exists to satisfy INVEST, not as an end in itself.
+  Signals for split: Acceptance Criteria ballooning, story bundling
+  more than one seam, low coupling per DEC-0199. Signals for merge:
+  splitting would leave half with no independently observable value,
+  persistent mutual coupling. Splitting surfaces candidate Component
+  Doc boundaries. Constrains story-slicing-seams.md and Story playbook.
+  Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0037 @ T2, T4, T6"

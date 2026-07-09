@@ -6,6 +6,13 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to backlog (trigger TRG-0009: deployment requiring work-management
+  system other than Jira Data Center). Adapters for monday.com, OpenProject,
+  Jira Cloud validating host-agnostic contract. Each new adapter implements
+  full contract (projection lifecycle, field-ownership, drift events, backlog
+  read) and declares capability manifest. Swapping systems is config plus
+  conformant adapter.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

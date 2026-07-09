@@ -5,6 +5,13 @@ title: Program-user reviews carry a service-signed attribution block that gate-p
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Review body carries a structured attribution block (person-id, PR
+  reference, decision timestamp) signed by service-held asymmetric key
+  (Ed25519-class). Public key is deployment configuration; private key
+  lives in secret store. gate-policy check verifies signature and
+  person-id resolves in governance/people.yaml to a holder of required
+  role.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T4-T5"

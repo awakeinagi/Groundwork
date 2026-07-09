@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  The delivery seam under the notification center (EP-0006). Defines
+  NotifierConnector protocol for resolved channel addresses and
+  pre-rendered payloads: operations deliver, capability-manifest query.
+  Email adapter v1. Terminal delivery result (delivered or failed); no
+  pending state. Failed delivery never loses notification — remains
+  authoritative in-app. Connector is delivery pipe only; notification
+  center owns preference resolution, routing, digest composition, and
+  content rendering. Credentials envelope-encrypted in secret store
+  (CMP-0015).
 context: integration
 links:
   derives-from: [EP-0005]

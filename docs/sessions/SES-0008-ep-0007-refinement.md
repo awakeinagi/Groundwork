@@ -5,6 +5,17 @@ title: EP-0007 refinement — placement, churn, search, serving, profiles
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Refined EP-0007 (Consolidation Memory Layer) to gate-readiness.
+  Settled: static always-on consolidation catalog with
+  telemetry-driven additions/retirements, debounced regeneration churn
+  with quiet-window/max-wait plus on-demand rebuild, retrieval layer
+  ownership of full-text and embedding search, deterministic recipe
+  resolver assembling ranked budget-truncated bundles with citations
+  and freshness proofs, automated faithfulness checks blocking serving
+  (no human gate), and opt-in participant profiles readable/editable by
+  users via UI. Extended SP-0002 with search/vector workload. Produced
+  7 decisions and added EP-0007→EP-0006 impact edge.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

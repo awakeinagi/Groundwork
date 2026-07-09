@@ -5,6 +5,14 @@ title: The impactor's body must explain each of its impacts edges
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Any epic, story, or component carrying an impacts edge must reference
+  each impact target by bare ID in its body prose—the impactor explains
+  how it shapes the impactee. Blocking rule in check_links.py (both
+  copies). The impactee side carries no prose obligation. Frontmatter
+  edge reciprocity remains blocking under existing rule 6. Matches 64–71%
+  existing convention; enforcement is mechanical per DEC-0242. ~38 prose
+  explanations added in adopting session under DEC-0248's sanction.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0049 @ T8-T11"

@@ -5,6 +5,15 @@ title: Queue and KV-store extend the Port family to six
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Queue and KV-store Ports extend the family from four to six. Queue
+  Port: background/async job execution (enqueue, consume, acknowledge,
+  retry). KV-store Port: ephemeral coordination state (rate limiting,
+  locks, bookkeeping) plus general-purpose caching; further use cases
+  deferred to SP-0011. Relates-to DEC-0121 rather than superseding.
+  Each becomes standalone protocol-type CMP at component derivation.
+  Constrains Port family, CONTEXT.md, composition root definition.
+  Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0038 @ T2"

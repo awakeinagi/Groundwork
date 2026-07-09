@@ -5,6 +5,13 @@ title: Deferred status and release scoping extend to spikes
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Extends deferred status and release scoping to stories, epics, and spikes.
+  All other semantics unchanged: entry from any active status; no gates and no
+  derivation while deferred; revival to draft; deferral and revival cite
+  decisions; spikes inherit release defaults from parent epics. A deferred
+  spike allows honest parking of questions that matter later without losing
+  continuity. Supersedes DEC-0097.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0017 @ T3"

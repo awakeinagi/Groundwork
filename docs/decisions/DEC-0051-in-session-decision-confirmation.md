@@ -5,6 +5,15 @@ title: Distilled decisions are confirmed in-session before acceptance
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  At natural checkpoints (topic close, session end) the agent plays back
+  proposed decisions in plain language and the participant confirms or corrects
+  while present. Confirmed decisions commit to the item branch as accepted, with
+  the confirmation exchange itself in the transcript; the item's PR gate remains
+  final ratification. This catches distillation errors at the source by the only
+  person who knows what they meant, making the confirmation exchange part of the
+  provenance chain. Sessions auto-closed for inactivity commit only confirmed
+  decisions; the rest stay proposed (DEC-0057).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0006 @ T2-T3"

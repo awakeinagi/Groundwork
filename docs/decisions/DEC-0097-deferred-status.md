@@ -5,6 +5,14 @@ title: deferred joins the artifact status lifecycle for stories and epics
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Adds a deferred lifecycle status for stories and epics only. Entry occurs
+  from any active status (draft, in-refinement, gated, approved); while
+  deferred, the artifact cannot pass gates and nothing may derive from it.
+  Exit (revival) always returns to draft, retaining body content and citations
+  but requiring re-earned gates in current context. Allows capturing real
+  artifacts that are intentionally parked without pretending they are current
+  work or forcing heavyweight supersede mechanics for descoping.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0016 @ T1-T5"

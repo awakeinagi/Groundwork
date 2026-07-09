@@ -71,6 +71,7 @@ import argparse
 import json
 import re
 import sys
+import textwrap
 from pathlib import Path
 
 import ladybug
@@ -280,20 +281,53 @@ class Graph:
                           {"id": aid})
 
 
+OVERVIEWS = {}  # id -> overview text; filled in main() per DEC-0290
+
+
+def load_overviews(root):
+    """Read overviews from frontmatter at emit time (DEC-0290) — the
+    graph DB stays overview-free and disposable."""
+    ov = {}
+    docs = root / "docs"
+    if not docs.is_dir():
+        return ov
+    for path in sorted(docs.rglob("*.md")):
+        if path.parent.name in SKIP_DIRS:
+            continue
+        try:
+            text = path.read_text()
+            end = text.index("\n---", 3)
+            fm = yaml.safe_load(text[3:end]) or {}
+        except (OSError, ValueError, yaml.YAMLError):
+            continue
+        if isinstance(fm, dict) and fm.get("id") and fm.get("overview"):
+            ov[str(fm["id"])] = " ".join(str(fm["overview"]).split())
+    return ov
+
+
 def emit(rows, as_json, empty="  (none)"):
+    if OVERVIEWS:
+        for r in rows:
+            key = r.get("id") or r.get("artifact")
+            if key in OVERVIEWS and "overview" not in r:
+                r["overview"] = OVERVIEWS[key]
     if as_json:
         print(json.dumps(rows, indent=2))
         return
     if not rows:
         print(empty)
         return
-    cols = list(rows[0].keys())
+    cols = [c for c in rows[0].keys() if c != "overview"]
     widths = {c: max(len(c), *(len(str(r.get(c, ""))) for r in rows))
               for c in cols}
     print("  " + "  ".join(c.ljust(widths[c]) for c in cols))
     for r in rows:
         print("  " + "  ".join(str(r.get(c, "")).ljust(widths[c])
                                for c in cols))
+        if r.get("overview"):
+            print(textwrap.fill(r["overview"], width=78,
+                                initial_indent="      ",
+                                subsequent_indent="      "))
 
 
 def cmd_build(g, root, args):
@@ -679,6 +713,9 @@ def main():
                          " keep it gitignored)")
     ap.add_argument("--json", action="store_true",
                     help="emit result rows as JSON instead of aligned text")
+    ap.add_argument("--no-overviews", action="store_true",
+                    help="suppress artifact overviews in listing output "
+                         "(included by default per DEC-0290)")
     sub = ap.add_subparsers(dest="cmd", required=True,
                             metavar="COMMAND")
     ps = {name: sub.add_parser(name, help=h, description=f"{h}. {d}")
@@ -706,6 +743,9 @@ def main():
     if args.cmd != "build" and not db_path.exists():
         sys.exit(f"No graph at {db_path} — run `build` first.")
     g = Graph(db_path, fresh=(args.cmd == "build"))
+    if not args.no_overviews and args.cmd in (
+            "impact", "trace", "order", "gaps", "elements"):
+        OVERVIEWS.update(load_overviews(root))
     {"build": cmd_build, "sync": cmd_sync, "query": cmd_query,
      "impact": cmd_impact, "trace": cmd_trace, "gaps": cmd_gaps,
      "order": cmd_order, "elements": cmd_elements,

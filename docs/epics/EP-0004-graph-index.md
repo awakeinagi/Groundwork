@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-05
+overview: >-
+  EP-0004 delivers the Cross-Reference Graph Index as a strictly derived,
+  rebuildable projection of the canonical store: a queryable graph over
+  typed links and citations in artifact frontmatter, maintained as a main
+  base view plus overlays per open item branch. Serves three query tiers
+  (named traversals, bounded generic primitive, read-only openCypher) to
+  agents, gate engine, UI, and manifest generation. Freshness via
+  synchronous writes to writer's overlay and async propagation. Approved
+  2026-07-07.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

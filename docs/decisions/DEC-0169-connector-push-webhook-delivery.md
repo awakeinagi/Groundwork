@@ -5,6 +5,11 @@ title: Host events reach the connector protocol via registered webhooks; polling
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Decides that the connector protocol exposes webhook registration for
+  push-based event delivery, with periodic reconciliation polling as a
+  backstop only. Constrains how host events reach the protocol and
+  ensures freshness within seconds.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0030 @ T2"

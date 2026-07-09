@@ -5,6 +5,15 @@ title: v1 ships only capabilities that tested well; the rest are captured in def
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  v1 groundwork_search.py ships eight tested hybrid capabilities: core
+  search, current-truth redirect, graph boost, subtree scoping, pre-filters,
+  prior-art recall, similar-ID lookup, and staleness warning. Rejects
+  trigger matching as unsupported by POC evidence. Defers three capabilities
+  (unlinked-neighbor audit, glossary-drift detection, seam-candidate
+  clustering) into single backlog story ST-0009 with attached tuning
+  insights. Trigger matching closed as rejected-with-evidence and should
+  not be re-proposed without new facts.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T12-T14"

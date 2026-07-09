@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Durable identity: pluggable auth-provider contract with v1 email/OIDC
+  provider, resolution from auth subject to stable person-id via
+  governance/people.yaml, role claims for gate engine, OAuth host-identity
+  linkage, and one-time bootstrap migration of email identities. Role
+  claims include active time-bounded delegations.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

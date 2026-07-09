@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  FastAPI/ASGI HTTP+SSE surface serving the Web UI. Non-streaming REST
+  routes for artifact reads with provenance, gate actions, conflict reads,
+  notification reads/writes, and governance metrics (fixed named endpoints,
+  no generic query language). SSE endpoint for session-engine turns with
+  Last-Event-ID reconnect/resume, emitting stable monotonically-ascending
+  event IDs. All responses application/problem+json per RFC 9457. Computes
+  nothing itself — fronts CMP-0001, CMP-0004, and ST-0018. Four elements:
+  ApiApplication, ProblemType, RestSurface, SessionSseEndpoint.
 context: platform
 links:
   derives-from: [EP-0008]

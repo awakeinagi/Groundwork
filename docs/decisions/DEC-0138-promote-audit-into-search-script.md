@@ -5,6 +5,15 @@ title: The POC retrieval is promoted into the skill's groundwork_search.py, with
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  POC retrieval audit is promoted into skill's groundwork_search.py
+  implementing search, similar, audit, and build per accepted semantics.
+  Hybrid graph features compute from frontmatter links directly (one-hop
+  boost, subtree closure, redirect) without LadybugDB read-only dependency.
+  The vss extension is not loaded; similarity is brute-force. Both stances
+  are reversible and scoped to implementation, leaving every accepted
+  retrieval semantic intact. Verification during promotion caught and fixed
+  index-refresh defect.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0024 @ T2-T3, T6"

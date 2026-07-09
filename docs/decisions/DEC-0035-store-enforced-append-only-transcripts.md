@@ -5,6 +5,11 @@ title: Append-only transcripts enforced by the store; sessions ride the item bra
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Storage API is type-aware; session artifacts expose only append-turn and close
+  operations, enforced server-side regardless of caller; sessions and distilled
+  decisions commit to item branch and land on main with item's PR merge, ratifying
+  provenance trail and making bypass risk structural rather than convention-based.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T4-T5"

@@ -5,6 +5,12 @@ title: Deferral and revival each cite a Decision
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Both deferral and revival transitions cite a Decision record. Deferring adds
+  the deferral decision to the artifact's cites; revival adds the reviving
+  decision. One decision may cover several items scoped in the same breath. The
+  citation answers "why isn't/wasn't this in the release?" from the artifact
+  itself indefinitely, preventing year-later git archaeology on scope changes.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0016 @ T4-T5"

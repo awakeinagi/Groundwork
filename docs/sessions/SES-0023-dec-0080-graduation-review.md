@@ -5,6 +5,13 @@ title: Gate challenge — applying the DEC-0080 graduation rule to CMP-0001; gra
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Applied DEC-0080's element-graduation rule to CMP-0001's 13 elements
+  at gate time. Graduated ChangeEvent (consumed by multiple future CMPs)
+  and AppDatabasePort (needs independent conformance versioning) to
+  standalone components. Established element-graduation review as a
+  required component-design gate step. Produced DEC-0134, DEC-0135,
+  DEC-0136.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

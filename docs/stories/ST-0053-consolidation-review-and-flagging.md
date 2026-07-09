@@ -6,6 +6,12 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2. Review surface for consolidation-layer output
+  where humans inspect what got consolidated and flag bad
+  consolidations for correction, listing consolidation records with
+  their source artifacts/spans and consolidated output side by side. Per
+  DEC-0072, DEC-0073, DEC-0100, DEC-0133.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

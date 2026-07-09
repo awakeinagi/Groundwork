@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Provides the storage service's core read/write surface over the
+  application-owned fork as a language-neutral OpenAPI contract. Reads
+  return artifact plus its ref (commit sha) and accept optional ref/branch
+  pinning. Writes run tier-1 validation before commit and return field-level
+  errors on failure. Service holds the only repository write credentials and
+  constructs commits entirely from typed parameters. Session artifacts expose
+  only append-turn and close mutation operations. Full surface is defined in
+  OpenAPI and published with specs; conformance test suite runs against the
+  contract, not the implementation.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

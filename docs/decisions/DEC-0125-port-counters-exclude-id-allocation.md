@@ -5,6 +5,15 @@ title: The app database port's "counters" are operational bookkeeping; ID alloca
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Clarifying DEC-0121, the app database port's "counters" means operational
+  bookkeeping counters (outbox dispatch/retry counts, debounce and
+  regeneration state, session-inactivity tracking, telemetry tallies) —
+  state whose loss is inconvenience, never design truth. Artifact-ID
+  allocation state is excluded from the port; DEC-0077 stands unchanged.
+  Persisting ID counters would reintroduce drift-from-git failure mode that
+  rescan-on-boot was chosen to eliminate. The port contract exposes no
+  ID-counter surface.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0021 @ T3-T5"

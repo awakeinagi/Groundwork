@@ -5,6 +5,12 @@ title: ID allocation serialized by a lock on the API server
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  API server serializes ID allocation with thread/process-safe lock; correct
+  under fork-pull model where committed counter file on main would lag branches;
+  counter durability across service restarts specified at story level via rescan
+  on boot or persisted allocation log; multi-node deployment upgrades to distributed
+  lock.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T3"

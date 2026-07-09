@@ -5,6 +5,18 @@ title: An amends link type for partial supersession — semantics, checker, migr
 status: draft
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Question: should the closed link vocabulary gain an amends (or narrows)
+  type for decisions canceling part of an accepted decision, and if so,
+  with what semantics? Does amends stale citers like supersedes, what do
+  checkers enforce, how do graph tools incorporate it, and do existing
+  narrowing decisions migrate or does the sweep already suffice? Blocks
+  no current work; sweep is the operating mitigation, but accruing
+  un-typed narrowing decisions carries debt and the answer changes
+  EP-0001's format engine (validates link vocabulary), so should land
+  before that contract hardens. Method enumerates narrowing decisions,
+  prototypes edge on branch, runs impact with/without amends, drafts
+  checker rule and spec diff, compares review burden. Draft status.
 timebox: 2d
 links:
   derives-from: [BG-0001]

@@ -5,6 +5,15 @@ title: Epic derivation requires an explicit deliverable-coverage pass
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Requires an explicit deliverable-coverage pass before finalizing a
+  draft epic set. Extract every deliverable named in goal's Decision/
+  Scope and System Context sections, confirm each maps to at least one
+  derived epic. Explicitly watch for structural and cross-cutting
+  deliverables that read as generic connective tissue and get silently
+  treated as covered by the union of domain epics. Mirrors existing
+  Component Doc graduation-review discipline: citing a rule is not
+  applying it. Constrains Epic playbook. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0035 @ T9-T10"

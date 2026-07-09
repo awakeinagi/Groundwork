@@ -6,6 +6,19 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Question: when TRG-0001 or TRG-0002 fires, does AWS SQS serve as the
+  Queue Port's external adapter, and what does migration from the
+  embedded, durable app-database-backed queue look like without losing
+  in-flight jobs? Blocks no current work; on trigger firing, it blocks
+  multi-node deployment and background-job stories depending on
+  cross-instance queue delivery. Method establishes which trigger fired
+  and its demands, prototypes Queue Port contract (enqueue/consume/ack/
+  retry) against AWS SQS (standard vs. FIFO, visibility timeout, dead
+  letter queue), evaluates operational overhead and cost against
+  self-hosted alternatives, defines migration path (drain-and-cutover vs.
+  dual-write) and rollback. Deferred to backlog; revived by TRG-0001
+  or TRG-0002. Findings pending.
 timebox: 3d
 links:
   derives-from: [EP-0008]

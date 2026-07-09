@@ -5,6 +5,17 @@ title: The Inbound API SSE contract defines the transport envelope only; session
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Decides that CMP-0011 (Inbound API) defines the SSE transport
+  envelope only—stable event id, closed framing event-types
+  (turn-delta, turn-complete, error), and a data field—while the
+  session engine's turn/delta content schema remains opaque
+  passthrough owned by ST-0032/EP-0002. Avoids co-ownership of the
+  turn model; if the API re-declared the turn body, it would drift
+  against EP-0002 as that model evolves. Mirrors DEC-0217's
+  opaque-payload seam principle: one owner per schema. CMP-0011
+  carries SSEEvent value element and framing; the SSE endpoint
+  service passes data through untouched.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0044 @ T2"

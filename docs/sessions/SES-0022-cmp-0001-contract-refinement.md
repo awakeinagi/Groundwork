@@ -5,6 +5,17 @@ title: CMP-0001 contract refinement — element decomposition, cross-cutting sem
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Refined CMP-0001 from draft stub to contract-complete with thirteen
+  elements. Decomposed: five focused services (1:1 to storage stories),
+  SchemaValidator and CheckSuite as separate services, ItemBranch and
+  SessionWorktree as entities with lifecycle contracts. Cross-cutting:
+  RFC 9457 problem+json error model, closed ChangeEvent kind enum with
+  schema versioning, AppDatabasePort as typed operation families
+  (unit-of-work, outbox, bookkeeping), eight typed mechanical API items.
+  Four component invariants. Six acceptance suites. Differentiated
+  Out-of-Scope rule: future work as deferred stories/spikes, boundary
+  statements link the artifact.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

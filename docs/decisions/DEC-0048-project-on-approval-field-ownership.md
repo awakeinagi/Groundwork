@@ -5,6 +5,16 @@ title: Jira projections are created on approval; field ownership is split
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Projections are created when the artifact first merges to main (approved);
+  drafts never appear in Jira. Field ownership is split: content fields (title,
+  summary, description, doc link, doc-id) are canonical-owned—edits there are
+  drift (DEC-0044). Workflow fields (status column, sprint, assignee, estimates)
+  are Jira-owned—teams work normally, and the connector syncs workflow state
+  into the doc store as implementation telemetry via mechanical writes
+  (DEC-0033), not drift. This ensures Jira-dwellers only see ratified content,
+  sprint mechanics stay untouched, and the doc store learns implementation
+  progress for traceability reporting.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T4-T5"

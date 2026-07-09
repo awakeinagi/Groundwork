@@ -5,6 +5,13 @@ title: Implements references must agree with the story's Component Impact
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  A design element may only reference a story whose Component Impact section
+  names that element's Component Doc. Mismatches (element claiming to implement
+  a story that does not name its CMP) are gated findings on the CMP and audit
+  findings corpus-wide. The story's Component Impact is the forward declaration;
+  the element's Implements claim is the fine-grained truth. When the element is
+  correct, the fix is a scoped story amendment updating Component Impact.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0015 @ T4-T5"

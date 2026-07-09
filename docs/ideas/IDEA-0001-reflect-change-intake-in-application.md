@@ -5,6 +5,16 @@ title: Reflect the change-intake workflow in the Groundwork application's sessio
 status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Reflect the change-intake workflow defined in SES-0050 throughout the
+  application's session engine and UI. The workflow includes mandatory
+  sessions for semantic change, mechanical floor requirements, expedited
+  sessions, restate/align loops with verbatim proposal records,
+  todo-list enforcement, agent-proposes/user-disposes intake,
+  locate-first classification, and in-session staleness cascades.
+  Implementation scope: intake session kinds, alignment loop in session
+  UI, expedited-session support, and CP triage routing into intake.
+  Taken up by SES-0052.
 proposed-by: awakeinagi@gmail.com
 links:
   derives-from: [SES-0050]

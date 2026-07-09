@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Who anyone is and how the system acts for them. Pluggable auth-provider
+  protocol with email/OIDC v1 provider. Session issuance and validation.
+  Person-id resolution and role claims via shared RoleResolution seam
+  (CMP-0016). OAuth host-identity linkage over secret store (CMP-0015).
+  Delegated-review posting with signed attribution block consumed by
+  gate-policy check. Seven elements: AuthProvider (protocol), AuthSubject,
+  SessionToken, IdentityService, HostIdentityLink, AttributionBlock,
+  ReviewDelegationService. Secret Store graduated per DEC-0232.
 context: integration
 links:
   derives-from: [EP-0005]

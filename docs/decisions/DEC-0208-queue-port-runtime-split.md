@@ -5,6 +5,14 @@ title: Queue Port splits into a port-contract+adapter story and a separate async
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Queue Port splits into ST-0060 (Protocol contract, conformance suite,
+  v1 durable app-database-backed adapter) and ST-0061 (in-process
+  asyncio runtime that enqueues, consumes, acknowledges, retries).
+  Mirrors project's established seam (port-contract-and-adapter vs.
+  consumer) from app-database Port precedent. Contract's conformance
+  suite verifiable on its own before runtime consumes it. ST-0061
+  depends-on ST-0060. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T1-T2"

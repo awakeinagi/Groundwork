@@ -5,6 +5,14 @@ title: Rebuild-sufficiency is a component invariant — all derived state recons
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  CMP-0001 guarantees as a component invariant: every piece of derived state
+  — app database contents, outbox, worktrees, ID counters, and any cache —
+  is reconstructible from the fork's git refs alone. A deployment restored
+  from only the fork repository converges to correct service state. This
+  generalizes canonical-store discipline: git is the single source of truth,
+  so anything not rebuildable from it would be a second truth. Naming it
+  once at component level keeps each element's design honest.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0022 @ T5-T6"

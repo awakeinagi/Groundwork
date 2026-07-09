@@ -5,6 +5,16 @@ title: Story-slicing seam guidance and coupling-check generalization
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Introduced five story-slicing seams validated against established
+  literature (Workflow Steps, Business Rule Variations, Simple/Complex,
+  Variations in Data, Defer Performance): Data, Chronological, Fidelity,
+  Logic, and Operational. Added sixth seam Operations/CRUD (artifact
+  lifecycle). Generalized coupling-check script to --type {epic,story}
+  mode. Validated spike pattern as native to Groundwork's SP artifact
+  type rather than as a seventh seam. Updated refinement-process.md and
+  SKILL.md with INVEST-grounded split-vs-merge guidance and anti-pattern
+  warnings. Produced DEC-0198-DEC-0200.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

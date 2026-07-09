@@ -5,6 +5,16 @@ title: EP-0005 refinement — review identity, drift, host variance, person regi
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Refined EP-0005 (Connectors & Identity) to gate-readiness, absorbing
+  fork-pull and governance-gate requirements. Settled: per-user OAuth
+  with program-user fallback for code-host reviews, direct Jira edits
+  reverted and captured as first-class Change Proposal artifacts routed
+  to refinement, capability-declaring connectors with documented minimum
+  set, and stable person-id registry in governance/people.yaml.
+  Bitbucket Data Center chosen for v1. Produced 8 decisions and added
+  SPEC-change-proposal. New EP-0005→EP-0002 impact: CP triage is
+  session-agent scope.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

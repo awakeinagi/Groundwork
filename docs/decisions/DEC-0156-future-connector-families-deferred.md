@@ -5,6 +5,13 @@ title: Future connector families are deferred backlog stories, each behind a dem
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Three deferred backlog stories capture future connector families:
+  additional code-host connectors (ST-0028), additional notifier
+  adapters (ST-0029), additional work-management connectors (ST-0030),
+  each subscribed to its own armed demand trigger (TRG-0007, TRG-0008,
+  TRG-0009). Distinct contracts and demand signals stay separate;
+  condition-driven revival beats memory.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T6-T8"

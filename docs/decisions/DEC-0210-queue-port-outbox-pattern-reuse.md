@@ -5,6 +5,15 @@ title: Queue Port's durable adapter reuses the App Database Port's outbox retry/
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Queue Port's failure contract mirrors App Database Port's outbox
+  pattern: bounded retry count per job, stale-lease typed errors on
+  ack/nack of expired or unknown lease (job remains/becomes claimable
+  again), dead-letter parking after configurable maximum failed
+  deliveries visible through bookkeeping surface. Delivery
+  at-least-once; consumers idempotent by contract. Reuses already-proven
+  pattern from same codebase for same underlying problem. Constrains
+  ST-0060's Acceptance Criteria and Component Doc. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T3-T4"

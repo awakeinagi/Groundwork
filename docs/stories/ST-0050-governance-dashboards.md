@@ -6,6 +6,13 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2. Dashboards surfacing governance-reporting
+  metrics (design velocity, gate throughput, staleness backlog) for
+  owners needing program-level view rather than one artifact at a time,
+  rendering the governance metrics API's named endpoints as
+  charts/tables scoped by goal, epic, or whole design. Per DEC-0042,
+  DEC-0073, DEC-0100, DEC-0133, DEC-0163.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

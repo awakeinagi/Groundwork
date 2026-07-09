@@ -5,6 +5,15 @@ title: App database port operations carry a full failure contract — stale leas
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  App database port contract defines failure semantics: stale lease —
+  ack/nack with expired or unknown lease fails with typed error, event
+  remains claimable; retry exhaustion — after configurable max failed
+  deliveries event parks in dead-letter state, visible and never silently
+  dropped; crash atomicity — crash mid-UnitOfWork leaves no partially
+  visible state, verified by conformance suite failure injection; typed
+  error conditions per operation enumerate in contract. Guesses about failure
+  paths differ per engine; conformance suite exists to prevent them.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0024 @ T4-T5"

@@ -5,6 +5,14 @@ title: An in-app notification center is the source of truth; delivery via notifi
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  An in-app notification center is the authoritative source of truth for
+  gate requests, conflict escalations, session invitations, and staleness
+  sweeps, with read state and links to relevant surfaces. External
+  delivery flows through pluggable notifier connectors (email in v1;
+  Slack/Teams as future adapters). Per-user channel preferences live with
+  the account. The connector pattern extends naturally to delivery
+  channels.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0010 @ T2-T3"

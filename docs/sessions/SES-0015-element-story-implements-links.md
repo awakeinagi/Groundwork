@@ -5,6 +5,17 @@ title: Element→story Implements links and percent-complete metrics
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Introduced Element→story Implements links enabling completion
+  decidability and percent-complete metrics at each design level.
+  Settled: mandatory `Implements:` line under each element heading
+  (parseable, Graph Index emits element→story edges), gate-blocker
+  validation, design completion % computable immediately (implementation
+  % semantics deferred to future work), reciprocity tier-2 consistency
+  check (element may only reference story whose Component Impact links
+  its CMP), staleness propagates story→CMP direction only with
+  element-scoped impact reporting. Reverse coverage verified via
+  CMP-gate check plus corpus-wide audit.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

@@ -5,6 +5,16 @@ title: Realign gated EP-0001 stories with release scoping, trigger subscriptions
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Audited eight gated stories against decisions from SES-0016 (release
+  scoping), SES-0017 (embedded stack), SES-0018 (trigger subscriptions),
+  and SES-0020 (infrastructure ports). Two stories require real amendment:
+  ST-0007 check inventory expanded for release/trigger rules, ST-0001
+  schemas updated for deferred/release validation; one light touch:
+  ST-0008 rephrased against app database port. Five unaffected. One
+  coverage gap closed: new story ST-0009 for app database port.
+  Resolved terminology tension between DEC-0121 and DEC-0077:
+  'counters' are operational bookkeeping (not ID counters).
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

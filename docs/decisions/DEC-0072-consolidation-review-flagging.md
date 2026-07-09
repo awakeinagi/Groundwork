@@ -5,6 +5,13 @@ title: Consolidations are human-reviewable in the UI; flags quarantine immediate
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The UI surfaces consolidations for review with content, source refs, and
+  freshness state. Any user can flag a consolidation with an issue report;
+  flags quarantine it immediately, treating it as stale and never serving
+  it while the recipe resolver falls back to underlying sources. Flags
+  queue for disposition (regenerate, fix sources, or correct the checker),
+  and confirmed misses become regression cases in the evaluation corpus.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0009 @ T1-T2"

@@ -7,6 +7,13 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 created: 2026-07-08
+overview: >-
+  Pluggable-UI seam for 1:1 refinement sessions: open/resume/append-turn/close
+  operations for one participant conducting one conversation with agent.
+  Sessions stay open across pauses by default; inactivity auto-closes with
+  partial distillation. Sessions carry kind (full/expedited/idea-capture) and
+  optional intake-opening context with verbatim proposal, proposer, origin,
+  source ref. Modified-approved artifacts trigger staleness cascade at close.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

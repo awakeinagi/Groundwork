@@ -5,6 +5,15 @@ title: The SSE session-streaming story defines reconnect-with-backoff and resume
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  ST-0059's Acceptance Criteria require client reconnects automatically
+  with backoff on dropped connection, resumes stream from last-seen SSE
+  event id (standard Last-Event-ID semantics) without dropping or
+  duplicating turns for UI. Defines at story grain rather than deferring
+  to Component Doc stage. Edge case surfaced but unresolved upstream
+  (DEC-0187); directly observable and testable, fitting story grain.
+  Constrains ST-0059's Component Doc to implement as Constraint. Status
+  accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T3-T4"

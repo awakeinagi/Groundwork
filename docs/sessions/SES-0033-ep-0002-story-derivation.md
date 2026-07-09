@@ -5,6 +5,17 @@ title: EP-0002 story derivation — session engine, packs, guardrails, synthesis
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Sliced Refinement Session Agent epic into 10 stories covering session
+  conduct, pack format, guardrails, transcript capture, distillation,
+  conflicts, synthesis, context assembly, lifecycle, and evaluation
+  harness. Resolved open questions on judge-model independence
+  enforcement, authored seed benchmark corpus requirement, and synthesis
+  anchoring via default shared-draft prose exclusion. Drafted SP-0008
+  spike on pack-format expressiveness (3d timeboxed). Decision-recall
+  audit surfaced two contract gaps on turn truncation and conflict
+  timeout-to-default. Produced ST-0032-ST-0041, SP-0008, and
+  DEC-0178-DEC-0183.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

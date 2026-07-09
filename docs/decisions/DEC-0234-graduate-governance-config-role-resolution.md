@@ -5,6 +5,14 @@ title: GovernanceConfig and a shared RoleResolution service graduate out of CMP-
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  GovernanceConfig and a shared RoleResolution service graduate out of
+  CMP-0004 into new standalone component CMP-0016. RoleResolution evaluates
+  role membership plus active time-bounded delegation at explicit governance
+  ref and point in time. Both CMP-0004 and CMP-0007 consume it; file schemas
+  remain CMP-0001's. Delegation logic implemented exactly once eliminates
+  divergence risk and resolves the dependency cycle between gate engine and
+  identity.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T2, T5-T6, T9-T10"

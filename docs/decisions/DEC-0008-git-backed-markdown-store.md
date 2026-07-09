@@ -7,6 +7,13 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  Reference implementation of canonical store is markdown files with YAML
+  frontmatter in git repository owned by application. UI reads and writes
+  through storage API. Versioning, diffs, and branch-based review come
+  free. Implementation agents consume docs same way they consume code.
+  Consolidation freshness can pin git refs. Storage interface does not
+  leak git specifics, so database or wiki backend remains swappable.
 source-span: "SES-0001 @ T4-T5"
 links:
   derives-from: [SES-0001]

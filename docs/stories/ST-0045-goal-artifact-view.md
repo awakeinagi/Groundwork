@@ -7,6 +7,13 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Rendered Business Goal stakeholders can read and trust: full content
+  plus drill-down paths from the goal into decisions that shaped it and
+  the transcript spans behind each decision, with typed-link navigation
+  to related artifacts and body citations resolved as bare artifact IDs
+  at render time. Per DEC-0009, DEC-0015, DEC-0026, DEC-0184, DEC-0186,
+  DEC-0188, DEC-0242.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

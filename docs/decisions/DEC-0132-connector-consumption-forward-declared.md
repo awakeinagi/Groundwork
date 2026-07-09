@@ -5,6 +5,15 @@ title: CMP-0001 forward-declares its code-host connector consumption; the list b
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  CMP-0001 enumerates exactly the connector operations it requires: fork
+  provisioning, branch create/delete, PR open/merge/review-state,
+  required-check registration, and a permission probe, consumed via
+  capability manifest. This consumption list is a binding input to EP-0005
+  refinement: the connector protocol CMP must satisfy it or raise a conflict.
+  The component is gate-eligible on the strength of the list; the local-git
+  fake connector proves the seam implementable today. Consumer-side shape is
+  fully determined by approved stories.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0022 @ T5-T6"

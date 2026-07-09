@@ -5,6 +5,13 @@ title: Gate checks recompute on ChangeEvents and host webhooks, backstopped by a
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Gate engine subscribes to ChangeEvents and host webhooks (reviews,
+  pushes, PR lifecycle) and re-posts affected checks on each relevant
+  event idempotently. A periodic reconciliation sweep re-verifies every
+  open PR's checks as backstop for missed events, ensuring check
+  freshness even on idle PRs. Governance-change merges trigger bulk
+  recomputation.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T4-T5"

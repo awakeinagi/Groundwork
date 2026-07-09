@@ -6,6 +6,12 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to backlog (trigger TRG-0007: deployment requiring code host
+  other than GitHub). Connectors for hosts beyond v1 GitHub reference—
+  Bitbucket Cloud, GitLab—each a new adapter plus capability manifest
+  per protocol. Each passes protocol conformance suite. Richer host
+  features surface through manifest for gate compiler.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

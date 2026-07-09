@@ -5,6 +5,13 @@ title: The Idea take-up flow ships in release 1 as an ST-0065 amendment
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0281 constrains the Idea take-up flow to release 1 as an ST-0065
+  amendment: the captured-Ideas list gains a take-up action opening an
+  intake-opened session with the Idea's verbatim text as the proposal
+  (origin: idea), setting the Idea taken-up and its Disposition naming
+  the session. This completes DEC-0261's work-queue semantics in the same
+  release capturing Ideas.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T8-T9"

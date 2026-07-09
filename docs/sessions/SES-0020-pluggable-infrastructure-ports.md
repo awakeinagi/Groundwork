@@ -5,6 +5,16 @@ title: Pluggable infrastructure ports — swappable embedding model, vector stor
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Established pluggable infrastructure via four Protocol-typed ports
+  (embedding, vector store, app database, graph engine) with
+  config-selected Adapter implementations and per-port conformance
+  suites. Embedding port exposes model identity and dimensionality,
+  stamped on vector index; mismatch forces full re-embed. v1 ships
+  embedded adapters for storage/graph plus local-model and REST-client
+  embedding adapters, proving the swappable seam. Requirement applies to
+  Groundwork product only (skill tooling remains hard-wired). Port and
+  Adapter added to glossary.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

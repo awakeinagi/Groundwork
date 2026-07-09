@@ -5,6 +5,13 @@ title: Armed triggers surface in the status report, at release-gate reviews, and
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Armed triggers surface at three critical moments: in the status report
+  (every run, adjacent to Deferred section); at release-gate reviews of Business
+  Goals (checking if armed conditions have been met); and under checker
+  validation (format, unique sequential IDs, required fields by status,
+  resolvable links, decision links on fired/retired entries). Ensures armed
+  triggers reach reviewers at moments when scope is actually examined.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0017 @ T4-T5"

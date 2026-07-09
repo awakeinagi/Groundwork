@@ -5,6 +5,13 @@ title: An identifier co-occurrence audit over code-span tokens is required at de
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  After new decisions are distilled, facilitator runs consistency
+  tool's terms command: extract new DEC's code-span identifiers and
+  report every ratified artifact sharing a rare identifier
+  (frequency ≤ 6 by default), flagging pairs with no direct link.
+  Matching by containment (jira-status joins set-jira-status). Session
+  transcripts excluded. Hits reviewed with recorded dispositions.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0027 @ T1-T3"

@@ -6,6 +6,19 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Question: what additional KV-store use cases beyond the two already
+  scoped (ephemeral coordination state as baseline, general-purpose
+  caching as extension per DEC-0203) does Groundwork need, and does the
+  current Port contract (get/set/delete with TTL) accommodate them
+  without modification? Blocks no current work; blocks confident Port
+  reuse when a new use case is proposed (without this spike, a new use
+  might assume undocumented semantics like atomic increment, compare-and-
+  swap, or pub/sub that the current contract doesn't guarantee). Method
+  tracks candidate uses as proposed, checks each against existing
+  contract, evaluates extending Port vs. routing to different Port where
+  use doesn't fit. Deferred to backlog; not trigger-subscribed, revived
+  manually by concrete use-case proposal. Findings pending.
 timebox: 2d
 links:
   derives-from: [EP-0008]

@@ -5,6 +5,14 @@ title: The intake authority check lives in the guardrails story, and the CP sour
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0278 constrains the intake authority check to ST-0035 (guardrails
+  and authority limits): at intake open, the engine resolves the
+  proposer's decision rights through the governance-config lookup ST-0035
+  AC3 defines; a failed check halts intake and writes a CP with new source
+  unauthorized-attempt via the existing create-change-proposal operation.
+  SPEC-change-proposal's source enum and ST-0039 AC1 gain the value. This
+  reuses existing seams with no new machinery.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T6-T7"

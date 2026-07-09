@@ -5,6 +5,15 @@ title: No fixed epic count; explicit split-vs-merge heuristics adopted
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  States explicitly there is no fixed or required number of epics per
+  goal; the six seams are candidate cuts to consider, not a quota to
+  fill. Signals for split: independent Why for each half, falls on
+  opposite side of seam, zero-mutual-blocking parallelism, low coupling
+  per DEC-0196. Signals for merge: persistent mutual coupling that never
+  resolves, one half has no standalone outcome, scope too narrow to
+  justify gate/session overhead. Constrains epic-slicing-seams.md and
+  Epic playbook. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0036 @ T3, T5"

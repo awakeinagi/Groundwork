@@ -5,6 +5,16 @@ title: "Three query tiers: named traversals, bounded primitive, guarded openCyph
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Three query tiers serve different consumers. Named traversals (trace-to-goal,
+  subtree/descendants, impact-neighborhood, cited-by, conflict-neighborhood,
+  build-order) form the stable contract. Bounded generic primitive (start set,
+  edge types, direction, depth limit, view) serves the mid-session agent tool.
+  Advanced endpoint offers read-only openCypher with depth/time/result-size
+  guards and required view parameter. openCypher is chosen as an engine-independent
+  standard (Neo4j, KuzuDB, Memgraph, Apache AGE), so the advanced tier constrains
+  the engine choice (DEC-0061) rather than the engine constraining the contract.
+  Each consumer gets the least-power interface that serves it.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0007 @ T3-T5"

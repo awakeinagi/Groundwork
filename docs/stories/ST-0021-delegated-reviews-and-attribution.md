@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Machinery turning UI approval into attributable host review: posting
+  as the approver via their linked OAuth identity where available, or
+  as role-scoped program user with service-signed attribution block.
+  Attribution block schema published for gate verification. Tokens and
+  signing key held in encrypted secret store.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

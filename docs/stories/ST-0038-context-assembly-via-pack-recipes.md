@@ -7,6 +7,13 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Declarative retrieval boundary between session and Graph Index /
+  Consolidation layer: each strategy pack states what context it needs—
+  required graph paths, preferred consolidations, fallback crawls, token
+  budget with truncation priority, on-demand tool enablement. Default
+  exclusion rule keeps synthesized shared draft prose from anchoring fresh
+  1:1 sessions; only structured facts flow in unless pack explicitly opts in.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

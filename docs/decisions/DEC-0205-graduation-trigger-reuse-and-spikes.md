@@ -5,6 +5,15 @@ title: Queue/KV-store graduation reuses TRG-0001/TRG-0002; two evaluation spikes
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Queue and KV-store Port graduation reuses TRG-0001 and TRG-0002
+  (multi-node/HA and concurrent writers conditions). Opens two
+  evaluation spikes: SP-0009 (AWS SQS adapter for Queue) and SP-0010
+  (external KV-store adapter), mirroring SP-0002's role for
+  app-database Port. Reuses existing triggers rather than arming new
+  ones; same two conditions govern all three Ports' graduation. One
+  trigger firing revives every affected spike at once. Constrains
+  TRIGGERS.md entries. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0038 @ T2-T4"

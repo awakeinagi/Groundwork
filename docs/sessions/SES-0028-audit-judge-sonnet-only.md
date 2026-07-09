@@ -5,6 +5,13 @@ title: Narrow decision-recall audit judge topology to Sonnet 5 only
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Product owner directive narrowing the decision-recall audit's judge
+  model tier to Sonnet 5 only, superseding DEC-0137's Opus-class tier
+  for candidate lists under 15. Sonnet 5 fills every judge role
+  previously given to Opus, including fork-when-facilitator-matches
+  case. Leaves audit topology, retrieval, and disposition steps
+  unchanged. Produced DEC-0161.
 participant: awakeinagi@gmail.com
 participant-role: product-owner
 facilitator: Claude (Sonnet 5)

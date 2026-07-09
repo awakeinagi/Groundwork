@@ -5,6 +5,11 @@ title: The Groundwork UI wraps the PR; approvers never need the code host
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Groundwork UI renders gate as rich review surface (diff, provenance, impact
+  report) with approve/request-changes actions driving host PR-review API;
+  PR remains durable auditable gate record; keeps single surface for business
+  users while making host PR machinery the enforcement substrate.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T4-T5"

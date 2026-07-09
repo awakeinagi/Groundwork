@@ -5,6 +5,15 @@ title: Jira drift is reverted and captured as a change proposal
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  On detecting a direct edit to a canonical-owned Jira field, the connector
+  promptly restores the projection to canonical content and comments on the
+  issue with explanation and links. The edit is not discarded; its diff is
+  captured as a Change Proposal artifact (DEC-0047) routed to the item's
+  refinement flow. The agent triages it—trivial changes become a mechanical-fix
+  PR citing the CP; substantive changes trigger a refinement session invitation
+  to the editor. This converts drift from an error into an input and makes the
+  redirect respectful of the editor's work while maintaining canonical truth.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T2-T3"

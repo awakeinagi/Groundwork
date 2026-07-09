@@ -5,6 +5,12 @@ title: KV-store Port adds an atomic set-if-absent operation for coordination loc
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The KvStorePort contract adds an atomic operation: set-if-absent(namespace,
+  key, value, ttl) → acquired: bool. It succeeds and returns true only if no
+  live value exists; otherwise returns false without modifying the existing
+  value. This is the minimal primitive for race-free lock acquisition without
+  pulling in heavier mechanisms like App Database Port's UnitOfWork.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0041 @ T1-T2"

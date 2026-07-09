@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  In-process asyncio runtime consuming CMP-0012 (Queue Port) for all durable
+  state. Claims, executes, and acks/retries background jobs via generic
+  dispatch loop. No external broker or separate worker process in v1.
+  Handler registration per job-type via direct call; no central registry
+  maintained. Unregistered job-types nack without execution. Exception
+  handling and timeout enforcement result in nack (retry path), never crash.
+  Bounded concurrency via configured deployment cap. On restart, resumes
+  purely from Queue Port state. First concrete job: KV-store periodic
+  expiry sweep.
 context: platform
 links:
   derives-from: [EP-0008]

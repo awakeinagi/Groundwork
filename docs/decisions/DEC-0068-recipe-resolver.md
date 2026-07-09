@@ -5,6 +5,13 @@ title: A deterministic recipe resolver assembles session context bundles
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The retrieval layer exposes resolve(recipe, task) → bundle, assembling
+  context by fetching required graph paths, substituting fresh
+  consolidations where they cover paths, filling gaps via search, and
+  ranking/truncating to token budget. Deterministic assembly for a given
+  repo-ref and index-state enables regression testing via the DEC-0058
+  harness. On-demand graph/search tools handle mid-session follow-ups.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0008 @ T2-T3"

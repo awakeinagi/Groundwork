@@ -5,6 +5,17 @@ title: EP-0006 refinement — v1 surfaces, session UX, notifications, gate rende
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Refined EP-0006 (Refinement Web UI) to gate-readiness, deliberately
+  refined last as the most-impacted epic. Settled: v1 surfaces are
+  session UI, goal artifact view with provenance drill-down, goal gate
+  surface, and minimal conflict view; structured-hybrid session UX with
+  question cards, decision-playback cards, progress panel, always-addable
+  notes/clarifications, free-text response, and elaborate-on-demand
+  options; in-app notification center as source of truth plus pluggable
+  notifier connectors; semantic artifact-aware diff for gate review.
+  Produced 4 decisions, concretizing EP-0006→EP-0002 impact via typed
+  turn payloads.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

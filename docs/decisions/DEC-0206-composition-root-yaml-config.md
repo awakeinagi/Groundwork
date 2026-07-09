@@ -5,6 +5,15 @@ title: Composition Root v1 config format is a structured YAML deployment-config 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  v1 Composition Root reads a single structured YAML deployment config
+  file naming the Adapter for each of six Ports plus each Adapter's
+  configuration block. Environment variables reserved for secrets and
+  environment-specific overrides, never primary mechanism for adapter
+  selection. Matches project's established pattern for deployment-scoped
+  settings; one reviewable file for whole topology easier to audit than
+  scattered environment variables. Constrains ST-0057's Acceptance
+  Criteria and Composition Root Component Doc contract. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T1-T2"

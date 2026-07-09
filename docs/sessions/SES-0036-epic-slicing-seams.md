@@ -5,6 +5,17 @@ title: Epic-slicing seam guidance, coupling check, and split-vs-merge heuristics
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Introduced six vertical-slicing seams for epic decomposition: Access,
+  Timeline, Protocol, Integration, Sophistication, and Bounded-Context/
+  Domain-Capability. Corrected "horizontal slicing" terminology to
+  "vertical slice" (convention: vertical = through all layers on
+  business seam). Drafted groundwork_epic_coupling.py to check
+  bidirectional impacts, treating mutual coupling as actionable,
+  one-way fan-out as informational. Zero false positives on project's
+  own epic set. Documented split-vs-merge heuristics grounded in impact
+  edges. Updated refinement-process.md and SKILL.md. Produced
+  DEC-0195-DEC-0197.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

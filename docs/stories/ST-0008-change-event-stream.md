@@ -7,6 +7,19 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Provides the event stream every derived system rides: artifact-changed
+  events emitted for each canonical write (content, mechanical, merge),
+  carrying artifact ID, type, branch/ref, change kind, and changed fields.
+  Branch-aware, reliably delivered (at-least-once, per-artifact ordered),
+  and replayable from git history. Merge events carry enough information for
+  Graph Index to promote overlay state to main view. Named consumers wired
+  and tested: Graph Index incremental updates, staleness sweeps,
+  consolidation invalidation. Stream replayable from any ref range — a
+  consumer rebuilt from scratch converges to live consumer state. Events
+  recorded in transactional outbox behind app database port (CMP-0003),
+  atomically with write bookkeeping, dispatched with retries. Adapter
+  config-selected; v1 uses DuckDB adapter.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

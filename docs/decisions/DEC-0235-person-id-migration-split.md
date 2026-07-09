@@ -5,6 +5,12 @@ title: Identity provides the email-to-person-id mapping; CMP-0001's mechanical w
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  CMP-0007 exposes a batch email→person-id mapping operation (pure resolver
+  over the registry); the migration itself is CMP-0001's migrate-person-ids
+  mechanical-write operation, initiated by operator action. Mechanical writes
+  stay single-owner; identity stays a pure resolver with no write-orchestration
+  responsibility or hidden trigger.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T1-T2"

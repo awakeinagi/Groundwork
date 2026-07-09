@@ -5,6 +5,14 @@ title: Governance changes recompute all open PRs' checks under the new policy; h
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Merging a governance change triggers recomputation of gate-policy check on
+  every open PR under the new policy. Existing host reviews stand as facts;
+  the check re-evaluates whether those facts satisfy the new policy — results
+  may flip in either direction. No PR merges under a policy the organization
+  has already rejected. Rights revocation must bite immediately; the window
+  between policy change and PR re-open is exactly what such changes exist to
+  close.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T2-T3"

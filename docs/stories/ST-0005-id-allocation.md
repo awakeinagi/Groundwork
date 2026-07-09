@@ -7,6 +7,14 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Delivers the allocator behind every artifact ID: sequential per prefix,
+  never reused (including for later-deleted or abandoned artifacts),
+  correct under concurrency with thread/process-safe locking. Concurrent
+  creation requests never mint duplicates; allocation accounts for unmerged
+  item-branch artifacts via fresh ref scan. Counter state survives restart
+  via rescan-on-boot (no persistent counter store exists). Single-allocator
+  deployment is a documented constraint.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

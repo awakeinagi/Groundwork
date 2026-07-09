@@ -7,6 +7,13 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 created: 2026-07-08
+overview: >-
+  Versioned, plugin-like bundle format defining how agent conducts one
+  session kind: phases, stopping criteria, escalation triggers, guardrail
+  policy, and context recipe per artifact-type-and-phase. Model-agnostic
+  core with pluggable model-adapter boundary. Every session records pack
+  version and model used. Packs stored in canonical repo, PR-gated like
+  governance config.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

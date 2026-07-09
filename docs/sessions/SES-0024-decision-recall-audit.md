@@ -5,6 +5,15 @@ title: Decision-recall audit — POC, judge topology, codification; port failure
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Built and validated POC for decision-recall audit using model2vec
+  embeddings to surface relevant accepted decisions unapplied at
+  refinement time. Found audit complements rule-type decision checklists
+  but cannot replace them. Recommended single Opus judge, Sonnet batches
+  at scale; stakeholder accepted Opus for main, Sonnet for 8-record
+  shards. Promoted POC to skill's groundwork_search.py. Added missing
+  failure-semantics contract to CMP-0003. Produced DEC-0137, DEC-0138,
+  DEC-0139.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

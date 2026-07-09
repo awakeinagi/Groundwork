@@ -87,6 +87,8 @@ title: Short descriptive title
 status: draft
 owner: <person or role accountable for the gate>
 created: 2026-07-06
+overview: >-        # REQUIRED on every artifact (DEC-0284): self-sufficient
+  ...               # plain prose, max 250 words — read first, body on demand
 links:
   derives-from: [BG-0001]   # immediate parent(s) in the pipeline
   satisfies: [BG-0001]      # business goal(s) ultimately served
@@ -123,6 +125,16 @@ Rules:
   impactors are settled and whose impact fan-out is largest, first).
 - `cites` is the provenance field: any artifact whose content rests on a
   decision cites its `DEC-` ID.
+- **The `overview:` field** (DEC-0284..DEC-0288) is the
+  progressive-disclosure entry point: self-sufficient plain prose, max
+  250 words, bare IDs allowed, no markdown — what the artifact is, its
+  core content/outcome, and its disposition. It is **derived,
+  non-normative** content (like consolidations): never citable as
+  provenance, body wins on conflict, freely regenerable — so adding or
+  regenerating one on a closed session or accepted decision violates no
+  immutability rule. Any edit that changes an artifact's meaning updates
+  its overview in the same edit; gate prep confirms faithfulness.
+  Presence and the cap are checker-enforced.
 
 ## Status lifecycles
 
@@ -457,6 +469,11 @@ into projects at bootstrap):
     session's `relates-to` is referenced in the session body — at
     write time in the Purpose section; retroactively via a Post-Close
     Enrichment entry.
+16. **Overview presence, cap, and resolution** (DEC-0284, DEC-0286,
+    DEC-0287): every artifact's frontmatter contains a non-empty
+    `overview:` of at most 250 words whose bare artifact IDs all
+    resolve (DEC-0242 extended to the overview surface). Faithfulness
+    is process-enforced (DEC-0288), not checker territory.
 
 Beyond the checker, the human-enforced rules: closed sessions and accepted
 decisions are immutable; acceptance criteria and contract items cite

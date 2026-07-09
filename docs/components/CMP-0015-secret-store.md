@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Standalone service component, graduated from CMP-0007 per DEC-0232
+  (consumed by CMP-0007 and CMP-0009). Single place secret material lives
+  at rest: envelope-encrypted storage in app database behind CMP-0003.
+  Operations: put, get, delete with namespace/key scoping. Envelope
+  encryption: each secret encrypted with own data key under AEAD; data
+  keys wrapped by deployment master key. Master key never persisted with
+  data. No secret values in logs or error output. Copied database useless
+  without master key; tampered ciphertext yields decryption-failed,
+  never silent corruption.
 context: integration
 component-type: service
 links:

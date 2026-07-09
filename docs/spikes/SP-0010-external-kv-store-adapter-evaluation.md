@@ -6,6 +6,19 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Question: when TRG-0001 or TRG-0002 fires, which external KV-store
+  adapter (Redis/ElastiCache, Memcached, other) best serves coordination
+  state and caching, and how does data migrate from embedded,
+  app-database-backed KV table? Blocks no current work; on trigger
+  firing, it blocks multi-node deployment (coordination and locks must
+  be shared across instances) and any caching-dependent story. Method
+  establishes which trigger fired and its demands, prototypes KV-store
+  Port contract (get/set/delete/TTL) against leading candidate,
+  verifies cross-instance coordination correctness, evaluates operational
+  overhead and cost against alternatives, defines migration path for
+  existing coordination/cache state and rollback. Deferred to backlog;
+  revived by TRG-0001 or TRG-0002. Findings pending.
 timebox: 3d
 links:
   derives-from: [EP-0008]

@@ -5,6 +5,14 @@ title: The search index auto-refreshes on every search; graph staleness is detec
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Every search and similar invocation first reconciles the index with docs via
+  per-file content hashes; only changed, new, or deleted files are re-embedded.
+  Static embeddings make this affordable: full re-embed measured at 0.14 s,
+  incremental refresh near-instant. The tool also checks graph freshness
+  (.groundwork-graph age against newest doc) and prints loud warning naming
+  rebuild command when stale. Hybrid features degrade gracefully rather than
+  failing.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T5-T6, T13"

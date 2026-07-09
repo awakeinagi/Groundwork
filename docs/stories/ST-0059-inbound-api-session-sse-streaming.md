@@ -7,6 +7,13 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Streaming half of the Inbound API: Server-Sent Events for append-turn
+  output with automatic reconnect and resume so network blips never drop
+  or duplicate session turns, with streamed events structured for
+  ST-0043/ST-0044 to render partial agent output incrementally as
+  produced. Per DEC-0182, DEC-0187, DEC-0202, DEC-0207, DEC-0212,
+  DEC-0213.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

@@ -5,6 +5,12 @@ title: CMP-0009 defaults to REST with GraphQL for gaps, disambiguates GitHub's o
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Settles CMP-0009's wire-protocol implementation guidance: REST
+  primary with GraphQL for gaps, 403-to-error-type disambiguation via
+  header inspection, and check-before-create idempotency mechanics on
+  natural keys. Constrains normative implementation behavior on every
+  CodeHostConnector operation.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0032 @ T2-T3"

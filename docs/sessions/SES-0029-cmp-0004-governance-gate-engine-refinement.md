@@ -5,6 +5,14 @@ title: Refine CMP-0004 (Governance & Gate Engine) — element decomposition and 
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Refined CMP-0004 from stub toward contract-completeness. Proposed
+  10-element decomposition mapping 1:1 to seven stories; no element
+  qualifies for graduation under DEC-0080 (hypothetical future consumers
+  vs. existing ones). Grilled three contract-shape questions: metrics API
+  fixed named endpoints, gate-policy live evaluation with no cache,
+  conflict-gate four-operation arbiter surface. Confirmed all
+  recommendations. Produced DEC-0162-DEC-0165.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude (Sonnet 5)

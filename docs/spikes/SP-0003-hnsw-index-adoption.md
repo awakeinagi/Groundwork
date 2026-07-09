@@ -6,6 +6,17 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-07
+overview: >-
+  Question: at what corpus/query scale does DuckDB brute-force vector
+  search outgrow acceptable latency, and if HNSW via the vss extension
+  is the answer, how are experimental index persistence and the top_k-CTE
+  query pattern (which bypasses WHERE clauses) handled? Blocks no current
+  work; when TRG-0003 fires, search-latency-sensitive work blocks on
+  choosing between in-place HNSW (this spike) and infrastructure
+  graduation (SP-0002). Method reproduces firing condition, benchmarks
+  HNSW against brute-force on real/10x corpus, evaluates persistence
+  strategies, compares against SP-0002's findings. Deferred to backlog;
+  revived by TRG-0003. Findings pending.
 timebox: 3d
 links:
   derives-from: [EP-0007]

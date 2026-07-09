@@ -5,6 +5,17 @@ title: Change-intake workflow — mandatory sessions, Idea artifacts, CP extensi
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Session refined the change-intake workflow: the standard process by
+  which change intent enters a Groundwork-managed project. Participants
+  refined mandatory intake sessions with role-authority checks, clarified
+  the boundary between Change Proposals and a new Idea artifact type for
+  pre-classification work queuing, and resolved how governance operates
+  in skill-only (non-application) projects via versioned configuration
+  files. Produced 16 decisions (DEC-0252..DEC-0267) defining intake paths
+  (mechanical floor, expedited, full, idea-capture), local governance
+  setup, and two Ideas (IDEA-0001, IDEA-0002) parking application-side
+  reflection work.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Code (claude-fable-5)

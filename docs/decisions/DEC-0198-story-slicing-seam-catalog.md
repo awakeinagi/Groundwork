@@ -5,6 +5,15 @@ title: A story-slicing seam catalog is adopted for story derivation
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Adopts a six-seam catalog for story derivation: Data, Chronological,
+  Fidelity, Logic, Operational, Operations (CRUD/lifecycle). Each with
+  Rule and Examples grounded in Groundwork's artifact lifecycle.
+  Documents that Spike artifact type covers Lawrence's Architectural
+  Spike pattern structurally. Fidelity seam carries caveat: basic means
+  unstyled, never sub-baseline; mechanics-first story still owes shared
+  accessibility/responsive conformance. Creates references/story-slicing
+  -seams.md. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0037 @ T1-T4"

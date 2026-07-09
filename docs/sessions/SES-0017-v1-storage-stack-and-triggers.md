@@ -5,6 +5,15 @@ title: v1 storage stack — embedded LadybugDB + DuckDB, deferral triggers
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Directed v1 storage stack change: embedded LadybugDB for graph, DuckDB
+  for app database and vector/semantic search; deferred Postgres +
+  pgvector to future spike. Superseded prototype-spike selections.
+  DuckDB-hosted transactional outbox pattern retained. Re-scoped SP-0002
+  to future evaluation under four armed triggers. Extended deferred
+  status to spikes. Established trigger registry in docs/TRIGGERS.md with
+  parseable TRG-nnnn entries; skill context loading filters armed-only
+  triggers. Firing/retiring cites decisions. Seven decisions produced.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

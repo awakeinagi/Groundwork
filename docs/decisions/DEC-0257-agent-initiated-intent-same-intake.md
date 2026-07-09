@@ -5,6 +5,13 @@ title: Agent-originated change intent enters the same intake — the agent propo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Change intent originating from the agent goes through the intake
+  protocol with roles reversed: agent surfaces its observation as a
+  proposal, restates stakes plainly, and a session captures it only when
+  the user says go. Nothing changes in the corpus without human
+  instruction. Symmetric with existing rule that agent recommendations
+  accepted by user become the user's decisions.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T12-T13"

@@ -5,6 +5,15 @@ title: The app database port exposes typed operation families; no SQL crosses th
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  AppDatabasePort contract defines engine-neutral typed operation families:
+  transactional unit-of-work (atomic commit/rollback), outbox append within
+  unit of work plus dispatch claim/ack/nack leasing, and keyed operational-
+  bookkeeping records (namespace, key, document). No SQL crosses the seam.
+  The conformance suite tests exactly these semantics including atomicity
+  of write-bookkeeping plus outbox-append. A typed surface lets any engine
+  with the right semantics adapt; a SQL port would restrict adapters to
+  SQL engines.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0022 @ T3-T4"

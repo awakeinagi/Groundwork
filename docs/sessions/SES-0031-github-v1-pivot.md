@@ -5,6 +5,14 @@ title: Pivot v1 code host from Bitbucket Data Center to GitHub
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Product owner pivot moving Bitbucket Data Center to backlog behind
+  TRG-0010 trigger, using GitHub Cloud as v1 code host. Superseded
+  DEC-0050. Re-affirmed five approved artifacts with GitHub-target edits
+  (EP-0005, ST-0003, ST-0013, CMP-0001, CMP-0004); no contract shapes
+  changed, only which host is v1. Derived ST-0031 (GitHub connector,
+  current) and CMP-0009 (stub). Deferred ST-0020 and SP-0004 to backlog
+  behind distinct TRG-0010. Produced DEC-0172-DEC-0173.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude (Sonnet 5)

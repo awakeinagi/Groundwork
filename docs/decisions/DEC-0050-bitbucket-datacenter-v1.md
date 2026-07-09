@@ -5,6 +5,15 @@ title: Bitbucket Data Center is the sole v1 code-host connector
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  v1 ships exactly one code-host connector: Bitbucket Data Center (self-hosted).
+  GitHub, Bitbucket Cloud, and GitLab connectors are future work validated
+  against the same contract (DEC-0045). The connector contract is
+  host-agnostic; BBDC is chosen as the reference implementation because it
+  matches the organization's actual hosting and implies Jira Data Center as the
+  target Jira instance. The capability baseline is set by BBDC's features:
+  no native CODEOWNERS-style path-scoped reviewer requirements, so the
+  gate-policy required check carries more enforcement weight.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T5"

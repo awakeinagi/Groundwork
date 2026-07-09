@@ -5,6 +5,14 @@ title: Every design element declares the stories it implements
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Every design element carries a mandated Implements line directly under
+  its heading, listing one or more stories as resolvable markdown links per
+  DEC-0090. Missing lines, empty lists, or unresolvable targets are
+  gate-blockers. An element no story motivates is a design smell; the line
+  enables story-completion metrics. Private helper values/events list
+  stories of the elements they support; graduated seam CMPs reference the
+  stories that birthed them.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0015 @ T2-T5"

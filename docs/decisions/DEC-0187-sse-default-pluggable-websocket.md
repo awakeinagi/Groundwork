@@ -5,6 +5,11 @@ title: SSE is the default streaming transport, behind a client abstraction that 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The session-engine client defaults to Server-Sent Events for
+  streaming agent output, with user turns sent as plain POSTs. Built
+  behind a transport-agnostic interface allowing future WebSocket
+  swaps without changing component APIs.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0034 @ T2-T3"

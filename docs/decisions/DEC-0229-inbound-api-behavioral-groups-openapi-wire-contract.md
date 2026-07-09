@@ -5,6 +5,13 @@ title: The Inbound API contracts behavioral endpoint groups in its Component Doc
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  CMP-0011 contracts the route surface as behavioral endpoint groups (artifact
+  reads, gate actions, conflict reads, notifications, governance metrics,
+  session SSE), each stating its behavior, auth requirement, called component,
+  and problem+json failure classes. A maintained OpenAPI document is named as
+  the authoritative wire contract for exact paths, verbs, and request/response
+  schemas. The Component Doc does not restate every path and schema inline.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0044 @ T1"

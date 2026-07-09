@@ -5,6 +5,14 @@ title: Taxonomy, obligations, and patterns live in a dedicated SPEC-design-eleme
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  A dedicated SPEC-design-elements holds the taxonomy, typed obligations,
+  graduation rule, element-declaration syntax, item-ID scheme, and
+  patterns catalog. SPEC-component references it and keeps only
+  doc-structure rules (required sections, Implementation Guidance, gate
+  checks). The five type names become glossary terms. This separation
+  keeps SPEC-component readable and gives the catalog room to grow without
+  crowding gate rules.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T8-T9"

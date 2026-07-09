@@ -6,6 +6,12 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2. Commenting surface on the incremental synthesis
+  shared draft letting stakeholders react to in-progress synthesis, with
+  comments feeding into Change Proposals rather than editing the draft
+  directly, and propose-change actions creating CP- artifacts per
+  DEC-0047. Per DEC-0047, DEC-0055, DEC-0073, DEC-0100, DEC-0133.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

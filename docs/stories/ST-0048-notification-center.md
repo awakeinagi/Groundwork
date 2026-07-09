@@ -7,6 +7,12 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  In-app notification source of truth for authenticated participants:
+  per-user event list with persistent read/unread state, per-category
+  email-delivery preferences, and live new-event streaming via the same
+  client as session turns. Per DEC-0075, DEC-0149, DEC-0184, DEC-0186,
+  DEC-0187, DEC-0188.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

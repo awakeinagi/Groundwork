@@ -5,6 +5,15 @@ title: Connectors declare capability manifests; the gate compiler adapts
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The code-host contract defines its operations plus a capability manifest each
+  connector declares (required-checks, team-sync, review-dismissal, etc.). A
+  documented minimum capability set is required to host Groundwork at all;
+  above the minimum, the gate engine's policy compiler adapts—emulating missing
+  host features via the gate-policy check where possible. New hosts become new
+  connectors plus manifests, never core changes, applying the pluggable-boundary
+  constraint of BG-0001 to variance without sacrificing richer hosts' features
+  to the lowest common denominator.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T2-T3"

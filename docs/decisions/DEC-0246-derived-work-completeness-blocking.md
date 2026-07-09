@@ -5,6 +5,14 @@ title: Derived-work completeness is a blocking checker rule
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Every artifact whose derives-from names a business goal or epic must
+  reference each child by bare ID in that parent's body. This is a
+  blocking rule in tools/check_links.py, failing pre-commit like broken
+  links. Derivation playbooks gain an explicit step: deriving a child
+  updates the parent's Derived Work section in the same edit. Matches
+  the 92–100% existing convention across the corpus; enforcement is
+  mechanical per DEC-0242's notation.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0049 @ T1-T2, T6-T7, T10-T11"

@@ -6,6 +6,18 @@ status: approved
 owner: awakeinagi@gmail.com
 sponsor: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Groundwork: a system to ground implementation in refined business
+  intent. Problem: business requests arrive poorly defined, vague, or
+  contradictory. Solution: a standalone application where an AI agent
+  refines raw business ideas into implementation-ready specifications
+  through unsupervised 1:1 Q&A sessions with stakeholders, product
+  owners, and engineering leads, producing a gated hierarchy of
+  Business Goals, Epics, Stories/Spikes, and contract-complete
+  Component Docs — all provenance-linked to decisions that shaped them.
+  Success criteria include traceability, conflict surfacing,
+  human-ratified layers, parallel implementability, and sync without
+  drift to external systems.
 links:
   derives-from: [SES-0001]
 cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006,

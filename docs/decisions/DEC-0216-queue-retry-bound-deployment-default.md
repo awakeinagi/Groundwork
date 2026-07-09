@@ -5,6 +5,12 @@ title: Queue Port retry bound is a single deployment-wide default, not a per-job
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The Queue Port's retry bound is a single deployment-wide configured value
+  (set via Composition Root), not overridable per job at enqueue time. This
+  matches App Database Port precedent, which exposes no per-operation retry
+  override either — retry policy is adapter/deployment configuration, not a
+  per-call parameter.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0040 @ T1-T2"

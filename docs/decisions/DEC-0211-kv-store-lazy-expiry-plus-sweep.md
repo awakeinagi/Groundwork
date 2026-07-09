@@ -5,6 +5,14 @@ title: KV-store Port v1 expiry is lazy-on-read plus a best-effort periodic sweep
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  KV-store expiry is lazy-on-read plus best-effort periodic sweep. get()
+  on expired key returns not-found immediately; periodic sweep job
+  (first concrete job on async runtime ST-0061) reclaims expired rows
+  so storage doesn't grow unbounded from unread keys. Lazy alone is
+  correct but write-heavy, read-rarely keys accumulate; sweep bounds
+  storage without new mechanism at zero infrastructure cost. Constrains
+  ST-0062's Acceptance Criteria. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T3-T4"

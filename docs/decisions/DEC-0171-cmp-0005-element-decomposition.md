@@ -5,6 +5,12 @@ title: CMP-0005 decomposes into CodeHostConnector, CapabilityManifest, and HostE
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Decides that CMP-0005 decomposes into three elements:
+  CodeHostConnector (protocol), CapabilityManifest (value), and
+  HostEvent (event). None graduates to standalone component status in
+  v1. Constrains how the connector capability seam is structured and
+  versioned.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0030 @ T1-T2"

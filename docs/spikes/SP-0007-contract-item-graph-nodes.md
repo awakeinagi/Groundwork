@@ -5,6 +5,19 @@ title: Contract-item-level graph nodes with per-item decision citations
 status: draft
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Question: do contract-item nodes pay their way? Can element contract
+  items (Element.B|A|D|C|IG-n with per-item decision citations) be parsed
+  reliably enough to add item→decision CITES edges to the graph index,
+  making impact sweeps and DEC-0157 review item-precise, without parse
+  fragility, index bloat, or markdown-convention rigidity costing more
+  than the precision gained? Blocks no current work; element-level
+  granularity plus DEC-0157/DEC-0158 tooling is the operating state, but
+  the answer shapes EP-0004's Graph Index contracts (IMPLEMENTS edges and
+  rollups already ride element granularity). Method prototypes in skill
+  graph tool, extends parser for item IDs and per-item citations, counts
+  parse failures, re-runs SES-0026 queries at item granularity, measures
+  index growth. Draft status.
 timebox: 3d
 links:
   derives-from: [BG-0001]

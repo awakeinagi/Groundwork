@@ -5,6 +5,14 @@ title: Element types carry gate-checkable contract obligations
 status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Each element type mandates which contract kinds its elements must
+  define, gate-checkable: entity requires identity/lifecycle + data; value
+  requires data; service requires API + behavior; event requires schema +
+  semantics; protocol requires API + conformance. Obligations make the
+  taxonomy load-bearing: type is a claim about which contracts an element
+  owes, so per-element completeness becomes mechanically checkable.
+  Superseded by DEC-0088.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T4-T5"

@@ -5,6 +5,13 @@ title: ConflictGate exposes escalate, resolve, and override-approver operations;
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  ConflictGate exposes three API items (escalate, resolve,
+  override-approver) plus the conflicts-open check evaluation and
+  timeout-fire path that drafts System Decision. The per-artifact
+  timeout-to-default election is expressed in artifact frontmatter,
+  tier-1 validated by CMP-0001. Matches ST-0015 acceptance criteria
+  one-to-one and gives Arbiter queue concrete operations.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0029 @ T5-T6"

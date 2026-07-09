@@ -5,6 +5,15 @@ title: Refine CMP-0005 (Code-Host Connector Protocol) — element decomposition 
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Refined CMP-0005 from stub to contract-complete. Handled SP-0004
+  blocker by drafting full contract with check-administration flagged
+  provisional pending spike findings. Settled one-protocol-element
+  decomposition, typed-error-conditions convention, v1 minimum capability
+  set, push-webhook event delivery, and allowlist filtering as
+  behavior clause. Decision-recall audit flagged missing deferral
+  decision; added check-unregister operation found by audit gap.
+  Produced DEC-0166-DEC-0171.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude (Sonnet 5)

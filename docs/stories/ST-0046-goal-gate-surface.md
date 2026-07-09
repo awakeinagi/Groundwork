@@ -7,6 +7,13 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Review surface for Product Owner goal approval without opening the
+  host PR: section-level semantic diff, agent-written change summary,
+  impact report, and provenance links, with approve/request-changes
+  actions driving the host PR through the connector. Raw diff stays one
+  click away. Per DEC-0032, DEC-0043, DEC-0076, DEC-0146, DEC-0184,
+  DEC-0186, DEC-0188.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

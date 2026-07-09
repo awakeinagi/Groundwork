@@ -7,6 +7,14 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  In-process asyncio runtime that claims, executes, and acks/retries
+  background jobs from the Queue Port with no external broker or worker
+  process, honoring ST-0060's retry/dead-letter contract, resuming from
+  persisted state on process restart, exposing job-state observability
+  through the Queue Port's bookkeeping surface, and executing bounded
+  concurrent jobs via asyncio tasks. Per DEC-0102, DEC-0121, DEC-0131,
+  DEC-0203, DEC-0204, DEC-0205, DEC-0208, DEC-0210, DEC-0211.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

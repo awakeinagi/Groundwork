@@ -5,6 +5,11 @@ title: Context-recipe story owns anchoring-risk mitigation for the synthesized d
 status: accepted
 owner: ds-lead
 created: 2026-07-08
+overview: >-
+  Assigns anchoring-risk mitigation to the context-recipe story
+  (ST-0038): strategy-pack context recipes exclude the synthesized
+  draft's prose from 1:1 grilling context by default, permitting only
+  structured facts. Mitigates bias risk from async-visible drafts.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0033 @ T2-T3"

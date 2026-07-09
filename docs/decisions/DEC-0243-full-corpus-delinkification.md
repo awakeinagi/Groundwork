@@ -5,6 +5,13 @@ title: The full corpus is de-linkified in one mechanical pass under DEC-0091's s
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  One mechanical pass converts inline artifact links to bare IDs across
+  the entire corpus—closed sessions, accepted decisions, components,
+  stories, spikes, epics, goals, specs, and CONTEXT.md—under DEC-0091's
+  existing sanction for meaning-preserving reference formatting. Four
+  descriptive prose links are reworded by hand to preserve meaning.
+  Drops ~65k tokens (~20%) corpus-wide.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0047 @ T3-T4, T7-T8"

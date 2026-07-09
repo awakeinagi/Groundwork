@@ -5,6 +5,13 @@ title: Captured Ideas join the project's work queue; each take-up runs the intak
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Inspired Ideas never extend the current session; they are parked per
+  DEC-0260 and join the project's work queue (status report and "what is
+  to be done?" surfaces captured Ideas alongside gated, stale, and
+  frontier items). Each take-up runs the full intake protocol (DEC-0255)
+  as its own session. The post-grilling summary reviews captured Ideas
+  and asks for any last ones before artifact generation.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T14-T15, T20"

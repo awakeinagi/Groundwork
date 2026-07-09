@@ -6,6 +6,12 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2. Profile surface where participant views and
+  edits their opt-in profile and manages consent—what the
+  consolidation/memory layer is allowed to remember about them, with
+  consent toggles explicit per data category and off by default per
+  DEC-0071's opt-in model. Per DEC-0071, DEC-0073, DEC-0100, DEC-0133.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

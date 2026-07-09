@@ -5,6 +5,10 @@ title: The system is named Groundwork
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  The system is named Groundwork, evoking the core value proposition of
+  grounding implementation in business intent with documentation as the
+  foundation everything is built on.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T12-T13"

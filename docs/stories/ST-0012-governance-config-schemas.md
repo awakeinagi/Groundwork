@@ -7,6 +7,19 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Provides the governance-as-code surface: published schemas and lifecycle
+  for four governance/ files — who holds which role and decision rights
+  (roles.yaml), how domains route to approvers (domains.yaml), what each
+  gate requires (gate-policies.yaml), which repositories the agent may read
+  (repos.yaml), plus person registry (people.yaml) with stable person-ids.
+  Tier-1 validation runs on every PR touching governance/ and blocks
+  malformed configuration with explanations. governance/ is Arbiter-owned;
+  every change goes through same PR gate as artifacts, and changing approval
+  rights is itself gated. Deployment-time init command seeds founding files
+  directly into initial repository history before branch protection first
+  compiles. Role-rights vocabulary aligns with session engine proposal-capture
+  behavior.
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]

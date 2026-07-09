@@ -132,6 +132,11 @@ is gated).
 - **Consolidation (CON)** — curated, derived reference material summarizing a
   frequently traveled path of the artifact graph, maintained for agent
   retrieval efficiency and invalidated when its sources change.
+- **Overview** — the derived, non-normative frontmatter summary every
+  artifact carries (self-sufficient plain prose, max 250 words): the
+  progressive-disclosure entry point read before — often instead of — the
+  body. Never citable as provenance; the body wins on conflict; kept
+  faithful in the same edit whenever meaning changes.
 - **Participant Profile** — opt-in, per-person interaction memory (pacing,
   preferences, questions already covered) that improves repeat sessions;
   owned by its subject, who can read, edit, and delete it via the UI; never

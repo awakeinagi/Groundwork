@@ -5,6 +5,13 @@ title: Subscription lifecycle — revival unsubscribes everywhere; emptied armed
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Establishes three subscription-lifecycle invariants. Armed triggers subscribe
+  only deferred artifacts (at least one); checker enforces. Revival unsubscribes
+  the item everywhere: when an item leaves deferred, its subscriber lines are
+  removed from all other armed triggers in one change, no separate ceremony.
+  An armed trigger emptied by unsubscription auto-retires, citing the reviving
+  decision. Keeps armed set clean and invariants checkable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0018 @ T1-T3"

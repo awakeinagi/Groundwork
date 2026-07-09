@@ -5,6 +5,11 @@ title: Escalated Conflicts do not default into the general artifact timeout-to-d
 status: accepted
 owner: ds-lead
 created: 2026-07-08
+overview: >-
+  Decides that escalated Conflicts do not default into DEC-0039's
+  timeout-to-default election mechanism. An owner can still opt in
+  explicitly, but no CFL artifact auto-resolves on a clock by default.
+  Preserves mediation-driven conflict resolution.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0033 @ T9-T10"

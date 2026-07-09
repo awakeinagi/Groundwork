@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Standalone protocol-type component, graduated from CMP-0001 per
+  DEC-0135. Defines the infrastructure seam for relational/transactional
+  workload behind the Canonical Store. Operations: UnitOfWork begin/commit,
+  outbox append/claim/ack/nack for change-event emission, bookkeeping
+  put/get/delete for derived state (branch metadata, worktree state, retry
+  counters). No ID-counter state exposed; all state derived and
+  rebuildable. DuckDB adapter in v1. Conformance suite published with
+  contract.
 context: canonical-store
 component-type: protocol
 links:

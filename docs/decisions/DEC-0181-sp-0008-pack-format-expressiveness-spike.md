@@ -5,6 +5,11 @@ title: A timeboxed spike validates pack schema expressiveness before the pack-fo
 status: accepted
 owner: ds-lead
 created: 2026-07-08
+overview: >-
+  Prescribes SP-0008, a 3-day spike validating whether a declarative
+  pack.yaml schema can express real strategy-pack variation without
+  needing a scripting layer. Method: draft against three concrete
+  scenarios spanning phase diversity.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0033 @ T6-T7"

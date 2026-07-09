@@ -110,6 +110,15 @@ Component Docs. Every stage transition passes a **human approval gate**.
    `## Implementation Guidance` as decision-cited Constraints (`IG-n`),
    with advisory Notes never load-bearing. An element consumed by more
    than one CMP graduates to its own CMP with `component-type:` set.
+10. **Overviews.** Every artifact carries a frontmatter `overview:` —
+    self-sufficient plain prose, max 250 words, bare IDs allowed, no
+    markdown (per DEC-0284, DEC-0286; presence and cap
+    checker-enforced per DEC-0287). It is derived, non-normative
+    content: never citable as provenance, body wins on conflict,
+    freely regenerable — adding or refreshing one on a closed session
+    or accepted decision violates no immutability rule (per DEC-0285).
+    Any edit that changes an artifact's meaning updates its overview
+    in the same edit; gate prep confirms faithfulness (per DEC-0288).
 
 ## How design changes are made — change intake
 
@@ -195,9 +204,23 @@ item is unsubscribed from every other armed trigger in the same change
 and emptied triggers retire. Review armed triggers when scope or
 releases are re-planned.
 
+## Reading discipline — progressive disclosure
+
+Read overviews first; open bodies only when the overview says the
+detail is there (per DEC-0284, DEC-0289). The skill's
+`groundwork_read.py` serves concise reads without whole-file loads:
+`overview <ID>...` (batch, or `--type/--status` filtered), `outline
+<ID>`, `section <ID> <heading>`, `element <CMP-ID> <name>`, `item
+<CMP-ID> <item-ID>`, `turns <SES-ID> <T-span>`, `term <name>`, `citers
+<ID>`. Search and graph tool outputs already include overviews (per
+DEC-0290) — a hit list is often enough to answer without any file
+read. Whole-file reads are for artifacts you are actively editing or
+gating.
+
 ## Orientation for a fresh agent
 
-1. Read `CONTEXT.md`, then the Business Goal(s) in `docs/goals/`.
+1. Read `CONTEXT.md`, then the Business Goal(s) in `docs/goals/` —
+   overviews first, bodies as needed (see Reading discipline).
 2. Check state: artifacts with `status: gated` await approval; `stale`
    await re-affirmation; open `CFL-` files block their artifacts; approved
    artifacts with an empty "Derived Work" section are the frontier.

@@ -5,6 +5,14 @@ title: ChangeEvent graduates from CMP-0001 to a standalone event-type component
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  ChangeEvent element graduates to CMP-0002, a standalone CMP with
+  component-type: event, owned by Canonical Store context and derived from
+  EP-0001. It carries the payload schema and the emission/ordering/delivery/
+  replay semantics. CMP-0001 depends on it as the emitter; consumer
+  components depend on it alone. Consumption by multiple components is
+  contract-certain today from approved story citations; graduating at gate
+  avoids amputating an element from approved CMP-0001 later.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0023 @ T2-T3"

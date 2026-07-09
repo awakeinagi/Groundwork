@@ -6,6 +6,12 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to backlog (trigger TRG-0008: deployment requiring notification
+  channel beyond email). Delivery channels beyond v1 email adapter—Slack,
+  Teams, and beyond—each a new adapter under notifier connector contract.
+  Channel selection stays per-user preference; in-app notification center
+  remains source of truth regardless of channel.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

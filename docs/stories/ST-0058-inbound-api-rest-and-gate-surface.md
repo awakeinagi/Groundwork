@@ -7,6 +7,13 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  FastAPI/ASGI HTTP surface for EP-0006's non-streaming views and
+  actions: artifact reads with provenance drill-down, gate actions,
+  conflict reads, and notification reads/writes. Session turn streaming
+  is separate (ST-0059). HTTP surface exists because Groundwork ships as
+  a standalone application with its own backend services. Per DEC-0001,
+  DEC-0018, DEC-0042, DEC-0127, DEC-0163, DEC-0202, DEC-0207, DEC-0212.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

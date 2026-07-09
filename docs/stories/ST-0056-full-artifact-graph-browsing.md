@@ -6,6 +6,13 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2. Generalizes ST-0045's artifact view from
+  Business Goals to every artifact type (epic, story, spike, component,
+  session, decision, conflict, change proposal) plus a graph browser
+  visualizing typed-link traversal over the derived index, rendering the
+  closed link-type vocabulary over stable frontmatter IDs. Per DEC-0009,
+  DEC-0010, DEC-0073, DEC-0100, DEC-0101, DEC-0119, DEC-0133.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

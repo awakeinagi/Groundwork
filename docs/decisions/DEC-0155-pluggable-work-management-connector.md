@@ -5,6 +5,13 @@ title: Work management is a pluggable connector family; Jira Data Center is the 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Work management generalizes to a pluggable connector family with
+  host-agnostic, capability-declaring contract (DEC-0045 pattern
+  applied to work management) owning projection lifecycle, drift
+  capture, and backlog read feed. Jira Data Center (confirmed deployed
+  flavor) is the reference adapter. Future adapters (monday.com,
+  OpenProject, Jira Cloud) validate against the same contract.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T6-T7"

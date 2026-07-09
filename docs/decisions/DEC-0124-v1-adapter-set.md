@@ -5,6 +5,14 @@ title: v1 ships the embedded storage adapters plus two embedding adapters — lo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  v1 ships DuckDB adapter only for app database and graph store ports;
+  DuckDB plus vss for vector store port; and two embedding adapters (local
+  model and REST-API client). Second adapters for storage and graph ports
+  arrive with SP-0002 graduation evaluation. The embedding port proves the
+  port pattern end-to-end with two real adapters, including the
+  identity-stamping machinery of DEC-0123 which only a model swap exercises.
+  DEC-0102's embedded-only v1 storage commitment is unchanged.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0020 @ T4-T5, T6-T7"

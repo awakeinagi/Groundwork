@@ -5,6 +5,11 @@ title: Spike findings are recorded as Decision records
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Spike findings are written as Decision records with derives-from pointing
+  to spike instead of session; existing impact-analysis machinery marks affected
+  stories and contracts stale automatically; spike knowledge becomes citable
+  provenance using one mechanism rather than two.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T12-T13"

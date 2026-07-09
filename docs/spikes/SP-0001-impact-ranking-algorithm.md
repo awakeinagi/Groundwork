@@ -5,6 +5,16 @@ title: Ranking algorithm for impact-based refinement ordering
 status: draft
 owner: ds-lead
 created: 2026-07-05
+overview: >-
+  Question: what algorithm ranks same-level artifacts by impact
+  dependency to minimize decision rework when refining, handling cycles
+  present in real graphs? Blocks refinement ordering at every level
+  (goals, epics, stories, spikes) and shapes both initial ordering and
+  re-affirmation queue logic after staleness changes. Method evaluates
+  SCC-condensation plus topological sort, PageRank-style centrality,
+  out-degree minus in-degree heuristics, and minimum feedback arc set
+  approaches; investigates provisional bounding decisions; prototypes
+  front-runner against the EP-0001–EP-0007 graph. Findings pending.
 timebox: 3d
 links:
   derives-from: [BG-0001]

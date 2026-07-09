@@ -5,6 +5,14 @@ title: A cross-epic impact-coupling check is required at epic derivation
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Adds scripts/groundwork_epic_coupling.py to flag mutual (bidirectional)
+  impacts coupling between sibling epics as a candidate for re-seaming.
+  Run immediately after draft epic set's impact edges are drawn, before
+  deep refinement. One-directional fan-out reported as context only;
+  bounded-context slicing routinely produces legitimate heavy one-way
+  fan-out. Advisory only, never auto-blocking. Constrains Epic playbook
+  and SKILL.md. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0036 @ T3-T4"

@@ -29,6 +29,8 @@ title: Refinement Session Agent
 status: draft
 owner: eng-lead       # role or named person accountable for the gate
 created: 2026-07-05
+overview: >-         # derived, non-normative summary — see "The overview
+  ...                # field" below (DEC-0284..DEC-0286)
 links:
   derives-from: [BG-0001]     # immediate parent(s) in the pipeline
   satisfies: [BG-0001]        # business goal(s) ultimately served
@@ -58,6 +60,30 @@ Rules (DEC-0009):
 - Empty link lists may be omitted.
 - The Graph Index is built solely from frontmatter; prose wiki-links are
   navigational sugar and carry no semantics.
+
+## The overview field
+
+Every artifact, of every type, carries a frontmatter `overview:` field
+(DEC-0284) — the progressive-disclosure entry point an agent
+reads before deciding whether to open the body:
+
+- **Content** (DEC-0286): self-sufficient plain prose,
+  **max 250 words** — what the artifact is, its core content or
+  outcome, and its current disposition. Bare artifact IDs allowed; no
+  markdown formatting. Per-type guidance lives in the authoring
+  templates.
+- **Authority** (DEC-0285): the overview is **derived,
+  non-normative** content, in the same class as consolidations — never
+  citable as provenance, the body wins on any conflict, freely
+  regenerable. Adding or correcting an overview alters no recorded
+  meaning: it is legal on closed Sessions and accepted Decisions, and
+  triggers no staleness or re-gating.
+- **Accuracy** (DEC-0288): any edit that changes an
+  artifact's meaning updates the overview in the same edit; gate
+  preparation includes confirming the overview is still faithful.
+- **Enforcement** (DEC-0287): presence and the word cap are
+  integrity-checked (rule 11 below); faithfulness is a process
+  obligation, not a checker rule.
 
 ## Status lifecycle
 
@@ -182,3 +208,10 @@ DEC-0104):
     and a decision link on every fired/retired entry
     (DEC-0106,
     DEC-0108).
+11. Every artifact's frontmatter contains a non-empty `overview:` field
+    of at most 250 words, and every bare artifact ID inside it
+    resolves — DEC-0242's guarantee
+    extended to the overview surface
+    (DEC-0284,
+    DEC-0286,
+    DEC-0287).

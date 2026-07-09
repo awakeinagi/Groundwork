@@ -5,6 +5,11 @@ title: The Groundwork UI ships as an embeddable npm React component library, plu
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Ships the Groundwork UI as an npm package of React components and
+  hooks for direct embedding in Next.js App Router applications,
+  reused by a thin standalone app in the same repo. Enables component
+  sharing with host context and theme inheritance.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0034 @ T2-T3"

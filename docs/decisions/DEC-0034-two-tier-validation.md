@@ -5,6 +5,12 @@ title: "Two-tier validation: schema on every write, completeness at the gate"
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Two-tier validation: tier 1 structural on every API write (frontmatter parses,
+  schema satisfied, links resolve in branch view), tier 2 completeness as required
+  PR checks (required sections present, items cite decisions, links reciprocal, no
+  open conflicts); main always fully valid while branches structurally valid but
+  incomplete.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T4-T5"

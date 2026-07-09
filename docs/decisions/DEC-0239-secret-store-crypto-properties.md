@@ -5,6 +5,13 @@ title: Secret-store contract states crypto properties; named v1 algorithms are p
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  CMP-0015's contract states crypto properties: envelope encryption, AEAD,
+  per-secret data keys, master key never persisted alongside the data. Named
+  v1 defaults (AES-256-GCM data keys; master from environment or key file) are
+  pinned as decision-cited Implementation Constraints, not contract items.
+  Allows testable conformance without freezing cryptography into the seam;
+  algorithm swaps become constraint changes, not contract amendments.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T3-T4"

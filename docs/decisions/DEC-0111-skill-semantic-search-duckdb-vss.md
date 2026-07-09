@@ -5,6 +5,13 @@ title: The skill gains a semantic search tool on DuckDB + vss, pip-bundled, dogf
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The design skill's tooling gains semantic search on DuckDB with the vss
+  extension, pip-bundled via duckdb, duckdb-extensions, and
+  duckdb-extension-vss so it works offline. This dogfoods DEC-0102's
+  vector-search commitment the same way the graph tool dogfoods embedded
+  LadybugDB. Offline-usable packaging verified empirically: bare LOAD vss
+  fails without duckdb-extensions.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T1-T3, T16"

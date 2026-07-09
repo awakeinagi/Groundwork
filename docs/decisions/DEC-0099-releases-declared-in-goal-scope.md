@@ -5,6 +5,13 @@ title: Release labels are declared in the Business Goal's Scope section
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Each Business Goal's Scope section declares named releases as a
+  machine-parseable list (one item per release, value in code span, current
+  release marked). The checker validates every release field value in stories
+  and epics against declared releases plus reserved backlog. Matching is exact:
+  a label must literally equal a declared value; no prefix-matching. Adding,
+  renaming, or re-scoping a release is a goal amendment passing its gate.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0016 @ T4-T5, T10-T11"

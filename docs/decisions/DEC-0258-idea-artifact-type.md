@@ -5,6 +5,14 @@ title: A new Idea artifact type (IDEA-) captures raw change intent verbatim, wit
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  New Idea artifact type (IDEA- prefix, docs/ideas/) captures raw change
+  intent verbatim. Statuses: captured → taken-up (intake session derives
+  and refinement begins) or declined (with recorded rationale). Captured
+  mid-session under focus-artifact test (DEC-0260) or via dedicated
+  idea-capture micro-session. Pass no gates; nothing derives except
+  take-up session. Frictionless capture keeps mandatory-session rule
+  (DEC-0252) and focus-artifact test livable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T13-T15"

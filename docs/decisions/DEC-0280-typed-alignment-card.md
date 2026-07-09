@@ -5,6 +5,14 @@ title: A typed alignment card carries the restate-and-align loop in the session 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0280 constrains the session payload contract to gain a fourth card
+  type, the alignment card: the agent's restatement of the intake intent
+  with confirm/amend actions, where amendment loops back to a fresh
+  restatement turn mirroring decision-playback correction. A confirmed
+  alignment card is the typed turn DEC-0273's alignment-before-grilling
+  invariant keys on, making alignment confirmation machine-legible and
+  recorded.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T8-T9"

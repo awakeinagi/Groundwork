@@ -5,6 +5,13 @@ title: Embeddings come from model2vec static potion-base-8M, not transformer or 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The search tool embeds with model2vec static embeddings, model
+  minishlab/potion-base-8M (256-dim): numpy-only, no PyTorch, ~30 MB one-time
+  fetch. POC measurements on the real corpus: 922-chunk embedding in 0.14 s,
+  cold start sub-second. Static-embedding quality is below transformers but
+  sufficient; paraphrase weakness showed only in rejected trigger-matching.
+  Model swap requires full re-index (cheap at current scale).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T3-T4, T9"

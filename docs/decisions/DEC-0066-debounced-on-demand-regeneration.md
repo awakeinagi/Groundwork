@@ -5,6 +5,14 @@ title: Consolidation regeneration is debounced, with on-demand rebuild at reques
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Staleness remains instant and absolute: a stale consolidation is never served.
+  Regeneration is debounced—rebuild fires after a quiet window with no further
+  source changes, or a max-wait cap, whichever comes first. If a request arrives
+  for a consolidation that is currently stale, regeneration runs on-demand for
+  that request. Hot items never thrash the generator; requesters never receive
+  stale content and never wait for a schedule. The freshness guarantee is
+  preserved by serving rules, not regeneration speed.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0008 @ T2-T3"

@@ -5,6 +5,13 @@ title: Element declarations are parseable body headings; no frontmatter mirror
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Element declarations use the body-heading convention `### <ElementName>
+  (<type>)` inside the Design Elements section as the single source of
+  truth. The checker parses headings and validates types against the closed
+  enum. Machine consumers query element nodes via the Graph Index. No
+  frontmatter mirror; every consumer parses the body anyway, and a mirror
+  would serve only duplication and introduce drift.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T9-T11"

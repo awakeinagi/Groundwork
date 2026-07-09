@@ -5,6 +5,14 @@ title: EP-0001 story refinement — counter durability, event transport, dev con
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  First story-level refinement of the project: EP-0001 story set
+  (ST-0001–ST-0008) to gate-readiness. Three stories carried flagged
+  open design points settled by refinement: ST-0005 ID counter
+  durability (rescan-on-boot), ST-0008 event-stream transport
+  (transactional outbox in Postgres), ST-0003 development-time
+  code-host strategy (local-git fake connector implementing full
+  contract). Produced 3 decisions; all eight stories moved to gated.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

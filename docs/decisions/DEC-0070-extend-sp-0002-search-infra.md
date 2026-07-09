@@ -5,6 +5,13 @@ title: SP-0002 is extended to evaluate search/vector infrastructure alongside th
 status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  SP-0002 is extended to evaluate retrieval infrastructure (pgvector + FTS
+  vs embedded vector index vs dedicated vector store) alongside graph
+  engine candidates on the same corpus and criteria. Search and graph
+  candidates overlap nearly entirely and their choices interact, warranting
+  joint judgment that returns one coherent infrastructure recommendation.
+  The spike timebox extends from 5 to 7 days.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0008 @ T4-T5"

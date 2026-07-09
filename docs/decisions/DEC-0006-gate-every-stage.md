@@ -7,6 +7,14 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  Every artifact passes human approval gate before next stage may derive
+  from it: Business Goals→Epics, Epics→Stories/Spikes, Stories→handoff.
+  Named approver's sign-off in UI transitions artifact to approved status.
+  Each layer of grounding chain is human-ratified — essential quality
+  backstop given unsupervised sessions. Slower than continuous review, but
+  worth it. Implies gate mechanics need roles/policies and status lifecycle
+  includes gated status.
 source-span: "SES-0001 @ T4-T5"
 links:
   derives-from: [SES-0001]

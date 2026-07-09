@@ -5,6 +5,14 @@ title: Spec includes a modeling-patterns catalog composing the five types
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The design-elements spec includes a modeling-patterns catalog showing
+  how common constructs (repository/store, workflow/process, policy/rule)
+  are modeled as compositions of the five element types, naming required
+  sub-elements per pattern that keep compositions independently
+  buildable-and-testable. The catalog is guidance for authors, not gate
+  rules; it grows as new constructs recur, capturing knowledge rejected
+  types would have named.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T7"

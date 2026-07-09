@@ -5,6 +5,11 @@ title: Gate policies support fixed role-mapping and committee approval
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Gate engine supports two configurable-per-artifact-type policies: fixed role-to-
+  approver mapping with domain-based assignment and Arbiter override, and committee
+  gates requiring sign-off from multiple roles; matches enforcement strictness to risk
+  levels at different stages and avoids wedging committee semantics later.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T10-T11"

@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  The capability seam for code-host orchestration. Host-agnostic protocol
+  defining operations for fork/branch/PR lifecycle, reviews (both OAuth
+  user and program-user paths), check administration, team administration,
+  and allowlisted read-only access. Capability-manifest schema declares
+  minimum and optional capabilities. Normalized host-event schema. Every
+  operation enumerates closed typed-error vocabulary. GitHub cloud is v1
+  (per DEC-0172); Bitbucket Data Center deferred. Conformance suite
+  published; local-git fake connector is the reference test double.
 context: integration
 component-type: protocol
 links:

@@ -7,6 +7,12 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Read surface for open CFL- conflict: the tension, each party's intent,
+  the mediation record sourced from session transcripts, and escalation
+  status. Mediation itself happens in-session; this view is where anyone
+  can see where a conflict stands, read-only in v1. Per DEC-0005,
+  DEC-0039, DEC-0073, DEC-0165, DEC-0183, DEC-0184, DEC-0186, DEC-0188.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

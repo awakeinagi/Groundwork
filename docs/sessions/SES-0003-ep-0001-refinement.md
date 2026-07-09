@@ -5,6 +5,15 @@ title: EP-0001 refinement — git model, access, concurrency, validation
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Refined EP-0001 (Artifact Store & Format Engine) to gate-readiness.
+  Established fork-pull model with local agent fork and per-item
+  branches, PR approval as human sign-off, worktree per user session,
+  and typed storage operations preventing agent bypass of approval
+  process. Resolved frictions between PR gates and domain constraints
+  through credential separation and mechanical-diff CI checks. Also
+  captured additional guidance for ranking spike SP-0001. Produced 8
+  decisions.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

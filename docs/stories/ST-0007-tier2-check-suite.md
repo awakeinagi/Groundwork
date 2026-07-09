@@ -7,6 +7,20 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Provides the required PR checks that make merge-to-main meaningful:
+  successor of check_links.py covering graph integrity, completeness,
+  provenance, append-only verification, and mechanical-diff validation.
+  Runs on every gate PR, blocks merge on failure. Checks cover ID uniqueness,
+  link/citation resolution, work traceability to goals, decision derivation,
+  impact-link reciprocity and same-type rule, approved-artifact conflicts,
+  required body sections, and component contract-item citations. Verifies
+  session-file diffs are append-only. Parses component Design Elements
+  sections: every type resolves against element-type enum, each element's
+  contract obligations present, API schemas resolve, item IDs well-formed,
+  Implementation Guidance cites decisions. Each element links to implementing
+  stories. Release-scoping checks on deferred status and release labels.
+  Validates trigger-registry format and cross-references.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

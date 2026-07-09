@@ -7,6 +7,14 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  The centralized doc store is the single source of truth for the grounding
+  chain (goal→epic→story→component). Jira is a projection only. People
+  interface via Groundwork UI; direct Jira edits are drift, detected and
+  reconciled toward canonical docs. Preserves alignment with business
+  intent — the system's core purpose — by authorizing exactly one place.
+  Implies Jira connector needs drift detection and reconciliation flow, and
+  UI must be good enough that people prefer it.
 source-span: "SES-0001 @ T2-T3"
 links:
   derives-from: [SES-0001]

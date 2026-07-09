@@ -7,6 +7,13 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Single place where all six infrastructure Port contracts are bound to
+  concrete Adapters at process startup from a structured deployment
+  config file, so every story in this epic and every engine epic's Port
+  rides one config-swappable seam. Composes the standalone Groundwork
+  application itself. Per DEC-0001, DEC-0102, DEC-0121, DEC-0122,
+  DEC-0124, DEC-0152, DEC-0201, DEC-0203, DEC-0204, DEC-0206, DEC-0209.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

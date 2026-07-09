@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Infrastructure seam for ephemeral coordination state and general caching.
+  Operations: get, set (TTL-scoped, required), delete (idempotent),
+  set-if-absent (atomic coordination lock primitive). All keys TTL-scoped;
+  no permanent-key mechanism. Lazy expiry on read returns not-found
+  immediately. Best-effort periodic sweep job reclaims expired rows. No
+  cross-key ordering or transactional guarantees across keys. V1 default
+  Adapter: sibling table on co-located DuckDB. Conformance suite published
+  with port.
 context: platform
 component-type: protocol
 links:

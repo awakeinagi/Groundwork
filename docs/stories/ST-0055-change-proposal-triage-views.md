@@ -6,6 +6,12 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2. UI over Change Proposal triage from ST-0039:
+  list, filter, and act on CP- artifacts with triage actions calling the
+  backend typed operations rather than a parallel write path, and
+  session triage action opening intake-opened sessions from the CP. Per
+  DEC-0047, DEC-0073, DEC-0100, DEC-0133, DEC-0277.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

@@ -5,6 +5,11 @@ title: A consolidation memory layer keeps agent retrieval lean and fresh
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Consolidation memory layer maintains curated reference material on frequently
+  traveled artifact graph paths, pinned to source git refs; stale consolidations
+  regenerated or retired mechanically, never served; kept non-citable to
+  preserve provenance chain integrity.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T9"

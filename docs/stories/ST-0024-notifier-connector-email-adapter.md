@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Delivery seam for person-targeted notifications: notifier connector
+  contract defining delivery operations and capability manifest, v1 email
+  adapter. In-app notification center remains source of truth. Respects
+  per-user channel preferences with digest/batching. Delivery success/failure
+  reported back; failed delivery never loses the notification.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

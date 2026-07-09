@@ -5,6 +5,10 @@ title: Jira issues carry summary plus link back; component docs get no Jira issu
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Jira issues carry title, summary, status, and link to canonical doc with ID
+  in custom field; component docs get no Jira issues; full detail lives only
+  in doc store to minimize drift surface between systems.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T6-T7"

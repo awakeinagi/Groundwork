@@ -5,6 +5,13 @@ title: An amends link type for partial supersession is evaluated by spike SP-000
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  SP-0006 is a timeboxed spike evaluating amends link type: staleness
+  semantics, checker rules, graph-tool support, migration of existing
+  narrowing decisions, and whether the DEC-0157 sweep covers the need
+  at acceptable cost. Adoption, if any, is a decision the spike
+  produces. Vocabulary changes ripple through spec, checker, and graph
+  tool.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0027 @ T2-T3"

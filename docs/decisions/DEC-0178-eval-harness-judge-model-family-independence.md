@@ -5,6 +5,11 @@ title: Eval harness enforces judge-model independence via config-declared model-
 status: accepted
 owner: ds-lead
 created: 2026-07-08
+overview: >-
+  Enforces DEC-0058's judge-model independence requirement via
+  config-declared model-family check: the harness refuses to run
+  faithfulness evals when the judge and session model families match.
+  Constrains evaluation harness configuration and gating behavior.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0033 @ T2-T3"

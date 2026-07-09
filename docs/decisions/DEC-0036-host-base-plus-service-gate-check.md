@@ -5,6 +5,11 @@ title: Gate policies enforce via host branch protection plus a service-computed 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Gate policies enforce via two layers: host branch protection for coarse CODEOWNERS-style
+  path-based rules with approval counts, plus service-computed gate-policy status check for
+  richer rules (domain-conditional approvers, role verification, quorum); neither alone
+  suffices—host provides tamper-resistance, service provides expressiveness.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0004 @ T2-T3"

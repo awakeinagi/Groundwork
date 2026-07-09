@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  V1 reference adapter for CMP-0005 (Code-Host Connector Protocol),
+  targeting GitHub cloud. Implements full protocol via REST/GraphQL
+  against GitHub cloud, with dual GitHub Apps (Orchestrator for writes,
+  Reader for allowlisted read-only access). Check-run result posting,
+  required-check registration via classic branch protection. Every GitHub
+  error maps to closed typed-error vocabulary. Idempotency on natural-key
+  creation via check-before-create. Capability manifest declares
+  native-path-scoped reviewers (CODEOWNERS) and team-sync support when
+  org-level members permission granted.
 context: integration
 links:
   derives-from: [EP-0005]

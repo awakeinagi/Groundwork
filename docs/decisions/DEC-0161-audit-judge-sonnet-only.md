@@ -5,6 +5,13 @@ title: The decision-recall audit judge runs on Sonnet 5 only, never Opus-class
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The decision-recall audit's judge subagent always runs on Sonnet 5
+  model (supersedes DEC-0137's Opus split). Lists ≤15 run one Sonnet 5
+  judge; lists >15 shard into batches of ~8, each judged on Sonnet 5.
+  One candidate per agent remains forbidden. All other clauses of
+  DEC-0137 (retrieval, finding cap, dispositions, complement status)
+  stand unchanged.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0028 @ T1-T3"

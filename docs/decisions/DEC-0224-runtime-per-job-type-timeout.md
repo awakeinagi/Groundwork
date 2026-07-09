@@ -5,6 +5,12 @@ title: Background Job Execution Runtime enforces a configurable per-job-type exe
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Each registered handler declares or defaults to a runtime-wide fallback
+  maximum execution duration; the runtime cancels handlers exceeding it and
+  calls QueuePort.nack as if the handler had raised an exception. A concurrency
+  bound eroded by hung jobs isn't a real bound. Timeout-triggered nack reuses
+  the existing failure-handling path rather than inventing a second mechanism.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0042 @ T1-T2"

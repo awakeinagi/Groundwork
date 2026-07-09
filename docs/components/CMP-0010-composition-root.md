@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Single place where all six infrastructure Port contracts bind to concrete
+  Adapters at process startup, from structured YAML deployment config.
+  Produces typed ApplicationContainer holding Port-typed references for
+  constructor injection; consumers never know which Adapter is bound.
+  Owns deterministic process startup/shutdown lifecycle ordering: open
+  resources, bind Adapters, build services, start JobRuntime; on shutdown,
+  reverse sequence. Fail-fast validation: unknown Adapter or missing field
+  aborts startup. Adapter selection never from environment variables.
 context: platform
 links:
   derives-from: [EP-0008]

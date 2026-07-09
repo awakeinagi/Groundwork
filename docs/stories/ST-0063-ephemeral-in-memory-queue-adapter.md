@@ -6,6 +6,12 @@ status: deferred
 release: "backlog"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to backlog. asyncio.Queue-backed alternate Adapter for the
+  Queue Port—a real, useful option (e.g. tests, local dev) but not the
+  v1 default. Jobs do not survive process restart, documented as the
+  Adapter's defining trade-off against the durable default. Passes the
+  Queue Port's conformance suite when built. Per DEC-0204.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

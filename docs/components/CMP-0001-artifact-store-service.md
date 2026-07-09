@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  The single write authority for the Canonical Store, orchestrating the
+  fork-pull git model. Owns schema validation, artifact-ID allocation,
+  item-branch and session-worktree management, mechanical writes, and
+  change-event emission. Comprises six services (SchemaValidator,
+  StorageService, BranchOrchestrator, WorktreeManager, IdAllocator,
+  MechanicalWriteService) plus CheckSuite for graph integrity, entities
+  and values. Graduated seams for ChangeEvent and AppDatabasePort
+  to their own components per DEC-0134 and DEC-0135.
 context: canonical-store
 links:
   derives-from: [EP-0001]

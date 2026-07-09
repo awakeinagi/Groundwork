@@ -7,6 +7,11 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Operational side of conflict governance: the `conflicts-open` check
+  that blocks merges of contested artifacts, the Arbiter's escalation
+  queue, and per-artifact timeout-to-default election with System
+  Decisions. Enforces blocking, never mediation.
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]

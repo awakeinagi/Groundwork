@@ -5,6 +5,11 @@ title: All exported components are client-component boundaries; no server-prefet
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Every exported component is marked 'use client' and renders entirely
+  client-side within the host's server-component tree. v1 ships no
+  RSC-compatible server-side data-fetching helpers. Simplifies the
+  integration contract.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0034 @ T2-T3"

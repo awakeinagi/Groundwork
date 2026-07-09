@@ -5,6 +5,13 @@ title: Element-first contract layout with element-scoped item IDs
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Inside a CMP, the Design Elements section iterates elements; each
+  element carries its own contract block with element-scoped item IDs
+  (e.g., StorageService.B-3: B=behavior, A=API, D=data). A Component
+  Invariants section (C-<n>) holds cross-element guarantees. This replaces
+  three global Behavior/API/Data Contract sections, keeping contracts
+  local to what they describe while one gate ratifies a coherent whole.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T3-T5"

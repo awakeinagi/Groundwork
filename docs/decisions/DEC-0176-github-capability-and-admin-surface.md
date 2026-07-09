@@ -5,6 +5,12 @@ title: CMP-0009 introspects team_sync at install time, declares review_dismissal
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Settles four capability and administration questions for CMP-0009:
+  team_sync via runtime permission introspection, review_dismissal
+  declared true, classic branch-protection API for A-7, and
+  per-installation webhook secrets. Constrains the manifest's
+  capability declarations and administration surface.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0032 @ T4-T5"

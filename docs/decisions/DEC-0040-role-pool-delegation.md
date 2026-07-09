@@ -5,6 +5,11 @@ title: Role-pool approval by default; explicit time-bounded delegation for exclu
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Role-pool approval by default—any role member satisfies gate, domain mapping
+  expresses preference not exclusivity; exclusivity supported via explicit time-bounded
+  delegation entries edited through governance PR flow; no new mechanism for common
+  case with auditable exceptions for rare ones.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0004 @ T4-T5"

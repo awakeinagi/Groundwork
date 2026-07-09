@@ -5,6 +5,14 @@ title: System Decisions ride the auto-PR machinery with a template-conformance c
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Gate engine drafts each System Decision from fixed template citing the
+  artifact's timeout election and configured default rule, routing it through
+  existing auto-PR machinery: program-user approval gated by deterministic
+  template-conformance check. No new write path; mechanical allowlist
+  untouched. Reuses verified-fallback pattern already trusted for protected
+  mains: machine verification replaces human approval where human could not
+  meaningfully reject. PR history keeps every auto-resolution visible.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T2-T3"

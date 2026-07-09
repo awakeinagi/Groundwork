@@ -10,6 +10,14 @@ artifact files fail the checker, and every bare ID must resolve; links
 are still used for non-artifact files and URLs. Frontmatter values stay
 bare IDs.
 
+Every artifact carries a frontmatter `overview:` — self-sufficient
+plain prose, **max 250 words**, no markdown, bare IDs allowed
+(DEC-0284, DEC-0286; checker-enforced per DEC-0287). It is derived,
+non-normative content: never citable, body wins on conflict
+(DEC-0285). Any edit that changes the artifact's meaning updates the
+overview in the same edit (DEC-0288). Per-type guidance is inline in
+each template below.
+
 ## Contents
 
 [Business Goal](#business-goal-bg) · [Epic](#epic-ep) · [Story](#story-st) ·
@@ -31,6 +39,9 @@ status: draft
 owner: [approver person/role]
 sponsor: [named stakeholder who owns the intent]
 created: [YYYY-MM-DD]
+overview: >-
+  [≤250 words, self-sufficient: the business intent, who it serves, the
+  headline outcomes, and where the goal currently stands.]
 links:
   derives-from: [SES-0001]
 cites: [DEC-0001, DEC-0002]
@@ -126,6 +137,9 @@ title: [Coherent body of work]
 status: draft
 owner: [approver role]
 created: [YYYY-MM-DD]
+overview: >-
+  [≤250 words: what the epic delivers and for whom, its bounded context,
+  and where it stands (derived work, open risks).]
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]
@@ -172,6 +186,10 @@ status: draft            # deferred if out of the current release
 # release: "2"           # only when deferred: declared release or backlog
 owner: [approver role]
 created: [YYYY-MM-DD]
+overview: >-
+  [≤250 words: the change and its value, the shape of its acceptance
+  criteria, which components it touches, and its disposition (e.g.
+  deferred behind a trigger).]
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
@@ -216,6 +234,9 @@ status: draft
 owner: [role]
 created: [YYYY-MM-DD]
 timebox: [e.g. 3d]
+overview: >-
+  [≤250 words: the research question, why it blocks sibling work, and —
+  once complete — the answer and resulting decisions.]
 links:
   derives-from: [EP-0001]   # or [BG-0001] for cross-cutting spikes
   satisfies: [BG-0001]
@@ -252,6 +273,9 @@ status: draft
 owner: [approver role]
 created: [YYYY-MM-DD]
 context: [bounded context]
+overview: >-
+  [≤250 words: what the component is, what its contract covers (element
+  inventory in broad strokes), and its refinement state.]
 # component-type: protocol  # ONLY on standalone element CMPs (graduated
 #                           # seams): entity|value|service|event|protocol
 links:
@@ -329,6 +353,9 @@ participant: [named person]
 participant-role: stakeholder   # | product-owner | eng-lead | ds-lead | arbiter
 facilitator: [agent + model]
 transcript-fidelity: reconstructed   # | verbatim
+overview: >-
+  [≤250 words: what the session set out to refine, what it settled, and
+  what it produced (decisions, ideas, conflicts).]
 links:
   relates-to: [BG-0001]
 ---
@@ -370,6 +397,9 @@ created: [YYYY-MM-DD]
 decided-by: [named person]
 decided-on: [YYYY-MM-DD]
 source-span: "SES-0001 @ T2-T3"
+overview: >-
+  [≤250 words: the decision in one breath, plus what it constrains or
+  unlocks downstream.]
 links:
   derives-from: [SES-0001]   # or [SP-....]
   supersedes: []
@@ -403,6 +433,9 @@ title: [The tension in one line]
 status: open            # open | mediating | escalated | resolved
 owner: [arbiter, once escalated]
 created: [YYYY-MM-DD]
+overview: >-
+  [≤250 words: the tension, the parties and their intents, and the
+  mediation/resolution state.]
 links:
   relates-to: [BG-0001, BG-0002]   # ALL artifacts in tension
 ---
@@ -437,6 +470,9 @@ source: ui-suggestion      # | jira-drift | implementation-feedback
                            # | unauthorized-attempt (DEC-0262)
 proposed-by: [person]
 triage: pending            # pending | mechanical | session | rejected
+overview: >-
+  [≤250 words: the proposed change, where it arose, and its triage
+  state.]
 links:
   relates-to: [EP-0001]
 ---
@@ -464,6 +500,9 @@ status: captured           # captured | taken-up | declined
 owner: [proposer]
 created: [YYYY-MM-DD]
 proposed-by: [person]
+overview: >-
+  [≤250 words: the idea in brief, its spark context, and its
+  disposition.]
 links:
   derives-from: [SES-0001]   # the spawning session, when there is one
   relates-to: []             # artifacts the idea appears to touch
@@ -498,6 +537,9 @@ title: [Neighborhood summarized]
 status: fresh              # fresh | stale
 owner: [maintainer]
 created: [YYYY-MM-DD]
+overview: >-
+  [≤250 words: the graph neighborhood covered, for which audience, and
+  freshness state.]
 sources:
   - id: BG-0001
     ref: [git sha]

@@ -5,6 +5,16 @@ title: Synthesis runs incrementally per session close, over a shared visible dra
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Synthesis runs as each session closes: the agent merges new material into
+  the item draft on the item branch, runs conflict detection against prior
+  sessions' decisions, and on divergence opens the mediation flow with affected
+  participants (DEC-0005). The evolving synthesized draft is visible to all
+  participants for async comment; comments enter as Change Proposals (DEC-0047).
+  The PR gate sees one coherent draft plus full multi-session provenance. This
+  surfaces conflicts while intent is warm, not weeks later, and keeps
+  participants invested without the anchoring risk of live co-editing since
+  sessions themselves remain independent 1:1 conversations.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0006 @ T2-T3"

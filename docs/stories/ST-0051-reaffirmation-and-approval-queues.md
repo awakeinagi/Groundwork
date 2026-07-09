@@ -6,6 +6,13 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2. Queue view listing every artifact awaiting
+  re-affirmation or approval, ordered by impact rank so approvers clear
+  items that unblock the most downstream work first. Derived, read-only
+  view computed from artifact status and impact graph with no
+  queue-membership state of its own. Per DEC-0038, DEC-0041, DEC-0073,
+  DEC-0100, DEC-0133, DEC-0147.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

@@ -5,6 +5,16 @@ title: A six-seam vertical-slicing catalog is adopted for epic derivation
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Adopts a six-seam vertical-slicing catalog for epic derivation:
+  Access, Timeline, Protocol, Integration, Sophistication, and
+  Bounded-Context/Domain-Capability. Each documented with Rule,
+  Examples, and Why-this-seam-works explanation. Corrects terminology:
+  seam-based practice named vertical slicing; anti-pattern named
+  horizontal (layer) slicing, matching standard usage. Sophistication
+  seam carries explicit caveat that baseline error handling stays
+  inside core epic. Creates references/epic-slicing-seams.md. Status
+  accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0036 @ T1-T3"

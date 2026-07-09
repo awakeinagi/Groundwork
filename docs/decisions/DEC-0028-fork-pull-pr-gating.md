@@ -5,6 +5,11 @@ title: Fork-pull git model with branch-per-item; PR approval is the gate
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Fork-pull git model with branch-per-item; opening item branch opens PR against
+  upstream main; PR approval is human sign-off for designs; only approved versions
+  merge to main; ratification becomes durable host-native audit record with drafts
+  isolated by construction.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T3"

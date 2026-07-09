@@ -5,6 +5,13 @@ title: The code-host connector protocol adopts typed error conditions and natura
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Every CMP-0005 operation enumerates typed error conditions (not-found,
+  permission-denied, conflict, capability-unsupported, rate-limited)
+  that adapters map host-native errors onto; no host-specific exception
+  crosses the seam. Creation operations with natural key (fork, branch,
+  PR) are idempotent on that key: retrying succeeds returns existing
+  resource rather than erroring or duplicating.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0030 @ T1"

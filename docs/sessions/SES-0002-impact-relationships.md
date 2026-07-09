@@ -5,6 +5,15 @@ title: Impact relationships between same-level artifacts
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Extended the artifact model to capture impact relationships between
+  same-level artifacts at each hierarchy level (goals, epics, stories,
+  spikes). Established reciprocal impacts/impacted-by fields with
+  consistency enforced by the link checker; semantics: X impacts Y means
+  decisions refining X constrain or shape Y. Seeded initial impact edges
+  across epics; cycles exist (EP-0001↔EP-0003, EP-0002↔EP-0006),
+  indicating naive topological ordering insufficient. Produced spike
+  SP-0001 to develop a ranking algorithm. No conflicts.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

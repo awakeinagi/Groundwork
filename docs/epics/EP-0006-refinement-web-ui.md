@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-05
+overview: >-
+  A TypeScript web application providing the user interface where
+  stakeholders interact directly with Groundwork. The v1 scope includes
+  a structured-hybrid session experience with typed conversation cards,
+  artifact views with provenance drill-down, gate review surfaces
+  wrapping pull requests in semantic diffs, and an in-app notification
+  center. Post-v1 features include governance dashboards,
+  re-affirmation queues, profile management, and consolidation review.
+  Built modularly against session-engine, storage, governance, graph,
+  and retrieval contracts to remain pluggable.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

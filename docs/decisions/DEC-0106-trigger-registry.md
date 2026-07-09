@@ -5,6 +5,13 @@ title: Trigger registry — docs/TRIGGERS.md with parseable entries, armed-only 
 status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Establishes a single trigger registry at docs/TRIGGERS.md with parseable
+  entries using strict regex-extractable format. Each entry: heading with
+  TRG-nnnn ID and status (armed/fired/retired), required Condition, Consequence,
+  and Cites fields. Armed-only context loading pulls only active entries so
+  tooling can retrieve trigger conditions into agent context without excessive
+  token use. Superseded by DEC-0109 which adds subscriptions.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0017 @ T3-T5"

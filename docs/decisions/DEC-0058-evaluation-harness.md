@@ -5,6 +5,16 @@ title: An evaluation harness gates strategy-pack changes and LLM swaps
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The evaluation harness in EP-0002's scope covers: distillation faithfulness
+  (independent judge verifies each decision is supported by its cited turn span),
+  grilling quality (coverage, dependency ordering, recommended-answer discipline
+  on benchmark scenarios), and guardrail behavior (DEC-0054). Strategy-pack
+  changes and LLM swaps cannot merge without passing evals—the tier-2 pattern
+  (DEC-0034) applied to methodology. Additionally, periodic drift audits
+  re-run distillation from raw transcripts and diff against accepted decisions.
+  This catches methodology regressions by harness rather than annoyed
+  stakeholders, exactly when trust in the system is being established.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0006 @ T4-T5"

@@ -7,6 +7,13 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  Business stakeholders interact with the agent directly, with no technical
+  facilitator in the loop, from the first release. Sponsor accepted higher
+  quality bar over facilitated on-ramp. Raises stakes for mediation
+  (DEC-0005) and gates (DEC-0006) as quality backstops. Session agent, UI,
+  and guardrails must be production-grade at v1; the agent cannot rely on
+  human rescue for confused sessions.
 source-span: "SES-0001 @ T2-T3"
 links:
   derives-from: [SES-0001]

@@ -5,6 +5,13 @@ title: NotifierConnector protocol stays in CMP-0008; graduation revisited at EP-
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The NotifierConnector protocol stays inside CMP-0008. The only direct
+  consumer is the future notification center component (under EP-0006, no CMP
+  yet). CMP-0004 goes through the center, not directly through the protocol.
+  One future consumer does not trigger the graduation rule (DEC-0136). Revisit
+  when EP-0006's component boundary crystallizes and a second direct consumer
+  is identified.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0046 @ T1-T2"

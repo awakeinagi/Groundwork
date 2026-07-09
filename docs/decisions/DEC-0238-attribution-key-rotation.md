@@ -5,6 +5,12 @@ title: The attribution block carries a key_id; deployment config holds the order
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The attribution-block schema carries a key_id; deployment configuration holds
+  an ordered list of active public keys keyed by id. The verifier (CMP-0004)
+  verifies against the key matching the block's key_id. Rotation: add the new
+  key to the list, re-key the signer, retire the old key once open PRs drain.
+  Enables key rotation without invalidating attribution on every open PR.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T3-T4"

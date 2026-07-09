@@ -6,6 +6,18 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-07
+overview: >-
+  Covers the machinery needed when a SPEC document changes after launch:
+  existing artifacts validate against old schema while new writes need the
+  new one. Requires schema versioning, corpus migration (or explicit
+  grandfathering rules), and tier-1/tier-2 behavior during transition
+  window. Schema assets carry version; validation library knows which
+  version governs each artifact. SPEC changes ship with either mechanical
+  corpus migration or explicit grandfathering rule — never silent breakage
+  of existing artifacts. Deferred to backlog, subscribed to trigger
+  TRG-0005 (first post-launch SPEC change). Revival refines the sketch
+  acceptance criteria in current context per DEC-0097 revival-at-draft
+  rule.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

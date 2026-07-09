@@ -5,6 +5,17 @@ title: Groundwork inception grilling session
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  The inception grilling session for Groundwork, conducted
+  dependency-ordered with recommended answers per question. The sponsor
+  refined and confirmed core design decisions: standalone application,
+  doc store as canonical truth, unsupervised 1:1 sessions, gates at
+  every stage, impact analysis on goal changes, git-backed markdown
+  storage, typed links with stable IDs, contract-complete component
+  docs, Python backend with TypeScript frontend, full dogfooding, and a
+  v1 vertical slice of goal refinement end-to-end. Produced 25
+  decisions and confirmed shared understanding to proceed. Transcript
+  reconstructed (predates the application).
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

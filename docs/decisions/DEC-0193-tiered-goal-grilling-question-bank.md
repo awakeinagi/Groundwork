@@ -5,6 +5,16 @@ title: Goal-grilling questions are tiered by confidence and consolidated into a 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Consolidates goal-level questions into a new file
+  references/goal-grilling-questions.md, tagged [High], [Medium], or
+  [Low] confidence. Volatility runs High to Low as questions get more
+  concrete; High-tier answers treated as settled once confirmed;
+  Low-tier answers provisional, expected to be revised at Epic/Story/
+  Spike level. Separates stable process document from frequently-tuned
+  content document, giving facilitator and approver explicit vocabulary
+  for precision at each question. Constrains SKILL.md reference map and
+  Goal playbook. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0035 @ T15-T18"

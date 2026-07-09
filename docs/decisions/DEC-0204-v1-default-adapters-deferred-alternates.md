@@ -5,6 +5,15 @@ title: V1 default adapters for Queue and KV-store; alternates deferred
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Queue v1 default: durable, app-database-backed queue table (DuckDB);
+  in-memory asyncio.Queue deferred. KV-store v1 default: KV table on
+  same DuckDB; dedicated embedded KV library deferred. Deferred
+  alternates not trigger-subscribed, revived manually if needed. Keeps
+  v1 to one default per Port, matching BG-0001's goal refinement
+  end-to-end v1 slice; durable default for Queue since jobs shouldn't
+  silently vanish on restart. Constrains EP-0008's Scope. Status
+  accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0038 @ T2-T3"

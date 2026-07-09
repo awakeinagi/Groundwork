@@ -5,6 +5,13 @@ title: The attribution block stays a CMP-0007 element; CMP-0004 consumes it as a
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The AttributionBlock value element stays in CMP-0007 (Identity). CMP-0004
+  (Gate Engine) adds a depends-on edge consuming its schema and verification
+  items. This is the recorded outcome of the graduation review for this element.
+  One external consumer does not meet the more-than-one-CMP bar; the block's
+  signing rules are inseparable from the review-delegation service that
+  produces it.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T1-T2"

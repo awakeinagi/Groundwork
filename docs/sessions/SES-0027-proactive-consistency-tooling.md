@@ -5,6 +5,15 @@ title: Proactive consistency tooling — relates-to sweep, identifier co-occurre
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Converted the SES-0026 audit incident (DEC-0151 partially superseding
+  DEC-0048 with artifacts still naming the cancelled operation) into
+  systematic prevention. Shipped two tools: sweep (relates-to trigger on
+  decision distillation) and terms (identifier co-occurrence index
+  matching containment semantics). Opened spikes for partial-supersession
+  link type (amends/narrows) and contract-item-level graph nodes. All
+  required steps after decision distillation per SKILL.md. Produced
+  DEC-0157-DEC-0160.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

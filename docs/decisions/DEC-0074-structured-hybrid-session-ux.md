@@ -5,6 +5,14 @@ title: Sessions use a structured-hybrid UX with notes, free-text, and elaboratio
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Sessions use a structured-hybrid UX mixing free chat with typed
+  interaction cards—question cards and decision-playback cards—plus a
+  persistent progress panel. Every question card guarantees three
+  affordances: notes/clarifications on predetermined choices, free-text
+  response option, and elaboration-on-demand expansion. Structured cards
+  make recommendations visible and answers precise while guaranteeing
+  users are never boxed in.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0010 @ T2-T3"

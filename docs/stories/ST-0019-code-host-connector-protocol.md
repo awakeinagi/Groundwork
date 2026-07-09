@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Host-agnostic connector protocol seam: operation families (fork
+  provisioning, branch/PR/review/check operations, team administration,
+  read-only browse/search), capability manifest schema with documented
+  minimum set, normalized webhook event schema, and conformance suite
+  that qualifies any adapter. Local-git fake passes in full.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

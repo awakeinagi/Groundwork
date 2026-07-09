@@ -7,6 +7,13 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  Groundwork is built as a standalone application with web UI, backend
+  services, and connector integrations, not skills operating on git repos.
+  Business stakeholders must interact directly and unsupervised with the
+  system; they will not work in a terminal. A skills-first approach cannot
+  deliver that experience. Implies real application concerns (auth, roles,
+  production-grade sessions) arrive early.
 source-span: "SES-0001 @ T2-T3"
 links:
   derives-from: [SES-0001]

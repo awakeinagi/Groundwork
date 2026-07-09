@@ -5,6 +5,14 @@ title: The graph index gains MENTIONS edges and reciprocity audits
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  groundwork_graph.py indexes every bare artifact ID in body prose (code
+  spans and fenced blocks excluded, notation per DEC-0242) as a MENTIONS
+  edge. The gaps command gains reciprocity audits mirroring checker
+  rules: children unlisted in parents (DEC-0246), dead/missing cites
+  (DEC-0247), impactor edges without impactor prose (DEC-0249), and
+  session relates-to targets unmentioned (DEC-0250). Respects DEC-0063's
+  boundary. Makes every reciprocity question a two-line Cypher query.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0049 @ T3-T4, T8-T11"

@@ -5,6 +5,14 @@ title: release frontmatter field with SemVer-prefix values plus reserved backlog
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Stories and epics may carry a release frontmatter field with value either
+  the reserved label backlog ("wanted, no target release yet") or a SemVer 2.0
+  version core prefix: MAJOR, MAJOR.MINOR, or MAJOR.MINOR.PATCH with no v
+  prefix, pre-release, or build metadata. Partial values are scopes, not
+  versions. Absence means current release. An epic's release is the default
+  for stories deriving from it. An artifact with non-current release must be
+  deferred; a deferred artifact must carry a release label.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0016 @ T3-T5, T9-T11"

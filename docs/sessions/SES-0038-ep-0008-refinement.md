@@ -5,6 +5,16 @@ title: Backend Application Platform epic refinement
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Refined EP-0008 (Backend Application Platform) using redesigned
+  goal-template process, Protocol Seam guidance, and deliverable-coverage
+  checks. Settled composition-root split (this epic wires adapters; engine
+  epics own contracts). Added Queue and KV-store Ports to DEC-0121
+  six-port model. Confirmed durable DB-backed Queue and app-database
+  reuse KV-store as v1 defaults; deferred secondary adapters. Opened
+  three spikes (AWS SQS, external KV, KV use-case discovery).
+  Decision-recall audit found missing adapter specifications; addressed
+  in EP-0008's scope. Produced DEC-0201-DEC-0205.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

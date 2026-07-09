@@ -7,6 +7,14 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  The backend platform layer assembling Groundwork's domain engines and
+  integration layer into one running v1 application and exposing it to
+  the UI. Includes the Composition Root binding six Port contracts to
+  concrete Adapters from deployment configuration, the inbound API
+  surface using FastAPI/ASGI/SSE, and two new infrastructure ports —
+  Queue and KV-store — extending the Port family. Identified as a
+  missing piece during SES-0035 retrospective.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

@@ -5,6 +5,14 @@ title: Trigger subscriptions — multi-subscriber triggers and revival unsubscri
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Addressed trigger-registry gaps identified with SP-0002's
+  multi-trigger subscription. Restructured entries as condition plus
+  subscriber list with per-subscription decision citations (arming
+  decision at entry level). Firing revives all subscribers; each revival
+  cites the firing decision. Revival unsubscribes the item from all
+  other triggers (preventing re-revival); an emptied armed trigger
+  auto-retires. Produced 2 decisions.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

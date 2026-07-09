@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-05
+overview: >-
+  EP-0005 delivers Connectors & Identity as pluggable boundary adapters:
+  the code-host connector (fork/branch/PR orchestration, reviews, branch
+  protection, team administration, read-only context access), the
+  work-management connector (projection sync, drift capture, workflow
+  telemetry), the notifier connector (delivery to in-app and external
+  channels), and identity (auth providers, person registry, OAuth
+  linkage). Each sits behind a capability-declaring contract for
+  swappable implementations. v1 targets GitHub cloud; Bitbucket Data
+  Center deferred to backlog. Approved 2026-07-08.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

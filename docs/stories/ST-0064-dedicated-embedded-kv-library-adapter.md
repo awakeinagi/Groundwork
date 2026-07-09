@@ -6,6 +6,13 @@ status: deferred
 release: "backlog"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to backlog. Dedicated embedded KV-store library (e.g.
+  diskcache) as alternate Adapter for the KV-store Port—a real option
+  but not the v1 default. Documents trade-offs against the default
+  (separate storage file, no shared transaction/UnitOfWork scope),
+  satisfies expiry contract by whatever mechanism the library provides,
+  and passes the conformance suite when built. Per DEC-0204, DEC-0211.
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]

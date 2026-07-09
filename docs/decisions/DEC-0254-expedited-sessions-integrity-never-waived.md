@@ -5,6 +5,14 @@ title: Expedited single-round sessions compress grilling but waive no integrity 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  An expedited session is a single-round session: proposal is restated,
+  confirmed once, and recorded—done in minutes. Compresses grilling only.
+  Every integrity step still runs with nothing waived: decisions
+  distilled and confirmed, consistency sweep and terms checks,
+  decision-recall audit, staleness cascade where approved artifacts are
+  modified, link checker before commit. Makes DEC-0252's hard rule
+  livable for small semantic changes; keeps compliance cheap.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T10-T13"

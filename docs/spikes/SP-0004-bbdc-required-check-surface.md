@@ -6,6 +6,18 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Question: do Bitbucket Data Center merge checks and Code Insights
+  suffice as the gate engine's required-check surface? Specifically, can
+  they block merge per-PR, accept re-reported results on state changes
+  (including failing already-green checks), and post results with
+  necessary permissions for five registered checks? Blocks ST-0020 upon
+  revival; the entire gate design routes fine-grained enforcement
+  through service-side required checks because BBDC lacks native
+  path-scoped reviewer requirements. Method registers synthetic required
+  check on real BBDC instance, verifies merge blocking, result
+  re-reporting, permission requirements, and force-push behavior.
+  Deferred to backlog; revived by TRG-0010. Findings pending.
 timebox: 3d
 links:
   derives-from: [EP-0005]

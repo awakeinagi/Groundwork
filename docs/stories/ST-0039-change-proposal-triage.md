@@ -7,6 +7,12 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 created: 2026-07-08
+overview: >-
+  Changes captured outside refinement channels—from Jira drift,
+  shared-draft comments, and implementation feedback—are triaged into
+  mechanical-fix PRs, refinement sessions, or audited rejections, with
+  proposals preserved verbatim and triage rationale recorded on the CP
+  artifact. Per DEC-0047, DEC-0130, DEC-0277, DEC-0278.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

@@ -5,6 +5,11 @@ title: Eval harness requires an authored seed benchmark corpus before it can gat
 status: accepted
 owner: ds-lead
 created: 2026-07-08
+overview: >-
+  Requires a hand-authored seed benchmark corpus (goal-refinement,
+  epic-refinement, story-refinement, conflict-mediation, and CP-triage
+  scenarios) as a v1 acceptance criterion. The harness must not pass
+  pack changes or model swaps until the corpus exists and is exercised.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0033 @ T2-T3"

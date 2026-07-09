@@ -5,6 +5,15 @@ title: Hybrid retrieval — always-on superseded redirect, graph boost, subtree 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Search integrates the graph (read-only) with six semantics: current-truth
+  redirect (superseded hits annotated with successors), graph-boosted artifact
+  ranking (one-hop decay 0.25 over CITES/DERIVES/RELATES_TO/IMPACTS),
+  subtree scoping (--within <ID>), metadata pre-filters (--type, --status,
+  --current, --turns; WHERE clauses before ranking), similar <ID> neighbors,
+  boilerplate deduplication at index time. Default is include-everything +
+  annotate + redirect; pre-filters opt-in. Superseded text often best-matches;
+  history questions legitimate.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T8-T15"

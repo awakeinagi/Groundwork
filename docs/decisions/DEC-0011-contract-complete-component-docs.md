@@ -7,6 +7,15 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  Component Doc must be contract-complete: implementer with doc plus
+  dependency interface contracts (not internals) can implement and test.
+  Behavior, data, API contracts itemized and tied to discussions/decisions
+  that produced them, so agents crawl cross-references for context when
+  needed. Full self-containment pursued iteratively; quality software is
+  priority so fallback stays sanctioned. Prevents divergence risk across
+  parallel agents while crawl keeps missing detail from becoming wrong
+  guess. Formalized in SPEC-component.
 source-span: "SES-0001 @ T6-T7"
 links:
   derives-from: [SES-0001]

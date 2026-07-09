@@ -5,6 +5,16 @@ title: EP-0003 refinement — policy enforcement, governance config, staleness o
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Refined EP-0003 (Governance & Gate Engine) to gate-readiness,
+  reconciling it with the fork-pull PR-gating model. Settled: policy
+  enforcement via host base plus service-computed gate-policy checks,
+  governance-as-code configuration, staleness spread via subtree marking
+  and re-affirmation workflow, conflict escalation via Arbiter queue
+  with blocking check and optional per-artifact timeout resolution,
+  approver delegation via role-pool defaults and time-bounded
+  governance-config entries. Impact-ranked re-affirmation queue
+  ordering uses SP-0001 algorithm. Produced 7 decisions.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

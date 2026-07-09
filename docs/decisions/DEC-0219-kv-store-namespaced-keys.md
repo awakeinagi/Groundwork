@@ -5,6 +5,12 @@ title: KV-store Port keys are (namespace, key) pairs, mirroring AppDatabasePort'
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Every KvStorePort operation addresses a (namespace, key) pair, mirroring
+  AppDatabasePort.A-3's bookkeeping family shape (namespace, key, document).
+  This keeps the two ports' typed operation families consistent and gives each
+  unrelated consumer (rate limiter, lock, cache) a collision-free namespace
+  without inventing per-caller prefixing conventions.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0041 @ T1-T2"

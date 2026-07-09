@@ -5,6 +5,15 @@ title: Queue Port contract refinement
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Refined CMP-0012 (Queue Port) toward contract-completeness from ST-0060
+  and outbox-pattern precedent (DEC-0210). Settled job-type as open
+  string namespace, dead-letter terminal in v1, single deployment-wide
+  retry default, and fixed-envelope job payload (opaque document).
+  Resolved layering ambiguity: Queue adapter is sibling on co-located
+  engine, not routing through AppDatabasePort. Decision-recall audit
+  flagged missing citations and deferral/split decisions; added to
+  cites. No graduation indicated. Produced DEC-0214-DEC-0218.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

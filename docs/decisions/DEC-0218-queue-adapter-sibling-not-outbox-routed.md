@@ -5,6 +5,13 @@ title: Queue Port's durable adapter is a sibling adapter on the co-located DuckD
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The Queue Port's v1 durable adapter is a sibling adapter on the co-located
+  DuckDB engine, not routed through AppDatabasePort operations. DEC-0210's
+  "reuses the outbox pattern" refers to the retry/dead-letter/stale-lease
+  semantics, not implementation on top of AppDatabasePort.A-2. Consistent
+  with KV-store Port precedent: one engine instance, separate Port contracts,
+  zero cross-port operation consumption.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0040 @ T3-T4"

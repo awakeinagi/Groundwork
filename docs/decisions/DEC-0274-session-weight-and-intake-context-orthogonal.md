@@ -5,6 +5,15 @@ title: The session contract models weight and intake-opening context as orthogon
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0274 constrains ST-0032's session contract to model weight and
+  intake-opening context as orthogonal fields: a session kind enum (full
+  | expedited | idea-capture) and an optional intake context (verbatim
+  proposal, proposer, origin: user | agent | cp | idea, source ref when
+  origin is CP or Idea). Expedited and idea-capture sessions always carry
+  intake context; full sessions open either planned or intake-opened.
+  idea-capture stays in the enum for the conversational case; form-shaped
+  capture remains a sessionless mechanical write.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T4-T7"

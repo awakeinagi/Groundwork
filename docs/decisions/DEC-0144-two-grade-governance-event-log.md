@@ -5,6 +5,15 @@ title: The governance event log carries two truth grades — mirrored provenance
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Governance event log carries two truth grades. Provenance-grade facts
+  (approvals, auto-resolutions, stale marks and clears) must land in git or
+  host history first; log only mirrors them; rebuild from git plus host
+  history reconverges on them. Telemetry-grade events (engine-internal
+  operations) are authoritative for dashboards and metrics, lossy on rebuild,
+  never citable as provenance. Extends rebuild-sufficiency spirit honestly
+  instead of pretending notification history lives in git; nothing
+  decision-shaped gains a second truth.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T4-T5"

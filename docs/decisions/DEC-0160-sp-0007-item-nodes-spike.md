@@ -5,6 +5,13 @@ title: Contract-item-level graph nodes are evaluated by spike SP-0007, not adopt
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  SP-0007 is a timeboxed spike prototyping contract-item nodes in
+  graph tool: parse element items (Element.K-n) with per-item decision
+  citations, add item→DEC CITES edges, measure whether item-precise
+  queries pay for added parse fragility and graph size. Findings are
+  design input for EP-0004 Graph Index and the skill tool. Empirical
+  question, not armchair decidable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0027 @ T2-T3"

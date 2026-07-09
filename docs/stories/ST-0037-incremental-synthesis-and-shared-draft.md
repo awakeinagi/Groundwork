@@ -7,6 +7,13 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Merge step turning per-participant 1:1 sessions into coherent item draft:
+  runs on every session close, detects conflicts against prior sessions'
+  decisions, keeps evolving synthesized draft visible to all participants
+  for async comment via Change Proposals. Draft merges into generic item
+  branch or user-suffixed branch on conflict. Full multi-session provenance
+  presented to PR gate.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

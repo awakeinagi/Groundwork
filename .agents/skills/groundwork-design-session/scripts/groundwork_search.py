@@ -268,6 +268,20 @@ def two_tier(store, rows, sims, k, boost=True, redirect=None):
     return out
 
 
+def attach_overviews(store, entries):
+    """Include each hit's overview (DEC-0290) — read from the file at
+    emit time so the index stays overview-free and disposable."""
+    for e in entries:
+        row = store.db.execute("SELECT file FROM meta WHERE artifact=?",
+                               [e["artifact"]]).fetchone()
+        if not row:
+            continue
+        fm, _ = parse_doc(store.root / row[0])
+        ov = fm.get("overview")
+        if ov:
+            e["overview"] = " ".join(str(ov).split())
+
+
 def considered_set(fm, body, redirect):
     ids = set(fm.get("cites") or []) | set(DEC_RE.findall(body))
     for i in list(ids):
@@ -338,9 +352,11 @@ def main():
     s.add_argument("--turns", action="store_true")
     s.add_argument("--within")
     s.add_argument("--no-boost", action="store_true")
+    s.add_argument("--no-overviews", action="store_true")
     m = sub.add_parser("similar")
     m.add_argument("id")
     m.add_argument("--k", type=int, default=8)
+    m.add_argument("--no-overviews", action="store_true")
     a = sub.add_parser("audit")
     a.add_argument("artifact")
     a.add_argument("--k", type=int, default=15)
@@ -387,6 +403,8 @@ def main():
         rows2 = [(i, r) for i, r in enumerate(rows) if r[0] != args.id]
         idxs = [i for i, _ in rows2]
         out = two_tier(store, [r for _, r in rows2], sims[idxs], args.k)
+    if not args.no_overviews:
+        attach_overviews(store, out)
     print(json.dumps(out, indent=2))
 
 

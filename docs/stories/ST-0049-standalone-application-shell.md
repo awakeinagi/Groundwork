@@ -7,6 +7,12 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Thin Next.js App Router application living in the repo, importing
+  every v1 component exclusively from the published npm package with
+  only routing, page layout, and auth/session bootstrapping added—so
+  Groundwork is directly usable without any host app. Per DEC-0184,
+  DEC-0186, DEC-0188.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

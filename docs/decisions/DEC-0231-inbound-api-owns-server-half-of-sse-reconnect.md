@@ -5,6 +5,17 @@ title: The Inbound API owns the server half of SSE reconnect/resume; the client 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Decides that CMP-0011 (backend Inbound API) contracts only the
+  server half of SSE reconnect/resume: emit stable, monotonically
+  ascending event ids; on reconnect carrying Last-Event-ID, resume
+  with no turn dropped or duplicated; return problem+json on
+  handshake failures; never treat reconnect as activity signal. The
+  client-side transport-agnostic abstraction and automatic
+  reconnect-with-backoff are owned by Web UI (EP-0006) and marked
+  Out-of-Scope here. The Last-Event-ID standard contract is the clean
+  boundary between backend and frontend halves, keeping the backend
+  component from owning UI-client behavior.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0044 @ T3"

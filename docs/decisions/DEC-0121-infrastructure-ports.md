@@ -5,6 +5,15 @@ title: Four infrastructure ports — app database, vector store, embedding, grap
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Groundwork exposes four infrastructure ports as Protocol-element seams:
+  app database, vector store, embedding, and graph store, each owned by
+  its respective context. Vector store and app database are deliberately
+  separate even though DuckDB implements both in v1; future deployments
+  may split them without redesign. Consumers program against port contracts
+  only; no adapter touches an engine API directly. Scope binds the
+  Groundwork product; the facilitation skill's local tooling stays
+  hard-wired to its embedded stack for zero-config value.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0020 @ T1-T3, T6-T7"

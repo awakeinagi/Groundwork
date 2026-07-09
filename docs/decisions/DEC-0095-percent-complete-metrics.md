@@ -5,6 +5,14 @@ title: Percent-complete metrics — design % from docs, implementation % project
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Establishes two percent-complete metrics rolled up from element-to-story
+  Implements edges. Design % measures fraction of elements referencing each
+  story that are design-complete (typed contract obligations met, no Pending
+  content), rolled up story → epic → business goal equally. Implementation %
+  joins the same structure against external Jira status, never committing
+  volatile build state into canon. Stories with no referencing element read 0%
+  and flag as uncovered. Both metrics degrade gracefully.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0015 @ T2-T5"

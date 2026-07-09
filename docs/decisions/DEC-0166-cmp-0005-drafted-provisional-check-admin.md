@@ -5,6 +5,13 @@ title: CMP-0005 drafts and gates now; check-administration operations are marked
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  CMP-0005 is drafted in full and gated this session. The
+  check-administration items (A-5, A-6) are explicitly marked
+  provisional; shape may change once SP-0004 reports, at which point
+  CMP-0005 either re-affirms unchanged or amends through a new session.
+  The consumer-side shape is already fixed; only BBDC-side feasibility
+  is unconfirmed.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0030 @ T1"

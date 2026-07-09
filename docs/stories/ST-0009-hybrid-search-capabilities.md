@@ -6,6 +6,18 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-07
+overview: >-
+  Extends hybrid search tooling with three semantic plus graph capabilities
+  tested as promising-but-not-ready in SES-0019 POCs: (1) unlinked-neighbor
+  audit surfacing artifact pairs with high semantic similarity but no graph
+  connection (duplicate-story, missing-edge, conflict candidates); tuning
+  needed for element-mediated paths and content-only comparison. (2)
+  Glossary-drift detection flagging sections semantically close to CONTEXT.md
+  terms that never name them; false-positive rate too high, needs precision
+  bar. (3) Seam-candidate clustering for proposing element seam graduation
+  across Component Docs; untestable with single CMP, needs element-contract
+  embeddings. Deferred to backlog with no trigger subscription; revival by
+  want. POC evidence captured inline for tuning at revival.
 links:
   derives-from: [EP-0007]
   satisfies: [BG-0001]

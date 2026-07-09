@@ -5,6 +5,13 @@ title: Body cross-references must be resolvable markdown links
 status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  In artifact bodies, every cross-reference must be an inline markdown
+  link `[<ID>](relative/path.md)`. Bare artifact IDs outside code blocks
+  and inline code are integrity violations; frontmatter links remain bare
+  IDs per DEC-0009. check_links.py enforces that relative links resolve,
+  link text beginning with an ID targets that artifact, and no bare IDs
+  appear in prose. Superseded by DEC-0091.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0014 @ T2-T3"

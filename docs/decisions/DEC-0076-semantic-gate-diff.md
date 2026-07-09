@@ -5,6 +5,14 @@ title: Gate review renders a semantic diff with agent summary and impact report
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Gate sign-off renders an artifact-aware semantic diff: section-level
+  before/after with changed contract items highlighted, agent
+  plain-language change summary on top, impact report (staleness, affected
+  parties) alongside, and provenance links for every claim. Raw text diff
+  remains one click away; the PR description carries the same summary for
+  host-side reviewers. Semantic rendering makes the human gate a real
+  check, not a rubber stamp.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0010 @ T2-T3"

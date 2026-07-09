@@ -5,6 +5,15 @@ title: KV-Store Port contract refinement
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Refined CMP-0014 (KV-store Port) toward contract-completeness from
+  ST-0062, which pre-resolved the Queue Port's layering ambiguity.
+  Settled key shape as (namespace, key) pair, mandatory TTL on every
+  set(), and atomic set-if-absent primitive for coordination-lock use
+  case. Decision-recall audit surfaced same citation consistency gaps as
+  CMP-0012 (port-graduation pattern and deferral decision); correctly
+  declined to cross-cite Queue Port's adapter pattern since that's
+  Queue-specific. No graduation indicated. Produced DEC-0219-DEC-0221.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

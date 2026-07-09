@@ -5,6 +5,15 @@ title: Frontmatter cites and body prose stay synchronized in both directions
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  For business goals, epics, stories, spikes, and components, both
+  directions are blocking: dead cites (DECs in cites: not in body prose)
+  and missing cites (DECs in prose but not in cites: or frontmatter
+  links). cites: becomes the complete machine-readable considered set,
+  per DEC-0242's notation. Sessions and decisions exempt (sessions use
+  DEC-0250; decisions use relates-to). Remediation applied per instance:
+  genuine governance adds citation; structural governs add provenance
+  note; cruft drops; missing cites added.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0049 @ T4-T11"

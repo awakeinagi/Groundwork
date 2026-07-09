@@ -5,6 +5,17 @@ title: CMP-0007 Identity & Access refinement — structure, seams, and contract 
 status: closed
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Refined CMP-0007 (Identity & Access) with element-graduation findings
+  from approved neighbors. Graduated SecretStore to CMP-0015 (second
+  consumer: CMP-0010 master key). Graduated GovernanceConfig value plus
+  RoleResolution service to new CMP-0016 (duplicate role evaluation
+  tension). Kept AttributionBlock in CMP-0007. Resolved session
+  ownership (opaque server-side handles via app-database bookkeeping),
+  OAuth flow ownership (identity end-to-end), key rotation scheme
+  (key_id in block, active-key list in config), and crypto specificity
+  (contract properties, named defaults as constraints). Produced
+  DEC-0232-DEC-0239.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: "Claude Code (claude-fable-5), groundwork-design-session skill"

@@ -5,6 +5,15 @@ title: The graph engine is selected by spike SP-0002, with openCypher support re
 status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  A timeboxed spike (SP-0002) prototypes the query contract against candidates—
+  embedded graph (KuzuDB), Postgres with Apache AGE/recursive CTEs, and a
+  dedicated graph DB (Neo4j)—on the real bootstrap graph plus synthetic scale.
+  Criteria: openCypher support (hard requirement), overlay/view support,
+  traversal ergonomics, rebuild speed, multi-node story, and on-prem ops burden.
+  Findings become decisions per DEC-0023. Every candidate is plausible; guessing
+  bakes an unvalidated choice into a load-bearing spot—exactly what spikes
+  exist to prevent. Status: superseded.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0007 @ T2-T5"

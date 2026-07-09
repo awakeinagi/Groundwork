@@ -5,6 +5,11 @@ title: Governance configuration lives as versioned files in the canonical repo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Governance configuration lives as versioned files in canonical repo (roles.yaml,
+  domains.yaml, gate-policies.yaml), edited through same PR flow; changing approver
+  rights is itself a gated change owned by Arbiter; full audit trail preserved and
+  repo remains self-sufficient with no second source of truth to drift.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0004 @ T2-T3"

@@ -5,6 +5,12 @@ title: The retrieval layer owns full-text and semantic search over artifact bodi
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The retrieval layer (EP-0007) owns full-text and semantic search over
+  artifact bodies as a derived, rebuildable index. Embedding models are
+  pinned to version; model swaps trigger re-embed batch jobs, never silent
+  mixes. Search infrastructure is evaluated alongside graph choices in the
+  extended SP-0002, supporting cross-goal conflict detection for EP-0002.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0008 @ T2-T3"

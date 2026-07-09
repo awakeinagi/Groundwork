@@ -6,6 +6,13 @@ status: deferred
 release: "2"
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Deferred to release 2 (trigger: release-2 planning). Work-management
+  connector contract with Jira Data Center reference: projection lifecycle
+  (created on first main merge, never in drafts), field-ownership map
+  (canonical-owned title/summary/link, Jira-owned workflow fields).
+  Projection creation writes issue key once to frontmatter via
+  `set-jira-key` operation.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

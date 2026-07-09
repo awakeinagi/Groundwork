@@ -5,6 +5,15 @@ title: Mechanical operations are typed API items sharing one allowlist asset wit
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Each mechanical operation (append-turn, close-session, mark-stale,
+  clear-stale, set-jira-key, set-jira-status, create-change-proposal,
+  set-cp-triage) is its own MechanicalWriteService API item with typed
+  parameters and exact allowed diff shape. The allowlist — operation to
+  permitted fields/append-regions map — is a single published data-contract
+  asset consumed by both the write path and the mechanical-diff validator
+  in the check suite. One source of truth, two consumers, with shared
+  discipline preventing fork.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0022 @ T3-T4"

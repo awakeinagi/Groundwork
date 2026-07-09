@@ -5,6 +5,13 @@ title: Firing or retiring a trigger cites a decision
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Firing or retiring a trigger requires a decision (derived from a session or
+  spike) recording the observation that the condition holds. The consequence
+  executes citing that same decision; since revival already requires a citation,
+  one decision serves both firing and revival with no double ceremony. The
+  registry entry flips to fired/retired with the date, decision link, and
+  outcome. Keeps the registry self-explanatory without git archaeology.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0017 @ T4-T5"

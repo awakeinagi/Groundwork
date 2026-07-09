@@ -5,6 +5,14 @@ title: The index carries frontmatter metadata only; bodies stay in the store
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Nodes carry frontmatter-derived attributes (id, type, status, title, owner,
+  refs); edges carry link type and provenance. Bodies stay in the store: queries
+  return IDs plus metadata, and callers fetch documents through the storage API.
+  Full-text and semantic search over bodies is a separate retrieval concern in
+  EP-0007's neighborhood, not this index. This keeps rebuild fast and the index
+  small, and avoids duplicating body storage that the consolidation and retrieval
+  layer will need to own anyway.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0007 @ T4-T5"

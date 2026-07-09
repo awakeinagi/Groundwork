@@ -5,6 +5,14 @@ title: A session's relates-to targets must appear in its body
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Every artifact in a session's relates-to list must be referenced by
+  bare ID in the session's body. Blocking rule in check_links.py (both
+  copies). For closed sessions, fixes land in Post-Close Enrichment
+  entries per DEC-0248; for new sessions, the template and playbook make
+  the mention part of writing the Purpose section. Matches 76–100%
+  existing convention; ensures session record traces back to its subjects
+  without silent gaps.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0049 @ T6-T7, T10-T11"

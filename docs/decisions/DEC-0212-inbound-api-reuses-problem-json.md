@@ -5,6 +5,15 @@ title: The Inbound API reuses DEC-0127's RFC 9457 problem+json error model
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Every non-2xx response from Inbound API is application/problem+json
+  per RFC 9457, following DEC-0127's established shape (stable type URI
+  per failure class, tier-1 field-level errors in errors[] extension).
+  Inbound API defines surface-specific problem-type vocabulary rather
+  than reusing storage API's types verbatim. One error-model standard
+  for whole application simpler than two competing envelopes for two
+  HTTP surfaces. Constrains ST-0058's Acceptance Criteria. Status
+  accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T3-T4"

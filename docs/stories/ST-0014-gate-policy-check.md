@@ -7,6 +7,23 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Implements the service-computed check that makes PR merges meaningful:
+  evaluates everything richer than the host can express — domain-conditional
+  approvers, role verification against governance/roles.yaml, committee
+  quorum composition by distinct roles. Fails while any ancestor is stale;
+  passes only once every stale ancestor clears. Any role-pool member
+  satisfies gate by default; domain preference affects routing unless
+  policy sets exclusivity flag (only named approver or active delegate
+  passes). Program-user reviews pass only with verified human attribution.
+  Every result carries readable explanation naming governing policy, facts
+  satisfying it, and (on failure) exactly what is missing. Verdicts
+  recompute idempotently on ChangeEvents and webhooks; periodic reconciliation
+  sweep re-verifies all open PRs. Governance merge bulk-recomputes check on
+  every open PR under new policy. On machine-verified path (program-user
+  auto-PRs), check passes with program-user approval when corresponding
+  validator passes; machine verification substitutes for role-pool approval
+  only on these PRs.
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]

@@ -5,6 +5,14 @@ title: Trigger entries hold decision-cited subscriber lists; a firing revives al
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Supersedes DEC-0106, restating the registry with subscriptions. Each trigger
+  entry holds a Subscribers list (one line per subscription: action verb,
+  linked target, and subscription's decision citation). A firing revives all
+  subscribers; the condition holding is a world fact, not specific to one item.
+  Late subscriptions stay individually attributable. One condition, many
+  watchers, with per-subscription provenance keeping "why is this watching
+  this?" answerable per line.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0018 @ T1-T3"

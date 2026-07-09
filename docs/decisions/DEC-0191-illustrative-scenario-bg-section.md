@@ -5,6 +5,14 @@ title: Business Goals gain a non-binding Illustrative Scenario section
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Adopts an Illustrative Scenario section for the Business Goal
+  template: a required non-binding happy-path walkthrough and optional
+  bad-path notes, captured during grilling sessions. The section
+  grounds stakeholder understanding without dragging implementation
+  details into goal-level gating; full edge-case enumeration is
+  deferred to Epic and Story refinement stages. Constrains Business
+  Goal template structure and Epic/Story playbooks. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0035 @ T15-T17"

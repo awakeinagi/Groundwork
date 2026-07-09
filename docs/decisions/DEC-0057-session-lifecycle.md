@@ -5,6 +5,15 @@ title: Sessions stay open across pauses and auto-close on inactivity with partia
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Sessions stay open across pauses by default; resuming re-orients the
+  participant on what's settled and what's open. After a configurable inactivity
+  window the session auto-closes with partial distillation: confirmed decisions
+  commit as accepted, unconfirmed material is marked proposed, and the record
+  notes incompleteness. A later return opens a new session that loads the prior
+  one as context. One sitting-spanning session keeps turn-span citations coherent
+  for a continuous line of inquiry, while auto-close prevents abandoned sessions
+  from accumulating as permanently open provenance.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0006 @ T4-T5"

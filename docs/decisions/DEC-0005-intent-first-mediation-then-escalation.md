@@ -7,6 +7,15 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  On detecting conflict, agent first understands each stakeholder's
+  underlying intention. Informed by that intent, agent explains conflict
+  and offers compromises and alternatives (mediation). If mediation fails,
+  escalates to appropriate team with well-documented Conflict record
+  capturing intents, proposals, and responses. Downstream generation from
+  artifacts in tension is blocked until resolution. Intent-first makes
+  compromises and escalation genuinely informative; pure mediation lacks
+  backstop, flag-and-escalate only forfeits cheap resolutions.
 source-span: "SES-0001 @ T4-T5"
 links:
   derives-from: [SES-0001]

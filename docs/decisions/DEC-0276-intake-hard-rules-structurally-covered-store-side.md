@@ -5,6 +5,15 @@ title: The store already structurally enforces the no-session and mechanical-flo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0276 constrains IDEA-0001's scope by noting that the store already
+  structurally enforces DEC-0252 and DEC-0253: the write topology makes
+  sessionless semantic change abnormal via per-session worktrees and gate
+  PRs; the only sessionless write path is the closed typed
+  mechanical-operation set, which is exactly the mechanical floor; and
+  tier-2 checks verify decisions derive from sessions or spikes. No
+  EP-0001 changes are needed; the correspondence is noted in amended
+  stories.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0052 @ T4-T5"

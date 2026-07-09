@@ -5,6 +5,13 @@ title: A timeboxed spike validates BBDC's required-check surface before the conn
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  SP-0004 is a timeboxed spike against a real Bitbucket Data Center
+  instance validating that merge checks / Code Insights suffice as the
+  required-check surface (per-PR blocking, re-reporting, program-user
+  visibility) before ST-0020 gates. Findings land as decisions. A
+  failed assumption here reworks the gate design; discovering that
+  mid-implementation is expensive.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T2-T3"

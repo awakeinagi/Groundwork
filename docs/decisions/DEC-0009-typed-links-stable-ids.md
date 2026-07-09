@@ -7,6 +7,14 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  Every artifact gets an immutable prefixed ID (BG-0001 etc.). Relationships
+  live in YAML frontmatter as closed typed vocabulary: derives-from,
+  satisfies, depends-on, conflicts-with, supersedes, relates-to, plus cites
+  for Decision citations. Link checker validates graph integrity (no dangling
+  refs, every work artifact traces to goal). Machine traversal (impact
+  analysis, traceability, Graph Index) requires unambiguous semantics;
+  inline wiki-links cannot provide them. Formalized in SPEC-artifact-common.
 source-span: "SES-0001 @ T6-T7"
 links:
   derives-from: [SES-0001]

@@ -5,6 +5,14 @@ title: CPs capture unauthorized change attempts, unifying with ST-0035's out-of-
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  A Change Proposal is created in two situations: out-of-band change
+  intent (reviewer comments, implementation feedback, queued input) and
+  unauthorized change attempts (someone instructs a change they lack
+  authority to approve). The change does not proceed; the CP captures the
+  attempt verbatim awaiting triage/ratification by actual authority
+  holders. A live instruction by authorized user goes straight to
+  session. Unifies with ST-0035 AC2's captured proposal concept.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T7-T8, T12-T13"

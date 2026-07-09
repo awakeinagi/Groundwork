@@ -5,6 +5,13 @@ title: Story design coverage — every approved story referenced by an element
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Requires every approved story to be referenced by at least one design
+  element's Implements line. Enforced at the Component Doc gate: a CMP cannot
+  pass its gate while any story naming that component in Component Impact has
+  no referencing element. A corpus-wide audit surfaces stories with zero
+  referencing elements as gaps (non-blocking). The check makes design
+  completion decidable and ensures story coverage is falsifiable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0015 @ T2-T3"

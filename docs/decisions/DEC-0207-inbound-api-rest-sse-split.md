@@ -5,6 +5,14 @@ title: Inbound API splits into a REST/artifact+gate story and a separate SSE ses
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Inbound API splits into two stories: ST-0058 (REST routes for goal/
+  epic/story/session views and gate actions) and ST-0059 (SSE streaming
+  endpoint for session-engine client). Independently testable and
+  demoable via Data Seam's different-entry-method variant applied to
+  channel. Keeps each story's Acceptance Criteria list tight rather than
+  waiting on streaming's reconnect/backoff details. ST-0059 depends-on
+  ST-0058 and ST-0032. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0039 @ T1-T2"

@@ -5,6 +5,15 @@ title: Goal gates render a mandatory Context Diagram and conditional Process Flo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Mandates a Context Diagram (C4 Level 1 in Mermaid) at Business Goal
+  gate, rendered from System Context answers, showing the system,
+  actors, and external dependencies. Adds an optional Process Flow
+  diagram if the session surfaced enough sequential detail; never
+  fabricates steps. Both diagrams are embedded in the versioned
+  Business Goal doc alongside prose review to catch boundary
+  misunderstandings at gate time. Constrains Goal playbook, Gates
+  section, and Business Goal template. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0035 @ T15-T17"

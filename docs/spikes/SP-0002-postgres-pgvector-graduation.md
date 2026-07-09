@@ -6,6 +6,18 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Question: when a graduation trigger fires, how should Groundwork move
+  from embedded v1 stack (LadybugDB graph, DuckDB app database plus
+  vector search) to Postgres plus pgvector while preserving read-only
+  guarded openCypher, main/branch overlays, session-synchronous writes,
+  deterministic rebuilds, and self-hosted operations? Blocks no current
+  work; multi-node deployment and scale-dependent stories block on its
+  answer when a trigger fires. Method evaluates target choice (Postgres
+  alone vs. Postgres plus graph answer), prototypes openCypher tier and
+  overlays, evaluates pgvector/full-text retrieval, defines migration
+  and rollback. Deferred to backlog; revived by TRG-0001..TRG-0004.
+  Findings pending.
 timebox: 7d
 links:
   derives-from: [EP-0004]

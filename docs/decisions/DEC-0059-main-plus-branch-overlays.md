@@ -5,6 +5,16 @@ title: The index maintains main as base plus an overlay per open item branch
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The index maintains main as the base view plus a lightweight overlay per open
+  item branch (the branch's additions/changes layered over main). Every query
+  names its view: session agents query their item-branch overlay; impact
+  analysis, Handoff Manifests, and Jira sync query main-only. Results tag each
+  node with ref and status so drafts cannot be mistaken for approved artifacts.
+  This gives both consumer classes the reality they need without ambiguity—one
+  base graph with thin overlays avoids the ambiguity of a flattened multi-branch
+  graph where the same artifact differing across branches makes answers silently
+  filter-dependent.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0007 @ T2-T3"

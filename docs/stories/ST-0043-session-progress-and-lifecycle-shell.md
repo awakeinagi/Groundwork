@@ -7,6 +7,12 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Container rendering every session conversation: a progress panel
+  showing settled/open/parked items, and pause/resume handling that
+  re-orients returning participants to what's settled and what's open.
+  Hosts ST-0044's conversation cards inside its content region. Per
+  DEC-0057, DEC-0074, DEC-0182, DEC-0187, DEC-0188.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

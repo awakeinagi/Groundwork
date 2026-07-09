@@ -5,6 +5,16 @@ title: IDEA-0001 take-up — the change-intake workflow in the application
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Session took up IDEA-0001: reflecting the paradigm's intake workflow
+  (SES-0050) in the application's session engine and UI. Refined where
+  intake protocol lives (engine enforces, packs own conversation), how
+  sessions represent kind/intake context, whether idea-capture coexists
+  with typed-mechanical capture paths, and how authority checks and
+  cascade mechanics trigger. Produced 11 decisions (DEC-0273..DEC-0283)
+  and amended 7 stories spanning two epics (ST-0032, ST-0033, ST-0035,
+  ST-0039, ST-0044, ST-0065, ST-0055) plus SPEC-session and SPEC-change-proposal.
+  Second dogfooding of the change-intake protocol.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Code (claude-fable-5)

@@ -7,6 +7,18 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Question: can a declarative pack.yaml schema (phases, stopping criteria,
+  escalation triggers, guardrail policy, context recipe) express real
+  strategy-pack variation, or does real authoring require escaping to
+  general scripting/templating? Blocks ST-0033's schema finalization; a
+  declarative-only schema that cannot express real branching or
+  conditional behavior forces format rework, and every other epic story
+  builds on packs conforming to that format. Method drafts pack.yaml
+  schema per DEC-0053 and ST-0033, designs three diverse pack scenarios
+  (linear grilling, mediation with escalation, CP-triage classification),
+  checks whether each scenario's real behavior is expressible
+  declaratively without escape hatches. Approved status.
 timebox: 3d
 links:
   derives-from: [EP-0002]

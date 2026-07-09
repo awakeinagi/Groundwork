@@ -5,6 +5,12 @@ title: The notifier connector contract is sliced as an EP-0005 story; the epic s
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Story derivation slices a notifier-connector story (contract,
+  capability manifest, v1 email adapter) under EP-0005, and the epic's
+  Scope gains a matching bullet. The assignment was already decided by
+  DEC-0075; parking it would orphan v1 email delivery while the
+  notification center is refined.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T2-T3"

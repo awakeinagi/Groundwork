@@ -5,6 +5,16 @@ title: "CMP-0008 Notification Delivery refinement"
 status: closed
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Refined CMP-0008 from draft stub to contract-complete, fed by approved
+  ST-0024 and ST-0048. Settled protocol stays in CMP-0008 (one future
+  consumer insufficient to trigger graduation). Resolved delivery
+  boundary as resolved channel address (not person-id), pre-rendered
+  content, center-composed routing and batching. Settled idempotency on
+  notification_id per DEC-0167, opaque channel-address strings per
+  adapter interpretation. Decomposed into three elements:
+  NotifierConnector protocol, NotifierCapabilityManifest value,
+  EmailNotifier service (v1 default). Produced DEC-0240-DEC-0241.
 transcript-type: reconstructed
 participants:
   facilitator: claude

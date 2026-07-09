@@ -5,6 +5,14 @@ title: The cross-epic coupling check is generalized to story/spike siblings
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Extends scripts/groundwork_epic_coupling.py with a --type
+  {epic,story} flag to check story/spike siblings. Story mode groups
+  stories and spikes by parent epic's derives-from link. Same
+  mutual-coupling-only, fan-out-as-context design from DEC-0196 carries
+  over unchanged. Regression-tested against existing epic set;
+  smoke-tested against all epics' story/spike sets found zero mutual
+  coupling. Constrains Story playbook and SKILL.md. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0037 @ T2, T6"

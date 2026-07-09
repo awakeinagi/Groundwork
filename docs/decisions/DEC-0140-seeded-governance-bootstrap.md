@@ -5,6 +5,14 @@ title: Governance bootstraps via a seeded init commit before protection is compi
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Deployment-time init command writes the founding governance files — initial
+  Arbiter and role assignments from deployment configuration — directly into
+  repository's initial history, before branch protection is first compiled.
+  First policy compilation then locks gating behind them. Founding state is
+  first commit of audit trail. The chicken-and-egg is resolved by sequencing,
+  not exception: once the door is locked there is no special case left in
+  policy evaluator for an attacker to reach.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T2-T3"

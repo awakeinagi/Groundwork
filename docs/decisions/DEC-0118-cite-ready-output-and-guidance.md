@@ -5,6 +5,14 @@ title: Output is two-tier and cite-ready; skill docs gain usage guidance and coo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Results are two-tier: graph-boosted artifact ranking on top, then exact
+  chunk hits with artifact ID, section heading or turn number, status,
+  similarity score, short snippet, and superseded-by redirect; deduplicated
+  per artifact. SKILL.md rows route meaning-shaped questions (discussed? covers?
+  duplicate?) to semantic search and structure-shaped questions (depends on?
+  why exists?) to graph. Skill reference gains cookbook recipes. Full sections
+  rejected as context-flooding; paths-only rejected for requiring follow-up.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T5-T6, T9, T16"

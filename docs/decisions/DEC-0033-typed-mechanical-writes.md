@@ -5,6 +5,12 @@ title: Mechanical writes are typed service operations; agents hold no git creden
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Three-part safeguard for mechanical writes: credential separation (agent holds
+  no git credentials), typed operations (only expressible as service operations
+  like append-turn or mark-stale, never arbitrary diff), and verified fallback
+  (auto-PRs with deterministic diff check where policy forbids direct pushes,
+  machine verification replaces human approval spam).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T5-T6"

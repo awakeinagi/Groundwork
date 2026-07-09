@@ -5,6 +5,14 @@ title: SPEC-idea mirrors the paradigm's Idea semantics — tier-1 validates shap
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0269 constrains SPEC-idea to mirror the paradigm's Idea semantics
+  exactly: tier-1 validation at store write time covers schema-expressible
+  shape (prefix, directory, statuses, required fields, rejection of
+  release/gate), while tier-2 validation at PR time covers cross-artifact
+  rules (spawning session cross-references, take-up derivation, decline
+  rationale). Divergence is a conformance bug; the paradigm's semantics
+  are already accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0051 @ T6-T7"

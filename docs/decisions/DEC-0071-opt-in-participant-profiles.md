@@ -5,6 +5,13 @@ title: Participant profiles are supported, strictly opt-in, and user-owned via t
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  The memory layer supports both consolidations and participant
+  interaction profiles. Profiles are strictly opt-in with no profile
+  existing without explicit user consent. Profile data is readable and
+  editable by its subject via the UI; users see exactly what the agent
+  remembers and can correct or delete it. Profiles feed session conduct
+  through the bundle mechanism as any context element.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0008 @ T4-T5"

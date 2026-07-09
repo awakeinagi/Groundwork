@@ -5,6 +5,13 @@ title: Background Job Execution Runtime's concurrency bound is a single global c
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The Background Job Execution Runtime's concurrency bound is a single
+  deployment-wide configured cap (via Composition Root), applying across all
+  job-types combined. No per-job-type override exists. v1 has one concrete job
+  (KV-store expiry sweep); a per-type cap would be speculative. A single global
+  cap satisfies the "never unbounded fan-out" requirement and can be extended
+  later if a real starvation scenario surfaces between job types.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0042 @ T1-T2"

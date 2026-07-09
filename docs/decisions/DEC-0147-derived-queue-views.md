@@ -5,6 +5,12 @@ title: Approver and Arbiter queues are derived views with no persisted queue tru
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Queues are computed views: membership and order derived at read time
+  from graph state (stale artifacts, open conflicts, open gate PRs),
+  governance configuration (routing, delegations), and impact rank.
+  No queue truth is persisted. Read-state and snooze preferences are
+  UI-side per-user only.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T4-T5"

@@ -5,6 +5,17 @@ title: Semantic search for the skill tooling — DuckDB + vss, hybrid with the g
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Directed adding semantic search to the facilitation skill using DuckDB
+  + vss extension, dogfooding DEC-0102 embedded stack. Settled: model2vec
+  static embedding, section-level chunks plus per-turn transcript rows
+  for provenance, no persisted HNSW index (deferred to spike), separate
+  groundwork_search.py with uv inline dependencies, sibling
+  .groundwork-search DuckDB file (gitignored), auto-refresh on every
+  search via per-file content hashes, cite-ready hits with artifact
+  ID/section/turn/status/score/snippet. Throwaway POCs demonstrated pure
+  semantic search misleads on superseded decisions; graph-boosted
+  re-ranking corrects this.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

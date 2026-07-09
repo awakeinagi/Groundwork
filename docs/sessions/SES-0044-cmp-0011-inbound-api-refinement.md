@@ -5,6 +5,14 @@ title: CMP-0011 Inbound API — component contract refinement
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  SES-0044 refined the CMP-0011 Inbound API component contract against
+  approved stories ST-0058 and ST-0059, grilling three open questions:
+  route-surface granularity (decided: behavioral endpoint groups with
+  OpenAPI as authoritative wire contract), SSE event seam (decided: API
+  defines transport envelope only, opaque passthrough), and SSE
+  reconnect/resume ownership (decided: CMP-0011 owns server half only).
+  Produced DEC-0229, DEC-0230, DEC-0231. Status closed.
 participant: awakeinagi@gmail.com
 links:
   relates-to: [CMP-0011, EP-0008, ST-0058, ST-0059]

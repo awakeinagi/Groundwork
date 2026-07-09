@@ -5,6 +5,14 @@ title: Queue Port dead-lettering is terminal in v1; no redrive operation
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  v1 defines no redrive/requeue operation on Queue Port contract.
+  Dead-lettered jobs remain queryable through status/bookkeeping surface
+  but recovery, if ever needed, is an operator action outside the port
+  or a future contract addition. No Acceptance Criterion or cited decision
+  calls for redrive; adding unrequested operation would be scope creep.
+  Visibility (queryable dead-letter state) is v1 guarantee; recovery
+  ergonomics can be added later if real need surfaces. Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0040 @ T1-T2"

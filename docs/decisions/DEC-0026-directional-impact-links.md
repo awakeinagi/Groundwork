@@ -5,6 +5,11 @@ title: Same-level impact is modeled as reciprocal directional links
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Same-level artifact impact modeled as reciprocal directional links: impacts
+  and impacted-by connect same-type artifacts only; both directions stored
+  redundantly for self-description when read in isolation; reciprocity and
+  same-type restriction enforced mechanically rather than by convention.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0002 @ T1-T2"

@@ -7,6 +7,15 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  When approved artifact changes, agent walks cross-reference graph, marks
+  affected descendants stale, produces impact report (including in-flight
+  work), and queues targeted re-refinement sessions. Approved-but-stale
+  artifacts block new downstream generation until re-ratified. Preserves
+  human refinements and in-flight state (unlike regeneration) while
+  guaranteeing nothing new built on invalidated basis (unlike manual
+  propagation). Same mechanism serves superseded Decisions and spike
+  findings, and Consolidation freshness.
 source-span: "SES-0001 @ T4-T5"
 links:
   derives-from: [SES-0001]

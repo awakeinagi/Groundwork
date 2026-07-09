@@ -5,6 +5,14 @@ title: Adapters are selected by deployment configuration; every port carries a c
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Each port's concrete adapter is selected by deployment configuration,
+  enabling adapter swaps via config change without touching consumer code.
+  Every port ships a shared conformance test suite that any adapter must
+  pass; passing the suite is the definition of a valid adapter. This makes
+  graduation paths cheap: write an adapter, pass the suite, flip the config.
+  The conformance suite is the executable form of the port contract, making
+  it real rather than aspirational.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0020 @ T2-T3, T6-T7"

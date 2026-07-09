@@ -5,6 +5,13 @@ title: CMP-0007 issues and validates sessions as opaque, revocable server-side h
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  CMP-0007 issues and validates sessions as opaque, revocable server-side
+  handles: issue_session after provider authentication, validate_session on
+  every request, revoke_session on logout. The token is an opaque random
+  handle; session state (person-id, expiry) lives in the app database via
+  bookkeeping family, with TTL from deployment configuration. Keeps all
+  identity state in one component and makes sessions instantly revocable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T3-T6"

@@ -7,6 +7,16 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  The rules layer of Groundwork: compiles governance-as-code onto host
+  branch protection, evaluates gate policies, operates the conflict queue,
+  runs staleness sweeps with re-affirmation flows, and emits governance
+  events with metrics/query API. Nine elements: GovernanceInit (bootstrap),
+  PolicyCompiler (host branch protection and required checks),
+  GatePolicyCheck (policy evaluation), ConflictGate (conflict blocking and
+  escalation), StalenessSweepService, ReaffirmationService, ImpactReport,
+  GovernanceEvent, GovernanceEventLog. Graduated RoleResolution to CMP-0016
+  and GovernanceConfig parsing to CMP-0016 per DEC-0234.
 context: governance
 links:
   derives-from: [EP-0003]

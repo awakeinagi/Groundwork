@@ -5,6 +5,13 @@ title: ID counters are derived by rescan-on-boot; no persistent counter store
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  ID counters are derived by rescan-on-boot. The service scans every ref
+  (main and all item branches) on startup for the maximum existing ID per
+  prefix, then allocates from memory behind a service lock. No persistent
+  counter state exists; the repository remains the only state.
+  Single-allocator deployment is documented; boot cost is trivial at
+  documentation scale.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0011 @ T2-T3"

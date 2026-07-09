@@ -7,6 +7,18 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Provides the mechanical-write surface: a closed set of typed operations
+  (append-turn, close-session, mark-stale, clear-stale, set-jira-key,
+  migrate-person-ids, create-change-proposal, set-cp-triage, create-idea,
+  set-idea-disposition) through which system facts reach the repository.
+  Each operation constructs its commit entirely from typed parameters; no
+  operation can modify body content or non-allowlisted frontmatter fields
+  (rejected structurally, not by policy). Agent processes hold no git
+  credentials; only storage service can construct commits. Where upstream
+  forbids direct pushes, mechanical writes flow through auto-PRs approved
+  by program user and gated by mechanical-diff validator. Direct-commit vs.
+  auto-PR mode is per-deployment configuration.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

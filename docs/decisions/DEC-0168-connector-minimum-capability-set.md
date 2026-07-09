@@ -5,6 +5,14 @@ title: The v1 minimum code-host capability set is core orchestration, review pos
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Minimum capability set a host must support: fork provisioning, branch
+  create/delete/push, PR open/merge/review-state reads, review posting,
+  read-only browse/search under allowlist, permission probe,
+  check-result posting. Above minimum (adaptable or emulatable): native
+  check registration, team sync, review dismissal, path-scoped reviewer
+  rules. None of minimum is BBDC-specific, holds even if SP-0004
+  surfaces BBDC quirks.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0030 @ T2"

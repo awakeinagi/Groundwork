@@ -5,6 +5,16 @@ title: Component spec refinement — design-element taxonomy and implementation 
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Refined SPEC-component to introduce typed design-element taxonomy and
+  implementation guidance. Settled: hybrid component granularity with
+  graduation rule (nested elements by default; standalone CMPs for
+  elements consumed across boundaries or independently versioned),
+  element-first contract blocks with component-level invariants, five
+  closed-set element types (entity, value, service, event, protocol)
+  with typed gate-checkable obligations, and split Constraints
+  (normative, decision-cited) plus advisory Notes. Created
+  SPEC-design-elements.md with patterns catalog.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

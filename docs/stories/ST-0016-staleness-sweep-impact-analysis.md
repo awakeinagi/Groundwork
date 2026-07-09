@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Invalidation machinery: detecting approved artifact changes, computing
+  their derived subtree, marking all approved members stale in one
+  mechanical sweep, and producing impact reports captured in re-affirmation
+  PRs and stored as telemetry. Sweeps are idempotent under at-least-once
+  redelivery.
 links:
   derives-from: [EP-0003]
   satisfies: [BG-0001]

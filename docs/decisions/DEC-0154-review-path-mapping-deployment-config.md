@@ -5,6 +5,13 @@ title: The role-to-review-path mapping lives in deployment configuration, not go
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The role→review-path mapping (which roles review via OAuth versus
+  program-user path) lives in deployment configuration, not
+  governance files. The mapping reflects seat procurement (an
+  operational fact about the deployment), not an approval rule. Audit
+  trail of who approved what is carried by signed attribution block
+  and host review record.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T4-T5"

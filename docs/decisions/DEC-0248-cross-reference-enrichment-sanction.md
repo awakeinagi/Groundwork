@@ -5,6 +5,15 @@ title: Cross-reference enrichment of immutable artifacts is sanctioned
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Extending DEC-0091: cross-reference enrichment of ratified or closed
+  artifacts is sanctioned—adding bare-ID mentions, cites: entries, or
+  frontmatter links that surface already-existing relationships. Never
+  alters recorded meaning, never triggers staleness or re-gating. In
+  closed sessions, body-side enrichment lands in a dated Post-Close
+  Enrichment subsection appended at the bottom of the Transcript
+  (testimony itself never edited). Enables remediation for DEC-0246,
+  DEC-0247, DEC-0249, and DEC-0250.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0049 @ T6-T11"

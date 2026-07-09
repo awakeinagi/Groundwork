@@ -5,6 +5,11 @@ title: Allowlist filtering is a behavior clause on the connector's read-operatio
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Decides that allowlist filtering is not a separate design element
+  but a contract obligation directly on the read-operation family.
+  Constrains the connector protocol's allowed repository exposure and
+  path-exclude handling.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0030 @ T2"

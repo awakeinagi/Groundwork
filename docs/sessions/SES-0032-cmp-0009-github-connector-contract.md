@@ -5,6 +5,16 @@ title: CMP-0009 GitHub Connector — contract refinement
 status: closed
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Refined CMP-0009 from stub to contract-complete after SES-0031
+  established GitHub as v1 host. Grilled GitHub-specific implementation
+  questions across four dependency-ordered clusters: credential
+  separation (two Apps), wire-protocol conventions (REST primary,
+  403-disambiguation), capability surface (team_sync introspection,
+  review_dismissal), and element decomposition (single connector).
+  Drafted contract with all eleven operation families. Found three
+  approved artifacts still naming BBDC as implementation; corrected to
+  name GitHub v1 alongside deferred BBDC. Produced DEC-0174-DEC-0177.
 participant: awakeinagi
 participant-role: stakeholder
 facilitator: Claude (Sonnet 5)

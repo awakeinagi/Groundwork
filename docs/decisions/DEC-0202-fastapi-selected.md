@@ -5,6 +5,13 @@ title: FastAPI selected as the inbound API framework
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Selects FastAPI as v1 inbound API framework for EP-0008: ASGI-native,
+  first-class SSE/WebSocket support, typed request/response models.
+  Satisfies DEC-0187's required streaming transport and DEC-0018's
+  Python reference stack. Aligns with contract-complete standard
+  DEC-0011. Constrains EP-0008's Interfaces & Contracts to Define.
+  Status accepted.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0038 @ T1"

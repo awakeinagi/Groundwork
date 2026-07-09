@@ -5,6 +5,13 @@ title: Implementation Guidance section — normative cited Constraints + advisor
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  CMP docs gain an Implementation Guidance section with two subsections.
+  Constraints (IG-<n> items) are normative for the reference
+  implementation, decision-cited, and gate-checked. Notes are advisory, may
+  be stack-specific, never gate-checked and never load-bearing. This split
+  preserves language-agnostic contracts: a rebuild in another language
+  ignores notes and renegotiates constraints.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T6-T7"

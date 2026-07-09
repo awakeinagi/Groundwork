@@ -5,6 +5,16 @@ title: CMP-0010 Composition Root — component contract refinement
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Refined CMP-0010 (Composition Root) toward contract-completeness
+  against ST-0057. Settled wiring shape (typed application container
+  with explicit constructor injection, no global service locator),
+  lifecycle ownership (Root owns deterministic startup/shutdown sequence,
+  ASGI lifespan invokes it), and config resolution (path from single env
+  var with default; enumerated overrides only, no arbitrary dotted-path).
+  Graduation review found no graduation. Decision-recall audit added
+  out-of-scope clarification on job-handler registration. Produced
+  DEC-0226-DEC-0228.
 participant: awakeinagi@gmail.com
 links:
   relates-to: [CMP-0010, EP-0008, ST-0057]

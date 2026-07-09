@@ -5,6 +5,17 @@ title: EP-0002 refinement — distillation trust, strategy packs, guardrails, sy
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Refined EP-0002 (Refinement Session Agent) to gate-readiness, the v1
+  centerpiece. Settled: in-session confirmation playback for decision
+  acceptance, strategy packs as versioned model-agnostic plugin bundles
+  containing prompts, skills, tools, declarative context recipe with
+  token budget, pause/resume/close lifecycle with inactivity auto-close
+  and partial distillation, evaluation harness in-epic gating pack/LLM
+  changes with periodic drift audits from raw transcripts. Raw
+  transcripts held as canonical ground truth. Produced 8 decisions. New
+  impact edge: decision-rights configuration extends
+  governance/roles.yaml.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

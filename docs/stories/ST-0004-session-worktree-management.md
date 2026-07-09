@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Provides per-session isolation via git worktrees: each user session gets
+  a dedicated worktree off the item branch; all writes land there. On close,
+  sole-version changes merge into the generic item branch. Multiple
+  divergent versions trigger user-suffixed item branches
+  surfaced for synthesis rather than auto-merged. Worktrees from
+  inactivity-auto-closed sessions are garbage-collected after their
+  distillation commits. Worktree state is reconstructible after service
+  restart; no in-flight session is orphaned or double-provisioned.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

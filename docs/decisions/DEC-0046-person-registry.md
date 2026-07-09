@@ -5,6 +5,15 @@ title: A PR-gated person registry maps stable person-ids to provider identities
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  governance/people.yaml—PR-gated like all governance (DEC-0037)—maps a stable
+  person-id to display name, email, auth subject, host username(s), and Jira
+  accountId. Artifacts reference the person-id; each connector resolves its own
+  column; the Admin UI edits the file like any governance config. This keeps
+  provenance in the clone-rebuildable repo rather than a mutable service table
+  or email, surviving provider swaps (DEC-0024) and renames. Existing artifacts
+  from bootstrap use emails; mechanical migration to person-ids happens on first
+  population.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T2-T3"

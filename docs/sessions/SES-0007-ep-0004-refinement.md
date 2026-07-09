@@ -5,6 +5,16 @@ title: EP-0004 refinement — branch overlays, freshness, engine spike, query ti
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Refined EP-0004 (Cross-Reference Graph Index) to gate-readiness,
+  resolving branch-awareness under fork-pull model and query contracts.
+  Settled: main base plus per-item-branch overlays with
+  view-parameterized queries, session-synchronous overlay writes and
+  asynchronous global propagation with scheduled rebuild-and-diff
+  verification, metadata-only graph (bodies stay in store), named
+  traversals plus bounded generic query primitive, plus openCypher for
+  advanced queries (read-only with depth/time/result guards). Engine
+  choice deferred to SP-0002 spike. Produced 6 decisions.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI

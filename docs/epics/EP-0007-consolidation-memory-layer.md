@@ -7,6 +7,15 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: ds-lead
 created: 2026-07-05
+overview: >-
+  Groundwork's retrieval and memory layer providing context bundles for
+  sessions. Includes consolidations along catalogued and
+  telemetry-discovered graph paths, full-text and semantic search over
+  artifact bodies, a deterministic recipe resolver assembling
+  budget-bounded context bundles, automated faithfulness checking, and
+  opt-in participant profiles. Consolidations are browsable with source
+  references and freshness metadata, with quarantine and disposition
+  workflows for human-flagged issues.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

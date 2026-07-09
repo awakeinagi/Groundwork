@@ -5,6 +5,11 @@ title: Groundwork is specified using its own process and formats
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Groundwork specifies itself using its own artifact formats and pipeline; SES-0001
+  is the inception session, producing DEC records and component docs in production
+  format authored manually until tooling self-hosts; validates doc format before
+  application code exists and directly satisfies language-agnostic rebuild requirement.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T10-T11"

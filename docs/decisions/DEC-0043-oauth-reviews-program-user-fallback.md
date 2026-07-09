@@ -5,6 +5,15 @@ title: PR reviews post as the approver via OAuth, with a program-user fallback
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Approvers with code-host identities connect them via OAuth once; reviews post
+  as them so host-side audit shows the real person. Roles whose members lack
+  host seats approve through a role-scoped program user, with the human
+  approver's identity cryptographically attributed in the review body and
+  governance event log, and the gate-policy check verifying the attribution.
+  Which roles use which path is per-deployment configuration. This preserves
+  host-native audit wherever seats exist without making seat procurement a
+  blocker for business participation.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0005 @ T2-T3"

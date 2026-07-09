@@ -5,6 +5,14 @@ title: "v1 UI surfaces: session experience, goal view, goal gate, minimal confli
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  v1 ships exactly the goal-refinement spine: the Q&A session experience,
+  Business Goal artifact view with provenance drill-down, gate
+  review/approve surface for goals, and minimal conflict view. Deferred to
+  post-v1 stories (governance dashboards, re-affirmation queues, profiles,
+  consolidation review, CP triage, artifact browsing) are each paired with
+  the capability that needs them. This focuses the trust-critical session
+  experience.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0010 @ T2-T3"

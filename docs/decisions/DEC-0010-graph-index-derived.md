@@ -7,6 +7,15 @@ owner: awakeinagi@gmail.com
 created: 2026-07-05
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
+overview: >-
+  Graph database indexes typed links strictly as derived index: rebuilt
+  from canonical docs at any time, never written to directly, never source
+  of truth. Gets graph-query ergonomics for agents without splitting truth
+  between git and database — avoids drift problem DEC-0002 eliminated for
+  Jira reintroduced internally. Acceptable at bootstrap scale but file
+  traversal degrades as graph grows. Graph Index is component with rebuild
+  contract; graph-engine choice deferred behind interface. Consumed by
+  impact analysis and Consolidation path analysis.
 source-span: "SES-0001 @ T6-T7, T9"
 links:
   derives-from: [SES-0001]

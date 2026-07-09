@@ -5,6 +5,13 @@ title: CMP-0007 owns the OAuth host-identity linking flow end-to-end
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  CMP-0007 owns the OAuth host-identity linking flow end-to-end: begin_link
+  (person-id, host) → authorize-url and complete_link (state, callback-params)
+  finishing the exchange and storing the token in the secret store (CMP-0015).
+  CMP-0011 exposes the HTTP callback route and delegates immediately. Matches
+  the boundary the approved connector already drew; host-OAuth specifics stay
+  out of the generic API component.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0045 @ T3-T4"

@@ -7,6 +7,17 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Graduated from CMP-0004 per DEC-0234 for shared consumption by gate
+  evaluation and identity claims. Typed in-memory value of five governance/
+  files at a git ref: roles.yaml, domains.yaml, gate-policies.yaml,
+  repos.yaml, people.yaml. Role-membership evaluation including active
+  time-bounded delegation windows. Three elements: GovernanceConfig (parsed
+  value, never persisted independently of git), RoleClaims (person-id,
+  governance-ref, evaluated-at, roles with direct/delegation sources),
+  RoleResolution (pure live evaluation service answering membership and
+  claims questions). Evaluation identical on identical inputs; consumed by
+  both CMP-0004 (gate verdicts) and CMP-0007 (person claims).
 context: governance
 links:
   derives-from: [EP-0003]

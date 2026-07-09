@@ -5,6 +5,15 @@ title: A decision-recall audit is a required refinement-stage step — retrieval
 status: superseded
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  After drafting or amending any artifact and at gate preparation, facilitator
+  runs decision-recall audit: retrieval ranks accepted decisions relevant to
+  artifact but absent from considered set (top-15 by rank); subagent judges
+  candidates strictly (at most 4 findings or exactly "Nothing to add");
+  findings addressed before gating. Catches content-relevant misses (~60% per
+  stage at k=15); complements DEC-0136 checklists for rule-type decisions.
+  Topology: Sonnet-class agents for >15 lists, Opus otherwise; comparative
+  judgment within batch prevents acquiescence bias. Superseded.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0024 @ T1-T5"

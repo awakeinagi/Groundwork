@@ -5,6 +5,16 @@ title: EP-0006 story derivation — v1 surfaces, packaging/styling/transport, po
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Sliced Refinement Web UI epic into 15 stories (8 v1, 7 post-v1
+  deferred). Amended stakeholder's React recommendation to require
+  pluggability into Next.js 15 App Router with Tailwind 4, Radix UI.
+  Settled packaging as npm component library, styling via Tailwind
+  sharing host config, RSC boundaries as use-client everywhere, SSE
+  default streaming with WebSocket swappability. Drafted standalone Next
+  wrapper app. Decision-recall audit found citations to add across
+  multiple stories and required adding DEC-0133 to all deferred stories.
+  Produced ST-0042-ST-0056 and DEC-0184-DEC-0188.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

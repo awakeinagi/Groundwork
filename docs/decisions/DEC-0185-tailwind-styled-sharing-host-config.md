@@ -5,6 +5,11 @@ title: Components are styled with Tailwind CSS utility classes, sharing the host
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Components are styled with Tailwind utility classes and Radix UI
+  primitives, sharing the host's Tailwind v4 configuration and theme
+  tokens. No separate compiled stylesheet; smallest bundle and
+  native look-and-feel for the stated host stack.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0034 @ T2-T3"

@@ -5,6 +5,11 @@ title: CMP-0009 decomposes into a single GitHubConnector service element; no gra
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Decides that CMP-0009 decomposes into a single GitHubConnector
+  service element implementing the full CodeHostConnector protocol;
+  webhook payload normalization is internal. Does not meet the
+  graduation rule and advances no element to standalone status.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0032 @ T6"

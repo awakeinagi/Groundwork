@@ -5,6 +5,13 @@ title: Queue Port job envelope is fixed with an opaque payload document
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The Queue Port defines a fixed job envelope with opaque payload, not
+  per-job-type typed schemas. The envelope comprises job-id, job-type (open
+  string per DEC-0214), opaque JSON payload, attempt-count, and enqueued-at
+  timestamp. Only the runtime's registered handler parses the payload; the
+  port treats it as transport and durability, mirroring App Database Port's
+  bookkeeping document.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0040 @ T1-T2"

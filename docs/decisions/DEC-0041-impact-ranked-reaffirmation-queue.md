@@ -5,6 +5,16 @@ title: Re-affirmation queues are ordered by impact rank
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Re-affirmation queues presented to approvers are ordered by impact rank
+  using the same algorithm that orders refinement work (DEC-0027, SP-0001).
+  Items whose decisions constrain the most downstream siblings and descendants
+  clear first, with human judgment applied until the spike lands. Notifications
+  are batched via configured channels. This ensures clearing high-impact items
+  first unblocks the most downstream work per approval, giving the system one
+  prioritization function. SP-0001's algorithm gains a second consumer with this
+  decision, and its objective function should account for re-affirmation
+  clearing as well as initial refinement ordering.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0004 @ T4-T5"

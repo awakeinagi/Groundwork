@@ -5,6 +5,14 @@ title: "Index freshness: synchronous for the writing branch, async globally, reb
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Writes update the writer's branch overlay synchronously—a session always reads
+  its own writes. Propagation to other views (main on merge, other overlays) rides
+  the change-event stream asynchronously with bounded lag. Full rebuild from the
+  repository is both the recovery path and the correctness definition: an index
+  state is correct iff it equals rebuild output at that ref. This gives mid-session
+  agents the read-your-writes consistency they need without paying strict synchrony
+  across all views, which would stall writes on every large merge.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0007 @ T2-T3"

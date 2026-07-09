@@ -5,6 +5,13 @@ title: CMP-0004 decomposes into ten nested Design Elements; no graduation at thi
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  CMP-0004 (Governance & Gate Engine) decomposes into ten Design
+  Elements (one per story: GovernanceConfig/Init, PolicyCompiler,
+  GatePolicyCheck, ConflictGate, StalenessSweepService/ImpactReport,
+  ReaffirmationService, GovernanceEvent/Log). All ten stay nested inside
+  CMP-0004; none graduates to standalone component now. Graduation
+  follows an actual second consumer, not a forecast one.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0029 @ T1-T4"

@@ -7,6 +7,13 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Quality gate between agent methodology and production use:
+  independent-model distillation-faithfulness judging, grilling-quality
+  benchmarks against a hand-authored corpus, guardrail behavior tests,
+  and periodic drift audits from raw transcripts. Gates every
+  strategy-pack change and LLM swap before merge. Per DEC-0052,
+  DEC-0054, DEC-0058, DEC-0178, DEC-0179.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

@@ -5,6 +5,11 @@ title: The agent builds the domain model during refinement
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Agent builds the domain model during refinement by challenging vague terms,
+  proposing precise canonical terms, and recording definitions in glossaries
+  so bounded contexts and component boundaries emerge from stakeholder-
+  validated language continuously rather than as one-time modeling.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T6-T7"

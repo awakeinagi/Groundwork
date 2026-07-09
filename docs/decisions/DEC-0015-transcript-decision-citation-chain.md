@@ -5,6 +5,15 @@ title: "Provenance chain: transcript → Decision record → citation"
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Raw session transcripts are stored verbatim and append-only; the agent
+  distills each session into discrete Decision records citing specific
+  transcript spans. Contracts, requirements, and acceptance criteria cite
+  Decisions rather than transcripts. This establishes a citable provenance
+  chain — stakeholder utterance, distilled decision, contract constraint —
+  where the transcripts remain retrievable for dispute resolution. The
+  approach avoids both the maintenance burden of constant distillation and the
+  loss of audit trail from discarding transcripts entirely.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T8-T9"

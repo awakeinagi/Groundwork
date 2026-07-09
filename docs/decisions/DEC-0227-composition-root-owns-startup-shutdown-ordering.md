@@ -5,6 +5,13 @@ title: The Composition Root owns the deterministic process startup/shutdown orde
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The Composition Root owns a single deterministic startup and shutdown sequence
+  exposed as lifecycle hooks (startup() / shutdown()). Startup order: open
+  engine resources → bind adapters → build services → start runtime → ready.
+  Shutdown runs the reverse. CMP-0011's ASGI lifespan invokes these but does not
+  own the ordering. This keeps ordering knowledge next to the bindings it
+  constrains and enables non-HTTP entrypoints to use the same sequence.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0043 @ T2"

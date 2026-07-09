@@ -5,6 +5,16 @@ title: Backend Application Platform story derivation
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Sliced EP-0008 into eight stories covering Composition Root, Inbound
+  API (REST and SSE), Queue Port and runtime, KV-store Port, and async
+  runtime execution. Resolved config format (YAML deployment file),
+  API split (REST/artifact vs. SSE session), Queue/KV layering (sibling
+  adapters on co-located engine), and operational specifics (Queue
+  outbox pattern with retries, KV TTL mechanism, RFC 9457 error envelope,
+  SSE reconnect/resume). Decision-recall audit addressed seven genuine
+  gaps and one layering ambiguity across stories. No mutual coupling
+  found. Produced ST-0057-ST-0064 and DEC-0206-DEC-0213.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

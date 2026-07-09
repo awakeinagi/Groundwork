@@ -5,6 +5,13 @@ title: Background Job Execution Runtime owns handler registration; producers reg
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The Background Job Execution Runtime exposes register(job-type, handler) as
+  part of its own contract. Each component needing background work calls it
+  directly at initialization (e.g., KV-store adapter registers its expiry-sweep
+  handler), rather than the Composition Root maintaining a central registry.
+  This keeps job registration co-located with the component owning its business
+  logic, uncoupling composition from job internals.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0042 @ T1-T2"

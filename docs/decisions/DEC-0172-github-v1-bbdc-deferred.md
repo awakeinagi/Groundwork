@@ -5,6 +5,12 @@ title: GitHub (cloud) is the v1 code-host connector; Bitbucket Data Center is de
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Swaps the v1 code-host connector reference implementation from
+  Bitbucket Data Center to GitHub Cloud, deferring BBDC behind a
+  demand trigger (TRG-0010). Validates the connector protocol's
+  pluggability ahead of schedule and unblocks check-administration
+  provisioning (DEC-0173).
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0031 @ T1"

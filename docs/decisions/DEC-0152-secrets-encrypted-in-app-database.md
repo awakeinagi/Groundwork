@@ -5,6 +5,13 @@ title: Connector secrets live envelope-encrypted in the app database; an externa
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Connector secrets (OAuth tokens, host credentials, signing key) are
+  stored envelope-encrypted at rest in the app database, accessed
+  through the App Database Port; the master key comes from deployment
+  configuration and is never persisted alongside data. An external
+  vault becomes a future adapter evaluated by deferred spike SP-0005,
+  armed by trigger TRG-0006.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T4-T5"

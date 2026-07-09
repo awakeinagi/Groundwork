@@ -5,6 +5,13 @@ title: The Idea type enters the application via amendments to the schema-suite c
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0268 constrains the Idea type reflection in the application to
+  amendments only to ST-0001 and CMP-0001: the artifact-type enumeration
+  extends to include IDEA with acceptance criteria for Idea-specific
+  validation, and the SchemaValidator type list matches. No new store
+  story; adding a type is the schema suite's existing charter per
+  ST-0001, and dual stories would split that responsibility.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0051 @ T6-T7"

@@ -5,6 +5,15 @@ title: Clickable cross-references in artifact bodies
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Scoped and authorized updating specs to make cross-references
+  clickable in artifact bodies. Settled: scope to body prose only
+  (frontmatter remains bare IDs per DEC-0009 to preserve Graph Index
+  semantics), new integrity rule requiring inline links resolve with
+  link text starting with artifact ID pointing at that artifact, bare
+  IDs in prose flagged. Authorized full mechanical retrofit pass over
+  entire corpus including closed sessions and accepted decisions, under
+  explicit formatting-only decision. Produced 2 decisions.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

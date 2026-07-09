@@ -5,6 +5,14 @@ title: Story changes propagate staleness to referencing Component Docs
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The element-to-story Implements edge participates in staleness propagation
+  one direction only: when an approved story is amended or superseded, every
+  Component Doc containing an element that references it is marked stale.
+  Impact reports name specific referencing elements so re-affirmation is scoped
+  to them. Component Doc and element edits never stale stories. This keeps
+  design-completion metrics honest after change, with element-scoped reporting
+  preventing whole-document panic.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0015 @ T4-T5"

@@ -5,6 +5,15 @@ title: AppDatabasePort graduates to a standalone protocol-type component; all in
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  AppDatabasePort element graduates to CMP-0003, a standalone CMP with
+  component-type: protocol, owned by Canonical Store context. It carries
+  typed operation families and conformance expectations; CMP-0001 becomes
+  consumer via depends-on. Pattern: remaining infrastructure ports (vector
+  store, embedding, graph store) likewise arrive as standalone protocol-type
+  CMPs in their owning contexts when EP-0004/EP-0007 derive them.
+  Conformance criterion holds today; one uniform pattern across all four
+  ports spares future epics the same deliberation.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0023 @ T2-T3"

@@ -5,6 +5,11 @@ title: Auth is a pluggable interface; start simple
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Authentication is a pluggable interface; v1 ships with simple email/OIDC
+  provider; organizational SSO becomes swap-in adapter when required; auth contract
+  exposes stable person identifiers so artifacts can reference them durably across
+  provider swaps and identity matters only for attribution.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T12-T13"

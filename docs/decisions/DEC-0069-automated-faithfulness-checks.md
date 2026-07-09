@@ -5,6 +5,14 @@ title: Consolidations serve without human gates, guarded by automated faithfulne
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Consolidations generate without human gates, guarded instead by
+  automated faithfulness checks verifying no new claims against sources
+  (per DEC-0058 harness pattern). Failures block serving and alert.
+  Periodic independent-judge review samples served elements; all carry
+  source refs for consumer verification. This treats consolidations as
+  derived non-citable content with machine verification matched to
+  mechanical guarantees.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0008 @ T4-T5"

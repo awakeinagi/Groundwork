@@ -7,6 +7,14 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Fixed-order flow on contradictory or competing requests: elicit each
+  stakeholder's underlying intent first, mediate with informed compromise
+  proposals, escalate to CFL artifact if mediation fails. Detection runs at
+  three points: within-session contradiction, cross-session contradiction,
+  contradiction with accepted Decision. CFL blocks derivative work via
+  conflicts-open check; resolves only by ratified Decision or explicit
+  withdrawal.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

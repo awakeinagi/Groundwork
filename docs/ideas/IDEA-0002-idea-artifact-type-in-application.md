@@ -5,6 +5,14 @@ title: Add the Idea artifact type to the application's data model, specs, and tr
 status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Add the Idea artifact type to the application's data model,
+  specifications, and triage surfaces. The Idea type was paradigm-level
+  defined in SES-0050 with work-queue semantics and
+  pre-classification boundary. Application scope: artifact spec,
+  artifact-type enum, Idea capture and browse in UI, work-queue
+  surfacing alongside untriaged change proposals in triage views, and
+  take-up flow opening an intake session. Taken up by SES-0051.
 proposed-by: awakeinagi@gmail.com
 links:
   derives-from: [SES-0050]

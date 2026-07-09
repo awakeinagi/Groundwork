@@ -5,6 +5,11 @@ title: Worktree per user session; merge to item branch or fork user branches
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Each user session gets its own git worktree; if worktree is only version of
+  item, changes merge to generic item branch; if multiple versions or conflict
+  exist, user-suffixed branches used until reconciled; sessions isolated by
+  construction and divergence represented explicitly as branches for agent synthesis.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T3"

@@ -5,6 +5,13 @@ title: Notifier delivery boundary — resolved-address, pre-rendered, center-res
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Establishes the notifier connector boundary: the center resolves
+  per-user channel preferences and renders content before calling
+  deliver(), the connector receives resolved addresses and pre-rendered
+  payloads only, the center composes digests, and results are idempotent
+  on notification_id. This constrains CMP-0008's NotifierConnector
+  protocol contract.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0046 @ T1-T6"

@@ -5,6 +5,13 @@ title: Hybrid CMP granularity — nested design elements, seam elements graduate
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Component docs remain bounded-context-scale and contain typed design
+  elements. An element consumed across component boundaries graduates to
+  its own standalone CMP under the CMP type taxonomy. Graduation rule: more
+  than one consuming CMP or independently versioned conformance. This
+  balances manageability against avoiding gate explosion and incoherent
+  piecemeal approval of scattered internals.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0012 @ T3-T5"

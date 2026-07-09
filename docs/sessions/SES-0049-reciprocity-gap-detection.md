@@ -5,6 +5,18 @@ title: Reciprocity gap detection — derived-work completeness, dead cites, ment
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Method-level session addressing documentation gaps after EP-0008
+  discovered missing from BG-0001 Derived Work. Empirical reciprocity
+  sweep over 2,078 frontmatter edges identified three gap patterns:
+  parent doesn't list derived children (7/8 goal→epic), dead cites
+  (~66 instances), and session-side impacts unexplained (76% consistent).
+  Implemented four blocking checker rules, added MENTIONS edges and
+  reciprocity audits to graph. Extended DEC-0091 enrichment sanction
+  to allow cross-reference fixes in closed sessions via Post-Close
+  Enrichment subsections. Executed full sweep: 243 items fixed across
+  92 artifacts, zero violations after remediation. Produced
+  DEC-0246-DEC-0251.
 participant: awakeinagi@gmail.com
 participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)

@@ -5,6 +5,15 @@ title: An explicit element-graduation review is a required step before any compo
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Before any Component Doc is set gated, the facilitator must run explicit
+  graduation review: every design element checked against DEC-0080 criteria
+  (consumed by more than one CMP or needing independently versioned
+  conformance), outcome recorded in gating session. The review is named step
+  in SPEC-component and facilitation skill's component playbook; the graph
+  tool's element-inventory command provides mechanical aid. Rule-type
+  decisions fail silently when merely cited; operationalizing them as
+  checklists at the stage they govern is the fix.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0023 @ T3-T4"

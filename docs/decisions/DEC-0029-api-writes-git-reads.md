@@ -5,6 +5,11 @@ title: All writes via the storage API; read-only git access sanctioned
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  All writes flow through storage API with no exceptions; external consumers
+  get read-only git access pinned to refs for distribution; one write authority
+  preserves invariants the store enforces while repo remains zero-infrastructure
+  distribution format for readers.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0003 @ T3"

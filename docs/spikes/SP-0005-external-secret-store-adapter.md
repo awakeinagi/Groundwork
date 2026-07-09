@@ -6,6 +6,17 @@ status: deferred
 release: backlog
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Question: when an enterprise deployment mandates an external secret
+  store, which adapter (Vault, cloud KMS, other) best serves the
+  connector-secrets workload, and how do secrets migrate from embedded
+  envelope encryption without a re-authorization storm? Blocks no current
+  work; on trigger firing, it blocks deployments that require external
+  secrets (secrets handle every delegated review and identity linkage).
+  Method surveys deployment's approved services, prototypes storage seam
+  against leading candidate, measures token re-encryption and movement
+  without user action, recommends adapter boundary. Deferred to backlog;
+  revived by TRG-0006. Findings pending.
 timebox: 3d
 links:
   derives-from: [EP-0005]

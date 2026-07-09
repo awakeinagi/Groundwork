@@ -5,6 +5,12 @@ title: Impact reports live in re-affirmation PR descriptions and the event log, 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Impact reports from staleness sweeps are written into re-affirmation
+  PR descriptions (visible to reviewers) and the governance event log
+  (for dashboards). Reports are never committed to the canonical repo
+  since they are derived analysis, regenerable from the graph at any
+  commit.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0025 @ T4-T5"

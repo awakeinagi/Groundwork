@@ -5,6 +5,14 @@ title: A local-git fake connector implements the code-host contract for developm
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  A local-git fake connector implements the full code-host contract
+  against a local bare repository for development and CI, with real git
+  branches and simulated PRs, reviews, and required checks in local
+  metadata. The fake is a permanent test double enabling hermetic
+  store-pipeline development and CI-testing before any real host exists.
+  It validates connector pluggability when the BBDC connector later swaps
+  in.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0011 @ T2-T3"

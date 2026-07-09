@@ -7,6 +7,13 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-09
+overview: >-
+  Release-1 UI support for the Idea artifact: capturing raw change intent
+  mid-session or standalone via quick-capture, seeing what has been
+  captured, and taking a captured Idea up into an intake-opened session
+  with the Idea's verbatim text as proposal. Capture and take-up are the
+  release-1 value; browsing/queue surfaces remain release-2. Per
+  DEC-0258, DEC-0260, DEC-0261, DEC-0269, DEC-0270, DEC-0271, DEC-0281.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

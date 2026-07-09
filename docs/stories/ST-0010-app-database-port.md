@@ -7,6 +7,18 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-07
+overview: >-
+  Defines the Artifact Store's infrastructure seam for transactional
+  workload as a Protocol design element: the app database port covering
+  outbox storage/dispatch bookkeeping and operational bookkeeping counters
+  (retry counts, session-inactivity tracking). Consumers program against
+  the port contract only; no consumer references an engine API directly.
+  Concrete adapter selected by deployment configuration — swapping engines
+  is config change plus adapter implementation, never consumer code change.
+  Shared conformance test suite shipped with port; passing it defines valid
+  adapter. v1 ships DuckDB adapter only. ID-allocation state not stored
+  behind port; port contract exposes no ID-counter surface; rescan-on-boot
+  remains sole ID-counter mechanism.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

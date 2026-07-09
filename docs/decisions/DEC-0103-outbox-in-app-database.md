@@ -5,6 +5,14 @@ title: The change-event outbox lives in the app database (DuckDB in v1)
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The transactional-outbox pattern for change events is hosted in the app
+  database (DuckDB in v1) instead of a separate Postgres instance. Each
+  canonical write records its event in an outbox table atomically with the
+  write's bookkeeping; a dispatcher delivers to consumers with retries;
+  replay-from-git remains the recovery path. The pattern's guarantees
+  (at-least-once, per-artifact ordering, durability) are host-agnostic.
+  Supersedes DEC-0078.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0017 @ T2-T3"

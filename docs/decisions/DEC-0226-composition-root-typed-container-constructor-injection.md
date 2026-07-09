@@ -5,6 +5,13 @@ title: The Composition Root exposes a typed application container and injects Po
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  The Composition Root builds one typed application container holding every
+  bound Port instance and each constructed top-level service, passing each
+  dependency explicitly into consumers' constructors (constructor injection).
+  Consumers never reach into a global registry or service locator. This makes
+  each component's dependency set visible, keeps the binding graph in one
+  auditable place, and is trivially testable without framework or global reset.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0043 @ T1"

@@ -5,6 +5,14 @@ title: Revised typed obligations — entity full behavior contract, conditional 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The typed obligations table is revised, superseding DEC-0083: entity now
+  requires full behavior contract + data contract with conditional API
+  (required exactly when exposed at the component boundary); value requires
+  data; service requires API + behavior; event requires schema + semantics;
+  protocol requires API + conformance. Obligations remain gate-checkable
+  per element. Entity behavior deserves full expression without forcing
+  language signatures on internals.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0013 @ T1-T3"

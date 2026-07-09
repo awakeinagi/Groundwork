@@ -5,6 +5,16 @@ title: Sessions enforce guardrail policies, role decision rights, and injection 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Three layers enforce trust in unsupervised sessions (DEC-0003). Guardrail
+  policy (per strategy pack) detects unproductive patterns (circular answers,
+  hostility, fatigue) with graceful moves—reframe, park-and-continue, offer
+  pause, or end with partial record plus Arbiter notification. Authority limits
+  from governance config define each role's decision rights; statements outside
+  those rights become proposals requiring ratification. Injection hygiene treats
+  participant input as data, never instructions. This keeps authority overreach
+  out of accepted decisions that downstream contracts would cite before any gate
+  sees them.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0006 @ T2-T3"

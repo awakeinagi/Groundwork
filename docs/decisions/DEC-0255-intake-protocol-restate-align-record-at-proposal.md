@@ -5,6 +5,15 @@ title: Change intake runs a restate-and-align loop, and the session record opens
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Change intake follows a fixed protocol: proposer states change; agent
+  restates intention and asks to begin session; clarifications return to
+  restate until alignment confirmed; authority check runs against
+  governance config (unauthorized instruction captured as CP per
+  DEC-0262); otherwise confirmed path runs (full grilling, expedited per
+  DEC-0254, mechanical fix per DEC-0253, or idea capture per DEC-0258).
+  Session record begins at the verbatim proposal. If no change instructed,
+  nothing recorded.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T1-T2, T10-T11"

@@ -5,6 +5,13 @@ title: GatePolicyCheck evaluates live on every call, with no cached CompiledPoli
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  GatePolicyCheck.evaluate(pr-ref) reads governance/*.yaml at PR's
+  target-branch ref, PR review state, staleness state, and
+  open-conflict state fresh on every call. No CompiledPolicy value
+  element exists; nothing is persisted between calls. Keeps coherence
+  with DEC-0141 mid-flight recomputation and avoids second state
+  machine (cache freshness) at embedded single-process scale.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0029 @ T5-T6"

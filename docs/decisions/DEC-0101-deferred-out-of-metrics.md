@@ -5,6 +5,14 @@ title: Deferred items leave metric denominators and gain a dedicated discovery v
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Clarifies that deferred items leave metric denominators. Design-% rollups
+  and uncovered-story warnings count in-scope stories only; deferred stories
+  are excluded to avoid false gaps and artificially deflated progress. New
+  audit warning detects elements whose Implements line references only
+  deferred stories (in-scope contract content unmotivated by scope). Status
+  report gains Deferred section grouped by release label, sorted by SemVer
+  with backlog last.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0016 @ T4-T5"

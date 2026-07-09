@@ -5,6 +5,13 @@ title: The governance metrics/query API exposes fixed named endpoints, not a gen
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  GovernanceEventLog exposes one API item per named metric
+  (get-approval-latency, get-stale-counts, get-conflict-aging,
+  get-gate-throughput), each taking a time range, plus search-events
+  for ad hoc provenance-grade lookups. No generic query language.
+  Matches story's explicit minimum list, keeps contract simple and
+  testable, avoids designing aggregation language before real demand.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0029 @ T5-T6"

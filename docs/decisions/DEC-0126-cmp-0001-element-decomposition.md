@@ -5,6 +5,15 @@ title: CMP-0001 decomposes into thirteen design elements — focused services, l
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  CMP-0001 comprises thirteen design elements: six services
+  (StorageService, BranchOrchestrator, WorktreeManager, IdAllocator,
+  MechanicalWriteService, SchemaValidator, CheckSuite); three entities
+  (Artifact, ItemBranch, SessionWorktree); one value (ArtifactId); one
+  event (ChangeEvent); one protocol (AppDatabasePort). One OpenAPI
+  document spans the whole API surface; the element split is a
+  contract-organization choice, not deployment. Element-per-story keeps
+  contract blocks reviewable and item IDs meaningful.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0022 @ T1-T2"

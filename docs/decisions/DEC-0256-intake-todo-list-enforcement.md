@@ -5,6 +5,13 @@ title: The agent materializes the intake workflow as a todo list at first mentio
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  The moment change intent is mentioned, the agent creates a minimal todo
+  list—restate intention; confirm alignment; start session?—using the
+  harness's task/todo tracker. On path confirmation the list expands to
+  match the confirmed path (full grilling, expedited per DEC-0254, etc.).
+  Agent works the list; steps marked done as complete. Guarantees the
+  restate/align steps are tracked and no step silently drops under load.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T3, T10-T11"

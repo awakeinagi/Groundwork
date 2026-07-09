@@ -7,6 +7,12 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Agent's read-only window on existing code, governed: browse and search
+  only allowlisted repositories from governance/repos.yaml, path excludes
+  enforced on all operations, tokens scoped read-only. Published repo+ref
+  citation format lets decisions influenced by code reads record exactly
+  what was examined. No write operation is expressible.
 links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]

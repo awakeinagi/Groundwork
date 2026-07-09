@@ -5,6 +5,13 @@ title: SP-0002 is re-scoped to the Postgres + pgvector graduation evaluation and
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  SP-0002 is re-scoped from engine selection (answered by DEC-0102) to the
+  graduation evaluation: "when and how should Groundwork graduate from embedded
+  LadybugDB/DuckDB to Postgres + pgvector?" It is set deferred with release
+  backlog; revival is governed by armed triggers TRG-0001 through TRG-0004
+  (multi-node/HA, concurrent writers, degraded performance, enterprise
+  deployment). Re-scoping preserves accumulated context over archive-and-recreate.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0017 @ T3, T6-T7"

@@ -7,6 +7,18 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Delivers machine-readable JSON Schemas for every artifact type's
+  frontmatter and every governance configuration file (roles.yaml,
+  domains.yaml, gate-policies.yaml, people.yaml, repos.yaml), plus the
+  validation library that storage service runs on every write. Schemas
+  match their SPEC documents exactly and are published as language-neutral
+  assets for reimplementation conformance. Tier-1 validation rejects
+  malformed writes with field-level errors; unknown link types and IDs are
+  tier-1 rejections but impact-link reciprocity is tier-2. The element-type
+  enum is published and component frontmatter validates optional
+  component-type field against it. Stories and spikes frontmatter accept
+  deferred status with release labels.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

@@ -7,6 +7,18 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-07
 owner: eng-lead
 created: 2026-07-06
+overview: >-
+  Implements the fork-pull mechanics: creating an artifact opens its
+  dedicated item branch on the fork and a gate PR against upstream main,
+  carrying the artifact and its sessions/decisions as they accrue.
+  Refinement commits accumulate on the branch; PR merge transitions the
+  artifact to approved, recording approver identities from reviews.
+  Post-merge edits reuse the branch and open a new PR; artifact returns to
+  in-refinement. Frontmatter status and branch/PR state stay synchronized
+  throughout via atomic updates or reconciliation on next event. All host
+  interactions go through the code-host connector contract; v1 is GitHub
+  cloud. Full orchestration test suite passes hermetically against the
+  local-git fake connector.
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]

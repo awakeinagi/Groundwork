@@ -5,6 +5,14 @@ title: A crisply defined mechanical floor exempts zero-semantic-content fixes fr
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  Changes with zero semantic content—typo/spelling fixes, formatting,
+  broken-link or reference repair—are mechanical fixes: they skip the
+  session requirement and are committed directly with descriptive
+  messages; git history is their audit trail. Alters no meaning, touches
+  no contract line, decision text, status, approval field, or frontmatter
+  link semantics. When in doubt it is semantic and requires a session.
+  Keeps mandatory-session rule credible without trivial process burden.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T10-T11"

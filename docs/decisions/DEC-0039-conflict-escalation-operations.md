@@ -5,6 +5,11 @@ title: Escalated conflicts queue with the Arbiter and block merges; timeout reso
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Escalated conflicts queue with Arbiter in UI and block merges via conflicts-open
+  status check; no automatic timeout by default; exception electable per artifact
+  allows timeout-to-default after configured period with configured rule, recorded
+  as system Decision; per-artifact election makes choice explicit and auditable.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-06
 source-span: "SES-0004 @ T3"

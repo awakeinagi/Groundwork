@@ -5,6 +5,16 @@ title: Background Job Execution Runtime contract refinement
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Refined CMP-0013 (Background Job Execution Runtime) toward
+  contract-completeness, consuming the approved CMP-0012 (Queue Port).
+  Settled handler registration API owned by this CMP (not centralized
+  in Composition Root), auto-nack on uncaught exceptions, per-job
+  execution timeout with auto-nack on expiry, and single global
+  concurrency cap. Decision-recall audit found no missing decisions;
+  nearest near-misses already carried transitively through depends-on
+  relationship to CMP-0012. No graduation indicated. Produced
+  DEC-0222-DEC-0225.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI

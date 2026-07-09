@@ -7,6 +7,17 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 owner: ds-lead
 created: 2026-07-05
+overview: >-
+  EP-0002 delivers the Refinement Session Agent that conducts
+  unsupervised 1:1 refinement sessions via versioned strategy packs:
+  capturing raw verbatim transcripts, distilling in-session-confirmed
+  Decisions with turn-span citations, enforcing role-based decision
+  rights through governance config, detecting and mediating conflicts
+  with escalation, incrementally synthesizing across sessions, triaging
+  Change Proposals, and proving quality through an evaluation harness.
+  The agent is the direct attack on BG-0001's problem: vague requests
+  become refined, ratified artifacts through the session experience.
+  Approved 2026-07-09.
 links:
   derives-from: [BG-0001]
   satisfies: [BG-0001]

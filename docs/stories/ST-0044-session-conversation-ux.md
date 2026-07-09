@@ -7,6 +7,12 @@ owner: eng-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-09
 created: 2026-07-08
+overview: >-
+  Conversation content inside ST-0043's shell: free chat mixed with
+  typed question cards (recommended-first options), decision-playback
+  cards, and alignment cards for intake-opened sessions, each carrying
+  guaranteed affordances the sponsor amended into the session UX. Per
+  DEC-0051, DEC-0074, DEC-0187, DEC-0188, DEC-0280.
 links:
   derives-from: [EP-0006]
   satisfies: [BG-0001]

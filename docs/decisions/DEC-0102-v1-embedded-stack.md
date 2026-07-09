@@ -5,6 +5,14 @@ title: v1 storage stack — embedded LadybugDB for graph, DuckDB for app databas
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  v1 uses embedded storage engines only: LadybugDB (openCypher-native)
+  for the Graph Index and DuckDB for the app database plus vector/semantic
+  search. Postgres and pgvector are deferred to re-scoped SP-0002. This is
+  evidence-backed by the design skill's own graph tool dogfooding LadybugDB
+  over the real artifact corpus. The consequence is single-process/single-writer
+  architecture, the boundary that graduation triggers watch. Supersedes
+  DEC-0061 and DEC-0070.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0017 @ T1-T3"

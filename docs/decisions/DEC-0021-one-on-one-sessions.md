@@ -5,6 +5,11 @@ title: Sessions are 1:1; the agent synthesizes across sessions
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Each refinement session is one-on-one between participant and agent; agent
+  synthesizes perspectives across sessions, detects cross-participant conflicts,
+  and runs mediation flow; simpler UI, cleaner transcripts with unambiguous
+  attribution essential for decided-by provenance, natural async resumability.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T10-T11"

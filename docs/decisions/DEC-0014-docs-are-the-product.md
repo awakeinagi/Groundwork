@@ -5,6 +5,11 @@ title: Docs are the product; swarm orchestration is out of scope
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Groundwork responsibility ends at approved contract-complete component docs
+  plus machine-readable handoff manifest; swarm orchestration and feedback-loop
+  ingestion are separate concerns, keeping v1 scope sane and system identity
+  crisp as a specification producer.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T8-T9"

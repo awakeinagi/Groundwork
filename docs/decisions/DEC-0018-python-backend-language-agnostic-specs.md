@@ -5,6 +5,11 @@ title: Python backend + TypeScript frontend; all specs language-agnostic
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-05
+overview: >-
+  Reference implementation is Python backend on Claude Agent SDK with
+  TypeScript frontend; all design specs must be language-agnostic so backend,
+  frontend, agents, and connectors can be rebuilt in different languages while
+  preserving durable contracts and implementability.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T8-T9"

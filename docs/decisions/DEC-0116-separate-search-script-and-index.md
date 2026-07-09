@@ -5,6 +5,13 @@ title: Search ships as a separate script with its own gitignored DuckDB index fi
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Search is a separate script scripts/groundwork_search.py with its own uv
+  inline metadata (duckdb, duckdb-extensions, duckdb-extension-vss, model2vec,
+  ladybug<1.0 read-only, pyyaml, numpy, pyarrow). Index lives in .groundwork-search
+  DuckDB file in project root: derived view, disposable, rebuildable,
+  gitignored. Independent tools fail independently; each stays runnable alone.
+  Two derived stores cannot share a file: one is LadybugDB, the other DuckDB.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T5-T6, T9"

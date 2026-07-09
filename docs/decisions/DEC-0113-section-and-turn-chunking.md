@@ -5,6 +5,13 @@ title: The search corpus is section-level chunks plus per-turn transcript rows, 
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  The index holds one row per ## and ### section across docs/ plus CONTEXT.md,
+  plus one row per T<n> transcript turn inside session Transcript sections.
+  Every row carries metadata columns: artifact ID, type, status, section
+  heading, turn number. Section hits land agents on the right part of the
+  right doc, cite-ready. Per-turn rows make "who said what, when" searchable
+  and enable metadata pre-filtering via WHERE clauses.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0019 @ T3-T4, T15"

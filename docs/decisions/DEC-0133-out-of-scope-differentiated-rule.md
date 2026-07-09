@@ -5,6 +5,15 @@ title: Out of Scope entries that are future work must exist as deferred artifact
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-07
+overview: >-
+  Differentiated Out of Scope rule for stories and component docs: future
+  work entries must exist as deferred story or spike with release label and,
+  when revival has observable condition, trigger subscription; entry links
+  to it. Boundary statements denying adjacent behavior link the owning
+  artifact if one exists, or stand alone if behavior is permanently out.
+  Classification is human judgment at gate review, not mechanical check.
+  Blanket capture would make permanent denials unschedulable backlog
+  residents; status quo left genuine future work invisible.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-07
 source-span: "SES-0022 @ T7-T8"

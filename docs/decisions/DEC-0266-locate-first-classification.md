@@ -5,6 +5,15 @@ title: Intake sessions classify a change's artifact level locate-first — searc
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-09
+overview: >-
+  DEC-0266 constrains intake sessions to classify a change's artifact
+  level locate-first at session open, using semantic search and graph
+  trace to locate affected artifacts, then maintaining a working
+  hypothesis throughout grilling that is revised as answers land and
+  confirmed in the post-grilling summary. Classification is continuous
+  and grounded in the existing corpus rather than the proposal's
+  wording, preventing premature anchoring on unrefined framing and
+  enabling level-appropriate question bank selection.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T18-T19"

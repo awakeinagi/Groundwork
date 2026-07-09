@@ -7,6 +7,12 @@ owner: ds-lead
 approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 created: 2026-07-08
+overview: >-
+  Refinement sessions double as domain modeling by immediately
+  challenging vague or overloaded terms, proposing precise canonical
+  definitions, and writing resolved terms into CONTEXT.md as they
+  crystallize, never batched or deferred to a separate exercise. Per
+  DEC-0012, DEC-0056.
 links:
   derives-from: [EP-0002]
   satisfies: [BG-0001]

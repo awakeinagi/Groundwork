@@ -7,6 +7,14 @@ approved-by: awakeinagi@gmail.com
 approved-on: 2026-07-08
 owner: eng-lead
 created: 2026-07-08
+overview: >-
+  Standalone event-type component, graduated from CMP-0001 per DEC-0134
+  because multiple consumers depend on it. Defines the payload schema
+  and delivery contract for artifact-change events emitted by CMP-0001's
+  outbox. Specifies event_id, artifact_id, artifact_type, branch, commit,
+  kind (created, content-amended, status-changed, merged, deleted),
+  changed_fields, and timestamp. Delivery: at-least-once, per-artifact
+  ordering only. Consumers idempotent by contract.
 context: canonical-store
 component-type: event
 links:

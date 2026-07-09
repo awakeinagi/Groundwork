@@ -5,6 +5,13 @@ title: Work-management connector stories are born deferred at release 2
 status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-08
+overview: >-
+  Work-management connector stories (projection lifecycle, drift
+  capture, backlog read feed) are drafted in full now and born
+  deferred with release 2. Code-host connector, identity, and notifier
+  stories stay in the current release since PR gate and agent codebase
+  context need them in v1. Deferral captures design without widening
+  the v1 slice.
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-08
 source-span: "SES-0026 @ T2-T3"

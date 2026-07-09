@@ -5,6 +5,15 @@ title: EP-0007 amendment — human review and flagging of consolidations
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-06
+overview: >-
+  Amendment to EP-0007 refinement following SES-0008, establishing human
+  backstop to automated faithfulness checking. Consolidations browsable
+  via UI with source references, freshness state, and check history; any
+  user can flag with an issue report. Flags quarantine immediately (never
+  served, fallback to sources) pending disposition in review queue
+  (regenerate, fix sources, or correct checker). Confirmed human-caught
+  misses feed evaluation corpus as regression cases, permanently
+  strengthening automated guard. Produced 1 decision.
 participant: awakeinagi@gmail.com
 participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
