@@ -18,7 +18,7 @@ overview: >-
   agree.
 links:
   derives-from: [SES-0061]
-  relates-to: [DEC-0292, DEC-0329]
+  relates-to: [DEC-0292, DEC-0329, IDEA-0023]
 ---
 
 # IDEA-0016: Reconcile the System-Architect Model-Invocation Mechanism
@@ -54,3 +54,13 @@ Pending — awaiting take-up. A future session should verify what model
 `"fable"` actually resolves to at spawn time, decide whether the
 frontmatter pin and the spawn-time alias should say the same thing,
 and correct whichever is stale.
+
+Update (2026-07-10): a diagnostic investigation prompted by taking up
+this idea found the underlying premise runs deeper than "which alias
+resolves to what" — see IDEA-0023, which found DEC-0292's explicit-
+override mandate itself is backwards (it silently drops reasoning
+effort; the frontmatter-only path it distrusts actually preserves
+both model and effort) and separately confirmed `claude-opus-4-6` is
+not a real Anthropic model identifier. A future session resolving
+this idea should read IDEA-0023 first.
+
