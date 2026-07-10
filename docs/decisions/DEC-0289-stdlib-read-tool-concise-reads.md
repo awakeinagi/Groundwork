@@ -2,14 +2,19 @@
 id: DEC-0289
 type: decision
 title: A stdlib read tool owns ID-addressed concise reads with eight affordances
-status: accepted
+status: superseded
+superseded-by: [DEC-0316]
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0053 @ T6-T9"
 overview: >-
-  A new stdlib-only skill script, groundwork_read.py, owns all
+  SUPERSEDED by DEC-0316 (SES-0057): the read surface is redesigned
+  into the read family of artifact-interact's unified CLI; the eight
+  affordances' intent and the SES-0053 division of labor carry
+  forward there. Original decision: a new stdlib-only skill script,
+  groundwork_read.py, owns all
   ID-addressed concise reads with eight v1 subcommands: batch overview
   (by IDs or type/status filter), outline (headings + CMP element
   inventory), section (one body section), element (one CMP design
