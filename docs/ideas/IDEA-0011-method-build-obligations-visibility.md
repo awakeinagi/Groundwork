@@ -2,26 +2,22 @@
 id: IDEA-0011
 type: idea
 title: Surface ratified-but-unbuilt method tooling in the status report and work queue
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 proposed-by: awakeinagi
 overview: >-
   Captured mid-SES-0058 after the stakeholder asked why the
   artifact-interact skill decided in SES-0057 (DEC-0322 mandated its
-  build) was never built: "decided, not yet built" is a legitimate
-  state for method tooling, but nothing tracks it — the status
-  report's work queue shows drafts, gated artifacts, conflicts,
+  build) was never built: "decided, not yet built" was a legitimate
+  state for method tooling, but nothing tracked it — the status
+  report's work queue showed drafts, gated artifacts, conflicts,
   change proposals, and Ideas, while a ratified method-level build
-  obligation appears nowhere. The facilitator only discovered the
-  unbuilt skill by inspecting .claude/skills/ directly. The gap:
-  method-tooling build obligations need a visible home in the status
-  report / work queue so a session that ratifies a build also leaves
-  a trail the next session start surfaces. Facilitator restatement
-  aligned with the stakeholder in-session. Disposition pending —
-  partially mitigated for the current instance by SES-0058's own
-  build-before-commit execution, but the systemic tracking gap
-  remains.
+  obligation appeared nowhere. Taken up at SES-0059 (DEC-0344):
+  resolved structurally by the BG-0002 method track — method work
+  now lives in the artifact tree, so obligations surface in the
+  status report natively, and BG-0002 carries the residual nothing-
+  ratified-stays-invisibly-unbuilt criterion. Status: taken-up.
 links:
   derives-from: [SES-0058]
 ---
@@ -50,7 +46,5 @@ it.
 
 ## Disposition
 
-Pending — awaiting take-up via the change-intake protocol as its own
-session. The immediate instance is being handled inside SES-0058's
-build-before-commit execution; the systemic fix (status-report /
-work-queue visibility for method build obligations) is this Idea.
+Taken up at SES-0059 (DEC-0344). The fix is structural: method work now lives in the artifact tree under BG-0002, so build obligations surface in the status report and frontier natively; BG-0002 outcome 4 carries the residual guarantee that nothing ratified stays invisibly unbuilt. The immediate instance (the unbuilt artifact-interact skill) was built at SES-0058.
+
