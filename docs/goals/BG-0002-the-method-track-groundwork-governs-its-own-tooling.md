@@ -2,7 +2,9 @@
 id: BG-0002
 type: business-goal
 title: The Method Track — Groundwork governs its own tooling
-status: gated
+status: approved
+approved-on: 2026-07-10
+approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 overview: >-
