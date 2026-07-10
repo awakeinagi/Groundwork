@@ -52,11 +52,11 @@ epic level, just one grain down.
 
 ## Cross-story coupling check (required step)
 
-Same tool as the epic-level check, generalized:
-
-```bash
-python3 <skill-dir>/scripts/groundwork_epic_coupling.py --root <project> check --type story ST-nnnn SP-nnnn ...
-```
+Same tool as the epic-level check, generalized: task the
+artifact-librarian with the coupling check, story variant, over the
+draft IDs (the librarian runs the artifact-interact CLI's coupling
+family: `gw.py --root <project> coupling check --type story ST-nnnn
+SP-nnnn ...`).
 
 Run right after a draft story/spike set's impact edges are drawn, before
 any of them is refined in depth. It groups siblings by their parent

@@ -47,7 +47,8 @@ Three properties make the system work; protect them above all:
 ```
 CONTEXT.md               glossary — the project's ubiquitous language
 AGENTS.md                standing instructions for agents (Groundwork marker)
-tools/check_links.py     graph integrity checker — run before every commit
+tools/check_links.py     graph integrity checker — a librarian check task
+                         runs the full integrity suite before every commit
 governance/              governance-as-code (DEC-0263): roles.yaml,
                          domains.yaml, gate-policies.yaml, people.yaml —
                          seeded solo at bootstrap, edited via normal commits
@@ -422,8 +423,10 @@ re-reading.
 
 ## Integrity rules
 
-Enforced by `tools/check_links.py` (bundled with this skill; installed
-into projects at bootstrap):
+Enforced by the integrity checker (`check_links.py`, bundled with the
+artifact-interact skill's scripts and installed into projects at
+bootstrap as `tools/check_links.py`; a librarian check task runs it
+before every commit):
 
 1. IDs are unique; frontmatter `id` matches the filename prefix; type
    matches prefix.

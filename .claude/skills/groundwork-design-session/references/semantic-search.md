@@ -1,9 +1,23 @@
 # Semantic Search & Decision-Recall Audit
 
 Companion to [SKILL.md](../SKILL.md)'s search section: recipes and the
-audit protocol. The tool is `scripts/groundwork_search.py`; its DuckDB
-index (`.groundwork-search`) is a derived view — docs stay the source
-of truth; the index reconciles itself with the docs on every run.
+audit protocol. The tool is the `search` family of the artifact-interact
+skill's unified CLI:
+
+```bash
+python3 .claude/skills/artifact-interact/scripts/gw.py --root <project> search <subcommand> [args]
+```
+
+Its DuckDB index (`.groundwork-search`) is a derived view — docs stay
+the source of truth; the index reconciles itself with the docs on every
+run.
+
+> **Who runs these commands (DEC-0324..DEC-0327).** The commands below
+> are executed by the `artifact-librarian` agent (or another agent that
+> explicitly charters the artifact-interact skill per DEC-0327) — never
+> by the facilitator directly. Facilitators pass the *intent* to the
+> librarian ("have we discussed X?", "run the recall audit on ST-0004")
+> rather than running commands themselves.
 
 ## Search recipes
 
@@ -27,10 +41,12 @@ at gate prep.
 
 **Mechanics:**
 
-1. `audit <ID-or-file> [--k 15]` — ranks accepted decisions relevant to
-   the artifact but absent from its considered set (frontmatter cites +
-   inline references, superseded-redirected), and emits a JSON judge
-   packet including instructions.
+1. Task the librarian with the recall audit on the artifact (it runs
+   `audit <ID-or-file> [--k 15]`) — this ranks accepted decisions
+   relevant to the artifact but absent from its considered set
+   (frontmatter cites + inline references, superseded-redirected), and
+   emits a JSON judge packet including instructions, which the
+   librarian returns to you.
 2. Spawn a judge subagent with the packet (plus the artifact text if
    the judge lacks session context), always on a **Sonnet 5** model —
    never Opus-class:

@@ -2,3 +2,4 @@
 .groundwork-graph.wal
 .groundwork-search
 .groundwork-search.wal
+__pycache__/

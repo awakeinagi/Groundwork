@@ -1,13 +1,24 @@
 # Specification: Bundled Scripts
 
-Language-agnostic behavioral specification for the two executable tools
-bundled with the `groundwork-design-session` skill. An agent with no other
+> **Home note (DEC-0310).** This spec lives with the `artifact-interact`
+> skill: all artifact tooling scripts moved out of the
+> `groundwork-design-session` skill into
+> `.claude/skills/artifact-interact/scripts/`, and this document moved
+> with them.
+
+Language-agnostic behavioral specification for two of the executable
+tools bundled with the `artifact-interact` skill
+(`.claude/skills/artifact-interact/scripts/check_links.py` and
+`.claude/skills/artifact-interact/scripts/status_report.py`; both also
+reachable as the `check` and `status` families of the unified `gw.py`
+CLI). An agent with no other
 context should be able to reimplement both from this document alone, in
 any language. The reference implementations happen to be Python 3 with a
 YAML-parsing library as the only third-party dependency, but nothing below
 requires that.
 
-Read [groundwork-system.md](groundwork-system.md) for the artifact model
+Read the `groundwork-design-session` skill's
+`references/groundwork-system.md` for the artifact model
 these tools operate on; this spec restates the parts they depend on so it
 stands alone.
 
@@ -150,7 +161,9 @@ explicitly. Skip targets that failed to resolve (Rule A covered them).
 
 ### Purpose
 
-The skill's Step-0 tool: given a project root, produce a concise census of
+The design-session facilitator's Step-0 assessment tool (run for it by
+the artifact-librarian as a status task): given a project root, produce
+a concise census of
 the design's state and recommend which operating mode the facilitator
 should enter — Mode 1 (bootstrap), Mode 2 (begin the design), or Mode 3
 (continue). It must be safe to run on anything: an empty directory, a

@@ -35,16 +35,51 @@ semantic change to the corpus ever happens outside a session (DEC-0252,
 hard rule); unauthorized attempts are captured as CPs per the
 governance config in `governance/` (DEC-0262, DEC-0263).
 
+## How you touch artifacts: the artifact-librarian (DEC-0324..DEC-0334)
+
+You do not read, search, or write corpus artifacts yourself — **no
+agent does** (DEC-0325, facilitator included). Every artifact
+interaction is delegated to the `artifact-librarian` project agent:
+spawn it with a **task-level intent**, always passing the Agent tool's
+explicit `model: sonnet` parameter (DEC-0329). It plans and executes
+the reads/searches/graph queries/typed writes via the
+`artifact-interact` skill (its chartered toolbelt, DEC-0327) and
+returns a distilled result; ask for verbatim sections when fidelity
+matters (gate review, transcript work).
+
+- **Read/search/graph tasks may fan out in parallel; write tasks are
+  serialized — one write-task librarian at a time (DEC-0332).**
+- The librarian refuses invariant-violating writes and reports the
+  sanctioned alternative (DEC-0330); surface refusals to the
+  stakeholder like any other tension — never instruct it to work
+  around one.
+- Git stays with you: the librarian validates and runs the checker on
+  request, but you commit (DEC-0333).
+- Direct use of `artifact-interact` is sanctioned only under the
+  manual-load escape hatch (DEC-0327): the operator explicitly loads
+  it, or an agent definition charters it. If that applies to you, its
+  SKILL.md documents the CLI.
+
+Intent examples you'll use constantly:
+
+- "Status report for <root>: counts, open items, frontier, recommended mode."
+- "Locate-first for this proposal: search + graph-trace <topic>; return the affected artifacts with overviews."
+- "Record these N decisions (payloads follow) with cites and links; then consistency sweep + terms on the new IDs."
+- "Run the recall audit on <ID>; return the candidate list and judge packet."
+- "Close SES-nnnn: append these turns, set status closed, update overview; run the full checker and report."
+
 ## Step 0 — Assess the project state (always do this first)
 
-Run the bundled status tool from the project root:
-
-```bash
-python3 <skill-dir>/scripts/status_report.py .
-```
-
-It reports artifact counts by type/status, open items, the refinement
-frontier, and a recommended mode. Verify its recommendation yourself:
+1. **Verify the interaction surface is installed** (DEC-0326):
+   the `artifact-librarian` agent (`.claude/agents/artifact-librarian.md`)
+   and the `artifact-interact` skill (project-local
+   `.claude/skills/artifact-interact/`, or user scope) must both exist.
+   If either is missing, stop and tell the user to run
+   `install.sh --project <repo>` from a Groundwork repo's
+   `.claude/skills/artifact-interact/` directory. Do not improvise
+   direct artifact access instead.
+2. **Task the librarian with a status report.** Verify its recommended
+   mode yourself:
 
 | Observation | Mode |
 |---|---|
@@ -71,9 +106,9 @@ to run sessions and gates). Templates for every artifact type are in
    ```
    CONTEXT.md          ← glossary seed (template in references/templates.md)
    AGENTS.md           ← copy assets/AGENTS.md from this skill, verbatim
-   tools/check_links.py← copy scripts/check_links.py from this skill
-   tools/serve_docs.py ← copy scripts/serve_docs.py from this skill
-   docs/human_docs.html← copy assets/human_docs.html from this skill
+   tools/check_links.py← from the artifact-interact skill's scripts/
+   tools/serve_docs.py ← from the artifact-interact skill's scripts/
+   docs/human_docs.html← from the artifact-interact skill's assets/
    governance/         ← seed people/roles/domains/gate-policies.yaml with
                          solo god-mode defaults (templates.md §Governance
                          seeds; DEC-0263 — all roles → the operator)
@@ -87,11 +122,21 @@ to run sessions and gates). Templates for every artifact type are in
    IDs; this viewer, not stored links, carries human navigation.
    If the repo already has an `AGENTS.md` or `CLAUDE.md`, don't overwrite —
    append the Groundwork section from the asset instead.
-2. If not a git repo, `git init`. Docs being versioned is load-bearing:
+2. **Install the interaction surface and its mandate** (DEC-0326):
+   install the `artifact-interact` skill + `artifact-librarian` agent
+   into the project (`install.sh --project`), and ensure the standing
+   instruction is present in BOTH surfaces — the AGENTS.md Groundwork
+   section (the asset carries it) AND project-level memory: *all agents
+   must use the artifact-librarian to interact with artifacts, unless
+   the artifact-interact skill has been manually loaded.* On every
+   later invocation, re-verify both; re-add if missing. This applies to
+   every project using the Groundwork paradigm, not just the Groundwork
+   application repo.
+3. If not a git repo, `git init`. Docs being versioned is load-bearing:
    history is the audit trail and IDs are never reused even after deletes.
-3. Run `python3 tools/check_links.py` (should pass trivially), commit:
+4. Have the librarian run the full checker (should pass trivially), commit:
    `"Bootstrap Groundwork documentation structure"`.
-4. Proceed directly into Mode 2 — an empty structure has no value until
+5. Proceed directly into Mode 2 — an empty structure has no value until
    the first idea enters refinement. Ask the user for their idea(s) if they
    haven't volunteered one.
 
@@ -116,8 +161,9 @@ decision distillation, and gates. The short version of the flow:
    in `CONTEXT.md` as they resolve. Keep going as many rounds as it takes
    to reach shared understanding — there is no round cap.
 3. **Record `SES-0001`** (turn-numbered transcript) and distill the
-   decisions into `DEC-` records, confirming each with the user in plain
-   language before marking it accepted.
+   decisions into `DEC-` records — all via librarian write tasks —
+   confirming each with the user in plain language before marking it
+   accepted.
 4. **Draft `BG-0001`** (Business Goal) from the session; set it `gated`
    and ask the user to approve. On approval, record `approved-by`/
    `approved-on` and commit.
@@ -125,13 +171,14 @@ decision distillation, and gates. The short version of the flow:
    `impacted-by` edges between them, then refine each epic through its own
    session — highest-impact epics first.
 
-Always run `python3 tools/check_links.py` before every commit; commit at
-least once per session and once per approval.
+Always have the librarian run the full checker before every commit;
+commit at least once per session and once per approval.
 
 ## Mode 3 — Continue an existing design
 
 1. Read the status report plus `CONTEXT.md`, the Business Goal(s), and the
-   frontier artifacts it lists. Do **not** re-litigate accepted decisions —
+   frontier artifacts it lists (librarian read tasks; overviews first).
+   Do **not** re-litigate accepted decisions —
    read them and build on them. If something seems wrong, raise it as a
    new session topic; a new decision may supersede an old one, but history
    is never rewritten.
@@ -160,44 +207,34 @@ least once per session and once per approval.
 
 ## Semantic search & the decision-recall audit
 
-`scripts/groundwork_search.py` — hybrid semantic search over the corpus
-(DuckDB index in `.groundwork-search`, gitignored, disposable; model2vec
-embeddings, fully local; index auto-reconciles with the docs on every
-invocation). Route **meaning-shaped** questions here (have we discussed
-X? which decision covers Y? is this new artifact a duplicate?) and
-**structure-shaped** questions to the graph tool (what depends on X? why
-does Y exist?).
-
-```bash
-uv run <skill-dir>/scripts/groundwork_search.py --root <project> search "query"     [--k N] [--type decision] [--status accepted] [--current] [--turns]     [--within EP-0001] [--no-boost]
-uv run <skill-dir>/scripts/groundwork_search.py --root <project> similar <ID>
-uv run <skill-dir>/scripts/groundwork_search.py --root <project> audit <ID-or-file> [--k 15]
-```
+Route **meaning-shaped** questions to librarian search tasks (have we
+discussed X? which decision covers Y? is this new artifact a
+duplicate?) and **structure-shaped** questions to librarian graph tasks
+(what depends on X? why does Y exist?). Read tasks parallelize freely
+(DEC-0332).
 
 **Decision-recall audit (required stage step).** After drafting or
-materially amending an artifact — and again at gate prep — run `audit`:
-it ranks accepted decisions relevant to the artifact but absent from its
-considered set (cites + inline references) and emits a judge context
-packet. Spawn a judge subagent with that packet, always on a **Sonnet
-5** model (fork when the facilitator itself runs Sonnet 5, else a fresh
-Sonnet 5 agent — spawn it with the Agent tool's **`model: sonnet`
-override set explicitly**; a subagent with no `model` inherits the
-facilitator's model, which when the facilitator is Opus-class is exactly
-the forbidden case) — one judge for lists ≤15; shard into ~8-candidate
-batches beyond that; **never one candidate per agent** (isolated
-relevance judges over-flag). Address findings in-session;
-"Nothing to add" is a valid outcome worth recording. The audit catches
-*content-relevant* decisions missing from context; *rule-type* decisions
-(e.g. seam graduation) still need their explicit checklists — the two
-mechanisms are complements. Recipes in
+materially amending an artifact — and again at gate prep — task the
+librarian with the recall audit on the artifact: it returns the ranked
+candidates and the judge context packet. Spawn a judge subagent with
+that packet, always on a **Sonnet 5** model (fork when the facilitator
+itself runs Sonnet 5, else a fresh Sonnet 5 agent — spawn it with the
+Agent tool's **`model: sonnet` override set explicitly**; a subagent
+with no `model` inherits the facilitator's model, which when the
+facilitator is Opus-class is exactly the forbidden case) — one judge
+for lists ≤15; shard into ~8-candidate batches beyond that; **never
+one candidate per agent** (isolated relevance judges over-flag).
+Address findings in-session; "Nothing to add" is a valid outcome worth
+recording. The audit catches *content-relevant* decisions missing from
+context; *rule-type* decisions (e.g. seam graduation) still need their
+explicit checklists — the two mechanisms are complements. Recipes in
 [references/semantic-search.md](references/semantic-search.md).
 
 **Consistency checks at distillation (required — DEC-0157/DEC-0158).**
-Immediately after recording new decisions, run
-`python3 <skill-dir>/scripts/groundwork_consistency.py --root <project>
-sweep <new-DEC-IDs>` and `… terms <new-DEC-IDs>` (pure stdlib). `sweep`
-catches partial supersessions: an accepted decision named in
-`relates-to`/`supersedes` gets its ratified citers listed for
+Immediately after recording new decisions, include in the librarian's
+write task: run the consistency `sweep` and `terms` checks over the new
+DEC IDs. `sweep` catches partial supersessions: an accepted decision
+named in `relates-to`/`supersedes` gets its ratified citers listed for
 consistency review (narrowing decisions never fire the staleness walk).
 `terms` catches contract-identifier overlap: ratified artifacts sharing
 rare code-span identifiers (containment-matched), flagging unlinked
@@ -207,16 +244,15 @@ findings. Protocol details in
 §Distilling decisions.
 
 **Cross-sibling coupling check at epic and story derivation (required —
-DEC-0196, DEC-0199).** Right after a draft sibling set's impact edges are
-drawn, and before refining any of them in depth, run `python3
-<skill-dir>/scripts/groundwork_epic_coupling.py --root <project> check
-<IDs>` — add `--type story` for a story/spike set under an epic (default
-is epic, siblings grouped by goal). Pure stdlib. It flags *mutual*
-(bidirectional) `impacts` coupling between siblings — a signal the split
-may have followed a technical-layer seam instead of a real one — while
-treating one-directional fan-out as informational only (expected from
-foundational/substrate epics; not a finding). Seam catalogs and
-split-vs-merge guidance in
+DEC-0196, DEC-0199).** Right after a draft sibling set's impact edges
+are drawn, and before refining any of them in depth, task the librarian
+with the coupling check over the sibling IDs (story/spike sets under an
+epic use the story variant; the default groups epics by goal). It flags
+*mutual* (bidirectional) `impacts` coupling between siblings — a signal
+the split may have followed a technical-layer seam instead of a real
+one — while treating one-directional fan-out as informational only
+(expected from foundational/substrate epics; not a finding). Seam
+catalogs and split-vs-merge guidance in
 [references/epic-slicing-seams.md](references/epic-slicing-seams.md) and
 [references/story-slicing-seams.md](references/story-slicing-seams.md).
 
@@ -226,83 +262,62 @@ sessions open with an **advisor** consultation of the
 `system-architect` project agent (`.claude/agents/system-architect.md`,
 knowledge in the `system-architecture-bp` skill), and their gate prep
 includes a **reviewer** consultation — at component gate prep it runs
-before the DEC-0136 graduation review. Discretionary at BG level.
-Every consultation is a dual-instance debate (record-grounded vs
-best-practice-independent, ≤2 rebuttal rounds; strongest model passed
-explicitly at every spawn); the verdict is a proposal the stakeholder
-ratifies, recorded as attributed transcript turns with inline
-dispositions. Protocol details in
+before the DEC-0136 graduation review. Discretionary at BG level and at
+method-level sessions (DEC-0323). Every consultation is a dual-instance
+debate (record-grounded vs best-practice-independent, ≤2 rebuttal
+rounds; strongest model passed explicitly at every spawn); the verdict
+is a proposal the stakeholder ratifies, recorded as attributed
+transcript turns with inline dispositions. The system-architect holds
+an explicit read-only corpus charter (DEC-0328). Protocol details in
 [references/refinement-process.md](references/refinement-process.md)
 §System-architect consultation.
 
-## Concise reads & progressive disclosure (read this before opening files)
+## Concise reads & progressive disclosure
 
 Every artifact carries a frontmatter `overview:` (max 250 words,
-derived/non-normative — body wins; DEC-0284..DEC-0288). **Read
-overviews first; open a body only when the overview says the detail is
-there.** `scripts/groundwork_read.py` (pure stdlib, no index) serves
-the concise reads:
+derived/non-normative — body wins; DEC-0284..DEC-0288). Librarian read
+tasks serve overviews, outlines, sections, elements, contract items,
+turn spans, glossary terms, and citers — ask for overviews first, and
+for bodies only when an overview says the detail is there. Search and
+graph results include overviews by default (DEC-0290) — a hit list
+frequently answers the question with zero file reads. When an edit
+changes an artifact's meaning, the same write task updates its
+overview (DEC-0288).
 
-```bash
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> overview <ID>... [--type T] [--status S]
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> outline <ID>
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> section <ID> <heading>
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> element <CMP-ID> <name>
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> item <CMP-ID> <item-ID>   # e.g. StorageService.B-3, C-2, IG-1
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> turns <SES-ID> <T4-T6>
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> term <glossary-term>
-python3 <skill-dir>/scripts/groundwork_read.py --root <project> citers <ID>
-```
+## The graph index (structure-shaped questions)
 
-Search and graph outputs include overviews by default (`--no-overviews`
-to suppress; DEC-0290) — a hit list frequently answers the question
-with zero file reads. Whole-file reads are for artifacts you are
-actively editing or gating. When an edit changes an artifact's meaning,
-update its overview in the same edit (DEC-0288).
+The librarian's graph tasks answer traversals:
 
-## The local graph index (LadybugDB)
-
-The skill bundles a queryable graph view of the artifact tree —
-`scripts/groundwork_graph.py`, an embedded LadybugDB (openCypher) built
-from frontmatter links plus Design Element headings. Run it via `uv`,
-which installs `ladybug<1.0` into a temporary managed venv from the
-script's inline metadata (requires `uv` on PATH):
-
-```bash
-uv run <skill-dir>/scripts/groundwork_graph.py --root <project> build
-uv run <skill-dir>/scripts/groundwork_graph.py --root <project> <command>
-```
-
-Use it whenever a question is really a graph traversal:
-
-| Moment in the process | Command |
+| Moment in the process | Ask the librarian for |
 |---|---|
-| Before superseding a decision or amending an approved artifact — who goes stale? | `impact <ID>` |
-| Session prep: why does this artifact exist, on which decisions? | `trace <ID>` |
-| Periodic audit: dangling refs, citations of superseded DECs, uncited decisions, frontier, reciprocity gaps (unlisted children, dead/missing cites, unexplained impact edges, unmentioned session subjects) | `gaps` |
-| Choosing what to refine next among siblings | `order [type]` |
-| Element inventory across components (seam-graduation candidates) | `elements [etype]` |
-| Percent-complete estimate — design % per story/epic/goal | `progress` |
-| Anything else | `query "<openCypher>"` — schema + recipe cookbook in [references/graph-queries.md](references/graph-queries.md) |
+| Before superseding a decision or amending an approved artifact — who goes stale? | impact walk of the ID |
+| Session prep: why does this artifact exist, on which decisions? | provenance trace of the ID |
+| Periodic audit: dangling refs, citations of superseded DECs, uncited decisions, frontier, reciprocity gaps | the gaps report |
+| Choosing what to refine next among siblings | refinement order (optionally by type) |
+| Element inventory across components (seam-graduation candidates) | the elements inventory |
+| Percent-complete estimate | design % per story/epic/goal |
+| Anything else | an openCypher query — recipes in [references/graph-queries.md](references/graph-queries.md) |
 
-Discipline: the graph is a **derived view** — docs stay the source of
-truth. After editing artifacts, `sync <file-or-ID>...` (or rebuild:
-`build` is cheap). The DB file `.groundwork-graph` is disposable; keep
-it gitignored. Graph mutations via `query` are for what-if exploration
-only, never a substitute for editing docs.
+The graph is a **derived view** — docs stay the source of truth; the
+librarian keeps it synced around its own writes. Graph mutations are
+for what-if exploration only, never a substitute for editing docs.
 
 ## Invariants (never break these, in any mode)
 
-- **Checker before commit.** `python3 tools/check_links.py` must pass.
+- **Checker before commit.** The full integrity suite must pass (a
+  librarian check task) before every commit.
 - **Provenance.** Sessions are append-only once closed; accepted decisions
   are immutable (supersede, don't edit); every contract line and
   acceptance criterion cites a `DEC-`.
 - **Gates.** Nothing derives from an unapproved parent; approval is the
   user's explicit call, recorded in frontmatter.
-- **IDs.** Sequential per prefix, never reused. Check existing files (all
-  of `docs/`) for the max before allocating.
+- **IDs.** Sequential per prefix, never reused — the write API allocates;
+  never hand-pick an ID.
 - **Glossary.** Use `CONTEXT.md` terms exactly; resolve new or drifting
   terms there the moment they crystallize.
+- **Delegation (DEC-0325).** All artifact interaction goes through the
+  artifact-librarian; direct tooling only under the DEC-0327 escape
+  hatch.
 
 ## Reference map
 
@@ -315,5 +330,7 @@ only, never a substitute for editing docs.
 | Epic-slicing seams, vertical-vs-horizontal slicing, split-vs-merge guidance, the coupling check | [references/epic-slicing-seams.md](references/epic-slicing-seams.md) |
 | Story-slicing seams, INVEST-grounded split-vs-merge guidance, the coupling check | [references/story-slicing-seams.md](references/story-slicing-seams.md) |
 | Copy-paste templates for every artifact + CONTEXT.md/README seeds | [references/templates.md](references/templates.md) |
-| Graph-index schema, command reference, openCypher recipe cookbook | [references/graph-queries.md](references/graph-queries.md) |
+| Graph-index schema, openCypher recipe cookbook | [references/graph-queries.md](references/graph-queries.md) |
+| Recall-audit recipes and judge protocol | [references/semantic-search.md](references/semantic-search.md) |
 | The standing instructions installed into projects | [assets/AGENTS.md](assets/AGENTS.md) |
+| The artifact toolbelt itself (librarian/chartered use only) | the `artifact-interact` skill |

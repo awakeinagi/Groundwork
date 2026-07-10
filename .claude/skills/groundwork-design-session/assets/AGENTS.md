@@ -33,10 +33,31 @@ docs/
 Pipeline: Idea → Sessions → Business Goal → Epics → Stories/Spikes →
 Component Docs. Every stage transition passes a **human approval gate**.
 
+## How agents touch artifacts — the artifact-librarian mandate
+
+**All agents must use the `artifact-librarian` agent to interact with
+artifacts, unless the `artifact-interact` skill has been manually
+loaded (DEC-0325, DEC-0326, DEC-0327).** Reads, searches, graph
+queries, and writes alike: spawn the `artifact-librarian` project
+agent (`.claude/agents/artifact-librarian.md`) with a task-level
+intent, passing the Agent tool's explicit `model: sonnet` parameter
+(DEC-0329). It executes the operations through the `artifact-interact`
+skill's guardrailed CLI — the sole sanctioned write path (DEC-0312) —
+and returns a distilled result (verbatim content on request). Do not
+Read/Edit/Write `docs/` artifact files yourself, and do not load
+`artifact-interact` because context seems to call for it — the skill
+is explicit-load-only. "Manually loaded" means the operator loaded it
+by name, or your own agent definition explicitly charters it
+(DEC-0328: `overview-writer` and `system-architect` hold such
+charters). Read-only librarian tasks may run in parallel; never run
+two write-task librarians concurrently (DEC-0332). The librarian never
+commits — git stays with you (DEC-0333).
+
 ## Non-negotiable rules
 
-1. **Run `python3 tools/check_links.py` before every commit.** Never
-   commit red.
+1. **Run the full integrity checker before every commit** (a librarian
+   check task; `python3 tools/check_links.py` if you are chartered).
+   Never commit red.
 2. **Gates.** Never derive downstream work from a parent whose `status`
    is not `approved`. Approval is a human's explicit call; record it as
    `status: approved` + `approved-by:` + `approved-on:` in frontmatter,
@@ -203,16 +224,14 @@ releases are re-planned.
 
 ## Reading discipline — progressive disclosure
 
-Read overviews first; open bodies only when the overview says the
-detail is there (per DEC-0284, DEC-0289). The Groundwork skill's
-`groundwork_read.py` serves concise reads without whole-file loads:
-`overview <ID>...` (batch, or `--type/--status` filtered), `outline
-<ID>`, `section <ID> <heading>`, `element <CMP-ID> <name>`, `item
-<CMP-ID> <item-ID>`, `turns <SES-ID> <T-span>`, `term <name>`, `citers
-<ID>`. Search and graph tool outputs already include overviews (per
-DEC-0290) — a hit list is often enough to answer without any file
-read. Whole-file reads are for artifacts you are actively editing or
-gating.
+Read overviews first; ask for bodies only when the overview says the
+detail is there (per DEC-0284, DEC-0289). Librarian read tasks serve
+concise reads without whole-file loads: overviews (batch, or
+type/status filtered), outlines, sections, design elements, contract
+items, transcript turn spans, glossary terms, and citers. Search and
+graph results already include overviews (per DEC-0290) — a hit list is
+often enough to answer without any file read. Ask for verbatim
+sections only when fidelity matters (gate review, transcript work).
 
 ## Orientation for a fresh agent
 

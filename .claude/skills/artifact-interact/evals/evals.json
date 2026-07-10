@@ -1,0 +1,13 @@
+{
+  "skill_name": "artifact-interact",
+  "note": "Functional CLI matrix run 2026-07-09 during the SES-0058 build (14 cases, all passing against a scratch corpus copy); prompts below are the reusable eval set for future iterations.",
+  "evals": [
+    {"id": 1, "prompt": "Using the artifact-interact CLI against <scratch-corpus>, create an idea artifact titled 'Test idea', proposed-by tester, with a short overview, then report the allocated ID.", "expected_output": "New IDEA-nnnn file with sequential ID, template body, valid frontmatter; compact OK line; no other file changed."},
+    {"id": 2, "prompt": "Set an accepted decision's status to draft, then edit its Decision section.", "expected_output": "Both operations REFUSED with messages naming supersede as the sanctioned alternative; files untouched."},
+    {"id": 3, "prompt": "Add an impacts link between two same-type artifacts and verify reciprocity.", "expected_output": "impacts on source and impacted-by on target both written; cross-type attempts refused."},
+    {"id": 4, "prompt": "Append a turn to a closed session without --enrichment, then with --enrichment.", "expected_output": "First refused (immutability, names the enrichment path); second lands under a dated Post-Close Enrichment subsection."},
+    {"id": 5, "prompt": "Supersede an accepted decision with a new title/overview/session/source-span.", "expected_output": "New accepted DEC created with supersedes link; old flipped to superseded with superseded-by backlink; ratified citers listed as stale-walk hint."},
+    {"id": 6, "prompt": "Apply a JSON batch: create an idea, then add-cite to an existing draft artifact.", "expected_output": "Both operations applied in order with OK lines; no stdin blocking."},
+    {"id": 7, "prompt": "Run the read, status, and check families through gw.py.", "expected_output": "read overview/outline/section work; status report prints; full checker runs and reports the corpus verdict."}
+  ]
+}

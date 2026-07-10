@@ -46,7 +46,7 @@ clarity.
   mutual blocking — forcing them into one epic creates an artificial
   bottleneck where nothing gates until everything is done (see
   horizontal slicing, above).
-- Run the [cross-epic coupling check](../scripts/groundwork_epic_coupling.py)
+- Task the librarian with the cross-epic coupling check
   once draft stories exist — if a single epic's own stories cluster into
   two groups with near-zero decisions in common, that's the same signal
   one level down, and usually means the epic should have been two from
@@ -68,11 +68,10 @@ clarity.
 ## Cross-epic coupling check (required step)
 
 After deriving a draft epic set and drawing its `impacts`/`impacted-by`
-edges (per refinement-process.md's Epic derivation playbook), run:
-
-```bash
-python3 <skill-dir>/scripts/groundwork_epic_coupling.py --root <project> check EP-nnnn ...
-```
+edges (per refinement-process.md's Epic derivation playbook), task the
+artifact-librarian with the coupling check over the draft epic IDs (the
+librarian runs the artifact-interact CLI's coupling family:
+`gw.py --root <project> coupling check EP-nnnn ...`).
 
 It flags **mutual** (bidirectional) coupling between sibling epics —
 pairs where each shapes the other's decisions — as a candidate for

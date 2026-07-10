@@ -63,8 +63,9 @@ capture the attempt verbatim as a CP awaiting the authority holder(s)
 5. **The record opens at the proposal (DEC-0255).** T1 reconstructs
    the verbatim proposal, T2 your restatement, then the alignment
    loop — provenance starts at intent, not at grilling.
-6. **Locate first (DEC-0266).** At session open, run semantic search
-   and a graph trace over the intent to find the artifacts it touches;
+6. **Locate first (DEC-0266).** At session open, task the
+   artifact-librarian with a semantic search and a graph trace over the
+   intent to find the artifacts it touches;
    maintain a working hypothesis of the affected set and levels
    (BG/EP/ST/SP/CMP/element) through grilling, and confirm it in the
    closing summary. Classification is continuous, grounded in the
@@ -77,7 +78,7 @@ capture the attempt verbatim as a CP awaiting the authority holder(s)
    spawning session cross-references every Idea it produces.
 8. **Modifications complete their cascade in-session (DEC-0267).**
    When the change modifies approved artifacts: record the superseding
-   DECs, run the staleness walk (`groundwork_graph.py impact`), mark
+   DECs, run the staleness walk (a librarian graph task: `impact`), mark
    descendants stale, and present re-affirmation — before the session
    closes. The corpus is never left mid-cascade.
 9. **Close: detailed summary + inspired-ideas check (DEC-0261).**
@@ -165,8 +166,9 @@ their transcript at the verbatim proposal (DEC-0255).
    `relates-to` must be referenced in the body (DEC-0250) — the Purpose
    section naturally names them; the checker enforces it.
 4½. **Decision-recall audit.** After drafting or materially amending
-   the artifact (and again before any gate), run the search tool's
-   `audit` command and spawn a judge subagent with the emitted packet —
+   the artifact (and again before any gate), task the librarian with
+   the recall audit on the artifact — it returns the judge packet —
+   then spawn a judge subagent with that packet;
    protocol, judge topology, and limits in
    [semantic-search.md](semantic-search.md). Address findings before
    gating; "Nothing to add" is a valid outcome. The audit catches
@@ -199,13 +201,10 @@ their transcript at the verbatim proposal (DEC-0255).
   DEC-0158).** A new decision can narrow or contradict an accepted one
   *without* superseding it (a "partial supersession") — the staleness
   walk keys on `supersedes` and never fires. So, immediately after
-  recording new DECs, run both commands of
-  `scripts/groundwork_consistency.py` (pure stdlib, no index):
-
-  ```bash
-  python3 <skill-dir>/scripts/groundwork_consistency.py --root <project> sweep DEC-nnnn ...
-  python3 <skill-dir>/scripts/groundwork_consistency.py --root <project> terms DEC-nnnn ...
-  ```
+  recording new DECs, task the librarian with both consistency checks
+  over the new DEC IDs — the `sweep` and `terms` commands of the
+  consistency family (include this in the distillation write task, or
+  run it as its own librarian task).
 
   `sweep` lists the ratified citers of every accepted decision in the
   new DEC's `relates-to`/`supersedes` — review each citer for
@@ -291,8 +290,8 @@ the change, never as deferred follow-up work (DEC-0267):
 
 1. Walk the graph downward (`derives-from`/`satisfies` children,
    transitively) and set every approved descendant to `status: stale`.
-   The bundled graph tool computes this set: `uv run
-   scripts/groundwork_graph.py impact <ID>` (see SKILL.md).
+   A librarian graph task computes this set (the graph `impact <ID>`
+   command; see SKILL.md).
 2. Produce a short impact report: what changed, which artifacts are
    affected, which are mid-implementation.
 3. **Re-affirmation** clears staleness cheaply: show the approver the
@@ -313,8 +312,8 @@ with the artifacts.
 
 To pick what to refine next among siblings: prefer the item whose
 `impacted-by` list is fully settled (approved) and whose `impacts` list is
-largest — computable via `uv run scripts/groundwork_graph.py order
-<type>` (see SKILL.md). Cycles are normal (A and B constrain each other): break them by
+largest — computable via a librarian graph task (the graph `order
+<type>` command; see SKILL.md). Cycles are normal (A and B constrain each other): break them by
 refining one with the other's known constraints explicitly on the table,
 or by making *provisional* bounding decisions on the impacted item first —
 subject-to-change guesses that give the impactor something to design
@@ -412,9 +411,9 @@ and resolve them here as Risks & Open Questions, or push genuinely open
 ones to a spike.
 
 **Cross-epic coupling check (required, right after impact edges are
-drawn, before refining any epic in depth).** Run
-`groundwork_epic_coupling.py check` (see
-[epic-slicing-seams.md](epic-slicing-seams.md)) over the draft set.
+drawn, before refining any epic in depth).** Task the librarian with
+the coupling check (see
+[epic-slicing-seams.md](epic-slicing-seams.md)) over the draft set's IDs.
 Address any mutual-coupling findings — reconsider the seam, or confirm
 the cycle is real and resolve it via a provisional bounding decision —
 before spending a session refining epics that may need to be re-seamed.
@@ -455,10 +454,10 @@ becomes concrete, testable Acceptance Criteria here. A spike is done when
 its findings are recorded as decisions.
 
 **Cross-story coupling check (required, right after impact edges are
-drawn, before refining any story in depth).** Run
-`groundwork_epic_coupling.py check --type story` (see
-[story-slicing-seams.md](story-slicing-seams.md)) over the draft
-set. Address any mutual-coupling findings — reconsider the seam, or
+drawn, before refining any story in depth).** Task the librarian with
+the coupling check, story variant (`--type story` — see
+[story-slicing-seams.md](story-slicing-seams.md)), over the draft
+set's IDs. Address any mutual-coupling findings — reconsider the seam, or
 confirm the cycle is real and resolve it via a provisional bounding
 decision — before spending a session refining stories that may need to
 be re-seamed.
@@ -499,8 +498,8 @@ step before gating** (run it after the system-architect reviewer
 consultation, DEC-0292 — critique may reshape elements): check every
 element against the graduation rule
 (consumed by more than one CMP — actual or contract-certain — or
-needing independently versioned conformance; the graph tool's
-`elements` command lists candidates) and record the outcome in the
+needing independently versioned conformance; a librarian graph task
+(`elements`) lists candidates) and record the outcome in the
 gating session — citing a rule is not applying it. Put refinement-made stack commitments in
 Implementation Guidance → Constraints (decision-cited); anything merely
 helpful goes in Notes and must never be load-bearing. The gate test:
@@ -516,8 +515,8 @@ is implementation-ready — tell the user so, explicitly.
 
 ## Commit discipline
 
-- `python3 tools/check_links.py` before **every** commit; fix violations,
-  never commit red.
+- A librarian check task runs the full integrity suite before **every**
+  commit; fix violations, never commit red.
 - Commit at least: once per session recorded (session + decisions +
   artifact updates together), once per approval, once per bootstrap.
 - Messages: imperative summary naming the artifacts, e.g.

@@ -1,18 +1,27 @@
 # Graph Queries — the LadybugDB Graph Index
 
-How to use `scripts/groundwork_graph.py`: the schema, the commands, and
-a cookbook of openCypher recipes for questions the canned commands don't
-cover. LadybugDB is an embedded, Kuzu-lineage graph database
-(openCypher dialect; engine docs at https://docs.ladybugdb.com/).
+How to use the `graph` family of the artifact-interact skill's unified
+CLI: the schema, the commands, and a cookbook of openCypher recipes for
+questions the canned commands don't cover. LadybugDB is an embedded,
+Kuzu-lineage graph database (openCypher dialect; engine docs at
+https://docs.ladybugdb.com/).
+
+> **Who runs these commands (DEC-0324..DEC-0327).** The commands below
+> are executed by the `artifact-librarian` agent (or another agent that
+> explicitly charters the artifact-interact skill per DEC-0327) — never
+> by the facilitator directly. Facilitators pass the *intent* to the
+> librarian ("what would go stale if DEC-0011 were superseded?") rather
+> than running commands themselves.
 
 ## Running it
 
-The script carries PEP 723 inline metadata; `uv run` resolves
-`ladybug<1.0` + `pyyaml` into a temporary managed venv automatically:
+The underlying script carries PEP 723 inline metadata; the CLI resolves
+`ladybug<1.0` + `pyyaml` through `uv run` into a temporary managed venv
+automatically (requires `uv` on PATH):
 
 ```bash
-uv run <skill-dir>/scripts/groundwork_graph.py --root <project> build
-uv run <skill-dir>/scripts/groundwork_graph.py --root <project> <command> [args]
+python3 .claude/skills/artifact-interact/scripts/gw.py --root <project> graph build
+python3 .claude/skills/artifact-interact/scripts/gw.py --root <project> graph <command> [args]
 ```
 
 - The database is a single file, default `<root>/.groundwork-graph`.
@@ -192,10 +201,10 @@ real state, work on a copy of the derived DB:
 
 ```bash
 cp .groundwork-graph /tmp/whatif.db
-uv run .../groundwork_graph.py --db /tmp/whatif.db query \
+python3 .../gw.py graph --db /tmp/whatif.db query \
   "MATCH (a:Artifact {id:'EP-0002'}), (b:Artifact {id:'EP-0006'})
    MERGE (a)-[:IMPACTS]->(b)"
-uv run .../groundwork_graph.py --db /tmp/whatif.db impact EP-0002
+python3 .../gw.py graph --db /tmp/whatif.db impact EP-0002
 ```
 
 Never mutate the real DB to represent hypothetical design: rebuild
