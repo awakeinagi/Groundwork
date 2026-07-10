@@ -29,7 +29,7 @@ overview: >-
   the DEC-0342 backfill. Status: approved.
 links:
   relates-to: [SES-0059, BG-0001, DEC-0346]
-cites: [DEC-0335, DEC-0336, DEC-0337, DEC-0338, DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0343, DEC-0344, DEC-0345, DEC-0324, DEC-0006, DEC-0011, DEC-0312, DEC-0263, DEC-0325, DEC-0019]
+cites: [DEC-0335, DEC-0336, DEC-0337, DEC-0338, DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0343, DEC-0344, DEC-0345, DEC-0324, DEC-0006, DEC-0011, DEC-0312, DEC-0263, DEC-0325, DEC-0019, DEC-0350, DEC-0351]
 ---
 
 # BG-0002: The Method Track — Groundwork Governs Its Own Tooling
@@ -138,6 +138,10 @@ and arbiter roles for this track, as for BG-0001.
 
 ## Derived Work
 
-- (pending approval) The Artifact Interaction Surface epic per
-  DEC-0339, carrying the DEC-0342 backfill stories and the two
-  Component Docs for the artifact-librarian and artifact-interact.
+- EP-0009 (Artifact Interaction Surface, status draft), derived at
+  SES-0065's take-up of IDEA-0015: carries DEC-0339's full charter
+  (per DEC-0350) — the DEC-0342 backfill stories and the two
+  Component Docs for the artifact-librarian and artifact-interact —
+  plus guardrailed exploratory tooling spikes (DEC-0351). Pending
+  gate approval.
+

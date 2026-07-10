@@ -2,7 +2,7 @@
 id: IDEA-0015
 type: idea
 title: "Resume the pending Artifact Interaction Surface epic derivation"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 proposed-by: awakeinagi
@@ -18,7 +18,7 @@ overview: >-
   than re-grilling from scratch.
 links:
   derives-from: [SES-0061]
-  relates-to: [DEC-0339, BG-0002]
+  relates-to: [DEC-0339, BG-0002, EP-0009, IDEA-0024]
 ---
 
 # IDEA-0015: Resume the Pending Artifact Interaction Surface Epic Derivation
@@ -47,6 +47,15 @@ report showing no gated artifact and no memory of the prior grilling.
 
 ## Disposition
 
-Pending — awaiting take-up. When taken up, the take-up session should
-begin from the architect verdict and resolved open questions already
-established, rather than re-grilling from scratch.
+## Disposition
+
+Taken up in SES-0065: produced EP-0009 (Artifact Interaction Surface),
+carrying DEC-0339's full charter intact (DEC-0350). IDEA-0015's own
+Spark Context mis-summarized the record it was resuming from (see
+IDEA-0024's correction note); SES-0065 verified and corrected the
+basis before drafting. The backfill of the already-built surface —
+what IDEA-0015 was actually gesturing at when it said "resume from the
+existing architect verdict" — is re-captured in its own right as
+IDEA-0024 (Take up the Artifact Interaction Surface backfill),
+disposition pending its own take-up.
+
