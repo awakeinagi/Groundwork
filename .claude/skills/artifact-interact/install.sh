@@ -28,6 +28,12 @@ esac
 mkdir -p "$SKILLS" "$AGENTS"
 rsync -a --delete --exclude '__pycache__' "$HERE/" "$SKILLS/artifact-interact/"
 [ -f "$AGENT" ] && cp "$AGENT" "$AGENTS/"
+# The librarian's memory skill ships with the deliverable (SES-0059);
+# don't overwrite an existing copy — it holds accumulated memory.
+MEMSKILL="$REPO_ROOT/.claude/skills/artifact-librarian-memory"
+if [ -d "$MEMSKILL" ] && [ ! -d "$SKILLS/artifact-librarian-memory" ]; then
+  rsync -a "$MEMSKILL/" "$SKILLS/artifact-librarian-memory/"
+fi
 
 # Bootstrap tool copies for Groundwork projects (DEC-0310)
 if [ "${1}" = "--project" ] && [ -d "$TARGET/docs" ]; then
