@@ -2,7 +2,7 @@
 id: IDEA-0016
 type: idea
 title: "Reconcile the system-architect model-invocation mechanism"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 proposed-by: awakeinagi
@@ -50,10 +50,21 @@ questions a future session should settle.
 
 ## Disposition
 
-Pending — awaiting take-up. A future session should verify what model
-`"fable"` actually resolves to at spawn time, decide whether the
-frontmatter pin and the spawn-time alias should say the same thing,
-and correct whichever is stale.
+## Disposition
+
+Taken up by SES-0062. That session pulled this idea's full payload and
+found the literal requested change already existed in
+`.claude/agents/system-architect.md` frontmatter; the real gap —
+whether DEC-0292's spawn-time practice (the alias `"fable"`) matches
+its own frontmatter-pin mandate — was investigated there. The
+investigation went deeper than a naming reconciliation: it surfaced
+that DEC-0292's premise is empirically contradicted and its mandated
+explicit-override practice itself silently drops reasoning effort (see
+IDEA-0023). This idea's own literal ask turned out moot (already true
+on disk) and its real underlying concern is now tracked and superseded
+in scope by IDEA-0023, which a future session should read first before
+resolving either idea. No further action against this idea itself;
+IDEA-0023 carries the open work.
 
 Update (2026-07-10): a diagnostic investigation prompted by taking up
 this idea found the underlying premise runs deeper than "which alias

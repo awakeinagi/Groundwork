@@ -28,6 +28,7 @@ overview: >-
   another reconciliation), and correct the frontmatter's model
   string to a real identifier.
 links:
+  derives-from: [SES-0062]
   relates-to: [DEC-0292, DEC-0329, IDEA-0016]
 ---
 
