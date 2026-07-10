@@ -23,7 +23,7 @@ overview: >-
   the companion skill established by DEC-0294.
 links:
   derives-from: [SES-0054]
-  relates-to: [IDEA-0003, DEC-0291, DEC-0293, DEC-0294, DEC-0295, DEC-0136]
+  relates-to: [IDEA-0003, DEC-0291, DEC-0293, DEC-0294, DEC-0295, DEC-0136, DEC-0347, DEC-0348, DEC-0349]
 ---
 
 # DEC-0292: Create the `system-architect` Project Agent

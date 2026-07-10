@@ -19,7 +19,7 @@ overview: >-
   in the same commit as the retrofit so coverage is never partial.
 links:
   derives-from: [SES-0053]
-  relates-to: [DEC-0285, DEC-0286, DEC-0287]
+  relates-to: [DEC-0285, DEC-0286, DEC-0287, DEC-0348]
 ---
 
 # DEC-0291: Bulk Retrofit via a Haiku-Pinned Overview-Writer Agent

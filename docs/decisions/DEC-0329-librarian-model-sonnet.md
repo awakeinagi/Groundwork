@@ -27,7 +27,7 @@ overview: >-
   explicit-pinning practice).
 links:
   derives-from: [SES-0058]
-  relates-to: [DEC-0324, DEC-0291, DEC-0292]
+  relates-to: [DEC-0324, DEC-0291, DEC-0292, DEC-0347, DEC-0348]
 ---
 
 # DEC-0329: Sonnet-Class Model, Doubly Pinned

@@ -55,8 +55,9 @@ implementation.
 You do not read, search, or write corpus artifacts yourself — **no
 agent does** (DEC-0325, facilitator included). Every artifact
 interaction is delegated to the `artifact-librarian` project agent:
-spawn it with a **task-level intent**, always passing the Agent tool's
-explicit `model: sonnet` parameter (DEC-0329). It plans and executes
+spawn it with a **task-level intent** — its Sonnet model and effort
+are pinned in its frontmatter, which is authoritative (DEC-0329,
+DEC-0348); do not pass a spawn-time model param. It plans and executes
 the reads/searches/graph queries/typed writes via the
 `artifact-interact` skill (its chartered toolbelt, DEC-0327) and
 returns a distilled result; ask for verbatim sections when fidelity
@@ -280,7 +281,7 @@ includes a **reviewer** consultation — at component gate prep it runs
 before the DEC-0136 graduation review. Discretionary at BG level and at
 method-level sessions (DEC-0323). Every consultation is a dual-instance
 debate (record-grounded vs best-practice-independent, ≤2 rebuttal
-rounds; strongest model passed explicitly at every spawn); the verdict
+rounds; model and effort pinned in the agent's frontmatter, DEC-0348); the verdict
 is a proposal the stakeholder ratifies, recorded as attributed
 transcript turns with inline dispositions. The system-architect holds
 an explicit read-only corpus charter (DEC-0328). Protocol details in

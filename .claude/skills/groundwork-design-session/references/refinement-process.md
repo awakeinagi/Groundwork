@@ -341,8 +341,9 @@ refinement and gate prep; **discretionary** at business-goal level.
 Every consultation runs the dual-instance debate (DEC-0293): spawn two
 instances — one *record-grounded* (packet includes the relevant
 accepted decisions) and one *best-practice-independent* (no record) —
-on the strongest available model, **passing the model explicitly at
-every spawn** (the frontmatter pin alone does not take effect); relay
+on the strongest available model, **pinned in the agent definition's
+frontmatter** (authoritative per DEC-0348; frontmatter changes require
+a Claude Code restart, DEC-0347); relay
 positions between them for at most two rebuttal rounds; present the
 joint verdict (or documented disagreement, as alternatives) to the
 stakeholder. The outcome is always a proposal the stakeholder

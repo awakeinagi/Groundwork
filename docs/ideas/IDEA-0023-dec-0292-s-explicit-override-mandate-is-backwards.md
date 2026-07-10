@@ -2,34 +2,35 @@
 id: IDEA-0023
 type: idea
 title: "DEC-0292's explicit-override mandate is backwards: frontmatter alone preserves model and effort"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 proposed-by: awakeinagi
 overview: >-
-  Three live diagnostic spawns of system-architect contradict
-  DEC-0292's premise that "the frontmatter pin alone has been
-  observed not to take effect." No-override (frontmatter model
-  claude-opus-4-6, effort high) yielded effort 99/100; DEC-0292's
-  mandated explicit model="fable" override yielded effort "low" then
-  40/100 on repeat — the frontmatter-only path DEC-0292 says doesn't
-  work actually delivers correct model AND effort, while the
-  mandated override silently drops effort. Cause: the Agent tool has
-  a model parameter but no effort parameter; only Workflow's agent()
-  supports explicit effort, so DEC-0292's practice cannot currently
-  pass "explicit model + high effort" together. Separately, claude-
-  opus-4-6 is not a real Anthropic model identifier per official
-  docs (current lineup: claude-fable-5, claude-opus-4-8, claude-
-  sonnet-5, claude-haiku-4-5-20251001), yet it still resolved and
-  ran at full effort, suggesting frontmatter model is treated as
-  opaque label text. A future session should supersede DEC-0292 with
-  this corrected finding, choose a fix (drop the explicit-override
-  mandate; route high-effort needs through Workflow's agent(); or
-  another reconciliation), and correct the frontmatter's model
-  string to a real identifier.
+  Three live diagnostic spawns of system-architect (SES-0062)
+  appeared to contradict DEC-0292's premise that a frontmatter model
+  pin alone doesn't take effect, suggesting the mandated explicit-
+  override practice silently dropped effort while frontmatter alone
+  preserved it. SES-0063 took this idea up and re-verified it at a
+  larger sample (24 spawns, 8 arms): the headline finding is REFUTED
+  — frontmatter effort in fact survives explicit spawn-time model
+  overrides, both same-family and cross-family. The apparent
+  contradiction traced to a different mechanism entirely: agent
+  definition files are read once at Claude Code startup (DEC-0347),
+  so mid-session frontmatter edits were silently served stale,
+  producing the earlier "doesn't take effect" illusion. The
+  corrected practice — frontmatter-only pinning, no mandated
+  explicit spawn-time model param — is recorded in DEC-0348, which
+  narrows (via relates-to, not full supersession) DEC-0292 and
+  DEC-0329's explicit-override clauses while leaving their surviving
+  content (the agents' existence, consultation moments, and model-
+  tier choices) unchanged. The system-architect's `claude-opus-4-6`
+  frontmatter string, also flagged by this idea as undocumented, is
+  retained on the stakeholder's empirical ratification (DEC-0349).
+  Status: taken-up.
 links:
   derives-from: [SES-0062]
-  relates-to: [DEC-0292, DEC-0329, IDEA-0016]
+  relates-to: [DEC-0292, DEC-0329, IDEA-0016, SES-0063, DEC-0347, DEC-0348, DEC-0349]
 ---
 
 # IDEA-0023: DEC-0292's explicit-override mandate is backwards: frontmatter alone preserves model and effort
@@ -91,11 +92,20 @@ idea whose take-up prompted this diagnostic investigation.
 
 ## Disposition
 
-Pending — awaiting take-up. A future session should: verify the
-effort-drop finding is not a fluke (ideally with a larger sample or by
-inspecting harness-level docs/behavior if available), supersede
-DEC-0292 (never edit an accepted decision — supersede only) with the
-corrected empirical picture, decide the fix for guaranteeing high
-effort at system-architect spawn time, and correct the frontmatter
-model string to a real current identifier.
+Taken up in SES-0063 (2026-07-10). The headline finding — "DEC-0292's
+explicit-override mandate silently drops effort, frontmatter alone
+preserves both model and effort" — is REFUTED by a larger sample (24
+probe spawns across 8 arms): frontmatter effort survives explicit
+spawn-time model overrides, both same-family and cross-family. The
+real root cause of every historical "frontmatter pin alone doesn't
+take effect" observation was startup caching of agent definitions
+(DEC-0347: `.claude/agents/*.md` is read once at Claude Code startup;
+mid-session edits are silently ignored until restart) — not a genuine
+limitation of the frontmatter mechanism. The corrected practice —
+project agents are pinned via frontmatter alone, with explicit
+spawn-time model params reserved for deliberate one-off deviations —
+is recorded in DEC-0348. The frontmatter `model: claude-opus-4-6`
+string on system-architect is retained, ratified by the stakeholder on
+empirical grounds, per DEC-0349. See SES-0063 for the full
+verification transcript.
 

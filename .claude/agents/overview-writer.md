@@ -1,6 +1,6 @@
 ---
 name: overview-writer
-description: Writes or refreshes the frontmatter `overview:` field of Groundwork artifacts (DEC-0284..DEC-0288). Use for bulk overview generation/retrofit and for repairing drifted overviews. Model is Haiku per DEC-0291 — callers MUST also pass the Agent tool's explicit model parameter (model "haiku") on every spawn; the frontmatter pin alone has been observed not to take effect.
+description: Writes or refreshes the frontmatter `overview:` field of Groundwork artifacts (DEC-0284..DEC-0288). Use for bulk overview generation/retrofit and for repairing drifted overviews. Model is Haiku per DEC-0291, pinned with effort in this file's frontmatter; the pin is authoritative and sufficient (DEC-0348, restoring DEC-0291's original structural-pin intent) — do not pass a spawn-time model param except as a deliberate one-off deviation. Frontmatter changes require a Claude Code restart (DEC-0347).
 model: claude-haiku-4-5
 effort: high
 tools: Read, Bash, Grep, Glob, Task, Skill

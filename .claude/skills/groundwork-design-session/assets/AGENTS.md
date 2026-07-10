@@ -40,8 +40,9 @@ artifacts, unless the `artifact-interact` skill has been manually
 loaded (DEC-0325, DEC-0326, DEC-0327).** Reads, searches, graph
 queries, and writes alike: spawn the `artifact-librarian` project
 agent (`.claude/agents/artifact-librarian.md`) with a task-level
-intent, passing the Agent tool's explicit `model: sonnet` parameter
-(DEC-0329). It executes the operations through the `artifact-interact`
+intent — its Sonnet model and effort are pinned in the agent's
+frontmatter, which is authoritative (DEC-0329, DEC-0348); do not pass
+a spawn-time model param. It executes the operations through the `artifact-interact`
 skill's guardrailed CLI — the sole sanctioned write path (DEC-0312) —
 and returns a distilled result (verbatim content on request). Do not
 Read/Edit/Write `docs/` artifact files yourself, and do not load
