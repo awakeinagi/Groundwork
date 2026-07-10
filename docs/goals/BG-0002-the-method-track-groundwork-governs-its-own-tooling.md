@@ -13,20 +13,22 @@ overview: >-
   machinery, hooks operating on Groundwork corpora — is documented,
   contracted, and gated by the same pipeline it implements. Born
   from the SES-0058 drift (a deployed agent holding tools nobody
-  discussed) and the dropped dogfooding commitment. Outcomes: gated
-  contracts for every method executable; no ungoverned capability
-  (mechanically checked, DEC-0341); human gates before deployment;
-  nothing ratified invisibly unbuilt (IDEA-0011's fix, DEC-0344); no
-  build without the DEC-0335 intake. Admission predicate: can
-  runtime behavior diverge from the record without anyone editing
-  the record? Non-goals: product features, prose references, re-
-  deciding ratified architecture. Sacrificial by design — per-
-  component absorption triggers retire each piece when the BG-0001
-  application ships its replacement. First derived work on approval:
-  the Artifact Interaction Surface epic (DEC-0339) carrying the
-  DEC-0342 backfill. Status: gated, awaiting stakeholder approval.
+  discussed) and the dropped dogfooding commitment (per DEC-0019).
+  Outcomes: gated contracts for every method executable; no
+  ungoverned capability (mechanically checked, DEC-0341); human
+  gates before deployment; nothing ratified invisibly unbuilt
+  (IDEA-0011's fix, DEC-0344); no build without the DEC-0335 intake.
+  Admission predicate: can runtime behavior diverge from the record
+  without anyone editing the record? Non-goals: product features,
+  prose references, re-deciding ratified architecture. This track's
+  delegation/contract pattern is permanent — BG-0001's application
+  implements it natively, inheriting this track's contracts; only
+  current implementations may later be rebuilt natively (per
+  DEC-0346, narrowing DEC-0338's sacrificial framing). First derived
+  work: the Artifact Interaction Surface epic (DEC-0339) carrying
+  the DEC-0342 backfill. Status: approved.
 links:
-  relates-to: [SES-0059, BG-0001]
+  relates-to: [SES-0059, BG-0001, DEC-0346]
 cites: [DEC-0335, DEC-0336, DEC-0337, DEC-0338, DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0343, DEC-0344, DEC-0345, DEC-0324, DEC-0006, DEC-0011, DEC-0312, DEC-0263, DEC-0325, DEC-0019]
 ---
 
@@ -114,14 +116,22 @@ and arbiter roles for this track, as for BG-0001.
 
 ## Conflicts & Tensions
 
-- This track's tooling is sacrificial by design: the BG-0001
-  application will absorb its functions (sessions, gates, storage,
-  artifact APIs). Each component under this goal carries an absorption
-  clause — decommissioned when the corresponding BG-0001 capability
-  ships — recorded as armed triggers in docs/TRIGGERS.md (per
-  DEC-0338). Until then, two descriptions of artifact handling
-  coexist deliberately: this track documents today's working tooling;
-  BG-0001 designs tomorrow's replacement.
+- This track establishes a permanent design pattern — mandatory
+  delegation through a governed subagent, corpus interaction
+  restricted to a typed contract API, gate-enforced agent/tool
+  contracts — that BG-0001's application is expected to implement
+  natively, inheriting these already-gated contracts rather than
+  re-deciding delegation and write-authority from scratch (per
+  DEC-0346, narrowing DEC-0338). What remains provisional is narrower:
+  today's specific implementation — a CLI script plus a
+  Claude-Code-specific subagent — may later be rebuilt as a native
+  application feature. Each component under this goal still carries an
+  absorption clause, recorded as armed triggers in docs/TRIGGERS.md
+  (per DEC-0338), but those triggers now describe when an
+  *implementation* may be retired, never when the *pattern* is
+  discontinued. Until an implementation is rebuilt, two descriptions
+  of artifact handling coexist deliberately: this track documents
+  today's working tooling; BG-0001 designs its native successor.
 - Full standard gates on small tooling is a deliberate cost (ratified
   over lighter ceremony); the Scope predicate and the DEC-0336
   yardstick are the pressure valves that keep it proportionate.
