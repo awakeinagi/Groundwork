@@ -2,7 +2,8 @@
 id: DEC-0321
 type: decision
 title: groundwork-design-session declares artifact-interact a mandatory Step-0 load
-status: accepted
+status: superseded
+superseded-by: [DEC-0326]
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 decided-by: awakeinagi@gmail.com
@@ -20,7 +21,10 @@ overview: >-
   relying on artifact-interact's own description-based triggering
   (under-triggering risk for a dependency the process cannot run
   without, given DEC-0312 makes its write API the only sanctioned
-  write path).
+  write path). Superseded by DEC-0326 at SES-0058: the facilitator no
+  longer loads artifact-interact — the skill became the
+  artifact-librarian's toolbelt, is explicit-load-only, and Step 0 now
+  verifies the librarian and skill are installed.
 links:
   derives-from: [SES-0057]
   relates-to: [DEC-0310, DEC-0312]
