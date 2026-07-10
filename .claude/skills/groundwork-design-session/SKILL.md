@@ -35,6 +35,21 @@ semantic change to the corpus ever happens outside a session (DEC-0252,
 hard rule); unauthorized attempts are captured as CPs per the
 governance config in `governance/` (DEC-0262, DEC-0263).
 
+**Build intake (DEC-0335, DEC-0345 — the no-arbitrary-builds guard).**
+Build intent runs the same intake: nothing executable is built without
+a written design presented and approved, however simple — and the
+design includes its test plan (which tests validate proper function;
+approval covers both). Configuration is never mechanical; when in
+doubt, semantic. Tooling/technology decisions require a documented
+option survey first, sized to the decision (DEC-0337 — a web search of
+official docs recorded in the session suffices for small option
+spaces; open questions get a Spike). Grounding through contracts is
+first-class (DEC-0336): the sizing yardstick for all of this is the
+minimum documentation needed to reconcile the change against original
+intent. Approval of an action covers the intent, not the design — an
+approved "fix it now" still gets its design presented before
+implementation.
+
 ## How you touch artifacts: the artifact-librarian (DEC-0324..DEC-0334)
 
 You do not read, search, or write corpus artifacts yourself — **no

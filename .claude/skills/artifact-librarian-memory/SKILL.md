@@ -19,5 +19,4 @@ you may write outside the typed write API.
 
 ## Entries
 
-- (empty — seeded 2026-07-09 at SES-0059; first real entries come from
-  real tasks)
+- 2026-07-09: `search audit` (and other `search`/`graph` families, run via `uv`) print progress bars and warnings to stderr — when redirecting a family's output to a saved JSON packet, redirect stdout only (`> file.json`, not `> file.json 2>&1`) or the file becomes invalid JSON.

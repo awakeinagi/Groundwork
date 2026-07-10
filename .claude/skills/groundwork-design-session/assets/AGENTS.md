@@ -53,6 +53,28 @@ charters). Read-only librarian tasks may run in parallel; never run
 two write-task librarians concurrently (DEC-0332). The librarian never
 commits — git stays with you (DEC-0333).
 
+## The no-arbitrary-builds guard (DEC-0335, DEC-0345)
+
+**Nothing is built in this project without a written design presented
+to and approved by a human — however simple.** The build-side sibling
+of the no-semantic-change-outside-a-session rule: build intent enters
+through intake the moment it is uttered (restate → design → approval →
+build). The design includes its **test plan** — which tests will run
+and what outcome counts as proper function; approval covers both
+(DEC-0345). Mechanical floor: only changes that cannot alter runtime
+behavior or any contract surface (comments, whitespace, invisible
+renames) pass without ceremony; **configuration is never mechanical**
+— tool lists, models, permissions, settings, dependencies are semantic
+by definition; when in doubt, it's semantic. Before any tooling or
+technology decision, survey the option space and document it — a web
+search of official docs recorded in the session suffices for small
+option spaces; open questions get a Spike (DEC-0337). Alongside
+provenance, **grounding through contracts** is first-class (DEC-0336):
+everything living in the project carries a written statement of what
+it does, what it touches, and how it is configured — before it exists;
+the sizing yardstick is the minimum documentation needed to reconcile
+a change against original intent.
+
 ## Non-negotiable rules
 
 1. **Run the full integrity checker before every commit** (a librarian

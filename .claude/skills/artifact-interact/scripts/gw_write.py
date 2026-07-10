@@ -232,6 +232,12 @@ class Corpus:
     def __init__(self, root):
         self.root = Path(root).resolve()
         self.docs = self.root / "docs"
+        # Batch mode (DEC-0314: validated and applied as a unit) defers
+        # post-write re-validation to the end of the batch so members
+        # may reference each other regardless of creation order.
+        self.defer_recheck = False
+        self.pending_recheck = []
+        self.pending_resolve = []
         if not self.docs.is_dir():
             fail(f"no docs/ under {self.root}", 2)
         self.paths = {}   # id -> path
@@ -254,6 +260,11 @@ class Corpus:
         return f"{prefix}-{max(nums, default=0) + 1:04d}"
 
     def resolve_all(self, text, where):
+        # In batch mode, content resolution defers like recheck does:
+        # payloads may reference artifacts created later in the batch.
+        if self.defer_recheck:
+            self.pending_resolve.append((text, where))
+            return
         missing = [i for i in set(ID_RE.findall(text))
                    if i not in self.paths]
         if missing:
@@ -261,6 +272,10 @@ class Corpus:
 
     # targeted post-write re-check (DEC-0315)
     def recheck(self, path):
+        if self.defer_recheck:
+            if path not in self.pending_recheck:
+                self.pending_recheck.append(path)
+            return True
         art = Artifact(path)
         aid = art.scalar("id")
         problems = []
@@ -366,7 +381,11 @@ def op_create(c, args, json_mode):
             if i not in c.paths:
                 fail(f"link target {i} does not exist")
 
-    fm = [f"id: {aid}", f"type: {args.type}", f"title: {args.title}",
+    # Titles are always double-quoted: unquoted YAML breaks on ':' and
+    # friends (SES-0059 T22-class defect, stakeholder-approved fix).
+    quoted_title = '"' + args.title.replace("\\", "\\\\") \
+                                   .replace('"', '\\"') + '"'
+    fm = [f"id: {aid}", f"type: {args.type}", f"title: {quoted_title}",
           f"status: {status}", f"owner: {args.owner}",
           f"created: {today()}"]
     for extra in args.field:
@@ -639,12 +658,32 @@ def op_apply(c, args, json_mode):
     if not isinstance(ops, list):
         fail("apply expects a JSON list of operation objects")
     print(f"apply: {len(ops)} operation(s)")
+    c.defer_recheck = True
     for i, spec in enumerate(ops):
         op = spec.pop("op", None)
         if op not in DISPATCH or op == "apply":
             fail(f"apply[{i}]: unknown op {op!r}")
         ns = build_namespace(op, spec)
         DISPATCH[op](c, ns, json_mode)
+    # DEC-0314: the batch validates as a unit — re-check every touched
+    # file now that all members exist, reporting all failures together.
+    c.defer_recheck = False
+    failures = 0
+    for text, where in c.pending_resolve:
+        try:
+            c.resolve_all(text, where)
+        except SystemExit:
+            failures += 1
+    for path in c.pending_recheck:
+        try:
+            c.recheck(path)
+        except SystemExit:
+            failures += 1
+    if failures:
+        fail(f"apply: {failures} file(s) failed post-batch validation "
+             "(details above) — files are written; fix required")
+    print(f"apply: post-batch validation clean "
+          f"({len(c.pending_recheck)} file(s))")
 
 
 def build_namespace(op, spec):
