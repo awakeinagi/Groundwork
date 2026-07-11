@@ -2,7 +2,7 @@
 id: DEC-0357
 type: decision
 title: "The projection spike proceeds fully separate from SP-0007, with the parse-scope overlap accepted"
-status: proposed
+status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 decided-by: awakeinagi

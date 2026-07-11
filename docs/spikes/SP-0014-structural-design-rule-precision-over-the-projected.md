@@ -2,7 +2,7 @@
 id: SP-0014
 type: spike
 title: "Structural design-rule precision over the projected corpus"
-status: draft
+status: in-refinement
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 timebox: 1 session

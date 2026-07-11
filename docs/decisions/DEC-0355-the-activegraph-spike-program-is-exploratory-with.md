@@ -2,7 +2,7 @@
 id: DEC-0355
 type: decision
 title: "The ActiveGraph spike program is exploratory with no kill-bar success thresholds"
-status: proposed
+status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 decided-by: awakeinagi

@@ -2,7 +2,7 @@
 id: DEC-0356
 type: decision
 title: "The spikes evaluate ActiveGraph only; the DEC-0337 option survey is deferred until after the spikes report"
-status: proposed
+status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 decided-by: awakeinagi

@@ -2,7 +2,7 @@
 id: DEC-0354
 type: decision
 title: "Groundwork evaluates an executable-design-knowledge approach via an ActiveGraph spike program under EP-0009"
-status: proposed
+status: accepted
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 decided-by: awakeinagi
