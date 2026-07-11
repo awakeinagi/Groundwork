@@ -55,8 +55,21 @@ The source passage is curated/licensed content already present in the corpus (e.
 
 ## Findings
 
-Pending — recorded at spike completion.
+**Source.** arc42 Section 5, Building Block View (lines 340-546 of the vendored arc42 template in the system-architecture-bp skill), chosen as the densest single section covering both decomposition and interface-contract guidance; compiled in full, not cherry-picked.
 
+**Output.** 14 candidate rules -- roughly 3 structural-presence rules, 3 judgment-class rules, 5 guarded heuristics, 3 meta-constraints -- each with a verbatim passage, line citation, applicability conditions, and a compiler self-flagged confidence level. 9 further pieces of source content were correctly judged uncompilable rather than force-fitted into a rule shape. The full candidate-rule table is retained as throwaway evidence in the session scratchpad per DEC-0351, not committed to the corpus.
+
+**Stakeholder side-by-side review** (the spike's measurement, rule vs. cited passage): 12 of 14 ratified in compiled form. R1, R3, R4, R5, R6, R13 ratified as-is. R7, R8, R11 ratified in their guarded compiled forms -- R8's guard fires only on author-flagged complex interfaces, with the finding phrased as "confirm a signature isn't sufficient" rather than a stronger claim; R11's guard restricts to author-supplied importance metadata only, explicitly rejecting graph-derived importance proxies. R2 and R9 were ratified but downgraded to advisory severity: both are definition-derived or source-optional content that should never fire as a violation. R14 was ratified as an LLM-judgment rule. R10 and R12 were reclassified as meta-guards on the ruleset itself rather than firing rules. Zero corrupted compiles were ratified.
+
+**Failure-mode catalog** -- the spike's key deliverable, extending the three anticipated modes (over-generalization, lost applicability conditions, invented specificity):
+(a) definition-to-imperative conversion (R2) -- a definitional sentence compiled into an imperative rule;
+(b) benefit-to-imperative elevation from Motivation prose (R14) -- a stated benefit of a practice compiled as if it were a mandate;
+(c) invented trigger criteria where the source prose delegates to human judgment (R8, R11) -- the compiler had to invent a firing condition the source never specified, caught only by guarding it;
+(d) optional-content elevation (R9) -- source content marked as optional compiled as if mandatory;
+(e) NOVEL -- contradiction-generating rule pairs: faithful compiles of R3 (completeness) and R11 (selectivity) conflict with each other unless the otherwise-uncompilable meta-principle R12 ("relevance over completeness") rides along as a guard on both;
+(f) NOVEL -- template-vs-invariant genre effect: a documentation-template source (arc42) compiles mostly into presence checks rather than design-correctness invariants, so the checkable fraction of a source depends on its genre, not just its density.
+
+**Bottom line.** Prose-to-rule compilation is viable only as a citation-preserving pipeline with stakeholder ratification in the loop -- the compiler's verbatim-passage discipline and its self-flagged interpretation points are precisely what made every guard catchable during review.
 
 ## Resulting Decisions
 

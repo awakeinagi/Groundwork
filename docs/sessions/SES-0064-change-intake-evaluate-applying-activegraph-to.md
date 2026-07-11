@@ -2,7 +2,7 @@
 id: SES-0064
 type: session
 title: "Change intake: evaluate applying activegraph to Groundwork"
-status: open
+status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 participant: awakeinagi
@@ -34,11 +34,16 @@ overview: >-
   completes (over a reduced rulebase), sent the provenance and
   audit-tooling defects to idea capture, approved SP-0015 with the
   arc42-section source (gate, approve, launch), and accepted the T17
-  reject dispositions as final. T23 recorded SP-0013's Findings
-  (status unchanged, approved), DEC-0358 (the SP-0014 deferral,
-  relates-to DEC-0299/DEC-0309/SP-0013), IDEA-0025..IDEA-0027, a
-  precondition note on SP-0014, a source note on SP-0015, and
-  SP-0015's gate/approve. Status: open.
+  reject dispositions as final. T23 recorded SP-0013's Findings,
+  DEC-0358 (the SP-0014 deferral), IDEA-0025..IDEA-0027, and
+  SP-0015's gate/approve. T24-T26 recorded SP-0015's execution
+  findings (arc42 §5 Building Block View source, 14 candidate rules
+  plus 9 uncompilable, two novel failure modes) and the
+  stakeholder's per-rule fidelity verdicts (12/14 ratified, 2
+  downgraded to advisory, zero corrupted compiles). Decisions
+  Produced lists DEC-0354..DEC-0358. T27 the stakeholder declined
+  further ideas and closed the session; T28 recorded the closing
+  summary. Status: closed.
 ---
 
 ## Purpose
@@ -220,9 +225,24 @@ SP-0014 waits: full deferral until the corpus-wide `Uses:` backfill is taken up 
 **T23 — Claude (Fable 5), facilitator:**
 Recorded SP-0013's Findings section from T21's digest (status remains `approved` -- SPEC-spike defines no post-execution status beyond the common gate lifecycle). Recorded DEC-0358 (SP-0014's execution deferred until the `Uses:` backfill completes), with a corresponding precondition note added to SP-0014's Data-Source Assumptions. Captured IDEA-0025 (backfill typed `Uses:` lines and arm checker enforcement, blocking SP-0014), IDEA-0026 (repair contract-item provenance defects), and IDEA-0027 (fix the recall-audit packet generator), each cross-referencing SES-0064. SP-0015 gained a Method note recording the arc42-section source selection, then was gated and approved (approved-by awakeinagi@gmail.com, approved-on 2026-07-10). Per T22, the T17 reject dispositions are now final. Session remains open.
 
+**T24 — Claude (Fable 5), facilitator:**
+SP-0015's executor report arrived (read-only-over-`docs/` and scratchpad-only-store constraints honored throughout). Findings: source was arc42 Section 5, Building Block View (lines 340-546 of the vendored template in system-architecture-bp), compiled in full; output was 14 candidate rules (3 structural-presence, 3 judgment-class, 5 guarded heuristics, 3 meta-constraints) plus 9 pieces of source content correctly judged uncompilable, with the full candidate table retained as throwaway scratchpad evidence per DEC-0351; a failure-mode catalog extending the three anticipated modes with two novel ones -- contradiction-generating rule pairs (R3 vs R11, resolved only by the uncompilable meta-principle R12 riding along as a guard) and a template-vs-invariant genre effect (a documentation-template source compiles mostly into presence checks, not design-correctness invariants).
+
+**T25 — awakeinagi (stakeholder, option selections):**
+Fidelity review verdicts via per-rule side-by-side option selection: R1, R3, R4, R5, R6, R13 ratified as-is; R7, R8, R11 ratified in guarded compiled form (R8 guarded to author-flagged complex interfaces only, phrased as confirming a signature isn't sufficient; R11 guarded to author-supplied importance metadata, graph proxies rejected); R2, R9 ratified but downgraded to advisory severity; R14 ratified as an LLM-judgment rule; R10, R12 reclassified as meta-guards on the ruleset rather than firing rules. 12 of 14 ratified in compiled form; zero corrupted compiles ratified.
+
+**T26 — Claude (Fable 5), facilitator:**
+Recorded SP-0015's Findings section from T24's digest and T25's per-rule verdicts (status unchanged, `approved` -- SPEC-spike defines no post-execution status beyond the common gate lifecycle). Session remains open.
+
+**T27 — awakeinagi (stakeholder):**
+No new ideas, close the session.
+
+**T28 — Claude (Fable 5), facilitator:**
+Closing summary presented: this session investigated applying ActiveGraph to Groundwork and confirmed a five-spike exploratory program (no kill bar) housed under EP-0009; SP-0013 and SP-0015 were executed and answered their questions (100% round-trip projection with a central Uses:-absence finding; 12/14 rules ratified with a two-mode extension to the failure catalog); DEC-0358 recorded SP-0014's deferral until the Uses: backfill completes; IDEA-0025..IDEA-0027 were captured and queued; the T17 recall-audit dispositions are final. No inspired ideas at close. Session closed.
+
 ## Decisions Produced
 
-None yet — investigation is just starting.
+DEC-0354, DEC-0355, DEC-0356, DEC-0357, and DEC-0358 have been recorded in this session (T16, T23): DEC-0354 (the executable-design-knowledge approach and five-spike program), DEC-0355 (exploratory, no kill-bar thresholds), DEC-0356 (ActiveGraph-only scope, DEC-0337 survey deferred), DEC-0357 (the projection spike proceeds fully separate from SP-0007), and DEC-0358 (SP-0014's execution deferred until the corpus-wide `Uses:` backfill completes).
 
 ## Conflicts Raised
 
