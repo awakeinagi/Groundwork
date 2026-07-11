@@ -350,6 +350,10 @@ names below are reserved words when used as element types.
   starts new work. Statuses: armed (watched; the only entries loaded
   into agent context), fired, retired. Firing or retiring cites a
   Decision.
+- **Artifact Interaction Surface** — the mandatory delegation surface
+  (the artifact-librarian agent plus the artifact-interact skill)
+  through which all agents interact with Groundwork corpora
+  (DEC-0324/DEC-0325).
 
 ## Roles
 

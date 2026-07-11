@@ -2,7 +2,9 @@
 id: EP-0009
 type: epic
 title: "Artifact Interaction Surface"
-status: draft
+status: approved
+approved-on: 2026-07-10
+approved-by: awakeinagi@gmail.com
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 overview: >-
@@ -10,21 +12,35 @@ overview: >-
   the artifact-interact skill as gated, contracted deliverables
   under BG-0002: two Component Docs, one per artifact (different
   consumer sets per DEC-0339), each carrying a mandatory runtime-
-  policy contract section (DEC-0340), plus guardrailed exploratory
-  evaluation of candidate interaction-surface tooling. Backfill of
-  the already-built surface (DEC-0342's protocol, DEC-0340's SPEC
+  policy contract section (DEC-0340) with a frontmatter-pinned model
+  per DEC-0348 (no spawn-time model param mandated), plus
+  guardrailed exploratory evaluation of candidate interaction-
+  surface tooling whose executable spikes carry a test plan per
+  DEC-0345, sized by DEC-0336. The skill's CMP consolidates the
+  DEC-0310 premise that artifact-interact is the single home of all
+  artifact-touching tooling; the conformance check (DEC-0341) is
+  operationally constrained by DEC-0347's agent-definition startup-
+  caching. Interfaces to define include the absorption-trigger
+  conditions (DEC-0109/DEC-0338/DEC-0346) and a shared gate
+  criterion: neither CMP gates until consumer expectations —
+  currently distributed across DEC-0325, DEC-0327, DEC-0330,
+  DEC-0331, DEC-0340, DEC-0342 — are captured. Backfill of the
+  already-built surface (DEC-0342's protocol, DEC-0340's SPEC
   amendment, DEC-0341's conformance check, TRIGGERS.md absorption-
   trigger arming) is in scope but its execution is deferred by
-  sequencing, not superseded (DEC-0350) -- the epic's first derived
-  work is the exploratory spike program. Open questions carried
-  through the gate: install-script contract scope (deferred a third
-  time) and the defect-tracking artifact shape (travels with the
-  backfill).
+  sequencing, not superseded (DEC-0350) — the epic's first derived
+  work is the exploratory spike program; the spikes are safe under
+  this sequencing because their outputs are throwaway (DEC-0351) and
+  any adoption still routes through DEC-0337/DEC-0335. The epic
+  completes in phases and gates per story/spike, not as a release
+  train. Open questions carried through the gate: install-script
+  contract scope (deferred a third time) and the defect-tracking
+  artifact shape (travels with the backfill).
 links:
   derives-from: [BG-0002]
   satisfies: [BG-0002]
   relates-to: [DEC-0339, IDEA-0015]
-cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338]
+cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329]
 ---
 
 ## Summary
@@ -58,17 +74,26 @@ report's frontier, not a separate tracking mechanism.
 
 **In:**
 - The two Component Docs per DEC-0339: the librarian's CMP (task
-  contract, refusal semantics per DEC-0330, double-pinned model, deny-
-  by-default tool grants with rationale, memory policy per DEC-0331,
-  spawn contract — per DEC-0340's agent-contract profile) and the
-  artifact-interact skill's CMP (CLI operation semantics in SPEC
-  lockstep, per DEC-0311).
+  contract, refusal semantics per DEC-0330, frontmatter-pinned model
+  (DEC-0348 — the frontmatter pin is authoritative and sufficient;
+  explicit spawn-time model params are no longer mandated, correcting
+  DEC-0329's mandate clause), deny-by-default tool grants with
+  rationale, memory policy per DEC-0331, spawn contract — per
+  DEC-0340's agent-contract profile) and the artifact-interact skill's
+  CMP (CLI operation semantics in SPEC lockstep, per DEC-0311). The
+  skill's premise — that artifact-interact is the single home of all
+  artifact-touching tooling (DEC-0310) — is what the skill CMP exists
+  to consolidate.
 - Runtime/capability configuration as a mandatory, gate-enforced
   contract section inside each CMP — not a separate epic (DEC-0339,
   DEC-0340).
 - The DEC-0340 SPEC-component agent-profile amendment (already
   accepted; this epic is the deliverable it amends against).
-- The DEC-0341 deployed-vs-contracted conformance check.
+- The DEC-0341 deployed-vs-contracted conformance check, operationally
+  constrained by DEC-0347: agent definition files are read once at
+  Claude Code startup and cached, so a conformance change to an agent
+  definition requires a restart before the check can observe it as
+  deployed.
 - Arming the absorption-clause triggers in docs/TRIGGERS.md (per
   DEC-0338/DEC-0346) — currently unmet: no armed trigger exists yet
   for this surface, an open BG-0002 obligation surfaced this session.
@@ -76,9 +101,11 @@ report's frontier, not a separate tracking mechanism.
   surface tooling (DEC-0351): spike outputs are throwaway and never
   deployed as part of the surface; adoption of anything a spike
   surfaces happens only through a DEC-0337 option survey followed by
-  DEC-0335 design intake.
-- The backfill of the already-built surface (DEC-0342's protocol,
-  above) — in scope, execution deferred per DEC-0350.
+  DEC-0335 design intake. Any executable spike artifact's design
+  includes a test plan (DEC-0345), sized by DEC-0336's yardstick.
+- The backfill of the already-built surface (DEC-0342's protocol
+  (sequencing revised by DEC-0350), above) — in scope, execution
+  deferred per DEC-0350.
 
 **Out:**
 - Distribution/packaging (install.sh, the IDEA-0010 plugin) — derives
@@ -111,9 +138,20 @@ follow-up, not performed by this epic record itself.
   contract, concurrency obligations, breaking-change list.
 - The conformance-check contract (DEC-0341): deployed-vs-contracted
   diff shape and violation reporting.
+- The absorption-trigger condition(s) for the librarian and skill
+  implementations: condition language and subscriber list per
+  SPEC-triggers/DEC-0109, with firing semantics per DEC-0338/DEC-0346
+  — a fired trigger retires the implementation only, never the
+  method-track pattern it instantiates.
 
 All of the above are deferred to the backfill fold-in Idea's take-up
 (DEC-0350) — this epic charters them, it does not draft them.
+
+Gate criterion: neither CMP gates until its consumers' expectations
+are captured. Consumer expectations for this surface are today
+distributed across DEC-0325, DEC-0327, DEC-0330, DEC-0331, DEC-0340,
+and DEC-0342; the CMPs consolidate them rather than introduce new
+ones.
 
 ## Risks & Open Questions
 
@@ -130,6 +168,13 @@ All of the above are deferred to the backfill fold-in Idea's take-up
 - Spike work under this epic brushes against BG-0002's admission
   predicate (can runtime diverge from the record unedited?) —
   mitigated by DEC-0351's throwaway-output guardrail.
+- Safety argument for contract-later sequencing: the spikes leave the
+  surface unchanged — their outputs are throwaway per DEC-0351 — and
+  evaluate a NEW capability whose data source is the corpus, not the
+  surface's own contract. Adoption of anything a spike surfaces
+  requires the DEC-0337 option survey followed by DEC-0335 design
+  intake, so no uncontracted change can reach the surface through
+  this epic's exploratory track.
 
 ## Derived Work
 
@@ -138,3 +183,9 @@ Pending:
   SES-0064's own context once this epic approves.
 - Backfill stories and both CMPs — created at the fold-in Idea's
   take-up (DEC-0350).
+
+The epic completes in phases: first the exploratory spike program,
+then the backfill at IDEA-0024's take-up. Each story or spike gates
+individually — the epic itself is a scope container, not a release
+train, and does not gate as a single unit of completion.
+
