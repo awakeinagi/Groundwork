@@ -20,7 +20,7 @@ context: canonical-store
 links:
   derives-from: [EP-0001]
   satisfies: [BG-0001]
-  depends-on: [CMP-0002, CMP-0003]
+  depends-on: [CMP-0002, CMP-0003, CMP-0005]
 cites: [DEC-0009, DEC-0011, DEC-0018, DEC-0026, DEC-0028, DEC-0029, DEC-0030,
         DEC-0031, DEC-0032, DEC-0033, DEC-0034, DEC-0035, DEC-0037, DEC-0038,
         DEC-0043, DEC-0045, DEC-0046, DEC-0047, DEC-0048, DEC-0049, DEC-0054,
@@ -64,6 +64,7 @@ all non-2xx responses use the problem+json model
 ### SchemaValidator (service)
 
 Implements: ST-0001
+Uses: none
 
 - `SchemaValidator.A-1` — `validate(document, artifact-type) →
   ok | problem(tier1-validation-failed) with errors[]{field, rule,
@@ -107,6 +108,9 @@ Implements: ST-0001
 ### StorageService (service)
 
 Implements: ST-0002
+Uses: SchemaValidator.A-1 (interface), MechanicalWriteService.A-1
+(interface), MechanicalWriteService.A-2 (interface), ChangeEvent.B-1
+(interface), AppDatabasePort.B-1 (interface)
 
 - `StorageService.A-1` — `read(artifact-id, [ref]) → {document,
   ref: commit-sha} | problem(not-found)`. Reads return the resolving
@@ -135,6 +139,8 @@ Implements: ST-0002
 ### BranchOrchestrator (service)
 
 Implements: ST-0003
+Uses: IdAllocator (interface), ItemBranch.B-2 (interface), CodeHostConnector
+(interface)
 
 - `BranchOrchestrator.A-1` — `create-artifact(type, seed-content) →
   {artifact-id, item-branch, pr-ref}`. Allocates the ID via
@@ -158,6 +164,7 @@ Implements: ST-0003
 ### WorktreeManager (service)
 
 Implements: ST-0004
+Uses: SessionWorktree.B-2 (interface)
 
 - `WorktreeManager.A-1` — `open-session-worktree(artifact-id,
   session-id) → {worktree-ref}`. Provisions a dedicated worktree off
@@ -177,6 +184,7 @@ Implements: ST-0004
 ### IdAllocator (service)
 
 Implements: ST-0005
+Uses: none
 
 - `IdAllocator.A-1` — `allocate(prefix) → ArtifactId |
   problem(id-conflict)`. Returns the next sequential ID for the prefix
@@ -197,6 +205,7 @@ Implements: ST-0005
 ### MechanicalWriteService (service)
 
 Implements: ST-0006
+Uses: SchemaValidator.D-5 (interface), CheckSuite.B-3 (interface)
 
 - `MechanicalWriteService.A-1..A-10` — one API item per operation of
   the closed set: `append-turn(session-id, turn-content)`,
@@ -243,6 +252,7 @@ Implements: ST-0006
 ### CheckSuite (service)
 
 Implements: ST-0007
+Uses: MechanicalWriteService.D-1 (interface)
 
 - `CheckSuite.A-1` — `run(ref-range) → findings[]{artifact, rule,
   explanation, fix-hint, severity: violation|warning}`. Registered as a
@@ -283,6 +293,7 @@ Implements: ST-0007
 
 Implements: ST-0001,
 ST-0002
+Uses: StorageService.A-3 (interface), SchemaValidator.D-1 (interface)
 
 - `Artifact.B-1` — identity is the immutable `ArtifactId`; the filename
   slug may change, the ID may not; IDs are never reused (per DEC-0009).
@@ -301,6 +312,7 @@ ST-0002
 ### ItemBranch (entity)
 
 Implements: ST-0003
+Uses: AppDatabasePort (interface)
 
 - `ItemBranch.B-1` — identity: exactly one item branch per artifact,
   named for it, living on the application fork; lifecycle:
@@ -320,6 +332,7 @@ Implements: ST-0003
 ### SessionWorktree (entity)
 
 Implements: ST-0004
+Uses: AppDatabasePort (interface)
 
 - `SessionWorktree.B-1` — identity: one worktree per (artifact,
   session); lifecycle: `provisioned → active → closed(merged) |
@@ -337,6 +350,7 @@ Implements: ST-0004
 ### ArtifactId (value)
 
 Implements: ST-0005
+Uses: none
 
 - `ArtifactId.D-1` — format `<PREFIX>-<4-digit zero-padded n>`, prefix
   from the closed artifact-type set; equality by value; immutable;
@@ -396,13 +410,12 @@ Implements: ST-0005
   all operation families and the atomicity guarantee
   (`AppDatabasePort.A-1..A-3`, `AppDatabasePort.B-1`)
   (per DEC-0135).
-- **Code-host connector contract** (EP-0005;
-  future standalone `protocol`-type CMP per
-  DEC-0080) —
-  consumption forward-declared per
+- CMP-0005 — the Code-Host Connector
+  Protocol (EP-0005), consumed by the BranchOrchestrator element;
+  forward-declared per
   DEC-0132,
-  binding on EP-0005's
-  refinement. Operations consumed: fork provisioning; branch
+  now a standing dependency
+  (per DEC-0080). Operations consumed: fork provisioning; branch
   create/delete; PR open, merge, review-state; check-run result posting
   (required-check *registration* is the gate engine's
   policy-compilation duty, per

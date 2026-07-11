@@ -55,6 +55,8 @@ operation family; the graduation review found no split warranted.
 
 Implements: ST-0031,
 ST-0023
+Uses: CodeHostConnector (interface), CapabilityManifest (interface),
+HostEvent (interface), SecretStore.A-1 (interface), SecretStore.A-2 (interface)
 
 Implements CMP-0005's
 `CodeHostConnector` protocol in full, against GitHub cloud
@@ -406,3 +408,4 @@ before writing, returning it instead of creating a duplicate
   Data Center
   (ST-0028,
   per DEC-0156).
+

@@ -58,6 +58,7 @@ Governance-as-Code, Gate Policy, Approver, Role Claims — per
 ### GovernanceConfig (value)
 
 Implements: ST-0012
+Uses: SchemaValidator.D-2 (interface)
 
 - `GovernanceConfig.D-1` — the parsed, typed representation of the five
   `governance/` files (`roles.yaml`, `domains.yaml`,
@@ -82,6 +83,7 @@ Implements: ST-0012
 
 Implements: ST-0022,
 ST-0014
+Uses: none
 
 - `RoleClaims.D-1` — schema: `person_id`, `governance_ref`, `at`
   (timestamp evaluated against), `roles[]` — each entry `{role,
@@ -94,6 +96,7 @@ ST-0014
 
 Implements: ST-0014,
 ST-0022
+Uses: GovernanceConfig (interface), StorageService.A-1 (interface)
 
 - `RoleResolution.A-1` — `resolve(governance_ref, person_id, at) →
   RoleClaims`; typed error: `unknown-person` (person-id absent from

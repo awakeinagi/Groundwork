@@ -73,6 +73,7 @@ this time.
 
 Implements: ST-0019,
 ST-0023
+Uses: none
 
 Every operation enumerates typed error conditions from the closed
 vocabulary `not-found | permission-denied | conflict |
@@ -184,6 +185,7 @@ DEC-0167).
 ### CapabilityManifest (value)
 
 Implements: ST-0019
+Uses: none
 
 - `CapabilityManifest.D-1` — schema: `host_type` (string), `adapter_version`
   (string), and boolean capability flags. **Minimum set** (all must be
@@ -204,6 +206,7 @@ Implements: ST-0019
 ### HostEvent (event)
 
 Implements: ST-0019
+Uses: none
 
 - `HostEvent.D-1` — payload schema: `event_id` (uuid), `schema_version`
   (int), `repo`, `kind` (closed enum: `pr-opened | pr-updated |
@@ -348,3 +351,4 @@ leaf: it depends on nothing else in the system.
   per DEC-0156).
 - Writing to codebase content — permanently out for the whole system
   (per DEC-0014).
+

@@ -20,10 +20,8 @@ context: platform
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]
-  depends-on: [CMP-0010, CMP-0004, CMP-0001]
-cites: [DEC-0001, DEC-0018, DEC-0042, DEC-0085, DEC-0127, DEC-0132, DEC-0133,
-        DEC-0163, DEC-0182, DEC-0187, DEC-0202, DEC-0207, DEC-0212, DEC-0213,
-        DEC-0226, DEC-0227, DEC-0229, DEC-0230, DEC-0231]
+  depends-on: [CMP-0010, CMP-0004, CMP-0001, CMP-0007]
+cites: [DEC-0001, DEC-0018, DEC-0042, DEC-0085, DEC-0127, DEC-0132, DEC-0133, DEC-0163, DEC-0182, DEC-0187, DEC-0202, DEC-0207, DEC-0212, DEC-0213, DEC-0226, DEC-0227, DEC-0229, DEC-0230, DEC-0231, DEC-0366]
 ---
 
 # CMP-0011: Inbound API
@@ -61,6 +59,7 @@ DEC-0187).
 
 Implements: ST-0058,
 ST-0059
+Uses: CompositionRoot.A-2 (interface), IdentityService (interface)
 
 - `ApiApplication.A-1` — the FastAPI/ASGI application object; its
   lifespan hook invokes
@@ -97,6 +96,7 @@ ST-0059
 
 Implements: ST-0058,
 ST-0059
+Uses: none
 
 - `ProblemType.D-1` — schema: the RFC 9457 problem+json body — `type`
   (stable URI), `title`, `status`, `detail`, `instance`, plus an
@@ -115,6 +115,8 @@ ST-0059
 ### RestSurface (service)
 
 Implements: ST-0058
+Uses: StorageService.A-1 (interface), GatePolicyCheck.A-1 (interface),
+ConflictGate.A-1 (interface)
 
 - `RestSurface.A-1` — artifact reads: read a Business Goal / Epic /
   Story / Spike with full content and provenance drill-down; success
@@ -167,6 +169,7 @@ Implements: ST-0058
 ### SessionSseEndpoint (service)
 
 Implements: ST-0059
+Uses: SSEEvent (interface)
 
 - `SessionSseEndpoint.A-1` — an SSE endpoint streams append-turn output
   for an open session as `SSEEvent` frames; the stakeholder's own turns
@@ -204,6 +207,7 @@ Implements: ST-0059
 ### SSEEvent (value)
 
 Implements: ST-0059
+Uses: none
 
 - `SSEEvent.D-1` — schema (the SSE transport envelope): `id` (the
   session engine's stable, per-session ordered id, from
@@ -287,12 +291,16 @@ Implements: ST-0059
 - CMP-0001 — consumed:
   `StorageService.A-1` (`read(artifact-id, [ref]) → {document,
   provenance}`) for artifact reads with provenance drill-down.
+- CMP-0007 — consumed:
+  `IdentityService.A-1` (`resolve(auth_subject) → person_id`), the
+  participant-resolution surface backing `ApiApplication.B-1`'s
+  authenticated-Participant requirement on every route; forward-declared
+  per
+  DEC-0132,
+  now a standing dependency (per
+  DEC-0366).
 - Forward-declared (per
   DEC-0132):
-  the identity-provider contract from
-  ST-0022
-  (owned by CMP-0007) resolving the
-  Participant on every route; and
   ST-0032's
   append-turn stream and stable per-session event-id ordering, consumed
   by `SessionSseEndpoint`.

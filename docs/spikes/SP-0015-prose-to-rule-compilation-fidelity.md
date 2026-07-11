@@ -73,4 +73,7 @@ The source passage is curated/licensed content already present in the corpus (e.
 
 ## Resulting Decisions
 
-Pending — a completed spike produces at least one decision, even "assumption confirmed, no change."
+## Resulting Decisions
+
+This spike's findings -- the ratifiable-as-is rate (12 of 14 candidate rules ratified, most as-is or in guarded/downgraded form), the failure-mode catalog, and the stakeholder's side-by-side rule-vs-passage review -- were recorded and ratified at SES-0064 (T22 disposition, gate-approve-launch path selected). No rule-adoption decision has actually been made: this spike is throwaway per its own guardrails (DEC-0351), and adopting anything it surfaces requires the ordinary DEC-0337 option survey followed by DEC-0335 design intake -- not this spike's findings alone. Rule-adoption decisions are deferred to SP-0016 preparation, per DEC-0354 (the governing program decision establishing this five-spike evaluation and the adoption path that follows it).
+

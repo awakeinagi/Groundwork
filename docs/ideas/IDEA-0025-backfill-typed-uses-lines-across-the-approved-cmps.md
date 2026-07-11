@@ -2,7 +2,7 @@
 id: IDEA-0025
 type: idea
 title: "Backfill typed Uses: lines across the approved CMPs and arm checker enforcement"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 proposed-by: awakeinagi
@@ -34,4 +34,13 @@ Raised at SES-0064 T21-T22: SP-0013's executed findings surfaced the `Uses:`-lin
 
 ## Disposition
 
-Pending. This is a modification of approved artifacts (all 16 CMPs); its take-up must run the full DEC-0267 cascade -- superseding/amending decisions recorded, the staleness walk run, affected descendants marked stale, and re-affirmation presented to the approver, all within the intake session before close.
+## Disposition
+
+Taken up at SES-0066. The corpus-wide backfill executed (DEC-0359) -- 71
+typed Uses: edges across 53 elements in the 15 conforming CMPs, 20 explicit
+Uses: none -- and checker enforcement was armed (DEC-0360, rule 20). The
+DEC-0267 amendment cascade ran in-session: the four extraction escalations
+were recorded as decisions (DEC-0361..DEC-0364) and the batched
+re-affirmation of the 15 modified approved CMPs completed before close.
+SP-0014's DEC-0358 precondition is satisfied (DEC-0365).
+

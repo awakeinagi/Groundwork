@@ -50,6 +50,7 @@ Canonical Store, Artifact, Item Branch — per
 ### ChangeEvent (event)
 
 Implements: ST-0008
+Uses: none
 
 - `ChangeEvent.D-1` — payload schema: `event_id` (uuid),
   `schema_version` (int), `artifact_id` (artifact-ID string per
@@ -113,3 +114,4 @@ Boundary statements (per DEC-0133):
   consolidation invalidation — EP-0003/EP-0004/EP-0007).
 - User-facing notifications (EP-0006
   — they derive from governance events, not raw store events).
+

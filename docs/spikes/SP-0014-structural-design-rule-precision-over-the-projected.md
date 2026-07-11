@@ -27,7 +27,7 @@ links:
   impacted-by: [SP-0013]
   derives-from: [EP-0009]
   relates-to: [SP-0013]
-cites: [DEC-0354, DEC-0351, DEC-0355, DEC-0335, DEC-0337, DEC-0345, DEC-0336, DEC-0315, DEC-0309, DEC-0299, DEC-0086, DEC-0358]
+cites: [DEC-0354, DEC-0351, DEC-0355, DEC-0335, DEC-0337, DEC-0345, DEC-0336, DEC-0315, DEC-0309, DEC-0299, DEC-0086, DEC-0358, DEC-0365, DEC-0359, DEC-0360]
 ---
 
 > Guardrails (DEC-0351): this spike's outputs are strictly throwaway and are never deployed as part of the artifact interaction surface. Adoption of anything it surfaces happens only through the ordinary path -- a DEC-0337 option survey followed by DEC-0335 design intake -- never by this spike's findings alone.
@@ -53,9 +53,9 @@ Descriptive measures, no pass/fail threshold (DEC-0355): a complete findings cat
 
 ## Data-Source Assumptions
 
-SP-0013's projection is faithful enough to build on -- its coverage stats (fraction of contract items and typed edges projected cleanly) gate what these rules can see and thus what findings are even possible. Compiled rules derive only from already-curated sources: ratified system-architecture-bp content and accepted Groundwork DECs, never invented heuristics.
-
 **Execution precondition (DEC-0358).** SP-0013's findings show zero typed `Uses:` lines exist anywhere in the corpus, so the dependency-cycle, stability-direction, and build-order rules in this spike's planned rulebase have no edge data to fire against today. Per DEC-0358, this spike's execution is deferred until the corpus-wide `Uses:` backfill is taken up and completed; it does not proceed with a reduced rulebase in the interim.
+
+**Precondition met (DEC-0365).** SES-0066 executed the corpus-wide `Uses:` backfill (DEC-0359) and armed checker enforcement (DEC-0360): 71 typed edges now exist across the 15 conforming CMPs' 53 elements. DEC-0358's precondition is satisfied; SP-0014 is unblocked and may execute in its own future session. Note the qualifier distribution is 100% `(interface)`, zero `(implementation)` -- SP-0014's build-order/serialization rules will be vacuously satisfied against this data (an acknowledged, not blocking, consequence).
 
 ## Findings
 

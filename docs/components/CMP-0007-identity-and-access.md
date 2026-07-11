@@ -71,6 +71,7 @@ Person Registry, Connector — per [CONTEXT.md](../../CONTEXT.md).
 ### AuthProvider (protocol)
 
 Implements: ST-0022
+Uses: none
 
 - `AuthProvider.A-1` — `authenticate(credential) → AuthSubject`; the
   credential shape is provider-specific (email challenge, OIDC
@@ -87,6 +88,7 @@ Implements: ST-0022
 ### AuthSubject (value)
 
 Implements: ST-0022
+Uses: none
 
 - `AuthSubject.D-1` — schema: `provider_id` (string), `subject`
   (string, stable within the provider), optional `email`, optional
@@ -98,6 +100,7 @@ Implements: ST-0022
 ### SessionToken (value)
 
 Implements: ST-0022
+Uses: none
 
 - `SessionToken.D-1` — schema: `token` (opaque handle, ≥128 bits of
   entropy), `expires_at` (timestamp). Carries no claims and no
@@ -107,6 +110,7 @@ Implements: ST-0022
 ### IdentityService (service)
 
 Implements: ST-0022
+Uses: GovernanceConfig.D-1 (interface), RoleResolution.A-1 (interface), AppDatabasePort.A-3 (interface)
 
 - `IdentityService.A-1` — `resolve(auth_subject) → person_id` via the
   `people.yaml` value (`GovernanceConfig.D-1`); typed error:
@@ -158,6 +162,7 @@ Implements: ST-0022
 
 Implements: ST-0021,
 ST-0022
+Uses: SecretStore.A-1 (interface), SecretStore.A-3 (interface)
 
 - `HostIdentityLink.D-1` — identity `(person_id, host)`; attributes:
   `host_username`, `token_ref` (a
@@ -197,6 +202,7 @@ ST-0022
 ### AttributionBlock (value)
 
 Implements: ST-0021
+Uses: SecretStore (interface)
 
 - `AttributionBlock.D-1` — schema: `schema_version` (int),
   `person_id`, `pr_ref`, `decision_timestamp`, `key_id`, `signature`
@@ -227,6 +233,7 @@ Implements: ST-0021
 ### ReviewDelegationService (service)
 
 Implements: ST-0021
+Uses: CodeHostConnector.A-4 (interface), HostIdentityLink (interface), AttributionBlock (interface)
 
 - `ReviewDelegationService.A-1` — `post_review(pr_ref, person_id,
   verdict, body) → {path: as-user | program-user}`; typed errors:

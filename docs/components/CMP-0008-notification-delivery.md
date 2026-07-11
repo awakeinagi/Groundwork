@@ -61,6 +61,7 @@ Connector, Notifier Connector, Capability Manifest, Adapter — per
 ### NotifierConnector (protocol)
 
 Implements: ST-0024
+Uses: SecretStore.A-2 (interface)
 
 Every operation enumerates typed error conditions from the closed
 vocabulary `recipient-invalid | credential-error | delivery-failed |
@@ -109,6 +110,7 @@ rate-limited`
 ### NotifierCapabilityManifest (value)
 
 Implements: ST-0024
+Uses: none
 
 - `NotifierCapabilityManifest.D-1` — schema: `channel_type` (string —
   "email", "slack", etc.), `adapter_version` (string), and boolean
@@ -126,6 +128,7 @@ Implements: ST-0024
 ### EmailNotifier (service)
 
 Implements: ST-0024
+Uses: NotifierConnector (interface), SecretStore (interface)
 
 - `EmailNotifier.A-1` — implements `NotifierConnector` for
   `channel_type: "email"`. Sends to the recipient email address via
@@ -233,3 +236,4 @@ Implements: ST-0024
   (CMP-0013) concern;
   this component delivers synchronously per call
   (per DEC-0204).
+

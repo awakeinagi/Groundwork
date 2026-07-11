@@ -58,6 +58,7 @@ App Database Port's outbox lease).
 
 Implements: ST-0060,
 ST-0061
+Uses: none
 
 - `QueuePort.A-1` — `enqueue(job-type, payload) → JobId`. `job-type` is
   an open string namespace — any value is accepted; the port does not
@@ -113,6 +114,7 @@ ST-0061
 ### Job (value)
 
 Implements: ST-0060
+Uses: none
 
 - `Job.D-1` — schema: `job-id` (uuid), `job-type` (open string, per
   DEC-0214),
@@ -133,6 +135,7 @@ Implements: ST-0060
 
 Implements: ST-0060,
 ST-0061
+Uses: none
 
 - `JobStatus.D-1` — closed enum: `queued | running | retrying |
   dead-lettered`; queryable via `QueuePort.A-3` (per
@@ -225,3 +228,4 @@ DEC-0133):
 - Per-job-type payload schema validation — the port treats `payload` as
   opaque; type-specific validation is the registered handler's concern
   (CMP-0013).
+

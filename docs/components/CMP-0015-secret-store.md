@@ -57,6 +57,7 @@ Secret Store, Port, Adapter — per [CONTEXT.md](../../CONTEXT.md).
 
 Implements: ST-0021,
 ST-0022
+Uses: AppDatabasePort.A-1 (interface), AppDatabasePort.A-3 (interface)
 
 - `SecretStore.A-1` — `put(namespace, key, secret) → ok`: stores or
   replaces (replacement supports credential rotation) the secret

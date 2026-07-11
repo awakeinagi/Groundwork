@@ -20,7 +20,7 @@ context: platform
 links:
   derives-from: [EP-0008]
   satisfies: [BG-0001]
-  depends-on: [CMP-0003, CMP-0012, CMP-0013, CMP-0014]
+  depends-on: [CMP-0003, CMP-0012, CMP-0013, CMP-0014, CMP-0015]
 cites: [DEC-0001, DEC-0102, DEC-0121, DEC-0122, DEC-0124, DEC-0132, DEC-0133,
         DEC-0152, DEC-0201, DEC-0203, DEC-0204, DEC-0205, DEC-0206, DEC-0208,
         DEC-0222, DEC-0226, DEC-0227, DEC-0228, DEC-0232]
@@ -61,6 +61,7 @@ Port contracts only").
 ### DeploymentConfig (value)
 
 Implements: ST-0057
+Uses: none
 
 - `DeploymentConfig.D-1` — schema: a top-level YAML map with one entry
   per Port (`app-database`, `vector-store`, `embedding`, `graph-store`,
@@ -90,6 +91,7 @@ Implements: ST-0057
 ### ApplicationContainer (value)
 
 Implements: ST-0057
+Uses: none
 
 - `ApplicationContainer.D-1` — schema: exactly one bound instance per
   Port (the six), plus references to the constructed top-level services.
@@ -106,6 +108,8 @@ Implements: ST-0057
 ### CompositionRoot (service)
 
 Implements: ST-0057
+Uses: AppDatabasePort (interface), QueuePort (interface), KvStorePort
+(interface), JobRuntime.A-2 (interface), SecretStore (interface)
 
 - `CompositionRoot.A-1` — `build_container(config: DeploymentConfig) →
   ApplicationContainer`. Binds each of the six Ports to the Adapter
@@ -218,6 +222,13 @@ Implements: ST-0057
   `JobRuntime.A-2` (`start()`/`stop()`), wired during
   `startup()`/`shutdown()`; the Root only starts and stops the runtime,
   it does not register handlers (see Out of Scope).
+- CMP-0015 — consumed: the Secret Store the
+  Root hands the master key to at startup (this component's
+  `IG-3`); corroborated by
+  CMP-0015's own
+  `IG-2` (per
+  DEC-0232,
+  ST-0022).
 - Forward-declared (per
   DEC-0132,
   for the Port contracts not yet drafted as standalone components): the

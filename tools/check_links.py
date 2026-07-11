@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Validate a Groundwork artifact graph.
 
-Usage: python3 check_links.py [project_root]   (default: cwd)
+Usage: python3 check_links.py [--uses-advisory] [project_root]
+(default root: cwd)
 
 Rules enforced:
   1. IDs unique; frontmatter `id` matches filename prefix and type.
@@ -65,6 +66,20 @@ Rules enforced:
      ID inside it resolves (DEC-0242 extended to the overview
      surface). Faithfulness to the body is a process obligation
      (DEC-0288), not checked here.
+ 20. Typed element dependencies (DEC-0299, DEC-0306, DEC-0309;
+     SPEC-design-elements): every design element carries a `Uses:`
+     line before its contract items — `Uses: none`, or comma-separated
+     `Target.K-n (interface|implementation|test)` entries (omitted
+     qualifier means interface; a bare element name without an item is
+     valid, e.g. a test double). Every target resolves to an element
+     defined in some component's Design Elements section and, when
+     item-qualified, to an item that element defines (`..` ranges
+     expanded). A component's cross-component Uses: edges must project
+     exactly onto its frontmatter depends-on, both directions
+     (DEC-0309). Docs with no Design Elements section are skipped.
+     With --uses-advisory, rule-20 findings are demoted to warnings
+     (exit 0) — an authoring-time aid only; all other rules keep their
+     normal severity.
 
 Ideas (IDEA-*, docs/ideas/, DEC-0258) are pre-classification captures:
 they are exempt from goal tracing (rule 3) and never carry release
@@ -116,6 +131,13 @@ TRIGGER_HEAD_RE = re.compile(r"^## (TRG-\d{4}) \((armed|fired|retired)\)\s*$")
 TRIGGER_ANY_HEAD_RE = re.compile(r"^## .*TRG", re.IGNORECASE)
 ARTIFACT_FILE_RE = re.compile(
     r"(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}-[^/\s]*\.md$")
+USES_QUALIFIERS = {"interface", "implementation", "test"}
+ITEM_DEF_RE = re.compile(
+    r"^[ \t]*-[ \t]+`(?P<el>[A-Za-z]\w*)\.(?P<a>[A-Z]{1,3}-\d+)"
+    r"(?:\.\.(?P<b>[A-Z]{1,3}-\d+))?`", re.MULTILINE)
+USES_ENTRY_RE = re.compile(
+    r"^(?P<el>[A-Za-z]\w*)(?:\.(?P<item>[A-Z]{1,3}-\d+))?"
+    r"(?:\s*\((?P<qual>[^)]*)\))?$")
 
 
 def parse_frontmatter(path):
@@ -136,7 +158,9 @@ def as_list(value):
 
 
 def main():
-    root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path.cwd()
+    argv = [a for a in sys.argv[1:] if a != "--uses-advisory"]
+    uses_advisory = "--uses-advisory" in sys.argv[1:]
+    root = Path(argv[0]).resolve() if argv else Path.cwd()
     docs = root / "docs"
     if not docs.is_dir():
         print(f"No docs/ directory under {root} — not a Groundwork project "
@@ -418,6 +442,124 @@ def main():
                 and aid not in story_covered:
             warnings.append(f"{fm['_path']}: approved story {aid} has no "
                             f"referencing design element (coverage gap)")
+
+    # Rule 20: typed Uses: lines and depends-on projection (DEC-0299,
+    # DEC-0306, DEC-0309; SPEC-design-elements). Findings are demoted
+    # to warnings under --uses-advisory (authoring aid; error is the
+    # default so the rule cannot ship unarmed).
+    uses_findings = warnings if uses_advisory else errors
+    element_owner = {}    # element name -> [owning CMP ids]
+    element_items = {}    # (cmp, name) -> set of item ids (ranges expanded)
+    element_blocks = {}   # (cmp, name) -> block text
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "component":
+            continue
+        section = DESIGN_ELEMENTS_RE.search(fm.get("_body") or "")
+        if not section:
+            continue
+        sec_text = section.group(1)
+        heads = list(ELEMENT_HEADING_RE.finditer(sec_text))
+        for i, h in enumerate(heads):
+            name = h.group(1)
+            end = heads[i + 1].start() if i + 1 < len(heads) else len(sec_text)
+            block = sec_text[h.end():end]
+            element_owner.setdefault(name, []).append(aid)
+            items = set()
+            for m in ITEM_DEF_RE.finditer(block):
+                if m.group("el") != name:
+                    continue
+                a, b = m.group("a"), m.group("b")
+                if b is None:
+                    items.add(a)
+                    continue
+                pa, na = a.rsplit("-", 1)
+                pb, nb = b.rsplit("-", 1)
+                if pa == pb and int(na) <= int(nb):
+                    items.update(f"{pa}-{n}"
+                                 for n in range(int(na), int(nb) + 1))
+                else:
+                    items.update((a, b))
+            element_items[(aid, name)] = items
+            element_blocks[(aid, name)] = block
+    cross_targets = {}    # cmp id -> set of provider cmp ids
+    for (aid, name), block in sorted(element_blocks.items()):
+        fmp = artifacts[aid]["_path"]
+        lines = block.splitlines()
+        uses_idx = [i for i, ln in enumerate(lines)
+                    if ln.strip().startswith("Uses:")]
+        if not uses_idx:
+            uses_findings.append(f"{fmp}: element {name} lacks a Uses: "
+                                 f"line (per DEC-0299)")
+            continue
+        if len(uses_idx) > 1:
+            uses_findings.append(f"{fmp}: element {name} has multiple "
+                                 f"Uses: lines")
+            continue
+        i0 = uses_idx[0]
+        first_bullet = next(
+            (i for i, ln in enumerate(lines)
+             if ln.lstrip().startswith("- `")), len(lines))
+        if i0 > first_bullet:
+            uses_findings.append(f"{fmp}: element {name} Uses: line must "
+                                 f"precede its contract items")
+        content_lines = [lines[i0].split("Uses:", 1)[1]]
+        for ln in lines[i0 + 1:]:
+            if not ln.strip() or ln.lstrip().startswith(("- ", "#")):
+                break
+            content_lines.append(ln)
+        content = " ".join(p.strip() for p in content_lines).strip()
+        if content == "none":
+            continue
+        if not content:
+            uses_findings.append(f"{fmp}: element {name} Uses: line is "
+                                 f"empty (write 'Uses: none')")
+            continue
+        for raw in content.split(","):
+            entry = raw.strip().strip("`").strip()
+            m = USES_ENTRY_RE.match(entry)
+            if not m:
+                uses_findings.append(f"{fmp}: element {name} Uses: entry "
+                                     f"{raw.strip()!r} is malformed")
+                continue
+            qual = m.group("qual")
+            if qual is not None and qual not in USES_QUALIFIERS:
+                uses_findings.append(
+                    f"{fmp}: element {name} Uses: entry {entry!r} has "
+                    f"unknown qualifier {qual!r} (closed set: "
+                    f"{sorted(USES_QUALIFIERS)})")
+            tgt = m.group("el")
+            owners = element_owner.get(tgt, [])
+            if not owners:
+                uses_findings.append(f"{fmp}: element {name} Uses: target "
+                                     f"{tgt!r} resolves to no element")
+                continue
+            if len(owners) > 1:
+                uses_findings.append(
+                    f"{fmp}: element {name} Uses: target {tgt!r} is "
+                    f"ambiguous (defined in {', '.join(sorted(owners))})")
+                continue
+            owner = owners[0]
+            item = m.group("item")
+            if item and item not in element_items[(owner, tgt)]:
+                uses_findings.append(
+                    f"{fmp}: element {name} Uses: target {tgt}.{item} — "
+                    f"{tgt} defines no item {item}")
+            if owner != aid:
+                cross_targets.setdefault(aid, set()).add(owner)
+    has_elements = {cmp for cmp, _ in element_blocks}
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "component" or aid not in has_elements:
+            continue
+        declared = set(as_list((fm.get("links") or {}).get("depends-on")))
+        derived = cross_targets.get(aid, set())
+        for t in sorted(derived - declared):
+            uses_findings.append(f"{fm['_path']}: element Uses: edges "
+                                 f"reach {t} but depends-on omits it "
+                                 f"(per DEC-0309)")
+        for t in sorted(declared - derived):
+            uses_findings.append(f"{fm['_path']}: depends-on {t} is "
+                                 f"supported by no element Uses: edge "
+                                 f"(per DEC-0309)")
 
     # Body prose bare-ID mentions, shared by rules 8 and 15-18
     mentions = {}

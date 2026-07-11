@@ -19,6 +19,7 @@ overview: >-
 context: canonical-store
 component-type: protocol
 links:
+  depends-on: [CMP-0002]
   derives-from: [EP-0001]
   satisfies: [BG-0001]
 cites: [DEC-0077, DEC-0080, DEC-0102, DEC-0103, DEC-0121, DEC-0122, DEC-0124,
@@ -53,6 +54,7 @@ Port, Adapter, Mechanical Write, Canonical Store — per
 
 Implements: ST-0010,
 ST-0008
+Uses: ChangeEvent.D-1 (interface), ChangeEvent.B-2 (interface)
 
 - `AppDatabasePort.A-1` — `begin() → UnitOfWork` with atomic
   commit/rollback across all operations enlisted in it; typed error
@@ -148,3 +150,4 @@ Boundary statements (per DEC-0133):
   is the sole mechanism (per DEC-0125, DEC-0077).
 - Dispatcher scheduling and retry policy — the consumer's concern
   (CMP-0001).
+

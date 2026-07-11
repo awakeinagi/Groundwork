@@ -55,6 +55,7 @@ introduced; `namespace`/`key` reuse the shape
 ### KvStorePort (protocol)
 
 Implements: ST-0062
+Uses: none
 
 - `KvStorePort.A-1` — `get(namespace, key) → value |
   problem(not-found)`. Returns `not-found` immediately for an expired
@@ -181,3 +182,4 @@ DEC-0133):
   (DEC-0220); use
   the App Database Port
   (CMP-0003) instead.
+

@@ -53,6 +53,8 @@ term: **Handler** (the registered callable that executes one
 ### JobRuntime (service)
 
 Implements: ST-0061
+Uses: QueuePort.A-2 (interface), QueuePort.B-4 (interface), QueuePort.B-5
+(interface), QueuePort.B-6 (interface)
 
 - `JobRuntime.A-1` — `register(job-type, handler, [timeout])`. Attaches
   a handler callable to a `job-type` (open string namespace, per

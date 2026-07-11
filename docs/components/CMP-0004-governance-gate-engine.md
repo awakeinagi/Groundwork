@@ -77,6 +77,7 @@ own value/event elements or against dependency contracts named in
 ### GovernanceInit (service)
 
 Implements: ST-0012
+Uses: PolicyCompiler.A-2 (interface)
 
 - `GovernanceInit.A-1` — `init(deployment-config) → {commit-sha}`.
   Writes the founding `governance/` files — initial Arbiter and role
@@ -91,6 +92,7 @@ Implements: ST-0012
 ### PolicyCompiler (service)
 
 Implements: ST-0013
+Uses: GovernanceConfig (interface), CodeHostConnector (interface)
 
 - `PolicyCompiler.A-1` — `compile(governance-ref) →
   {branch-protection-plan, team-sync-plan, required-checks[]}`. Pure
@@ -141,6 +143,7 @@ Implements: ST-0013
 ### GatePolicyCheck (service)
 
 Implements: ST-0014
+Uses: StorageService (interface), GovernanceConfig (interface), CodeHostConnector (interface), AttributionBlock.B-2 (interface)
 
 - `GatePolicyCheck.A-1` — `evaluate(pr-ref) →
   {verdict: pass|fail, explanation, missing[]}`. Reads
@@ -195,6 +198,7 @@ Implements: ST-0014
 ### ConflictGate (service)
 
 Implements: ST-0015
+Uses: SchemaValidator (interface), MechanicalWriteService (interface)
 
 - `ConflictGate.A-1` — `evaluate(pr-ref) → {verdict: pass|fail,
   explanation}` — the `conflicts-open` required check. Fails any gate
@@ -242,6 +246,7 @@ Implements: ST-0015
 ### StalenessSweepService (service)
 
 Implements: ST-0016
+Uses: MechanicalWriteService.A-3 (interface)
 
 - `StalenessSweepService.A-1` — `sweep(change-event) → {affected:
   ArtifactId[], report: ImpactReport}`. Invoked on a ChangeEvent
@@ -271,6 +276,7 @@ Implements: ST-0016
 ### ImpactReport (value)
 
 Implements: ST-0016
+Uses: GovernanceEventLog (interface)
 
 - `ImpactReport.D-1` — schema: what changed (source artifact + diff
   ref), the affected set including in-flight work (open PRs on
@@ -288,6 +294,7 @@ Implements: ST-0016
 ### ReaffirmationService (service)
 
 Implements: ST-0017
+Uses: BranchOrchestrator.A-2 (interface), MechanicalWriteService.A-4 (interface), GovernanceEventLog (interface)
 
 - `ReaffirmationService.A-1` — `open-reaffirmation(artifact-id) →
   {item-branch, pr-ref}`. Reuses the artifact's existing item branch and
@@ -328,6 +335,7 @@ Implements: ST-0017
 ### GovernanceEvent (event)
 
 Implements: ST-0018
+Uses: ChangeEvent.B-1 (interface)
 
 - `GovernanceEvent.D-1` — envelope: `event-id`, `event-type` (closed
   enum: `gate-transition`, `staleness-sweep`, `staleness-clear`,
@@ -347,6 +355,7 @@ Implements: ST-0018
 ### GovernanceEventLog (service)
 
 Implements: ST-0018
+Uses: GovernanceEvent (interface), AppDatabasePort (interface)
 
 - `GovernanceEventLog.A-1` — `get-approval-latency(range) → {p50, p90,
   samples[]}` (per DEC-0163).

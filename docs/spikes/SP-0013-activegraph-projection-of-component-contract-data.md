@@ -30,7 +30,7 @@ links:
   impacts: [SP-0014]
   derives-from: [EP-0009]
   relates-to: [SP-0007]
-cites: [DEC-0354, DEC-0351, DEC-0357, DEC-0160, DEC-0335, DEC-0336, DEC-0337, DEC-0345, DEC-0355, DEC-0309, DEC-0299, DEC-0081, DEC-0087, DEC-0340, DEC-0092, DEC-0306]
+cites: [DEC-0354, DEC-0351, DEC-0357, DEC-0160, DEC-0335, DEC-0336, DEC-0337, DEC-0345, DEC-0355, DEC-0309, DEC-0299, DEC-0081, DEC-0087, DEC-0340, DEC-0092, DEC-0306, DEC-0358, DEC-0359, DEC-0360]
 ---
 
 > Guardrails (DEC-0351): this spike's outputs are strictly throwaway and are never deployed as part of the artifact interaction surface. Adoption of anything it surfaces happens only through the ordinary path -- a DEC-0337 option survey followed by DEC-0335 design intake -- never by this spike's findings alone.
@@ -84,4 +84,11 @@ The throwaway projection script and its ActiveGraph store are retained as eviden
 
 ## Resulting Decisions
 
-Pending — a completed spike produces at least one decision, even "assumption confirmed, no change."
+## Resulting Decisions
+
+DEC-0358 (SES-0064): SP-0014's execution deferred until the corpus-wide `Uses:` backfill this spike's central finding forced is taken up and completed.
+
+DEC-0359 (SES-0066): the corpus-wide `Uses:` backfill executed -- 71 typed edges across the 15 conforming CMPs' 53 elements, derived by the three-pass methodology this spike's findings' evidentiary basis grounded.
+
+DEC-0360 (SES-0066): `tools/check_links.py` rule 20 armed, enforcing the DEC-0299/DEC-0306/DEC-0309 mandate this spike found unenforced and corpus-absent.
+
