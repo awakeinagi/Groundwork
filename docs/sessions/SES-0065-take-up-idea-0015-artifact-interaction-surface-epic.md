@@ -2,38 +2,37 @@
 id: SES-0065
 type: session
 title: "Take-up: IDEA-0015 Artifact Interaction Surface epic derivation"
-status: open
+status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 overview: >-
-  Take-up of IDEA-0015: derived, refined, and stakeholder-ratified
-  the Artifact Interaction Surface epic (EP-0009) DEC-0339 charters
-  under BG-0002. Grilling resolved a framing collision (thinner
-  forward-only vs DEC-0339's full-surface charter) in favor of full
-  scope with the backfill's execution deferred by sequencing, not
-  supersession (DEC-0350); confirmed guardrailed exploratory tooling
-  spikes in the epic's Scope-In (DEC-0351); deferred the install-
-  script contract scope call a third time (DEC-0352); and deferred
-  the defect-artifact shape design to the backfill (DEC-0353). A
-  correction finding surfaced and fixed IDEA-0015's own mis-
-  summarized Spark Context and an unmet BG-0002 obligation (no armed
-  TRIGGERS.md absorption trigger for this surface). The stakeholder
-  confirmed the complete draft package verbatim ("Confirmed", T12).
-  Gate prep followed: a dual-instance reviewer consultation (record-
-  grounded vs best-practice-independent) converged on gate-ready-
-  with-changes after one rebuttal round, narrowing most findings and
-  leaving the glossary entry as the sole documented disagreement; a
-  14-candidate decision- recall audit found three missing citations
-  (DEC-0310, DEC-0347, DEC-0348) and confirmed the "double-pinned
-  model" phrasing as drift against DEC-0348. The consolidated
-  package was presented (T15) and the stakeholder ratified it —
-  "Ratify all, glossary now" — with approval conditional on clean
-  application (T16). EP-0009 is edited per the ratified package (six
-  edits plus the glossary entry) and, on a clean full-checker pass,
-  moved to gated then approved per the stakeholder's conditional
-  approval. The SES-0064 activegraph spike program stays out of this
-  session's scope. Session remains open (closing summary still
-  pending).
+  Take-up of IDEA-0015, now closed. Derived, refined, gated, and
+  obtained stakeholder approval on the Artifact Interaction Surface
+  epic (EP-0009) DEC-0339 charters under BG-0002. Grilling resolved
+  a framing collision (thinner forward-only vs DEC-0339's full-
+  surface charter) in favor of full scope with the backfill's
+  execution deferred by sequencing, not supersession (DEC-0350);
+  confirmed guardrailed exploratory tooling spikes in the epic's
+  Scope-In (DEC-0351); deferred the install-script contract scope
+  call a third time (DEC-0352); and deferred the defect-artifact
+  shape design to the backfill (DEC-0353). A correction finding
+  fixed IDEA-0015's own mis-summarized Spark Context and an unmet
+  BG-0002 obligation (no armed TRIGGERS.md absorption trigger for
+  this surface). The stakeholder confirmed the complete draft
+  package verbatim ("Confirmed", T12). Gate prep: a dual-instance
+  reviewer consultation (record-grounded vs best-practice-
+  independent) converged on gate-ready-with-changes after one
+  rebuttal round, leaving the glossary entry as the sole documented
+  disagreement; a 14-candidate decision-recall audit found three
+  missing citations (DEC-0310, DEC-0347, DEC-0348) and fixed
+  "double-pinned model" drift against DEC-0348. The consolidated
+  package was ratified ("Ratify all, glossary now", T16) conditional
+  on clean application; EP-0009 was edited per the ratified package
+  and, on a clean checker pass, moved to gated then approved.
+  Session closed (T17-T18) with EP-0009 approved as the parent for
+  SES-0064's spike program, handing back a constraint: each SP
+  states explicit evaluation criteria and data-source assumptions at
+  definition time. No further ideas inspired.
 links:
   relates-to: [IDEA-0015]
 ---
@@ -177,6 +176,25 @@ parent session.
 
 "Ratify all, glossary now"; approval conditional on clean application
 ("Approve on clean application").
+
+**T17 — facilitator:**
+
+Presented the closing summary: EP-0009 approved with DEC-0339's full
+scope, the backfill's execution deferred per DEC-0350 and guardrailed
+exploratory spikes accommodated per DEC-0351; DEC-0350..DEC-0353
+recorded; IDEA-0024 captured; IDEA-0015 disposed with its Spark
+Context correction applied; BG-0002 amended; a CONTEXT.md term added;
+gate rigor findings — the dual-instance reviewer debate converged in
+one rebuttal round, and the decision-recall audit found three missing
+citations plus fixed DEC-0348 phrasing drift. Handback to the parent
+session (SES-0064): EP-0009 is the approved parent for the spike
+program; constraint — each SP artifact states explicit evaluation
+criteria and data-source assumptions at definition time. Asked the
+DEC-0261 inspired-ideas question.
+
+**T18 — stakeholder (verbatim):**
+
+"Nope that's all for now"
 
 ## Decisions Produced
 
