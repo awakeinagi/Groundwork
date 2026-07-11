@@ -20,24 +20,28 @@ overview: >-
   the stakeholder asked to run and learn about a tool called
   activegraph, then evaluate applying it to the Groundwork project.
   Discussion (T3-T11) explored an "executable design knowledge"
-  approach — compiling design best practices and rule-type decisions
-  into reactive rules firing over a typed projection of the design
-  corpus, with ActiveGraph as candidate substrate — and the
-  stakeholder confirmed, via option selection, a five-spike
+  approach -- compiling design best practices and rule-type
+  decisions into reactive rules firing over a typed projection of
+  the design corpus, with ActiveGraph as candidate substrate -- and
+  the stakeholder confirmed, via option selection, a five-spike
   exploratory program (projection, rule precision, compilation
   fidelity, hook-loop economics, fork-and- diff evidence),
   exploratory with no kill bar, ActiveGraph-only with the DEC-0337
   option survey deferred to after the spikes report, and the
   projection spike kept fully separate from SP-0007/DEC-0160. At T12
-  the facilitator attempted to derive the required parent epic
-  (chartered by DEC-0339 under BG-0002) and found it does not exist:
-  IDEA-0015 records the epic derivation was deliberately deferred at
-  SES-0061 and remains status `captured`. Per the spike-derivation
-  gate, no DEC or SP artifacts for the program were created this
-  session — this record captures only the transcript of the design
-  discussion and the gate finding. Status: open; the epic derivation
-  must resume (IDEA-0015) before the four decisions and five spikes
-  described in-session can be recorded.
+  the facilitator found the required parent epic (chartered by
+  DEC-0339) did not yet exist -- IDEA-0015 recorded its derivation
+  as deliberately deferred at SES-0061. T13-T14 presented unblock
+  options; the stakeholder directed a facilitator fork to take up
+  IDEA-0015. T15's fork (SES-0065) derived, debated, gated, and got
+  approval for EP-0009, recording DEC-0350..DEC-0353 and disposing
+  IDEA-0015. T16 recorded the four decisions (DEC-0354..DEC-0357:
+  the approach and program, no kill-bar thresholds, ActiveGraph-only
+  scope with the survey deferred, and SP-A's separation from
+  SP-0007) and the five spike artifacts (SP-0013..SP-0017) under
+  EP-0009, each with Evaluation Criteria and Data-Source Assumptions
+  sections per the SES-0065 handback constraint. Status: open; the
+  closing summary follows the recall audit.
 ---
 
 ## Purpose
@@ -160,6 +164,43 @@ program. This transcript record stands; the four decisions and five
 spike artifacts described in the session's design discussion are not
 yet recorded in the corpus pending that epic's derivation. Session
 remains open.
+
+**T13 — Claude (Fable 5), facilitator:**
+Presented the unblock options for the epic-derivation gate found at
+T12: take up IDEA-0015 to derive the required parent epic, re-house
+the spike program under a different existing epic, or park the
+program as detailed IDEAs for later take-up.
+
+**T14 — awakeinagi (stakeholder):**
+Initially selected parking as detailed IDEAs, then withdrew that
+selection and instructed: spawn a facilitator fork to take up
+IDEA-0015 interactively; return here for spike creation afterward.
+
+**T15 — Claude (Fable 5), facilitator:**
+Spawned SES-0065 (take-up of IDEA-0015): EP-0009 was derived, refined
+through dual-instance architect debate (converged
+GATE-READY-WITH-CHANGES, all-LOW), gated, and approved by the
+stakeholder (2026-07-10); DEC-0350..DEC-0353 were recorded; IDEA-0015
+was disposed; IDEA-0024 was captured. The handback constraint folded
+into this session: every SP artifact states evaluation criteria and
+data-source assumptions.
+
+**T16 — Claude (Fable 5), facilitator:**
+Recorded the four decisions and five spikes under EP-0009: DEC-0354
+(the executable-design-knowledge approach and five-spike program),
+DEC-0355 (exploratory, no kill-bar thresholds), DEC-0356 (ActiveGraph-
+only scope, DEC-0337 survey deferred until after the spikes report),
+and DEC-0357 (the projection spike proceeds fully separate from
+SP-0007). Created SP-0013 (projection, "ActiveGraph projection of
+component contract data"), SP-0014 (structural rule precision,
+impacted-by SP-0013), SP-0015 (prose-to-rule compilation fidelity,
+independent), SP-0016 (reactive hook-loop economics, impacted-by
+SP-0014), and SP-0017 (fork-and-diff design-debate evidence,
+impacted-by SP-0014, queued last). Every spike cites DEC-0354 and
+DEC-0351; SP-0014 additionally cites DEC-0355; each carries
+"Evaluation Criteria" and "Data-Source Assumptions" sections and notes
+its throwaway script's validation approach is part of the spike design
+per DEC-0345, sized minimally per DEC-0336.
 
 ## Decisions Produced
 

@@ -40,7 +40,7 @@ links:
   derives-from: [BG-0002]
   satisfies: [BG-0002]
   relates-to: [DEC-0339, IDEA-0015]
-cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329]
+cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354]
 ---
 
 ## Summary
@@ -178,14 +178,22 @@ ones.
 
 ## Derived Work
 
+## Derived Work
+
+The activegraph exploratory spike program (DEC-0354): SP-0013
+(projection), SP-0014 (structural rule precision, impacted-by
+SP-0013), SP-0015 (prose-to-rule compilation fidelity, independent),
+SP-0016 (reactive hook-loop economics, impacted-by SP-0014), and
+SP-0017 (fork-and-diff design-debate evidence, impacted-by SP-0014,
+queued last).
+
 Pending:
-- The activegraph exploratory spike program — to be created in
-  SES-0064's own context once this epic approves.
 - Backfill stories and both CMPs — created at the fold-in Idea's
   take-up (DEC-0350).
 
-The epic completes in phases: first the exploratory spike program,
-then the backfill at IDEA-0024's take-up. Each story or spike gates
-individually — the epic itself is a scope container, not a release
-train, and does not gate as a single unit of completion.
+The epic completes in phases: first the exploratory spike program
+(SP-0013..SP-0017 above), then the backfill at IDEA-0024's take-up.
+Each story or spike gates individually — the epic itself is a scope
+container, not a release train, and does not gate as a single unit of
+completion.
 
