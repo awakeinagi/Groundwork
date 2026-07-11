@@ -22,7 +22,7 @@ overview: >-
   fidelity report.
 links:
   derives-from: [EP-0009]
-cites: [DEC-0354, DEC-0351, DEC-0335, DEC-0337, DEC-0355, DEC-0345, DEC-0336]
+cites: [DEC-0354, DEC-0351, DEC-0335, DEC-0337, DEC-0355, DEC-0345, DEC-0336, DEC-0294]
 ---
 
 > Guardrails (DEC-0351): this spike's outputs are strictly throwaway and are never deployed as part of the artifact interaction surface. Adoption of anything it surfaces happens only through the ordinary path -- a DEC-0337 option survey followed by DEC-0335 design intake -- never by this spike's findings alone.
@@ -40,6 +40,8 @@ Blocks nothing today. It is independent evidence for the compilation half of the
 Select one bounded curated source: an arc42 section from system-architecture-bp, or a chapter extracted via a book-to-skill-style pipeline. An agent compiles it into candidate rules, each citing the specific source passage it was compiled from. The stakeholder reviews each candidate rule against its cited passage, side by side.
 
 This spike builds a throwaway executable; per DEC-0345, its validation approach (the checks described above) is part of the reviewed spike design, not chosen ad hoc after the fact, and is sized minimally per DEC-0336's throwaway-scope yardstick.
+
+The system-architecture-bp corpus itself is the direct precedent for this compilation exercise: DEC-0294 established it as a curated, cited best-practice corpus, and it is this spike's source material.
 
 ## Evaluation Criteria
 Descriptive measures, no pass/fail threshold (DEC-0355): the ratifiable-as-is rate (fraction of candidate rules the stakeholder accepts without edits); a catalog of compilation failure modes observed (over-generalization, lost applicability conditions, invented specificity not present in the source).

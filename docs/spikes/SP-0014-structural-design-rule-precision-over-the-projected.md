@@ -27,7 +27,7 @@ links:
   impacted-by: [SP-0013]
   derives-from: [EP-0009]
   relates-to: [SP-0013]
-cites: [DEC-0354, DEC-0351, DEC-0355, DEC-0335, DEC-0337, DEC-0345, DEC-0336]
+cites: [DEC-0354, DEC-0351, DEC-0355, DEC-0335, DEC-0337, DEC-0345, DEC-0336, DEC-0315, DEC-0309, DEC-0299, DEC-0086]
 ---
 
 > Guardrails (DEC-0351): this spike's outputs are strictly throwaway and are never deployed as part of the artifact interaction surface. Adoption of anything it surfaces happens only through the ordinary path -- a DEC-0337 option survey followed by DEC-0335 design intake -- never by this spike's findings alone.
@@ -45,6 +45,8 @@ Blocks nothing today. It is the load-bearing evidence for the executable-design-
 Hand-compile approximately 12 structural rules as ActiveGraph behaviors: roughly six from the system-architecture-bp corpus (dependency cycles, stability direction, orphaned interfaces) and roughly six from Groundwork's own rule-type DECs (citation integrity, mandatory-contract-kind completeness, Uses-typing/build-order). Fire the rulebase against the graph SP-0013 projected. The stakeholder disposes every finding the rules produce -- real, noise, or change-worthy.
 
 This spike builds a throwaway executable; per DEC-0345, its validation approach (the checks described above) is part of the reviewed spike design, not chosen ad hoc after the fact, and is sized minimally per DEC-0336's throwaway-scope yardstick.
+
+The rulebase must position itself against DEC-0315's per-operation-checks-vs-full-checker-gate architecture: these rules are exploratory firing over a projection, not a replacement for the pre-commit gate. The structural contracts it validates are the ones SP-0013 projects -- DEC-0309's Uses-edges source-of-truth/depends-on projection and DEC-0299's typed Uses vocabulary (interface/implementation/test) -- and element-taxonomy/obligation checks defer to DEC-0086, which gives SPEC-design-elements ownership of that taxonomy.
 
 ## Evaluation Criteria
 Descriptive measures, no pass/fail threshold (DEC-0355): a complete findings catalog with the stakeholder's disposition on each (real / noise / change-worthy); per-rule precision notes (which rules fired only real findings, which fired noise, and why).

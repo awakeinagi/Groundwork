@@ -23,25 +23,25 @@ overview: >-
   approach -- compiling design best practices and rule-type
   decisions into reactive rules firing over a typed projection of
   the design corpus, with ActiveGraph as candidate substrate -- and
-  the stakeholder confirmed, via option selection, a five-spike
-  exploratory program (projection, rule precision, compilation
-  fidelity, hook-loop economics, fork-and- diff evidence),
+  the stakeholder confirmed a five-spike exploratory program,
   exploratory with no kill bar, ActiveGraph-only with the DEC-0337
-  option survey deferred to after the spikes report, and the
-  projection spike kept fully separate from SP-0007/DEC-0160. At T12
-  the facilitator found the required parent epic (chartered by
-  DEC-0339) did not yet exist -- IDEA-0015 recorded its derivation
-  as deliberately deferred at SES-0061. T13-T14 presented unblock
-  options; the stakeholder directed a facilitator fork to take up
-  IDEA-0015. T15's fork (SES-0065) derived, debated, gated, and got
-  approval for EP-0009, recording DEC-0350..DEC-0353 and disposing
-  IDEA-0015. T16 recorded the four decisions (DEC-0354..DEC-0357:
-  the approach and program, no kill-bar thresholds, ActiveGraph-only
-  scope with the survey deferred, and SP-A's separation from
-  SP-0007) and the five spike artifacts (SP-0013..SP-0017) under
-  EP-0009, each with Evaluation Criteria and Data-Source Assumptions
-  sections per the SES-0065 handback constraint. Status: open; the
-  closing summary follows the recall audit.
+  survey deferred, and the projection spike kept separate from
+  SP-0007/DEC-0160. At T12 the facilitator found the required parent
+  epic (DEC-0339) did not yet exist; IDEA-0015 recorded its
+  deferral. T13-T14 presented unblock options; the stakeholder
+  forked to take up IDEA-0015. T15's fork (SES-0065) derived,
+  debated, gated, and approved EP-0009, recording
+  DEC-0350..DEC-0353. T16 recorded DEC-0354..DEC-0357 and
+  SP-0013..SP-0017 under EP-0009. T17 presented the recall-audit
+  verdict from three Sonnet 5 judges: accepted additions applied as
+  cites plus brief body mentions per DEC-0247; rejected findings
+  held for discussion; audit-packet tooling defects flagged for idea
+  capture. T18 the stakeholder selected apply-accepts/discuss-
+  rejects and a gate-approve-execute path for SP-0013. T19 the
+  stakeholder instructed spawning an empty-context executor subagent
+  for SP-0013. T20 recorded the applied fixes, SP-0013 gated and
+  approved, and the executor spawned. Status: open; reject
+  dispositions remain for stakeholder discussion before close.
 ---
 
 ## Purpose
@@ -201,6 +201,18 @@ DEC-0351; SP-0014 additionally cites DEC-0355; each carries
 "Evaluation Criteria" and "Data-Source Assumptions" sections and notes
 its throwaway script's validation approach is part of the spike design
 per DEC-0345, sized minimally per DEC-0336.
+
+**T17 — Claude (Fable 5), facilitator:**
+Presented the consolidated recall-audit verdict from three Sonnet 5 judges across all six artifacts (SP-0013..SP-0017, DEC-0356). Accepted additions: SP-0013 add-cites DEC-0309, DEC-0299, DEC-0081, DEC-0087; SP-0014 add-cites DEC-0315, DEC-0309, DEC-0299, DEC-0086; SP-0015 add-cite DEC-0294; SP-0016 add-cites DEC-0315, DEC-0118; SP-0017 add-cite DEC-0293; DEC-0356 relates-to DEC-0336. Rejected findings held for discussion: DEC-0354 (DEC-0157/DEC-0345/DEC-0348 proposed adds); DEC-0355 (nothing-to-add); DEC-0357 (a DEC-0172/DEC-0173 chain judged a topic-misread); SP-0017 (a DEC-0348 proposed add judged a misread -- run-forks, not agent-spawns); SP-0016 (a DEC-0340 proposed add judged already covered by the DEC-0351 guardrail); SP-0014 (a DEC-0338 proposed add judged already carried via EP-0009). Judges also surfaced audit-packet tooling defects -- missing artifact content, identical considered-lists across findings, stderr leaking into JSON output, and a stale-graph warning -- flagged for idea capture at session close.
+
+**T18 — awakeinagi (stakeholder, option selections):**
+Apply accepts, discuss rejects. SP-0013 path: gate, then approve, then execute.
+
+**T19 — awakeinagi (stakeholder):**
+Spawn a subagent (inherit your model) with empty context to take up SP-0013
+
+**T20 — Claude (Fable 5), facilitator:**
+Applied the accepted fixes: cites and their required DEC-0247 body mentions added to SP-0013..SP-0017 (Method sections), plus SP-0013's Data-Source Assumptions gained two confirmed/scoped lines; DEC-0356 gained a relates-to DEC-0336 link. SP-0013 was gated then approved (approved-by awakeinagi@gmail.com, approved-on 2026-07-10) on T19's execute authority. An empty-context executor subagent was spawned with SP-0013's Method section as its brief. Reject dispositions from T17 remain pending stakeholder discussion before session close.
 
 ## Decisions Produced
 

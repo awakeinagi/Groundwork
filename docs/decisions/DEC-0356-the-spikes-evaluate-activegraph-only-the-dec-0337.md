@@ -19,7 +19,7 @@ overview: >-
   Confirmed in SES-0064 (T9) via stakeholder option selection.
 links:
   derives-from: [SES-0064]
-  relates-to: [DEC-0337, DEC-0351, DEC-0354]
+  relates-to: [DEC-0337, DEC-0351, DEC-0354, DEC-0336]
 ---
 
 ## Context

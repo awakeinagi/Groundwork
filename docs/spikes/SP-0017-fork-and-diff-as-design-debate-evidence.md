@@ -24,7 +24,7 @@ links:
   impacted-by: [SP-0014]
   derives-from: [EP-0009]
   relates-to: [SP-0014]
-cites: [DEC-0354, DEC-0351, DEC-0335, DEC-0337, DEC-0355, DEC-0345, DEC-0336]
+cites: [DEC-0354, DEC-0351, DEC-0335, DEC-0337, DEC-0355, DEC-0345, DEC-0336, DEC-0293]
 ---
 
 > Guardrails (DEC-0351): this spike's outputs are strictly throwaway and are never deployed as part of the artifact interaction surface. Adoption of anything it surfaces happens only through the ordinary path -- a DEC-0337 option survey followed by DEC-0335 design intake -- never by this spike's findings alone.
@@ -42,6 +42,8 @@ Blocks nothing today; explicitly queued last since it depends on SP-0014's ruleb
 Encode two alternative designs for a question the corpus has already decided (a question with a recorded dual-instance architect debate). Run both alternatives through SP-0014's rulebase via ActiveGraph's fork-and-diff mechanism. Compare the resulting structural findings-diff against what the recorded debate actually surfaced.
 
 This spike builds a throwaway executable; per DEC-0345, its validation approach (the checks described above) is part of the reviewed spike design, not chosen ad hoc after the fact, and is sized minimally per DEC-0336's throwaway-scope yardstick.
+
+The dual-instance architect debate this spike benchmarks against is the mechanism DEC-0293 established; the comparison is meaningful only because that mechanism already produces a recorded, citable debate record to diff against.
 
 ## Evaluation Criteria
 Descriptive measures, no pass/fail threshold (DEC-0355): the findings-diff compared against the historical-debate record -- what the diff surfaced that the debate missed, and what the debate surfaced that the diff missed.
