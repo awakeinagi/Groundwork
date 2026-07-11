@@ -30,7 +30,7 @@ links:
   impacts: [SP-0014]
   derives-from: [EP-0009]
   relates-to: [SP-0007]
-cites: [DEC-0354, DEC-0351, DEC-0357, DEC-0160, DEC-0335, DEC-0336, DEC-0337, DEC-0345, DEC-0355, DEC-0309, DEC-0299, DEC-0081, DEC-0087, DEC-0340]
+cites: [DEC-0354, DEC-0351, DEC-0357, DEC-0160, DEC-0335, DEC-0336, DEC-0337, DEC-0345, DEC-0355, DEC-0309, DEC-0299, DEC-0081, DEC-0087, DEC-0340, DEC-0092, DEC-0306]
 ---
 
 > Guardrails (DEC-0351): this spike's outputs are strictly throwaway and are never deployed as part of the artifact interaction surface. Adoption of anything it surfaces happens only through the ordinary path -- a DEC-0337 option survey followed by DEC-0335 design intake -- never by this spike's findings alone.
@@ -68,8 +68,19 @@ DEC-0340's agent-contract profile is deliberately outside this projection's scop
 
 ## Findings
 
-Pending — recorded at spike completion.
+Executed by an empty-context executor subagent (spawned SES-0064 T19) working strictly read-only over `docs/` files, with all script and store artifacts confined to the session scratchpad, retained only as throwaway evidence (DEC-0351) and never committed.
 
+**Round-trip.** 100% projection across the 16 approved CMPs: 53 Elements grouped under 16 Components, 346/346 ContractItems (262 element-scoped, 38 `C-n` component-level, 46 `IG-n` integration-group items), 140 Decisions, 28 Stories. Relations: 53 HAS_ELEMENT, 346 HAS_ITEM, 65 IMPLEMENTS, 581 item-to-DEC CITES, 26 component DEPENDS_ON. The parser's element/item/edge counts matched both the ActiveGraph run's counts and an independent grep-based count -- three-way agreement. ActiveGraph's expressiveness itself was not a limiting constraint anywhere in the projection.
+
+**Central negative finding.** Zero typed `Uses:` lines exist anywhere in the 16 CMPs. The DEC-0299/DEC-0306/DEC-0309 typed-dependency mechanism is SPEC-mandated but corpus-absent: the docs predate the mandate, were never backfilled, and `tools/check_links.py` does not flag the absence. Structural dependency data therefore survives only as 26 untyped component-grain depends-on edges plus item-grain cross-references embedded in contract-item prose, with no element-grain typed edge to project.
+
+**Provenance edge cases**, 10 of 346 items (2.9%): four items cite story acceptance criteria rather than a Decision (RestSurface.A-1..A-4 in CMP-0011, phrased "per ST-0058 AC1/AC4"); two cite an implemented protocol item in prose rather than a Decision (GitHubConnector.A-2/A-3, referencing CodeHostConnector.A-2/A-3); four are effectively uncited at the item level (KvStorePort.A-3, StalenessSweepService.A-1, CodeHostConnector.A-10, HostEvent.B-1).
+
+**Gap list** -- design information the docs carry that the projection cannot express: no source exists for typed dependency edges (the central finding above); item-grain cross-component references live only in prose, ungraphable as typed edges; non-DEC provenance (story ACs, implemented-protocol items) is unrepresentable in a strict item-to-DEC citation model; range items (e.g. MechanicalWriteService.A-1..A-10) collapse to a single projected node, losing per-member cardinality; sibling-scoped citations spanning a range cannot be attributed to one specific item within it; item-body semantic content is dropped in projection, leaving only IDs and citation edges; `Implements:` lines use bare IDs rather than the DEC-0092-mandated resolvable-link form, so the projection cannot distinguish a resolvable target from a stale one without a second pass.
+
+**Corpus ambiguities**, surfaced independently of the projection mechanics: CMP-0006 is a non-conforming draft stub that does not follow the standard element/contract-item shape; CMP-0001 and CMP-0004 disagree on the size of the same contract-item family, one giving A-1..A-10 and the other A-1..A-8.
+
+The throwaway projection script and its ActiveGraph store are retained as evidence in the session scratchpad per DEC-0351 and are not committed to the corpus; they are not part of the artifact interaction surface, and adopting anything from them requires the ordinary DEC-0337 option survey followed by DEC-0335 design intake.
 
 ## Resulting Decisions
 

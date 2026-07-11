@@ -2,7 +2,9 @@
 id: SP-0015
 type: spike
 title: "Prose-to-rule compilation fidelity"
-status: draft
+status: approved
+approved-on: 2026-07-10
+approved-by: awakeinagi@gmail.com
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 timebox: 1 session
@@ -42,6 +44,8 @@ Select one bounded curated source: an arc42 section from system-architecture-bp,
 This spike builds a throwaway executable; per DEC-0345, its validation approach (the checks described above) is part of the reviewed spike design, not chosen ad hoc after the fact, and is sized minimally per DEC-0336's throwaway-scope yardstick.
 
 The system-architecture-bp corpus itself is the direct precedent for this compilation exercise: DEC-0294 established it as a curated, cited best-practice corpus, and it is this spike's source material.
+
+**Source selected (SES-0064 T22).** The stakeholder selected the arc42-section route over the book-to-skill extraction alternative as this spike's bounded curated source, and selected a gate-approve-launch disposition path for this spike.
 
 ## Evaluation Criteria
 Descriptive measures, no pass/fail threshold (DEC-0355): the ratifiable-as-is rate (fraction of candidate rules the stakeholder accepts without edits); a catalog of compilation failure modes observed (over-generalization, lost applicability conditions, invented specificity not present in the source).

@@ -16,32 +16,29 @@ intake:
 links:
   relates-to: []
 overview: >-
-  Change-intake session opened at the verbatim proposal (DEC-0255):
-  the stakeholder asked to run and learn about a tool called
-  activegraph, then evaluate applying it to the Groundwork project.
-  Discussion (T3-T11) explored an "executable design knowledge"
-  approach -- compiling design best practices and rule-type
-  decisions into reactive rules firing over a typed projection of
-  the design corpus, with ActiveGraph as candidate substrate -- and
-  the stakeholder confirmed a five-spike exploratory program,
-  exploratory with no kill bar, ActiveGraph-only with the DEC-0337
-  survey deferred, and the projection spike kept separate from
-  SP-0007/DEC-0160. At T12 the facilitator found the required parent
-  epic (DEC-0339) did not yet exist; IDEA-0015 recorded its
-  deferral. T13-T14 presented unblock options; the stakeholder
-  forked to take up IDEA-0015. T15's fork (SES-0065) derived,
-  debated, gated, and approved EP-0009, recording
-  DEC-0350..DEC-0353. T16 recorded DEC-0354..DEC-0357 and
-  SP-0013..SP-0017 under EP-0009. T17 presented the recall-audit
-  verdict from three Sonnet 5 judges: accepted additions applied as
-  cites plus brief body mentions per DEC-0247; rejected findings
-  held for discussion; audit-packet tooling defects flagged for idea
-  capture. T18 the stakeholder selected apply-accepts/discuss-
-  rejects and a gate-approve-execute path for SP-0013. T19 the
-  stakeholder instructed spawning an empty-context executor subagent
-  for SP-0013. T20 recorded the applied fixes, SP-0013 gated and
-  approved, and the executor spawned. Status: open; reject
-  dispositions remain for stakeholder discussion before close.
+  Change-intake session opened at the verbatim proposal (DEC-0255)
+  to evaluate applying ActiveGraph to Groundwork. T3-T11 explored an
+  "executable design knowledge" approach and confirmed a five-spike
+  exploratory program, no kill bar, ActiveGraph-only scope. T12-T15
+  forked to take up IDEA-0015, deriving and approving the required
+  parent epic EP-0009 (DEC-0350..DEC-0353) in SES-0065. T16 recorded
+  DEC-0354..DEC-0357 and SP-0013..SP-0017 under EP-0009. T17
+  presented a three-judge recall-audit verdict; T18-T20 applied
+  accepted fixes, gated and approved SP-0013, and spawned an empty-
+  context executor for it. T21 the executor's SP-0013 findings
+  arrived: 100% round-trip projection (16 Components, 53 Elements,
+  346 ContractItems, 140 Decisions, 28 Stories), but zero typed
+  Uses: lines exist anywhere despite the DEC-0299/DEC-0306/DEC-0309
+  mandate, plus 10 provenance edge cases and a gap list. T22 the
+  stakeholder deferred SP-0014's execution until the Uses: backfill
+  completes (over a reduced rulebase), sent the provenance and
+  audit-tooling defects to idea capture, approved SP-0015 with the
+  arc42-section source (gate, approve, launch), and accepted the T17
+  reject dispositions as final. T23 recorded SP-0013's Findings
+  (status unchanged, approved), DEC-0358 (the SP-0014 deferral,
+  relates-to DEC-0299/DEC-0309/SP-0013), IDEA-0025..IDEA-0027, a
+  precondition note on SP-0014, a source note on SP-0015, and
+  SP-0015's gate/approve. Status: open.
 ---
 
 ## Purpose
@@ -213,6 +210,15 @@ Spawn a subagent (inherit your model) with empty context to take up SP-0013
 
 **T20 — Claude (Fable 5), facilitator:**
 Applied the accepted fixes: cites and their required DEC-0247 body mentions added to SP-0013..SP-0017 (Method sections), plus SP-0013's Data-Source Assumptions gained two confirmed/scoped lines; DEC-0356 gained a relates-to DEC-0336 link. SP-0013 was gated then approved (approved-by awakeinagi@gmail.com, approved-on 2026-07-10) on T19's execute authority. An empty-context executor subagent was spawned with SP-0013's Method section as its brief. Reject dispositions from T17 remain pending stakeholder discussion before session close.
+
+**T21 — Claude (Fable 5), facilitator:**
+SP-0013's executor subagent reported back: it honored the read-only-over-`docs/` and scratchpad-only-store constraints throughout. Findings -- 100% round-trip projection (16 Components, 53 Elements, 346/346 ContractItems, 140 Decisions, 28 Stories; 53 HAS_ELEMENT, 346 HAS_ITEM, 65 IMPLEMENTS, 581 CITES, 26 DEPENDS_ON, parser/graph/grep counts agreeing three ways); a central negative finding that zero typed `Uses:` lines exist anywhere in the corpus despite the DEC-0299/DEC-0306/DEC-0309 mandate, leaving structural dependency data as 26 untyped component edges plus prose only; 10 provenance edge cases out of 346 items (story-AC citations, implemented-protocol-item citations, four effectively uncited items); and a gap list covering unrepresentable non-DEC provenance, range-item cardinality loss, sibling-scoped citation attribution, dropped item-body semantics, and bare-ID `Implements:` lines versus DEC-0092's link mandate, plus two corpus ambiguities (CMP-0006's non-conforming shape, CMP-0001/CMP-0004's family-size disagreement).
+
+**T22 — awakeinagi (stakeholder, option selections):**
+SP-0014 waits: full deferral until the corpus-wide `Uses:` backfill is taken up and completed, over proceeding now with a reduced rulebase. The provenance and tooling defects SP-0013's findings and the T17 audit surfaced are captured as Ideas, not fixed inline. SP-0015 proceeds gate, approve, launch, with the arc42-section source (system-architecture-bp) rather than the book-to-skill extraction alternative. The T17 reject dispositions are accepted as final.
+
+**T23 — Claude (Fable 5), facilitator:**
+Recorded SP-0013's Findings section from T21's digest (status remains `approved` -- SPEC-spike defines no post-execution status beyond the common gate lifecycle). Recorded DEC-0358 (SP-0014's execution deferred until the `Uses:` backfill completes), with a corresponding precondition note added to SP-0014's Data-Source Assumptions. Captured IDEA-0025 (backfill typed `Uses:` lines and arm checker enforcement, blocking SP-0014), IDEA-0026 (repair contract-item provenance defects), and IDEA-0027 (fix the recall-audit packet generator), each cross-referencing SES-0064. SP-0015 gained a Method note recording the arc42-section source selection, then was gated and approved (approved-by awakeinagi@gmail.com, approved-on 2026-07-10). Per T22, the T17 reject dispositions are now final. Session remains open.
 
 ## Decisions Produced
 
