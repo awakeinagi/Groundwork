@@ -30,6 +30,10 @@ Method-level session, following SES-0014's precedent (which produced
 the convention this session reverses). Focus: the token cost of the
 documentation corpus in agent context, especially Component Docs.
 
+## Purpose
+
+Method-level session to address the token overhead of inline markdown cross-references corpus-wide and establish the human browsing surface for bare-ID navigation. (skeleton restored at SES-0078)
+
 ## Transcript
 
 ### T1 — Facilitator
@@ -163,3 +167,7 @@ degradation, cleared by rebuilding the index.
   sanction
 - DEC-0244 — single-file doc viewer plus API server backed by the
   skill's search and graph tooling
+
+## Conflicts Raised
+
+None raised during this session. (skeleton restored at SES-0078)

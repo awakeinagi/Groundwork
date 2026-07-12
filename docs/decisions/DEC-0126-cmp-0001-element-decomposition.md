@@ -78,3 +78,7 @@ home instead of restating them across API items.
   second gate before EP-0001 completes.
 - **Branch/worktree lifecycles as service behavior items** — no single
   home for the cross-cutting invariants.
+
+## Implications
+
+Settling the thirteen-element inventory at T2 is what let the session proceed — the facilitator explicitly read the inventory back before opening Round 2 on cross-cutting semantics (SES-0022 T3), and the invariant and acceptance-suite decisions of Round 3 were likewise built against this settled element set. The decomposition therefore functions as the foundation the session's later decisions (DEC-0127 through DEC-0133) were reasoned over, not merely a naming exercise. (skeleton restored at SES-0078)

@@ -55,3 +55,11 @@ Notes for Implementers already anticipates future jobs — notifier
 retries, staleness sweeps — registering against a generic dispatch
 loop). Gating every future job type through this CMP would add
 ceremony with no consumer that needs the closed guarantee.
+
+## Alternatives Considered
+
+The facilitator's Round 1 question posed a closed enum mirroring `ChangeEvent.kind`'s gated-extension model (DEC-0128) as the alternative to an open string namespace for job-type. That option was not adopted because `ChangeEvent.kind`'s closure exists specifically because its consumers — the Graph Index and governance sweeps — branch on the enum directly, so a silent new value would break them, and the Queue Port does not share that consumption pattern since only the runtime's registered handler ever interprets job-type. The stakeholder confirmed the recommended open-namespace answer as given, without raising a further alternative. (skeleton restored at SES-0078)
+
+## Implications
+
+Adopting an open string namespace means new job types are added by registering a handler on the background job execution runtime (ST-0061) and never by a contract change to the Queue Port, which explicitly constrains CMP-0012's contract going forward. Because the port never interprets job-type itself, gating every future job type through this CMP would only add ceremony, since no consumer needs the closed guarantee that gating would provide. (skeleton restored at SES-0078)

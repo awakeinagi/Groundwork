@@ -50,3 +50,11 @@ guarantee — recovery ergonomics can be added later as a gated contract
 change if a real need surfaces, consistent with how
 CMP-0003's dead-letter
 handling (`AppDatabasePort.B-5`) also stops at visibility.
+
+## Alternatives Considered
+
+The facilitator's Round 1 question set posed an explicit `requeue(job-id)` operation as the alternative to leaving dead-lettering terminal in v1. The terminal-in-v1 recommendation was given instead because no Acceptance Criterion in ST-0060 calls for redrive, and the stakeholder confirmed that recommendation as given, without raising the requeue alternative further. (skeleton restored at SES-0078)
+
+## Implications
+
+Because the Queue Port contract defines no redrive/requeue operation in v1, dead-lettered jobs remain queryable only through the status/bookkeeping surface (`QueuePort.A-*`); recovery, if ever needed, is left to an operator action outside the port or to a future contract addition rather than a v1 obligation. Visibility of dead-lettered state is the guarantee v1 actually delivers, and recovery ergonomics can be added later as a gated contract change if a real need surfaces. (skeleton restored at SES-0078)

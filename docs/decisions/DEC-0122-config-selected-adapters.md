@@ -57,3 +57,7 @@ the storage API's contract-first conformance testing
   adapters without touching the codebase; rejected as
   packaging/versioning machinery v1 doesn't need. Nothing in this
   decision forecloses adding it later.
+
+## Implications
+
+The config-selected-adapter and conformance-suite requirement lands on the same three epics as the port decision it operationalizes — EP-0001, EP-0004, and EP-0007 — which the facilitator flagged at SES-0020 T6 as needing amendment and re-affirmation once this decision, among the session's five, took effect. The participant confirmed this at T7. Every adapter, present or future, for the four ports established in this session must pass its port's conformance suite before being considered valid, which is the concrete gate this decision imposes on subsequent adapter work. (skeleton restored at SES-0078)

@@ -64,3 +64,7 @@ port exists to prevent.
 - **Document at-least-once implications only** — cheaper; rejected
   because it leaves conforming behavior undefined on the paths that
   distinguish adapters.
+
+## Implications
+
+An adapter author holding only the AppDatabasePort contract can now determine conforming behavior on an expired lease, exhausted retries, or a crash mid-transaction, rather than having to guess — the gap the SES-0024 audit judge flagged in CMP-0003. The conformance suite's failure injection verifies crash atomicity, and the dead-letter state added for retry exhaustion is visible through the bookkeeping surface, with replay-from-git remaining the ultimate recovery path. Because per-operation typed error conditions are enumerated in the contract, the HTTP problem+json model of DEC-0127 continues to govern only the API surface, not the port itself. (skeleton restored at SES-0078)

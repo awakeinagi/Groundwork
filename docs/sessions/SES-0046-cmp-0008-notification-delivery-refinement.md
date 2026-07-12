@@ -33,6 +33,10 @@ draft stub to a contract-complete component doc, fed by approved story
 ST-0024 and
 its cited decisions.
 
+## Purpose
+
+Refine CMP-0008 (Notification Delivery) from draft stub to contract-completeness against approved stories ST-0024 and ST-0048. (skeleton restored at SES-0078)
+
 ## Pre-session state
 
 CMP-0008 was a stub
@@ -141,3 +145,7 @@ Confirmed both decisions and the element decomposition.
   CMP-0008
 - DEC-0241 —
   delivery boundary: resolved-address, pre-rendered, center-resolved
+
+## Conflicts Raised
+
+None raised during this session. (skeleton restored at SES-0078)

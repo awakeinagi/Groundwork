@@ -32,6 +32,10 @@ then the instance). Trigger: the stakeholder noticed EP-0008 is absent
 from BG-0001's Derived Work section and asked why `tools/check_links.py`
 did not flag it.
 
+## Purpose
+
+Method-level session to detect and remediate reciprocity gaps in the documentation graph — derived-work completeness, dead cites, and unexplained session-side impacts — after EP-0008 was discovered missing from BG-0001's Derived Work. (skeleton restored at SES-0078)
+
 ## Transcript
 
 ### T1 — Stakeholder

@@ -57,3 +57,11 @@ zero cross-port operation consumption
 to App Database Port internals and blur which port's conformance suite
 is actually being exercised — the same reasoning that settled the
 KV-store case.
+
+## Alternatives Considered
+
+At T3, the facilitator surfaced a layering ambiguity in ST-0060 AC5's description of the v1 durable adapter as "a queue table riding the App Database Port," posing two readings as alternatives: routing through `AppDatabasePort`'s outbox/bookkeeping operations as the storage mechanism, versus a sibling adapter with its own table on the same co-located DuckDB engine, consuming no `AppDatabasePort` operations. The facilitator recommended the sibling-adapter reading for consistency with the KV-store Port precedent just settled in the same refinement thread (SES-0039, ST-0062), and the stakeholder confirmed that recommendation at T4. (skeleton restored at SES-0078)
+
+## Implications
+
+The Queue Port's durable adapter consumes none of `AppDatabasePort`'s operation families; DEC-0210's phrase "reuses the outbox pattern" is clarified to mean only that the retry/dead-letter/stale-lease semantics are mirrored, not that the adapter is implemented on top of `AppDatabasePort.A-2`. No SQL crosses the Queue Port's own seam either, per DEC-0129, and this keeps the two ports' conformance suites cleanly separated rather than coupling Queue Port conformance to App Database Port internals. (skeleton restored at SES-0078)

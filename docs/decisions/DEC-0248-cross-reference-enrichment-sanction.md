@@ -19,7 +19,7 @@ decided-on: 2026-07-08
 source-span: "SES-0049 @ T6-T11"
 links:
   derives-from: [SES-0049]
-  relates-to: [DEC-0091]
+  relates-to: [DEC-0091, DEC-0408]
 ---
 
 # DEC-0248: Cross-Reference Enrichment Is Sanctioned

@@ -53,3 +53,7 @@ refs?"
 - **Leave it implicit across element items** — each element already
   hints at it; without the component-level statement, a new element
   could quietly introduce unrebuildable state.
+
+## Implications
+
+Because rebuild-sufficiency is now named once at the CMP-0001 component level, any new element proposed for the component must answer how its state is reconstructible from the fork's git refs, rather than each element implicitly asserting a piece of the guarantee on its own. Any derived state that could not be rebuilt from git refs alone would constitute a second source of truth, which the invariant is written to rule out for app database contents, outbox, worktrees, ID counters, and any cache. (skeleton restored at SES-0078)

@@ -87,3 +87,7 @@ capability seams — no new artifact machinery needed.
   outbox too.
 - **Binding the skill tooling as well** — more consistent dogfooding,
   rejected as configuration surface on tools whose value is zero-config.
+
+## Implications
+
+Because the port requirement reaches into how EP-0001, EP-0004, and EP-0007 are architected — as the app-database, graph-store, and vector/embedding-owning epics respectively — the facilitator flagged at close that those three epics would be amended by this decision and go stale, requiring re-affirmation before their own work proceeds (SES-0020 T6). The participant confirmed the decision on that basis at T7. The requirement is scoped to the Groundwork product only; the facilitation skill's own local tooling is explicitly excluded from this consequence and keeps its hard-wired, zero-config stack (SES-0020 T3, T6). (skeleton restored at SES-0078)

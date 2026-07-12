@@ -53,3 +53,7 @@ promises.
 - **A value element per operation** — maximum schema reuse if
   operations ever ride the event stream; deferred until that need
   exists.
+
+## Implications
+
+Since the allowlist is a single published data-contract asset consumed by both the write path and the mechanical-diff validator, any change to what a mechanical operation is permitted to touch must update that one asset, and both consumers pick up the change together rather than risking a fork between what the write path permits and what the validator checks. Each mechanical operation remains its own typed API item, so adding a new mechanical operation in the future means defining its own typed parameters and diff shape entry in the shared allowlist rather than adding a value element. (skeleton restored at SES-0078)

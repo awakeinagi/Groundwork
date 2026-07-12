@@ -50,3 +50,11 @@ through the same nack path as an explicit failure keeps exactly one
 failure-handling mechanism (retry → dead-letter,
 DEC-0139) instead of
 two.
+
+## Alternatives Considered
+
+T1 framed the uncaught-exception question as auto-nack (routing through the Queue Port's retry/dead-letter bound) versus letting the exception propagate and potentially crash the runtime or that dispatch task; propagation was weighed and rejected because it would defeat the whole point of bounded concurrency and per-job isolation named in ST-0061 AC6. The stakeholder confirmed auto-nack as given (T2). (skeleton restored at SES-0078)
+
+## Implications
+
+No uncaught handler exception can crash the runtime or another in-flight job; every such failure is funneled through the existing `QueuePort.nack` path, so retries and eventual dead-lettering (DEC-0210) apply the same way whether a job fails explicitly or via an uncaught exception. This keeps exactly one failure-handling mechanism in the runtime rather than two. (skeleton restored at SES-0078)

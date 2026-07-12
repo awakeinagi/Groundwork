@@ -48,3 +48,11 @@ failure-handling path exceptions already take
 (DEC-0223) rather than
 inventing a second one — a timeout is simply another way execution
 fails to complete cleanly.
+
+## Alternatives Considered
+
+T1 posed the timeout question as a configurable per-job-type timeout with auto-nack on expiry versus no runtime-enforced timeout at all; the no-timeout alternative was weighed and rejected because it would let a single hung handler erode the bounded-concurrency guarantee ST-0061 AC6 requires, degrading the pool to "however many jobs happen to be stuck." The stakeholder confirmed the enforced-timeout recommendation as given (T2). (skeleton restored at SES-0078)
+
+## Implications
+
+A handler that exceeds its declared (or runtime-wide fallback) maximum execution duration is cancelled by the runtime and treated exactly as if it had raised, routing through the same nack path DEC-0223 established. This preserves the concurrency bound against silent erosion by hung jobs without introducing a second, separate failure-handling mechanism. (skeleton restored at SES-0078)

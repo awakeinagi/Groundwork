@@ -44,3 +44,11 @@ operation families consistent
 (DEC-0129) and gives each
 consumer (rate limiter, lock, cache) a collision-free namespace without
 inventing a new prefixing convention per caller.
+
+## Alternatives Considered
+
+The facilitator's Round 1 question set posed a flat `key` string as the alternative to a `(namespace, key)` pair for KvStorePort. The `(namespace, key)` recommendation was given instead so that the port's unrelated scoped consumers — rate limiting, coordination locks, and caching — cannot collide on key names, and the stakeholder confirmed the recommendation as given. (skeleton restored at SES-0078)
+
+## Implications
+
+Mirroring `AppDatabasePort.A-3`'s bookkeeping family shape (`namespace, key, document`) keeps the two ports' typed operation families consistent with one another. Each unrelated consumer of the KV-store Port — rate limiter, lock, cache — gets a collision-free namespace without needing to invent its own per-caller prefixing convention. (skeleton restored at SES-0078)

@@ -49,3 +49,11 @@ the port would couple this CMP to every future job type, contradicting
 DEC-0214's open-namespace
 choice — new job types would still need a gated change here for their
 payload shape even though the type name itself is open.
+
+## Alternatives Considered
+
+The facilitator's Round 1 question set posed per-job-type typed payload schemas declared at the port as the alternative to a fixed envelope with an opaque payload — noting that typed schemas would require every new job type to add a value element to CMP-0012. The fixed-envelope, opaque-payload recommendation was given instead because it mirrors `AppDatabasePort.A-3`'s bookkeeping `document`, and the stakeholder confirmed the recommendation as given. (skeleton restored at SES-0078)
+
+## Implications
+
+Because the port's `payload` field is uninterpreted by the port itself, only the runtime's registered handler for a given job-type parses it — the port's role stays limited to transport and durability, not payload semantics. This preserves DEC-0214's open-namespace choice for job-type: declaring per-job-type schemas at the port would have coupled CMP-0012 to every future job type, meaning new job types would still need a gated change here for payload shape even though the type name itself is open. (skeleton restored at SES-0078)

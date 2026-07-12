@@ -58,3 +58,7 @@ consumption list is exactly what that discipline needs.
 - **Refine EP-0005 first** — strictly cleaner dependency order; rejected
   as delaying the EP-0001
   deliverable for a contract whose consumer half is already known.
+
+## Implications
+
+Because CMP-0001 gates on the strength of its enumerated connector consumption list, EP-0005's refinement of the connector protocol CMP is now bound to satisfy exactly that list of operations, or raise a conflict if it cannot; the two epics are not serialized, since the consumer-side shape is already fully determined by approved stories. The local-git fake connector stands as proof that the seam is implementable today, ahead of the connector protocol CMP existing. (skeleton restored at SES-0078)

@@ -115,6 +115,10 @@ DECs.
   — config path from one env var + default; enumerated overrides only,
   no arbitrary dotted-path.
 
+## Conflicts Raised
+
+None raised during this session. (skeleton restored at SES-0078)
+
 ## Post-Session Steps
 
 - Consistency `sweep`/`terms` over

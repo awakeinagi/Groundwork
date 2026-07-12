@@ -44,3 +44,11 @@ current consumer to validate it against. A single global cap is the
 simplest mechanism that satisfies the "never unbounded fan-out"
 requirement and can be extended to per-type caps later if a real
 starvation scenario surfaces between job types.
+
+## Alternatives Considered
+
+T1 posed the concurrency-scope question as a single global cap versus per-job-type caps; the per-job-type alternative was weighed and set aside for v1 because it would be speculative configuration surface with no current consumer to validate it against, given the runtime has exactly one concrete job (the KV-store expiry sweep). The stakeholder confirmed the single-global-cap recommendation as given (T2). (skeleton restored at SES-0078)
+
+## Implications
+
+v1 ships with one deployment-wide concurrency cap, configured via the Composition Root's deployment configuration (DEC-0206), applying uniformly across all job types combined with no per-type override. If a real starvation scenario between job types surfaces later, the mechanism can be extended to per-job-type caps at that point rather than being built speculatively now. (skeleton restored at SES-0078)

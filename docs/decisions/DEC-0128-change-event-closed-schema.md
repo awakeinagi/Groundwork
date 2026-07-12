@@ -51,3 +51,7 @@ element types, and mechanical operations — events follow suit.
 
 - **Open-ended kind string** — cheaper to extend, but unmatchable
   exhaustively and silently extensible.
+
+## Implications
+
+Any future addition to the kind enum, or change to the payload shape, must go through a gate rather than landing as an ordinary code change, keeping ChangeEvent's contract as disciplined as the mechanical-write allowlist. The schema_version field is the explicit mechanism by which downstream consumers detect and handle payload evolution, so it must be bumped whenever the payload changes. Because kind is closed, consumers can rely on exhaustive matching, and a typo'd or unrecognized kind will surface as a match failure rather than shipping silently. (skeleton restored at SES-0078)

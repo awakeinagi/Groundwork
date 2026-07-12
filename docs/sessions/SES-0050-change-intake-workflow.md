@@ -37,6 +37,10 @@ projects without the application. Relates to BG-0001 as the goal whose
 product must eventually reflect these method changes (parked as
 IDEA-0001 and IDEA-0002, both spawned here).
 
+## Purpose
+
+Refine the change-intake workflow — the standard process by which change intent enters a Groundwork-managed project — covering mandatory intake sessions, role-authority checks, the boundary between Change Proposals and the new Idea artifact type, and governance in skill-only projects. (skeleton restored at SES-0078)
+
 ## Transcript
 
 ### T1 — Stakeholder

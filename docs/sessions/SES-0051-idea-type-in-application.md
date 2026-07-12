@@ -35,6 +35,10 @@ EP-0006 (a new release-1 story, ST-0065). ST-0055 and ST-0056 receive
 impact edges as the release-2 surfacing homes. IDEA-0001 was briefly
 opened for take-up and redirected — it remains captured.
 
+## Purpose
+
+Take up IDEA-0002: reflect the paradigm's Idea artifact type in the application's storage, validation, and UI. (skeleton restored at SES-0078)
+
 ## Transcript
 
 ### T1 — Stakeholder

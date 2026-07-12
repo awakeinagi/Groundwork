@@ -586,8 +586,8 @@ def main():
             if err:
                 errors.append(f"{fm['_path']}: {aid} {err}")
 
-    # Rule 26 (SES-0077): required-section presence per type — WARN
-    # until the rollout sweep decides promotion.
+    # Rule 26 (SES-0077): required-section presence per type — FAIL
+    # since the SES-0078 legacy repair cleared the rollout backlog.
     for aid, fm in artifacts.items():
         req = REQUIRED_SECTIONS.get(str(fm.get("type")), [])
         if not req:
@@ -600,8 +600,8 @@ def main():
         optional = OPTIONAL_SECTIONS.get(str(fm.get("type")), set())
         missing = [s for s in req if s not in have and s not in optional]
         if missing:
-            warnings.append(f"{fm['_path']}: {aid} missing required "
-                            f"section(s) {missing} (rule 26)")
+            errors.append(f"{fm['_path']}: {aid} missing required "
+                          f"section(s) {missing} (rule 26)")
     story_covered = set()
     for aid, fm in artifacts.items():
         if fm.get("type") != "component":

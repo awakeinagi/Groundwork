@@ -60,3 +60,7 @@ deliberation.
 - **Keep nested until a second adapter ships** — the SP-0002 graduation
   path would then re-open an approved store doc to extract the seam it
   needs.
+
+## Implications
+
+With AppDatabasePort graduated to CMP-0003, CMP-0001 becomes a consumer of it via depends-on rather than owning it internally, and adapter authors can work against the port contract and its conformance expectations without needing CMP-0001's internals. The graduation also sets the pattern the remaining infrastructure ports — vector store, embedding, graph store — are expected to follow as standalone protocol-type CMPs in their owning contexts when EP-0004 and EP-0007 derive them, sparing those future epics the same deliberation. This graduation review is now a required consideration when designing components in the future, for both the system and the skill. (skeleton restored at SES-0078)

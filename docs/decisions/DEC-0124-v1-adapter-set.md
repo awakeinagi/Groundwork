@@ -66,3 +66,7 @@ embedded-only v1 storage commitment is unchanged.
 - **A second adapter for every port** — maximum confidence; rejected as
   effectively pulling
   SP-0002 into v1.
+
+## Implications
+
+Shipping DuckDB-only storage/graph adapters plus two embedding adapters in v1 means the second storage and graph adapters remain out of scope until the SP-0002 graduation evaluation is taken up, per the participant's acceptance at T5 of embedded defaults for storage/graph with only the embedding port getting a second adapter at v1 (SES-0020 T4-T5). As with the session's other four decisions, this lands on EP-0001, EP-0004, and EP-0007, which the facilitator flagged at T6 as needing amendment and re-affirmation before their own work proceeds; the participant confirmed at T7. (skeleton restored at SES-0078)

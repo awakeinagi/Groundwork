@@ -17,7 +17,7 @@ decided-on: 2026-07-07
 source-span: "SES-0014 @ T2-T3"
 links:
   derives-from: [SES-0014]
-  relates-to: [DEC-0090]
+  relates-to: [DEC-0090, DEC-0408]
 ---
 
 # DEC-0091: Formatting-only linkification of immutable artifacts is sanctioned

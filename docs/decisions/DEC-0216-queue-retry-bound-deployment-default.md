@@ -47,3 +47,11 @@ ST-0060 or
 ST-0061
 calls for per-job tuning; a single default keeps the contract simplest
 and can be extended later if a real job type needs a different bound.
+
+## Alternatives Considered
+
+The facilitator's Round 1 question set posed a per-job override of the retry bound at enqueue time as the alternative to a single deployment-wide default. The single-default recommendation was given instead because it matches the App Database Port precedent (CMP-0003), which exposes no per-operation retry override either, and because no cited Acceptance Criterion in ST-0060 or ST-0061 calls for per-job tuning; the stakeholder confirmed the recommendation as given. (skeleton restored at SES-0078)
+
+## Implications
+
+With retry policy set as adapter/deployment configuration via the Composition Root (DEC-0206), `enqueue()` carries no per-job retry-bound parameter, which keeps the contract at its simplest. The decision leaves room to extend the contract later if a real job type is found to need a different bound. (skeleton restored at SES-0078)

@@ -44,3 +44,11 @@ this seam. It also keeps the lazy-plus-sweep expiry mechanism
 (DEC-0211) universally
 applicable: every key is eventually reclaimable, with no carve-out to
 special-case.
+
+## Alternatives Considered
+
+The facilitator's Round 1 question set (T1) framed the TTL requirement as a binary choice between making TTL mandatory on every `set()` call and leaving it optional so that no-TTL keys could live forever; the optional, permanent-key path was weighed and set aside because it would let the port drift into a second permanent store, undermining the ephemeral-only scope DEC-0203 established. The stakeholder confirmed the mandatory-TTL recommendation as given (T2), settling the point with no further alternative raised. (skeleton restored at SES-0078)
+
+## Implications
+
+Every caller of `set()` must supply an explicit TTL, and the contract provides no way to create a key that never expires; a caller that needs permanent state must instead use the App Database Port's bookkeeping family. This also means the lazy-plus-sweep expiry mechanism (DEC-0211) can apply uniformly to every key in the store, since none are exempt from eventual reclamation. (skeleton restored at SES-0078)

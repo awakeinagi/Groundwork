@@ -130,6 +130,10 @@ stories and fold into the doc without new DECs.
   abstraction belongs to
   EP-0006.
 
+## Conflicts Raised
+
+None raised during this session. (skeleton restored at SES-0078)
+
 ## Post-Session Steps
 
 - Consistency `sweep`/`terms` over

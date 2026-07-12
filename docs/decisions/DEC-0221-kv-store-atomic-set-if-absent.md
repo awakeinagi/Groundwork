@@ -48,3 +48,11 @@ be lightweight coordination state). It follows the same "typed
 operation family, no caller-composed race" discipline the App Database
 Port already established for its own atomicity guarantees
 (DEC-0139).
+
+## Alternatives Considered
+
+T1 flagged that a plain `get()`-then-`set()` composition races for lock acquisition and weighed leaving lock semantics to that unsafe, caller-composed sequence against adding a dedicated atomic primitive; the caller-composed path was rejected because it cannot deliver the "single-writer coordination locks" use case ST-0062's own scope names. The recommendation to add `set-if-absent` was confirmed by the stakeholder without modification (T2). (skeleton restored at SES-0078)
+
+## Implications
+
+Callers implementing coordination locks now have a race-free primitive rather than needing to compose lower-level operations unsafely, closing the contract gap between ST-0062's stated use case and a minimal get/set surface. This follows the same "typed operation family, no caller-composed race" discipline the App Database Port already established for its own atomicity guarantees (DEC-0139), rather than requiring callers to reach for a heavier mechanism like UnitOfWork for lightweight coordination state. (skeleton restored at SES-0078)

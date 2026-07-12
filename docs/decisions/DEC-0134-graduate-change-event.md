@@ -57,3 +57,7 @@ the gate avoids amputating an element from an approved doc later.
   rule triggers; guarantees staleness churn on approved
   CMP-0001 that
   this gate absorbs for free.
+
+## Implications
+
+With ChangeEvent graduated to CMP-0002, CMP-0001 depends on it only as the emitter, and the future consumer components ST-0008 already names — Graph Index, governance staleness sweeps, consolidation invalidation — depend on CMP-0002 alone rather than on all of CMP-0001, avoiding inheriting the store document's staleness. Graduating at gate time, rather than waiting for the second consumer CMP to materialize, avoids having to amputate the element from an already-approved CMP-0001 later. This graduation review is now a required consideration when designing components in the future, for both the system and the skill. (skeleton restored at SES-0078)

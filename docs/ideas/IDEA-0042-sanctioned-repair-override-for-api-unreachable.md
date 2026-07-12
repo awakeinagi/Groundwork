@@ -48,3 +48,5 @@ Pending.
 
 Amended 2026-07-12 (SES-0074) to add a fourth API-unreachable surface (creating a missing required top-level body section), per operator approval.
 
+Evidence note (2026-07-12, SES-0078): this session repeated the freehand operator-sanctioned direct-edit stopgap across thirty-six further artifacts (the rule-26 legacy-skeleton repair, IDEA-0052), the same pattern SES-0072 and SES-0073 hit — further strengthening the case for bringing sanctioned repairs in-API.
+

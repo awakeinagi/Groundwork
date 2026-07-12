@@ -57,3 +57,7 @@ a dimension and still be incomparable.
 - **Leave it to adapter documentation** — trusts operators to remember
   the re-index rule; rejected because the failure mode gives no signal
   when they forget.
+
+## Implications
+
+Embedding identity stamping is scoped to the embedding and vector-store ports established in the same session, which fall to EP-0007 as the owning epic; the facilitator's SES-0020 T6 flag that EP-0001, EP-0004, and EP-0007 would need amendment and re-affirmation covers this decision's consequence for EP-0007 specifically. The participant confirmed the mismatch-refuses-and-forces-re-embed behavior at T5 and the full decision playback at T7. Whether the forced rebuild runs automatically or waits on operator confirmation was explicitly left as story-level detail still to be settled (SES-0020 T4-T5). (skeleton restored at SES-0078)

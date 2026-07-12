@@ -53,3 +53,11 @@ what jobs exist. A centralized Composition Root registry would force it
 to import every future job-owning module just to wire handlers,
 coupling the composition layer to job internals it has no other reason
 to know about.
+
+## Alternatives Considered
+
+T1 posed the registration question as `register(job-type, handler)` owned by the runtime and called directly by each producer versus centralized registration performed by the Composition Root at process startup; the centralized alternative was weighed and rejected because it would force the Composition Root to import every future job-owning module just to wire handlers. The stakeholder confirmed the CMP-owned registration recommendation as given (T2). (skeleton restored at SES-0078)
+
+## Implications
+
+Each component that needs background work — e.g. the KV-store Port's default Adapter registering its expiry-sweep handler — must call `register()` directly at its own initialization rather than being wired centrally. This closes the open point CMP-0014's Notes had forward-declared, and keeps job registration co-located with the component owning the business logic rather than coupling the composition layer to job internals it has no other reason to know about. (skeleton restored at SES-0078)

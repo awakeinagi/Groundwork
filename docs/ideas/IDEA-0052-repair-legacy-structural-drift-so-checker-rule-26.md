@@ -2,7 +2,7 @@
 id: IDEA-0052
 type: idea
 title: "Repair legacy structural drift so checker rule 26 can promote to FAIL"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-12
 proposed-by: Claude Fable 5 (facilitator), capture approved by the stakeholder at SES-0077's close-out check
@@ -31,4 +31,5 @@ The rule-26 rollout sweep at SES-0077 item 9.
 
 ## Disposition
 
-Pending.
+Taken up at SES-0078 on 2026-07-12. Repairs were executed and verified across all thirty-six offenders, and checker rule 26 was promoted from WARN to FAIL per DEC-0409, applying the DEC-0408 repair convention.
+

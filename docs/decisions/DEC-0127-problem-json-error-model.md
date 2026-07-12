@@ -52,3 +52,7 @@ client tooling understands it; the conformance suite can assert on
 
 - **Custom `{code, message, details[]}` envelope** — marginally simpler
   to read, reinvents the standard, opaque to generic tooling.
+
+## Implications
+
+This error model was accepted at T4 together with three sibling cross-cutting decisions from the same round — the ChangeEvent closed kind enum, the AppDatabasePort typed operation families, and the eight-item mechanical-operations model (SES-0022 T3-T4) — as the shared cross-cutting semantics layer for CMP-0001's contract. Because the problem-type vocabulary is part of the published contract, any later addition of a failure class to CMP-0001's API surface is itself a contract change, not an internal implementation detail. (skeleton restored at SES-0078)

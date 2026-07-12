@@ -18,7 +18,7 @@ links:
   derives-from: [EP-0005]
   satisfies: [BG-0001]
   depends-on: [CMP-0005]
-cites: [DEC-0045, DEC-0050, DEC-0079]
+cites: [DEC-0045, DEC-0050, DEC-0079, DEC-0172]
 ---
 
 # CMP-0006: Bitbucket Data Center Connector
@@ -32,29 +32,43 @@ capability manifest, merge checks / Code Insights as the
 required-check surface, reviewer groups for team routing
 (DEC-0050).
 
-## Pending — Ubiquitous Language
+## Ubiquitous Language
 
-## Pending — Design Elements
+Content pending — deferred to backlog behind TRG-0010 per DEC-0172. (skeleton restored at SES-0078)
+
+## Design Elements
+
+Content pending — deferred to backlog behind TRG-0010 per DEC-0172. (skeleton restored at SES-0078)
 
 Element decomposition follows story approval
 (ST-0020,
 ST-0023) and
 SP-0004 findings.
 
-## Pending — Component Invariants
+## Component Invariants
 
-## Pending — Implementation Guidance
+Content pending — deferred to backlog behind TRG-0010 per DEC-0172. (skeleton restored at SES-0078)
 
-## Pending — Dependencies
+## Implementation Guidance
+
+Content pending — deferred to backlog behind TRG-0010 per DEC-0172. (skeleton restored at SES-0078)
+
+## Dependencies
+
+Content pending — deferred to backlog behind TRG-0010 per DEC-0172. (skeleton restored at SES-0078)
 
 Implements CMP-0005; exact
 consumed sections declared at contract time.
 
-## Pending — Acceptance & Test Expectations
+## Acceptance & Test Expectations
+
+Content pending — deferred to backlog behind TRG-0010 per DEC-0172. (skeleton restored at SES-0078)
 
 Conformance to CMP-0005's
 suite is the headline expectation
 (per DEC-0079,
 DEC-0045).
 
-## Pending — Out of Scope
+## Out of Scope
+
+Content pending — deferred to backlog behind TRG-0010 per DEC-0172. (skeleton restored at SES-0078)

@@ -70,6 +70,6 @@ settled soundly.
 
 (pending — spike not yet run)
 
-## Decisions Produced
+## Resulting Decisions
 
 (pending)

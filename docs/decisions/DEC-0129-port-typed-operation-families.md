@@ -52,3 +52,7 @@ the conformance suite into SQL-compatibility testing.
 
 - **SQL-level port** ("execute SQL in a transaction") — maximum
   consumer flexibility, minimum seam integrity. Rejected.
+
+## Implications
+
+Because the port exposes engine-neutral typed operation families, any storage engine that satisfies the required semantics can be adapted behind it, and the conformance suite tests exactly those semantics rather than SQL-specific behavior. Since no SQL crosses the seam, consumers program only against the typed operations and cannot depend on SQL dialect specifics, keeping the seam intact and adapters swappable across engines. (skeleton restored at SES-0078)

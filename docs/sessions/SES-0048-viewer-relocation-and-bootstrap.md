@@ -27,6 +27,10 @@ links:
 Short follow-up to SES-0047: two stakeholder directives on the doc
 viewer, arriving immediately after DEC-0244 was committed.
 
+## Purpose
+
+Short follow-up to SES-0047 executing two stakeholder directives for the doc viewer: relocate it from tools/ to docs/human_docs.html and include it in the agent-skill bootstrap. (skeleton restored at SES-0078)
+
 ## Transcript
 
 ### T1 — Stakeholder
@@ -71,3 +75,7 @@ placement; no links added.
 
 - DEC-0245 — the viewer ships at `docs/human_docs.html` and is
   installed by project bootstrap
+
+## Conflicts Raised
+
+None raised during this session. (skeleton restored at SES-0078)
