@@ -3,7 +3,7 @@ id: BG-0002
 type: business-goal
 title: The Method Track — Groundwork governs its own tooling
 status: approved
-approved-on: 2026-07-10
+approved-on: 2026-07-12
 approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-09
@@ -29,7 +29,7 @@ overview: >-
   the DEC-0342 backfill. Status: approved.
 links:
   relates-to: [SES-0059, BG-0001, DEC-0346]
-cites: [DEC-0335, DEC-0336, DEC-0337, DEC-0338, DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0343, DEC-0344, DEC-0345, DEC-0324, DEC-0006, DEC-0011, DEC-0312, DEC-0263, DEC-0325, DEC-0019, DEC-0350, DEC-0351]
+cites: [DEC-0335, DEC-0336, DEC-0337, DEC-0338, DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0343, DEC-0344, DEC-0345, DEC-0324, DEC-0006, DEC-0011, DEC-0312, DEC-0263, DEC-0325, DEC-0019, DEC-0350, DEC-0351, DEC-0388]
 ---
 
 # BG-0002: The Method Track — Groundwork Governs Its Own Tooling
@@ -105,9 +105,10 @@ anticipated but derives only at IDEA-0010's take-up (per DEC-0339).
   DEC-0337).
 - Every executable build's presented design includes its test plan;
   approval covers both (per DEC-0345).
-- All artifact interaction runs through the artifact-librarian (per
-  DEC-0325); its own contract is this track's first deliverable (per
-  DEC-0342).
+- Writes and synthesis reads run through the artifact-librarian, while
+  targeted bounded reads are chartered directly to every agent (per
+  DEC-0388, which superseded DEC-0325); its own contract is this
+  track's first deliverable (per DEC-0342).
 
 ## Stakeholders & Roles
 

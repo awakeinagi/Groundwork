@@ -3,8 +3,8 @@ id: EP-0009
 type: epic
 title: "Artifact Interaction Surface"
 status: approved
-approved-on: 2026-07-10
-approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-12
+approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 overview: >-
@@ -23,24 +23,27 @@ overview: >-
   caching. Interfaces to define include the absorption-trigger
   conditions (DEC-0109/DEC-0338/DEC-0346) and a shared gate
   criterion: neither CMP gates until consumer expectations —
-  currently distributed across DEC-0325, DEC-0327, DEC-0330,
-  DEC-0331, DEC-0340, DEC-0342 — are captured. Backfill of the
+  currently distributed across DEC-0388, DEC-0327, DEC-0330,
+  DEC-0331, DEC-0340, DEC-0342, and the SES-0076 concurrency set
+  (DEC-0391, DEC-0392, DEC-0393) — are captured. Backfill of the
   already-built surface (DEC-0342's protocol, DEC-0340's SPEC
   amendment, DEC-0341's conformance check, TRIGGERS.md absorption-
   trigger arming) is in scope but its execution is deferred by
   sequencing, not superseded (DEC-0350) — the epic's first derived
-  work is the exploratory spike program; the spikes are safe under
-  this sequencing because their outputs are throwaway (DEC-0351) and
-  any adoption still routes through DEC-0337/DEC-0335. The epic
-  completes in phases and gates per story/spike, not as a release
-  train. Open questions carried through the gate: install-script
-  contract scope (deferred a third time) and the defect-tracking
-  artifact shape (travels with the backfill).
+  work is the exploratory spike program, which now includes SP-0018
+  (the multi-session worktree write model); the spikes are safe
+  under this sequencing because their outputs are throwaway
+  (DEC-0351) and any adoption still routes through
+  DEC-0337/DEC-0335. The epic completes in phases and gates per
+  story/spike, not as a release train. Open questions carried
+  through the gate: install-script contract scope (deferred a third
+  time) and the defect-tracking artifact shape (travels with the
+  backfill).
 links:
   derives-from: [BG-0002]
   satisfies: [BG-0002]
   relates-to: [DEC-0339, IDEA-0015]
-cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354]
+cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0389, DEC-0391, DEC-0392, DEC-0393]
 ---
 
 ## Summary
@@ -49,26 +52,28 @@ The single method epic governing the artifact-librarian agent and the
 artifact-interact skill as gated, contracted deliverables: two
 Component Docs, one per artifact — different consumer sets per
 DEC-0339 (the skill answers to the librarian and DEC-0327-chartered
-agents; the librarian answers to all agents per DEC-0325) — each
-carrying a mandatory runtime-policy contract section (DEC-0340). Also
-scopes guardrailed exploratory evaluation of candidate tooling for
-this surface (DEC-0351). Backfill of the already-built surface is in
-scope but its execution is deferred (DEC-0350); the first work this
-epic actually derives is the exploratory spike program.
+agents; the librarian answers to all agents for writes and synthesis
+reads per DEC-0388, with targeted reads chartered directly per
+DEC-0388/DEC-0389) — each carrying a mandatory runtime-policy contract
+section (DEC-0340). Also scopes guardrailed exploratory evaluation of
+candidate tooling for this surface (DEC-0351). Backfill of the
+already-built surface is in scope but its execution is deferred
+(DEC-0350); the first work this epic actually derives is the
+exploratory spike program.
 
 ## Why (Goal Alignment)
 
 BG-0002's premise: no ungoverned capability; every deployed method
 execution surface is documented, contracted, and gated by the same
 pipeline it implements. The artifact-librarian/artifact-interact pair
-is the mandatory interaction path for all agents touching Groundwork
-corpora (DEC-0325) and is currently built, dogfooded daily, and
-uncontracted — the exact gap BG-0002 exists to close, and its named
-first derived work (BG-0002's overview). The pair ships as one
-deliverable per DEC-0334, which is why this epic hosts two Component
-Docs, not two epics. Method work living in the artifact tree (per
-DEC-0344) is how this obligation surfaced at all — the status
-report's frontier, not a separate tracking mechanism.
+is the mandatory path for all writes and synthesis reads by any agent
+touching Groundwork corpora (DEC-0388) and is currently built,
+dogfooded daily, and uncontracted — the exact gap BG-0002 exists to
+close, and its named first derived work (BG-0002's overview). The pair
+ships as one deliverable per DEC-0334, which is why this epic hosts
+two Component Docs, not two epics. Method work living in the artifact
+tree (per DEC-0344) is how this obligation surfaced at all — the
+status report's frontier, not a separate tracking mechanism.
 
 ## Scope
 
@@ -122,9 +127,9 @@ report's frontier, not a separate tracking mechanism.
 Bounded context: **Method track**. Term "Artifact Interaction
 Surface" (the mandatory delegation surface — artifact-librarian agent
 plus artifact-interact skill — through which all agents interact with
-Groundwork corpora, per DEC-0324/DEC-0325) is not yet glossary-
-resolved in CONTEXT.md; adding it is carried as backfill-adjacent
-follow-up, not performed by this epic record itself.
+Groundwork corpora, per DEC-0324/DEC-0388, superseding DEC-0325) is
+not yet glossary-resolved in CONTEXT.md; adding it is carried as
+backfill-adjacent follow-up, not performed by this epic record itself.
 
 ## Interfaces & Contracts to Define
 
@@ -149,9 +154,9 @@ All of the above are deferred to the backfill fold-in Idea's take-up
 
 Gate criterion: neither CMP gates until its consumers' expectations
 are captured. Consumer expectations for this surface are today
-distributed across DEC-0325, DEC-0327, DEC-0330, DEC-0331, DEC-0340,
-and DEC-0342; the CMPs consolidate them rather than introduce new
-ones.
+distributed across DEC-0388, DEC-0327, DEC-0330, DEC-0331, DEC-0340,
+DEC-0342, and the SES-0076 concurrency set (DEC-0391, DEC-0392,
+DEC-0393); the CMPs consolidate them rather than introduce new ones.
 
 ## Risks & Open Questions
 
@@ -181,16 +186,18 @@ ones.
 The activegraph exploratory spike program (DEC-0354): SP-0013
 (projection), SP-0014 (structural rule precision, impacted-by
 SP-0013), SP-0015 (prose-to-rule compilation fidelity, independent),
-SP-0016 (reactive hook-loop economics, impacted-by SP-0014), and
-SP-0017 (fork-and-diff design-debate evidence, impacted-by SP-0014,
-queued last).
+SP-0016 (reactive hook-loop economics, impacted-by SP-0014), SP-0017
+(fork-and-diff design-debate evidence, impacted-by SP-0014, queued
+last), and SP-0018 (multi-session worktree write model: merge-time ID
+allocation and serialized merges, the worktree-scale counterpart under
+this same epic).
 
 Pending:
 - Backfill stories and both CMPs — created at the fold-in Idea's
   take-up (DEC-0350).
 
 The epic completes in phases: first the exploratory spike program
-(SP-0013..SP-0017 above), then the backfill at IDEA-0024's take-up.
+(SP-0013..SP-0018 above), then the backfill at IDEA-0024's take-up.
 Each story or spike gates individually — the epic itself is a scope
 container, not a release train, and does not gate as a single unit of
 completion.
