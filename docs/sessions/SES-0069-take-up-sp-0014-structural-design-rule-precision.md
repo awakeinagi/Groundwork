@@ -91,8 +91,6 @@ T22 — Facilitator: Recorded the approval: SP-0014 approved (awakeinagi@gmail.c
 
 ## Decisions Produced
 
-## Decisions Produced
-
 DEC-0367 (compiled structural rules fire true findings; precision is source-dependent) and DEC-0368 (no differential reactive-substrate evidence from ActiveGraph) produced from SP-0014's findings catalog, accepted at T21/T22 on stakeholder gate approval. DEC-0354, DEC-0355, DEC-0356, DEC-0357 ratified proposed -> accepted at T5 (recorded decisions originate from SES-0064; this session is the ratification record). The DEC-0292 system-architect reviewer consultation was waived as a one-off by the stakeholder at T6/T7, recorded here as a session outcome alongside the T5 ratification.
 
 ## Conflicts Raised

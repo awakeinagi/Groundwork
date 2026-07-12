@@ -5,6 +5,10 @@ title: "Take up SP-0017: fork-and-diff as design-debate evidence"
 status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-11
+participant: awakeinagi@gmail.com
+participant-role: operator/stakeholder
+facilitator: Claude (Fable 5) via Claude Code
+transcript-fidelity: reconstructed
 overview: >-
   This session takes up SP-0017 (fork-and-diff as design-debate
   evidence): forking two alternative designs for an already-decided
@@ -35,8 +39,6 @@ links:
 Take up and execute spike SP-0017: determine whether running two alternative designs for an already-decided design question through SP-0014's ActiveGraph rulebase, via fork-and-diff, produces decision-grade evidence when compared against the recorded human dual-instance system-architect debate (DEC-0293 protocol) that actually decided that question. Leading benchmark: SES-0056 turns 11-13 -> DEC-0307 (component grouping principle, bounded-context vs vertical-slice), the cleanest single-question instance with a stakeholder-adjudicated divergence between the two architect instances. Reuse SP-0014's surviving throwaway rulebase as input; all build artifacts stay in scratchpad and are never committed (DEC-0351). Deliverable: findings on the correspondence between the automated findings-diff and the human debate, plus any resulting decisions about whether/how fork-and-diff can serve as design-debate evidence in Groundwork.
 
 ## Transcript
-
-TBD.
 
 Turn 1 -- Facilitator (restate & align): "Taking up SP-0017 as its own spike session (Mode 3). The spike asks whether running two alternative designs for an already-decided design question through SP-0014's rulebase, via ActiveGraph fork-and-diff, produces decision-grade evidence when measured against the human dual-instance system-architect debate (DEC-0293 protocol) that actually decided that question. Timebox: 1 session. Reuses SP-0014's surviving throwaway rulebase as input. No kill bar -- evaluation is a diff-vs-debate comparison."
 
@@ -72,10 +74,12 @@ Turn 16 -- Stakeholder (dispositions + spike gate): "Stakeholder confirmed: keep
 
 Turn 17 -- Facilitator (close): "SES-0070 closed. SP-0017 approved with five proposed resulting decisions; full adoption deferred; all build code throwaway and archived off-corpus (DEC-0351). Follow-ups noted: the DEC-0337 cross-spike adoption survey; the IDEA-0041 edit-section heading-bug fix (three instances now: SP-0015 shipped, SP-0016 and DEC-0369/0370/0371 caught pre-commit) and repair of the shipped SP-0015 instance."
 
+Turn 18 -- Facilitator (post-close enrichment, DEC-0248, 2026-07-12): "Operator-sanctioned repair of an incomplete close-out record, applied by direct edit outside the write API (the API's closed-session gate correctly refused edit-section; the operator explicitly sanctioned the direct route and the commit). Repairs: Decisions Produced filled with DEC-0369..0373 (was 'TBD.'); Conflicts Raised set to 'None.' (was 'TBD.'); a stray leftover 'TBD.' placeholder removed from the top of the Transcript; frontmatter completed with participant, participant-role, facilitator, and transcript-fidelity per sibling-session convention. No transcript turn content was altered. Root cause — the session-close step verified neither required-section completion nor frontmatter completeness before set-status closed — is folded into IDEA-0041's fix scope per the operator, alongside a fourth shipped instance of the phantom-heading defect found in SES-0069's Decisions Produced heading during this repair."
+
 ## Decisions Produced
 
-TBD.
+DEC-0369 (fork-and-diff yields directionally-reliable but rationale-partial structural evidence for grouping decisions), DEC-0370 (the ActiveGraph fork-and-diff mechanism is viable for design-alternative evaluation), DEC-0371 (structural rulebases have a semantic blind spot bounding automated design evidence), DEC-0372 (ActiveGraph event-log provenance and deterministic replay), and DEC-0373 (ActiveGraph typed schemas with behavior-mediated gate enforcement) -- recorded proposed at T11/T13, sharpened and link-audited at T15, and held proposed at T16 with full adoption deferred to the post-SP-0016 cross-spike DEC-0337 adoption survey.
 
 ## Conflicts Raised
 
-TBD.
+None.
