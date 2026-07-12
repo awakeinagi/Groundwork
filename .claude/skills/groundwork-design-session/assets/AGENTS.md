@@ -170,9 +170,12 @@ a change against original intent.
 authority.** Discussion that changes nothing may stay off the record;
 the moment a change is instructed, run intake:
 
-1. **First mention → todo list (DEC-0256).** Create a minimal tracked
-   list — *restate intention; confirm alignment; start session?* —
-   expanding it to the confirmed path's steps once aligned.
+1. **First mention → todo list (DEC-0256, DEC-0410).** Create a
+   minimal tracked list — *restate intention; confirm alignment; start
+   session?* — in whichever task/todo tool the harness exposes (e.g.
+   TodoWrite or the Task tools TaskCreate/TaskUpdate; a visible
+   in-conversation checklist only when none exists), expanding it to
+   the confirmed path's steps once aligned.
 2. **Restate & align (DEC-0255).** Restate the proposal's *intention*;
    clarifications loop back to restatement until the proposer confirms.
    Agent-noticed issues enter the same way, roles reversed: you

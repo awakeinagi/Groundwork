@@ -34,11 +34,14 @@ authority the governance config requires, the change does not proceed —
 capture the attempt verbatim as a CP awaiting the authority holder(s)
 (DEC-0262).
 
-1. **First mention → todo list (DEC-0256).** The moment change intent
-   is mentioned, create a minimal todo list — *restate intention;
-   confirm alignment; start session?* — and expand it to the confirmed
-   path's steps once alignment lands. Work the list; nothing drops
-   silently.
+1. **First mention → todo list (DEC-0256, DEC-0410).** The moment
+   change intent is mentioned, create a minimal todo list — *restate
+   intention; confirm alignment; start session?* — in whichever
+   task/todo tool the harness session exposes (e.g. TodoWrite, or the
+   Task tools TaskCreate/TaskUpdate); only when the session exposes no
+   tracker tool, keep a visible checklist in the conversation itself.
+   Expand it to the confirmed path's steps once alignment lands. Work
+   the list; nothing drops silently.
 2. **Restate and align (DEC-0255).** Restate the *intention* you
    understood and ask whether to begin a session. Clarifications and
    additions loop back to restatement until the proposer confirms.

@@ -26,7 +26,7 @@ overview: >-
   surface (DEC-0313).
 links:
   derives-from: [SES-0057]
-  relates-to: [DEC-0029, DEC-0033, DEC-0310, DEC-0313, DEC-0377]
+  relates-to: [DEC-0029, DEC-0033, DEC-0310, DEC-0313, DEC-0377, DEC-0410]
 ---
 
 # DEC-0312: The Write API Is the Sole Sanctioned Write Path

@@ -16,6 +16,7 @@ decided-by: awakeinagi@gmail.com
 decided-on: 2026-07-09
 source-span: "SES-0050 @ T3, T10-T11"
 links:
+  relates-to: [DEC-0410]
   derives-from: [SES-0050]
 ---
 
