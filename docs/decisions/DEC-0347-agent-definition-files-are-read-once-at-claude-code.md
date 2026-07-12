@@ -2,7 +2,8 @@
 id: DEC-0347
 type: decision
 title: "Agent definition files are read once at Claude Code startup; changes require exit-and-restart"
-status: accepted
+status: superseded
+superseded-by: [DEC-0418]
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 decided-by: awakeinagi

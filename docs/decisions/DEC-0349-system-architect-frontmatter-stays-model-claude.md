@@ -23,7 +23,7 @@ overview: >-
   or is deprecated.
 links:
   derives-from: [SES-0063]
-  relates-to: [DEC-0292, DEC-0348, DEC-0347]
+  relates-to: [DEC-0292, DEC-0348, DEC-0347, DEC-0418]
 cites: [DEC-0292, DEC-0348]
 ---
 

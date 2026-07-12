@@ -17,33 +17,32 @@ overview: >-
   guardrailed exploratory evaluation of candidate interaction-
   surface tooling whose executable spikes carry a test plan per
   DEC-0345, sized by DEC-0336. The skill's CMP consolidates the
-  DEC-0310 premise that artifact-interact is the single home of all
-  artifact-touching tooling; the conformance check (DEC-0341) is
-  operationally constrained by DEC-0347's agent-definition startup-
-  caching. Interfaces to define include the absorption-trigger
-  conditions (DEC-0109/DEC-0338/DEC-0346) and a shared gate
-  criterion: neither CMP gates until consumer expectations —
-  currently distributed across DEC-0388, DEC-0327, DEC-0330,
-  DEC-0331, DEC-0340, DEC-0342, and the SES-0076 concurrency set
-  (DEC-0391, DEC-0392, DEC-0393) — are captured. Backfill of the
-  already-built surface (DEC-0342's protocol, DEC-0340's SPEC
-  amendment, DEC-0341's conformance check, TRIGGERS.md absorption-
-  trigger arming) is in scope but its execution is deferred by
-  sequencing, not superseded (DEC-0350) — the epic's first derived
-  work is the exploratory spike program, which now includes SP-0018
-  (the multi-session worktree write model); the spikes are safe
-  under this sequencing because their outputs are throwaway
-  (DEC-0351) and any adoption still routes through
-  DEC-0337/DEC-0335. The epic completes in phases and gates per
-  story/spike, not as a release train. Open questions carried
-  through the gate: install-script contract scope (deferred a third
-  time) and the defect-tracking artifact shape (travels with the
-  backfill).
+  DEC-0310 premise that artifact- interact is the single home of all
+  artifact-touching tooling; the conformance check (DEC-0341)
+  observes agent-definition changes at the next incoming turn of the
+  spawning session, per DEC-0418's turn-boundary reload semantics
+  (superseding DEC-0347's restart-required finding). Interfaces to
+  define include the absorption-trigger conditions
+  (DEC-0109/DEC-0338/DEC-0346) and a shared gate criterion: neither
+  CMP gates until consumer expectations — currently distributed
+  across DEC-0388, DEC-0327, DEC-0330, DEC-0331, DEC-0340, DEC-0342,
+  and the SES-0076 concurrency set (DEC-0391, DEC-0392, DEC-0393) —
+  are captured. Backfill of the already-built surface is in scope
+  but its execution is deferred by sequencing, not superseded
+  (DEC-0350) — the epic's first derived work is the exploratory
+  spike program, which now includes SP-0018 (the multi-session
+  worktree write model); the spikes are safe under this sequencing
+  because their outputs are throwaway (DEC-0351) and any adoption
+  still routes through DEC-0337/DEC-0335. The epic completes in
+  phases and gates per story/spike, not as a release train. Open
+  questions carried through the gate: install-script contract scope
+  (deferred a third time) and the defect-tracking artifact shape
+  (travels with the backfill).
 links:
   derives-from: [BG-0002]
   satisfies: [BG-0002]
   relates-to: [DEC-0339, IDEA-0015]
-cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0389, DEC-0391, DEC-0392, DEC-0393, DEC-0411, DEC-0412, DEC-0413, DEC-0414, DEC-0415, DEC-0416, DEC-0394]
+cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0389, DEC-0391, DEC-0392, DEC-0393, DEC-0411, DEC-0412, DEC-0413, DEC-0414, DEC-0415, DEC-0416, DEC-0394, DEC-0418]
 ---
 
 ## Summary
@@ -94,11 +93,15 @@ status report's frontier, not a separate tracking mechanism.
   DEC-0340).
 - The DEC-0340 SPEC-component agent-profile amendment (already
   accepted; this epic is the deliverable it amends against).
-- The DEC-0341 deployed-vs-contracted conformance check, operationally
-  constrained by DEC-0347: agent definition files are read once at
-  Claude Code startup and cached, so a conformance change to an agent
-  definition requires a restart before the check can observe it as
-  deployed.
+- The DEC-0341 deployed-vs-contracted conformance check. Agent-
+  definition changes take effect at the next incoming turn of the
+  spawning session, not at restart: the registry refreshes on turn
+  boundaries, and an edit to an existing definition is subject to
+  watcher-ingestion racing that turn boundary and clears deterministically
+  by the turn after (DEC-0418, superseding DEC-0347's restart-required
+  finding). A conformance change to an agent definition is observed by
+  the check once that refresh has landed, not necessarily by a same-
+  turn spawn.
 - Arming the absorption-clause triggers in docs/TRIGGERS.md (per
   DEC-0338/DEC-0346) — currently unmet: no armed trigger exists yet
   for this surface, an open BG-0002 obligation surfaced this session.
