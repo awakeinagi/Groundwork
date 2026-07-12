@@ -3,24 +3,39 @@
 
 One entry point, subcommand families, uniform --root convention:
 
-  read         concise ID-addressed reads (overview, outline, section,
-               element, item, turns, term, citers)         [stdlib]
-  write        typed, guardrailed write operations (create, set-status,
-               add-link, add-cite, update-overview, edit-section,
-               append-turn, supersede, apply)               [stdlib]
+  read         concise ID-addressed reads                   [stdlib]
+               overview | outline | section | element | item | turns
+               | term | citers
+  write        typed, guardrailed write operations          [stdlib]
+               create | set-status | add-link | add-cite | remove-cite
+               | update-overview | edit-section | delete-section
+               | append-turn | supersede | apply (JSON batch)
   check        full integrity suite (the pre-commit gate)   [stdlib]
   status       project status report                        [stdlib]
-  consistency  post-distillation sweeps (sweep, terms)      [stdlib]
-  coupling     sibling impact-coupling check                [stdlib]
-  search       hybrid semantic search + recall audit        [uv-run]
-  graph        LadybugDB graph queries                      [uv-run]
+  consistency  post-distillation sweeps: sweep | terms      [stdlib]
+  coupling     sibling impact-coupling check: check         [stdlib]
+  search       semantic search + recall audit:              [uv-run]
+               search | similar | audit | build
+  graph        LadybugDB graph queries: build | impact | trace
+               | order | gaps | elements | percent | query  [uv-run]
 
 Dependencies are layered (DEC-0317): the common path is pure stdlib and
 runs under python3; search and graph carry inline uv metadata and load
 their engines only when invoked (requires `uv` on PATH).
 
 Usage: python3 gw.py [--root DIR] <family> [args...]
-       python3 gw.py <family> --help
+       python3 gw.py <family> --help              family overview
+       python3 gw.py <family> <subcommand> --help subcommand details
+
+Examples:
+  gw.py --root . read overview --type idea --status captured
+  gw.py --root . read section EP-0009 "Derived Work"
+  gw.py --root . write create --type idea --title "T" --overview "..."
+  echo "New body." | gw.py --root . write edit-section SES-0077 Purpose
+  gw.py --root . write apply ops.json
+  gw.py --root . search audit SES-0077 --output packet.json
+  gw.py --root . graph impact DEC-0325
+  gw.py --root . check
 """
 
 import os

@@ -107,6 +107,7 @@ It requires PyYAML (`pip install pyyaml`).
 """
 
 import re
+import os
 import sys
 from pathlib import Path
 
@@ -161,6 +162,87 @@ ID_PLACEHOLDER_RE = re.compile(
 BODY_H1_ID_RE = re.compile(
     r"^#\s+((?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4})\b")
 RATIFIED_STATUSES = {"approved", "accepted", "closed"}
+
+# Rule 25 (SES-0077, DEC-0402): typed frontmatter field schema — a hand
+# copy of gw_write.py's FIELD_SCHEMA (keep in sync; `release` is omitted
+# here because rule 10 validates it more strongly against the declared
+# release list). WARN severity until the DEC-0402 promotion decision.
+# Rule 26 (SES-0077): required-section skeleton per type — a hand copy
+# of gw_write.py's REQUIRED_SECTIONS (keep in sync).
+REQUIRED_SECTIONS = {
+    "business-goal": ["Problem", "Intent", "Outcomes & Success Criteria",
+                      "Scope", "Constraints", "Stakeholders & Roles",
+                      "Conflicts & Tensions", "Derived Work"],
+    "epic": ["Summary", "Why (Goal Alignment)", "Scope", "Domain Context",
+             "Interfaces & Contracts to Define", "Risks & Open Questions",
+             "Derived Work"],
+    "story": ["Summary", "Acceptance Criteria", "Component Impact",
+              "Out of Scope", "Notes for Implementers"],
+    "spike": ["Question", "Why It Blocks", "Method", "Findings",
+              "Resulting Decisions"],
+    "component": ["Purpose", "Ubiquitous Language", "Design Elements",
+                  "Component Invariants", "Implementation Guidance",
+                  "Dependencies", "Acceptance & Test Expectations",
+                  "Out of Scope"],
+    "session": ["Purpose", "Transcript", "Decisions Produced",
+                "Conflicts Raised"],
+    "decision": ["Context", "Decision", "Rationale",
+                 "Alternatives Considered", "Implications"],
+    "conflict": ["The Tension", "Party Intents", "Mediation Record",
+                 "Resolution"],
+    "change-proposal": ["Proposed Change", "Context", "Triage Outcome"],
+    "idea": ["The Idea", "Spark Context", "Disposition"],
+    "consolidation": ["Path Covered", "Consolidated Content", "Omissions"],
+}
+
+# Sections the SPEC marks optional — exempt from the skeleton guard
+# (SES-0077 item 9: stories' Notes for Implementers is "optional
+# context", per the system reference).
+OPTIONAL_SECTIONS = {"story": {"Notes for Implementers"}}
+
+DATE_VALUE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+FIELD_SCHEMA = {
+    "transcript-fidelity": ({"session"}, "enum",
+                            {"verbatim", "reconstructed"}),
+    "participant": ({"session"}, "scalar", None),
+    "participant-role": ({"session"}, "scalar", None),
+    "facilitator": ({"session"}, "scalar", None),
+    "decided-by": ({"decision"}, "scalar", None),
+    "decided-on": ({"decision"}, "date", None),
+    "accepted-in": ({"decision"}, "scalar", None),
+    "source-span": ({"decision"}, "scalar", None),
+    "timebox": ({"spike"}, "scalar", None),
+    "sponsor": ({"business-goal"}, "scalar", None),
+    "approved-by": (None, "scalar", None),
+    "approved-on": (None, "date", None),
+    "created": (None, "date", None),
+}
+
+
+def validate_field(atype, key, value):
+    """One frontmatter field against FIELD_SCHEMA (DEC-0402); error
+    string or None (unknown fields stay open for extension)."""
+    spec = FIELD_SCHEMA.get(key)
+    if spec is None:
+        return None
+    types, kind, enum = spec
+    if types is not None and atype not in types:
+        return (f"field {key!r} applies to {sorted(types)}, not "
+                f"{atype!r} (rule 25, DEC-0402)")
+    if isinstance(value, (list, dict)):
+        return (f"field {key!r} must be a single scalar value, got a "
+                f"{type(value).__name__} (rule 25, DEC-0402)")
+    v = str(value).strip().strip("\"'")
+    if kind == "scalar" and v.startswith("["):
+        return (f"field {key!r} must be a single scalar value, got a "
+                f"list (rule 25, DEC-0402)")
+    if kind == "enum" and v not in enum:
+        return (f"field {key!r} must be one of {sorted(enum)}, got "
+                f"{v!r} (rule 25, DEC-0402)")
+    if kind == "date" and not DATE_VALUE_RE.match(v):
+        return (f"field {key!r} must be an absolute date YYYY-MM-DD, "
+                f"got {v!r} (rule 25, DEC-0402)")
+    return None
 
 
 def parse_frontmatter(path):
@@ -491,6 +573,35 @@ def main():
 
     # Rule 9: element Implements lines — presence, stories, reciprocity
     warnings = []
+
+    # Rule 25 (DEC-0402): typed frontmatter fields match the schema.
+    # Promoted WARN -> FAIL at SES-0077: the rollout sweep found zero
+    # legacy violations, so the rule blocks from day one.
+    for aid, fm in artifacts.items():
+        atype = str(fm.get("type"))
+        for k, v in fm.items():
+            if k.startswith("_"):
+                continue
+            err = validate_field(atype, k, v)
+            if err:
+                errors.append(f"{fm['_path']}: {aid} {err}")
+
+    # Rule 26 (SES-0077): required-section presence per type — WARN
+    # until the rollout sweep decides promotion.
+    for aid, fm in artifacts.items():
+        req = REQUIRED_SECTIONS.get(str(fm.get("type")), [])
+        if not req:
+            continue
+        have = set()
+        for _, ln in body_prose_lines(fm.get("_body") or ""):
+            m = ANY_HEADING_RE.match(ln.rstrip())
+            if m and len(m.group(1)) == 2:
+                have.add(m.group(2))
+        optional = OPTIONAL_SECTIONS.get(str(fm.get("type")), set())
+        missing = [s for s in req if s not in have and s not in optional]
+        if missing:
+            warnings.append(f"{fm['_path']}: {aid} missing required "
+                            f"section(s) {missing} (rule 26)")
     story_covered = set()
     for aid, fm in artifacts.items():
         if fm.get("type") != "component":
@@ -851,4 +962,11 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except BrokenPipeError:
+        # Downstream consumer (head, less) closed the pipe — not an
+        # error (SES-0077, DEC-0404). Re-point stdout so interpreter
+        # shutdown doesn't re-raise, and exit clean.
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(0)

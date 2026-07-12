@@ -9,6 +9,7 @@ recommended mode for the groundwork-design-session skill:
 """
 
 import re
+import os
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -209,4 +210,11 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except BrokenPipeError:
+        # Downstream consumer (head, less) closed the pipe — not an
+        # error (SES-0077, DEC-0404). Re-point stdout so interpreter
+        # shutdown doesn't re-raise, and exit clean.
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(0)

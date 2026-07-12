@@ -2,7 +2,7 @@
 id: IDEA-0047
 type: idea
 title: "Add a remove-cite operation to the write API"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-12
 proposed-by: awakeinagi@gmail.com
@@ -32,4 +32,5 @@ Surfaced during SES-0076's DEC-0267 cascade: the write API has no sanctioned way
 
 ## Disposition
 
-Pending — awaiting take-up. Relates to IDEA-0042 (the API-unreachable-surface collection) and DEC-0247, the citation rule the API-unreachable surface would let citers satisfy.
+Taken up via SES-0077. DEC-0403 adds a `remove-cite` operation to the write API's operation set, following the DEC-0377 extension precedent, with the refusal conditions and `--amend` requirements this idea's spark called for.
+

@@ -19,7 +19,24 @@ links:
   derives-from: [SES-0076]
   relates-to: [DEC-0326, DEC-0388, DEC-0389]
 ---
-
 # DEC-0390: The gw-read skill may self-trigger; the non-self-triggering mandate protects the write-bearing surface
 
-The DEC-0326 non-self-triggering rule is motivated by the mutation surface and continues to protect the artifact-interact skill unchanged. The read-only `gw-read` skill may load freely from conversational context, since nothing it exposes can mutate the corpus. This narrows DEC-0326's motivation without superseding it.
+## Context
+
+The DEC-0326 non-self-triggering rule is motivated by the mutation surface and continues to protect the artifact-interact skill unchanged.
+
+## Decision
+
+The read-only `gw-read` skill may load freely from conversational context, since nothing it exposes can mutate the corpus. This narrows DEC-0326's motivation without superseding it.
+
+## Rationale
+
+Not separately recorded at distillation; the rationale is carried by the Context and Decision above and by the source session's transcript at the recorded source span (skeleton restored at SES-0077).
+
+## Alternatives Considered
+
+No alternatives were separately recorded at distillation (skeleton restored at SES-0077).
+
+## Implications
+
+No separate implications were recorded at distillation; the operative consequences are stated in the Decision (skeleton restored at SES-0077).

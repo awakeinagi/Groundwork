@@ -34,6 +34,7 @@ Exit code 0 always (findings are for human/judge review, not CI).
 
 import argparse
 import re
+import os
 import sys
 from pathlib import Path
 
@@ -264,15 +265,24 @@ def main():
         description=(__doc__ or "").splitlines()[0])
     ap.add_argument("--root", default=".", type=Path)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    p1 = sub.add_parser("sweep", help="relates-to sweep (DEC-0157)")
-    p1.add_argument("ids", nargs="+")
-    p1.add_argument("--all-statuses", action="store_true")
-    p2 = sub.add_parser("terms",
-                        help="identifier co-occurrence audit (DEC-0158)")
-    p2.add_argument("ids", nargs="+")
+    p1 = sub.add_parser(
+        "sweep", help="relates-to sweep (DEC-0157)",
+        description="For each new DEC, list ratified citers of every "
+        "accepted decision in its relates-to/supersedes — the partial-"
+        "supersession review list.")
+    p1.add_argument("ids", nargs="+", help="new decision IDs (DEC-nnnn)")
+    p1.add_argument("--all-statuses", action="store_true",
+                    help="include non-ratified citers")
+    p2 = sub.add_parser(
+        "terms", help="identifier co-occurrence audit (DEC-0158)",
+        description="Report ratified artifacts sharing rare code-span "
+        "identifiers with the new DECs (containment-matched), flagging "
+        "unlinked co-occurrences.")
+    p2.add_argument("ids", nargs="+", help="new decision IDs (DEC-nnnn)")
     p2.add_argument("--max-df", type=int, default=6,
                     help="ignore identifiers appearing in more docs")
-    p2.add_argument("--all-statuses", action="store_true")
+    p2.add_argument("--all-statuses", action="store_true",
+                    help="include non-ratified artifacts")
     args = ap.parse_args()
 
     docs = load_corpus(args.root)
@@ -287,4 +297,11 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except BrokenPipeError:
+        # Downstream consumer (head, less) closed the pipe — not an
+        # error (SES-0077, DEC-0404). Re-point stdout so interpreter
+        # shutdown doesn't re-raise, and exit clean.
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(0)

@@ -2,7 +2,7 @@
 id: IDEA-0014
 type: idea
 title: "Add a section-repair / occurrence-safe delete operation to the write API"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 proposed-by: awakeinagi
@@ -44,4 +44,5 @@ DEC-0312.
 
 ## Disposition
 
-Pending.
+Taken up via SES-0077. Satisfied by DEC-0377 (SES-0072), which already shipped `edit-section --occurrence` and `delete-section` with passing tests before SES-0077's disposition check ran; no new build was required.
+

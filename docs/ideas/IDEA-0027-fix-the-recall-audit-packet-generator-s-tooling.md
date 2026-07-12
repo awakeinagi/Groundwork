@@ -2,7 +2,7 @@
 id: IDEA-0027
 type: idea
 title: "Fix the recall-audit packet generator's tooling defects"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 proposed-by: awakeinagi
@@ -31,4 +31,5 @@ Surfaced at SES-0064 T17 during the recall-audit verdict presentation, flagged t
 
 ## Disposition
 
-Pending.
+Taken up via SES-0077. DEC-0405 makes the recall-audit packet self-sufficient (audited-artifact content, candidate overviews/scores, deterministic ordering) and defends its output contract against stderr-splicing and orchestration-layer swaps, addressing all four defects this idea's spark surfaced.
+

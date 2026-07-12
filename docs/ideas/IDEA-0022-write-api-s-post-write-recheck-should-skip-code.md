@@ -2,7 +2,7 @@
 id: IDEA-0022
 type: idea
 title: "Write API's post-write recheck should skip code spans/blocks like the full checker does"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 proposed-by: awakeinagi
@@ -65,8 +65,5 @@ gap from the body-only case this idea primarily describes.
 
 ## Disposition
 
-Pending — awaiting take-up. A future session should align `Corpus.recheck`'s
-ID-scanning with the full checker's code-span-aware logic for body content,
-and separately decide whether the overview field should ever be allowed to
-contain an intentionally-unresolvable token at all, or must always avoid
-the literal pattern entirely.
+Taken up via SES-0077. DEC-0399 aligns the write API's recheck with the full checker's code-span-aware logic for body content by routing it through the existing `prose_lines` walker. DEC-0398 separately decides the overview-field question: overview tokens must always resolve, with no code-span exemption, since overviews are freely regenerable.
+

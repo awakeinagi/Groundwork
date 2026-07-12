@@ -29,8 +29,13 @@ links:
   derives-from: [SES-0076]
   supersedes: [DEC-0325]
 ---
-
 # DEC-0388: Targeted artifact reads are de-mediated for every agent; librarian mediation remains mandatory for writes and synthesis reads
+
+## Context
+
+SES-0076 examined librarian-mediation efficiency: which artifact interactions require librarian mediation and which may go direct (skeleton restored at SES-0077).
+
+## Decision
 
 Any agent may directly invoke targeted, bounded-output read operations — overview, outline, section, citers, filtered listings, a single search, a single graph query — and consume the result as-is. Librarian delegation remains the sole sanctioned path for every write and for open-ended synthesis reads: precedent hunts, surveys, recall audits, and any task requiring iterative exploration or cross-artifact distillation. The boundary is output-shape plus judgment: no hard call cap, but an agent that catches itself chaining many calls delegates instead.
 
@@ -43,3 +48,7 @@ The spawn overhead on bounded reads buys no isolation value, since the CLI's out
 ## Alternatives Considered
 
 Retaining everything-mandatory delegation; making all reads discretionary with no boundary; an enumerated operation whitelist; a hard call-count cap.
+
+## Implications
+
+No separate implications were recorded at distillation; the operative consequences are stated in the Decision (skeleton restored at SES-0077).

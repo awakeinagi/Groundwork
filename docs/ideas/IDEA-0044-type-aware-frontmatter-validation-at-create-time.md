@@ -2,7 +2,7 @@
 id: IDEA-0044
 type: idea
 title: "Type-aware frontmatter validation at create time and in the checker"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-12
 proposed-by: awakeinagi
@@ -36,4 +36,5 @@ SES-0073 was created with off-spec transcript-fidelity and list-valued participa
 
 ## Disposition
 
-Pending.
+Taken up via SES-0077. DEC-0402 adds a `FIELD_SCHEMA` table validating typed frontmatter fields at create, in the recheck, and via a new corpus-wide checker rule.
+

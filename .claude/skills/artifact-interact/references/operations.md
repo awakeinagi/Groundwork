@@ -102,6 +102,21 @@ gw.py --root . write add-cite ST-0066 DEC-0335
   must be referenced in its body prose by literal ID (rule 18) — a
   compressed range ("DEC-0376 through DEC-0385") does not count.
 
+## remove-cite (SES-0077, DEC-0403)
+
+```bash
+gw.py --root . write remove-cite ST-0066 DEC-0335
+gw.py --root . write remove-cite SP-0014 DEC-0014 --amend  # approved/stale
+```
+
+- The sanctioned dead-cite repair (DEC-0247): removes one DEC from
+  `cites:` (dropping the line when emptied). Refuses while the body
+  prose still references the DEC — rework the body mention first, or
+  earlier in the same batch; code-span quotations do not block.
+- Immutability mirrors edit-section: accepted decisions and closed
+  sessions refuse outright; `approved`/`stale` artifacts require
+  `--amend`.
+
 ## update-overview
 
 ```bash
@@ -188,18 +203,29 @@ normalized to underscores). Positional arguments use their names (`id`,
 `status`, `heading`, `rel`, `target`). `content` may replace
 `--from-file` for any payload-taking op. The batch validates as a unit:
 IDs and re-checks defer to the end so members may reference each other.
-A refusal stops the batch; earlier ops remain applied — order
-prerequisites first, and on a partial failure re-run **only** the
-unexecuted remainder.
+
+**Pre-validation (DEC-0400):** the whole batch is checked before
+anything applies — an unknown op name, an unknown batch key (e.g. the
+CLI-style `link` string), or a malformed `links` value (non-dict, rel
+outside the closed vocabulary, non-list targets) refuses the entire
+batch with nothing written.
+
+**Failure accounting (DEC-0401):** per-op `OK` lines are flushed as
+each op lands; an apply-time refusal stops the batch and prints a
+manifest (`applied N of M; not attempted: …`). The terminal line
+`apply: applied N/N; post-batch validation clean` is the success
+signal — if it is missing, the batch did not finish: trust the flushed
+per-op lines, and re-run **only** the unexecuted remainder.
 
 **Batch key table (the traps in bold):**
 
 | op | keys |
 |---|---|
-| create | type, title, overview, status, owner, **links** (a DICT: `{"derives-from": ["SES-…"], "relates-to": […]}` — the CLI's `link` string form is silently ignored), cites (list), field (list of `"key: value"`), content or from-file |
+| create | type, title, overview, status, owner, **links** (a DICT: `{"derives-from": ["SES-…"], "relates-to": […]}` — the CLI's `link` string form is **refused**, DEC-0400), cites (list), field (list of `"key: value"`), content or from-file |
 | set-status | id, status, approved-by, superseded-by, release, session, no-decisions-ok |
 | add-link | id, rel, target |
 | add-cite | id, target |
+| remove-cite | id, target, amend |
 | update-overview | id, **text** (or content) — the key `overview` does not exist and fails with "provide overview text" |
 | edit-section | id, heading, occurrence, amend, overview-ok, content or from-file |
 | delete-section | id, heading, occurrence, amend |
@@ -218,16 +244,21 @@ unexecuted remainder.
 ]
 ```
 
-After any batch that writes `links`/`add-link`, grep-read the touched
-frontmatter to confirm the links actually landed — a wrong key is
-silently ignored, not refused.
+A wrong batch key now refuses the whole batch instead of being
+silently ignored (DEC-0400). The verification habit still matters
+after an abnormal end (timeout, kill): the flushed per-op lines are
+the truthful record of what landed (DEC-0401) — diff-verify each
+target rather than assuming all-or-nothing.
 
 ## Validation layering (DEC-0315, DEC-0386)
 
 Per-op: preconditions before disk; targeted re-check of touched files
-after (frontmatter parses as YAML when PyYAML is available, ID/filename
-match, link resolution, overview cap, reciprocity of touched pairs,
-body-H1 identity). The **full checker** (`gw.py --root . check`) stays
+after (frontmatter parses as YAML when PyYAML is available, typed
+frontmatter fields against the FIELD_SCHEMA table — enums, dates,
+scalar shapes — per DEC-0402, ID/filename match, link resolution with
+body IDs scanned code-span-aware per DEC-0399 while overview IDs must
+always resolve per DEC-0398, overview cap, reciprocity of touched
+pairs, body-H1 identity). The **full checker** (`gw.py --root . check`) stays
 the pre-commit gate — it additionally enforces prose obligations (cite
 referenced in body per DEC-0247, impact edges explained per DEC-0249,
 session relates-to mentions per DEC-0250, produced-decision back-links

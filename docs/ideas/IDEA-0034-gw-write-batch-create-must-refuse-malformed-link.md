@@ -2,7 +2,7 @@
 id: IDEA-0034
 type: idea
 title: "gw_write batch create must refuse malformed link keys"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-11
 proposed-by: awakeinagi
@@ -39,4 +39,5 @@ Surfaced by the librarian mid-execution of SES-0067's idea-capture write batch; 
 
 ## Disposition
 
-Pending.
+Taken up via SES-0077. DEC-0400 makes batch create (and every other batch op) pre-validate wholly and refuse entirely on malformed link keys, unknown op-spec keys, or unknown op names, closing the silent-drop gap. DEC-0401 adds the companion failure-accounting the same investigation surfaced.
+

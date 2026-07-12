@@ -42,17 +42,23 @@ at gate prep.
 **Mechanics:**
 
 1. Task the librarian with the recall audit on the artifact (it runs
-   `audit <ID-or-file> [--k 15]`) — this ranks accepted decisions
-   relevant to the artifact but absent from its considered set
-   (frontmatter cites + inline references, superseded-redirected), and
-   emits a JSON judge packet including instructions, which the
-   librarian returns to you.
-2. Spawn a judge subagent with the packet (plus the artifact text if
-   the judge lacks session context), always on a **Sonnet 5** model —
-   never Opus-class:
+   `audit <ID-or-file> [--k 15] [--output PATH]`) — this ranks accepted
+   decisions relevant to the artifact but absent from its considered
+   set (frontmatter cites + inline references, superseded-redirected),
+   and emits a JSON judge packet, which the librarian returns to you.
+   The packet is self-sufficient (DEC-0405): it carries the audited
+   artifact's id, title, overview, and full body, candidate overviews
+   and similarity scores, and the judge instructions — no out-of-band
+   artifact handoff is needed. Prefer `--output` so the packet never
+   shares a stream with warnings or progress output.
+2. Spawn a judge subagent with the packet, always on a **Sonnet 5**
+   model — never Opus-class. The packet's instructions make the judge
+   confirm `artifact.id` matches its assignment before judging (a
+   mismatch is reported, not judged — catches orchestration-layer
+   packet swaps, IDEA-0027):
    - list ≤ 15 → **one** Sonnet 5 judge; fork (inherits session
      context) when the facilitator itself runs Sonnet 5, otherwise a
-     fresh Sonnet 5 agent fed the packet + artifact. **Pin the model
+     fresh Sonnet 5 agent fed the packet. **Pin the model
      explicitly**: on the Agent call pass `model: sonnet` — a fresh
      subagent given only a `subagent_type` (e.g. `general-purpose`) and
      no `model` override *inherits the facilitator's model*, so on an

@@ -21,6 +21,7 @@ Exit codes: 0 ok, 1 not found / bad request, 2 setup problem.
 
 import argparse
 import re
+import os
 import sys
 import textwrap
 from pathlib import Path
@@ -303,32 +304,71 @@ def cmd_citers(corpus, aid):
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Concise, ID-addressed reads over a Groundwork corpus")
-    ap.add_argument("--root", default=".", help="project root")
+        description="Concise, ID-addressed reads over a Groundwork "
+        "corpus (DEC-0289). Progressive disclosure: read overviews "
+        "first, open bodies only when an overview says the detail is "
+        "there.",
+        epilog="examples:\n"
+        "  groundwork_read.py --root . overview DEC-0388 EP-0009\n"
+        "  groundwork_read.py --root . overview --type idea "
+        "--status captured\n"
+        "  groundwork_read.py --root . section EP-0009 'Derived Work'\n"
+        "  groundwork_read.py --root . turns SES-0077 T4-T6\n"
+        "  groundwork_read.py --root . citers DEC-0335",
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--root", default=".",
+                    help="project root containing docs/ (default: cwd)")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    p = sub.add_parser("overview")
-    p.add_argument("ids", nargs="*")
-    p.add_argument("--type", dest="type_f")
-    p.add_argument("--status", dest="status_f")
-    p = sub.add_parser("outline")
-    p.add_argument("id")
-    p = sub.add_parser("section")
-    p.add_argument("id")
-    p.add_argument("heading")
-    p = sub.add_parser("element")
-    p.add_argument("id")
-    p.add_argument("name")
-    p = sub.add_parser("item")
-    p.add_argument("id")
-    p.add_argument("item_id")
-    p = sub.add_parser("turns")
-    p.add_argument("id")
-    p.add_argument("span")
-    p = sub.add_parser("term")
-    p.add_argument("name")
-    p = sub.add_parser("citers")
-    p.add_argument("id")
+    p = sub.add_parser(
+        "overview", help="frontmatter overviews, by ID and/or filter",
+        description="Print header + overview for the given IDs and/or "
+        "every artifact matching --type/--status. The default first "
+        "read for any artifact (DEC-0284).")
+    p.add_argument("ids", nargs="*",
+                   help="artifact IDs (e.g. DEC-0388 EP-0009)")
+    p.add_argument("--type", dest="type_f",
+                   help="filter by artifact type (e.g. idea, decision)")
+    p.add_argument("--status", dest="status_f",
+                   help="filter by status (e.g. captured, accepted)")
+    p = sub.add_parser(
+        "outline", help="section headings only",
+        description="Print the heading tree; component elements also "
+        "show their Implements: line.")
+    p.add_argument("id", help="artifact ID")
+    p = sub.add_parser(
+        "section", help="one body section",
+        description="Print one section's heading and body, matched by "
+        "case-insensitive heading substring.")
+    p.add_argument("id", help="artifact ID")
+    p.add_argument("heading", help="heading substring (case-insensitive)")
+    p = sub.add_parser(
+        "element", help="one CMP design element's block",
+        description="Print one design element's full contract block "
+        "from a component doc.")
+    p.add_argument("id", help="component ID (CMP-nnnn)")
+    p.add_argument("name", help="element name substring")
+    p = sub.add_parser(
+        "item", help="one contract item",
+        description="Print a single contract item and its continuation "
+        "lines (element-scoped item IDs).")
+    p.add_argument("id", help="component ID (CMP-nnnn)")
+    p.add_argument("item_id", help="item ID, e.g. StorageService.B-3")
+    p = sub.add_parser(
+        "turns", help="a session transcript turn span",
+        description="Print the lines of a transcript turn span.")
+    p.add_argument("id", help="session ID (SES-nnnn)")
+    p.add_argument("span", help="turn span: T4 or T4-T6")
+    p = sub.add_parser(
+        "term", help="one CONTEXT.md glossary entry",
+        description="Print one glossary entry from CONTEXT.md, matched "
+        "by name substring.")
+    p.add_argument("name", help="term name substring")
+    p = sub.add_parser(
+        "citers", help="who references an artifact",
+        description="List every artifact referencing the ID in "
+        "frontmatter or body.")
+    p.add_argument("id", help="artifact ID")
 
     args = ap.parse_args()
     root = Path(args.root).resolve()
@@ -355,4 +395,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except BrokenPipeError:
+        # Downstream consumer (head, less) closed the pipe — not an
+        # error (SES-0077, DEC-0404). Re-point stdout so interpreter
+        # shutdown doesn't re-raise, and exit clean.
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(0)

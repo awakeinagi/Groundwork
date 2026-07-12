@@ -210,6 +210,16 @@ their transcript at the verbatim proposal (DEC-0255).
   what provenance wants). Origin: the SES-0073 T5 incident, where a
   pre-written turn asserted a re-gate and a frontmatter fix that were
   then refused.
+- **Hand the librarian per-section payloads.** A decision-recording
+  task names each required section's content explicitly — Context (the
+  question), Decision (one unambiguous statement), Rationale,
+  Alternatives Considered, Implications — never a flat blob. The write
+  API refuses sectionless bodies (DEC-0407), but mapping prose into
+  sections is authoring judgment that belongs in the facilitator's
+  task, not the librarian's guess. Where a section's material was
+  genuinely never discussed, say so in the task; the librarian records
+  that plainly rather than padding. Origin: the SES-0077 skeleton
+  repair of DEC-0388..DEC-0406.
 - **Write finished prose.** Decision bodies, overviews, and every
   section payload handed to the librarian are complete sentences with
   normal capitalization and punctuation — never label-continuation

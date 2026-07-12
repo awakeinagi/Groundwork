@@ -8,8 +8,8 @@ re-validates the artifacts it touched (DEC-0315), and prints a compact
 result so the caller need not re-read the file (DEC-0314).
 
 Operations (DEC-0313): create, append-turn, edit-section, delete-section,
-set-status, add-link, add-cite, supersede, update-overview, apply
-(JSON batch).
+set-status, add-link, add-cite, remove-cite (DEC-0403), supersede,
+update-overview, apply (JSON batch).
 
 Structural guards (SES-0072, from IDEA-0041/IDEA-0028): section payloads
 are body-only — content carrying a heading line at the target section's
@@ -127,6 +127,73 @@ BODY_H1_ID_RE = re.compile(
 RATIFYING_STATUSES = {"approved", "accepted", "closed"}
 SESSION_CLOSE_FIELDS = ("participant", "participant-role", "facilitator",
                         "transcript-fidelity")
+
+# Typed frontmatter field schema (SES-0077, DEC-0402): shapes and enums
+# transcribed by hand from the SPECs (docs/specs/SPEC-*.md) — keep in
+# sync there, and with the checker's copy in check_links.py (rule 25;
+# the checker omits `release`, which its rule 10 validates more
+# strongly). Fields not listed stay open for extension. Kinds: enum;
+# date (absolute YYYY-MM-DD); scalar (one non-list value); release
+# (backlog | SemVer prefix).
+# Sections the SPEC marks optional — exempt from the skeleton guard
+# (SES-0077 item 9: stories' Notes for Implementers is "optional
+# context", per the system reference).
+OPTIONAL_SECTIONS = {"story": {"Notes for Implementers"}}
+
+DATE_VALUE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+RELEASE_VALUE_RE = re.compile(
+    r"^(?:backlog|(?:0|[1-9]\d*)(?:\.(?:0|[1-9]\d*)){0,2})$")
+FIELD_SCHEMA = {
+    # field -> (restricted-to types | None = any type, kind, enum | None)
+    "transcript-fidelity": ({"session"}, "enum",
+                            {"verbatim", "reconstructed"}),
+    "participant": ({"session"}, "scalar", None),
+    "participant-role": ({"session"}, "scalar", None),
+    "facilitator": ({"session"}, "scalar", None),
+    "decided-by": ({"decision"}, "scalar", None),
+    "decided-on": ({"decision"}, "date", None),
+    "accepted-in": ({"decision"}, "scalar", None),
+    "source-span": ({"decision"}, "scalar", None),
+    "timebox": ({"spike"}, "scalar", None),
+    "sponsor": ({"business-goal"}, "scalar", None),
+    "release": ({"story", "epic", "spike"}, "release", None),
+    "approved-by": (None, "scalar", None),
+    "approved-on": (None, "date", None),
+    "created": (None, "date", None),
+}
+
+
+def validate_field(atype, key, value):
+    """One frontmatter field against FIELD_SCHEMA (DEC-0402).
+
+    Returns an error string, or None when the field is unknown (open
+    for extension) or valid. `value` may be a parsed YAML value or the
+    raw text after 'key:' in a --field argument.
+    """
+    spec = FIELD_SCHEMA.get(key)
+    if spec is None:
+        return None
+    types, kind, enum = spec
+    if types is not None and atype not in types:
+        return (f"field {key!r} applies to {sorted(types)}, not "
+                f"{atype!r} (DEC-0402)")
+    if isinstance(value, (list, dict)):
+        return (f"field {key!r} must be a single scalar value, got a "
+                f"{type(value).__name__} (DEC-0402)")
+    v = str(value).strip().strip("\"'")
+    if kind == "scalar" and v.startswith("["):
+        return (f"field {key!r} must be a single scalar value, got a "
+                f"list (DEC-0402)")
+    if kind == "enum" and v not in enum:
+        return (f"field {key!r} must be one of {sorted(enum)}, got "
+                f"{v!r} (DEC-0402)")
+    if kind == "date" and not DATE_VALUE_RE.match(v):
+        return (f"field {key!r} must be an absolute date YYYY-MM-DD, "
+                f"got {v!r} (DEC-0402)")
+    if kind == "release" and not RELEASE_VALUE_RE.match(v):
+        return (f"field {key!r} must be 'backlog' or a SemVer prefix, "
+                f"got {v!r} (DEC-0402)")
+    return None
 
 
 def today():
@@ -353,13 +420,19 @@ class Corpus:
                 if a.startswith(prefix + "-")]
         return f"{prefix}-{max(nums, default=0) + 1:04d}"
 
-    def resolve_all(self, text, where):
+    def resolve_all(self, text, where, prose=False):
         # In batch mode, content resolution defers like recheck does:
         # payloads may reference artifacts created later in the batch.
         if self.defer_recheck:
-            self.pending_resolve.append((text, where))
+            self.pending_resolve.append((text, where, prose))
             return
-        missing = [i for i in set(ID_RE.findall(text))
+        # prose=True: body content — IDs inside inline code or fenced
+        # blocks are quotation, not cross-reference (DEC-0399, matching
+        # the checker's rule-8 semantics). Overviews scan raw: every
+        # ID-shaped token there must resolve (DEC-0398).
+        scan = ("\n".join(ln for _, ln in prose_lines(text))
+                if prose else text)
+        missing = [i for i in set(ID_RE.findall(scan))
                    if i not in self.paths]
         if missing:
             fail(f"{where}: unresolved IDs {sorted(missing)}")
@@ -375,16 +448,30 @@ class Corpus:
         problems = []
         if _yaml is not None:
             try:
-                if not isinstance(_yaml.safe_load(art.fm), dict):
+                fm_map = _yaml.safe_load(art.fm)
+                if not isinstance(fm_map, dict):
                     problems.append("frontmatter parsed as non-mapping "
                                     "YAML")
+                else:
+                    # Typed field schema (DEC-0402) under the DEC-0386
+                    # pattern: enforced when PyYAML is present, skipped
+                    # silently without it, checker rule 25 backstops.
+                    atype = str(fm_map.get("type"))
+                    for k, v in fm_map.items():
+                        err = validate_field(atype, k, v)
+                        if err:
+                            problems.append(err)
             except _yaml.YAMLError as e:
                 first = str(e).splitlines()[0] if str(e) else "parse error"
                 problems.append(f"frontmatter is not parseable YAML "
                                 f"({first})")
         if not aid or not path.name.startswith(aid + "-"):
             problems.append("id/filename mismatch")
-        for i in set(ID_RE.findall(art.fm) + ID_RE.findall(art.body)):
+        # Body IDs scan code-span-aware (DEC-0399): backticked/fenced
+        # IDs are quotation, not cross-reference. Frontmatter stays a
+        # raw sweep — overview IDs must always resolve (DEC-0398).
+        body_prose = "\n".join(ln for _, ln in prose_lines(art.body))
+        for i in set(ID_RE.findall(art.fm) + ID_RE.findall(body_prose)):
             if i != aid and i not in self.paths:
                 problems.append(f"unresolved {i}")
         first = art.body.lstrip("\n").split("\n", 1)[0]
@@ -457,11 +544,14 @@ def read_payload(args, implicit_stdin=True):
 
 
 def ok(msg, touched, json_mode):
+    # Flushed per line (DEC-0401): if a batch dies mid-way, the lines
+    # already printed are a truthful record of what landed.
     if json_mode:
         print(json.dumps({"result": "ok", "detail": msg,
-                          "touched": [str(t) for t in touched]}))
+                          "touched": [str(t) for t in touched]}),
+              flush=True)
     else:
-        print(f"OK {msg}")
+        print(f"OK {msg}", flush=True)
 
 
 # ----------------------------------------------------------- operations
@@ -502,6 +592,12 @@ def op_create(c, args, json_mode):
           f"status: {status}", f"owner: {args.owner}",
           f"created: {today()}"]
     for extra in args.field:
+        if ":" not in extra:
+            fail(f"--field entries take 'key: value', got {extra!r}")
+        fkey, fval = extra.split(":", 1)
+        err = validate_field(args.type, fkey.strip(), fval.strip())
+        if err:
+            fail(f"create: {err}")
         fm.append(extra)
     ov_lines = ["overview: >-"]
     import textwrap as _tw
@@ -528,6 +624,33 @@ def op_create(c, args, json_mode):
             body_lines[0] = body_lines[0].replace(f"{prefix}-XXXX", aid)
             body = "\n".join(body_lines)
 
+    # Required-section presence (SES-0077 item 9): a caller-supplied
+    # body must carry the type's full ##-section skeleton — the silent
+    # flat-body hole behind the DEC-0388..0406 malformation. The
+    # template path always satisfies this by construction.
+    have = set()
+    for _, ln in prose_lines(body):
+        hm = ANY_HEADING_RE.match(ln.rstrip())
+        if hm and len(hm.group(1)) == 2:
+            have.add(hm.group(2))
+    optional = OPTIONAL_SECTIONS.get(args.type, set())
+    missing = [s for s in REQUIRED_SECTIONS.get(args.type, [])
+               if s not in have and s not in optional]
+    if missing:
+        fail(f"create: body is missing required section(s) {missing} "
+             f"for {args.type} — every type's section skeleton is "
+             "mandatory (SES-0077); omit the body to start from the "
+             "template")
+    # Creating AT a ratifying status runs the same structural gate as a
+    # set-status transition to it (SES-0077 item 9, closing the
+    # DEC-0378 bypass).
+    if status in RATIFYING_STATUSES:
+        problems = [f"duplicate sibling heading {'#' * lv} {t!r} x{n}"
+                    for lv, t, n in duplicate_sibling_headings(body)]
+        problems += placeholder_findings(body)
+        if problems:
+            fail(f"create: cannot create {args.type} at ratified status "
+                 f"{status!r} — " + "; ".join(problems))
     path = c.docs / subdir / f"{aid}-{kebab(args.title)}.md"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("---\n" + "\n".join(fm) + "\n---\n\n" +
@@ -666,6 +789,49 @@ def op_add_cite(c, args, json_mode):
        + ("" if changed else " (already present)"), [art.path], json_mode)
 
 
+def op_remove_cite(c, args, json_mode):
+    """Remove a DEC citation — the eleventh operation (SES-0077,
+    DEC-0403), extending the DEC-0313 set per the DEC-0377 precedent.
+    Closes the API-unreachable dead-cite repair surface (IDEA-0047)."""
+    art = c.load(args.id)
+    if not args.target.startswith("DEC-"):
+        fail("cites reference decisions (DEC-nnnn)")
+    atype, status = art.scalar("type"), art.scalar("status")
+    if atype == "decision" and status in ("accepted", "superseded"):
+        fail("accepted decisions are immutable — supersede instead")
+    if atype == "session" and status == "closed":
+        fail("closed sessions are immutable — open a new session")
+    if status in ("approved", "stale") and not args.amend:
+        fail(f"{args.id} is {status}; semantic edits to ratified "
+             "artifacts happen in a session — re-run with --amend to "
+             "assert a session sanctions this removal")
+    cited = art.get_list("cites")
+    if args.target not in cited:
+        fail(f"{args.id} does not cite {args.target}")
+    # Removing a cite the body still references would mint a rule-16
+    # missing-cite violation (DEC-0247) — rework the body mention
+    # first (or earlier in the same batch; this check reads the file
+    # as it stands). Code-span quotations do not count as references.
+    body_prose = "\n".join(ln for _, ln in prose_lines(art.body))
+    if args.target in ID_RE.findall(body_prose):
+        fail(f"{args.id} body prose still references {args.target} — "
+             "remove or rework the body mention first (DEC-0247)")
+    remaining = [i for i in cited if i != args.target]
+    span = art._list_span("cites")
+    assert span is not None
+    start, end, _ids = span
+    if remaining:
+        art.fm = (art.fm[:start] + f"cites: [{', '.join(remaining)}]" +
+                  art.fm[end:])
+    else:  # drop the emptied cites: line entirely
+        if art.fm[end:end + 1] == "\n":
+            end += 1
+        art.fm = art.fm[:start] + art.fm[end:]
+    art.write()
+    c.recheck(art.path)
+    ok(f"remove-cite {args.id} -/- {args.target}", [art.path], json_mode)
+
+
 def op_update_overview(c, args, json_mode):
     art = c.load(args.id)
     text = read_payload(args) or args.text
@@ -734,7 +900,7 @@ def op_edit_section(c, args, json_mode):
     art.body = (art.body[:start] + head_line + "\n\n" +
                 content.strip() + "\n\n" + art.body[end:])
     art.write()
-    c.resolve_all(content, f"{args.id} section")
+    c.resolve_all(content, f"{args.id} section", prose=True)
     c.recheck(art.path)
     warn = ("" if args.overview_ok else
             " — if this changed the artifact's meaning, update-overview "
@@ -791,7 +957,7 @@ def op_append_turn(c, args, json_mode):
     if content is None:
         fail("provide turn content via stdin or --from-file")
     guard_heading_lines(content, 2, f"{args.id} turn")
-    c.resolve_all(content, f"{args.id} turn")
+    c.resolve_all(content, f"{args.id} turn", prose=True)
     span = art.section_span("Transcript")
     if span is None:
         fail(f"{args.id} has no Transcript section")
@@ -862,21 +1028,69 @@ def op_apply(c, args, json_mode):
     ops = json.loads(Path(args.file).read_text(encoding="utf-8"))
     if not isinstance(ops, list):
         fail("apply expects a JSON list of operation objects")
-    print(f"apply: {len(ops)} operation(s)")
-    c.defer_recheck = True
-    for i, spec in enumerate(ops):
+    # DEC-0400: whole-batch pre-validation — any invalid op refuses the
+    # entire batch before anything applies. Catches unknown op names,
+    # unknown batch keys (the SES-0067 'link' string-form silent drop),
+    # and malformed links values (previously written verbatim into
+    # frontmatter).
+    problems, specs = [], []
+    for i, raw in enumerate(ops):
+        spec = dict(raw)
         op = spec.pop("op", None)
+        specs.append((op, spec))
         if op not in DISPATCH or op == "apply":
-            fail(f"apply[{i}]: unknown op {op!r}")
-        ns = build_namespace(op, spec)
-        DISPATCH[op](c, ns, json_mode)
+            problems.append(f"apply[{i}]: unknown op {op!r}")
+            continue
+        unknown = sorted(k for k in spec
+                         if k.replace("_", "-") not in BATCH_KEYS[op])
+        if unknown:
+            problems.append(f"apply[{i}] ({op}): unknown key(s) "
+                            f"{unknown} — allowed: "
+                            f"{sorted(BATCH_KEYS[op])}")
+        links = spec.get("links")
+        if links is not None:
+            if not isinstance(links, dict):
+                problems.append(
+                    f"apply[{i}] ({op}): 'links' must be a dict of "
+                    "rel -> [IDs]; the CLI's 'rel=ID' string form is "
+                    "refused in batch")
+            else:
+                for rel, ids in links.items():
+                    if rel not in LINK_VOCAB:
+                        problems.append(f"apply[{i}] ({op}): link type "
+                                        f"{rel!r} not in {LINK_VOCAB}")
+                    if not isinstance(ids, list):
+                        problems.append(f"apply[{i}] ({op}): "
+                                        f"links[{rel!r}] must be a "
+                                        "list of IDs")
+    if problems:
+        fail("apply: batch refused, nothing applied (DEC-0400):\n  "
+             + "\n  ".join(problems))
+    print(f"apply: {len(ops)} operation(s)", flush=True)
+    c.defer_recheck = True
+    applied = 0
+    for i, (op, spec) in enumerate(specs):
+        try:
+            ns = build_namespace(op, spec)
+            DISPATCH[op](c, ns, json_mode)
+        except SystemExit:
+            # DEC-0401: truthful failure accounting — state exactly
+            # what landed before stopping (rollback stays deferred to
+            # the DEC-0391 machinery).
+            rest = [f"{j} ({o})" for j, (o, _s) in enumerate(specs)
+                    if j > i]
+            print(f"apply: op {i} ({op}) FAILED — applied {applied} of "
+                  f"{len(ops)}; not attempted: "
+                  f"{', '.join(rest) if rest else 'none'}", flush=True)
+            raise
+        applied += 1
     # DEC-0314: the batch validates as a unit — re-check every touched
     # file now that all members exist, reporting all failures together.
     c.defer_recheck = False
     failures = 0
-    for text, where in c.pending_resolve:
+    for text, where, prose in c.pending_resolve:
         try:
-            c.resolve_all(text, where)
+            c.resolve_all(text, where, prose)
         except SystemExit:
             failures += 1
     for path in c.pending_recheck:
@@ -885,10 +1099,11 @@ def op_apply(c, args, json_mode):
         except SystemExit:
             failures += 1
     if failures:
-        fail(f"apply: {failures} file(s) failed post-batch validation "
-             "(details above) — files are written; fix required")
-    print(f"apply: post-batch validation clean "
-          f"({len(c.pending_recheck)} file(s))")
+        fail(f"apply: applied {applied}/{len(ops)}, but {failures} "
+             "file(s) failed post-batch validation (details above) — "
+             "files are written; fix required")
+    print(f"apply: applied {applied}/{len(ops)}; post-batch validation "
+          f"clean ({len(c.pending_recheck)} file(s))", flush=True)
 
 
 def build_namespace(op, spec):
@@ -918,9 +1133,30 @@ def build_namespace(op, spec):
 DISPATCH = {
     "create": op_create, "set-status": op_set_status,
     "add-link": op_add_link, "add-cite": op_add_cite,
+    "remove-cite": op_remove_cite,
     "update-overview": op_update_overview, "edit-section": op_edit_section,
     "delete-section": op_delete_section, "append-turn": op_append_turn,
     "supersede": op_supersede, "apply": op_apply,
+}
+
+# Recognized batch keys per op (DEC-0400): the pre-validation pass
+# refuses any key outside these sets (hyphen and underscore forms both
+# accepted). Keep in sync with each subparser's BATCH KEYS note.
+BATCH_KEYS = {
+    "create": {"type", "title", "overview", "status", "owner", "links",
+               "cites", "field", "content", "from-file"},
+    "set-status": {"id", "status", "approved-by", "superseded-by",
+                   "release", "session", "no-decisions-ok"},
+    "add-link": {"id", "rel", "target"},
+    "add-cite": {"id", "target"},
+    "remove-cite": {"id", "target", "amend"},
+    "update-overview": {"id", "text", "content", "from-file"},
+    "edit-section": {"id", "heading", "occurrence", "amend",
+                     "overview-ok", "content", "from-file"},
+    "delete-section": {"id", "heading", "occurrence", "amend"},
+    "append-turn": {"id", "enrichment", "content", "from-file"},
+    "supersede": {"id", "title", "overview", "session", "source-span",
+                  "owner", "cites", "content", "from-file"},
 }
 
 
@@ -941,25 +1177,42 @@ def parse_links(pairs):
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Typed, guardrailed writes over a Groundwork corpus")
-    ap.add_argument("--root", default=".")
-    ap.add_argument("--json", action="store_true", dest="json_mode")
+        description="Typed, guardrailed writes over a Groundwork corpus "
+        "(DEC-0312, DEC-0313) — the sole sanctioned write path. Long "
+        "content travels via stdin or --from-file, never shell args.",
+        epilog="examples:\n"
+        "  gw_write.py --root . create --type idea --title 'T' "
+        "--overview '...'\n"
+        "  echo 'New body.' | gw_write.py --root . edit-section "
+        "SES-0077 Purpose\n"
+        "  gw_write.py --root . remove-cite ST-0066 DEC-0335\n"
+        "  gw_write.py --root . apply ops.json\n"
+        "run via the gw dispatcher: gw.py --root <root> write <op> ...",
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--root", default=".",
+                    help="project root containing docs/ (default: cwd)")
+    ap.add_argument("--json", action="store_true", dest="json_mode",
+                    help="emit results as JSON lines")
     sub = ap.add_subparsers(dest="op", required=True)
 
     p = sub.add_parser(
-        "create",
+        "create", help="create an artifact (allocates the next ID)",
         description="Create an artifact; the API allocates the next "
         "sequential ID. A body H1 written as '# PREFIX-XXXX: ...' is "
         "stamped with the allocated ID. BATCH KEYS: type, title, "
         "overview, status, owner, links (a DICT of rel->list, e.g. "
         '{"derives-from": ["SES-0001"]} — the CLI\'s link string form '
-        "is ignored in batch), cites (list), field (list), "
+        "is refused in batch, DEC-0400), cites (list), field (list), "
         "content|from-file.")
-    p.add_argument("--type", required=True)
-    p.add_argument("--title", required=True)
-    p.add_argument("--overview", required=True)
-    p.add_argument("--owner", default="awakeinagi@gmail.com")
-    p.add_argument("--status", default=None)
+    p.add_argument("--type", required=True,
+                   help="artifact type (e.g. idea, decision, session)")
+    p.add_argument("--title", required=True, help="artifact title")
+    p.add_argument("--overview", required=True,
+                   help="frontmatter overview (max 250 words)")
+    p.add_argument("--owner", default="awakeinagi@gmail.com",
+                   help="gate-accountable owner")
+    p.add_argument("--status", default=None,
+                   help="initial status (default: type's initial)")
     p.add_argument("--link", action="append", dest="link_pairs",
                    metavar="rel=ID[,ID...]")
     p.add_argument("--cite", action="append", dest="cites", default=[])
@@ -968,7 +1221,7 @@ def main():
     p.add_argument("--from-file", help="body content (else template)")
 
     p = sub.add_parser(
-        "set-status",
+        "set-status", help="change lifecycle status (guarded transitions)",
         description="Change lifecycle status. Transitions to approved/"
         "accepted/closed refuse duplicate sibling headings and "
         "placeholder lines (quote tokens in backticks to mention "
@@ -991,7 +1244,7 @@ def main():
                         "no decisions (DEC-0258)")
 
     p = sub.add_parser(
-        "add-link",
+        "add-link", help="add a frontmatter link (closed vocabulary)",
         description="Add a frontmatter link (closed vocabulary). "
         "impacts/impacted-by reciprocate automatically; relates-to "
         "does NOT — add the reverse side explicitly where wanted. "
@@ -1001,14 +1254,26 @@ def main():
     p.add_argument("target")
 
     p = sub.add_parser(
-        "add-cite",
+        "add-cite", help="add a DEC citation",
         description="Add a DEC citation; also reference the DEC in "
         "body prose (DEC-0247). BATCH KEYS: id, target.")
     p.add_argument("id")
     p.add_argument("target")
 
     p = sub.add_parser(
-        "update-overview",
+        "remove-cite", help="remove a DEC citation (dead-cite repair)",
+        description="Remove a DEC citation (DEC-0403) — the sanctioned "
+        "dead-cite repair. Refuses while body prose still references "
+        "the DEC (rework the body first; code-span quotations do not "
+        "count, DEC-0247), on immutable artifacts (accepted decisions, "
+        "closed sessions), and on approved/stale artifacts without "
+        "--amend. BATCH KEYS: id, target, amend.")
+    p.add_argument("id")
+    p.add_argument("target")
+    p.add_argument("--amend", action="store_true")
+
+    p = sub.add_parser(
+        "update-overview", help="replace the frontmatter overview",
         description="Replace the frontmatter overview (max 250 words; "
         "derived/non-normative, legal on any artifact incl. closed/"
         "accepted). BATCH KEY for the text is 'text' or 'content' — "
@@ -1018,7 +1283,7 @@ def main():
     p.add_argument("--from-file")
 
     p = sub.add_parser(
-        "edit-section",
+        "edit-section", help="replace one section body (heading kept)",
         description="Replace one section's BODY — the tool keeps the "
         "heading; payloads containing a heading line at the section's "
         "level or higher are refused (IDEA-0041). Heading matched by "
@@ -1035,7 +1300,7 @@ def main():
                    help="assert the overview is already faithful")
 
     p = sub.add_parser(
-        "delete-section",
+        "delete-section", help="remove a heading and its span (repair)",
         description="Remove a heading and its span — the phantom-"
         "heading repair op. Refuses the LAST occurrence of a type-"
         "required section (duplicates are deletable, the template is "
@@ -1046,7 +1311,7 @@ def main():
     p.add_argument("--amend", action="store_true")
 
     p = sub.add_parser(
-        "append-turn",
+        "append-turn", help="append turn content to a Transcript",
         description="Append turn content to a session's Transcript. "
         "###-level turn headings are fine; ##-level lines are refused. "
         "Closed sessions need --enrichment (dated Post-Close "
@@ -1057,7 +1322,7 @@ def main():
     p.add_argument("--enrichment", action="store_true")
 
     p = sub.add_parser(
-        "supersede",
+        "supersede", help="replace an accepted decision",
         description="Replace an accepted decision: creates the new "
         "accepted DEC (supersedes + derives-from set), flips the old "
         "to superseded, prints ratified citers as the stale-walk "
@@ -1074,13 +1339,17 @@ def main():
     p.add_argument("--from-file")
 
     p = sub.add_parser(
-        "apply",
+        "apply", help="run a JSON op list as one pre-validated unit",
         description="Run a JSON list of ops as one unit (validation "
         "defers to batch end so members may reference each other). "
         "Keys are each op's BATCH KEYS (see that op's --help); "
-        "'content' replaces --from-file inline. A refusal stops the "
-        "batch; earlier ops remain applied — re-run only the "
-        "unexecuted remainder. Full schema: references/operations.md.")
+        "'content' replaces --from-file inline. The whole batch is "
+        "pre-validated: an unknown op, unknown key, or malformed links "
+        "value refuses everything before anything applies (DEC-0400). "
+        "An apply-time refusal stops the batch and prints an applied/"
+        "not-attempted manifest (DEC-0401); a missing terminal "
+        "'applied N/N' summary means the batch did not finish — "
+        "verify per-op OK lines. Full schema: references/operations.md.")
     p.add_argument("file", help="JSON list of operation objects")
 
     args = ap.parse_args()

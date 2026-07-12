@@ -2,7 +2,7 @@
 id: IDEA-0048
 type: idea
 title: "Pipe-safe CLI output for gw read commands"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-12
 proposed-by: awakeinagi@gmail.com
@@ -30,4 +30,5 @@ The gw.py read commands emit a BrokenPipeError traceback when a downstream consu
 
 ## Disposition
 
-Pending — awaiting take-up. Relates to DEC-0389, the charter that expanded direct invocation of these commands.
+Taken up via SES-0077. DEC-0404 adds `BrokenPipeError` guards across all printing scripts, closing the noisy-traceback gap this idea flagged under the DEC-0388 direct-read charter.
+

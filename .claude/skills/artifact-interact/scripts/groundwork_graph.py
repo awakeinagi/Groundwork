@@ -70,6 +70,7 @@ type = status = 'missing' so gaps stay queryable.
 import argparse
 import json
 import re
+import os
 import sys
 import textwrap
 from pathlib import Path
@@ -753,4 +754,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except BrokenPipeError:
+        # Downstream consumer (head, less) closed the pipe — not an
+        # error (SES-0077, DEC-0404). Re-point stdout so interpreter
+        # shutdown doesn't re-raise, and exit clean.
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(0)

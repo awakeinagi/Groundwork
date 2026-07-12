@@ -28,8 +28,10 @@ derived, disposable, gitignored — never a source of truth.
 """
 
 import argparse
+import contextlib
 import hashlib
 import json
+import os
 import re
 import sys
 import time
@@ -39,6 +41,8 @@ import duckdb
 import numpy as np
 import yaml
 from model2vec import StaticModel
+
+from groundwork_audit_packet import build_packet, rank_candidates
 
 DIM = 256
 DEC_RE = re.compile(r"DEC-\d{4}")
@@ -133,7 +137,12 @@ class Store:
 
     def _model(self):
         if self.model is None:
-            self.model = StaticModel.from_pretrained("minishlab/potion-base-8M")
+            # Third-party loaders (huggingface hub, tqdm) may chatter on
+            # stdout; the audit packet owns stdout (IDEA-0027), so route
+            # any load-time output to stderr.
+            with contextlib.redirect_stdout(sys.stderr):
+                self.model = StaticModel.from_pretrained(
+                    "minishlab/potion-base-8M")
         return self.model
 
     def encode(self, texts):
@@ -145,10 +154,13 @@ class Store:
         if force:
             self.db.execute("DELETE FROM files; DELETE FROM chunks; DELETE FROM meta")
         seen, stale = set(), []
+        self.newest_doc_mtime = 0.0
         old = dict(self.db.execute("SELECT file, hash FROM files").fetchall())
         for f, fm, body in iter_docs(self.root):
             rel = str(f.relative_to(self.root))
             seen.add(rel)
+            self.newest_doc_mtime = max(self.newest_doc_mtime,
+                                        f.stat().st_mtime)
             h = hashlib.sha1(f.read_bytes()).hexdigest()
             if old.get(rel) != h:
                 stale.append((rel, h, fm, body))
@@ -222,8 +234,12 @@ class Store:
 
     def warn_graph_staleness(self):
         g = self.root / ".groundwork-graph"
-        newest = max((f.stat().st_mtime for f, _, _ in iter_docs(self.root)),
-                     default=0)
+        # Reuse the mtime high-water mark refresh() just computed rather
+        # than re-parsing the whole corpus a second time (IDEA-0027).
+        newest = getattr(self, "newest_doc_mtime", None)
+        if newest is None:
+            newest = max((f.stat().st_mtime
+                          for f, _, _ in iter_docs(self.root)), default=0)
         if not g.exists() or g.stat().st_mtime < newest:
             print("WARNING: .groundwork-graph is stale or missing — provenance "
                   "features degrade; rebuild: uv run groundwork_graph.py "
@@ -268,12 +284,12 @@ def two_tier(store, rows, sims, k, boost=True, redirect=None):
     return out
 
 
-def attach_overviews(store, entries):
+def attach_overviews(store, entries, key="artifact"):
     """Include each hit's overview (DEC-0290) — read from the file at
     emit time so the index stays overview-free and disposable."""
     for e in entries:
         row = store.db.execute("SELECT file FROM meta WHERE artifact=?",
-                               [e["artifact"]]).fetchone()
+                               [e[key]]).fetchone()
         if not row:
             continue
         fm, _ = parse_doc(store.root / row[0])
@@ -290,7 +306,7 @@ def considered_set(fm, body, redirect):
     return ids
 
 
-def cmd_audit(store, target, k):
+def cmd_audit(store, target, k, output=None):
     redirect = store.redirect_map()
     path = Path(target)
     if not path.exists():  # allow bare artifact ID
@@ -316,51 +332,90 @@ def cmd_audit(store, target, k):
                 best[did] = (s, chunks[qi][0], rows[ri][3])
     meta = {a: (t, st, ti) for a, t, st, ti in store.db.execute(
         "SELECT artifact, atype, status, title FROM meta").fetchall()}
-    ranked = sorted(best.items(), key=lambda x: -x[1][0])[:k]
-    packet = {
-        "artifact": fm.get("id", str(path)),
-        "considered": sorted(considered),
-        "candidates": [
-            {"rank": i + 1, "id": d, "title": meta.get(d, ("", "", ""))[2],
-             "matched_artifact_section": asect, "matched_decision_section": dsect}
-            for i, (d, (_s, asect, dsect)) in enumerate(ranked)],
-        "judge_instructions": (
-            "For each candidate judge whether it is BOTH (a) genuinely relevant "
-            "to the artifact's content and (b) missing from consideration — the "
-            "artifact should cite, reference, or consciously address it. Be "
-            "strict: most retrieval candidates are noise; do not manufacture "
-            "relevance; follow citation chains before flagging (a decision "
-            "already carried by a cited decision's provenance is NOT missing). "
-            "Report at most 4 findings ranked by importance (ID + why relevant "
-            "+ where to consider it), or exactly 'Nothing to add.' plus the "
-            "closest near-miss and why it fails. Also report, separately and "
-            "clearly labeled, any contract gap you notice while judging."),
+    # The audited artifact travels IN the packet — judges never evaluate
+    # blind (IDEA-0027); assembly is pure/model-free for testability.
+    artifact = {
+        "id": fm.get("id", str(path)),
+        "title": str(fm.get("title", "")),
+        "overview": " ".join(str(fm.get("overview") or "").split()),
+        "body": body.strip(),
     }
-    print(json.dumps(packet, indent=2))
+    packet = build_packet(artifact, considered, rank_candidates(best, k),
+                          meta)
+    attach_overviews(store, packet["candidates"], key="id")
+    text = json.dumps(packet, indent=2)
+    if output:
+        Path(output).write_text(text + "\n", encoding="utf-8")
+        print(f"packet -> {output}")
+    else:
+        print(text)
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--root", default=".", type=Path)
+    ap = argparse.ArgumentParser(
+        description="Hybrid semantic search and decision-recall audit "
+        "over a Groundwork corpus (DEC-0111..DEC-0119). The index "
+        "(.groundwork-search, DuckDB) is derived and disposable; "
+        "per-file hash freshness reconciles on every invocation.",
+        epilog="examples:\n"
+        "  groundwork_search.py --root . search 'write serialization' "
+        "--k 8\n"
+        "  groundwork_search.py --root . search 'gate policy' "
+        "--type decision --current\n"
+        "  groundwork_search.py --root . similar IDEA-0034\n"
+        "  groundwork_search.py --root . audit SES-0077 "
+        "--output packet.json\n"
+        "run via the gw dispatcher: gw.py --root <root> search ...",
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--root", default=".", type=Path,
+                    help="project root containing docs/ (default: cwd)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    s = sub.add_parser("search")
-    s.add_argument("query")
-    s.add_argument("--k", type=int, default=8)
-    s.add_argument("--type")
-    s.add_argument("--status")
-    s.add_argument("--current", action="store_true")
-    s.add_argument("--turns", action="store_true")
-    s.add_argument("--within")
-    s.add_argument("--no-boost", action="store_true")
-    s.add_argument("--no-overviews", action="store_true")
-    m = sub.add_parser("similar")
-    m.add_argument("id")
-    m.add_argument("--k", type=int, default=8)
-    m.add_argument("--no-overviews", action="store_true")
-    a = sub.add_parser("audit")
-    a.add_argument("artifact")
-    a.add_argument("--k", type=int, default=15)
-    sub.add_parser("build")
+    s = sub.add_parser(
+        "search", help="semantic search over corpus chunks",
+        description="Rank artifacts by chunk similarity to the query; "
+        "two-tier output with overviews (DEC-0290), superseded "
+        "redirects, and one-hop graph boost (DEC-0119).")
+    s.add_argument("query", help="natural-language query")
+    s.add_argument("--k", type=int, default=8,
+                   help="artifacts to return (default 8)")
+    s.add_argument("--type", help="filter by artifact type")
+    s.add_argument("--status", help="filter by status")
+    s.add_argument("--current", action="store_true",
+                   help="exclude superseded and stale artifacts")
+    s.add_argument("--turns", action="store_true",
+                   help="match session transcript turns only")
+    s.add_argument("--within", metavar="ID",
+                   help="limit to the derives-from subtree of ID")
+    s.add_argument("--no-boost", action="store_true",
+                   help="disable the one-hop graph neighbor boost")
+    s.add_argument("--no-overviews", action="store_true",
+                   help="omit hit overviews from the output")
+    m = sub.add_parser(
+        "similar", help="artifacts most similar to a given one",
+        description="Rank artifacts by similarity to the mean "
+        "embedding of the given artifact's chunks (duplicate hunting).")
+    m.add_argument("id", help="artifact ID")
+    m.add_argument("--k", type=int, default=8,
+                   help="artifacts to return (default 8)")
+    m.add_argument("--no-overviews", action="store_true",
+                   help="omit hit overviews from the output")
+    a = sub.add_parser(
+        "audit", help="decision-recall audit judge packet",
+        description="Rank accepted decisions relevant to the artifact "
+        "but absent from its considered set (cites + inline refs, "
+        "superseded-redirected) and emit the self-sufficient judge "
+        "packet (DEC-0405): the artifact's own title/overview/body, "
+        "candidate overviews and scores, deterministic ordering.")
+    a.add_argument("artifact", help="artifact ID or file path")
+    a.add_argument("--k", type=int, default=15,
+                   help="candidates to rank (default 15)")
+    a.add_argument("--output", metavar="PATH",
+                   help="write the packet JSON to PATH instead of stdout "
+                        "(defends the machine-parsed stream, IDEA-0027)")
+    sub.add_parser(
+        "build", help="force a full index rebuild",
+        description="Delete and rebuild the whole index; normally "
+        "unnecessary (per-file freshness reconciles every run).")
     args = ap.parse_args()
 
     store = Store(args.root)
@@ -371,7 +426,7 @@ def main():
         print(f"indexed {n} chunks in {time.time()-t0:.2f}s")
         return
     if args.cmd == "audit":
-        cmd_audit(store, args.artifact, args.k)
+        cmd_audit(store, args.artifact, args.k, args.output)
         return
 
     where, params = ["1=1"], []
@@ -409,4 +464,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except BrokenPipeError:
+        # Downstream consumer (head, less) closed the pipe — not an
+        # error (IDEA-0048). Re-point stdout so interpreter shutdown
+        # doesn't re-raise, and exit clean.
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(0)
