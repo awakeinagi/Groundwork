@@ -40,25 +40,48 @@ members' cross-component `Uses:` targets (DEC-0309).
 Pipeline: Idea → Sessions → Business Goal → Epics → Stories/Spikes →
 Component Docs. Every stage transition passes a **human approval gate**.
 
-## How agents touch artifacts — the artifact-librarian mandate
+## How agents touch artifacts — the interaction charter
 
-**All agents must use the `artifact-librarian` agent to interact with
-artifacts, unless the `artifact-interact` skill has been manually
-loaded (DEC-0325, DEC-0326, DEC-0327).** Reads, searches, graph
-queries, and writes alike: spawn the `artifact-librarian` project
-agent (`.claude/agents/artifact-librarian.md`) with a task-level
-intent — its Sonnet model and effort are pinned in the agent's
-frontmatter, which is authoritative (DEC-0329, DEC-0348); do not pass
-a spawn-time model param. It executes the operations through the `artifact-interact`
-skill's guardrailed CLI — the sole sanctioned write path (DEC-0312) —
-and returns a distilled result (verbatim content on request). Do not
-Read/Edit/Write `docs/` artifact files yourself, and do not load
-`artifact-interact` because context seems to call for it — the skill
-is explicit-load-only. "Manually loaded" means the operator loaded it
-by name, or your own agent definition explicitly charters it
-(DEC-0328: `overview-writer` and `system-architect` hold such
-charters). Read-only librarian tasks may run in parallel; never run
-two write-task librarians concurrently (DEC-0332). The librarian never
+**Targeted reads are chartered to every agent; writes and synthesis go
+through the `artifact-librarian` (DEC-0388).**
+
+**Direct targeted reads (any agent).** For bounded lookups consumed
+as-is, invoke the gw CLI's read-only families directly:
+
+```
+python3 .claude/skills/artifact-interact/scripts/gw.py --root . read overview <ID>
+  (also: read outline/section/citers, read overview --type T --status S,
+   search search "<query>", graph impact/trace <ID>)
+```
+
+Load the `gw-read` skill for full recipes — it is read-only and may
+load freely (DEC-0390). Discipline (DEC-0388, DEC-0389): overviews
+first, bodies only when an overview says the detail is there; filters
+over ID enumeration; never the `write` family; never raw
+Read/Grep/Glob of `docs/` (agent-definition charters per DEC-0328
+excepted). The boundary is output-shape plus judgment: the moment a
+task needs iterative exploration or cross-artifact synthesis — or you
+catch yourself chaining many calls — delegate to the librarian.
+
+**Librarian-mediated (mandatory).** All writes, and all open-ended
+synthesis reads (precedent hunts, surveys, recall audits): spawn the
+`artifact-librarian` project agent
+(`.claude/agents/artifact-librarian.md`) with a task-level intent —
+its Sonnet model and effort are pinned in the agent's frontmatter,
+which is authoritative (DEC-0329, DEC-0348); do not pass a spawn-time
+model param. It executes through the `artifact-interact` skill's
+guardrailed CLI — the sole sanctioned write path (DEC-0312) — and
+returns a distilled result (verbatim content on request).
+`artifact-interact` itself remains explicit-load-only (DEC-0326,
+DEC-0327).
+
+**Concurrency (DEC-0392–DEC-0394).** Librarian tasks launch in the
+background by default; block only where the next turn depends on the
+result (DEC-0393). Read tasks fan out freely. Interim: one write-task
+librarian at a time (DEC-0394) until the DEC-0391 lock-serialized
+apply ships; thereafter write tasks fan out too, with order-dependent
+writes in one batch or explicitly sequenced, and at most one
+turn-appending task per session (DEC-0392). The librarian never
 commits — git stays with you (DEC-0333).
 
 ## The no-arbitrary-builds guard (DEC-0335, DEC-0345)

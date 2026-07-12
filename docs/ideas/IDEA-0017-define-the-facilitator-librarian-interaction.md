@@ -16,7 +16,11 @@ overview: >-
   knows. This session ran many librarian tasks by practice/example
   rather than written spec; a future session should formalize it,
   likely as part of the pending librarian Component Doc's
-  conversational-patterns contract dimension.
+  conversational-patterns contract dimension. SES-0076's decisions
+  DEC-0388..DEC-0393 now constrain this idea: any future protocol
+  formalization must honor the targeted-read charter, the lock-
+  serialized write model, the dependency rule, and the background-
+  by-default interaction pattern.
 links:
   derives-from: [SES-0061]
   relates-to: [DEC-0324, DEC-0331]
@@ -58,3 +62,6 @@ pending epic (IDEA-0015) is derived — this is arguably the librarian's
 "conversational patterns" contract dimension the system-architect
 consultation already flagged as needing to be first-class for an
 agent component.
+
+SES-0076's decisions DEC-0388..DEC-0393 now constrain this idea: any future protocol formalization must honor the targeted-read charter, the lock-serialized write model, the dependency rule, and the background-by-default interaction pattern.
+

@@ -2,7 +2,8 @@
 id: DEC-0325
 type: decision
 title: Librarian delegation is mandatory for all artifact interaction, by all agents
-status: accepted
+status: superseded
+superseded-by: [DEC-0388]
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 decided-by: awakeinagi@gmail.com

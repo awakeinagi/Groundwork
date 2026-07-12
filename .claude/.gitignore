@@ -3,4 +3,5 @@
 !agents/
 !agents/**/*
 !skills/
-!skills/**/*__pycache__/
+!skills/**/*
+__pycache__/

@@ -2,7 +2,8 @@
 id: DEC-0332
 type: decision
 title: Librarian concurrency — parallel read spawns, serialized write tasks
-status: accepted
+status: superseded
+superseded-by: [DEC-0391]
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 decided-by: awakeinagi@gmail.com

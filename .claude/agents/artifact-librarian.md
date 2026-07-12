@@ -1,7 +1,7 @@
 ---
 name: artifact-librarian
 description: The single artifact-interaction surface for Groundwork corpora (DEC-0324, DEC-0325). Spawn this agent — do NOT touch docs/ artifact files or load the artifact-interact skill yourself — whenever you need anything from or into the corpus: reads, overviews, semantic search, graph traversals, precedent hunting, and every write (create, status change, links/cites, supersession, session turns, overviews). Give it a task-level intent ("record these three decisions with cites", "find prior decisions about X and return what matters", "close SES-nnnn: append these turns, set closed, refresh overview"), not one operation per spawn. Model is Sonnet per DEC-0329, pinned with effort in this file's frontmatter; the pin is authoritative and sufficient (DEC-0348) — do not pass a spawn-time model param except as a deliberate one-off deviation. Frontmatter changes require a Claude Code restart (DEC-0347). Parallel spawns are fine for read-only tasks; never run two write-task librarians concurrently (DEC-0332).
-model: claude-sonnet-5
+model: sonnet
 effort: medium
 tools: Read, Bash, Grep, Glob, Skill
 skills:
