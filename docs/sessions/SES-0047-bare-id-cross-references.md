@@ -21,7 +21,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [DEC-0009, DEC-0090, DEC-0091]
+  relates-to: [DEC-0009, DEC-0090, DEC-0091, DEC-0242, DEC-0243, DEC-0244]
 ---
 
 # SES-0047: Bare-ID Cross-References and the Doc Viewer

@@ -19,7 +19,7 @@ participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SES-0026, SP-0006, SP-0007]
+  relates-to: [SES-0026, SP-0006, SP-0007, DEC-0157, DEC-0158, DEC-0159, DEC-0160]
 ---
 
 # SES-0027: Proactive Consistency Tooling

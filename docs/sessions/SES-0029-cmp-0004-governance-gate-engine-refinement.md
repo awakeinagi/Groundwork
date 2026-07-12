@@ -19,7 +19,7 @@ facilitator: Claude (Sonnet 5)
 transcript-fidelity: verbatim
 links:
   derives-from: [EP-0003]
-  relates-to: [ST-0012, ST-0013, ST-0014, ST-0015, ST-0016, ST-0017, ST-0018]
+  relates-to: [ST-0012, ST-0013, ST-0014, ST-0015, ST-0016, ST-0017, ST-0018, DEC-0162, DEC-0163, DEC-0164, DEC-0165]
 ---
 
 # SES-0029: Refine the Governance & Gate Engine Component Doc

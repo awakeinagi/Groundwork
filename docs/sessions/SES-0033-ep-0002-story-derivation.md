@@ -21,7 +21,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0002]
+  relates-to: [EP-0002, DEC-0178, DEC-0179, DEC-0180, DEC-0181, DEC-0182, DEC-0183]
 ---
 
 # SES-0033: EP-0002 Story Derivation

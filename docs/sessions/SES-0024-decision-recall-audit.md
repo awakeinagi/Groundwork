@@ -19,7 +19,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SES-0023, CMP-0003, DEC-0111, DEC-0116, DEC-0136]
+  relates-to: [SES-0023, CMP-0003, DEC-0111, DEC-0116, DEC-0136, DEC-0137, DEC-0138, DEC-0139]
 ---
 
 # SES-0024: Decision-Recall Audit

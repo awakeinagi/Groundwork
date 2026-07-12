@@ -20,7 +20,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [ST-0001, ST-0007, ST-0008, ST-0010, EP-0001, DEC-0121, DEC-0077]
+  relates-to: [ST-0001, ST-0007, ST-0008, ST-0010, EP-0001, DEC-0121, DEC-0077, DEC-0125]
 ---
 
 # SES-0021: Gated-Story Realignment

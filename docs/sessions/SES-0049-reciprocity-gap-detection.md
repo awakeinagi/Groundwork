@@ -22,7 +22,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [BG-0001, EP-0008, DEC-0242]
+  relates-to: [BG-0001, EP-0008, DEC-0242, DEC-0246, DEC-0247, DEC-0248, DEC-0249, DEC-0250, DEC-0251]
 ---
 
 # SES-0049: Reciprocity Gap Detection

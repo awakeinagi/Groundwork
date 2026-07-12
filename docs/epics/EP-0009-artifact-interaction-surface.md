@@ -178,8 +178,6 @@ ones.
 
 ## Derived Work
 
-## Derived Work
-
 The activegraph exploratory spike program (DEC-0354): SP-0013
 (projection), SP-0014 (structural rule precision, impacted-by
 SP-0013), SP-0015 (prose-to-rule compilation fidelity, independent),

@@ -34,7 +34,7 @@ overview: >-
   states explicit evaluation criteria and data-source assumptions at
   definition time. No further ideas inspired.
 links:
-  relates-to: [IDEA-0015]
+  relates-to: [IDEA-0015, DEC-0350, DEC-0351, DEC-0352, DEC-0353]
 ---
 
 ## Purpose

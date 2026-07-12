@@ -18,7 +18,7 @@ participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SES-0012, ST-0007, CMP-0001]
+  relates-to: [SES-0012, ST-0007, CMP-0001, DEC-0088, DEC-0089]
 ---
 
 # SES-0013: Typed Obligations Refinement

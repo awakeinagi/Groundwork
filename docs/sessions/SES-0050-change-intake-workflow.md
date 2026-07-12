@@ -21,7 +21,7 @@ participant-role: stakeholder
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [BG-0001, ST-0035, DEC-0020, DEC-0037, DEC-0046, DEC-0047, IDEA-0001, IDEA-0002]
+  relates-to: [BG-0001, ST-0035, DEC-0020, DEC-0037, DEC-0046, DEC-0047, IDEA-0001, IDEA-0002, DEC-0252, DEC-0253, DEC-0254, DEC-0255, DEC-0256, DEC-0257, DEC-0258, DEC-0259, DEC-0260, DEC-0261, DEC-0262, DEC-0263, DEC-0264, DEC-0265, DEC-0266, DEC-0267]
 ---
 
 # SES-0050: The Change-Intake Workflow

@@ -14,7 +14,7 @@ intake:
   origin: user
   proposed-by: awakeinagi
 links:
-  relates-to: []
+  relates-to: [DEC-0354, DEC-0355, DEC-0356, DEC-0357, DEC-0358]
 overview: >-
   Change-intake session opened at the verbatim proposal (DEC-0255)
   to evaluate applying ActiveGraph to Groundwork. T3-T11 explored an

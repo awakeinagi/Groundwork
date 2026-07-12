@@ -50,8 +50,6 @@ questions a future session should settle.
 
 ## Disposition
 
-## Disposition
-
 Taken up by SES-0062. That session pulled this idea's full payload and
 found the literal requested change already existed in
 `.claude/agents/system-architect.md` frontmatter; the real gap —

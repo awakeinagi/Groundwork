@@ -18,7 +18,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SP-0002, DEC-0105, DEC-0106, DEC-0107]
+  relates-to: [SP-0002, DEC-0105, DEC-0106, DEC-0107, DEC-0109, DEC-0110]
 ---
 
 # SES-0018: Trigger Subscriptions

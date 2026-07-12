@@ -84,8 +84,6 @@ The throwaway projection script and its ActiveGraph store are retained as eviden
 
 ## Resulting Decisions
 
-## Resulting Decisions
-
 DEC-0358 (SES-0064): SP-0014's execution deferred until the corpus-wide `Uses:` backfill this spike's central finding forced is taken up and completed.
 
 DEC-0359 (SES-0066): the corpus-wide `Uses:` backfill executed -- 71 typed edges across the 15 conforming CMPs' 53 elements, derived by the three-pass methodology this spike's findings' evidentiary basis grounded.

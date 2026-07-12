@@ -20,7 +20,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0001, EP-0004, EP-0007, DEC-0102, DEC-0067, SP-0002]
+  relates-to: [EP-0001, EP-0004, EP-0007, DEC-0102, DEC-0067, SP-0002, DEC-0121, DEC-0122, DEC-0123, DEC-0124]
 ---
 
 # SES-0020: Pluggable Infrastructure Ports

@@ -35,7 +35,7 @@ links:
 cites: [DEC-0354, DEC-0356]
 ---
 
-# SP-0014 produced no differential evidence for a reactive substrate
+# DEC-0368: SP-0014 produced no differential evidence for a reactive substrate
 
 ## Context
 

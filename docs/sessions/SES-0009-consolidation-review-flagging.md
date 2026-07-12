@@ -19,7 +19,7 @@ participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0007, SES-0008]
+  relates-to: [EP-0007, SES-0008, DEC-0072]
 ---
 
 # SES-0009: Consolidation Review & Flagging (EP-0007 Amendment)

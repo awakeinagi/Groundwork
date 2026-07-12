@@ -20,7 +20,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0008]
+  relates-to: [EP-0008, DEC-0206, DEC-0207, DEC-0208, DEC-0209, DEC-0210, DEC-0211, DEC-0212, DEC-0213]
 ---
 
 # SES-0039: Backend Application Platform Story Derivation

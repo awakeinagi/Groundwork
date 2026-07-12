@@ -18,7 +18,7 @@ participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [ST-0003, ST-0005, ST-0008, EP-0001]
+  relates-to: [ST-0003, ST-0005, ST-0008, EP-0001, DEC-0077, DEC-0078, DEC-0079]
 ---
 
 # SES-0011: EP-0001 Story Refinement

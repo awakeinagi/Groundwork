@@ -19,7 +19,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0008, ST-0060, CMP-0012]
+  relates-to: [EP-0008, ST-0060, CMP-0012, DEC-0214, DEC-0215, DEC-0216, DEC-0217, DEC-0218]
 ---
 
 # SES-0040: Queue Port Contract Refinement

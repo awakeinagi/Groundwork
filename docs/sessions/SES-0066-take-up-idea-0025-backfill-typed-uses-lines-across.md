@@ -44,7 +44,7 @@ overview: >-
   IDEA-0028/IDEA-0029 captured, SP-0013/SP-0014/SP-0015 updated,
   checker green.
 links:
-  relates-to: [IDEA-0025, SP-0014, DEC-0358, DEC-0299, DEC-0306, DEC-0309, SP-0013, EP-0009]
+  relates-to: [IDEA-0025, SP-0014, DEC-0358, DEC-0299, DEC-0306, DEC-0309, SP-0013, EP-0009, DEC-0359, DEC-0360, DEC-0361, DEC-0362, DEC-0363, DEC-0364, DEC-0365, DEC-0366]
 ---
 
 ## Purpose

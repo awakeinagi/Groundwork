@@ -42,7 +42,7 @@ overview: >-
 cites: [DEC-0347, DEC-0348, DEC-0349]
 links:
   derives-from: [IDEA-0023]
-  relates-to: [DEC-0292, DEC-0329, SES-0061, SES-0062]
+  relates-to: [DEC-0292, DEC-0329, SES-0061, SES-0062, DEC-0347, DEC-0348, DEC-0349]
 ---
 
 # SES-0063: Take-up: DEC-0292 explicit-override mandate — reconcile model/effort finding
@@ -58,8 +58,6 @@ relates-to artifacts: DEC-0292, DEC-0329, IDEA-0023, SES-0061,
 SES-0062.
 
 ## Transcript
-
-TBD.
 
 **T1 — awakeinagi:**
 

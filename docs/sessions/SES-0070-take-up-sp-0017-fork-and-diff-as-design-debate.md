@@ -29,7 +29,7 @@ overview: >-
   was deferred to the DEC-0337 cross-spike survey, and the session
   closed with SP-0017 approved.
 links:
-  relates-to: [SP-0017]
+  relates-to: [SP-0017, DEC-0369, DEC-0370, DEC-0371, DEC-0372, DEC-0373]
 ---
 
 # SES-0070: Take up SP-0017: fork-and-diff as design-debate evidence

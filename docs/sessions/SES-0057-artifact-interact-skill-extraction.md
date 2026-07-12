@@ -38,8 +38,7 @@ overview: >-
   agents).
   No product artifacts (BG/EP/ST/CMP) change.
 links:
-  relates-to: [DEC-0289, DEC-0029, DEC-0033, DEC-0116, SES-0053,
-               IDEA-0010]
+  relates-to: [DEC-0289, DEC-0029, DEC-0033, DEC-0116, SES-0053, IDEA-0010, DEC-0310, DEC-0311, DEC-0312, DEC-0313, DEC-0314, DEC-0315, DEC-0316, DEC-0317, DEC-0318, DEC-0319, DEC-0320, DEC-0321, DEC-0322, DEC-0323]
 ---
 
 # SES-0057: Extract Artifact Tooling into the artifact-interact Skill

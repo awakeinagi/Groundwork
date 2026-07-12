@@ -34,8 +34,6 @@ Raised at SES-0064 T21-T22: SP-0013's executed findings surfaced the `Uses:`-lin
 
 ## Disposition
 
-## Disposition
-
 Taken up at SES-0066. The corpus-wide backfill executed (DEC-0359) -- 71
 typed Uses: edges across 53 elements in the 15 conforming CMPs, 20 explicit
 Uses: none -- and checker enforcement was armed (DEC-0360, rule 20). The

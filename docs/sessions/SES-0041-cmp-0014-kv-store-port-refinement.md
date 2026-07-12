@@ -19,7 +19,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0008, ST-0062, CMP-0014]
+  relates-to: [EP-0008, ST-0062, CMP-0014, DEC-0219, DEC-0220, DEC-0221]
 ---
 
 # SES-0041: KV-Store Port Contract Refinement

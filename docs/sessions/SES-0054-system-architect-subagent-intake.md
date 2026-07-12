@@ -29,7 +29,7 @@ overview: >-
   finding, ratified in-session). Captured IDEA-0005 (researcher
   agent) at the inspired-ideas check.
 links:
-  relates-to: [IDEA-0003, SES-0053, DEC-0291, IDEA-0005]
+  relates-to: [IDEA-0003, SES-0053, DEC-0291, IDEA-0005, DEC-0292, DEC-0293, DEC-0294, DEC-0295, DEC-0296]
 ---
 
 # SES-0054: IDEA-0003 take-up — the `system-architect` subagent

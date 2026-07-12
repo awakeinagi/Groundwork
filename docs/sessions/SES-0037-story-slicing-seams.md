@@ -20,7 +20,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SES-0036]
+  relates-to: [SES-0036, DEC-0198, DEC-0199, DEC-0200]
 ---
 
 # SES-0037: Story-Slicing Seam Guidance and Coupling-Check Generalization

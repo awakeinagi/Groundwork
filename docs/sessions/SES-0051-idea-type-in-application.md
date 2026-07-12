@@ -22,7 +22,7 @@ facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
   derives-from: [IDEA-0002]
-  relates-to: [IDEA-0001, EP-0001, EP-0006, ST-0001, CMP-0001, ST-0055, ST-0056, ST-0065]
+  relates-to: [IDEA-0001, EP-0001, EP-0006, ST-0001, CMP-0001, ST-0055, ST-0056, ST-0065, DEC-0268, DEC-0269, DEC-0270, DEC-0271, DEC-0272]
 ---
 
 # SES-0051: The Idea Type in the Application

@@ -19,7 +19,7 @@ facilitator: Claude (Sonnet 5)
 transcript-fidelity: reconstructed
 links:
   derives-from: [EP-0005]
-  relates-to: [ST-0019, ST-0020, ST-0028, SP-0004]
+  relates-to: [ST-0019, ST-0020, ST-0028, SP-0004, DEC-0172, DEC-0173]
 ---
 
 # SES-0031: GitHub Replaces Bitbucket Data Center as v1

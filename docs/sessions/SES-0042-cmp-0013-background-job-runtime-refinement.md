@@ -20,7 +20,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0008, ST-0061, CMP-0013]
+  relates-to: [EP-0008, ST-0061, CMP-0013, DEC-0222, DEC-0223, DEC-0224, DEC-0225]
 ---
 
 # SES-0042: Background Job Execution Runtime Contract Refinement

@@ -20,7 +20,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SES-0035]
+  relates-to: [SES-0035, DEC-0201, DEC-0202, DEC-0203, DEC-0204, DEC-0205]
 ---
 
 # SES-0038: Backend Application Platform Epic Refinement

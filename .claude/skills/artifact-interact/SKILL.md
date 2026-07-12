@@ -29,7 +29,7 @@ python3 <skill-dir>/scripts/gw.py --root <project> <family> [args...]
 | Family | Runs via | What it serves |
 |---|---|---|
 | `read` | python3 | overview, outline, section, element, item, turns, term, citers |
-| `write` | python3 | create, set-status, add-link, add-cite, update-overview, edit-section, append-turn, supersede, apply |
+| `write` | python3 | create, set-status, add-link, add-cite, update-overview, edit-section, delete-section, append-turn, supersede, apply |
 | `check` | python3 | the full integrity suite — the pre-commit gate (DEC-0315) |
 | `status` | python3 | project status report (counts, open items, frontier, mode) |
 | `consistency` | python3 | post-distillation `sweep` and `terms` checks |
@@ -59,12 +59,34 @@ name the sanctioned alternative (e.g. editing an accepted decision
 directs to `supersede`); report refusals to your caller rather than
 improvising around them.
 
+Payloads are finished prose: complete sentences with normal
+capitalization and punctuation. If a caller's payload opens a sentence
+with a label-continuation fragment or a lowercase code identifier,
+reword it (or push back) rather than transcribing the fragment
+verbatim under a section heading (SES-0072 casing repair).
+
 Long content travels via stdin, `--from-file PATH`, or `--from-file -`
 (explicit stdin) — never shell-quoted arguments (DEC-0314). Multi-op
 transactions (e.g. close-session = append turns + set status + update
 overview) go through `write apply ops.json`; see
 [references/operations.md](references/operations.md) for every
 operation's flags, invariants, refusal conditions, and batch schema.
+
+Structural guards (SES-0072): section payloads are **body-only** —
+`edit-section`/`append-turn` refuse content carrying a heading line at
+the target section's level or higher (the IDEA-0041 phantom-heading
+defect); repair existing corruption with `edit-section --occurrence N`
+or `delete-section` (duplicate occurrences are deletable, a type's
+required template is not). Ratifying transitions (`approved`,
+`accepted`, `closed`) refuse bodies with duplicate sibling headings or
+placeholder lines (TBD/TODO/FIXME, unallocated `…-XXXX` IDs — quote
+them in backticks to mention them legitimately). Session close
+additionally requires participant/participant-role/facilitator/
+transcript-fidelity frontmatter, and either a produced decision or
+`--no-decisions-ok "<reason>"` (DEC-0258). Accepting a proposed
+decision requires `--session SES-nnnn` (stamped as `accepted-in`).
+Bodies given to `create` may write their H1 as `# <PREFIX>-XXXX: …` —
+the allocated ID is stamped in.
 
 The full `check` family remains the pre-commit gate: run it before any
 commit; per-op re-checks do not replace it. Git itself belongs to the

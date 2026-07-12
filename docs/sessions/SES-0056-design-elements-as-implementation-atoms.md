@@ -35,8 +35,7 @@ overview: >-
   addressed; all four gated amendments approved 2026-07-09. Session
   closed; follow-on queue in Session Close.
 links:
-  relates-to: [SES-0055, IDEA-0006, IDEA-0009, DEC-0011, DEC-0014,
-               DEC-0136]
+  relates-to: [SES-0055, IDEA-0006, IDEA-0009, DEC-0011, DEC-0014, DEC-0136, DEC-0297, DEC-0298, DEC-0299, DEC-0300, DEC-0301, DEC-0302, DEC-0303, DEC-0304, DEC-0305, DEC-0306, DEC-0307, DEC-0308, DEC-0309]
 ---
 
 # SES-0056: Design Elements as Implementation Atoms

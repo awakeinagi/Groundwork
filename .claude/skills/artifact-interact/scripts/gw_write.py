@@ -7,8 +7,18 @@ basis, DEC-0311), performs the write plus its bookkeeping atomically,
 re-validates the artifacts it touched (DEC-0315), and prints a compact
 result so the caller need not re-read the file (DEC-0314).
 
-Operations (DEC-0313): create, append-turn, edit-section, set-status,
-add-link, add-cite, supersede, update-overview, apply (JSON batch).
+Operations (DEC-0313): create, append-turn, edit-section, delete-section,
+set-status, add-link, add-cite, supersede, update-overview, apply
+(JSON batch).
+
+Structural guards (SES-0072, from IDEA-0041/IDEA-0028): section payloads
+are body-only — content carrying a heading line at the target section's
+level or higher is refused (phantom-heading defect); `edit-section
+--occurrence N` and `delete-section` recover already-corrupted structure;
+ratifying transitions (approved/accepted/closed) refuse bodies with
+duplicate sibling headings or placeholder text; session close requires
+complete frontmatter and either a produced decision or an explicit
+--no-decisions-ok assessment.
 
 Long content travels via stdin or --from-file, never shell arguments.
 Errors name the sanctioned alternative where one exists.
@@ -24,6 +34,15 @@ import re
 import sys
 from pathlib import Path
 from typing import NoReturn
+
+# Optional (SES-0072): frontmatter YAML validation at recheck time when
+# PyYAML is present. Absent, the check skips silently — the write path
+# stays stdlib-only (DEC-0317); the pre-commit checker (which requires
+# PyYAML) remains the backstop.
+try:
+    import yaml as _yaml
+except ImportError:  # pragma: no cover
+    _yaml = None
 
 # ---------------------------------------------------------------- model
 
@@ -98,6 +117,16 @@ REQUIRED_SECTIONS = {
 
 ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}\b")
 HEADING_RE = re.compile(r"^(#{2,4})\s+(.*?)\s*$")
+ANY_HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
+INLINE_CODE_RE = re.compile(r"`[^`\n]*`")
+PLACEHOLDER_LINE_RE = re.compile(r"^(?:TBD|TODO|FIXME)\s*[.!:]?$", re.I)
+ID_PLACEHOLDER_RE = re.compile(
+    r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-XXXX\b")
+BODY_H1_ID_RE = re.compile(
+    r"^#\s+((?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4})\b")
+RATIFYING_STATUSES = {"approved", "accepted", "closed"}
+SESSION_CLOSE_FIELDS = ("participant", "participant-role", "facilitator",
+                        "transcript-fidelity")
 
 
 def today():
@@ -107,6 +136,68 @@ def today():
 def fail(msg, code=1) -> "NoReturn":
     print(f"REFUSED: {msg}", file=sys.stderr)
     raise SystemExit(code)
+
+
+# ------------------------------------------- structural guards (SES-0072)
+
+def prose_lines(text):
+    """(lineno, line) outside fenced code blocks, inline code blanked.
+
+    Quoting a placeholder or heading legitimately is done in backticks —
+    inline code and fenced blocks are exempt from every structural scan.
+    """
+    in_code = False
+    for n, line in enumerate(text.splitlines(), 1):
+        if line.lstrip().startswith("```"):
+            in_code = not in_code
+            continue
+        if not in_code:
+            yield n, INLINE_CODE_RE.sub("", line)
+
+
+def guard_heading_lines(content, max_level, where):
+    """Refuse body-only payloads carrying heading lines (IDEA-0041).
+
+    A heading at the target section's level or higher becomes a phantom
+    section boundary no later edit-section call can reach past.
+    """
+    for n, line in prose_lines(content):
+        m = ANY_HEADING_RE.match(line.rstrip())
+        if m and len(m.group(1)) <= max_level:
+            fail(f"{where}: content line {n} is a heading-level line "
+                 f"({line.strip()[:60]!r}) — this op writes section BODY "
+                 "only; the tool owns heading lines (IDEA-0041). Strip it; "
+                 "to repair existing structure use delete-section or "
+                 "edit-section --occurrence")
+
+
+def duplicate_sibling_headings(body):
+    """[(level, text, count)] of repeated same-level headings sharing a
+    parent — the phantom-heading signature."""
+    stack, seen = [], {}
+    for _, line in prose_lines(body):
+        m = ANY_HEADING_RE.match(line.rstrip())
+        if not m:
+            continue
+        level, text = len(m.group(1)), m.group(2)
+        while stack and stack[-1][0] >= level:
+            stack.pop()
+        key = (tuple(t for _, t in stack), level, text)
+        seen[key] = seen.get(key, 0) + 1
+        stack.append((level, text))
+    return [(k[1], k[2], n) for k, n in seen.items() if n > 1]
+
+
+def placeholder_findings(body):
+    """Standalone TBD/TODO/FIXME lines and unallocated ID placeholders."""
+    out = []
+    for n, line in prose_lines(body):
+        s = line.strip()
+        if PLACEHOLDER_LINE_RE.match(s):
+            out.append(f"line {n} is placeholder text {s!r}")
+        for tok in ID_PLACEHOLDER_RE.findall(line):
+            out.append(f"line {n} carries unallocated ID placeholder {tok}")
+    return out
 
 
 # ------------------------------------------------------------ file model
@@ -202,13 +293,14 @@ class Artifact:
 
     # -- body helpers --
 
-    def section_span(self, heading_substr):
+    def section_span(self, heading_substr, occurrence=1):
         lines = self.body.splitlines(keepends=True)
         want = heading_substr.lower()
         start = end = None
         level = 0
         in_code = False
         pos = 0
+        matched = 0
         for line in lines:
             stripped = line.rstrip("\n")
             if stripped.startswith("```"):
@@ -216,7 +308,9 @@ class Artifact:
             m = HEADING_RE.match(stripped) if not in_code else None
             if start is None:
                 if m and want in m.group(2).lower():
-                    start, level = pos, len(m.group(1))
+                    matched += 1
+                    if matched == occurrence:
+                        start, level = pos, len(m.group(1))
             elif m and len(m.group(1)) <= level:
                 end = pos
                 break
@@ -279,11 +373,30 @@ class Corpus:
         art = Artifact(path)
         aid = art.scalar("id")
         problems = []
+        if _yaml is not None:
+            try:
+                if not isinstance(_yaml.safe_load(art.fm), dict):
+                    problems.append("frontmatter parsed as non-mapping "
+                                    "YAML")
+            except _yaml.YAMLError as e:
+                first = str(e).splitlines()[0] if str(e) else "parse error"
+                problems.append(f"frontmatter is not parseable YAML "
+                                f"({first})")
         if not aid or not path.name.startswith(aid + "-"):
             problems.append("id/filename mismatch")
         for i in set(ID_RE.findall(art.fm) + ID_RE.findall(art.body)):
             if i != aid and i not in self.paths:
                 problems.append(f"unresolved {i}")
+        first = art.body.lstrip("\n").split("\n", 1)[0]
+        if first.startswith("# "):
+            if ID_PLACEHOLDER_RE.search(first):
+                problems.append("body H1 carries an unallocated ID "
+                                "placeholder")
+            else:
+                h1 = BODY_H1_ID_RE.match(first)
+                if h1 and h1.group(1) != aid:
+                    problems.append(f"body H1 names {h1.group(1)}, "
+                                    f"not {aid}")
         ov = extract_overview(art.fm)
         if not ov:
             problems.append("missing overview")
@@ -407,6 +520,13 @@ def op_create(c, args, json_mode):
         for sec in REQUIRED_SECTIONS.get(args.type, []):
             parts += [f"## {sec}", "", "TBD.", ""]
         body = "\n".join(parts)
+    else:
+        # Stamp the allocated ID into a placeholder H1 (SES-0072): bodies
+        # are authored before the ID exists; `# SES-XXXX: …` is expected.
+        body_lines = body.split("\n")
+        if body_lines and body_lines[0].startswith("# "):
+            body_lines[0] = body_lines[0].replace(f"{prefix}-XXXX", aid)
+            body = "\n".join(body_lines)
 
     path = c.docs / subdir / f"{aid}-{kebab(args.title)}.md"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -448,6 +568,43 @@ def op_set_status(c, args, json_mode):
             fail(f"deferred applies only to {sorted(DEFERRABLE)}")
         if not (args.release or art.scalar("release")):
             fail("deferral requires --release (DEC-0098)")
+    zero_dec_note = ""
+    if new in RATIFYING_STATUSES:
+        # Structural completeness gate (SES-0072): ratified artifacts may
+        # not carry phantom-heading duplicates or placeholder text.
+        problems = [f"duplicate sibling heading {'#' * lv} {t!r} x{n}"
+                    for lv, t, n in duplicate_sibling_headings(art.body)]
+        problems += placeholder_findings(art.body)
+        if problems:
+            fail(f"{args.id}: cannot ratify ({cur} -> {new}) — "
+                 + "; ".join(problems))
+    if atype == "session" and new == "closed":
+        missing = [f for f in SESSION_CLOSE_FIELDS if not art.scalar(f)]
+        if missing:
+            fail(f"{args.id}: session close requires frontmatter "
+                 f"{', '.join(missing)}")
+        produced = [aid for aid, p in c.paths.items()
+                    if aid.startswith("DEC-") and args.id in
+                    Artifact(p).get_list("derives-from", indent="  ")]
+        if not produced:
+            if not args.no_decisions_ok:
+                fail(f"{args.id}: no decision derives from this session — "
+                     "assess whether that is right (idea-capture sessions "
+                     "legitimately produce none, DEC-0258): either record "
+                     "the session's decisions first, or re-run with "
+                     '--no-decisions-ok "<reason>" to record the '
+                     "assessment")
+            zero_dec_note = (" [zero decisions acknowledged: "
+                             f"{args.no_decisions_ok}]")
+    if new == "accepted" and atype == "decision":
+        # accepted-in stamp (SES-0072): where a decision proposed in one
+        # session gets ratified later, the graph keeps the site.
+        if not args.session:
+            fail("accepting a decision requires --session SES-nnnn "
+                 "(accepted-in stamp)")
+        if args.session not in c.paths:
+            fail(f"{args.session} does not exist")
+        art.set_scalar("accepted-in", args.session)
     if new == "approved":
         if not args.approved_by:
             fail("approval requires --approved-by (gate stamping)")
@@ -465,7 +622,8 @@ def op_set_status(c, args, json_mode):
     art.set_scalar("status", new)
     art.write()
     c.recheck(art.path)
-    ok(f"set-status {args.id} {cur} -> {new}", [art.path], json_mode)
+    ok(f"set-status {args.id} {cur} -> {new}{zero_dec_note}",
+       [art.path], json_mode)
 
 
 def op_add_link(c, args, json_mode):
@@ -562,11 +720,17 @@ def op_edit_section(c, args, json_mode):
     content = read_payload(args)
     if content is None:
         fail("provide section content via stdin or --from-file")
-    span = art.section_span(args.heading)
+    span = art.section_span(args.heading, args.occurrence)
     if span is None:
-        fail(f"{args.id}: no section matching {args.heading!r}")
+        where = (f" (occurrence {args.occurrence})"
+                 if args.occurrence != 1 else "")
+        fail(f"{args.id}: no section matching {args.heading!r}{where}")
     start, end = span
     head_line = art.body[start:].splitlines()[0]
+    hm = HEADING_RE.match(head_line)
+    assert hm is not None
+    guard_heading_lines(content, len(hm.group(1)),
+                        f"{args.id} {args.heading!r}")
     art.body = (art.body[:start] + head_line + "\n\n" +
                 content.strip() + "\n\n" + art.body[end:])
     art.write()
@@ -579,6 +743,46 @@ def op_edit_section(c, args, json_mode):
        json_mode)
 
 
+def op_delete_section(c, args, json_mode):
+    """Remove a section (heading + body) — the recovery op for
+    phantom-heading corruption (SES-0072): duplicates are deletable,
+    the type's required template is not."""
+    art = c.load(args.id)
+    atype, status = art.scalar("type"), art.scalar("status")
+    if atype == "decision" and status in ("accepted", "superseded"):
+        fail("accepted decisions are immutable — supersede instead")
+    if atype == "session" and status == "closed":
+        fail("closed sessions are immutable — open a new session")
+    if status in ("approved", "stale") and not args.amend:
+        fail(f"{args.id} is {status}; semantic edits to ratified "
+             "artifacts happen in a session — re-run with --amend to "
+             "assert a session sanctions this deletion")
+    span = art.section_span(args.heading, args.occurrence)
+    if span is None:
+        where = (f" (occurrence {args.occurrence})"
+                 if args.occurrence != 1 else "")
+        fail(f"{args.id}: no section matching {args.heading!r}{where}")
+    start, end = span
+    head_line = art.body[start:].splitlines()[0]
+    hm = HEADING_RE.match(head_line)
+    assert hm is not None
+    level, text = len(hm.group(1)), hm.group(2)
+    if level == 2 and text in REQUIRED_SECTIONS.get(atype, []):
+        count = sum(1 for _, ln in prose_lines(art.body)
+                    if (m2 := ANY_HEADING_RE.match(ln.rstrip()))
+                    and len(m2.group(1)) == level and m2.group(2) == text)
+        if count <= 1:
+            fail(f"{args.id}: {text!r} is a required section for {atype} "
+                 "and this is its only occurrence — deleting it would "
+                 "break the template (duplicate occurrences are "
+                 "deletable)")
+    art.body = art.body[:start] + art.body[end:]
+    art.write()
+    c.recheck(art.path)
+    ok(f"delete-section {args.id} {text!r} (occurrence {args.occurrence})",
+       [art.path], json_mode)
+
+
 def op_append_turn(c, args, json_mode):
     art = c.load(args.id)
     if art.scalar("type") != "session":
@@ -586,6 +790,7 @@ def op_append_turn(c, args, json_mode):
     content = read_payload(args)
     if content is None:
         fail("provide turn content via stdin or --from-file")
+    guard_heading_lines(content, 2, f"{args.id} turn")
     c.resolve_all(content, f"{args.id} turn")
     span = art.section_span("Transcript")
     if span is None:
@@ -694,7 +899,8 @@ def build_namespace(op, spec):
         release=None, approved_by=None, superseded_by=None, amend=False,
         enrichment=False, overview_ok=False, derives_from=None,
         session=None, source_span=None, title=None, heading=None,
-        id=None, target=None, rel=None)
+        id=None, target=None, rel=None, occurrence=1,
+        no_decisions_ok=None)
     content = spec.pop("content", None)
     defaults.update({k.replace("-", "_"): v for k, v in spec.items()})
     ns = argparse.Namespace(**defaults)
@@ -713,8 +919,8 @@ DISPATCH = {
     "create": op_create, "set-status": op_set_status,
     "add-link": op_add_link, "add-cite": op_add_cite,
     "update-overview": op_update_overview, "edit-section": op_edit_section,
-    "append-turn": op_append_turn, "supersede": op_supersede,
-    "apply": op_apply,
+    "delete-section": op_delete_section, "append-turn": op_append_turn,
+    "supersede": op_supersede, "apply": op_apply,
 }
 
 
@@ -759,6 +965,12 @@ def main():
     p.add_argument("--approved-by")
     p.add_argument("--superseded-by")
     p.add_argument("--release")
+    p.add_argument("--session",
+                   help="SES-nnnn ratifying a proposed decision "
+                        "(stamped as accepted-in)")
+    p.add_argument("--no-decisions-ok", metavar="REASON",
+                   help="acknowledge closing a session that produced "
+                        "no decisions (DEC-0258)")
 
     p = sub.add_parser("add-link")
     p.add_argument("id")
@@ -778,9 +990,18 @@ def main():
     p.add_argument("id")
     p.add_argument("heading")
     p.add_argument("--from-file")
+    p.add_argument("--occurrence", type=int, default=1,
+                   help="target the Nth heading matching the substring "
+                        "(structural repair; default 1)")
     p.add_argument("--amend", action="store_true")
     p.add_argument("--overview-ok", action="store_true",
                    help="assert the overview is already faithful")
+
+    p = sub.add_parser("delete-section")
+    p.add_argument("id")
+    p.add_argument("heading")
+    p.add_argument("--occurrence", type=int, default=1)
+    p.add_argument("--amend", action="store_true")
 
     p = sub.add_parser("append-turn")
     p.add_argument("id")

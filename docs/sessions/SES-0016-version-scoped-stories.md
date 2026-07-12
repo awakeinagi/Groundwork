@@ -20,7 +20,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [DEC-0022, DEC-0093, DEC-0095]
+  relates-to: [DEC-0022, DEC-0093, DEC-0095, DEC-0097, DEC-0098, DEC-0099, DEC-0100, DEC-0101]
 ---
 
 # SES-0016: Version-Scoping of Stories — Deferred Status and SemVer Release Labels

@@ -47,8 +47,6 @@ report showing no gated artifact and no memory of the prior grilling.
 
 ## Disposition
 
-## Disposition
-
 Taken up in SES-0065: produced EP-0009 (Artifact Interaction Surface),
 carrying DEC-0339's full charter intact (DEC-0350). IDEA-0015's own
 Spark Context mis-summarized the record it was resuming from (see

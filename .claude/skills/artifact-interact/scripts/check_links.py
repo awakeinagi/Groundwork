@@ -80,6 +80,21 @@ Rules enforced:
      With --uses-advisory, rule-20 findings are demoted to warnings
      (exit 0) — an authoring-time aid only; all other rules keep their
      normal severity.
+ 21. Duplicate sibling headings (SES-0072, from IDEA-0041/IDEA-0028):
+     no artifact body repeats a same-level heading text under the same
+     parent heading (outside code) — the edit-section phantom-heading
+     signature. Applies to every artifact, drafts included.
+ 22. Placeholder text in ratified artifacts (SES-0072): an artifact
+     whose status is approved, accepted, or closed contains no
+     standalone TBD/TODO/FIXME line and no unallocated ID placeholder
+     (e.g. `SES-XXXX`) outside code. Drafts may stub freely; quote
+     placeholders in backticks to mention them legitimately.
+ 23. Produced-decision back-links (SES-0072): every decision whose
+     derives-from names a session appears in that session's
+     links.relates-to; deriving from a spike, in the spike's cites.
+ 24. Body H1 identity (SES-0072): a body H1, when present, must not
+     carry an unallocated ID placeholder, and when it leads with an
+     artifact ID that ID is the artifact's own.
 
 Ideas (IDEA-*, docs/ideas/, DEC-0258) are pre-classification captures:
 they are exempt from goal tracing (rule 3) and never carry release
@@ -138,6 +153,14 @@ ITEM_DEF_RE = re.compile(
 USES_ENTRY_RE = re.compile(
     r"^(?P<el>[A-Za-z]\w*)(?:\.(?P<item>[A-Z]{1,3}-\d+))?"
     r"(?:\s*\((?P<qual>[^)]*)\))?$")
+ANY_HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*$")
+PLACEHOLDER_LINE_RE = re.compile(r"^(?:TBD|TODO|FIXME)\s*[.!:]?$",
+                                 re.IGNORECASE)
+ID_PLACEHOLDER_RE = re.compile(
+    r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-XXXX\b")
+BODY_H1_ID_RE = re.compile(
+    r"^#\s+((?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4})\b")
+RATIFIED_STATUSES = {"approved", "accepted", "closed"}
 
 
 def parse_frontmatter(path):
@@ -217,6 +240,83 @@ def main():
                     errors.append(f"{fm['_path']}: {aid} overview "
                                   f"references unknown artifact {ref} "
                                   f"(DEC-0242, DEC-0287)")
+
+    # Rules 21-22 body walker: lines outside fenced code, inline code
+    # blanked — quoting placeholders/headings in backticks is legitimate.
+    def body_prose_lines(body):
+        in_code = False
+        for n, line in enumerate((body or "").splitlines(), 1):
+            if line.lstrip().startswith("```"):
+                in_code = not in_code
+                continue
+            if not in_code:
+                yield n, INLINE_CODE_RE.sub("", line)
+
+    # Rule 21: duplicate sibling headings (SES-0072)
+    for aid, fm in artifacts.items():
+        stack, seen = [], {}
+        for _, line in body_prose_lines(fm["_body"]):
+            m = ANY_HEADING_RE.match(line.rstrip())
+            if not m:
+                continue
+            level, text = len(m.group(1)), m.group(2)
+            while stack and stack[-1][0] >= level:
+                stack.pop()
+            key = (tuple(t for _, t in stack), level, text)
+            seen[key] = seen.get(key, 0) + 1
+            stack.append((level, text))
+        for (_, level, text), n in sorted(seen.items()):
+            if n > 1:
+                errors.append(f"{fm['_path']}: duplicate sibling heading "
+                              f"{'#' * level} {text!r} x{n} — phantom-"
+                              f"heading signature (rule 21)")
+
+    # Rule 22: placeholder text in ratified artifacts (SES-0072)
+    for aid, fm in artifacts.items():
+        if fm.get("status") not in RATIFIED_STATUSES:
+            continue
+        for n, line in body_prose_lines(fm["_body"]):
+            s = line.strip()
+            if PLACEHOLDER_LINE_RE.match(s):
+                errors.append(f"{fm['_path']}: ratified {aid} line {n} is "
+                              f"placeholder text {s!r} (rule 22)")
+            for tok in ID_PLACEHOLDER_RE.findall(line):
+                errors.append(f"{fm['_path']}: ratified {aid} line {n} "
+                              f"carries unallocated ID placeholder {tok} "
+                              f"(rule 22)")
+
+    # Rule 23: produced-decision back-links (SES-0072)
+    for aid, fm in artifacts.items():
+        if fm.get("type") != "decision":
+            continue
+        for p in as_list((fm.get("links") or {}).get("derives-from")):
+            parent = artifacts.get(p)
+            if parent is None:
+                continue  # unresolved target: rule 2
+            if parent.get("type") == "session":
+                back = as_list((parent.get("links") or {}).get("relates-to"))
+                if aid not in back:
+                    errors.append(f"{parent['_path']}: session produced "
+                                  f"{aid} (its derives-from) but "
+                                  f"relates-to omits it (rule 23)")
+            elif parent.get("type") == "spike":
+                if aid not in as_list(parent.get("cites")):
+                    errors.append(f"{parent['_path']}: spike produced "
+                                  f"{aid} but cites: omits it (rule 23)")
+
+    # Rule 24: body H1 identity (SES-0072)
+    for aid, fm in artifacts.items():
+        first = (fm["_body"] or "").lstrip("\n").split("\n", 1)[0]
+        if not first.startswith("# "):
+            continue
+        if ID_PLACEHOLDER_RE.search(first):
+            errors.append(f"{fm['_path']}: body H1 carries an unallocated "
+                          f"ID placeholder (rule 24)")
+            continue
+        m = BODY_H1_ID_RE.match(first)
+        if m and m.group(1) != aid:
+            errors.append(f"{fm['_path']}: body H1 names {m.group(1)}, "
+                          f"not {aid} (rule 24)")
 
     def refs(fm):
         links = fm.get("links") or {}

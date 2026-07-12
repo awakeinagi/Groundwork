@@ -20,7 +20,7 @@ facilitator: Claude (Sonnet 5)
 transcript-fidelity: reconstructed
 links:
   derives-from: [EP-0005]
-  relates-to: [ST-0019, ST-0023]
+  relates-to: [ST-0019, ST-0023, DEC-0166, DEC-0167, DEC-0168, DEC-0169, DEC-0170, DEC-0171]
 ---
 
 # SES-0030: Refine the Code-Host Connector Protocol Component Doc

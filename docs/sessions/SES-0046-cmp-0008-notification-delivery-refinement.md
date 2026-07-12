@@ -22,7 +22,7 @@ participants:
 artifact-focus: CMP-0008
 links:
   derives-from: [EP-0005]
-  relates-to: [ST-0024, ST-0048, CMP-0005, CMP-0007]
+  relates-to: [ST-0024, ST-0048, CMP-0005, CMP-0007, DEC-0240, DEC-0241]
 ---
 
 # SES-0046: Notification Delivery Refinement

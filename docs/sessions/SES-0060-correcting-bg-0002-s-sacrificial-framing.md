@@ -28,7 +28,7 @@ overview: >-
   framing needing correction. Method-level change to an approved
   artifact; resolved fully in-session per DEC-0267.
 links:
-  relates-to: [BG-0002, DEC-0338, DEC-0267, DEC-0260, DEC-0259, IDEA-0010, DEC-0339]
+  relates-to: [BG-0002, DEC-0338, DEC-0267, DEC-0260, DEC-0259, IDEA-0010, DEC-0339, DEC-0346]
 ---
 
 # SES-0060: Correcting BG-0002's Sacrificial Framing

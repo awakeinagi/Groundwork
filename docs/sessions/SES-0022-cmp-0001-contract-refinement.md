@@ -21,7 +21,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [CMP-0001, EP-0001, ST-0011]
+  relates-to: [CMP-0001, EP-0001, ST-0011, DEC-0126, DEC-0127, DEC-0128, DEC-0129, DEC-0130, DEC-0131, DEC-0132, DEC-0133]
 ---
 
 # SES-0022: Artifact Store Service Contract Refinement

@@ -21,7 +21,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SES-0035]
+  relates-to: [SES-0035, DEC-0195, DEC-0196, DEC-0197]
 ---
 
 # SES-0036: Epic-Slicing Seam Guidance, Coupling Check, and Split-vs-Merge Heuristics

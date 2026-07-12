@@ -19,7 +19,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [SES-0047, DEC-0244]
+  relates-to: [SES-0047, DEC-0244, DEC-0245]
 ---
 
 # SES-0048: Viewer Relocation and Bootstrap Inclusion

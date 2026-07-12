@@ -21,7 +21,7 @@ participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [EP-0006, EP-0002]
+  relates-to: [EP-0006, EP-0002, DEC-0073, DEC-0074, DEC-0075, DEC-0076]
 ---
 
 # SES-0010: EP-0006 Refinement Session

@@ -2,36 +2,33 @@
 id: IDEA-0041
 type: idea
 title: "gw_write edit-section must guard against heading-shaped content creating unaddressable phantom sections"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-11
 proposed-by: awakeinagi
 overview: >-
-  edit-section locates a section by first-heading-match and ends at
-  the next heading; if replacement content itself contains a
-  heading-shaped line, that line becomes a permanent phantom
-  boundary that no later edit-section call can ever reach or remove,
-  stranding duplicated content with no recovery path short of git.
-  This is a recurring defect with four independently shipped/caught
-  instances: SP-0015 (approved, closed at SES-0064, still
-  unrepaired), SP-0016 (caught pre-commit during SES-0071, redone),
-  DEC-0369/ DEC-0370/DEC-0371 (caught pre-commit, sanctioned dedup),
-  and SES-0069 (shipped and committed, repaired 2026-07-12 during
-  the SES-0070 close-out). Proposed fixes: (1) edit-section refuses
-  content containing a heading-level line at write time, or (2) an
-  occurrence-disambiguation flag / delete-section op lets an
-  already-corrupted section be recovered through the write API. Per
-  operator direction (2026-07-12), the fix scope is expanded to also
-  cover session-close completeness: SES-0070 was closed and
-  committed with placeholder "TBD." text still in required body
-  sections and required frontmatter fields missing, which the write
-  API's closed- session immutability gate then correctly refused to
-  repair ordinarily, forcing a sanctioned direct edit. The eventual
-  fix session should add a set-status-closed precondition and/or a
-  checker rule for placeholder text and duplicate sibling headings
-  in ratified artifacts, and should repair SP-0015's stranded
-  duplication via the proper sanctioned route. Reported per refuse-
-  and-report (DEC-0330); captured at operator request.
+  edit-section located a section by first-heading-match and ended at
+  the next heading; if replacement content contained a heading-
+  shaped line, that line became a permanent phantom boundary no
+  later edit-section call could reach, stranding duplicated content
+  with no recovery path short of git. Four independently
+  shipped/caught instances were recorded: SP-0015 (shipped,
+  unrepaired), SP-0016 (caught pre-commit),
+  DEC-0369/DEC-0370/DEC-0371 (caught pre-commit), and SES-0069
+  (shipped, repaired 2026-07-12). Per operator direction
+  (2026-07-12) the scope expanded to session-close completeness
+  (SES-0070 closed with placeholder text and missing frontmatter).
+  Taken up and resolved in SES-0072 (folding in near-duplicate
+  IDEA-0028): edit-section/append-turn now reject heading-bearing
+  payloads at write time (DEC-0376); an --occurrence flag and
+  delete-section op provide in-API recovery (DEC-0377); ratifying
+  transitions refuse duplicate headings and placeholders (DEC-0378);
+  checker rules 21/22 enforce this corpus-wide (DEC-0379); session-
+  close now requires complete identity frontmatter (DEC-0380) and an
+  explicit zero-decision acknowledgment (DEC-0381). The corpus-wide
+  sweep these rules ran found and repaired six further shipped
+  instances beyond the original four; SP-0015 was repaired via the
+  new delete-section op.
 links:
   derives-from: [SES-0071]
 ---
@@ -62,4 +59,6 @@ Until fixed, the operational workaround (recorded in the librarian's memory) is:
 **Fourth shipped instance (SES-0069).** SES-0069 (closed session, committed) independently carried the same signature: a duplicated "## Decisions Produced" heading — an empty first occurrence followed by the real content in a second occurrence. Found 2026-07-12 during the SES-0070 close-out repair; repaired the same day by operator-sanctioned direct dedup (content preserved, no data loss). Instance tally is now four: SP-0015 (shipped, still unrepaired), SP-0016 (caught pre-commit, redone), DEC-0369/DEC-0370/DEC-0371 (caught pre-commit, sanctioned dedup), and SES-0069 (shipped, repaired 2026-07-12).
 
 **Fix scope expanded per operator direction (2026-07-12).** The session-close step must verify close-out completeness BEFORE `set-status closed` runs: no "TBD." or other placeholder text remaining in required body sections (Decisions Produced, Conflicts Raised, Purpose, Transcript), and session frontmatter complete (`participant`, `participant-role`, `facilitator`, `transcript-fidelity`). Motivating instance: SES-0070 was closed and committed with Decisions Produced and Conflicts Raised still "TBD.", a stray placeholder left in Transcript, and all four of the above frontmatter fields missing; the write API's closed-session immutability gate then correctly refused the ordinary repair path (`append-turn --enrichment` cannot fix frontmatter or replace body sections), forcing an operator-sanctioned direct edit instead. Candidate enforcements for the eventual fix session to weigh: (a) a `set-status-closed` precondition in `gw_write` that checks for placeholder text and frontmatter completeness before allowing the transition, and/or (b) a `check` rule for placeholder text and duplicate sibling headings in ratified artifacts — either would have caught every instance recorded above at the gate, before commit.
+
+**Taken up and resolved (SES-0072, closed out 2026-07-12).** IDEA-0041 was taken up in a full grilling session, which folded in near-duplicate IDEA-0028 (DEC-0385). Resolved by ten accepted decisions: DEC-0376 (edit-section/append-turn reject heading-bearing payloads at write time), DEC-0377 (edit-section `--occurrence N` and the new `delete-section` recovery op), DEC-0378 (ratifying status transitions refuse duplicate sibling headings and placeholder text), DEC-0379 (checker rules 21 and 22), DEC-0380 (session close requires complete identity frontmatter), DEC-0381 (zero-decision session close requires an explicit `--no-decisions-ok` acknowledgment), DEC-0382 (sessions mirror produced decisions in relates-to, checker rule 23, full historical backfill), DEC-0383 (`accepted-in` ratification-site stamp on decision acceptance), DEC-0384 (create stamps allocated IDs into placeholder H1s, checker rule 24), and DEC-0385 (IDEA-0028 absorbed into this take-up). All four originally recorded instances (SP-0015, SP-0016, DEC-0369/DEC-0370/DEC-0371, SES-0069) plus six newly discovered instances found by this session's corpus-wide sweep (EP-0009, IDEA-0015, IDEA-0016, IDEA-0025, SES-0062, SP-0013) were repaired. SP-0015 — this idea's original motivating instance — was repaired via the new `delete-section` op, validating the recovery path against real corpus damage.
 

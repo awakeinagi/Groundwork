@@ -197,6 +197,21 @@ their transcript at the verbatim proposal (DEC-0255).
   mark it stale.
 - After distilling, add the new DEC IDs to the `cites` of every artifact
   they shaped, and list them in the session's **Decisions Produced**.
+- **Cross-link sibling decisions at creation time.** Decisions born of
+  the same session that form matched pairs (a gate and its checker
+  backstop, two halves of one resolution) get reciprocal `relates-to`
+  links when recorded — don't rely on a later corpus sweep or recall
+  audit to connect them (origin: the SES-0072 audit's contract-gap
+  finding).
+- **Write finished prose.** Decision bodies, overviews, and every
+  section payload handed to the librarian are complete sentences with
+  normal capitalization and punctuation — never label-continuation
+  fragments ("Context: no op reaches…"-style notes read fine after an
+  inline label but become lowercase sentence openers once transcribed
+  under a section heading). When a sentence would otherwise open with a
+  lowercase code identifier (edit-section, set-status), reword it
+  ("The edit-section op…"). Origin: the SES-0072 casing repair across
+  DEC-0376..DEC-0385.
 - **Consistency checks on every new decision (required — DEC-0157,
   DEC-0158).** A new decision can narrow or contradict an accepted one
   *without* superseding it (a "partial supersession") — the staleness

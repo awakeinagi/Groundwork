@@ -21,9 +21,7 @@ facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
   derives-from: [IDEA-0001]
-  relates-to: [SES-0050, SES-0051, EP-0002, EP-0006, ST-0016, ST-0017,
-               ST-0032, ST-0033, ST-0035, ST-0039, ST-0044, ST-0055,
-               ST-0065]
+  relates-to: [SES-0050, SES-0051, EP-0002, EP-0006, ST-0016, ST-0017, ST-0032, ST-0033, ST-0035, ST-0039, ST-0044, ST-0055, ST-0065, DEC-0273, DEC-0274, DEC-0275, DEC-0276, DEC-0277, DEC-0278, DEC-0279, DEC-0280, DEC-0281, DEC-0282, DEC-0283]
 ---
 
 # SES-0052: The Change-Intake Workflow in the Application

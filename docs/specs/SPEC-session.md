@@ -26,8 +26,11 @@ intake:                                 # present iff the session is intake-open
   proposed-by: <person-id>
   source-ref: <CP-/IDEA- id>            # when origin is cp or idea
 links:
-  relates-to: [BG-....]       # artifact(s) the session refined; may be empty
-                              # for inception sessions that create the artifact
+  relates-to: [BG-....]       # artifact(s) the session refined or produced
+                              # (incl. every DEC whose derives-from names
+                              # this session — checker rule 23, SES-0072);
+                              # may be empty for inception sessions that
+                              # create the artifact
 ```
 
 ## Lifecycle
@@ -35,6 +38,14 @@ links:
 Sessions use a reduced lifecycle: `open → closed`. A closed session is
 immutable. Follow-up conversation is a new Session linking
 `relates-to` the same artifacts.
+
+Closing is gated (SES-0072): the write API refuses `set-status closed`
+while the body carries placeholder text or duplicate sibling headings,
+while `participant`, `participant-role`, `facilitator`, or
+`transcript-fidelity` is missing, or while no decision derives from the
+session — the last unless the caller records the zero-decision
+assessment via `--no-decisions-ok "<reason>"` (legitimate for
+idea-capture sessions, DEC-0258).
 
 ## Required body sections
 

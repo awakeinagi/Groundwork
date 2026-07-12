@@ -21,7 +21,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [DEC-0102, DEC-0106, EP-0004, EP-0007, SP-0002]
+  relates-to: [DEC-0102, DEC-0106, EP-0004, EP-0007, SP-0002, DEC-0111, DEC-0112, DEC-0113, DEC-0114, DEC-0115, DEC-0116, DEC-0117, DEC-0118, DEC-0119, DEC-0120]
 ---
 
 # SES-0019: Semantic Search for the Skill Tooling — DuckDB + vss, Hybrid with the Graph

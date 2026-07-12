@@ -21,7 +21,7 @@ overview: >-
   IDEA-0003 (system-architect agent) and IDEA-0004 (ux-explorer agent).
   Distinct concern from EP-0007, which may later consume these outputs.
 links:
-  relates-to: [EP-0007, DEC-0017, DEC-0068, DEC-0248, IDEA-0003, IDEA-0004]
+  relates-to: [EP-0007, DEC-0017, DEC-0068, DEC-0248, IDEA-0003, IDEA-0004, DEC-0284, DEC-0285, DEC-0286, DEC-0287, DEC-0288, DEC-0289, DEC-0290, DEC-0291]
 ---
 
 # SES-0053: Per-Artifact Progressive Disclosure

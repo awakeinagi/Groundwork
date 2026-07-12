@@ -19,7 +19,7 @@ participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [BG-0001]
+  relates-to: [BG-0001, DEC-0026, DEC-0027]
 ---
 
 # SES-0002: Impact Relationships Between Same-Level Artifacts

@@ -20,7 +20,7 @@ participant-role: stakeholder
 facilitator: Claude Fable 5 (claude-fable-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [CMP-0001, ST-0001, ST-0007, EP-0001]
+  relates-to: [CMP-0001, ST-0001, ST-0007, EP-0001, DEC-0080, DEC-0081, DEC-0082, DEC-0083, DEC-0084, DEC-0085, DEC-0086, DEC-0087]
 ---
 
 # SES-0012: Component Spec — Design Elements & Implementation Guidance

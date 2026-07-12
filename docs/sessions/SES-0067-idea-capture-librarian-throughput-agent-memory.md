@@ -40,8 +40,6 @@ Idea-capture micro-session (DEC-0258) run immediately after SES-0066 closed, at 
 
 ## Transcript
 
-TBD.
-
 **T1 — Stakeholder.** "A few new ideas for later. (1) When interacting with the librarian, let's investigate what actions does the facilitator need to wait for (blocking) vs which ones can be left running in the background? We spend a lot of time waiting for the librarian to finish. (2) What optimizations can be performed on the librarians actions to make them more efficient? (3) For all agents, I want them to be equipped with a memory to track lessons learned so they can improve over time. Let's research examples of other self-improving/self-evolving agents and incorporate some of those ideas. (4) Any problems that subagents encounter should be reported back to the facilitator and recorded as IDEAs for improvements to the system to be taken up."
 
 **T2 — Facilitator.** Recorded all four verbatim as Ideas (IDEA-0030, IDEA-0031, IDEA-0032, IDEA-0033) per the DEC-0258 capture path; no refinement performed; each joins the queue for its own intake session at take-up.

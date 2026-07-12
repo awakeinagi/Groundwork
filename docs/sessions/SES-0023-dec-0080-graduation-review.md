@@ -17,7 +17,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [CMP-0001, CMP-0002, CMP-0003, DEC-0080, SES-0022]
+  relates-to: [CMP-0001, CMP-0002, CMP-0003, DEC-0080, SES-0022, DEC-0134, DEC-0135, DEC-0136]
 ---
 
 # SES-0023: Graduation Review at the Store Component Gate

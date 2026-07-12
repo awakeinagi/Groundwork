@@ -20,7 +20,7 @@ participant-role: stakeholder
 facilitator: Claude (Sonnet 5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [CMP-0009, ST-0031, CMP-0005]
+  relates-to: [CMP-0009, ST-0031, CMP-0005, DEC-0174, DEC-0175, DEC-0176, DEC-0177]
 ---
 
 # SES-0032: CMP-0009 GitHub Connector — Contract Refinement

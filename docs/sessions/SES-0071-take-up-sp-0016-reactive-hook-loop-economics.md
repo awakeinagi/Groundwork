@@ -35,18 +35,22 @@ overview: >-
   added post-audit. Evaluation was descriptive throughout, no
   pass/fail kill bar (DEC-0355). Session closed.
 links:
-  relates-to: [SP-0016]
+  relates-to: [SP-0016, DEC-0374, DEC-0375]
 ---
 
 # SES-0071: Take up SP-0016 — reactive hook-loop economics
 
 ## Purpose
 
-TBD.
+Take up SP-0016 (reactive hook-loop economics) as its own Groundwork
+spike session: run the spike end-to-end — design plus test plan
+approved before any build (DEC-0335/DEC-0345), throwaway build reusing
+SP-0014's projector/rulebase (DEC-0351), measure the edit→hook→
+project→fire→inject loop's per-edit latency and injected-token cost,
+observe catch-and-correct on a seeded violation, and record findings
+plus at least one resulting decision.
 
 ## Transcript
-
-TBD.
 
 Turn 1 -- Facilitator (sp0016): "Session opened to take up SP-0016 (Reactive hook-loop economics) as its own Groundwork spike session, operator awakeinagi@gmail.com as stakeholder. Verbatim take-up intent: run SP-0016 end-to-end as a spike session -- present a design plus test plan and obtain approval before any build (DEC-0335/DEC-0345), execute the throwaway build reusing SP-0014's projector/rulebase (DEC-0351), measure the hook loop, and record findings plus at least one resulting decision."
 
@@ -82,8 +86,14 @@ Turn 13 -- Facilitator (sp0016), CLOSING: "Session outcome. SP-0016 (reactive ho
 
 ## Decisions Produced
 
-TBD.
+DEC-0374 (the edit-fires-rules hook loop pays for itself in context
+economy at this corpus size — viability verdict, carrying DEC-0375's
+conditional caveat) and DEC-0375 (reactive-substrate marginal-cost
+baseline: self-scoped delta behaviors are corpus-independent and ~140x
+cheaper than batch; built-in pattern subscriptions re-scan globally,
+addressing DEC-0368) were recorded and accepted in this session
+(T12–T13).
 
 ## Conflicts Raised
 
-TBD.
+None.

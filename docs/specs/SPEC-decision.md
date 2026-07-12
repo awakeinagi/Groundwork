@@ -16,6 +16,11 @@ decided-by: <named person>                   # whose authority the decision carr
 decided-on: 2026-07-05
 source-span: "SES-0001 @ T12-T14"            # turns supporting the decision;
                                              # "SP-0003 findings" for spikes
+accepted-in: SES-....                        # session that ratified a decision
+                                             # accepted LATER than its origin
+                                             # (stamped by set-status accepted,
+                                             # SES-0072); absent when accepted
+                                             # in its originating session
 links:
   derives-from: [SES-....]                   # or [SP-....]
   supersedes: []                             # earlier decision(s) replaced

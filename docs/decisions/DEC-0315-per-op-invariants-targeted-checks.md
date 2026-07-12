@@ -22,7 +22,7 @@ overview: >-
   where one exists.
 links:
   derives-from: [SES-0057]
-  relates-to: [DEC-0312, DEC-0313, DEC-0130, DEC-0373]
+  relates-to: [DEC-0312, DEC-0313, DEC-0130, DEC-0373, DEC-0376, DEC-0378, DEC-0379]
 ---
 
 # DEC-0315: Per-Operation Invariants with Targeted Re-Checks

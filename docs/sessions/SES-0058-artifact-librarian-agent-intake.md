@@ -36,10 +36,7 @@ overview: >-
   skill and agent before committing anything. Method-level change; no
   product artifacts (BG/EP/ST/CMP) change.
 links:
-  relates-to: [SES-0057, DEC-0310, DEC-0312, DEC-0313, DEC-0318,
-               DEC-0319, DEC-0320, DEC-0321, DEC-0322, DEC-0323,
-               DEC-0291, DEC-0292, DEC-0260, DEC-0261,
-               IDEA-0010, IDEA-0011]
+  relates-to: [SES-0057, DEC-0310, DEC-0312, DEC-0313, DEC-0318, DEC-0319, DEC-0320, DEC-0321, DEC-0322, DEC-0323, DEC-0291, DEC-0292, DEC-0260, DEC-0261, IDEA-0010, IDEA-0011, DEC-0324, DEC-0325, DEC-0326, DEC-0327, DEC-0328, DEC-0329, DEC-0330, DEC-0331, DEC-0332, DEC-0333, DEC-0334]
 ---
 
 # SES-0058: The artifact-librarian Agent

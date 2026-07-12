@@ -56,20 +56,6 @@ disposition) went through the typed write API per the artifact-
 librarian mandate (DEC-0329), which chartered `artifact-interact` as
 the sole sanctioned interaction surface for this correction.
 
-## Purpose
-
-Backfilled session record (per the change-intake protocol: a session
-should have opened at the point the stakeholder's proposal was
-restated/aligned on, but did not at the time). Reconstructs an
-intake-opened conversation that took up IDEA-0016, investigated the
-system-architect model-invocation mechanism, found a deeper
-correctness issue in DEC-0292, deferred its resolution, and captured
-the finding as IDEA-0023. All writes performed to backfill this record
-(the session itself, the IDEA-0023 `derives-from` link, and IDEA-0016's
-disposition) went through the typed write API per the artifact-
-librarian mandate (DEC-0329), which chartered `artifact-interact` as
-the sole sanctioned interaction surface for this correction.
-
 ## Transcript
 
 **T1 — Stakeholder.** Proposed: "We need to switch the architect

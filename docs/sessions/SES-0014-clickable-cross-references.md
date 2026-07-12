@@ -19,7 +19,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [DEC-0009]
+  relates-to: [DEC-0009, DEC-0090, DEC-0091]
 ---
 
 # SES-0014: Clickable cross-references in artifact bodies

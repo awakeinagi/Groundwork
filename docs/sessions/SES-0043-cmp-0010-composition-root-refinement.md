@@ -17,7 +17,7 @@ overview: >-
   DEC-0226-DEC-0228.
 participant: awakeinagi@gmail.com
 links:
-  relates-to: [CMP-0010, EP-0008, ST-0057]
+  relates-to: [CMP-0010, EP-0008, ST-0057, DEC-0226, DEC-0227, DEC-0228]
 ---
 
 # SES-0043: Composition Root — Contract Refinement

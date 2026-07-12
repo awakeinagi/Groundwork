@@ -17,7 +17,7 @@ participant-role: product-owner
 facilitator: Claude (Sonnet 5)
 transcript-fidelity: verbatim
 links:
-  relates-to: [DEC-0137]
+  relates-to: [DEC-0137, DEC-0161]
 ---
 
 # SES-0028: Narrow Decision-Recall Audit Judge Topology to Sonnet 5 Only

@@ -21,7 +21,7 @@ participant-role: eng-lead
 facilitator: "Claude Code (claude-fable-5), groundwork-design-session skill"
 transcript-fidelity: reconstructed
 links:
-  relates-to: [CMP-0007, CMP-0015, CMP-0016, CMP-0004, ST-0021, ST-0022]
+  relates-to: [CMP-0007, CMP-0015, CMP-0016, CMP-0004, ST-0021, ST-0022, DEC-0232, DEC-0233, DEC-0234, DEC-0235, DEC-0236, DEC-0237, DEC-0238, DEC-0239]
 ---
 
 # SES-0045: Identity & Access Component Refinement

@@ -21,7 +21,7 @@ participant-role: eng-lead
 facilitator: Claude Code (claude-fable-5)
 transcript-fidelity: reconstructed
 links:
-  relates-to: [CMP-0001, ST-0007, DEC-0087, DEC-0090]
+  relates-to: [CMP-0001, ST-0007, DEC-0087, DEC-0090, DEC-0092, DEC-0093, DEC-0094, DEC-0095, DEC-0096]
 ---
 
 # SES-0015: Element→Story Implements Links and Percent-Complete Metrics

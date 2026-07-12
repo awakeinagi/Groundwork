@@ -19,7 +19,7 @@ participant-role: stakeholder
 facilitator: Claude Sonnet 5 (claude-sonnet-5) via Claude Code CLI
 transcript-fidelity: reconstructed
 links:
-  relates-to: [BG-0001]
+  relates-to: [BG-0001, DEC-0189, DEC-0190, DEC-0191, DEC-0192, DEC-0193, DEC-0194]
 ---
 
 # SES-0035: Goal-Template Redesign — Backend-Platform Epic Gap Retrospective and BG Grilling Overhaul
