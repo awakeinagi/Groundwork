@@ -16,7 +16,7 @@ overview: >-
   never silently mutates a submitted payload. Closes the IDEA-0041
   phantom-heading defect at its source; clean edits are idempotent.
 links:
-  relates-to: [DEC-0315, DEC-0377]
+  relates-to: [DEC-0315, DEC-0377, DEC-0414]
   derives-from: [SES-0072]
 ---
 

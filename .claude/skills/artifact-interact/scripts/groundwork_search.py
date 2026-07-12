@@ -156,14 +156,20 @@ class Store:
         seen, stale = set(), []
         self.newest_doc_mtime = 0.0
         old = dict(self.db.execute("SELECT file, hash FROM files").fetchall())
-        for f, fm, body in iter_docs(self.root):
-            rel = str(f.relative_to(self.root))
-            seen.add(rel)
-            self.newest_doc_mtime = max(self.newest_doc_mtime,
-                                        f.stat().st_mtime)
-            h = hashlib.sha1(f.read_bytes()).hexdigest()
-            if old.get(rel) != h:
-                stale.append((rel, h, fm, body))
+        # Live docs/ scan under the shared corpus lock (DEC-0391,
+        # DEC-0415): the index never snapshots a torn mid-apply state.
+        # Embedding and DB writes below run on the in-memory copy,
+        # after release.
+        from gw_lock import read_lock
+        with read_lock(self.root):
+            for f, fm, body in iter_docs(self.root):
+                rel = str(f.relative_to(self.root))
+                seen.add(rel)
+                self.newest_doc_mtime = max(self.newest_doc_mtime,
+                                            f.stat().st_mtime)
+                h = hashlib.sha1(f.read_bytes()).hexdigest()
+                if old.get(rel) != h:
+                    stale.append((rel, h, fm, body))
         gone = set(old) - seen
         for rel in gone:
             self.db.execute("DELETE FROM chunks WHERE file=?", [rel])

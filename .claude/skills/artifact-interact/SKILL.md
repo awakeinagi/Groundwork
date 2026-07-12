@@ -92,11 +92,17 @@ The full `check` family remains the pre-commit gate: run it before any
 commit; per-op re-checks do not replace it. Git itself belongs to the
 caller (DEC-0333) — nothing in this skill stages or commits.
 
-## Concurrency (DEC-0332)
+## Concurrency (DEC-0391; SES-0079, DEC-0411..DEC-0416)
 
-Read/search/graph invocations parallelize freely. Write operations are
-single-writer: never run two write invocations concurrently — creates
-allocate sequential IDs and reciprocity bookkeeping spans files.
+Read/search/graph invocations parallelize freely and take a shared
+lock, so they never observe a torn mid-apply state. Write operations
+serialize themselves at the apply moment on an exclusive lock — ID
+allocation, edits, reciprocity, recheck, and graph sync are one
+transactional unit that rolls back on any failure. Parallel write
+invocations are safe: they queue on the lock (60s default,
+`GW_LOCK_TIMEOUT` overrides) rather than corrupt. Content edits carry
+`--if-match` version tokens and turn numbers are tool-assigned — see
+[references/operations.md](references/operations.md) §Concurrency.
 
 ## Installing into a project
 

@@ -23,7 +23,7 @@ overview: >-
   fragment the surface DEC-0316 just unified).
 links:
   derives-from: [SES-0057]
-  relates-to: [DEC-0316, DEC-0138]
+  relates-to: [DEC-0316, DEC-0138, DEC-0411, DEC-0415]
 ---
 
 # DEC-0317: Layered Dependencies

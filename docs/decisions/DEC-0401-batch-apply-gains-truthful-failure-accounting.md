@@ -22,7 +22,7 @@ overview: >-
   decision.
 links:
   derives-from: [SES-0077]
-  relates-to: [DEC-0391, DEC-0394, IDEA-0034, DEC-0400]
+  relates-to: [DEC-0391, DEC-0394, IDEA-0034, DEC-0400, DEC-0412]
 ---
 # DEC-0401: Batch apply gains truthful failure accounting; rollback stays deferred
 

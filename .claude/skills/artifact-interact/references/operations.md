@@ -9,6 +9,25 @@ sanctioned alternative where one exists), 2 setup problem.
 with the code; if an op behaves differently from what is written here,
 that mismatch is itself a defect worth reporting.
 
+## Concurrency (DEC-0391; SES-0079, DEC-0411..DEC-0416)
+
+- **Writes serialize at the apply moment, not the task level.** Every
+  write op runs its whole span — corpus scan, ID allocation, edits,
+  reciprocity, recheck, graph sync — under an exclusive `flock` on
+  `<root>/.groundwork-lock`; reads take the same lock shared. Parallel
+  write invocations are safe: they queue (writes wait up to 60s, reads
+  10s; `GW_LOCK_TIMEOUT` overrides) and a timeout refuses cleanly
+  naming the holder's PID — retry, don't force.
+- **Applies are transactional.** Any failure (refusal, recheck, crash)
+  rolls the corpus back to its pre-op state from the journal at
+  `<root>/.groundwork-journal/`; "file written, fix required" is dead —
+  a refused write leaves nothing behind. After a hard crash the next
+  write op recovers automatically; `write recover` does it standalone
+  when a read warns about an interrupted apply.
+- **Content edits carry version tokens** (`--if-match`, DEC-0413) and
+  **turn numbers are tool-assigned** (DEC-0414) — see edit-section,
+  update-overview, and append-turn below.
+
 ## Structural guards (SES-0072 — apply across ops)
 
 - **Payloads are body-only.** `edit-section` and `append-turn` refuse
@@ -120,26 +139,35 @@ gw.py --root . write remove-cite SP-0014 DEC-0014 --amend  # approved/stale
 ## update-overview
 
 ```bash
-echo "…new overview…" | gw.py --root . write update-overview DEC-0335
-gw.py --root . write update-overview DEC-0335 --text "…" # short texts
+echo "…new overview…" | gw.py --root . write update-overview DEC-0335 --if-match v:1a2b3c4d5e6f
+gw.py --root . write update-overview DEC-0335 --text "…" --if-match v:… # short texts
 ```
 
 - ≤250 words, IDs must resolve. Legal on any artifact, including
   accepted decisions and closed sessions — overviews are derived and
   non-normative (DEC-0285).
+- **`--if-match <token>` is required** (DEC-0413) unless the same
+  invocation/batch created the artifact: `read overview <ID>` prints
+  the current token; a mismatch means the overview changed since your
+  read — re-read and recompose.
 - **Batch key is `text` or `content`, never `overview`** (see apply).
 
 ## edit-section
 
 ```bash
-gw.py --root . write edit-section ST-0066 "Acceptance Criteria" --from-file new.md
-gw.py --root . write edit-section SP-0002 "Findings" --occurrence 2 --from-file fix.md
+gw.py --root . write edit-section ST-0066 "Acceptance Criteria" --if-match v:… --from-file new.md
+gw.py --root . write edit-section SP-0002 "Findings" --occurrence 2 --if-match v:… --from-file fix.md
 ```
 
 - Replaces one section's BODY (heading kept — never include the heading
   line in the payload; the guard refuses it, DEC-0376). Content is
   matched by case-insensitive heading substring; `--occurrence N`
   targets the Nth match (structural repair; default 1).
+- **`--if-match <token>` is required** (DEC-0413) unless the same
+  invocation/batch created the artifact: `read section <ID> "<heading>"
+  [--occurrence N]` prints the section's current token (outline shows
+  every `##` section's token). A mismatch means the section changed
+  since your read — re-read and recompose; never retry blind.
 - Refuses accepted/superseded decisions (→ `supersede`) and closed
   sessions (→ `append-turn --enrichment`, or a new session).
   `approved`/`stale` artifacts require `--amend` — the caller asserts a
@@ -170,6 +198,12 @@ gw.py --root . write append-turn SES-0058 --enrichment --from-file xref.md
 - Open session: appends at the end of the Transcript section. Turn
   content may use `###`-level headings (`### T9 — …`) but is refused if
   it contains `##`-level lines (DEC-0376).
+- **Turn numbers are tool-assigned** (DEC-0414): the writer reads the
+  live transcript maximum under the lock and renumbers your payload's
+  turn headings to continue from it, reporting what it assigned in the
+  OK line (`assigned T7-T9`) — compose with any numbers, they are
+  provisional. Pass `--expect-first-turn N` to refuse cleanly if the
+  transcript advanced past where you composed.
 - Closed session: refused unless `--enrichment`, which appends under a
   dated `### Post-Close Enrichment` subsection (DEC-0248). Transcript
   turns themselves are never edited.
@@ -210,12 +244,15 @@ CLI-style `link` string), or a malformed `links` value (non-dict, rel
 outside the closed vocabulary, non-list targets) refuses the entire
 batch with nothing written.
 
-**Failure accounting (DEC-0401):** per-op `OK` lines are flushed as
-each op lands; an apply-time refusal stops the batch and prints a
-manifest (`applied N of M; not attempted: …`). The terminal line
+**Failure accounting (DEC-0401) + rollback (DEC-0412):** per-op `OK`
+lines are flushed as each op lands; an apply-time refusal stops the
+batch, prints a manifest (`applied N of M; not attempted: …; rolling
+back`), and then the **whole batch rolls back** — ops that had already
+landed are restored too, so a failed batch leaves the corpus
+byte-identical to before it started. The terminal line
 `apply: applied N/N; post-batch validation clean` is the success
-signal — if it is missing, the batch did not finish: trust the flushed
-per-op lines, and re-run **only** the unexecuted remainder.
+signal — if it is missing, nothing from the batch is on disk: fix the
+failing op and re-run the **entire** batch.
 
 **Batch key table (the traps in bold):**
 
@@ -226,10 +263,10 @@ per-op lines, and re-run **only** the unexecuted remainder.
 | add-link | id, rel, target |
 | add-cite | id, target |
 | remove-cite | id, target, amend |
-| update-overview | id, **text** (or content) — the key `overview` does not exist and fails with "provide overview text" |
-| edit-section | id, heading, occurrence, amend, overview-ok, content or from-file |
+| update-overview | id, **text** (or content), if-match — the key `overview` does not exist and fails with "provide overview text" |
+| edit-section | id, heading, occurrence, amend, overview-ok, content or from-file, if-match |
 | delete-section | id, heading, occurrence, amend |
-| append-turn | id, enrichment, content or from-file |
+| append-turn | id, enrichment, content or from-file, expect-first-turn |
 | supersede | id, title, overview, session, source-span, owner, cites, content or from-file |
 
 ```json

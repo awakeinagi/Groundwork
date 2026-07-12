@@ -106,6 +106,7 @@ This file is installed into Groundwork projects as tools/check_links.py.
 It requires PyYAML (`pip install pyyaml`).
 """
 
+import contextlib
 import re
 import os
 import sys
@@ -116,6 +117,25 @@ try:
 except ImportError:  # pragma: no cover
     print("check_links.py requires PyYAML: pip install pyyaml")
     sys.exit(2)
+
+# Shared corpus lock (DEC-0391, DEC-0411): the checker reads under the
+# shared lock so it never scans a torn mid-apply state. Optional —
+# this file is also installed standalone as tools/check_links.py in
+# Groundwork projects, where gw_lock.py is absent and the checker
+# behaves exactly as before.
+try:
+    import gw_lock as _gw_lock
+except ImportError:  # pragma: no cover
+    _gw_lock = None
+
+
+def read_lock(root):
+    return (_gw_lock.read_lock(root) if _gw_lock
+            else contextlib.nullcontext())
+
+
+def journal_pending(root):
+    return bool(_gw_lock) and _gw_lock.journal_pending(root)
 
 LINK_TYPES = {"derives-from", "satisfies", "depends-on", "conflicts-with",
               "supersedes", "relates-to", "impacts", "impacted-by"}
@@ -963,7 +983,14 @@ def main():
 
 if __name__ == "__main__":
     try:
-        sys.exit(main())
+        _argv = [a for a in sys.argv[1:] if not a.startswith("--")]
+        _root = Path(_argv[0]).resolve() if _argv else Path.cwd()
+        if journal_pending(_root):
+            print("WARN: an interrupted write apply is pending "
+                  "rollback — run `gw write recover` before trusting "
+                  "this check (DEC-0412)", file=sys.stderr)
+        with read_lock(_root):
+            sys.exit(main())
     except BrokenPipeError:
         # Downstream consumer (head, less) closed the pipe — not an
         # error (SES-0077, DEC-0404). Re-point stdout so interpreter

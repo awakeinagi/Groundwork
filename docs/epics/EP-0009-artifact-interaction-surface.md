@@ -43,7 +43,7 @@ links:
   derives-from: [BG-0002]
   satisfies: [BG-0002]
   relates-to: [DEC-0339, IDEA-0015]
-cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0389, DEC-0391, DEC-0392, DEC-0393]
+cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0389, DEC-0391, DEC-0392, DEC-0393, DEC-0411, DEC-0412, DEC-0413, DEC-0414, DEC-0415, DEC-0416, DEC-0394]
 ---
 
 ## Summary
@@ -157,6 +157,16 @@ are captured. Consumer expectations for this surface are today
 distributed across DEC-0388, DEC-0327, DEC-0330, DEC-0331, DEC-0340,
 DEC-0342, and the SES-0076 concurrency set (DEC-0391, DEC-0392,
 DEC-0393); the CMPs consolidate them rather than introduce new ones.
+
+The DEC-0391 concurrency model itself is implemented by a six-decision
+set shipped at SES-0079: DEC-0411 (the lock primitive, `gw_lock.py`),
+DEC-0412 (transactional journal rollback), DEC-0413 (per-section
+version tokens), DEC-0414 (tool-assigned turn numbers), DEC-0415
+(graph sync performed under the write lock), and DEC-0416 (the
+verification gate that retired the DEC-0394 interim restriction).
+Consumer expectations for this surface therefore include this full
+implementing set, not DEC-0391 alone, per the stakeholder's ratified
+preference for self-containedness.
 
 ## Risks & Open Questions
 

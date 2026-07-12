@@ -26,6 +26,11 @@ import sys
 import textwrap
 from pathlib import Path
 
+# Shared corpus lock + derived version tokens (DEC-0391; SES-0079,
+# DEC-0411, DEC-0413): reads take the lock shared — concurrent readers
+# never block each other, and no read observes a torn mid-apply state.
+from gw_lock import journal_pending, read_lock, version_token
+
 ID_RE = re.compile(r"\b(?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4}\b")
 HEADING_RE = re.compile(r"^(#{2,4})\s+(.*?)\s*$")
 ELEMENT_RE = re.compile(r"^###\s+(\S.*?)\s+\((entity|value|service|event|"
@@ -118,15 +123,38 @@ def cmd_overview(corpus, ids, type_f, status_f):
         return 1
     for doc in picked:
         print(header(doc))
+        print(f"  token: {version_token(doc['overview'])}")
         print(wrap(doc["overview"] or "(no overview)"))
         print()
     return 0
+
+
+def section_tokens(body):
+    """Line index of each ##-heading -> version token of its section
+    span (DEC-0413), one pass."""
+    lines = body.splitlines()
+    spans, start, in_code = {}, None, False
+    for i, line in enumerate(lines):
+        if line.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
+        m = HEADING_RE.match(line)
+        if m and len(m.group(1)) == 2:
+            if start is not None:
+                spans[start] = version_token("\n".join(lines[start:i]))
+            start = i
+    if start is not None:
+        spans[start] = version_token("\n".join(lines[start:]))
+    return spans
 
 
 def cmd_outline(corpus, aid):
     doc = get(corpus, aid)
     print(header(doc))
     lines = doc["body"].splitlines()
+    tokens = section_tokens(doc["body"])
     in_code = False
     for i, line in enumerate(lines):
         if line.startswith("```"):
@@ -138,7 +166,8 @@ def cmd_outline(corpus, aid):
         if not m:
             continue
         depth = len(m.group(1)) - 2
-        print("  " * depth + "- " + m.group(2))
+        tok = f"  [{tokens[i]}]" if i in tokens else ""
+        print("  " * depth + "- " + m.group(2) + tok)
         e = ELEMENT_RE.match(line)
         if e:
             for j in range(i + 1, min(i + 5, len(lines))):
@@ -153,19 +182,21 @@ def cmd_outline(corpus, aid):
     return 0
 
 
-def section_slice(body, match_fn):
-    """Return the lines of the first section whose heading satisfies
+def section_slice(body, match_fn, occurrence=1):
+    """Return the lines of the Nth section whose heading satisfies
     match_fn, up to the next heading of the same or higher level."""
     lines = body.splitlines()
-    out, level, in_code = [], None, False
+    out, level, in_code, matched = [], None, False, 0
     for line in lines:
         if line.startswith("```"):
             in_code = not in_code
         m = HEADING_RE.match(line) if not in_code else None
         if level is None:
             if m and match_fn(m.group(2)):
-                level = len(m.group(1))
-                out.append(line)
+                matched += 1
+                if matched == occurrence:
+                    level = len(m.group(1))
+                    out.append(line)
         else:
             if m and len(m.group(1)) <= level:
                 break
@@ -173,14 +204,19 @@ def section_slice(body, match_fn):
     return out if level is not None else None
 
 
-def cmd_section(corpus, aid, heading):
+def cmd_section(corpus, aid, heading, occurrence=1):
     doc = get(corpus, aid)
     want = heading.lower()
-    out = section_slice(doc["body"], lambda h: want in h.lower())
+    out = section_slice(doc["body"], lambda h: want in h.lower(),
+                        occurrence)
     if out is None:
-        print(f"{aid}: no section matching {heading!r}", file=sys.stderr)
+        where = (f" (occurrence {occurrence})" if occurrence != 1
+                 else "")
+        print(f"{aid}: no section matching {heading!r}{where}",
+              file=sys.stderr)
         return 1
     print(header(doc))
+    print(f"token: {version_token(chr(10).join(out))}")
     print("\n".join(out).rstrip())
     return 0
 
@@ -342,6 +378,10 @@ def main():
         "case-insensitive heading substring.")
     p.add_argument("id", help="artifact ID")
     p.add_argument("heading", help="heading substring (case-insensitive)")
+    p.add_argument("--occurrence", type=int, default=1,
+                   help="the Nth heading matching the substring — pairs "
+                        "with edit-section --occurrence so repairs can "
+                        "fetch the right token (DEC-0413)")
     p = sub.add_parser(
         "element", help="one CMP design element's block",
         description="Print one design element's full contract block "
@@ -372,9 +412,20 @@ def main():
 
     args = ap.parse_args()
     root = Path(args.root).resolve()
+    if journal_pending(root):
+        # Interrupted apply awaiting rollback: recovery is writer-only
+        # (exclusive lock); readers surface it and carry on (DEC-0412).
+        print("WARN: an interrupted write apply is pending rollback — "
+              "run `gw write recover` (or any write op) before "
+              "trusting reads (DEC-0412)", file=sys.stderr)
     if args.cmd == "term":
-        sys.exit(cmd_term(root, args.name))
-    corpus = load_corpus(root)
+        with read_lock(root):
+            rc = cmd_term(root, args.name)
+        sys.exit(rc)
+    # Shared lock covers the file scan only; formatting and printing
+    # happen on the in-memory corpus after release (DEC-0411).
+    with read_lock(root):
+        corpus = load_corpus(root)
     if args.cmd == "overview":
         if not args.ids and not args.type_f and not args.status_f:
             print("give IDs and/or --type/--status", file=sys.stderr)
@@ -383,7 +434,8 @@ def main():
     if args.cmd == "outline":
         sys.exit(cmd_outline(corpus, args.id))
     if args.cmd == "section":
-        sys.exit(cmd_section(corpus, args.id, args.heading))
+        sys.exit(cmd_section(corpus, args.id, args.heading,
+                             args.occurrence))
     if args.cmd == "element":
         sys.exit(cmd_element(corpus, args.id, args.name))
     if args.cmd == "item":

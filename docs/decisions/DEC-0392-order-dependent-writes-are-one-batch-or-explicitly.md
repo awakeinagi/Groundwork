@@ -19,7 +19,7 @@ overview: >-
   shared/exclusive lock design.
 links:
   derives-from: [SES-0076]
-  relates-to: [DEC-0391]
+  relates-to: [DEC-0391, DEC-0414]
 ---
 # DEC-0392: Order-dependent writes are one batch or explicitly sequenced; batch keys do not cross tasks
 

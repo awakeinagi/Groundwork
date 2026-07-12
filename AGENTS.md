@@ -75,14 +75,17 @@ returns a distilled result (verbatim content on request).
 `artifact-interact` itself remains explicit-load-only (DEC-0326,
 DEC-0327).
 
-**Concurrency (DEC-0392–DEC-0394).** Librarian tasks launch in the
-background by default; block only where the next turn depends on the
-result (DEC-0393). Read tasks fan out freely. Interim: one write-task
-librarian at a time (DEC-0394) until the DEC-0391 lock-serialized
-apply ships; thereafter write tasks fan out too, with order-dependent
-writes in one batch or explicitly sequenced, and at most one
-turn-appending task per session (DEC-0392). The librarian never
-commits — git stays with you (DEC-0333).
+**Concurrency (DEC-0391–DEC-0393; DEC-0411..DEC-0416, verified
+SES-0079).** Librarian tasks launch in the background by default;
+block only where the next turn depends on the result (DEC-0393). Read
+tasks fan out freely, and write tasks fan out too: the gw write path
+serializes at the apply moment on an exclusive lock, with
+transactional rollback — a failed or crashed write leaves the corpus
+untouched. DEC-0394's interim single-write-librarian rule expired at
+verification. Keep order-dependent writes in one batch or explicitly
+sequenced, and at most one turn-appending task per session
+(DEC-0392). The librarian never commits — git stays with you
+(DEC-0333).
 
 ## The no-arbitrary-builds guard (DEC-0335, DEC-0345)
 

@@ -16,7 +16,7 @@ overview: >-
   implementation is verified. Decided at SES-0076.
 links:
   derives-from: [SES-0076]
-  relates-to: [DEC-0391, DEC-0393]
+  relates-to: [DEC-0391, DEC-0393, DEC-0416]
 ---
 # DEC-0394: Until the concurrent-apply build ships, DEC-0332 remains the operative interim write rule
 

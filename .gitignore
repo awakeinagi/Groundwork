@@ -2,6 +2,8 @@
 .groundwork-graph.wal
 .groundwork-search
 .groundwork-search.wal
+.groundwork-lock
+.groundwork-journal/
 *.zip
 /SP*.md
 __pycache__/

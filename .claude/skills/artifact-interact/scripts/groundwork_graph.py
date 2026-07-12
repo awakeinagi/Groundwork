@@ -744,13 +744,27 @@ def main():
     if args.cmd != "build" and not db_path.exists():
         sys.exit(f"No graph at {db_path} — run `build` first.")
     g = Graph(db_path, fresh=(args.cmd == "build"))
+    # Live docs/ reads run under the shared corpus lock (DEC-0391,
+    # DEC-0415): overview loading and build/sync scan artifact files;
+    # pure DB queries need no lock. When gw_write runs sync as a child
+    # while holding the exclusive lock, it sets GW_LOCK_BYPASS and
+    # gw_lock yields immediately instead of deadlocking on the
+    # parent's lock.
+    from gw_lock import read_lock
     if not args.no_overviews and args.cmd in (
             "impact", "trace", "order", "gaps", "elements"):
-        OVERVIEWS.update(load_overviews(root))
-    {"build": cmd_build, "sync": cmd_sync, "query": cmd_query,
-     "impact": cmd_impact, "trace": cmd_trace, "gaps": cmd_gaps,
-     "order": cmd_order, "elements": cmd_elements,
-     "progress": cmd_progress, "stats": cmd_stats}[args.cmd](g, root, args)
+        with read_lock(root):
+            OVERVIEWS.update(load_overviews(root))
+    dispatch = {"build": cmd_build, "sync": cmd_sync, "query": cmd_query,
+                "impact": cmd_impact, "trace": cmd_trace,
+                "gaps": cmd_gaps, "order": cmd_order,
+                "elements": cmd_elements, "progress": cmd_progress,
+                "stats": cmd_stats}[args.cmd]
+    if args.cmd in ("build", "sync"):
+        with read_lock(root):
+            dispatch(g, root, args)
+    else:
+        dispatch(g, root, args)
 
 
 if __name__ == "__main__":

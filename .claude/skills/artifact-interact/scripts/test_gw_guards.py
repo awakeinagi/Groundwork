@@ -6,6 +6,7 @@ Self-contained: builds a scratch corpus in a temp dir per test class.
 Run: python3 test_gw_guards.py
 """
 
+import re
 import subprocess
 import sys
 import tempfile
@@ -14,6 +15,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 GW_WRITE = HERE / "gw_write.py"
+GW_READ = HERE / "groundwork_read.py"
 CHECK = HERE / "check_links.py"
 
 FM_TEMPLATE = """---
@@ -79,9 +81,15 @@ class Scratch:
         return p
 
     def baseline(self):
-        """A minimal corpus that passes the full checker."""
+        """A minimal corpus that passes the full checker (full BG
+        section skeleton since rule 26 promoted to FAIL, SES-0078)."""
         self.write("BG-0001", "business-goal", "approved",
                    "# BG-0001: Test goal\n\n## Problem\n\nPain.\n\n"
+                   "## Intent\n\nRelief.\n\n"
+                   "## Outcomes & Success Criteria\n\nLess pain.\n\n"
+                   "## Scope\n\nSmall.\n\n## Constraints\n\nFew.\n\n"
+                   "## Stakeholders & Roles\n\nTester.\n\n"
+                   "## Conflicts & Tensions\n\nNone.\n\n"
                    "## Derived Work\n\nSP-0001 derives from this goal.\n")
         self.write("SES-0001", "session", "open", session_body("SES-0001"),
                    links="links:\n  relates-to: [DEC-0001]\n",
@@ -98,6 +106,27 @@ def gw(root, *argv, stdin=None):
     return subprocess.run(
         [sys.executable, str(GW_WRITE), "--root", str(root), *argv],
         input=stdin, capture_output=True, text=True)
+
+
+def tok(root, aid, heading, occurrence=1):
+    """Current section version token via the read CLI (DEC-0413)."""
+    r = subprocess.run(
+        [sys.executable, str(GW_READ), "--root", str(root), "section",
+         aid, heading, "--occurrence", str(occurrence)],
+        capture_output=True, text=True)
+    m = re.search(r"^token: (v:[0-9a-f]{12})$", r.stdout, re.M)
+    assert m, f"no token in read output: {r.stdout}{r.stderr}"
+    return m.group(1)
+
+
+def otok(root, aid):
+    """Current overview version token via the read CLI (DEC-0413)."""
+    r = subprocess.run(
+        [sys.executable, str(GW_READ), "--root", str(root), "overview",
+         aid], capture_output=True, text=True)
+    m = re.search(r"^  token: (v:[0-9a-f]{12})$", r.stdout, re.M)
+    assert m, f"no token in read output: {r.stdout}{r.stderr}"
+    return m.group(1)
 
 
 def check(root):
@@ -120,6 +149,7 @@ class GuardTests(unittest.TestCase):
         p = self.path_of("SES-0001", "session")
         before = p.read_text()
         r = gw(self.root, "edit-section", "SES-0001", "Purpose",
+               "--if-match", tok(self.root, "SES-0001", "Purpose"),
                stdin="## Purpose\n\nNew purpose.")
         self.assertNotEqual(r.returncode, 0, r.stdout + r.stderr)
         self.assertIn("heading-level line", r.stderr)
@@ -127,16 +157,19 @@ class GuardTests(unittest.TestCase):
 
     def test_lower_level_heading_allowed(self):
         r = gw(self.root, "edit-section", "SES-0001", "Purpose",
+               "--if-match", tok(self.root, "SES-0001", "Purpose"),
                stdin="Intro.\n\n### Sub-point\n\nDetail.")
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
     def test_clean_edit_idempotent(self):
         p = self.path_of("SES-0001", "session")
         r1 = gw(self.root, "edit-section", "SES-0001", "Purpose",
+                "--if-match", tok(self.root, "SES-0001", "Purpose"),
                 stdin="New purpose.")
         self.assertEqual(r1.returncode, 0, r1.stderr)
         after1 = p.read_text()
         r2 = gw(self.root, "edit-section", "SES-0001", "Purpose",
+                "--if-match", tok(self.root, "SES-0001", "Purpose"),
                 stdin="New purpose.")
         self.assertEqual(r2.returncode, 0, r2.stderr)
         self.assertEqual(p.read_text(), after1)
@@ -152,7 +185,10 @@ class GuardTests(unittest.TestCase):
     def test_occurrence_targets_nth(self):
         p = self.corrupt_spike()
         r = gw(self.root, "edit-section", "SP-0002", "Findings",
-               "--occurrence", "2", stdin="Repaired content.")
+               "--occurrence", "2",
+               "--if-match", tok(self.root, "SP-0002", "Findings",
+                                 occurrence=2),
+               stdin="Repaired content.")
         self.assertEqual(r.returncode, 0, r.stderr)
         text = p.read_text()
         self.assertIn("Repaired content.", text)
@@ -251,16 +287,19 @@ class GuardTests(unittest.TestCase):
     # B1 (SES-0077, DEC-0399): body ID scans are code-span-aware
     def test_code_span_id_in_body_passes(self):
         r = gw(self.root, "edit-section", "SES-0001", "Purpose",
+               "--if-match", tok(self.root, "SES-0001", "Purpose"),
                stdin="A verbatim quote mentioning `DEC-9999` in backticks.")
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
     def test_fenced_block_id_passes(self):
         r = gw(self.root, "edit-section", "SES-0001", "Purpose",
+               "--if-match", tok(self.root, "SES-0001", "Purpose"),
                stdin="Example:\n\n```\nsee DEC-9999\n```\n\nDone.")
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
     def test_bare_unresolvable_id_still_refused(self):
         r = gw(self.root, "edit-section", "SES-0001", "Purpose",
+               "--if-match", tok(self.root, "SES-0001", "Purpose"),
                stdin="Prose naming DEC-9999 bare.")
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("unresolved", r.stderr)
@@ -274,6 +313,7 @@ class GuardTests(unittest.TestCase):
     # grant no exemption on that surface
     def test_overview_backticked_unresolvable_id_refused(self):
         r = gw(self.root, "update-overview", "SES-0001",
+               "--if-match", otok(self.root, "SES-0001"),
                "--text", "Mentions `DEC-9999` which does not exist.")
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("unresolved", r.stderr)
@@ -496,6 +536,7 @@ class BatchTests(unittest.TestCase):
              "overview": "First idea.",
              "links": {"derives-from": ["SES-0001"]}},
             {"op": "edit-section", "id": "SES-0001", "heading": "Purpose",
+             "if-match": tok(self.root, "SES-0001", "Purpose"),
              "content": "Updated purpose."},
         ])
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
@@ -504,9 +545,14 @@ class BatchTests(unittest.TestCase):
     def test_apply_time_failure_prints_manifest(self):
         # Op 0 applies; op 1 fails at apply time (nonexistent cite
         # target passes pre-validation, fails on load); op 2 is never
-        # attempted. The manifest must say all three things.
+        # attempted. The manifest must say all three things — and since
+        # DEC-0412, the whole batch then rolls back: op 0's landed edit
+        # is restored too, so the corpus is byte-identical to before.
+        before = (self.root / "docs" / "sessions" /
+                  "SES-0001-test.md").read_text()
         r = self.apply([
             {"op": "edit-section", "id": "SES-0001", "heading": "Purpose",
+             "if-match": tok(self.root, "SES-0001", "Purpose"),
              "content": "First edit lands."},
             {"op": "add-cite", "id": "SES-0001", "target": "DEC-9999"},
             {"op": "edit-section", "id": "SES-0001",
@@ -515,9 +561,11 @@ class BatchTests(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("applied 1 of 3", r.stdout)
         self.assertIn("not attempted: 2 (edit-section)", r.stdout)
+        self.assertIn("rolling back", r.stdout)
         text = (self.root / "docs" / "sessions" /
                 "SES-0001-test.md").read_text()
-        self.assertIn("First edit lands.", text)
+        self.assertEqual(text, before,
+                         "batch failure must roll back op 0's edit")
         self.assertNotIn("Never reached.", text)
 
 
@@ -654,14 +702,15 @@ class CheckerTests(unittest.TestCase):
         self.assertIn("rule 25", r.stdout)
         self.assertIn("transcript-fidelity", r.stdout)
 
-    # SES-0077 item 9: rule 26 warns on missing required sections
-    def test_rule_26_missing_sections_warn(self):
+    # SES-0077 item 9, promoted to FAIL by SES-0078 (DEC-0409): rule 26
+    # fails on missing required sections
+    def test_rule_26_missing_sections_fail(self):
         p = self.s.write("IDEA-0002", "idea", "captured",
                          idea_body("IDEA-0002"))
         p.write_text(p.read_text().replace("## Disposition\n\nPending.\n",
                                            ""))
         r = check(self.root)
-        self.assertEqual(r.returncode, 0, r.stdout)  # WARN severity
+        self.assertEqual(r.returncode, 1, r.stdout)  # FAIL severity
         self.assertIn("rule 26", r.stdout)
         self.assertIn("'Disposition'", r.stdout)
 

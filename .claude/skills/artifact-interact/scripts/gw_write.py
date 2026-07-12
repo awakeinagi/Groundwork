@@ -30,10 +30,25 @@ Exit codes: 0 ok, 1 refused/invalid request, 2 setup problem.
 import argparse
 import datetime
 import json
+import os
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 from typing import NoReturn
+
+# Concurrency machinery (DEC-0391; SES-0079, DEC-0411..DEC-0416): the
+# whole apply span — corpus scan, ID allocation, edits, reciprocity,
+# recheck, graph sync — runs under one exclusive lock; every mutation
+# is journaled first and rolls back on any failure.
+from gw_lock import (Journal, atomic_write, version_token, write_lock)
+
+HERE = Path(__file__).resolve().parent
+
+# Module-level journal, set in main() under the write lock; Artifact
+# and op_create funnel every mutation through it (DEC-0412).
+JOURNAL = None
 
 # Optional (SES-0072): frontmatter YAML validation at recheck time when
 # PyYAML is present. Absent, the check skips silently — the write path
@@ -125,6 +140,9 @@ ID_PLACEHOLDER_RE = re.compile(
 BODY_H1_ID_RE = re.compile(
     r"^#\s+((?:BG|EP|ST|SP|CMP|SES|DEC|CFL|CON|CP|IDEA)-\d{4})\b")
 RATIFYING_STATUSES = {"approved", "accepted", "closed"}
+# Turn headings the transcript reader recognizes (### Tn / **Tn),
+# shared shape with groundwork_read.py's TURN_RE (DEC-0414).
+TURN_HEAD_RE = re.compile(r"^(###\s+T|\*\*T)(\d+)\b", re.M)
 SESSION_CLOSE_FIELDS = ("participant", "participant-role", "facilitator",
                         "transcript-fidelity")
 
@@ -288,10 +306,12 @@ class Artifact:
         self.body = raw[end + 5:]
 
     def write(self):
-        self.path.write_text(f"---\n{self.fm}---\n{self.body}"
-                             if self.fm.endswith("\n")
-                             else f"---\n{self.fm}\n---\n{self.body}",
-                             encoding="utf-8")
+        if JOURNAL is not None:
+            JOURNAL.record(self.path)
+        atomic_write(self.path,
+                     f"---\n{self.fm}---\n{self.body}"
+                     if self.fm.endswith("\n")
+                     else f"---\n{self.fm}\n---\n{self.body}")
 
     # -- frontmatter helpers (top-level keys and links: subkeys) --
 
@@ -399,6 +419,10 @@ class Corpus:
         self.defer_recheck = False
         self.pending_recheck = []
         self.pending_resolve = []
+        # IDs created by this invocation: exempt from the --if-match
+        # requirement (DEC-0413) — the creator composed the content it
+        # is editing, there is no prior read to hold a token from.
+        self.created_in_batch = set()
         if not self.docs.is_dir():
             fail(f"no docs/ under {self.root}", 2)
         self.paths = {}   # id -> path
@@ -499,7 +523,8 @@ class Corpus:
                         f"{rel} {other_id} not reciprocated")
         if problems:
             fail(f"post-write check failed on {path.name}: "
-                 f"{'; '.join(problems)} — file written, fix required")
+                 f"{'; '.join(problems)} — rolling back, nothing "
+                 "lands (DEC-0412)")
         return True
 
 
@@ -653,9 +678,12 @@ def op_create(c, args, json_mode):
                  f"{status!r} — " + "; ".join(problems))
     path = c.docs / subdir / f"{aid}-{kebab(args.title)}.md"
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("---\n" + "\n".join(fm) + "\n---\n\n" +
-                    body.rstrip("\n") + "\n", encoding="utf-8")
+    if JOURNAL is not None:
+        JOURNAL.record_create(path)
+    atomic_write(path, "---\n" + "\n".join(fm) + "\n---\n\n" +
+                 body.rstrip("\n") + "\n")
     c.paths[aid] = path
+    c.created_in_batch.add(aid)
     # reciprocity bookkeeping for impact links
     for rel in ("impacts", "impacted-by"):
         for other_id in args.links.get(rel, []):
@@ -840,6 +868,16 @@ def op_update_overview(c, args, json_mode):
     text = " ".join(text.split())
     if len(text.split()) > 250:
         fail(f"overview is {len(text.split())} words (max 250)")
+    # Version precondition (DEC-0413), same shape as edit-section;
+    # the token covers the current overview text as a read emits it.
+    if args.id not in c.created_in_batch:
+        if not args.if_match:
+            fail(f"update-overview requires --if-match <token> from a "
+                 f"current read (DEC-0413) — `gw read overview "
+                 f"{args.id}` prints it")
+        if args.if_match != version_token(extract_overview(art.fm)):
+            fail(f"{args.id} overview changed since your read (token "
+                 "mismatch) — re-read and recompose (DEC-0413)")
     c.resolve_all(text, f"{args.id} overview")
     import textwrap as _tw
     block = "overview: >-\n" + "\n".join(
@@ -892,6 +930,20 @@ def op_edit_section(c, args, json_mode):
                  if args.occurrence != 1 else "")
         fail(f"{args.id}: no section matching {args.heading!r}{where}")
     start, end = span
+    # Version precondition (DEC-0413): the write carries the token it
+    # composed against; a mismatch means unseen changes — refuse with
+    # a re-read instruction rather than overwrite. Artifacts created
+    # by this same invocation are exempt (no prior read exists).
+    if args.id not in c.created_in_batch:
+        if not args.if_match:
+            fail(f"edit-section requires --if-match <token> from a "
+                 f"current read (DEC-0413) — `gw read section "
+                 f"{args.id} \"{args.heading}\"` prints it")
+        current = version_token(art.body[start:end])
+        if args.if_match != current:
+            fail(f"{args.id} {args.heading!r} changed since your read "
+                 f"(token mismatch) — re-read the section and "
+                 "recompose (DEC-0413)")
     head_line = art.body[start:].splitlines()[0]
     hm = HEADING_RE.match(head_line)
     assert hm is not None
@@ -967,6 +1019,7 @@ def op_append_turn(c, args, json_mode):
         fail("closed sessions are immutable; only dated Post-Close "
              "Enrichment is sanctioned (DEC-0248) — re-run with "
              "--enrichment, or open a new session")
+    assigned = ""
     if closed:
         seg = art.body[start:end]
         marker = f"### Post-Close Enrichment ({today()})"
@@ -977,13 +1030,42 @@ def op_append_turn(c, args, json_mode):
         art.body = (art.body[:end].rstrip("\n") + "\n" + insert +
                     "\n" + art.body[end:])
     else:
+        # Auto-numbering (DEC-0414): the writer owns turn numbers.
+        # Read the live max under the lock, renumber the payload's
+        # turn headings to continue from it; --expect-first-turn is
+        # the optional compare-and-refuse precondition.
+        seg = art.body[start:end]
+        existing = [int(m.group(2))
+                    for m in TURN_HEAD_RE.finditer(seg)]
+        nxt = max(existing, default=0) + 1
+        if args.expect_first_turn and args.expect_first_turn != nxt:
+            fail(f"{args.id}: transcript advanced — the next turn is "
+                 f"T{nxt}, you expected T{args.expect_first_turn}; "
+                 "re-read the transcript and recompose (DEC-0414)")
+        counter = [nxt]
+
+        def _renumber(m):
+            n = counter[0]
+            counter[0] += 1
+            return f"{m.group(1)}{n}"
+
+        content = TURN_HEAD_RE.sub(_renumber, content.strip())
         art.body = (art.body[:end].rstrip("\n") + "\n\n" +
                     content.strip() + "\n\n" + art.body[end:])
+        # Loud, never silent (DEC-0376 reconciliation): report the
+        # numbers the tool assigned so the caller sees the mutation.
+        if counter[0] > nxt:
+            assigned = (f" T{nxt}" if counter[0] == nxt + 1
+                        else f" T{nxt}-T{counter[0] - 1}")
     art.write()
     c.recheck(art.path)
-    ok(f"append-turn {args.id}"
-       + (" (post-close enrichment)" if closed else ""),
-       [art.path], json_mode)
+    if closed:
+        ok(f"append-turn {args.id} (post-close enrichment)",
+           [art.path], json_mode)
+    else:
+        ok(f"append-turn {args.id}"
+           + (f" (assigned{assigned}, DEC-0414)" if assigned else ""),
+           [art.path], json_mode)
 
 
 def op_supersede(c, args, json_mode):
@@ -1081,7 +1163,8 @@ def op_apply(c, args, json_mode):
                     if j > i]
             print(f"apply: op {i} ({op}) FAILED — applied {applied} of "
                   f"{len(ops)}; not attempted: "
-                  f"{', '.join(rest) if rest else 'none'}", flush=True)
+                  f"{', '.join(rest) if rest else 'none'}; rolling "
+                  "back (DEC-0412)", flush=True)
             raise
         applied += 1
     # DEC-0314: the batch validates as a unit — re-check every touched
@@ -1101,7 +1184,7 @@ def op_apply(c, args, json_mode):
     if failures:
         fail(f"apply: applied {applied}/{len(ops)}, but {failures} "
              "file(s) failed post-batch validation (details above) — "
-             "files are written; fix required")
+             "rolling back, nothing lands (DEC-0412)")
     print(f"apply: applied {applied}/{len(ops)}; post-batch validation "
           f"clean ({len(c.pending_recheck)} file(s))", flush=True)
 
@@ -1115,7 +1198,7 @@ def build_namespace(op, spec):
         enrichment=False, overview_ok=False, derives_from=None,
         session=None, source_span=None, title=None, heading=None,
         id=None, target=None, rel=None, occurrence=1,
-        no_decisions_ok=None)
+        no_decisions_ok=None, if_match=None, expect_first_turn=None)
     content = spec.pop("content", None)
     defaults.update({k.replace("-", "_"): v for k, v in spec.items()})
     ns = argparse.Namespace(**defaults)
@@ -1150,14 +1233,46 @@ BATCH_KEYS = {
     "add-link": {"id", "rel", "target"},
     "add-cite": {"id", "target"},
     "remove-cite": {"id", "target", "amend"},
-    "update-overview": {"id", "text", "content", "from-file"},
+    "update-overview": {"id", "text", "content", "from-file",
+                        "if-match"},
     "edit-section": {"id", "heading", "occurrence", "amend",
-                     "overview-ok", "content", "from-file"},
+                     "overview-ok", "content", "from-file", "if-match"},
     "delete-section": {"id", "heading", "occurrence", "amend"},
-    "append-turn": {"id", "enrichment", "content", "from-file"},
+    "append-turn": {"id", "enrichment", "content", "from-file",
+                    "expect-first-turn"},
     "supersede": {"id", "title", "overview", "session", "source-span",
                   "owner", "cites", "content", "from-file"},
 }
+
+
+def graph_sync_under_lock(root, touched):
+    """Best-effort targeted graph sync of the files this apply touched,
+    before the exclusive lock releases (DEC-0415): only when uv and an
+    existing graph store are present; failure warns, never fails the
+    write — the graph is a derived view. The child inherits
+    GW_LOCK_BYPASS because the parent already holds the lock it would
+    otherwise wait on."""
+    if shutil.which("uv") is None:
+        return
+    if not (Path(root) / ".groundwork-graph").exists():
+        return
+    targets = [t for t in touched if t.startswith("docs/")]
+    if not targets:
+        return
+    env = dict(os.environ, GW_LOCK_BYPASS="1")
+    try:
+        r = subprocess.run(
+            ["uv", "run", str(HERE / "groundwork_graph.py"),
+             "--root", str(root), "sync", *targets],
+            capture_output=True, text=True, timeout=180, env=env)
+        if r.returncode != 0:
+            detail = (r.stderr or r.stdout).strip().splitlines()
+            print("WARN: graph sync under the lock failed (non-fatal, "
+                  "DEC-0415): " + (detail[-1] if detail else "?"),
+                  file=sys.stderr, flush=True)
+    except (OSError, subprocess.TimeoutExpired) as e:
+        print(f"WARN: graph sync under the lock failed (non-fatal, "
+              f"DEC-0415): {e}", file=sys.stderr, flush=True)
 
 
 # ------------------------------------------------------------------ CLI
@@ -1281,6 +1396,10 @@ def main():
     p.add_argument("id")
     p.add_argument("--text")
     p.add_argument("--from-file")
+    p.add_argument("--if-match", dest="if_match", metavar="TOKEN",
+                   help="version token from a current read of the "
+                        "overview (DEC-0413); required unless this "
+                        "invocation created the artifact")
 
     p = sub.add_parser(
         "edit-section", help="replace one section body (heading kept)",
@@ -1298,6 +1417,10 @@ def main():
     p.add_argument("--amend", action="store_true")
     p.add_argument("--overview-ok", action="store_true",
                    help="assert the overview is already faithful")
+    p.add_argument("--if-match", dest="if_match", metavar="TOKEN",
+                   help="version token from a current read of the "
+                        "section (DEC-0413); required unless this "
+                        "invocation created the artifact")
 
     p = sub.add_parser(
         "delete-section", help="remove a heading and its span (repair)",
@@ -1320,6 +1443,10 @@ def main():
     p.add_argument("id")
     p.add_argument("--from-file")
     p.add_argument("--enrichment", action="store_true")
+    p.add_argument("--expect-first-turn", dest="expect_first_turn",
+                   type=int, metavar="N",
+                   help="refuse unless the next assigned turn would be "
+                        "TN (DEC-0414 precondition)")
 
     p = sub.add_parser(
         "supersede", help="replace an accepted decision",
@@ -1339,6 +1466,14 @@ def main():
     p.add_argument("--from-file")
 
     p = sub.add_parser(
+        "recover", help="roll back an interrupted apply's journal",
+        description="Acquire the exclusive lock and roll back any "
+        "leftover journal from a crashed apply (DEC-0412). Every "
+        "write op does this automatically first; recover exists so a "
+        "reader's interrupted-apply warning can be cleared without "
+        "composing a write. Safe when nothing is pending.")
+
+    p = sub.add_parser(
         "apply", help="run a JSON op list as one pre-validated unit",
         description="Run a JSON list of ops as one unit (validation "
         "defers to batch end so members may reference each other). "
@@ -1356,8 +1491,43 @@ def main():
     if args.op == "create":
         args.links = parse_links(getattr(args, "link_pairs", None))
         args.derives_from = args.links.get("derives-from")
-    c = Corpus(args.root)
-    DISPATCH[args.op](c, args, args.json_mode)
+    root = Path(args.root).resolve()
+
+    if args.op == "recover":
+        with write_lock(root):
+            n = Journal(root).recover()
+        print(f"OK recover: rolled back {n} file(s) from an "
+              "interrupted apply" if n else
+              "OK recover: no interrupted apply pending", flush=True)
+        return
+
+    # The apply span (DEC-0411): everything from the corpus scan that
+    # feeds ID allocation through graph sync runs under one exclusive
+    # lock, released explicitly when this block exits. Any leftover
+    # journal from a crashed apply is rolled back first — recovery is
+    # a writer-only action; readers merely warn (DEC-0412).
+    global JOURNAL
+    with write_lock(root):
+        recovered = Journal(root).recover()
+        if recovered:
+            print(f"NOTE: rolled back an interrupted apply "
+                  f"({recovered} file(s)) before proceeding "
+                  "(DEC-0412)", flush=True)
+        JOURNAL = Journal(root)
+        c = Corpus(args.root)
+        try:
+            DISPATCH[args.op](c, args, args.json_mode)
+        except BaseException:
+            undone = JOURNAL.rollback()
+            if undone:
+                print(f"rolled back: corpus restored to its pre-op "
+                      f"state ({undone} file(s)) (DEC-0412)",
+                      file=sys.stderr, flush=True)
+            raise
+        touched = list(JOURNAL.entries)
+        JOURNAL.commit()
+        if touched:
+            graph_sync_under_lock(root, touched)
 
 
 if __name__ == "__main__":

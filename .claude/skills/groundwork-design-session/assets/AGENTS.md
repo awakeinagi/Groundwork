@@ -50,9 +50,12 @@ Read/Edit/Write `docs/` artifact files yourself, and do not load
 is explicit-load-only. "Manually loaded" means the operator loaded it
 by name, or your own agent definition explicitly charters it
 (DEC-0328: `overview-writer` and `system-architect` hold such
-charters). Read-only librarian tasks may run in parallel; never run
-two write-task librarians concurrently (DEC-0332). The librarian never
-commits — git stays with you (DEC-0333).
+charters). Librarian tasks may run in parallel — reads freely, and
+write tasks too: the gw write path serializes at the apply moment
+with transactional rollback (DEC-0391; DEC-0411..DEC-0416). Keep
+order-dependent writes in one batch or explicitly sequenced, and at
+most one turn-appending task per session (DEC-0392). The librarian
+never commits — git stays with you (DEC-0333).
 
 ## The no-arbitrary-builds guard (DEC-0335, DEC-0345)
 

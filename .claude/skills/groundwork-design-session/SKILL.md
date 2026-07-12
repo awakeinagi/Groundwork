@@ -63,8 +63,12 @@ the reads/searches/graph queries/typed writes via the
 returns a distilled result; ask for verbatim sections when fidelity
 matters (gate review, transcript work).
 
-- **Read/search/graph tasks may fan out in parallel; write tasks are
-  serialized — one write-task librarian at a time (DEC-0332).**
+- **Read/search/graph tasks may fan out in parallel, and write tasks
+  may too — the gw write path serializes at the apply moment with
+  transactional rollback (DEC-0391; DEC-0411..DEC-0416, verified
+  SES-0079). Keep order-dependent writes in one batch or explicitly
+  sequenced, and at most one turn-appending task per session
+  (DEC-0392).**
 - The librarian refuses invariant-violating writes and reports the
   sanctioned alternative (DEC-0330); surface refusals to the
   stakeholder like any other tension — never instruct it to work
@@ -227,7 +231,7 @@ Route **meaning-shaped** questions to librarian search tasks (have we
 discussed X? which decision covers Y? is this new artifact a
 duplicate?) and **structure-shaped** questions to librarian graph tasks
 (what depends on X? why does Y exist?). Read tasks parallelize freely
-(DEC-0332).
+(DEC-0391).
 
 **Decision-recall audit (required stage step).** After drafting or
 materially amending an artifact — and again at gate prep — task the
