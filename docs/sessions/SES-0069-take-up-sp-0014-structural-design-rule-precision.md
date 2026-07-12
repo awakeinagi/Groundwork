@@ -2,7 +2,7 @@
 id: SES-0069
 type: session
 title: "Take up SP-0014: structural design-rule precision spike"
-status: open
+status: closed
 owner: awakeinagi@gmail.com
 created: 2026-07-11
 participant: awakeinagi@gmail.com
@@ -10,27 +10,31 @@ participant-role: operator/stakeholder
 facilitator: Claude (Fable 5) via Claude Code
 transcript-fidelity: reconstructed
 overview: >-
-  Session opened to take up and execute spike SP-0014 (structural
-  design-rule precision over the projected corpus) per its DEC-0365
-  unblocking. A ratification review closed four proposed decisions
-  (DEC-0354, DEC-0355, DEC-0356, DEC-0357) at T5. The stakeholder
-  waived the DEC-0292 system-architect consultation for this session
-  as a one-off (T6-T7), on the reasoning that the architect debates
-  for the program design already ran at SES-0064/SES-0065. The
-  facilitator presented a 12-rule structural rulebase design and
-  test plan per DEC-0335/DEC-0345 (T8); the stakeholder then
-  directed expansion to every worthy structural rule from the two
-  curated sources with no upper limit (T9), and the facilitator
-  expanded the rulebase to 24 rules -- 14 discovery, 5 calibration
-  with recorded expected outputs, 3 vacuous against current data,
-  and 2 weak/proxy probes -- recorded as this session's amendment to
-  SP-0014's Method (T10). The stakeholder approved continuing at
-  T11. Design approved; throwaway build and firing against SP-0013's
-  projection is now underway, to be followed by stakeholder
-  disposition of every finding and recording of Findings and
-  Resulting Decisions on SP-0014.
+  Closed. Session took up SP-0014 (structural design-rule precision
+  spike) under DEC-0365's unblocking, per SES-0064's spike program.
+  Ratified four stale-proposed program decisions DEC-0354..DEC-0357
+  at T5. The stakeholder waived the DEC-0292 system-architect
+  consultation as a one-off (T6/T7). Approved a 12-rule design (T8),
+  then the stakeholder directed expansion with no upper limit (T9);
+  the facilitator built a 24-rule structural rulebase (T10),
+  approved at T11. The throwaway build fired cleanly against
+  SP-0013's projection, all five calibration instruments passing,
+  and produced 102 findings across 15 of 24 rules (T12). The
+  stakeholder disposed all 102 findings -- 33 real/change-worthy, 9
+  debatable, 60 noise -- and affirmed the executable-design-
+  knowledge premise for decision-compiled rules specifically, versus
+  ActiveGraph as a substrate (T13-T16). Captured six consolidated
+  follow-up Ideas, IDEA-0035 through IDEA-0040, reviewed with the
+  stakeholder at the gate summary with none further offered
+  (T17-T18). A decision-recall audit at T19 produced three
+  provenance enrichments, near-misses recorded. Gate prep checklist
+  completed and SP-0014 set gated at T20. The stakeholder approved
+  the gate at T21; SP-0014 set approved (awakeinagi@gmail.com,
+  2026-07-11), DEC-0367 and DEC-0368 accepted, and the session
+  closed with the T22 summary. Evidence files remain in the session
+  scratchpad per the stakeholder's T17 instruction.
 links:
-  relates-to: [SP-0014, DEC-0354, DEC-0355, DEC-0359, DEC-0360, DEC-0356, DEC-0357]
+  relates-to: [SP-0014, DEC-0354, DEC-0355, DEC-0359, DEC-0360, DEC-0356, DEC-0357, IDEA-0035, IDEA-0036, IDEA-0037, IDEA-0038, IDEA-0039, IDEA-0040]
 ---
 
 ## Purpose
@@ -61,9 +65,35 @@ T10 -- Facilitator: Expanded the rulebase to 24 rules from the same two curated 
 
 T11 -- Stakeholder (verbatim): "Yes, please continue"
 
+T12 -- Facilitator: Reported build completion and presented the findings catalog: round-trip validation green after two parser fixes (wrapped Uses: continuations; item-body bleed -- recovering SP-0013's bullet-plus-indented-continuation convention to hit 581 CITES exactly) and two baseline revisions (DEPENDS_ON 26->30 explained by DEC-0359's reconciliation; typed Uses edges 72 in the corpus against DEC-0359's recorded 71 -- an unexplained record discrepancy flagged as a change-worthy meta-finding). All five calibration gates passed: R7 exactly SP-0013's 10 provenance edge cases; R19 exactly the 19 known coverage warnings; R14 all three DEC-0359 fake candidates after an in-run fix (fakes appear in prose form, not CamelCase); R11 fired once on CMP-0006 -- the compiled rule omitted checker rule 20's element-less-doc carve-out, kept as compilation-fidelity noise; R17 zero per its execution-time-revised expectation (the IDEA-0026 range dispute is invisible at edge grain since both written edges target the undisputed portion). Presented all 102 findings from 15 of 24 rules grouped with recommended dispositions: change-worthy -- R8's four superseded-DEC-0014 citations (strongest discovery), R16's three ungraduated multi-consumer elements, R24's six happy-path-only services, R13's schema-token review list; real-previously-recorded -- R7's 10, R19's 19, R14's three candidates; noise -- R6's 24 (bare-element edge-convention mismatch), most of R3 (boundary roles/protocol indirection), fan hubs, R11, R12, R14's two cross-reference hits. Asked specifically about the four zero-consumer workflow services (WorktreeManager, GovernanceInit, StalenessSweepService, ReaffirmationService).
+
+T13 -- Stakeholder (verbatim): "What is the full path to the findings?"
+
+T14 -- Facilitator: Gave the scratchpad paths (findings.md, findings.json alongside the throwaway build), noted the scratchpad is session-scoped and volatile, and that the durable home for the catalog is SP-0014's Findings section once dispositions land.
+
+T15 -- Stakeholder (verbatim): "What do these results reveal about the feasibility of using activegraph for this project? What benefits will it bring?"
+
+T16 -- Facilitator: Assessed that the results say much about the executable-design-knowledge premise and little about ActiveGraph specifically. The DEC-0354 premise survived: roughly two dozen real or change-worthy findings that twenty checker rules and the gate process had not caught, the graduation misses showing mechanical enforcement catching what process discipline leaked. Precision proved strongly source-dependent: DEC-compiled rules near-perfect, prose-compiled rules noisy -- an early corroboration of the prose-to-rule fidelity concern. ActiveGraph itself served only as a passive store; nothing exercised its distinctive reactive/replay/fork machinery, so everything done could equally have been done by extending check_links.py -- the differential evidence belongs to SP-0016 (hook-loop economics) and SP-0017 (fork-and-diff). Conditional benefits if the DEC-0356-deferred survey favors it: continuous contract-grain enforcement of rule-type decisions, an element/item-grain query surface, provenance-carrying findings; the thin owned implementation remains a real competitor. Data caveat: with 100% interface edges the build-order/serialization/coupling rules remain untested, unmeasured rather than confirmed.
+
+T17 -- Stakeholder (verbatim): "This was a great summary. Please be sure to include all of this in the Spike's write up. Let's also leave the findings files in place after we close out this Spike. I have an IDEA to start maintaining the results of Spikes.
+
+Let's create follow up IDEAs to fix all of the issues in the corpus and architecture revealed by this Spike; try to consolidate similar problems into as few IDEAs as possible. For the problems that were debatable, let's grill them in a follow up session and/or future spikes."
+
+T18 -- Facilitator: Recorded the disposition outcome -- recommendations accepted wholesale with debatable findings routed to a follow-up architecture-review session -- and captured six consolidated Ideas: IDEA-0035 (SP-0014 record-integrity repairs: superseded cites, uncited items, DEC-0359 count), IDEA-0036 (resolve SP-0014's eight unresolved schema tokens per DEC-0089), IDEA-0037 (complete error contracts for six happy-path-only services), IDEA-0038 (promote the three flagged test doubles to owned elements per DEC-0306), IDEA-0039 (architecture-review session over SP-0014's debatable structural findings), IDEA-0040 (maintain spike results durably). Noted R19's nineteen uncovered stories stay checker-tracked pipeline work rather than minting an Idea, and that the findings files remain in the session scratchpad per the stakeholder's instruction, with durable retention being IDEA-0040's open question.
+
+**T19 — Facilitator:** Ran the required decision-recall audit at gate prep: 15 candidates, single Sonnet 5 judge. Three findings, all accepted and addressed by provenance enrichment in the same edit: DEC-0308 linked at the R8 disposition (it is the record that superseded DEC-0014 — the repair in IDEA-0035 reconciles against it); DEC-0234 linked at the R16 disposition and IDEA-0039 (GovernanceConfig already graduated once to CMP-0016, making its new flag a second-order graduation question — also recorded as the judge's contract-gap observation that nothing previously connected the new finding back to DEC-0234's resolution); DEC-0126 linked as decomposition provenance for the CMP-0001 element findings. Judge near-misses (DEC-0232, DEC-0162, DEC-0177, DEC-0366) rejected as precedent-not-provenance, recorded here for completeness. Consistency checks on DEC-0367/DEC-0368 returned clean terms and only routine sweep review hints, reviewed with no inconsistencies found.
+
+T20 — Facilitator: Gate prep checklist completed and SP-0014 set gated: (1) overview faithfulness — rewritten at the write-up step to reflect the executed spike, re-checked after the recall-audit enrichments (no meaning change, left as-is); (2) system-architect reviewer consultation — covered by the stakeholder's one-off waiver recorded at T6/T7; (3) decision-recall audit — run at T19, three findings addressed by provenance enrichment, near-misses recorded; (4) consistency checks on DEC-0367/DEC-0368 — clean; (5) full checker — 586 artifacts, graph sound, only the 19 pre-existing R19-known coverage warnings. Presented SP-0014 for approval together with confirmation of proposed DEC-0367 and DEC-0368.
+
+T21 — Stakeholder (verbatim): "Approve the gate and close out the session"
+
+T22 — Facilitator: Recorded the approval: SP-0014 approved (awakeinagi@gmail.com, 2026-07-11); DEC-0367 and DEC-0368 accepted. Close summary per the intake protocol: the session took up SP-0014 under its DEC-0365 unblocking; ratified the four stale-proposed program decisions DEC-0354..DEC-0357; waived the system-architect consultation one-off (T6/T7); approved and executed the stakeholder-expanded 24-rule design under the DEC-0335/DEC-0345 guard with all five calibration instruments passing; took dispositions on all 102 findings (33 real/change-worthy, 9 debatable, 60 noise); captured six consolidated follow-up Ideas (IDEA-0035..IDEA-0040, reviewed with the stakeholder at the gate summary — the inspired-ideas check; none further offered); ran the recall audit with three provenance enrichments; and produced DEC-0367/DEC-0368 from the spike findings. Classification confirmed: spike execution touching SP-0014 (now approved), with follow-up work routed entirely through the captured Ideas queue. Evidence files remain in the session scratchpad per the stakeholder's T17 instruction; SES-0069 closes with this turn.
+
 ## Decisions Produced
 
-No new decisions distilled at this step. DEC-0354, DEC-0355, DEC-0356, DEC-0357 ratified proposed -> accepted at T5 (recorded decisions originate from SES-0064; this session is the ratification record).
+## Decisions Produced
+
+DEC-0367 (compiled structural rules fire true findings; precision is source-dependent) and DEC-0368 (no differential reactive-substrate evidence from ActiveGraph) produced from SP-0014's findings catalog, accepted at T21/T22 on stakeholder gate approval. DEC-0354, DEC-0355, DEC-0356, DEC-0357 ratified proposed -> accepted at T5 (recorded decisions originate from SES-0064; this session is the ratification record). The DEC-0292 system-architect reviewer consultation was waived as a one-off by the stakeholder at T6/T7, recorded here as a session outcome alongside the T5 ratification.
 
 ## Conflicts Raised
 
