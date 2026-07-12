@@ -16,7 +16,7 @@ decided-on: 2026-07-08
 source-span: "SES-0025 @ T4-T5"
 links:
   derives-from: [SES-0025]
-  relates-to: [DEC-0038, DEC-0076, DEC-0144]
+  relates-to: [DEC-0038, DEC-0076, DEC-0144, DEC-0372]
 ---
 
 # DEC-0146: Impact Reports in PR and Log, Not Repo

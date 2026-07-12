@@ -18,7 +18,7 @@ decided-on: 2026-07-07
 source-span: "SES-0019 @ T5-T6, T13"
 links:
   derives-from: [SES-0019]
-  relates-to: [DEC-0112, DEC-0116, DEC-0119]
+  relates-to: [DEC-0112, DEC-0116, DEC-0119, DEC-0372]
 ---
 
 # DEC-0117: Auto-Refresh on Search; Graph-Staleness Warning

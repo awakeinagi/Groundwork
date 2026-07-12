@@ -19,7 +19,7 @@ decided-on: 2026-07-08
 source-span: "SES-0023 @ T3-T4"
 links:
   derives-from: [SES-0023]
-  relates-to: [DEC-0080, DEC-0134, DEC-0135]
+  relates-to: [DEC-0080, DEC-0134, DEC-0135, DEC-0371]
 ---
 
 # DEC-0136: Required Graduation Review at Component Gates

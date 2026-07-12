@@ -23,7 +23,7 @@ overview: >-
   in whatever the implementer happened to check.
 links:
   derives-from: [SES-0059]
-  relates-to: [DEC-0335, DEC-0336, DEC-0322, DEC-0342]
+  relates-to: [DEC-0335, DEC-0336, DEC-0322, DEC-0342, DEC-0370]
 ---
 
 # DEC-0345: A Test Plan Precedes Any Executable Implementation

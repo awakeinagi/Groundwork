@@ -24,7 +24,7 @@ overview: >-
   "Closure axis" and "lifted edge" enter CONTEXT.md.
 links:
   derives-from: [SES-0056]
-  relates-to: [DEC-0080, DEC-0302, DEC-0301, DEC-0309]
+  relates-to: [DEC-0080, DEC-0302, DEC-0301, DEC-0309, DEC-0371]
 ---
 
 # DEC-0307: Bounded-Context Grouping Principle

@@ -19,8 +19,7 @@ decided-on: 2026-07-08
 source-span: "SES-0024 @ T2-T3, T6"
 links:
   derives-from: [SES-0024]
-  relates-to: [DEC-0111, DEC-0113, DEC-0114, DEC-0116, DEC-0117, DEC-0118,
-               DEC-0119, DEC-0137]
+  relates-to: [DEC-0111, DEC-0113, DEC-0114, DEC-0116, DEC-0117, DEC-0118, DEC-0119, DEC-0137, DEC-0372]
 ---
 
 # DEC-0138: Promote the Audit POC into groundwork_search.py

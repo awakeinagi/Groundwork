@@ -25,7 +25,7 @@ overview: >-
   spike Scope-In).
 links:
   derives-from: [SES-0064]
-  relates-to: [DEC-0339, DEC-0350, DEC-0351]
+  relates-to: [DEC-0339, DEC-0350, DEC-0351, DEC-0369, DEC-0370, DEC-0371, DEC-0372, DEC-0373]
 ---
 
 ## Context

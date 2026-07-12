@@ -19,7 +19,7 @@ decided-on: 2026-07-08
 source-span: "SES-0023 @ T2-T3"
 links:
   derives-from: [SES-0023]
-  relates-to: [DEC-0080, DEC-0121, DEC-0122, DEC-0129]
+  relates-to: [DEC-0080, DEC-0121, DEC-0122, DEC-0129, DEC-0369]
 ---
 
 # DEC-0135: AppDatabasePort Graduation and the Port-CMP Pattern
