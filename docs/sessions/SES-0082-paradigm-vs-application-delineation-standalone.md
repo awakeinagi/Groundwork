@@ -37,7 +37,7 @@ overview: >-
   facilitator's own git duty per DEC-0333.
 links:
 
-  relates-to: [DEC-0420, DEC-0421, DEC-0422, DEC-0423, DEC-0424, DEC-0425, DEC-0426, DEC-0427, DEC-0428, DEC-0429, DEC-0430, DEC-0431, DEC-0432, DEC-0433, DEC-0434, IDEA-0056, DEC-0435, DEC-0436, DEC-0437, DEC-0438, DEC-0439, DEC-0440, IDEA-0057, IDEA-0058]
+  relates-to: [DEC-0420, DEC-0421, DEC-0422, DEC-0423, DEC-0424, DEC-0425, DEC-0426, DEC-0427, DEC-0428, DEC-0429, DEC-0430, DEC-0431, DEC-0432, DEC-0433, DEC-0434, IDEA-0056, DEC-0435, DEC-0436, DEC-0437, DEC-0438, DEC-0439, DEC-0440, IDEA-0057, IDEA-0058, IDEA-0059]
 ---
 
 # SES-0082: Paradigm vs application delineation — standalone skills, shared paradigm logic
@@ -284,6 +284,10 @@ Per DEC-0261, this inspired idea does not extend the closing session; it is capt
 ### T54 (facilitator)
 
 Answered: no separate Idea — the governance-track question (where BG-0002's current charter function lives after a recharter) is already recorded as a named open question inside IDEA-0058's body and is only answerable by the recharter session itself; splitting it out would create a fragment with no independent take-up path. Should that session close without resolving it, it parks as its own artifact per DEC-0260 at that time. With the stakeholder's confirmation, the session closes: twenty-one accepted decisions (DEC-0420..DEC-0440), BG-0001/EP-0006/EP-0008 amended and re-affirmed (DEC-0267), the five-term glossary landed in CONTEXT.md, groundwork.yaml and PARITY.md created, three Ideas captured (IDEA-0056, IDEA-0057, IDEA-0058), the recall audit dispositioned with nineteen precedent links, and the commit to follow as the facilitator's git duty (DEC-0333).
+
+### Post-Close Enrichment (2026-07-12)
+
+Post-Close Enrichment (2026-07-12): cross-referenced to IDEA-0059 (harden write tasks against librarian overreach), captured at SES-0084 from the overreach incident recorded at this session's T48.
 
 ## Decisions Produced
 
