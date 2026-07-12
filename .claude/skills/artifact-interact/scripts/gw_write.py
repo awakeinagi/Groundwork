@@ -946,7 +946,15 @@ def main():
     ap.add_argument("--json", action="store_true", dest="json_mode")
     sub = ap.add_subparsers(dest="op", required=True)
 
-    p = sub.add_parser("create")
+    p = sub.add_parser(
+        "create",
+        description="Create an artifact; the API allocates the next "
+        "sequential ID. A body H1 written as '# PREFIX-XXXX: ...' is "
+        "stamped with the allocated ID. BATCH KEYS: type, title, "
+        "overview, status, owner, links (a DICT of rel->list, e.g. "
+        '{"derives-from": ["SES-0001"]} — the CLI\'s link string form '
+        "is ignored in batch), cites (list), field (list), "
+        "content|from-file.")
     p.add_argument("--type", required=True)
     p.add_argument("--title", required=True)
     p.add_argument("--overview", required=True)
@@ -959,7 +967,17 @@ def main():
                    metavar="'key: value'")
     p.add_argument("--from-file", help="body content (else template)")
 
-    p = sub.add_parser("set-status")
+    p = sub.add_parser(
+        "set-status",
+        description="Change lifecycle status. Transitions to approved/"
+        "accepted/closed refuse duplicate sibling headings and "
+        "placeholder lines (quote tokens in backticks to mention "
+        "them). Accepting a proposed decision requires --session "
+        "(stamps accepted-in). Closing a session requires identity "
+        "frontmatter (participant, participant-role, facilitator, "
+        "transcript-fidelity) and a produced decision, or "
+        "--no-decisions-ok. BATCH KEYS: id, status, approved-by, "
+        "superseded-by, release, session, no-decisions-ok.")
     p.add_argument("id")
     p.add_argument("status")
     p.add_argument("--approved-by")
@@ -972,21 +990,40 @@ def main():
                    help="acknowledge closing a session that produced "
                         "no decisions (DEC-0258)")
 
-    p = sub.add_parser("add-link")
+    p = sub.add_parser(
+        "add-link",
+        description="Add a frontmatter link (closed vocabulary). "
+        "impacts/impacted-by reciprocate automatically; relates-to "
+        "does NOT — add the reverse side explicitly where wanted. "
+        "BATCH KEYS: id, rel, target.")
     p.add_argument("id")
     p.add_argument("rel")
     p.add_argument("target")
 
-    p = sub.add_parser("add-cite")
+    p = sub.add_parser(
+        "add-cite",
+        description="Add a DEC citation; also reference the DEC in "
+        "body prose (DEC-0247). BATCH KEYS: id, target.")
     p.add_argument("id")
     p.add_argument("target")
 
-    p = sub.add_parser("update-overview")
+    p = sub.add_parser(
+        "update-overview",
+        description="Replace the frontmatter overview (max 250 words; "
+        "derived/non-normative, legal on any artifact incl. closed/"
+        "accepted). BATCH KEY for the text is 'text' or 'content' — "
+        "there is no 'overview' key.")
     p.add_argument("id")
     p.add_argument("--text")
     p.add_argument("--from-file")
 
-    p = sub.add_parser("edit-section")
+    p = sub.add_parser(
+        "edit-section",
+        description="Replace one section's BODY — the tool keeps the "
+        "heading; payloads containing a heading line at the section's "
+        "level or higher are refused (IDEA-0041). Heading matched by "
+        "case-insensitive substring. BATCH KEYS: id, heading, "
+        "occurrence, amend, overview-ok, content|from-file.")
     p.add_argument("id")
     p.add_argument("heading")
     p.add_argument("--from-file")
@@ -997,18 +1034,35 @@ def main():
     p.add_argument("--overview-ok", action="store_true",
                    help="assert the overview is already faithful")
 
-    p = sub.add_parser("delete-section")
+    p = sub.add_parser(
+        "delete-section",
+        description="Remove a heading and its span — the phantom-"
+        "heading repair op. Refuses the LAST occurrence of a type-"
+        "required section (duplicates are deletable, the template is "
+        "not). BATCH KEYS: id, heading, occurrence, amend.")
     p.add_argument("id")
     p.add_argument("heading")
     p.add_argument("--occurrence", type=int, default=1)
     p.add_argument("--amend", action="store_true")
 
-    p = sub.add_parser("append-turn")
+    p = sub.add_parser(
+        "append-turn",
+        description="Append turn content to a session's Transcript. "
+        "###-level turn headings are fine; ##-level lines are refused. "
+        "Closed sessions need --enrichment (dated Post-Close "
+        "Enrichment, DEC-0248). BATCH KEYS: id, enrichment, "
+        "content|from-file.")
     p.add_argument("id")
     p.add_argument("--from-file")
     p.add_argument("--enrichment", action="store_true")
 
-    p = sub.add_parser("supersede")
+    p = sub.add_parser(
+        "supersede",
+        description="Replace an accepted decision: creates the new "
+        "accepted DEC (supersedes + derives-from set), flips the old "
+        "to superseded, prints ratified citers as the stale-walk "
+        "hint. BATCH KEYS: id, title, overview, session, source-span, "
+        "owner, cites, content|from-file.")
     p.add_argument("id")
     p.add_argument("--title", required=True)
     p.add_argument("--overview", required=True)
@@ -1019,7 +1073,14 @@ def main():
     p.add_argument("--cite", action="append", dest="cites", default=[])
     p.add_argument("--from-file")
 
-    p = sub.add_parser("apply")
+    p = sub.add_parser(
+        "apply",
+        description="Run a JSON list of ops as one unit (validation "
+        "defers to batch end so members may reference each other). "
+        "Keys are each op's BATCH KEYS (see that op's --help); "
+        "'content' replaces --from-file inline. A refusal stops the "
+        "batch; earlier ops remain applied — re-run only the "
+        "unexecuted remainder. Full schema: references/operations.md.")
     p.add_argument("file", help="JSON list of operation objects")
 
     args = ap.parse_args()
