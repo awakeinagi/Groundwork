@@ -3,3 +3,5 @@
 .groundwork-search
 .groundwork-search.wal
 __pycache__/
+*.zip
+SP*.md
