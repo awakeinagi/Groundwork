@@ -10,29 +10,28 @@ sponsor: awakeinagi@gmail.com
 created: 2026-07-05
 overview: >-
   Groundwork: a system to ground implementation in refined business
-  intent. Problem: business requests arrive poorly defined, vague, or
-  contradictory. Solution: a standalone application where an AI agent
-  refines raw business ideas into implementation-ready specifications
-  through unsupervised 1:1 Q&A sessions with stakeholders, product
-  owners, and engineering leads, producing a gated hierarchy of
-  Business Goals, Epics, Stories/Spikes, and contract-complete
-  Component Docs — all provenance-linked to decisions that shaped
-  them — plus, per DEC-0308 (SES-0056, superseding DEC-0014), the
-  Swarm Orchestrator that dispatches implementation agents from the
-  Handoff Manifest's work packages and Slices, verifies acceptance,
-  and reports results. Success criteria include traceability, conflict
-  surfacing, human-ratified layers, parallel implementability (now
-  via orchestrated empty-context dispatch, DEC-0304), and sync
-  without drift to external systems. Feedback-loop ingestion stays
-  out of v1 (SP-0012 revisits). Scope amendment approved 2026-07-09.
+  intent. Problem: business requests arrive poorly defined, vague,
+  or contradictory. Solution: the Groundwork Application (DEC-0001,
+  DEC-0420), a standalone application where an AI agent refines raw
+  business ideas into implementation-ready specifications through
+  unsupervised 1:1 Q&A sessions with stakeholders, product owners,
+  and engineering leads, producing a gated hierarchy of Business
+  Goals, Epics, Stories/Spikes, and contract-complete Component Docs
+  — all provenance-linked to decisions that shaped them — plus, per
+  DEC-0308 (SES-0056, superseding DEC-0014), the Swarm Orchestrator
+  that dispatches implementation agents from the Handoff Manifest's
+  work packages and Slices, verifies acceptance, and reports
+  results. The Groundwork Paradigm this application implements is
+  also delivered standalone as agent skills and never requires this
+  application (DEC-0421). Success criteria include traceability,
+  conflict surfacing, human-ratified layers, parallel
+  implementability (now via orchestrated empty-context dispatch,
+  DEC-0304), and sync without drift to external systems. Feedback-
+  loop ingestion stays out of v1 (SP-0012 revisits). Scope amendment
+  approved 2026-07-09.
 links:
   derives-from: [SES-0001]
-cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006,
-        DEC-0009, DEC-0010, DEC-0011, DEC-0013, DEC-0015,
-        DEC-0018, DEC-0019, DEC-0021, DEC-0022, DEC-0024, DEC-0025,
-        DEC-0027, DEC-0098, DEC-0099, DEC-0189, DEC-0190, DEC-0191,
-        DEC-0192, DEC-0193, DEC-0194, DEC-0300, DEC-0302, DEC-0304,
-        DEC-0308, DEC-0104, DEC-0172]
+cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0004, DEC-0005, DEC-0006, DEC-0009, DEC-0010, DEC-0011, DEC-0013, DEC-0015, DEC-0018, DEC-0019, DEC-0021, DEC-0022, DEC-0024, DEC-0025, DEC-0027, DEC-0098, DEC-0099, DEC-0189, DEC-0190, DEC-0191, DEC-0192, DEC-0193, DEC-0194, DEC-0300, DEC-0302, DEC-0304, DEC-0308, DEC-0104, DEC-0172, DEC-0420, DEC-0421]
 ---
 
 # BG-0001: Groundwork — ground implementation in refined business intent
@@ -64,24 +63,26 @@ T1). (DEC-0189.)
 
 ## Intent
 
-Build **Groundwork** (per DEC-0025):
-a standalone application (DEC-0001)
-in which an AI agent refines raw business ideas into implementation-ready
-specifications through unsupervised 1:1 Q&A sessions
-(DEC-0003) with business
-stakeholders, product owners, and engineering/data-science leads — producing
-a gated hierarchy of Business Goals → Epics → Stories/Spikes →
-contract-complete Component Docs, with every artifact provenance-linked to
-the decisions and conversations that shaped it
-(DEC-0015).
+Build the **Groundwork Application** (per DEC-0025): a standalone
+application (DEC-0001, DEC-0420) in which an AI agent refines raw
+business ideas into implementation-ready specifications through
+unsupervised 1:1 Q&A sessions (DEC-0003) with business stakeholders,
+product owners, and engineering/data-science leads — producing a gated
+hierarchy of Business Goals → Epics → Stories/Spikes →
+contract-complete Component Docs, with every artifact provenance-linked
+to the decisions and conversations that shaped it (DEC-0015). The
+Groundwork Paradigm this application implements is also delivered
+standalone as agent skills and never requires this application
+(DEC-0421).
 
 ## System Context
 
 Boundary-only — see
 DEC-0190.
 
-1. **What are we building?** A standalone web application in which an AI
-   agent conducts unsupervised 1:1 refinement sessions with business
+1. **What are we building?** The Groundwork Application: a standalone
+   web application in which an AI agent conducts unsupervised 1:1 refinement
+   sessions with business
    stakeholders, product owners, and engineering/data-science leads,
    producing a gated hierarchy of Business Goals → Epics → Stories/Spikes
    → contract-complete Component Docs, stored as git-backed markdown and
@@ -95,7 +96,8 @@ DEC-0190.
    (DEC-0001,
    DEC-0003,
    DEC-0021).
-3. **Where will this live?** Deployed as a standalone application; v1
+3. **Where will this live?** Deployed as a standalone application (the
+   Groundwork Application, DEC-0420); v1
    runs as a single-process, single-writer embedded-engine deployment
    (per the armed triggers in `docs/TRIGGERS.md` — `TRG-0001`/`TRG-0002` —
    until a multi-node or multi-writer requirement fires them)

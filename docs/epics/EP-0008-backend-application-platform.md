@@ -23,8 +23,7 @@ links:
   depends-on: [EP-0001]
   impacts: [EP-0006]
   impacted-by: [EP-0001, EP-0002, EP-0003, EP-0004, EP-0005, EP-0006, EP-0007]
-cites: [DEC-0001, DEC-0018, DEC-0121, DEC-0122, DEC-0102, DEC-0124, DEC-0187,
-        DEC-0190, DEC-0201, DEC-0202, DEC-0203, DEC-0204, DEC-0205, DEC-0305]
+cites: [DEC-0001, DEC-0018, DEC-0121, DEC-0122, DEC-0102, DEC-0124, DEC-0187, DEC-0190, DEC-0201, DEC-0202, DEC-0203, DEC-0204, DEC-0205, DEC-0305, DEC-0420]
 ---
 
 # EP-0008: Backend Application Platform
@@ -49,19 +48,16 @@ retrospective); this epic closes it.
 
 ## Why (Goal Alignment)
 
-BG-0001's Intent names "a standalone
-application" with backend services as one of three deliverables
-(DEC-0001) — this is
-that deliverable's owning epic.
-BG-0001's System Context (per
-DEC-0190) already
-states the v1 process/deployment shape (single-process, single-writer,
-until `TRG-0001`/`TRG-0002` fire) and the trigger/output contract this
-epic implements. Outcome 4 (parallel implementability) depends on
-component docs being contract-complete — this epic's Composition Root
-and API contracts are the stable seam the UI
-(EP-0006) and the engine/connector
-components build against, instead of each other's internals.
+BG-0001's Intent names "a standalone application" with backend services
+as one of three deliverables (DEC-0001, DEC-0420) — this is that
+deliverable's owning epic. BG-0001's System Context (per DEC-0190)
+already states the v1 process/deployment shape (single-process,
+single-writer, until `TRG-0001`/`TRG-0002` fire) and the
+trigger/output contract this epic implements. Outcome 4 (parallel
+implementability) depends on component docs being contract-complete —
+this epic's Composition Root and API contracts are the stable seam
+the UI (EP-0006) and the engine/connector components build against,
+instead of each other's internals.
 
 ## Scope
 

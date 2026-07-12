@@ -8,10 +8,27 @@ is gated).
 
 ## The system
 
-- **Groundwork** — this system: a standalone application that refines business
-  ideas into contract-complete Component Docs through gated, agent-facilitated
-  refinement, with full provenance from implementation detail back to business
-  intent.
+- **Groundwork** — the umbrella name for two delineated deliverables
+  (DEC-0420): the Groundwork Paradigm and the Groundwork Application.
+  Refers to the system as a whole; use the specific term when precision
+  matters.
+- **Groundwork Paradigm** — the documentation-first design method itself:
+  the gated artifact tree, grilling sessions, decision provenance, and
+  integrity rules, delivered as agent skills plus the Groundwork
+  Engine's gw CLI. Adoptable standalone in any repository and never
+  requires the Application (DEC-0421).
+- **Groundwork Application** — the centralized team-facing application
+  that manages Groundwork corpora through a UI; an optional superset
+  built on the same paradigm. Exactly one instance serves a given
+  Groundwork docs repository (DEC-0426, DEC-0438).
+- **Groundwork Engine** — the single-sourced implementation of paradigm
+  mechanics (DEC-0423): today the gw CLI's internals; target shape a
+  library with the CLI and the Application backend as adapters.
+- **Method Track** — BG-0002's governance track for the paradigm's own
+  deployed tooling (dogfooding Groundwork's own corpus and skills).
+  Distinct from the Groundwork Paradigm itself: the Method Track is one
+  project's practice of adopting the paradigm, not the paradigm's
+  definition.
 - **Canonical Store** — the git-backed markdown repository that is the single
   source of truth for all artifacts. Every other representation (Jira, the
   Graph Index, UI views) is derived from it.

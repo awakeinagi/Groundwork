@@ -23,10 +23,7 @@ links:
   depends-on: [EP-0001, EP-0002, EP-0003]
   impacts: [EP-0002, EP-0008]
   impacted-by: [EP-0001, EP-0002, EP-0003, EP-0005, EP-0007, EP-0008]
-cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0022, DEC-0026, DEC-0032, DEC-0041,
-        DEC-0042, DEC-0043, DEC-0051, DEC-0055, DEC-0057, DEC-0071, DEC-0072,
-        DEC-0073, DEC-0074, DEC-0075, DEC-0076, DEC-0184, DEC-0185, DEC-0186,
-        DEC-0187, DEC-0188, DEC-0280]
+cites: [DEC-0001, DEC-0002, DEC-0003, DEC-0022, DEC-0026, DEC-0032, DEC-0041, DEC-0042, DEC-0043, DEC-0051, DEC-0055, DEC-0057, DEC-0071, DEC-0072, DEC-0073, DEC-0074, DEC-0075, DEC-0076, DEC-0184, DEC-0185, DEC-0186, DEC-0187, DEC-0188, DEC-0280, DEC-0420]
 ---
 
 # EP-0006: Refinement Web UI
@@ -43,14 +40,12 @@ UI layer itself remains pluggable.
 
 ## Why (Goal Alignment)
 
-Groundwork is a standalone application because stakeholders interact with
-it directly (DEC-0001),
-unsupervised (DEC-0003) —
-the UI is where that bet is won or lost. Canonical-store discipline
-(DEC-0002) requires the UI
-to be good enough that people prefer it over editing Jira, and gate
-quality is bounded by what approvers can comprehend
-(DEC-0076).
+The Groundwork Application is a standalone application because
+stakeholders interact with it directly (DEC-0001, DEC-0420),
+unsupervised (DEC-0003) — the UI is where that bet is won or lost.
+Canonical-store discipline (DEC-0002) requires the UI to be good
+enough that people prefer it over editing Jira, and gate quality is
+bounded by what approvers can comprehend (DEC-0076).
 
 ## Scope
 
