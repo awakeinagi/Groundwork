@@ -69,6 +69,13 @@ gw.py --root . write create --type decision --title "…" \
   `derives-from` a SES/SP (integrity rule 4); unknown link targets;
   impact links to a different type. Impact links write the reciprocal
   edge into the other file.
+- **Gate-required, create-only fields are demanded at creation**
+  (SES-0081): types whose later lifecycle gates require fields that no
+  op can add after creation must supply them via `--field` now —
+  currently sessions need all four of `participant`,
+  `participant-role`, `facilitator`, `transcript-fidelity` (the close
+  gate demands them). The refusal names what's missing; future types
+  are one `REQUIRED_AT_CREATE` table row.
 - After creating a decision that derives from a session, **add the
   session-side mirror**: `add-link <SES> relates-to <DEC>` (checker
   rule 23, DEC-0382) and reference the DEC by literal ID in the

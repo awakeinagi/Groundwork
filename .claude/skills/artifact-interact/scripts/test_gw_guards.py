@@ -318,6 +318,32 @@ class GuardTests(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("unresolved", r.stderr)
 
+    # SES-0081: gate-required, create-only fields demanded at creation
+    def test_required_at_create_fields(self):
+        from gw_write import REQUIRED_AT_CREATE
+        for atype, fields in REQUIRED_AT_CREATE.items():
+            with self.subTest(atype=atype):
+                r = gw(self.root, "create", "--type", atype,
+                       "--title", "Field trap", "--overview",
+                       f"A {atype} created without required fields.")
+                self.assertNotEqual(r.returncode, 0)
+                for f in fields:
+                    self.assertIn(f, r.stderr)
+                self.assertIn("--field", r.stderr)
+                args = ["create", "--type", atype, "--title",
+                        "Fields present", "--overview",
+                        f"A {atype} created with required fields."]
+                for f, v in {"participant": "tester",
+                             "participant-role": "sponsor",
+                             "facilitator": "facilitator-agent",
+                             "transcript-fidelity": "reconstructed",
+                             }.items():
+                    if f in fields:
+                        args += ["--field", f"{f}: {v}"]
+                r2 = gw(self.root, *args)
+                self.assertEqual(r2.returncode, 0,
+                                 r2.stdout + r2.stderr)
+
     # B3 (SES-0077, DEC-0402): typed frontmatter validation at create
     def test_create_bad_enum_refused(self):
         r = gw(self.root, "create", "--type", "session", "--title",

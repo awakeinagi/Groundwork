@@ -145,6 +145,11 @@ RATIFYING_STATUSES = {"approved", "accepted", "closed"}
 TURN_HEAD_RE = re.compile(r"^(###\s+T|\*\*T)(\d+)\b", re.M)
 SESSION_CLOSE_FIELDS = ("participant", "participant-role", "facilitator",
                         "transcript-fidelity")
+# Fields a later lifecycle gate requires but only create can write —
+# demanded at creation so no artifact is born un-gateable (SES-0081).
+# A future type whose lifecycle grows a create-only requirement is one
+# table row here, not a new guard.
+REQUIRED_AT_CREATE = {"session": SESSION_CLOSE_FIELDS}
 
 # Typed frontmatter field schema (SES-0077, DEC-0402): shapes and enums
 # transcribed by hand from the SPECs (docs/specs/SPEC-*.md) — keep in
@@ -616,6 +621,7 @@ def op_create(c, args, json_mode):
     fm = [f"id: {aid}", f"type: {args.type}", f"title: {quoted_title}",
           f"status: {status}", f"owner: {args.owner}",
           f"created: {today()}"]
+    supplied_fields = set()
     for extra in args.field:
         if ":" not in extra:
             fail(f"--field entries take 'key: value', got {extra!r}")
@@ -623,7 +629,18 @@ def op_create(c, args, json_mode):
         err = validate_field(args.type, fkey.strip(), fval.strip())
         if err:
             fail(f"create: {err}")
+        supplied_fields.add(fkey.strip())
         fm.append(extra)
+    # Gate-required, create-only fields must arrive now (SES-0081):
+    # a later lifecycle gate demands them and no op can add frontmatter
+    # after creation, so an artifact born without them is un-gateable.
+    lacking = [f for f in REQUIRED_AT_CREATE.get(args.type, ())
+               if f not in supplied_fields]
+    if lacking:
+        flags = " ".join(f"--field '{f}: …'" for f in lacking)
+        fail(f"create: a {args.type} requires {', '.join(lacking)} at "
+             f"creation — a later gate demands them and no op can add "
+             f"frontmatter afterwards; pass {flags} (SES-0081)")
     ov_lines = ["overview: >-"]
     import textwrap as _tw
     ov_lines += _tw.wrap(args.overview.strip(), width=68,
