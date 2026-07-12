@@ -203,6 +203,13 @@ their transcript at the verbatim proposal (DEC-0255).
   links when recorded — don't rely on a later corpus sweep or recall
   audit to connect them (origin: the SES-0072 audit's contract-gap
   finding).
+- **Record outcomes, never intentions.** Never pre-author a transcript
+  turn or overview that asserts the result of an operation that has
+  not yet executed — write the turn after the ops run, stating actual
+  outcomes including refusals (a faithful refusal record is exactly
+  what provenance wants). Origin: the SES-0073 T5 incident, where a
+  pre-written turn asserted a re-gate and a frontmatter fix that were
+  then refused.
 - **Write finished prose.** Decision bodies, overviews, and every
   section payload handed to the librarian are complete sentences with
   normal capitalization and punctuation — never label-continuation
