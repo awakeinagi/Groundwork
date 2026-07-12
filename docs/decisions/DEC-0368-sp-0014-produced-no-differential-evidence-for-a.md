@@ -31,7 +31,7 @@ overview: >-
   evaluation.
 links:
   derives-from: [SP-0014]
-  relates-to: [DEC-0354, DEC-0356, SP-0013, SP-0016, SP-0017, DEC-0374, DEC-0375]
+  relates-to: [DEC-0354, DEC-0356, SP-0013, SP-0016, SP-0017, DEC-0374, DEC-0375, DEC-0387]
 cites: [DEC-0354, DEC-0356]
 ---
 

@@ -28,7 +28,7 @@ overview: >-
   happens only through the ordinary DEC-0337 option survey +
   DEC-0335 design intake.
 links:
-  relates-to: [DEC-0354, DEC-0355, DEC-0351, DEC-0118, DEC-0315, DEC-0375, DEC-0368]
+  relates-to: [DEC-0354, DEC-0355, DEC-0351, DEC-0118, DEC-0315, DEC-0375, DEC-0368, DEC-0387]
   derives-from: [SES-0071]
 ---
 

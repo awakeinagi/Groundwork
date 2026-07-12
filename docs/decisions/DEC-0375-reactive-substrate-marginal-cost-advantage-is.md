@@ -27,7 +27,7 @@ overview: >-
   (DEC-0351); adoption via DEC-0337/DEC-0335 only; no kill bar
   (DEC-0355).
 links:
-  relates-to: [DEC-0368, DEC-0354, DEC-0351, DEC-0355, DEC-0374]
+  relates-to: [DEC-0368, DEC-0354, DEC-0351, DEC-0355, DEC-0374, DEC-0387]
   derives-from: [SES-0071]
 ---
 
