@@ -168,7 +168,7 @@ is gated).
 
 - **Artifact** — any identified, versioned document in the Canonical Store:
   Business Goal, Epic, Story, Spike, Component Doc, Session, Decision,
-  Conflict, Change Proposal, Idea, Consolidation.
+  Conflict, Change Proposal, Idea, Research, Consolidation.
 - **Business Goal (BG)** — the foundational statement of a refined business
   intent: problem, intent, outcomes, scope, constraints. Root of the
   traceability graph.
@@ -219,6 +219,37 @@ is gated).
   session takes it up or it is declined with rationale. Never gated,
   never release-labeled; classified intent defers as a Story/Spike
   instead.
+- **Research (RSCH)** — a free-standing deep investigation into a topic
+  drawn from any source class (web search, books, videos, or others),
+  distinct from a Spike (which derives from an Epic to answer a
+  design-tree question) and from an Idea (raw pre-classification capture
+  versus RSCH's post-investigation, analyzed evidence). Lives in
+  `docs/research/` as one canonical main file (frontmatter, overview,
+  status, links, research goals, compiled findings, and Business-Goal
+  applicability analysis) plus optional subtopic write-ups: plain
+  markdown files under the artifact's own directory
+  (`docs/research/RSCH-nnnn/`), owned by and referenced from the main
+  file, without their own IDs or frontmatter. Statuses: commissioned,
+  in-progress, concluded, abandoned, deferred. Ungated; reopenable from
+  concluded back to in-progress, with each round recorded in its own
+  timestamped, append-only section (DEC-0447, DEC-0448). A commissioned
+  or in-progress RSCH may enter deferred and revives to its prior
+  status, mirroring the deferred semantics DEC-0104 already gives
+  stories, epics, and spikes; abandoned remains terminal (DEC-0458).
+- **Source Register** — the per-Research-artifact list of sources
+  (title, reference or URL, source type, date accessed) that every
+  finding must cite from (DEC-0452).
+- **Source Mode** — the recorded choice governing how a Research
+  effort's sources are gathered: a stakeholder-supplied complete list,
+  a stakeholder-supplied seed list the agent expands, or sources the
+  agent finds on its own (DEC-0451).
+- **Research Round** — a Research artifact's timestamped, append-only
+  record of one investigation pass (initial or reopened); earlier
+  rounds are never rewritten (DEC-0448).
+- **Commissioned** — the initial status of a Research artifact opened
+  at intake to be investigated, as opposed to one created post-hoc
+  directly at `concluded` for research that already happened
+  (DEC-0448).
 
 ## Design elements
 
@@ -353,6 +384,12 @@ names below are reserved words when used as element types.
   expected to constrain, shape, or invalidate decisions in Y. Recorded as
   `impacts` on X and `impacted-by` on Y; the basis for ranking refinement
   order among siblings.
+- **Inspired-by / Inspired** — a reciprocal link pair: an artifact
+  inspired by a Research artifact carries `inspired-by` naming the RSCH,
+  which carries the reciprocal `inspired` list. Permitted on Business
+  Goals, Epics, Stories, Spikes, Ideas, and other Research artifacts;
+  the first extension of the closed typed-link vocabulary (DEC-0009,
+  DEC-0026) beyond its original set (DEC-0454).
 - **Release** — a named scope of delivery declared in a Business Goal's
   Scope section, labeled by a Semantic Versioning prefix (`1`, `1.2`,
   `1.2.3`). A partial label is a scope, not a version: `1` means
