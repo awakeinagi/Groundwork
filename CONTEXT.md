@@ -265,9 +265,21 @@ is gated).
   effort's sources are gathered: a stakeholder-supplied complete list,
   a stakeholder-supplied seed list the agent expands, or sources the
   agent finds on its own (DEC-0451).
+- **Source ID** — a Research artifact's stable, never-renumbered
+  Source Register identifier (S1, S2, and so on), cited inline by
+  findings as [Sn] (DEC-0492).
+- **Finding ID** — a Research artifact's required per-finding
+  identifier, Fn.m, where n is the round number and m is sequential
+  within the round; cross-artifact prose cites a specific finding as
+  the artifact ID followed by the finding ID, e.g. "RSCH-0007 F2.3"
+  (DEC-0493).
 - **Research Round** — a Research artifact's timestamped, append-only
   record of one investigation pass (initial or reopened); earlier
-  rounds are never rewritten (DEC-0448).
+  rounds are never rewritten (DEC-0448). Its required subsections are
+  Findings, Business-Goal Applicability, and Goals Assessment — the
+  met-or-unmet judgment against each numbered goal — plus a Next Round
+  Plan required exactly when the round's Goals Assessment concludes
+  goals unmet and research continuing (DEC-0490).
 - **Commissioned** — the initial status of a Research artifact opened
   at intake to be investigated, as opposed to one created post-hoc
   directly at `concluded` for research that already happened
