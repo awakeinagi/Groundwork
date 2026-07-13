@@ -31,13 +31,16 @@ overview: >-
   research, test plans in presented designs, the librarian write
   path, and DEC-0423's single-sourcing/extraction-trigger constraint
   (per DEC-0335, DEC-0336, DEC-0337, DEC-0345, DEC-0388). Solo
-  governance (per DEC-0263). Derived work: EP-0009 continues as-is;
-  fifteen further epic topics are anticipated, each deriving only
-  through its own refinement session (per DEC-0443, DEC-0446).
-  Status: approved.
+  governance (per DEC-0263). Derived work: EP-0009 continues; seven
+  further epics (Engine Core & Artifact Model, Agent & Skill
+  Surfaces, Runtime Portability & Modality Parity, Adoption, Self-
+  Governance & Dogfooding, Collaboration/Concurrency/Browsing,
+  Observability) derived at SES-0089 per DEC-0462; Export/Packaging
+  remains anticipated and underived, triggered by the first third-
+  party consumer (per DEC-0467). Status: approved.
 links:
   relates-to: [SES-0059, BG-0001, DEC-0346, DEC-0441, DEC-0442, DEC-0443, DEC-0444]
-cites: [DEC-0335, DEC-0336, DEC-0337, DEC-0338, DEC-0340, DEC-0341, DEC-0344, DEC-0345, DEC-0263, DEC-0388, DEC-0421, DEC-0422, DEC-0423, DEC-0433, DEC-0446]
+cites: [DEC-0335, DEC-0336, DEC-0337, DEC-0338, DEC-0340, DEC-0341, DEC-0344, DEC-0345, DEC-0263, DEC-0388, DEC-0421, DEC-0422, DEC-0423, DEC-0433, DEC-0446, DEC-0445, DEC-0462, DEC-0467]
 ---
 
 # BG-0002: Groundwork Core Technology — Engine & Delivery of the Paradigm
@@ -86,6 +89,23 @@ Solo governance (per DEC-0263): the operator holds sponsor, approver, and arbite
 
 ## Derived Work
 
-- EP-0009 (Artifact Interaction Surface) continues as-is under the rechartered goal.
-- Anticipated epic topics, each deriving only through its own refinement session after this gate (per DEC-0443, DEC-0446): Engine core; Agents; Skills (dual audience: agent-consumed and bare-user-facing); Artifact model; Modality parity; Adoption-greenfield; Adoption-brownfield; Self-governance; Export/packaging; Runtime portability; Collaboration & concurrency; Human browsing surface; Observability; Dogfooding.
+- EP-0009 (Artifact Lifecycle & Interaction, renamed per DEC-0445)
+  continues under the rechartered goal.
+- Seven epics derived at SES-0089's epic derivation, condensing the
+  fifteen anticipated topics named at DEC-0443/DEC-0446 along real
+  bounded-context seams (per DEC-0462): EP-0010 (Engine Core &
+  Artifact Model — the single-sourced paradigm mechanics and static
+  artifact model); EP-0011 (Agent & Skill Surfaces — the canonical
+  agent definitions and skills delivering the paradigm); EP-0012
+  (Runtime Portability & Modality Parity — cross-runtime translations
+  and the paradigm's parity contract); EP-0013 (Adoption — greenfield
+  bootstrap and brownfield fold-in as one epic); EP-0014
+  (Self-Governance & Dogfooding — the governance-rule obligations
+  merged with the dogfooding practice loop); EP-0015 (Collaboration,
+  Concurrency & Browsing — the multi-actor concurrency model and the
+  human browsing surface); EP-0016 (Observability — the audit-trail,
+  telemetry, checker-metrics, and session-analytics framework).
+- Remaining anticipated: Export/Packaging stays an anticipated topic,
+  underived, its trigger being the first third-party consumer (per
+  DEC-0467).
 

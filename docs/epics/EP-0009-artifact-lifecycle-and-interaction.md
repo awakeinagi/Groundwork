@@ -37,10 +37,12 @@ overview: >-
   contract scope and the defect-tracking artifact shape. Re-affirmed
   approved after SES-0085's broadening (per DEC-0441, DEC-0445).
 links:
+  impacts: [EP-0011, EP-0015]
+  impacted-by: [EP-0010]
   derives-from: [BG-0002]
   satisfies: [BG-0002]
   relates-to: [DEC-0339, IDEA-0015]
-cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0391, DEC-0392, DEC-0393, DEC-0411, DEC-0412, DEC-0413, DEC-0414, DEC-0415, DEC-0416, DEC-0394, DEC-0418, DEC-0422, DEC-0441, DEC-0443, DEC-0445]
+cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0391, DEC-0392, DEC-0393, DEC-0411, DEC-0412, DEC-0413, DEC-0414, DEC-0415, DEC-0416, DEC-0394, DEC-0418, DEC-0422, DEC-0441, DEC-0443, DEC-0445, DEC-0462]
 ---
 
 ## Summary
@@ -173,6 +175,14 @@ verification gate that retired the DEC-0394 interim restriction).
 Consumer expectations for this surface therefore include this full
 implementing set, not DEC-0391 alone, per the stakeholder's ratified
 preference for self-containedness.
+
+This epic's DEC-0462 sibling-set impacts edges: EP-0009's contracted
+artifact-librarian/artifact-interact deliverables are the mandatory
+write path the agent surfaces epic (EP-0011, Agent & Skill Surfaces)
+builds on, and its lifecycle domain interacts with the collaboration
+model (EP-0015, Collaboration, Concurrency & Browsing), while it
+consumes the model and machinery EP-0010 (Engine Core & Artifact
+Model) defines.
 
 ## Risks & Open Questions
 
