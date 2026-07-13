@@ -105,16 +105,39 @@ design tree, resolving dependencies between decisions one by one.
   premature.
 - **Small rounds.** 3–4 questions per round. If a structured-question tool
   (like AskUserQuestion) is available, use it — one question per card,
-  2–4 concrete options each. Asking ten things at once is bewildering.
+  substantive options plus the elaborate affordance below (cards hold
+  4 options total). Asking ten things at once is bewildering.
 - **Recommend, always.** Every question carries your recommended answer,
   listed first and marked "(Recommended)", with honest trade-offs on the
   alternatives. You have opinions; the stakeholder is paying for them.
   Expect pushback — stakeholders often upgrade a recommendation into
   something better; treat their amendments as design input, not noise.
-- **Three affordances on every question**: the user can annotate any
-  choice with notes; can always answer free-text instead; and can always
-  ask you to *elaborate* — expand the question with examples and a
-  detailed compare/contrast of the options before they answer.
+- **Three affordances on every question** — made visible in the card,
+  never assumed (DEC-0460, DEC-0461; they mirror DEC-0074's product-side
+  guarantees in live harness practice):
+  - *Elaborate is a listed option.* A card with at most two substantive
+    alternatives carries a selectable option labeled verbatim "Please
+    elaborate on what needs to be decided here, include examples where
+    helpful". Choosing it means: expand the question — what is being
+    decided, why it matters now, concrete examples, and a detailed
+    compare/contrast of the alternatives — then re-present the card.
+    When a question needs three or four substantive alternatives, drop
+    the listed option and end the question text with "(type `elaborate`
+    in the free-text field for examples and a detailed comparison
+    first)" — the keyword triggers the same behavior; pre-filling the
+    free-text field is not supported by any surveyed harness. Any
+    answer resembling "I don't understand" or "please explain" is this
+    directive unless the stakeholder states specifically what help they
+    need. No question kind is exempt — confirmations included.
+  - *Notes on any choice.* The stakeholder can attach free-text notes
+    to any selection (native in Claude Code). Treat arriving notes as
+    first-class design input — amendments, caveats, and upgrades to the
+    chosen option — never noise.
+  - *Free-text always.* The "Type something" field is never suppressed;
+    a free-text answer is always as valid as a listed option. On
+    harnesses without native notes (GitHub Copilot CLI `ask_user`) or
+    without structured cards at all (stock Amp), the elaborate keyword
+    and free-text substitute for the missing affordances.
 - **Explore before asking.** If the repo, the existing docs, or prior
   decisions can answer a question, read them instead of asking. Never ask
   the user something an accepted DEC already settles.
