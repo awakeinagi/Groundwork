@@ -2,7 +2,8 @@
 id: DEC-0474
 type: decision
 title: "Notes arrive via preview layout; Other is the guaranteed free-text channel"
-status: accepted
+status: superseded
+superseded-by: [DEC-0500]
 owner: awakeinagi@gmail.com
 created: 2026-07-13
 decided-by: awakeinagi@gmail.com

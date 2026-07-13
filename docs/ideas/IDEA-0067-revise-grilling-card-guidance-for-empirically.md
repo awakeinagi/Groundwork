@@ -2,7 +2,7 @@
 id: IDEA-0067
 type: idea
 title: "Revise grilling-card guidance for empirically mapped preview-layout mechanics"
-status: captured
+status: taken-up
 owner: awakeinagi@gmail.com
 created: 2026-07-13
 proposed-by: operator
@@ -19,6 +19,7 @@ overview: >-
   the stakeholder saw only labels and truncated previews on a
   detailed card.
 links:
+  relates-to: [SES-0093]
   derives-from: [SES-0092]
 ---
 
@@ -40,4 +41,5 @@ labels and truncated previews on a detailed card.
 
 ## Disposition
 
-Not yet dispositioned.
+Taken up by SES-0093, which superseded DEC-0473 and DEC-0474 and produced DEC-0499 through DEC-0503 to correct the affordance guidance for measured preview-layout behavior.
+

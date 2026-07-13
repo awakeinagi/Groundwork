@@ -2,7 +2,8 @@
 id: DEC-0473
 type: decision
 title: "Grilling elaborate affordance retained; keyword fallback routes through Other"
-status: accepted
+status: superseded
+superseded-by: [DEC-0499]
 owner: awakeinagi@gmail.com
 created: 2026-07-13
 decided-by: awakeinagi@gmail.com

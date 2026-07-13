@@ -104,60 +104,90 @@ design tree, resolving dependencies between decisions one by one.
   then descend. A question whose answer depends on an unasked question is
   premature.
 - **Small rounds.** 3–4 questions per round. If a structured-question tool
-  (like AskUserQuestion) is available, use it — one question per card,
-  substantive options plus the elaborate affordance below (cards hold
-  4 options total). Asking ten things at once is bewildering.
+  (like AskUserQuestion) is available, use it — batch the round into one
+  card of 2–4 questions, never a single-question preview card (DEC-0501:
+  selection and note are mutually exclusive there). Each question holds
+  up to three substantive options plus the combined "Something
+  else/Please elaborate" option (4 option slots per question). Asking
+  ten things at once is bewildering.
 - **Recommend, always.** Every question carries your recommended answer,
   listed first and marked "(Recommended)", with honest trade-offs on the
   alternatives. You have opinions; the stakeholder is paying for them.
   Expect pushback — stakeholders often upgrade a recommendation into
   something better; treat their amendments as design input, not noise.
-- **Preview layout on every card (DEC-0472).** Every grilling card uses
-  the preview layout: each substantive option carries a
-  consequence-sketch preview — a concrete illustration of what choosing
-  that option means (an example, mock, or resulting state, roughly 2–8
-  lines), never a restatement of the label. The elaborate option's
-  preview lists what the expansion will cover. The harness supports
-  previews only on single-select questions, so phrase questions
-  single-select wherever feasible; a genuinely multi-select card drops
-  to plain layout and its question text says so (per-choice notes
-  unavailable — caveats route through Other). The affordance loss is
-  disclosed, never silent. Preview layout is what makes
-  notes-on-selection reachable at all.
-- **Three affordances on every question** — made visible in the card,
-  never assumed (DEC-0472..DEC-0474, superseding DEC-0460/DEC-0461;
-  they mirror DEC-0074's product-side guarantees in live harness
-  practice):
-  - *Elaborate is a listed option.* A card with at most two substantive
-    alternatives carries a selectable option labeled verbatim "Please
-    elaborate on what needs to be decided here, include examples where
-    helpful". Choosing it means: expand the question — what is being
-    decided, why it matters now, concrete examples, and a detailed
-    compare/contrast of the alternatives — then re-present the card.
-    When a question needs three or four substantive alternatives, drop
-    the listed option and end the question text with "(choose Other and
-    type `elaborate` for examples and a detailed comparison first)" —
-    the keyword triggers the same behavior. Under preview layout the
-    inline free-text field is not reliably present, and pre-filling it
-    is unsupported by any surveyed harness, so the automatic Other
-    option is the sanctioned keyword channel (DEC-0473). Any answer
-    resembling "I don't understand" or "please explain" is this
-    directive unless the stakeholder states specifically what help they
-    need. No question kind is exempt — confirmations included.
-  - *Notes on any choice.* The stakeholder can attach free-text notes
-    to any selection — in Claude Code, per-selection notes are a
-    preview-layout feature, which is what DEC-0472's preview
-    requirement enables. Treat arriving notes as first-class design
-    input — amendments, caveats, and upgrades to the chosen option —
-    never noise.
-  - *Free-text always, via Other.* The automatic "Other" option is the
-    guaranteed free-text channel (DEC-0474); a custom answer through it
-    is always as valid as a listed option. The inline "Type something"
-    field is not relied upon — it may vanish in preview mode. On
-    harnesses without native notes (GitHub Copilot CLI `ask_user`) or
-    without structured cards at all (stock Amp), the elaborate keyword
-    and whatever free-text channel exists substitute for the missing
+- **Preview layout on every card (DEC-0472), budgeted to measured
+  behavior (DEC-0502).** Every grilling card uses the preview layout:
+  each substantive option carries a consequence-sketch preview — a
+  concrete illustration of what choosing that option means (an example,
+  mock, or resulting state), never a restatement of the label. Budget
+  (DEC-0502, measured 2026-07-13): up to ~20 post-wrap rows per preview
+  is safe — the pane renders a viewport-height window (~33 rows on a
+  large screen) and hard-cuts the rest with no scroll, so nothing a
+  stakeholder must read may sit below that. Labels stay ≤ ~28
+  characters per row (the option column is fixed near 30 characters and
+  cannot be widened). Option descriptions do NOT render in preview
+  layout — per-option analysis rides the preview pane, and comparative
+  or must-read analysis goes in a chat message immediately before the
+  card. Styling toolkit: bold pseudo-headers, hand-aligned monospace
+  columns (markdown table syntax degrades to raw pipes), fenced code
+  blocks (syntax-highlighted, `diff` included), and blockquote
+  callouts. The harness supports previews only on single-select
+  questions: phrase questions single-select wherever feasible; a
+  genuinely multi-select question drops to plain layout (DEC-0503 — see
+  the affordances below) and never carries previews (the harness
+  discards them silently, losing their content). The affordance
+  difference is disclosed in the question text, never silent. Preview
+  layout is what makes notes-on-selection reachable at all.
+- **The affordances on every question** — made visible in the card,
+  never assumed (DEC-0472, DEC-0499..DEC-0503; DEC-0499/DEC-0500
+  supersede DEC-0473/DEC-0474 after empirical measurement showed
+  preview layout suppresses the automatic Other option; they mirror
+  DEC-0074's product-side guarantees in live harness practice):
+  - *"Something else/Please elaborate" is a listed option on every
+    preview question (DEC-0499).* The final option slot, its preview
+    reading verbatim: "Use notes to type your own response or request
+    the agent to provide additional information. A blank notes section
+    implies that you would like the agent to elaborate on the question
+    with examples (where possible)." Selected with a note → a free-text
+    answer, amendment, or information request. Selected with blank
+    notes → the elaborate directive: expand the question — what is
+    being decided, why it matters now, concrete examples, and a
+    detailed compare/contrast of the alternatives — then re-present the
+    card. Any note resembling "I don't understand" or "please explain"
+    is this directive unless the stakeholder states specifically what
+    help they need. Substantive alternatives cap at three per question;
+    a genuinely four-way question splits across two cards. No question
+    kind is exempt — confirmations included.
+  - *Notes on any choice — which requires ≥2 questions per card
+    (DEC-0501).* Per-selection notes are a preview-layout feature. On a
+    single-question card, confirming a note submits immediately with no
+    option selected, so "option B, but with this caveat" needs a card
+    of at least two questions: never send a single-question preview
+    card; add a genuinely useful rider question (scheduling, scope,
+    priority) when a round has only one. Teach the sequence in the
+    pre-card chat message: select (Enter advances) → answer the rest →
+    arrow back → press `n` → type → Enter → Submit. Note-only
+    submissions (no option selected) are valid answers. Treat arriving
+    notes as first-class design input — amendments, caveats, and
+    upgrades to the chosen option — never noise.
+  - *Free-text always, via the layout's real channel (DEC-0500).* On
+    preview cards: the "Something else/Please elaborate" option plus
+    notes — the automatic Other option is SUPPRESSED in preview layout
+    and must never be promised there. On plain cards: Other, as before.
+    The harness-native "Chat about this" row, present on both layouts,
+    is the universal escape hatch into free conversation. On harnesses
+    without native notes (GitHub Copilot CLI `ask_user`) or without
+    structured cards at all (stock Amp), the elaborate keyword and
+    whatever free-text channel exists substitute for the missing
     affordances.
+  - *Multi-select questions are plain-layout questions (DEC-0503).*
+    Descriptions render on plain cards, so per-option trade-off prose
+    may ride the options themselves; Other is the free-text channel,
+    and `elaborate` typed into Other (or an "I don't
+    understand"-shaped answer) triggers the elaboration; no "Something
+    else" option is listed there — Other occupies that role natively.
+    Previews are never attached to multi-select questions: the harness
+    silently discards them, and content placed only in them is lost.
 - **Explore before asking.** If the repo, the existing docs, or prior
   decisions can answer a question, read them instead of asking. Never ask
   the user something an accepted DEC already settles.
