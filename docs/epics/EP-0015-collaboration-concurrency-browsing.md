@@ -20,19 +20,20 @@ overview: >-
   browsing surface — rendered markdown, bare-ID cross-reference
   navigation, backlinks, semantic+graph search UI (human_docs.html,
   serve_docs.py). Out of scope: the Application's team-facing
-  features and hosting, baseline single-writer corruption safety
-  (Engine Core & Artifact Model's definition-of-done), and the
-  write-path mechanics themselves (the Engine Core & Artifact Model
-  / EP-0009 seam). No outgoing impact edges among current siblings;
-  impacted-by Engine Core & Artifact Model and EP-0009. Open risks:
-  the SP-0018 ownership seam against EP-0009, and the multi-
-  session/multi-user concurrency model beyond the current single-
-  repo model as a candidate spike. Derives from BG-0002; draft
-  status.
+  features and hosting, baseline single-writer corruption safety,
+  and the write-path mechanics themselves. One outgoing impact edge
+  among current siblings: this epic impacts EP-0014, since the
+  governance-configuration schema it defines shapes what EP-0014's
+  governance rule families can evaluate (DEC-0506); impacted-by
+  Engine Core & Artifact Model and EP-0009. Open risks: the SP-0018
+  ownership seam against EP-0009, and the multi-session/multi-user
+  concurrency model beyond the current single-repo model as a
+  candidate spike. Derives from BG-0002; draft status.
 links:
+  impacts: [EP-0014]
   impacted-by: [EP-0010, EP-0009]
   derives-from: [BG-0002]
-cites: [DEC-0462, DEC-0468, DEC-0443, DEC-0244, DEC-0030, DEC-0427, DEC-0310, DEC-0469]
+cites: [DEC-0462, DEC-0468, DEC-0443, DEC-0244, DEC-0030, DEC-0427, DEC-0310, DEC-0469, DEC-0506]
 ---
 
 # EP-0015: Collaboration, Concurrency & Browsing
@@ -82,7 +83,9 @@ the same shared-corpus model.
 Bounded context: **Groundwork collaboration, concurrency & browsing**
 (per DEC-0462, DEC-0468, DEC-0443). Consumes the concurrency-safe
 write path from Engine Core & Artifact Model and the lifecycle domain
-from EP-0009; has no outgoing impact edges among current siblings.
+from EP-0009; carries one outgoing impact edge among current
+siblings — this epic impacts EP-0014 via the governance-configuration
+seam (DEC-0506).
 
 ## Interfaces & Contracts to Define
 
@@ -98,6 +101,10 @@ from EP-0009; has no outgoing impact edges among current siblings.
   team governance-configuration schema — roles, domains,
   gate-policies, and people (DEC-0443) — while EP-0014 owns its
   evaluation as rule families on the Engine-hosted checker (DEC-0469).
+  This seam carries a one-directional impact edge: this epic impacts
+  EP-0014 — the schema defined here shapes what the governance rule
+  families can evaluate (DEC-0506); the reverse influence is
+  consumer-driven input, not an impact edge.
 
 ## Risks & Open Questions
 

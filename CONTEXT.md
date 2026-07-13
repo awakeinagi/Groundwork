@@ -445,6 +445,12 @@ names below are reserved words when used as element types.
   (the artifact-librarian agent plus the artifact-interact skill)
   through which all agents interact with Groundwork corpora
   (DEC-0324/DEC-0325).
+- **Transition Rule** — a change to the method or its governance rules
+  is gated by the rules accepted before the change; new rules apply
+  only after approval under the old ones (DEC-0504).
+- **Dogfooding Loop** — the practice of the Groundwork project's own
+  use of the paradigm surfacing refinements, which enter change
+  intake like any other proposal, captured as IDEA-* items (DEC-0508).
 
 ## Roles
 
