@@ -2,7 +2,8 @@
 id: DEC-0460
 type: decision
 title: "Grilling question cards carry an explicit elaborate option, with a keyword fallback"
-status: accepted
+status: superseded
+superseded-by: [DEC-0473]
 owner: awakeinagi@gmail.com
 created: 2026-07-12
 decided-by: awakeinagi

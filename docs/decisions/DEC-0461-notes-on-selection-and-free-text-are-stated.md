@@ -2,7 +2,8 @@
 id: DEC-0461
 type: decision
 title: "Notes-on-selection and free-text are stated grilling affordances, with harness fallbacks"
-status: accepted
+status: superseded
+superseded-by: [DEC-0474]
 owner: awakeinagi@gmail.com
 created: 2026-07-12
 decided-by: awakeinagi

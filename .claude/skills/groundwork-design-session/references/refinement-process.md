@@ -112,9 +112,22 @@ design tree, resolving dependencies between decisions one by one.
   alternatives. You have opinions; the stakeholder is paying for them.
   Expect pushback — stakeholders often upgrade a recommendation into
   something better; treat their amendments as design input, not noise.
+- **Preview layout on every card (DEC-0472).** Every grilling card uses
+  the preview layout: each substantive option carries a
+  consequence-sketch preview — a concrete illustration of what choosing
+  that option means (an example, mock, or resulting state, roughly 2–8
+  lines), never a restatement of the label. The elaborate option's
+  preview lists what the expansion will cover. The harness supports
+  previews only on single-select questions, so phrase questions
+  single-select wherever feasible; a genuinely multi-select card drops
+  to plain layout and its question text says so (per-choice notes
+  unavailable — caveats route through Other). The affordance loss is
+  disclosed, never silent. Preview layout is what makes
+  notes-on-selection reachable at all.
 - **Three affordances on every question** — made visible in the card,
-  never assumed (DEC-0460, DEC-0461; they mirror DEC-0074's product-side
-  guarantees in live harness practice):
+  never assumed (DEC-0472..DEC-0474, superseding DEC-0460/DEC-0461;
+  they mirror DEC-0074's product-side guarantees in live harness
+  practice):
   - *Elaborate is a listed option.* A card with at most two substantive
     alternatives carries a selectable option labeled verbatim "Please
     elaborate on what needs to be decided here, include examples where
@@ -122,22 +135,29 @@ design tree, resolving dependencies between decisions one by one.
     decided, why it matters now, concrete examples, and a detailed
     compare/contrast of the alternatives — then re-present the card.
     When a question needs three or four substantive alternatives, drop
-    the listed option and end the question text with "(type `elaborate`
-    in the free-text field for examples and a detailed comparison
-    first)" — the keyword triggers the same behavior; pre-filling the
-    free-text field is not supported by any surveyed harness. Any
-    answer resembling "I don't understand" or "please explain" is this
+    the listed option and end the question text with "(choose Other and
+    type `elaborate` for examples and a detailed comparison first)" —
+    the keyword triggers the same behavior. Under preview layout the
+    inline free-text field is not reliably present, and pre-filling it
+    is unsupported by any surveyed harness, so the automatic Other
+    option is the sanctioned keyword channel (DEC-0473). Any answer
+    resembling "I don't understand" or "please explain" is this
     directive unless the stakeholder states specifically what help they
     need. No question kind is exempt — confirmations included.
   - *Notes on any choice.* The stakeholder can attach free-text notes
-    to any selection (native in Claude Code). Treat arriving notes as
-    first-class design input — amendments, caveats, and upgrades to the
-    chosen option — never noise.
-  - *Free-text always.* The "Type something" field is never suppressed;
-    a free-text answer is always as valid as a listed option. On
+    to any selection — in Claude Code, per-selection notes are a
+    preview-layout feature, which is what DEC-0472's preview
+    requirement enables. Treat arriving notes as first-class design
+    input — amendments, caveats, and upgrades to the chosen option —
+    never noise.
+  - *Free-text always, via Other.* The automatic "Other" option is the
+    guaranteed free-text channel (DEC-0474); a custom answer through it
+    is always as valid as a listed option. The inline "Type something"
+    field is not relied upon — it may vanish in preview mode. On
     harnesses without native notes (GitHub Copilot CLI `ask_user`) or
     without structured cards at all (stock Amp), the elaborate keyword
-    and free-text substitute for the missing affordances.
+    and whatever free-text channel exists substitute for the missing
+    affordances.
 - **Explore before asking.** If the repo, the existing docs, or prior
   decisions can answer a question, read them instead of asking. Never ask
   the user something an accepted DEC already settles.
