@@ -2,7 +2,8 @@
 id: DEC-0338
 type: decision
 title: "Charter BG-0002 — the method track (dogfooding: the method's tooling gated by its own pipeline)"
-status: accepted
+status: superseded
+superseded-by: [DEC-0441]
 owner: awakeinagi@gmail.com
 created: 2026-07-09
 decided-by: awakeinagi@gmail.com

@@ -24,11 +24,14 @@ is gated).
 - **Groundwork Engine** — the single-sourced implementation of paradigm
   mechanics (DEC-0423): today the gw CLI's internals; target shape a
   library with the CLI and the Application backend as adapters.
-- **Method Track** — BG-0002's governance track for the paradigm's own
-  deployed tooling (dogfooding Groundwork's own corpus and skills).
-  Distinct from the Groundwork Paradigm itself: the Method Track is one
-  project's practice of adopting the paradigm, not the paradigm's
-  definition.
+- **skill-mode** — using the Groundwork paradigm entirely through an
+  agent-chat runtime (Claude Code, GitHub Copilot, Codex, OpenCode, …)
+  via the Groundwork skills, no Application/UI; the gw CLI is the
+  substrate the skills drive (DEC-0444). The paradigm's core subset
+  (DEC-0433).
+- **Method Track** — historical name for BG-0002's original governance
+  charter (DEC-0338, superseded by DEC-0441); its substance continues
+  as the rechartered BG-0002's self-governance outcome (DEC-0442).
 - **Canonical Store** — the git-backed markdown repository that is the single
   source of truth for all artifacts. Every other representation (Jira, the
   Graph Index, UI views) is derived from it.

@@ -3,8 +3,8 @@ id: SP-0014
 type: spike
 title: "Structural design-rule precision over the projected corpus"
 status: approved
-approved-on: 2026-07-11
-approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-12
+approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 timebox: 1 session
@@ -34,7 +34,9 @@ overview: >-
   affirmed, source-dependent precision) and DEC-0368 (no
   differential reactive-substrate evidence). Follow-ups: IDEA-0035
   through IDEA-0040. Deliverable: complete findings catalog with
-  dispositions.
+  dispositions. Re-affirmed approved under DEC-0441 (approved-by
+  awakeinagi, approved-on 2026-07-12) after the SES-0085 staleness
+  walk found it clean of the old charter.
 links:
   impacts: [SP-0016, SP-0017]
   impacted-by: [SP-0013]

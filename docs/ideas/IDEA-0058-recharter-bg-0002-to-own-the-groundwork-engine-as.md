@@ -42,4 +42,5 @@ Open questions for the take-up session: the fate of BG-0002's current governance
 
 ## Disposition
 
-Pending.
+Entered take-up on 2026-07-12 at SES-0085; completed the same day. BG-0002 rechartered as Groundwork Core Technology — Engine & Delivery of the Paradigm (DEC-0441 superseding DEC-0338; DEC-0442 governance subsumption; DEC-0443 roster plus its extension (DEC-0446); DEC-0444 skill-mode; DEC-0445 EP-0009 broadening). Cascade completed in-session: EP-0009 and SP-0013 through SP-0017 re-affirmed. BG-0001's reframing remains a separate future step.
+

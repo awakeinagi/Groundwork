@@ -1,64 +1,61 @@
 ---
 id: EP-0009
 type: epic
-title: "Artifact Interaction Surface"
+title: "Artifact Lifecycle & Interaction"
 status: approved
 approved-on: 2026-07-12
 approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 overview: >-
-  The single method epic governing the artifact-librarian agent and
-  the artifact-interact skill as gated, contracted deliverables
-  under BG-0002: two Component Docs, one per artifact (different
-  consumer sets per DEC-0339), each carrying a mandatory runtime-
-  policy contract section (DEC-0340) with a frontmatter-pinned model
-  per DEC-0348 (no spawn-time model param mandated), plus
-  guardrailed exploratory evaluation of candidate interaction-
-  surface tooling whose executable spikes carry a test plan per
-  DEC-0345, sized by DEC-0336. The skill's CMP consolidates the
-  DEC-0310 premise that artifact- interact is the single home of all
-  artifact-touching tooling; the conformance check (DEC-0341)
-  observes agent-definition changes at the next incoming turn of the
-  spawning session, per DEC-0418's turn-boundary reload semantics
-  (superseding DEC-0347's restart-required finding). Interfaces to
-  define include the absorption-trigger conditions
-  (DEC-0109/DEC-0338/DEC-0346) and a shared gate criterion: neither
-  CMP gates until consumer expectations — currently distributed
-  across DEC-0388, DEC-0327, DEC-0330, DEC-0331, DEC-0340, DEC-0342,
-  and the SES-0076 concurrency set (DEC-0391, DEC-0392, DEC-0393) —
-  are captured. Backfill of the already-built surface is in scope
-  but its execution is deferred by sequencing, not superseded
-  (DEC-0350) — the epic's first derived work is the exploratory
-  spike program, which now includes SP-0018 (the multi-session
-  worktree write model); the spikes are safe under this sequencing
-  because their outputs are throwaway (DEC-0351) and any adoption
-  still routes through DEC-0337/DEC-0335. The epic completes in
-  phases and gates per story/spike, not as a release train. Open
-  questions carried through the gate: install-script contract scope
-  (deferred a third time) and the defect-tracking artifact shape
-  (travels with the backfill).
+  The epic governing how Groundwork artifacts are created, edited,
+  evolved, governed, and captured — where those interactions happen,
+  who performs them, and how — under BG-0002's Engine charter (per
+  DEC-0445, DEC-0441). Its current contracted deliverables remain
+  the artifact-librarian agent and the artifact-interact skill as
+  gated Component Docs, one per artifact, each carrying a mandatory
+  runtime-policy contract section (DEC-0340), plus guardrailed
+  exploratory evaluation of candidate interaction-surface tooling
+  (DEC-0345, DEC-0336); the broadened scope is grilled in EP-0009's
+  own refinement session. The skill's CMP consolidates the DEC-0310
+  premise that artifact-interact is the single home of all artifact-
+  touching tooling; the conformance check (DEC-0341) observes agent-
+  definition changes at the next incoming turn of the spawning
+  session (DEC-0418, superseding DEC-0347). Interfaces to define
+  include the absorption-trigger conditions
+  (DEC-0109/DEC-0338/DEC-0346/DEC-0422) and a shared gate criterion:
+  neither CMP gates until consumer expectations, distributed across
+  DEC-0388, DEC-0327, DEC-0330, DEC-0331, DEC-0340, DEC-0342, and
+  the SES-0076 concurrency set, are captured. Backfill of the
+  already-built surface is in scope but its execution is deferred by
+  sequencing, not superseded (DEC-0350) — the epic's first derived
+  work is the exploratory spike program; the spikes are safe under
+  this sequencing because their outputs are throwaway (DEC-0351) and
+  any adoption still routes through DEC-0337/DEC-0335. The epic
+  completes in phases and gates per story/spike, not as a release
+  train. Open questions carried through the gate: install-script
+  contract scope and the defect-tracking artifact shape. Re-affirmed
+  approved after SES-0085's broadening (per DEC-0441, DEC-0445).
 links:
   derives-from: [BG-0002]
   satisfies: [BG-0002]
   relates-to: [DEC-0339, IDEA-0015]
-cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0389, DEC-0391, DEC-0392, DEC-0393, DEC-0411, DEC-0412, DEC-0413, DEC-0414, DEC-0415, DEC-0416, DEC-0394, DEC-0418]
+cites: [DEC-0339, DEC-0340, DEC-0341, DEC-0342, DEC-0344, DEC-0346, DEC-0325, DEC-0334, DEC-0311, DEC-0350, DEC-0351, DEC-0352, DEC-0353, DEC-0322, DEC-0324, DEC-0327, DEC-0330, DEC-0331, DEC-0335, DEC-0337, DEC-0338, DEC-0310, DEC-0345, DEC-0336, DEC-0347, DEC-0348, DEC-0109, DEC-0329, DEC-0354, DEC-0388, DEC-0391, DEC-0392, DEC-0393, DEC-0411, DEC-0412, DEC-0413, DEC-0414, DEC-0415, DEC-0416, DEC-0394, DEC-0418, DEC-0422, DEC-0441, DEC-0443, DEC-0445]
 ---
 
 ## Summary
 
-The single method epic governing the artifact-librarian agent and the
-artifact-interact skill as gated, contracted deliverables: two
-Component Docs, one per artifact — different consumer sets per
-DEC-0339 (the skill answers to the librarian and DEC-0327-chartered
-agents; the librarian answers to all agents for writes and synthesis
-reads per DEC-0388, with targeted reads chartered directly per
-DEC-0388/DEC-0389) — each carrying a mandatory runtime-policy contract
-section (DEC-0340). Also scopes guardrailed exploratory evaluation of
-candidate tooling for this surface (DEC-0351). Backfill of the
-already-built surface is in scope but its execution is deferred
-(DEC-0350); the first work this epic actually derives is the
-exploratory spike program.
+The epic governing how Groundwork artifacts are created, edited,
+evolved, governed, and captured — where those interactions happen,
+who performs them, and how — under BG-0002's Engine charter (per
+DEC-0445, DEC-0441). Its current contracted deliverables remain the
+artifact-librarian agent and the artifact-interact skill (per
+DEC-0339); the broadened scope is grilled in EP-0009's own refinement
+session. Also scopes guardrailed exploratory evaluation of candidate
+tooling for this surface (DEC-0351). Backfill of the already-built
+surface is in scope but its execution is deferred (DEC-0350); the
+first work this epic actually derives is the exploratory spike
+program.
 
 ## Why (Goal Alignment)
 
@@ -103,8 +100,9 @@ status report's frontier, not a separate tracking mechanism.
   the check once that refresh has landed, not necessarily by a same-
   turn spawn.
 - Arming the absorption-clause triggers in docs/TRIGGERS.md (per
-  DEC-0338/DEC-0346) — currently unmet: no armed trigger exists yet
-  for this surface, an open BG-0002 obligation surfaced this session.
+  DEC-0338/DEC-0346/DEC-0422) — currently unmet: no armed trigger
+  exists yet for this surface, an open BG-0002 obligation surfaced
+  this session.
 - Guardrailed exploratory spikes evaluating candidate interaction-
   surface tooling (DEC-0351): spike outputs are throwaway and never
   deployed as part of the surface; adoption of anything a spike
@@ -120,14 +118,18 @@ status report's frontier, not a separate tracking mechanism.
   only at IDEA-0010's own take-up, per DEC-0339. Whether install.sh is
   contracted *within this epic* is a deliberately deferred open
   question (DEC-0352), not a scope-out call made here.
-- Product features — BG-0001's tree, not this method-track epic.
+- The Application itself — BG-0001's tree (per DEC-0441); sibling
+  Engine/paradigm concerns — DEC-0443's anticipated roster epics
+  (static artifact type/schema design belongs to the Artifact model
+  topic, per DEC-0445).
 - Re-deciding ratified architecture (DEC-0339, DEC-0340, DEC-0341,
   DEC-0342 stand as accepted).
 - DEC-0322's eval-loop territory — explicitly excluded per DEC-0342.
 
 ## Domain Context
 
-Bounded context: **Method track**. Term "Artifact Interaction
+Bounded context: **Groundwork Engine — artifact lifecycle &
+interaction** (per DEC-0441, DEC-0445). Term "Artifact Interaction
 Surface" (the mandatory delegation surface — artifact-librarian agent
 plus artifact-interact skill — through which all agents interact with
 Groundwork corpora, per DEC-0324/DEC-0388, superseding DEC-0325) is
@@ -148,9 +150,10 @@ backfill-adjacent follow-up, not performed by this epic record itself.
   diff shape and violation reporting.
 - The absorption-trigger condition(s) for the librarian and skill
   implementations: condition language and subscriber list per
-  SPEC-triggers/DEC-0109, with firing semantics per DEC-0338/DEC-0346
-  — a fired trigger retires the implementation only, never the
-  method-track pattern it instantiates.
+  SPEC-triggers/DEC-0109, with firing semantics per
+  DEC-0338/DEC-0346/DEC-0422 — a fired trigger retires the
+  implementation only, never skill-mode delivery of the paradigm
+  (per DEC-0422).
 
 All of the above are deferred to the backfill fold-in Idea's take-up
 (DEC-0350) — this epic charters them, it does not draft them.

@@ -3,8 +3,8 @@ id: SP-0015
 type: spike
 title: "Prose-to-rule compilation fidelity"
 status: approved
-approved-on: 2026-07-10
-approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-12
+approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 timebox: 1 session
@@ -21,7 +21,9 @@ overview: >-
   kill bar (DEC-0355). Data-source assumptions: source is
   curated/licensed content already in the corpus or explicitly
   provided; passage-level citations are resolvable. Deliverable:
-  fidelity report.
+  fidelity report. Re-affirmed approved under DEC-0441 (approved-by
+  awakeinagi, approved-on 2026-07-12) after the SES-0085 staleness
+  walk found it clean of the old charter.
 links:
   derives-from: [EP-0009]
 cites: [DEC-0354, DEC-0351, DEC-0335, DEC-0337, DEC-0355, DEC-0345, DEC-0336, DEC-0294]

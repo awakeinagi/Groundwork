@@ -32,7 +32,10 @@ overview: >-
   substrate) and IDEA-0043. This amendment was re-affirmed via the
   DEC-0267 stale-and-reapprove path and is approved (approved-by
   awakeinagi). Depends on SP-0014 (impacted-by). Deliverable:
-  measured demo report plus post-close follow-up, complete.
+  measured demo report plus post-close follow-up, complete. Re-
+  affirmed approved under DEC-0441 (approved-by awakeinagi,
+  approved-on 2026-07-12) after the SES-0085 staleness walk found it
+  clean of the old charter.
 links:
   impacted-by: [SP-0014]
   derives-from: [EP-0009]

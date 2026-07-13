@@ -3,8 +3,8 @@ id: SP-0013
 type: spike
 title: "ActiveGraph projection of component contract data"
 status: approved
-approved-on: 2026-07-10
-approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-12
+approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 timebox: 1 session
@@ -25,7 +25,10 @@ overview: >-
   SPEC-component/SPEC-design-elements; read-only direct parse of
   docs/ files is sanctioned for throwaway spike scope, to be
   confirmed at execution intake. Proceeds fully separate from
-  SP-0007 per DEC-0357. Deliverable: findings report.
+  SP-0007 per DEC-0357. Deliverable: findings report. Re-affirmed
+  approved under DEC-0441 (approved-by awakeinagi, approved-on
+  2026-07-12) after the SES-0085 staleness walk found it clean of
+  the old charter.
 links:
   impacts: [SP-0014]
   derives-from: [EP-0009]

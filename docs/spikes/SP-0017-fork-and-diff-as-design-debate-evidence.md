@@ -3,8 +3,8 @@ id: SP-0017
 type: spike
 title: "Fork-and-diff as design-debate evidence"
 status: approved
-approved-on: 2026-07-11
-approved-by: awakeinagi@gmail.com
+approved-on: 2026-07-12
+approved-by: awakeinagi
 owner: awakeinagi@gmail.com
 created: 2026-07-10
 timebox: 1 session
@@ -23,6 +23,9 @@ overview: >-
   validated by six tests on both benchmarks. Five proposed decisions
   (DEC-0369..0373); full adoption deferred to a post-SP-0016
   DEC-0337 cross-spike survey. All build code throwaway (DEC-0351).
+  Re-affirmed approved under DEC-0441 (approved-by awakeinagi,
+  approved-on 2026-07-12) after the SES-0085 staleness walk found it
+  clean of the old charter.
 links:
   impacted-by: [SP-0014]
   derives-from: [EP-0009]
