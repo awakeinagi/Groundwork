@@ -90,7 +90,29 @@ is gated).
   capability that hosts Groundwork's own state or computation. The six
   Ports: app database, vector store, embedding, graph store, Queue,
   KV-store. Consumers program against the Port contract, never an
-  engine API.
+  engine API. The Groundwork Engine's own Ports — graph store, vector
+  store, embedding provider, corpus filesystem — have their contracts
+  owned by EP-0010, with embedded zero-hosting default Adapters shipped
+  in-Engine; consuming surfaces may diverge on Adapter implementation,
+  never on feature support (DEC-0476).
+- **Engine Kernel** — the pure core of the Groundwork Engine: the
+  artifact model, ID allocation, validation, gate state, rule
+  machinery, format parsing, and the logic of graph sync and semantic
+  search. Performs no filesystem or network I/O itself — all I/O
+  crosses Port contracts implemented by Adapters (DEC-0477).
+- **Kernel Operation Catalog** — the Groundwork Engine's normative API
+  contract: the transport-independent enumeration of Engine operations
+  with typed inputs, outputs, and enumerated errors. Adapters (the gw
+  CLI first) conform to the catalog, never the reverse (DEC-0478).
+- **Corpus Schema Marker** — the corpus-level declaration of the
+  artifact-model schema version, numbered with Semantic Versioning.
+  Exactly one per corpus; migrations move the whole corpus atomically,
+  so mixed-version corpora cannot exist (DEC-0483).
+- **Structured Diagnostics** — the typed finding and error structures
+  every Engine operation contracts: rule ID, artifact, location,
+  severity, and fix hint for findings; enumerated error kinds for
+  failures. Part of the Kernel Operation Catalog; Adapters render them,
+  never define them (DEC-0479).
 - **Adapter** — a concrete implementation of one Port (e.g. DuckDB,
   LadybugDB, a local embedding model, a REST embedding client), selected
   by deployment configuration and valid only if it passes the Port's
